@@ -11,6 +11,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 1 | [ReceiptAI](#1-receiptai) | SaaS Subscription | $5K–$50K | Medium |
 | 2 | [LocalLaunch](#2-locallaunch) | Agency-as-a-SaaS | $10K–$100K | Medium-High |
 | 3 | [SkillBridge](#3-skillbridge) | Marketplace Commission | $8K–$80K | High |
+| 4 | [AutoEntrepreneur.ai](#4-autoentrepreneurai) | SaaS Subscription | €5K–€30K | Low-Medium |
+| 5 | [ContratIA](#5-contratia) | Pay-per-use + Subscription | €3K–€20K | Low |
+| 6 | [AssociatIA](#6-associatia) | SaaS Subscription | €8K–€55K | Medium |
 
 ---
 
@@ -144,6 +147,138 @@ Additional revenue: featured expert placement ($29/mo), analytics dashboard for 
 
 ---
 
+---
+
+## 4. AutoEntrepreneur.ai
+
+> **AI dashboard pour les 4 millions d'auto-entrepreneurs en France**
+
+### Problem
+France has 4M+ registered auto-entrepreneurs (micro-entrepreneurs) who manage their business alone. The URSSAF portal is confusing, most don't know their exact charges sociales until it's too late, and missing a quarterly declaration triggers penalties. Existing accounting tools (QuickBooks, Pennylane) are overkill and too expensive for a one-person business earning €500–€3K/month.
+
+### Solution
+A dead-simple web app where an auto-entrepreneur enters their revenue each month. The app automatically tracks their CA against their legal plafond (€77K for services, €188K for commerce), calculates exactly how much they'll owe in cotisations sociales, and sends reminders before URSSAF deadlines. A built-in AI chat answers questions like "Puis-je déduire mon téléphone ?" in plain French with legal citations.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0/mo | 3-month history, basic CA tracker |
+| Solo | €7/mo | Unlimited history, deadline alerts, charges calculator |
+| Pro | €14/mo | AI advisor, declaration pre-fill PDF, accountant sharing |
+
+**Target:** 4M auto-entrepreneurs in France. 0.1% at €7/mo = 4,000 users → **€28K MRR**. Startup cost: Claude API + Supabase free tier = ~€0 until 100+ users.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (deployed on Vercel — free tier)
+- **Auth + DB:** Supabase (free tier covers first 500 users)
+- **AI advisor:** Claude API (claude-sonnet-4-6)
+- **Payments:** Stripe (no monthly fee, 1.5% + €0.25/transaction)
+- **Notifications:** Resend (free up to 3K emails/mo)
+
+### Go-to-Market (zero budget)
+1. Post on r/france, r/AutoEntrepreneur, and forums like **Forum-Auto-Entrepreneur.fr**
+2. TikTok/YouTube Shorts: "J'ai créé un outil pour ne jamais rater ma déclaration URSSAF"
+3. Partenariat avec des influenceurs freelance francophones (David Legroux, etc.)
+4. SEO long-tail : "calculer charges auto entrepreneur", "plafond micro entreprise 2026"
+
+### Competitive Moat
+- No existing tool does this specifically for auto-entrepreneurs in France
+- URSSAF deadlines + plafond tracking is a genuine legal risk = strong retention
+- French tax law updates become a moat (complex to maintain = hard to copy)
+- AI in French with correct legal context is rare
+
+### Figma Schematic
+[View AutoEntrepreneur.ai Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/7a4cbfa9-5ec9-4dd4-9788-8ffc87376c68)
+
+---
+
+## 5. ContratIA
+
+> **Analyse instantanée de vos contrats en français — bail, CDI, CGV, et plus**
+
+### Problem
+Every person in France signs contracts they don't fully understand: a 40-page bail d'habitation full of abusive clauses, a CDI with a non-compete buried on page 12, or e-commerce CGV that waive all warranty rights. Lawyers charge €150–€300/hr for a basic review. Most people just sign, then discover problems too late.
+
+### Solution
+Users paste or upload a contract (PDF or text). The AI reads it, produces a clear summary in plain French, assigns a risk score (1–10), highlights potentially abusive or non-standard clauses, and compares them against the relevant French law (loi Alur for leases, Code du travail for employment, etc.). The entire analysis takes under 30 seconds.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Analyse à l'unité | €5–€9 | One contract, full report, exportable PDF |
+| Abonnement Essentiel | €12/mo | 5 analyses/mo + history |
+| Abonnement Pro | €24/mo | Unlimited analyses, priority processing, lawyer referral |
+
+**Unit economics:** €0.10–€0.30 per analysis in Claude API costs → 95%+ gross margin on pay-per-use.
+
+### Tech Stack
+- **Frontend:** Next.js (Vercel free tier)
+- **Document parsing:** pdf-parse (free npm library) + plain text input
+- **AI analysis:** Claude API with a specialized French contract prompt
+- **Payments:** Stripe one-time charges + subscriptions
+- **Storage:** Supabase Storage (for uploaded contracts)
+
+### Go-to-Market (zero budget)
+1. Launch on **Product Hunt** with French community outreach
+2. TikTok: "J'ai lu votre bail avec l'IA — voici les 3 clauses abusives"
+3. Partner with French tenant associations (UNPI, CLCV) as a free tool for their members
+4. SEO: "bail clause abusive", "comprendre son contrat de travail", "CGV consommateur droits"
+
+### Competitive Moat
+- No French-language contract AI exists at this price point
+- Legal specificity (Alur, Code civil, RGPD) is hard to replicate for non-French teams
+- Network of verified lawyer partners for upsell = strong differentiation
+- RGPD compliance by design (contracts never stored without consent) = trust moat
+
+### Figma Schematic
+[View ContratIA Analysis Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/cdacd969-8b07-4df1-9b62-b7a1903c291a)
+
+---
+
+## 6. AssociatIA
+
+> **La plateforme tout-en-un pour les associations loi 1901**
+
+### Problem
+France has **1.5 million associations loi 1901** — sports clubs, cultural groups, charities, parent committees — and 80% of them are managed by volunteers with zero budget. They struggle with: tracking members and their cotisations, generating legally compliant fiscal receipts (reçus fiscaux for 66% tax deduction), organizing general assemblies, and doing basic accounting. They use Excel, paper, or outdated €500/year software.
+
+### Solution
+A modern SaaS built specifically around French association law. One dashboard to manage members (import via CSV or invite by email), track paid dues and send automated reminders, generate certified reçus fiscaux in one click, run elections and AGO/AGE with digital minutes, and produce a simplified bilan comptable ready for the fisc.
+
+### Revenue Model
+| Tier | Price | For |
+|------|-------|-----|
+| Starter | €0/mo | Up to 30 members, basic tracking |
+| Essentiel | €19/mo | Up to 200 members, reçus fiscaux, AGO tools |
+| Pro | €39/mo | Unlimited members, multi-admin, comptabilité export, API |
+
+**Target:** Even 2,000 associations at €19/mo = **€38K MRR**. The free tier drives viral growth — treasurers recommend it to other associations.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind
+- **Auth + DB + Storage:** Supabase
+- **PDF generation:** react-pdf (reçus fiscaux, PV d'assemblée)
+- **Email:** Resend (relances cotisations, convocations)
+- **Payments:** Stripe
+- **AI (optional v2):** Claude API to draft statuts, PV templates
+
+### Go-to-Market (zero budget)
+1. Reach out directly to federations (FFBB, clubs sportifs locaux) — one federation = hundreds of clubs
+2. Partner with **Mairies** — they advise new associations and can recommend the tool
+3. Facebook Groups: "Trésorier d'association", "Gestion association France" (100K+ members)
+4. SEO: "logiciel gestion association gratuit", "reçu fiscal association modele"
+
+### Competitive Moat
+- French association law compliance built-in (a foreign competitor can't copy this easily)
+- Reçus fiscaux automation is a massive admin pain solved in one click
+- Free tier creates bottom-up adoption — no sales team needed
+- Federations as distribution channel = low CAC at scale
+
+### Figma Schematic
+[View AssociatIA Management Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/54a56228-91cf-4520-9b06-448cfb257b82)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -156,4 +291,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-18*
+*Last updated: 2026-04-18 — Ideas 4–6 added (France-specific, low-budget)*
