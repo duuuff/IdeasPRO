@@ -14,6 +14,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 4 | [AutoEntrepreneur.ai](#4-autoentrepreneurai) | SaaS Subscription | €5K–€30K | Low-Medium |
 | 5 | [ContratIA](#5-contratia) | Pay-per-use + Subscription | €3K–€20K | Low |
 | 6 | [AssociatIA](#6-associatia) | SaaS Subscription | €8K–€55K | Medium |
+| 7 | [AideMax](#7-aidemax) | Pay-per-report + Subscription | €4K–€25K | Low |
+| 8 | [DécoDPE](#8-décodpe) | Pay-per-report + B2B SaaS | €5K–€30K | Low |
+| 9 | [LeBonCoinIA](#9-leboncoinia) | Freemium + Pay-per-use | €3K–€18K | Low |
 
 ---
 
@@ -279,6 +282,138 @@ A modern SaaS built specifically around French association law. One dashboard to
 
 ---
 
+## 7. AideMax
+
+> **Calculateur d'aides sociales — trouvez en 2 minutes toutes les aides auxquelles vous avez droit**
+
+### Problem
+France has 1,200+ national and local benefit programs (APL, RSA, prime d'activité, MaPrimeRénov, CEE, aide à la garde d'enfants, etc.). The average French household leaves €4,000/year unclaimed simply because they don't know they qualify. The official simulateurs (CAF, URSSAF, impots.gouv.fr) are siloed — you need to visit 8 different sites to get the full picture, and most require creating accounts before showing any results.
+
+### Solution
+A single 2-minute questionnaire (income, age, housing status, family situation, location) powers a calculation engine that cross-references every major benefit program. The user sees a ranked list of aids they qualify for, with estimated monthly amounts. A paid PDF report unlocks the complete application guide: exact documents to gather, where to send them, legal deadlines, and direct links to official portals.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Simulation gratuite | €0 | Top 3 aides + estimated total |
+| Rapport complet | €4.99 | All eligible aids, PDF, step-by-step guides, document checklist |
+| Abonnement Suivi | €7/mo | Re-simulation on law changes, deadline alerts, unlimited reports |
+
+**Unit economics:** Claude API cost per simulation ~€0.05 → 99% gross margin on the €4.99 report. The free tier acts as the funnel — anyone who sees €800/mo in unclaimed benefits will pay €5 for the full guide.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **Data source:** data.gouv.fr open datasets + manually maintained benefit rules
+- **Calculation engine:** Server-side JS rules + Claude API for eligibility edge cases
+- **PDF export:** react-pdf
+- **Payments:** Stripe one-time + subscriptions
+- **Backend:** Supabase
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels: "J'ai trouvé €400/mois d'aides que je touchais pas — voici comment"
+2. Facebook Groups: "Maman solo France", "Jeunes actifs Paris", "RSA et insertion"
+3. SEO: "aide logement étudiant", "prime activité simulation", "aides rénovation maison"
+4. Partner with social workers (assistants sociaux) — they refer dozens of clients/week
+
+### Competitive Moat
+- One-stop-shop vs 8+ government silos is an instant win on UX
+- Data updated with each Finance law (PLF) → recurring moat
+- Personalized PDF report is genuinely hard to replicate with a free government tool
+- Trust built via official data sources (data.gouv.fr) + RGPD compliance
+
+### Figma Schematic
+[View AideMax Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/e2d7a13c-e334-4d50-8983-35196b6d20fd)
+
+---
+
+## 8. DécoDPE
+
+> **Décodeur de diagnostics immobiliers — comprenez votre DDT avant de signer**
+
+### Problem
+Every rental and property sale in France requires a Dossier de Diagnostic Technique (DDT): DPE, loi Carrez, amiante, plomb, termites, ERP (risques et pollutions), installation électrique/gaz. These documents total 40–80 pages of technical and legal jargon. 95% of renters and buyers sign without reading them. Yet a bad DPE can mean €200+/month in extra heating bills; a missed asbestos report can cause a health hazard; an incorrect surface measurement can legally void a lease.
+
+### Solution
+Upload the DDT as a PDF (or photograph the pages). The tool extracts every diagnostic section, runs an AI analysis on each, and returns a clean dashboard: energy class + estimated annual cost, health risk flags (amiante/plomb), legal validity check (loi Carrez surface), flood/earthquake zone risk, and a global risk score from 1–10. The full report is exportable as a PDF the user can keep or send to their lawyer.
+
+### Revenue Model
+| Tier | Price | For |
+|------|-------|-----|
+| Analyse particulier | €5 | One DDT, full dashboard, PDF report |
+| Pack acheteur | €12 | Up to 5 DDT analyses (for visits) |
+| Agent immobilier | €29/mo | Unlimited analyses, agency branding on reports, API |
+
+**Unit economics:** ~€0.15 API cost per DDT analysis → 97% gross margin. Agents pay monthly — strong B2B recurring revenue.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **PDF parsing:** pdf-parse + Tesseract.js for scanned docs
+- **AI analysis:** Claude API with specialized DDT prompt per section
+- **PDF report generation:** react-pdf
+- **Payments:** Stripe
+- **Storage:** Supabase Storage (auto-delete after 30 days)
+
+### Go-to-Market (zero budget)
+1. Reddit/forums: r/immobilier_france, SeLoger forum, PAP forum
+2. TikTok: "J'ai scanné mon DDT avec l'IA — le DPE était illégal"
+3. Cold email to agents immobiliers independants (IAD, CapiFrance) — €29/mo is nothing vs. their liability
+4. SEO: "comprendre diagnostic DPE", "DDT location explication", "classe énergie F charges"
+
+### Competitive Moat
+- No French tool explains DDT in plain language at this price
+- Agents have real legal liability if they misrepresent diagnostics → strong B2B pull
+- Scanned-doc support (Tesseract) covers the majority of real-world files that aren't clean PDFs
+- RGPD compliance: documents auto-deleted after 30 days = trust differentiator
+
+### Figma Schematic
+[View DécoDPE Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/76ced214-5a7f-41f5-affd-0da7f6c68f38)
+
+---
+
+## 9. LeBonCoinIA
+
+> **Optimisez vos annonces LeBonCoin avec l'IA — vendez plus vite, au meilleur prix**
+
+### Problem
+LeBonCoin is used by 28 million French people monthly. Yet most sellers write vague titles, underestimate their item's value, and receive lowball offers they can't counter. A "Samsung TV" listed for €80 might fetch €180 with the right title, description, and price positioning. Conversely, overpriced or badly described items sit for months. There is no tool today that helps individual sellers optimize their listings.
+
+### Solution
+The user describes their item (name, condition, a few details) and optionally uploads photos. The AI generates: an optimized title using LeBonCoin's search algorithm patterns, a compelling description in natural French, a suggested price range based on current market data, the best category and attributes to select, and a negotiation response template if buyers lowball. The final listing is ready to copy-paste in 60 seconds.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 1 annonce/semaine, titre + description uniquement |
+| Solo | €2/annonce | Full optimization: titre, description, prix, catégorie, template réponse |
+| Boost | €9/mo | Annonces illimitées, historique, "best time to post" tips, prix dynamique |
+
+**Unit economics:** Claude API cost ~€0.04/annonce → 98% gross margin on €2 plan.
+**Viral loop:** A user who sells their bike for €160 instead of €80 tells everyone.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI optimization:** Claude API (claude-sonnet-4-6) with LeBonCoin-specific prompting
+- **Price benchmarking:** Scraped LBC price distributions (public data) stored in Supabase
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube Shorts: "J'ai vendu mon canapé 3x plus cher grâce à l'IA"
+2. Reddit: r/france, r/vinted, r/consommation — share the free tier
+3. SEO: "rédiger annonce leboncoin", "prix vente occasion france", "optimiser annonce vente"
+4. Referral program: get 3 free annonces for each friend who signs up
+
+### Competitive Moat
+- LeBonCoin is uniquely French — no global competitor will build this
+- Price benchmarking database becomes more accurate with every user (data moat)
+- Negotiation templates are a unique feature no other tool offers
+- Free tier creates massive top-of-funnel with near-zero marginal cost
+
+### Figma Schematic
+[View LeBonCoinIA Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/6b26ce60-bece-43df-832a-62e1f6a69ab2)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -291,4 +426,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-18 — Ideas 4–6 added (France-specific, low-budget)*
+*Last updated: 2026-04-18 — Ideas 7–9 added (France-specific, ultra-low-budget: AideMax, DécoDPE, LeBonCoinIA)*
