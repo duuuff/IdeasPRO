@@ -17,6 +17,11 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 7 | [AideMax](#7-aidemax) | Pay-per-report + Subscription | €4K–€25K | Low |
 | 8 | [DécoDPE](#8-décodpe) | Pay-per-report + B2B SaaS | €5K–€30K | Low |
 | 9 | [LeBonCoinIA](#9-leboncoinia) | Freemium + Pay-per-use | €3K–€18K | Low |
+| 10 | [LoyerCheck](#10-loyercheck) | Freemium + Pay-per-report | €4K–€22K | Low |
+| 11 | [EtatDesLieux.ai](#11-etatdeslieuxai) | Pay-per-document | €5K–€28K | Low |
+| 12 | [ImpotsSimple](#12-impotssimple) | Freemium + Pay-per-use | €8K–€60K | Low-Medium |
+| 13 | [RecoursFacile](#13-recoursfacile) | Pay-per-letter + Upsell | €3K–€16K | Low |
+| 14 | [PermisIA](#14-permisia) | Freemium + Subscription | €6K–€45K | Medium |
 
 ---
 
@@ -414,6 +419,226 @@ The user describes their item (name, condition, a few details) and optionally up
 
 ---
 
+## 10. LoyerCheck
+
+> **Vérifiez en 30 secondes si votre loyer respecte l'encadrement des loyers**
+
+### Problem
+Paris, Lyon, Bordeaux, Montpellier et une dizaine d'autres villes appliquent l'encadrement des loyers depuis 2019–2022. Pourtant, une étude OLAP estime que **30–40% des logements parisiens sont loués au-dessus du loyer de référence majoré** — ce qui est illégal. Les locataires ne savent pas qu'ils sont surpayés, ne connaissent pas le loyer légal exact, et ne savent pas comment agir. Les propriétaires ne savent pas non plus s'ils sont en conformité.
+
+### Solution
+L'utilisateur entre l'adresse, le type de logement (meublé/non meublé), le nombre de pièces, la surface et la date du bail. En 30 secondes, LoyerCheck interroge les données officielles (DRIHL pour Paris, ADIL pour les autres villes), calcule le loyer de référence + majoration légale, et affiche si le loyer actuel est légal ou illégal. Si le loyer est trop élevé, un rapport PDF payant donne la lettre de mise en demeure prête à envoyer, le montant récupérable, et les contacts ADIL/Tribunal.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Vérification gratuite | €0 | Résultat légal/illégal + montant du dépassement |
+| Rapport complet | €4.99 | PDF : lettre de mise en demeure, montant récupérable sur 12 mois, guide recours ADIL |
+| Propriétaire conforme | €2.99 | Certificat de conformité officieux + conseils révision annuelle |
+
+**Unit economics:** Claude API cost ~€0.05/analyse → 99% gross margin. Un locataire qui apprend qu'il surpaye €120/mois paiera volontiers €5 pour le rapport.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **Data sources:** DRIHL Open Data (Paris), ADIL datasets, data.gouv.fr (zones encadrées)
+- **Geocoding:** Adresse.data.gouv.fr API (gratuit, officiel)
+- **AI letter generation:** Claude API (claude-sonnet-4-6)
+- **PDF:** react-pdf
+- **Payments:** Stripe
+- **Backend:** Supabase
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'ai découvert que mon loyer parisien était illégal — voici comment vérifier"
+2. Reddit/Forums : r/paris, r/france, SeLoger forum, PAP forum
+3. Partenariat avec associations de locataires (CLCV, CNL, UNPI) — outil gratuit pour leurs membres
+4. SEO : "encadrement des loyers paris vérifier", "loyer de référence majoration 2026", "loyer illégal recours"
+
+### Competitive Moat
+- Aucun outil grand public n'existe à ce prix point en France
+- Les données officielles sont publiques mais inaccessibles aux non-techniciens → valeur réelle
+- Génération automatique de la lettre de mise en demeure = action directe vs simple information
+- Extension facile vers toutes nouvelles villes rejoignant l'encadrement (marché en expansion)
+
+### Figma Schematic
+[View LoyerCheck Compliance Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/e37c37d1-88a4-4c93-9526-de1a96920de0)
+
+---
+
+## 11. EtatDesLieux.ai
+
+> **Générez un état des lieux professionnel avec l'IA — en 10 minutes, depuis votre téléphone**
+
+### Problem
+En France, 3 millions de locations changent de locataire chaque année. L'état des lieux d'entrée et de sortie est le document le plus litigieux de la relation bailleur/locataire : mal rédigé, il entraîne des conflits sur la caution qui peuvent aller jusqu'au tribunal. Les professionnels facturent €120–€200 pour un état des lieux. Les particuliers se débrouillent avec un formulaire Word imprimé et des photos floues sur WhatsApp — et perdent systématiquement au tribunal faute de preuves structurées.
+
+### Solution
+L'utilisateur crée un état des lieux pièce par pièce via son téléphone : il prend des photos de chaque élément (murs, sols, équipements, compteurs). L'IA décrit automatiquement l'état observé en termes juridiquement corrects (« traces d'usure normale », « rayure de 5 cm sur le parquet »). À la sortie, l'outil compare les photos entrée/sortie pièce par pièce et identifie les dégradations nouvelles. Le rapport PDF final est valable comme preuve légale, signable numériquement par les deux parties.
+
+### Revenue Model
+| Tier | Price | For |
+|------|-------|-----|
+| Etat des lieux simple | €4.99 | PDF complet, photos intégrées, signatures numériques |
+| Pack locataire | €9.99 | Entrée + sortie, comparaison IA, rapport de dégradation |
+| Propriétaire bailleur | €19/mo | États des lieux illimités, dashboard multi-biens, export comptable |
+
+**Unit economics:** ~€0.10 API + ~€0.05 stockage = €0.15 coût → 97% gross margin sur le plan €4.99. **Marché total :** 3M de déménagements/an → même 0.05% = 1,500 états = **€7,500/mois** dès l'an 1.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first)
+- **AI description:** Claude API avec vision (claude-sonnet-4-6) — analyse photo et génère la description
+- **Photo comparison:** Claude vision pour diff entrée/sortie
+- **Signatures:** DocuSeal (open-source, auto-hébergeable) ou HelloSign API
+- **PDF:** react-pdf avec photos intégrées
+- **Storage:** Supabase Storage (auto-delete 30 jours après signature)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Forums : SeLoger, PAP.fr, r/immobilier_france — présenter comme outil anti-litige
+2. TikTok : "Voici pourquoi vous perdez TOUJOURS sur la caution — et comment l'éviter"
+3. Partenariat avec agences immobilières indépendantes (IAD, CapiFrance) — option marque blanche
+4. SEO : "état des lieux gratuit modele", "modèle état des lieux PDF", "litige caution locataire"
+
+### Competitive Moat
+- Vision IA qui génère la description automatiquement = 10x plus rapide que remplir un formulaire
+- Comparaison photo entrée/sortie est unique sur le marché français
+- Valeur légale du PDF structuré + signature numérique = vrai avantage face aux photos WhatsApp
+- Propriétaires multi-biens = client récurrent fidèle (€19/mo × LTV 24 mois = €456 LTV)
+
+### Figma Schematic
+[View EtatDesLieux.ai Inspection Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/3f9f9c3f-aea3-4904-8026-b6fcfd20aeb1)
+
+---
+
+## 12. ImpotsSimple
+
+> **Votre déclaration de revenus guidée par l'IA — trouvez toutes vos déductions en 15 minutes**
+
+### Problem
+40 millions de Français déclarent leurs revenus chaque mai sur impots.gouv.fr. 70% ne savent pas qu'ils laissent de l'argent sur la table : frais réels non déclarés, dons aux associations (66% de crédit d'impôt), frais de garde d'enfant, travaux MaPrimeRénov, déficit foncier, investissement Pinel... Les experts-comptables coûtent €150–€400 pour une déclaration simple. Les simulateurs gratuits (impots.gouv.fr) ne conseillent pas, ils calculent seulement.
+
+### Solution
+L'utilisateur répond à 8 questions de profil (situation familiale, type de revenus, logement, dépenses de l'année). L'IA identifie toutes les déductions applicables, explique chacune en français simple, et génère un guide case par case pour remplir sa déclaration sur impots.gouv.fr. Le tout sans jamais toucher les données fiscales réelles de l'utilisateur — juste un guide intelligent.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Simulation gratuite | €0 | Top 3 déductions + estimation du gain |
+| Guide complet | €9.99 | Toutes déductions, guide case par case, PDF récapitulatif |
+| Vérification Pro | €14.99 | Guide complet + 1 question répondue par un fiscaliste partenaire |
+
+**Timing :** campagne de déclaration = mai–juin en France = pic de trafic naturel de 40M de personnes. **SEO saisonnier** extrêmement puissant. Même 50,000 utilisateurs payants à €9.99 = **€500K sur 6 semaines.**
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **AI:** Claude API — connaît le CGI (Code Général des Impôts) et les cases 2025/2026
+- **PDF:** react-pdf
+- **Payments:** Stripe
+- **Backend:** Supabase (aucune donnée fiscale stockée — RGPD by design)
+
+### Go-to-Market (zero budget)
+1. SEO agressif dès janvier : "déductions impôts 2026", "frais réels ou abattement 10%", "case 7UF déclaration"
+2. TikTok/YouTube en avril : "Les 5 déductions que 90% des Français oublient"
+3. Partenariats avec influenceurs finance perso (Heu?reka, Graham Stephan FR, etc.)
+4. Email marketing à la base utilisateurs AideMax (même profil démographique)
+
+### Competitive Moat
+- Timing annuel crée une audience captive de 40M de personnes chaque mai
+- Guide case-par-case en français simple = UX imbattable vs impots.gouv.fr
+- Fiscaliste partenaire en upsell = moat de confiance
+- Pas de stockage de données fiscales = avantage RGPD majeur sur les concurrents
+
+### Figma Schematic
+[View ImpotsSimple Declaration Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/21992570-1bbf-41e6-97a9-b2fb336dfba8)
+
+---
+
+## 13. RecoursFacile
+
+> **Générez en 3 minutes la lettre de recours parfaite contre n'importe quel service public**
+
+### Problem
+Chaque année, des millions de Français reçoivent des décisions injustes de la CAF, CPAM, Pôle Emploi, Fisc, Mairie, ou d'autres services publics : allocation coupée sans raison, remboursement refusé, amende contestable, permis de construire rejeté. Faire un recours est leur droit — mais 80% abandonnent parce qu'ils ne savent pas comment rédiger une lettre administrative formelle, quelle autorité saisir, ou dans quel délai agir. Les avocats en droit administratif coûtent €200–€400/hr pour des dossiers souvent gagnables seul.
+
+### Solution
+L'utilisateur sélectionne l'organisme adversaire et décrit son problème en langage courant. L'IA identifie le type de recours approprié (recours gracieux, recours hiérarchique, saisine du Médiateur de la République, Défenseur des Droits), la base légale, et le délai légal de réponse. Elle génère une lettre formelle en style administratif correct, avec références légales, prête à envoyer en recommandé.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Diagnostic gratuit | €0 | Type de recours + autorité compétente + délai |
+| Lettre complète | €3.99 | Lettre Word + PDF, adresse destinataire, conseils envoi recommandé |
+| Pack suivi | €5.99 | Lettre initiale + lettre de relance (si pas de réponse en 2 mois) |
+
+**Unit economics:** Claude API cost ~€0.08/lettre → 98% gross margin. **Volume naturel :** 100,000+ décisions administratives contestables par semaine en France.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **AI:** Claude API avec connaissance du Code des Relations entre le Public et l'Administration (CRPA)
+- **Templates:** Base de données de recours types par organisme (CAF, CPAM, Pôle Emploi, Fisc)
+- **Export:** .docx (docx npm) + react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Droits sociaux France", "CAF problèmes solutions", "Impôts réclamation" (200K+ membres combinés)
+2. TikTok : "La CAF t'a coupé tes aides ? Voici exactement quoi envoyer"
+3. SEO : "lettre recours CAF refus", "contester décision CPAM", "recours gracieux modèle"
+4. Partenariat avec AideMax (idea #7) — cross-sell naturel : trouver ses aides → les contester si refusées
+
+### Competitive Moat
+- Aucun service digital n'existe pour la rédaction de recours administratifs en France
+- Base de données de recours types par organisme est une barrière à l'entrée après quelques mois
+- Le cross-sell avec AideMax crée un écosystème (find benefits → claim benefits → appeal denials)
+- RGPD by design : aucune donnée personnelle stockée après génération
+
+### Figma Schematic
+[View RecoursFacile Appeal Generator Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/c95c4440-2ed3-4604-876b-625a4e8cc272)
+
+---
+
+## 14. PermisIA
+
+> **Préparez le Code de la Route avec une IA qui s'adapte à vos points faibles**
+
+### Problem
+1.4 million de Français passent le Code de la Route chaque année. Le taux de réussite est de seulement 58% — ce qui signifie que 590,000 personnes échouent et doivent repayer €30 d'inscription + mois supplémentaires d'auto-école. Les applications existantes (iPermis, En Voiture Simone) utilisent des QCM statiques sans adaptation. Aucune ne dit à l'élève *pourquoi* il se trompe, ni ne priorise ses vrais points faibles. L'auto-école coûte €1,200–€2,000 en France — les élèves sont très motivés à réduire le nombre d'essais.
+
+### Solution
+Un test de placement initial identifie les thèmes faibles de l'élève (priorité à droite, distances de freinage, alcool/drogues, signalisation...). Un algorithme d'apprentissage adaptatif (type Anki mais pour le Code) présente chaque jour 10 questions ciblées sur ses lacunes. Pour chaque mauvaise réponse, l'IA explique la règle de droit concernée avec un exemple visuel et 3 questions similaires pour ancrer la notion. Un simulateur d'examen final prédit le résultat avant le vrai passage.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | Test de placement + 3 jours d'accès complet |
+| Mensuel | €9.99/mo | Apprentissage adaptatif illimité, simulateurs, explications IA |
+| Pack examen | €19.99 | Accès 3 mois + 5 simulations d'examen complètes + rapport de préparation |
+
+**Market size:** 1.4M candidats/an × €9.99 × même 0.5% = **€70K MRR** en régime de croisière. Coût d'acquisition quasi nul via SEO et bouche-à-oreille dans les auto-écoles.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — fonctionne sur mobile sans appli)
+- **Question bank:** Base de données officielle ONISR (Code de la Route officiel) + questions générées par IA
+- **Adaptive algorithm:** Algorithme SM-2 (type Anki) côté serveur
+- **AI explanations:** Claude API — génère l'explication pédagogique à chaque erreur
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. SEO massif : "code de la route gratuit 2026", "entrainement code de la route en ligne", "test code de la route adaptatif"
+2. TikTok : "J'ai réussi le Code du premier coup avec cette méthode — pas iPermis"
+3. Partenariats avec auto-écoles indépendantes — outil recommandé aux élèves (commission de 20%)
+4. Discord/Reddit : r/france, communautés jeunes conducteurs
+
+### Competitive Moat
+- L'adaptation en temps réel aux points faibles est absente de tous les concurrents
+- Explications IA en français pédagogique (pas juste "bonne réponse / mauvaise réponse")
+- Algorithme de répétition espacée = meilleure mémorisation à long terme = meilleur taux de réussite = bouche-à-oreille
+- Base officielle ONISR + questions IA = contenu plus exhaustif que les apps statiques
+
+### Figma Schematic
+[View PermisIA Exam Prep Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/75aeb08e-6c93-4bd0-bcc2-65e20117fb57)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -426,4 +651,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-18 — Ideas 7–9 added (France-specific, ultra-low-budget: AideMax, DécoDPE, LeBonCoinIA)*
+*Last updated: 2026-04-19 — Ideas 10–14 added (France-specific, ultra-low-budget: LoyerCheck, EtatDesLieux.ai, ImpotsSimple, RecoursFacile, PermisIA)*
