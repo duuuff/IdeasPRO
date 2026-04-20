@@ -1091,8 +1091,29 @@ L'utilisateur entre son code postal, le nombre de personnes, et ses préférence
 - Le canal B2B (intégration dans les apps enseignes) est un levier de distribution gratuit : Leclerc paie pour intégrer la fonctionnalité dans sa propre app
 - La promesse "économisez €100/mois pour €5/mois" est un des ratios ROI les plus forts possible en B2C
 
+### Variante HelloFresh — Le modèle affilié
+
+Au lieu de seulement comparer les enseignes entre elles, l'app ajoute **HelloFresh (et Marley Spoon, EveryPlate)** comme une 3e option dans la comparaison :
+
+| Option | Coût estimé | Temps courses | Flexibilité |
+|--------|-------------|---------------|-------------|
+| Cuisiner (Leclerc optimisé) | €42 | 1h30 | Totale |
+| HelloFresh box | €65 | 0 min | Fixe (box prédéfinie) |
+| Hybride (2 repas HelloFresh + courses) | €52 | 45 min | Partielle |
+
+**Quand HelloFresh gagne** : recette complexe avec ingrédients rares, semaine très chargée, utilisateur solo (HelloFresh est moins cher à l'unité pour 1 personne sur certaines boxes).
+
+**Modèle affilié :** HelloFresh France verse **€10–€20 par nouvel abonné référé** + commissions récurrentes sur certains programmes. L'app est transparente sur la comparaison — ce qui crée la confiance — et monétise naturellement quand l'utilisateur choisit HelloFresh en connaissance de cause.
+
+**Impact sur le modèle économique global :**
+- Plan gratuit + affiliation HelloFresh → potentiellement rentable **sans aucun abonné payant**
+- 10 000 utilisateurs actifs × 5% conversion HelloFresh/mois × €15 commission = **€7 500/mois supplémentaires**
+- HelloFresh a tout intérêt à un partenariat renforcé (placement en tête de comparaison) → deal B2B possible
+
 ### Figma Schematic
 [View CourseFuté Recipe, Price & Route Optimizer Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/209ed874-8814-445e-bb03-93a3787bb764)
+
+[View CourseFuté v2 — HelloFresh Variant & Affiliate Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/523879f1-1e7f-4b23-beb5-1c8f00d12af5)
 
 ---
 
