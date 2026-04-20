@@ -27,6 +27,10 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 17 | [HéritageFacile](#17-héritagefacile) | Pay-per-report + Upsell | €5K–€35K | Low |
 | 18 | [CVFrançais.ai](#18-cvfrançaisai) | Pay-per-dossier + Subscription | €5K–€40K | Low |
 | 19 | [VTCPro](#19-vtcpro) | SaaS Subscription | €6K–€35K | Low |
+| 20 | [AlloDevis](#20-allodevis) | SaaS Subscription | €5K–€28K | Low |
+| 21 | [GîteBoost](#21-gîteboost) | SaaS Subscription | €8K–€50K | Low-Medium |
+| 22 | [CoPro.ai](#22-coproai) | Pay-per-report + Subscription | €4K–€22K | Low |
+| 23 | [MenuSaisonnier](#23-menusaisonnier) | SaaS Subscription | €3K–€18K | Low |
 
 ---
 
@@ -863,6 +867,185 @@ Un dashboard unique qui agrège les données de toutes les plateformes (import C
 
 ---
 
+## 20. AlloDevis
+
+> **Générez un devis professionnel en 2 minutes — l'outil des artisans qui détestent la paperasse**
+
+### Problem
+La France compte **600 000 artisans** (plombiers, électriciens, peintres, maçons, menuisiers) dont la grande majorité sont des TPE ou auto-entrepreneurs. La plupart rédigent leurs devis à la main, sur un carnet, ou par message WhatsApp. Résultat : devis non conformes (manque mentions légales obligatoires), image non professionnelle, délai de validation allongé, et zéro traçabilité des impayés. Les logiciels existants (Batappli, Dolibarr) coûtent €30–€100/mois et ont une courbe d'apprentissage de plusieurs heures — un plombier entre deux chantiers n'a ni le temps ni l'envie.
+
+### Solution
+L'artisan décrit sa prestation en langage courant sur son téléphone ("remplacement chauffe-eau électrique 300L, fourniture + pose, Paris 11e"). L'IA génère en 30 secondes un devis PDF professionnel avec toutes les mentions légales obligatoires (n° SIRET, TVA, garantie décennale, délai validité). Le client reçoit un lien SMS/email, signe numériquement, et la signature déclenche automatiquement la création de la facture correspondante.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 3 devis/mois, PDF basique, envoi email |
+| Pro | €9/mo | Devis illimités, signature numérique, conversion facture auto, relances impayés |
+| Expert | €19/mo | + Logo/couleurs personnalisés, conditions générales sur mesure, export comptable |
+
+**Unit economics:** Claude API ~€0.05/devis → 99% gross margin. **Marché :** 600K artisans × 0.1% au plan Pro = 600 clients → **€5 400 MRR**. Un artisan qui fait 3 devis/jour = €3 600 de CA mensuel géré — il paiera €9 sans hésiter.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — fonctionne sur mobile, sans installation)
+- **AI generation:** Claude API (claude-sonnet-4-6) — connaît les mentions légales CAPEB/FFB
+- **Signatures:** DocuSeal (open-source, auto-hébergeable) ou Yousign API
+- **PDF:** react-pdf
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Plombiers France", "Électriciens indépendants", "Artisans du BTP" (200K+ membres combinés)
+2. TikTok/YouTube : "J'ai montré à un plombier comment créer un devis pro en 2 minutes avec son téléphone"
+3. Partenariats avec fournisseurs matériaux (Point.P, Leroy Merlin Pro) — ils ont accès à des milliers d'artisans
+4. SEO : "logiciel devis artisan gratuit", "devis plombier modèle légal", "application facture artisan mobile"
+
+### Competitive Moat
+- Mobile-first + 30 secondes vs 30 minutes avec un logiciel traditionnel
+- Mentions légales CAPEB/FFB intégrées → zéro risque de litige client sur la conformité
+- La signature numérique intégrée supprime la friction principale du processus de vente artisan
+- Un artisan satisfait = tout son réseau : les artisans se recommandent entre eux via WhatsApp
+
+### Figma Schematic
+[View AlloDevis Artisan Quote Generator Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/fb3adc08-77cd-432e-988e-981f85be7884)
+
+---
+
+## 21. GîteBoost
+
+> **L'outil de revenue management pour les gîtes et chambres d'hôtes — réduisez vos commissions Airbnb de moitié**
+
+### Problem
+La France compte **60 000 gîtes ruraux** et **40 000 chambres d'hôtes** — le plus grand parc de tourisme rural d'Europe. La plupart passent par Airbnb, Booking.com, ou Gîtes de France et paient **15–20% de commission par réservation**. Sur une propriété à €80/nuit avec 60% d'occupation, ça représente €3 500–€5 000 perdus par an. Pourtant, ces propriétaires n'ont aucun outil pour : optimiser leurs tarifs selon la saison et la demande locale, générer des réservations directes (zéro commission), ou automatiser la communication avec les voyageurs (confirmations, instructions arrivée, avis post-séjour). Ils utilisent un agenda papier et répondent aux messages à toute heure.
+
+### Solution
+En 10 minutes, le propriétaire crée son mini-site de réservation directe (URL personnalisée, photos, calendrier, paiement Stripe). L'IA analyse son historique de réservations et propose des tarifs dynamiques par période (saint-valentin, vacances scolaires, événements locaux). Un système de messagerie automatique gère confirmations, rappels J-3, guide d'arrivée, et demande d'avis post-séjour — sans que le propriétaire touche son téléphone.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Starter | €0/mo | Mini-site réservation directe, calendrier, 1% de commission sur réservations directes |
+| Pro | €29/mo | Prix dynamiques IA, messages automatiques, sync calendrier Airbnb/Booking, 0% commission |
+| Business | €49/mo | + Multi-propriétés, analytics avancés, channel manager (màj tarifaire sur toutes les plateformes) |
+
+**Unit economics:** Coût infra ~€2/mois/user → 93% gross margin. **Pitch économique :** le plan à €29 se rembourse si l'IA évite une seule nuit vide par mois (€80) OU génère une réservation directe (économise €12–€16 de commission). **ROI en 48h pour le propriétaire.**
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mini-site public généré par propriétaire + dashboard privé)
+- **Calendrier:** ical sync (Airbnb/Booking.com exportent en .ics)
+- **AI pricing:** Claude API — analyse saisonnalité, événements locaux, taux occupation
+- **Messages automatiques:** Resend (emails) + Twilio (SMS) — triggers sur événements calendrier
+- **Paiements réservations:** Stripe (le propriétaire reçoit directement, 0% commission GîteBoost sur plan Pro)
+- **Auth + DB:** Supabase
+- **Abonnements:** Stripe
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Propriétaires Airbnb France", "Gîtes et chambres d'hôtes", "Tourisme rural France" (150K+ membres)
+2. TikTok/YouTube : "J'ai économisé €4 200 en un an en arrêtant de passer uniquement par Airbnb — voici comment"
+3. Partenariats avec Gîtes de France, Clévacances — ces fédérations cherchent des outils pour leurs adhérents
+4. SEO : "logiciel gestion gite rural", "réservation directe chambres hôtes", "prix dynamique location saisonnière"
+
+### Competitive Moat
+- Le plan freemium avec mini-site gratuit (1% commission) crée une adoption massive sans risque
+- La sync .ics avec Airbnb/Booking évite la double réservation — problème numéro 1 des propriétaires
+- Messages automatiques en français (spécificités françaises : horaires check-in légaux, taxe de séjour) = différenciation vs outils anglophones
+- Réseau de propriétaires ruraux très soudé = bouche-à-oreille puissant dans les villages et fédérations
+
+### Figma Schematic
+[View GîteBoost Revenue Management Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/a7842420-9d5e-4c8e-b641-e4b77951a09b)
+
+---
+
+## 22. CoPro.ai
+
+> **Comprenez et contestez vos charges de copropriété — l'IA contre les syndics opaques**
+
+### Problem
+La France compte **10 millions d'appartements en copropriété**, soit 30% du parc résidentiel. Chaque trimestre, les copropriétaires reçoivent un appel de fonds ou un relevé de charges qu'ils signent sans vraiment comprendre. Pourtant : une étude UFC-Que Choisir estime que **30% des charges de copropriété contiennent des erreurs ou surfacturations**. Un copropriétaire parisien lambda paie €3 000–€8 000/an de charges sans savoir si c'est normal, ce que couvre exactement chaque poste, ni si le syndic respecte la loi (délais de convocation, devis obligatoires, fonds de travaux loi Alur). Contester nécessite de connaître la loi du 10 juillet 1965 — ce que 99% des copropriétaires ne font pas.
+
+### Solution
+Le copropriétaire uploade son appel de fonds ou son relevé de charges annuel (PDF ou photo). L'IA décompose chaque poste en langage clair, compare les montants aux moyennes nationales par type d'immeuble et taille de lot (données ANIL/ADIL), vérifie la conformité avec la loi du 10 juillet 1965 et le décret de 2019, et signale les anomalies. Si une anomalie est détectée (poste gonflé, absence de devis obligatoire, fonds de travaux manquant), l'outil génère une lettre de contestation formelle au syndic, avec base légale.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Analyse gratuite | €0 | Décomposition des postes + score de conformité global |
+| Rapport complet | €5.99 | PDF : comparaison nationale, anomalies détaillées, base légale par poste |
+| Pack contestation | €9.99 | Rapport + lettre de contestation au syndic + guide procédure tribunal |
+| Abonnement Copropriétaire | €7/mo | Analyses illimitées, alertes convocations AG, historique sur 3 ans |
+
+**Unit economics:** Claude API ~€0.08/analyse → 99% gross margin. **Marché :** 10M copropriétaires × 0.05% = 5 000 rapports/mois → **€30K MRR**. La colère contre son syndic est un des moteurs de conversion les plus puissants qui soient.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **PDF parsing:** pdf-parse + Tesseract.js (les relevés sont souvent scannés)
+- **AI analysis:** Claude API — connaît la loi du 10 juillet 1965, décret 2019, barèmes ANIL
+- **Données comparatives:** Baromètre charges ADIL/ANIL (open data) + données agrégées anonymisées
+- **PDF export:** react-pdf
+- **Payments:** Stripe
+- **Backend:** Supabase
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Copropriétaires France", "Problèmes syndic France", "Droits des copropriétaires" (100K+ membres)
+2. TikTok/YouTube : "Mon syndic me facturait €400/an en trop — voici comment je l'ai découvert"
+3. SEO : "charges copropriété trop élevées recours", "lettre contestation syndic", "appel de fonds illégal"
+4. Partenariats avec UFC-Que Choisir et associations de copropriétaires (ARC, UNARC) — outil recommandé à leurs membres
+
+### Competitive Moat
+- Aucun outil grand public ne permet d'analyser ses charges avec base légale en France
+- Les données comparatives ANIL agrégées deviennent un avantage exclusif après 6 mois
+- La colère contre les syndics est structurelle (marché en croissance permanente)
+- L'abonnement mensuel crée un revenu récurrent fort : un copropriétaire reste client aussi longtemps qu'il est en copropriété (LTV 5–10 ans)
+
+### Figma Schematic
+[View CoPro.ai Charges Analyzer Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/9c2013ce-f70d-4881-aa56-a89731e765c2)
+
+---
+
+## 23. MenuSaisonnier
+
+> **Planifiez vos repas de la semaine avec des produits de saison et de votre région — zéro gaspillage, liste de courses automatique**
+
+### Problem
+72% des Français déclarent vouloir manger plus local et saisonnier, mais seulement 30% le font régulièrement — par manque de temps et de connaissances. Ils ne savent pas exactement ce qui pousse en avril dans leur région, comment structurer une semaine de repas autour de ces produits, ni quoi acheter au marché vs au supermarché. Les applications de recettes existantes (Marmiton, Cookcooking) proposent des plats en vrac sans tenir compte de la saisonnalité locale, ce qui génère frustration (légumes absents en magasin) et gaspillage (acheter trop sans plan cohérent). La France perd **30 kg de nourriture par personne et par an** — la moitié dans les foyers.
+
+### Solution
+L'utilisateur indique sa région, le nombre de personnes, ses préférences alimentaires (végétarien, sans gluten, budget serré) et deux contraintes de temps (cuisiner < 20 min en semaine, OK pour mijoter le week-end). L'IA génère un menu complet pour la semaine — 5 dîners + 5 déjeuners — 100% basé sur les produits actuellement de saison dans la région. Une liste de courses est automatiquement divisée en deux : produits à acheter au **marché local** (légumes, fruits, viande/poisson de saison) et produits à compléter au supermarché. L'utilisateur peut remplacer un repas en un clic, et l'IA garde la cohérence saisonnière.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 1 menu semaine/mois, liste de courses basique |
+| Mensuel | €3.99/mo | Menus illimités, préférences sauvegardées, liste de courses divisée marché/supermarché |
+| Famille | €5.99/mo | + Jusqu'à 6 personnes, planning mois entier, intégration app de courses (Bring!) |
+
+**Unit economics:** Claude API ~€0.08/menu → 98% gross margin. **Marché :** 30M de foyers français. Même 0.03% au plan Mensuel = 9 000 abonnés → **€36K MRR**. Le prix de 2 cafés par mois pour ne plus jamais se demander "qu'est-ce qu'on mange cette semaine?"
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — sauvegardable sur écran d'accueil mobile)
+- **Données saisonnalité:** Base de données calendrier saisonnier par région (92 départements) — maintenable manuellement, enrichissable via open data INRAE
+- **AI menu generation:** Claude API — génère des menus cohérents, équilibrés, contraintes respectées
+- **Shopping list:** Algorithme de consolidation des ingrédients + classification marché vs supermarché
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Instagram/Pinterest : communautés "zéro déchet", "manger local France", "famille écoresponsable" (1M+ abonnés combinés)
+2. TikTok : "J'ai arrêté le gaspillage alimentaire avec cette méthode — menu de la semaine en 30 secondes"
+3. Partenariats avec Réseaux AMAP (Associations pour le Maintien d'une Agriculture Paysanne) — 1 700 AMAP en France
+4. SEO : "menu semaine produits saison", "que manger de saison en avril", "recette légumes saison région"
+
+### Competitive Moat
+- Saisonnalité par région française est un avantage de localisation que les apps globales (Yummly, Mealime) ne peuvent pas répliquer
+- L'intégration AMAP crée un partenariat de distribution naturel avec 1 700 points de contact
+- La liste de courses divisée marché/supermarché est une fonctionnalité unique sur le marché français
+- Le calendrier saisonnier par département devient un asset SEO fort (longue traîne par mois + région)
+
+### Figma Schematic
+[View MenuSaisonnier Seasonal Meal Planner Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/b3eccc9b-d056-44ee-b365-d6e73cebebfc)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -875,4 +1058,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-20 — Ideas 15–19 added (France-specific, ultra-low-budget: VintedPro, RénovSimple, HéritageFacile, CVFrançais.ai, VTCPro)*
+*Last updated: 2026-04-20 — Ideas 20–23 added (France-specific, ultra-low-budget: AlloDevis, GîteBoost, CoPro.ai, MenuSaisonnier)*
