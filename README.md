@@ -22,6 +22,11 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 12 | [ImpotsSimple](#12-impotssimple) | Freemium + Pay-per-use | €8K–€60K | Low-Medium |
 | 13 | [RecoursFacile](#13-recoursfacile) | Pay-per-letter + Upsell | €3K–€16K | Low |
 | 14 | [PermisIA](#14-permisia) | Freemium + Subscription | €6K–€45K | Medium |
+| 15 | [VintedPro](#15-vintedpro) | Pay-per-listing + Subscription | €4K–€30K | Low |
+| 16 | [RénovSimple](#16-rénovsimple) | Pay-per-report + B2B SaaS | €6K–€40K | Low-Medium |
+| 17 | [HéritageFacile](#17-héritagefacile) | Pay-per-report + Upsell | €5K–€35K | Low |
+| 18 | [CVFrançais.ai](#18-cvfrançaisai) | Pay-per-dossier + Subscription | €5K–€40K | Low |
+| 19 | [VTCPro](#19-vtcpro) | SaaS Subscription | €6K–€35K | Low |
 
 ---
 
@@ -639,6 +644,225 @@ Un test de placement initial identifie les thèmes faibles de l'élève (priorit
 
 ---
 
+## 15. VintedPro
+
+> **Optimisez vos annonces Vinted avec l'IA — vendez plus vite, au meilleur prix**
+
+### Problem
+Vinted compte 23 millions d'utilisateurs en France. Pourtant, la plupart des vendeurs sous-estiment la valeur de leurs vêtements : une veste Zara "en bon état" listée €8 peut se vendre €22 avec le bon titre, la bonne description et le bon prix selon la marque, la taille et la saison. Les acheteurs font systématiquement des offres basses aux annonces mal rédigées. Contrairement à LeBonCoin (idée #9), Vinted est 100% mode — les règles de valorisation (marques, matières, coupes tendance, saison) sont radicalement différentes et demandent une IA spécialisée mode.
+
+### Solution
+L'utilisateur décrit son article (marque, état, taille, matière, quelques mots) et optionnellement uploade des photos. L'IA génère : un titre optimisé avec les mots-clés de recherche Vinted (marque + style + taille + état), une description convaincante en français naturel, un prix recommandé basé sur les transactions réelles du marché Vinted pour cet article, la meilleure heure/jour pour publier, et un template de réponse aux offres basses.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 1 analyse/semaine, titre + description uniquement |
+| Solo | €2/annonce | Analyse complète : titre, description, prix, timing, template réponse |
+| Boost | €9/mo | Annonces illimitées, suivi prix marché, alertes tendances saisonnières |
+
+**Unit economics:** Claude API cost ~€0.04/annonce → 98% gross margin. **Boucle virale :** un vendeur qui passe de €8 à €22 pour un pull parle à ses amis.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI optimization:** Claude API (claude-sonnet-4-6) avec prompt mode/Vinted spécialisé
+- **Price benchmarking:** Données marché Vinted scrapées (public) stockées en Supabase
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'ai vendu mon manteau 3x plus cher grâce à l'IA — sans changer les photos"
+2. Instagram/Pinterest : communautés mode seconde main, thrifting, capsule wardrobe
+3. Reddit : r/france, r/vinted, groupes Facebook "Vinted astuces France" (300K+ membres)
+4. Parrainage : 3 analyses gratuites pour chaque ami inscrit
+
+### Competitive Moat
+- Vinted est 100% français/européen — aucun outil global ne s'y spécialisera
+- Base de prix marché par marque/taille/état devient un data moat après 3 mois
+- Spécialisation mode (saison, tendances, marques premium vs fast fashion) absente de LeBonCoinIA
+- Boucle virale extrêmement forte : chaque vente réussie génère un témoignage partageable
+
+### Figma Schematic
+[View VintedPro AI Listing Optimizer Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/8234caf3-b646-4099-90a8-72223c7ac8dd)
+
+---
+
+## 16. RénovSimple
+
+> **Simulez la rentabilité de vos travaux de rénovation énergétique — MaPrimeRénov, CEE et ROI en 5 minutes**
+
+### Problem
+La France compte **5 millions de logements classés F ou G** (passoires énergétiques). La loi Climat impose leur interdiction progressive à la location : DPE G interdit depuis 2025, DPE F interdit en 2028, DPE E en 2034. Les propriétaires sont sous pression mais ne savent pas par où commencer : quels travaux prioriser ? Combien de MaPrimeRénov exactement ? Quel est le vrai ROI en économies de chauffage ? Les artisans gonflent les devis, les dossiers sont complexes. DécoDPE (#8) lit le diagnostic — RénovSimple dit quoi faire ensuite.
+
+### Solution
+L'utilisateur entre la classe DPE actuelle, la surface du logement, le type de chauffage, et son budget. L'IA calcule le meilleur scénario de travaux (isolation combles/murs, pompe à chaleur, double vitrage) pour atteindre la classe D ou C, avec pour chaque option : le montant exact de MaPrimeRénov, les Certificats d'Économies d'Énergie (CEE) disponibles, les aides régionales (Île-de-France, Occitanie, etc.), le ROI en économies annuelles, et les artisans RGE certifiés dans le département.
+
+### Revenue Model
+| Tier | Price | For |
+|------|-------|-----|
+| Simulation gratuite | €0 | Classe DPE cible atteignable + estimation totale des aides |
+| Rapport complet | €9.99 | PDF : scénarios travaux, montants aides par organisme, guide dossier, contacts RGE |
+| Agent/Notaire | €29/mo | API illimitée, rapports en marque blanche, intégration dans l'annonce immobilière |
+
+**Unit economics:** ~€0.15 API + €0.05 génération PDF = €0.20 coût → 98% gross margin sur €9.99. **Urgence légale :** 5M de propriétaires ont une deadline légale — le trafic SEO est structurellement croissant jusqu'en 2034.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **Data aides:** API MaPrimeRénov (ANAH), barèmes CEE publics, data.gouv.fr aides régionales
+- **AI simulation:** Claude API — calcule scénarios, explique en langage clair
+- **Artisans RGE:** Annuaire RGE officiel ADEME (open data)
+- **PDF:** react-pdf
+- **Payments:** Stripe
+- **Backend:** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO urgent : "DPE G interdit location 2025", "MaPrimeRénov montant simulateur", "travaux isolation aides 2026"
+2. TikTok/YouTube : "Mon propriétaire a 3 ans pour rénover ou ne peut plus louer — voici exactement ce qu'il doit faire"
+3. Cold email aux agents immobiliers (IAD, CapiFrance) — l'outil valorise leur conseil client
+4. Partenariats avec DécoDPE (#8) — cross-sell naturel : lire le DPE → simuler la rénovation
+
+### Competitive Moat
+- L'interdiction légale progressive crée une urgence non négociable pour 5M de propriétaires
+- Agrégation MaPrimeRénov + CEE + aides régionales en une seule simulation n'existe pas
+- Artisans RGE locaux intégrés = valeur actionnable, pas juste informationnelle
+- Synergie avec DécoDPE (#8) crée un écosystème complet "diagnostic → action → financement"
+
+### Figma Schematic
+[View RénovSimple Renovation ROI Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/83a5257e-e134-48cb-b5a0-b4e85ec8d750)
+
+---
+
+## 17. HéritageFacile
+
+> **Calculez vos droits de succession et optimisez vos donations — sans notaire, en 10 minutes**
+
+### Problem
+La France enregistre **600 000 successions par an**. Pour une succession simple (maison + épargne entre enfants), un notaire facture €1 500–€4 000 minimum — et souvent, la majorité du travail se résume à calculer les droits, appliquer les abattements légaux, et conseiller sur l'assurance-vie. La plupart des familles ne savent pas : que chaque parent peut donner €100 000 par enfant tous les 15 ans sans impôts, que l'assurance-vie est exonérée jusqu'à €152 000 par bénéficiaire, ou qu'un testament mal rédigé peut diviser l'abattement. Des familles paient des milliers d'euros d'impôts évitables.
+
+### Solution
+Un questionnaire de profil (liens de parenté, patrimoine immobilier, épargne, assurances-vie, dons déjà effectués, testament existant). L'IA calcule pour chaque héritier : les droits de succession bruts, les abattements applicables (€100K enfant, €80K conjoint survivant, etc.), le montant net à payer. Elle propose ensuite des stratégies de donation-partage pour réduire légalement la facture fiscale future, avec une simulation "si vous donnez €X maintenant vs dans 15 ans".
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Estimation gratuite | €0 | Droits par héritier + abattements identifiés |
+| Rapport complet | €9.99 | PDF : simulation détaillée, stratégies de donation, calendrier optimal |
+| Pack famille | €19.99 | Rapport + mise en relation notaire partenaire (honoraires négociés) |
+
+**Unit economics:** Claude API ~€0.10/simulation → 99% gross margin sur €9.99. **Marché :** même 0.05% des 600K successions annuelles = 300 rapports/mois → **€3K MRR dès le lancement.**
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **AI + droit:** Claude API avec connaissance du Code Civil, CGI (barèmes droits de succession 2026), régimes matrimoniaux
+- **PDF:** react-pdf
+- **Payments:** Stripe (one-time + pack)
+- **Backend:** Supabase (aucune donnée patrimoniale stockée — RGPD by design)
+
+### Go-to-Market (zero budget)
+1. SEO : "simulateur droits de succession", "abattement succession enfant 2026", "donation 100000 euros impôts"
+2. YouTube/TikTok : "Voici pourquoi 80% des familles françaises paient trop d'impôts à la succession"
+3. Facebook : groupes "Investissement immobilier France", "Retraite et patrimoine", "Gestion patrimoine senior"
+4. Partenariats avec ImpotsSimple (#12) — même profil utilisateur (soucieux de l'optimisation fiscale)
+
+### Competitive Moat
+- Le notaire est cher mais souvent peu pédagogique — l'IA explique chaque règle en français clair
+- La simulation "donation maintenant vs plus tard" est unique et crée une valeur immédiate
+- Base de barèmes CGI mise à jour annuellement = maintenance moat (les concurrents doivent aussi la maintenir)
+- Partenariat notaires = upsell naturel sans SAV pour l'outil
+
+### Figma Schematic
+[View HéritageFacile Succession Guide Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/b7a0ada9-dc85-4c07-bbe9-bf6e96a81df5)
+
+---
+
+## 18. CVFrançais.ai
+
+> **Générez en 3 minutes un CV et une lettre de motivation parfaits — adaptés au style français et à l'offre ciblée**
+
+### Problem
+La France a **3.5 millions de demandeurs d'emploi** actifs et des millions de salariés en recherche discrète. Le marché du travail français a ses codes très spécifiques : CV chronologique inversé d'une page, lettre de motivation obligatoire (inconnue dans la plupart des pays), ton formel attendu dans les grands groupes, pas de photo (RGPD mais usage encore ambigu), phrases d'accroche soignées. Les outils globaux (Resume.io, Canva CV) génèrent des formats anglophones inadaptés. Et rédiger une lettre de motivation convaincante pour chaque offre prend 1–2 heures à quelqu'un qui n'est pas à l'aise à l'écrit.
+
+### Solution
+L'utilisateur colle son profil (depuis LinkedIn ou texte libre) et l'offre d'emploi ciblée. Il sélectionne le type d'entreprise (startup, grand groupe, PME, administration). L'IA génère un CV d'une page au format français correct avec des verbes d'action et des chiffres pour quantifier les réalisations, et une lettre de motivation adaptée au ton de l'entreprise — le tout en moins de 3 minutes. L'utilisateur peut demander des variantes jusqu'à être satisfait avant de payer.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Aperçu gratuit | €0 | Voir les 5 premières lignes du CV + ouverture de la lettre |
+| Dossier complet | €4.99 | CV PDF + Word + Lettre de motivation PDF + Word |
+| Abonnement | €14.99/mo | Dossiers illimités + suivi candidatures + relances IA |
+
+**Timing :** les pics de recherche d'emploi en France sont janvier–février (après fêtes) et septembre–octobre (rentrée). SEO saisonnier puissant. **Unit economics :** Claude API ~€0.08/dossier → 98% gross margin.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **AI generation:** Claude API (claude-sonnet-4-6) — maîtrise les codes du CV français
+- **Export:** docx (npm officepegen) + react-pdf
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. SEO : "modèle CV français gratuit", "lettre de motivation exemple 2026", "CV reconversion professionnelle"
+2. TikTok/LinkedIn : "Mon CV généré par IA a décroché 4 entretiens en 2 semaines — voici le prompt"
+3. Pôle Emploi/France Travail : partenariats avec conseillers qui orientent les demandeurs vers des outils
+4. Reddit : r/france, r/emploi_france, r/reconversion
+
+### Competitive Moat
+- Seul outil 100% français (codes culturels, langue, format légal)
+- Adaptation au type d'entreprise est absente de tous les générateurs globaux
+- La lettre de motivation est une barrière uniquement française — aucun outil global ne la priorise
+- Suivi candidatures → relances IA = fonctionnalité de rétention forte sur l'abonnement
+
+### Figma Schematic
+[View CVFrançais.ai Job Application Generator Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/69461fc4-b89a-4267-adcd-57c75493cb7a)
+
+---
+
+## 19. VTCPro
+
+> **Le dashboard tout-en-un pour les 40 000 chauffeurs VTC auto-entrepreneurs en France**
+
+### Problem
+La France compte **40 000 chauffeurs VTC** (Uber, Bolt, Heetch, etc.) enregistrés comme auto-entrepreneurs. Ils travaillent sur 2–4 plateformes simultanément, reçoivent leurs revenus en vrac depuis des apps différentes, et ont du mal à : savoir exactement combien ils gagnent réellement (après commission plateforme), surveiller leur CA vs le plafond auto-entrepreneur (€77K), calculer leurs cotisations URSSAF trimestrielles, déduire les frais réels (carburant, entretien, LLD, péages), et générer les factures clients si nécessaire. En pratique ils découvrent leur facture URSSAF le jour de l'échéance — et parfois n'ont pas mis de côté.
+
+### Solution
+Un dashboard unique qui agrège les données de toutes les plateformes (import CSV ou connexion API là où disponible). Chaque course est automatiquement comptabilisée. L'outil affiche en temps réel : le CA du mois vs le plafond AE, la provision à mettre de côté pour les cotisations du prochain trimestre, les frais déductibles saisis, la marge nette réelle. Une alerte prévient 30 jours avant chaque échéance URSSAF. En fin d'année, un bilan comptable simplifié est exportable pour le comptable ou la déclaration annuelle.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 3 mois d'historique, résumé CA mensuel |
+| Pro | €9.99/mo | Tout illimité, alertes URSSAF, export comptable, provisions automatiques |
+| Expert | €19.99/mo | + Déclaration URSSAF pré-remplie, gestion TVA franchise, bilan annuel PDF |
+
+**Unit economics:** Supabase + Claude API ~€0.50/utilisateur/mois → 95% gross margin à partir de 200 users. **Marché captif :** 40K chauffeurs, tous auto-entrepreneurs, tous avec le même problème fiscal.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — optimisé mobile, le chauffeur est sur son téléphone)
+- **Import données:** CSV Uber/Bolt/Heetch + parsing IA des relevés PDF
+- **Calculs:** Moteur de règles AE (cotisations, plafonds, TVA franchise) + Claude API pour edge cases
+- **Alertes:** Resend (emails) + notifications push PWA
+- **PDF comptable:** react-pdf
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Chauffeurs VTC France", "Uber France chauffeurs", "VTC indépendants" (50K+ membres combinés)
+2. TikTok/YouTube : "Voici pourquoi tu rates probablement €200/mois en ne traçant pas tes frais VTC"
+3. Forums : VTC-info.fr, discussion.uber.com — présenter comme outil anti-mauvaise surprise URSSAF
+4. Bouche-à-oreille : les chauffeurs se connaissent entre eux (files d'attente aéroports, groupes WhatsApp)
+
+### Competitive Moat
+- AutoEntrepreneur.ai (#4) est généraliste — VTCPro est hyperspécialisé VTC (frais kilométriques, déduction LLD, multi-plateformes)
+- Agrégation multi-plateformes (Uber + Bolt + Heetch) est un problème non résolu que les chauffeurs mentionnent constamment
+- La communauté VTC est très soudée — un early adopter satisfait = 10 nouveaux clients organiques
+- Après 6 mois, les données agrégées permettent des benchmarks sectoriels uniques (revenu moyen/heure par ville)
+
+### Figma Schematic
+[View VTCPro Driver Dashboard Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/e3c5e7e6-7eea-4555-824e-61c540719dc8)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -651,4 +875,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-19 — Ideas 10–14 added (France-specific, ultra-low-budget: LoyerCheck, EtatDesLieux.ai, ImpotsSimple, RecoursFacile, PermisIA)*
+*Last updated: 2026-04-20 — Ideas 15–19 added (France-specific, ultra-low-budget: VintedPro, RénovSimple, HéritageFacile, CVFrançais.ai, VTCPro)*
