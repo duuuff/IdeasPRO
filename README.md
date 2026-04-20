@@ -31,6 +31,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 21 | [GîteBoost](#21-gîteboost) | SaaS Subscription | €8K–€50K | Low-Medium |
 | 22 | [CoPro.ai](#22-coproai) | Pay-per-report + Subscription | €4K–€22K | Low |
 | 23 | [MenuSaisonnier](#23-menusaisonnier) | SaaS Subscription | €3K–€18K | Low |
+| 24 | [CourseFuté](#24-coursefuté) | Freemium + Subscription | €10K–€65K | Medium |
 
 ---
 
@@ -1046,6 +1047,55 @@ L'utilisateur indique sa région, le nombre de personnes, ses préférences alim
 
 ---
 
+## 24. CourseFuté
+
+> **Menu de la semaine + comparaison de prix entre enseignes + itinéraire optimisé — le GPS de vos courses**
+
+### Problem
+Les ménages français dépensent en moyenne **€500/mois en alimentation**, soit le 2e poste de dépense après le logement. Pourtant, les prix des mêmes produits varient de **20 à 35% selon l'enseigne** (Leclerc, Carrefour, Lidl, Aldi, Intermarché). Personne ne fait la comparaison parce qu'il n'existe aucun outil qui combine : planification des repas, comparaison de prix multi-enseignes, et optimisation du trajet physique. Jow (le concurrent le plus proche en France) fait recettes + panier en ligne, mais ne compare pas les prix réels et ne gère pas les courses physiques ni les marchés. Résultat : les familles surpayent €80–€150/mois par habitude, sans s'en rendre compte.
+
+### Solution
+L'utilisateur entre son code postal, le nombre de personnes, et ses préférences (végétarien, sans gluten, budget €X/semaine). L'IA génère un menu 7 jours avec liste d'ingrédients consolidée. Le moteur de comparaison interroge les prix en temps réel des enseignes du secteur (Leclerc, Carrefour, Lidl, Aldi, Intermarché) via scraping public de leurs sites. L'IA calcule deux options : **tout acheter dans l'enseigne la moins chère** (gain de temps) ou **panier fractionné entre 2 enseignes + marché** (économie maximale). Si l'utilisateur choisit l'option fractionnée, Google Maps génère l'itinéraire optimal entre les commerces. Dans chaque magasin, la liste est ordonnée dans l'ordre des rayons pour éviter les allers-retours.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 1 menu/semaine, comparaison 2 enseignes, liste basique |
+| Malin | €4.99/mo | Menus illimités, comparaison toutes enseignes, itinéraire multi-magasins, liste par rayon |
+| Famille | €7.99/mo | + Jusqu'à 8 personnes, planning mensuel, alertes promotions sur vos produits récurrents |
+| B2B Enseigne | €500–€2 000/mo | Intégration marque blanche dans l'app Leclerc/Carrefour/Intermarché |
+
+**Pitch économique :** "Cette app vous fait économiser €100/mois sur vos courses. Elle coûte €5/mois. ROI = 2 000%." Aucun utilisateur ne résiste à ce calcul. **Unit economics :** Claude API ~€0.10/menu, scraping infra ~€30/mois fixe → >95% gross margin dès 100 abonnés.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — liste de courses utilisable hors-ligne en magasin)
+- **AI menus:** Claude API (claude-sonnet-4-6) — génère recettes équilibrées, contraintes respectées
+- **Prix en temps réel:** Scraping des sites publics Leclerc.fr, Carrefour.fr, Lidl.fr, Intermarché.fr (prix affichés publiquement) + Open Food Facts pour le matching produits
+- **Géolocalisation enseignes:** Google Places API (gratuit jusqu'à 28K requêtes/mois) pour trouver les magasins proches du code postal
+- **Itinéraire:** Google Maps Directions API (optimisation multi-stops)
+- **Liste par rayon:** Catégorisation IA par type d'enseigne (les plans de rayons Leclerc/Carrefour sont standardisés par format de magasin)
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'économise €120/mois sur mes courses grâce à cette app — voici exactement comment" (contenu ultra-partageable, promesse chiffrable)
+2. Partenariat UFC-Que Choisir : ils adorent les outils de comparaison de prix, base de 170K membres
+3. Facebook Groups : "Familles économes France", "Anti-gaspi alimentation", "Manger bien pas cher" (500K+ membres combinés)
+4. SEO : "comparer prix supermarchés France", "où faire ses courses moins cher", "application économiser courses"
+5. Extension naturelle de MenuSaisonnier (#23) — même audience, upgrade évident
+
+### Competitive Moat
+- **Jow** fait recettes + commande en ligne mais **ne compare pas les prix** entre enseignes et ne gère pas les courses physiques
+- La combinaison **comparaison + routing** est absente du marché mondial — pas seulement français
+- Le scraping des prix publics crée une base de données propriétaire qui s'améliore avec le temps (data moat)
+- Le canal B2B (intégration dans les apps enseignes) est un levier de distribution gratuit : Leclerc paie pour intégrer la fonctionnalité dans sa propre app
+- La promesse "économisez €100/mois pour €5/mois" est un des ratios ROI les plus forts possible en B2C
+
+### Figma Schematic
+[View CourseFuté Recipe, Price & Route Optimizer Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/209ed874-8814-445e-bb03-93a3787bb764)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1058,4 +1108,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-20 — Ideas 20–23 added (France-specific, ultra-low-budget: AlloDevis, GîteBoost, CoPro.ai, MenuSaisonnier)*
+*Last updated: 2026-04-20 — Ideas 20–24 added (France-specific, ultra-low-budget: AlloDevis, GîteBoost, CoPro.ai, MenuSaisonnier, CourseFuté)*
