@@ -32,6 +32,10 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 22 | [CoPro.ai](#22-coproai) | Pay-per-report + Subscription | €4K–€22K | Low |
 | 23 | [MenuSaisonnier](#23-menusaisonnier) | SaaS Subscription | €3K–€18K | Low |
 | 24 | [CourseFuté](#24-coursefuté) | Freemium + Subscription | €10K–€65K | Medium |
+| 25 | [ParcourSup.ai](#25-parcourSupai) | Pay-per-letter + Subscription | €8K–€55K | Low |
+| 26 | [ArnaqueCheck](#26-arnaquecheck) | Freemium + Subscription | €5K–€35K | Low |
+| 27 | [MutuelleOptimizer](#27-mutuelleoptimizer) | Freemium + Affiliate | €10K–€80K | Low-Medium |
+| 28 | [AssistanteMaternelle.ai](#28-assistantematernelleai) | SaaS Subscription | €6K–€40K | Low |
 
 ---
 
@@ -1117,6 +1121,188 @@ Au lieu de seulement comparer les enseignes entre elles, l'app ajoute **HelloFre
 
 ---
 
+## 25. ParcourSup.ai
+
+> **Générez en 3 minutes la lettre de motivation parfaite pour Parcoursup — adaptée à chaque formation**
+
+### Problem
+Chaque année, **900 000 lycéens** de Terminale saisissent leurs vœux sur Parcoursup entre novembre et mars. Pour chaque vœu, ils doivent rédiger un "projet de formation motivé" — une lettre de motivation académique ciblée sur la formation choisie. Les établissements précisent ce qu'ils attendent, mais la majorité des élèves (et de leurs parents) ne savent pas comment écrire une lettre académique convaincante en français. Des tuteurs particuliers facturent **€30–€60/h** rien que pour aider à rédiger ces lettres. Beaucoup d'élèves soumettent des lettres génériques copiées sur des modèles internet — et n'obtiennent pas leur formation souhaitée.
+
+### Solution
+L'élève colle l'intitulé de la formation et l'établissement ciblés (BTS Comptabilité à Bordeaux, BUT Informatique Lyon 1, Licence Psychologie Paris V...). Il renseigne en 2 minutes son profil (série, spécialités, mention probable, activités extra-scolaires, projet professionnel). L'IA génère une lettre de motivation personnalisée, en style académique français correct, qui met en avant les éléments du profil les plus pertinents pour cette formation précise. L'élève voit les 3 premières lignes gratuitement et paie **€2,99** pour débloquer la lettre complète (Word + PDF), prête à copier-coller dans Parcoursup.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Aperçu gratuit | €0 | 3 premières lignes + structure générale |
+| Lettre complète | €2,99 | Word + PDF, adaptée à la formation et au profil |
+| Pack 5 vœux | €9,99 | 5 lettres différentes (5 formations), export groupé |
+| Abonnement famille | €19/an | Lettres illimitées, suivi Parcoursup, rappels dates |
+
+**Timing :** La fenêtre de saisie Parcoursup = **novembre à mars**. Pic de trafic naturel de 900K élèves + leurs parents sur 5 mois. SEO saisonnier extrêmement fort. **Unit economics :** Claude API ~€0.08/lettre → 97% gross margin. Même 1% des élèves = 9 000 × €2,99 = **€26 900 sur la campagne**.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI generation:** Claude API (claude-sonnet-4-6) — connaît le style académique français et les attendus Parcoursup par filière
+- **Export:** docx (officegen) + react-pdf
+- **Auth + DB:** Supabase
+- **Payments:** Stripe (one-time + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. SEO agressif dès septembre : "lettre motivation parcoursup BTS", "projet formation motivé exemple", "parcoursup lettre de motivation BUT informatique"
+2. TikTok/YouTube en novembre : "J'ai généré ma lettre Parcoursup en 2 minutes — voici le résultat"
+3. Discord lycéens : serveurs "Parcoursup 2027", "Prépa France", "Terminale" (100K+ membres)
+4. Partenariats avec professeurs principaux et CPE — outil recommandé à toute la classe
+
+### Competitive Moat
+- Parcoursup est une plateforme 100% française sans équivalent mondial — aucun outil global ne s'y spécialisera
+- Les "attendus" de chaque formation (publiés sur parcoursup.fr) permettent un prompt ultra-ciblé que les outils génériques ne font pas
+- Le timing annuel crée une audience captive recurrente (un lycéen cette année = un parent qui recommande l'an prochain)
+- L'abonnement famille crée un revenu récurrent sur 3–4 ans (fratrie, entourage)
+
+### Figma Schematic
+[View ParcourSup.ai Motivation Letter Generator Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/611a12bd-f2ef-4d62-a929-28395c204aa3)
+
+---
+
+## 26. ArnaqueCheck
+
+> **Analysez en 10 secondes si un SMS, email ou QR code est une arnaque — l'anti-escroquerie français**
+
+### Problem
+La France est le **2e pays européen le plus touché par la fraude en ligne** : 3,7 milliards d'euros de pertes annuelles selon la Banque de France. Les arnaques françaises sont très spécifiques : faux SMS "Colis La Poste" (900K victimes en 2024), fausse amende ANTAI par email, arnaque CPF (Compte Personnel de Formation), faux remboursement CPAM, faux EDF/Engie réclamant un paiement, phishing Ameli. Les victimes sont souvent des personnes âgées ou peu à l'aise avec le numérique. Il n'existe **aucun outil grand public** en France pour analyser un message suspect en temps réel avant de cliquer. Les signalements officiels (Pharos, Signal-Spam) servent à protéger les autres, pas à protéger l'utilisateur immédiatement.
+
+### Solution
+L'utilisateur colle le texte du message (SMS, email, message WhatsApp) ou photographie un document/QR code suspect. L'IA analyse en 10 secondes : le numéro/domaine expéditeur, les techniques de manipulation utilisées (urgence, menace, gain), l'organisme usurpé, et la probabilité d'arnaque. Le résultat est un verdict clair (**Arnaque confirmée / Suspect / Légitime**) avec une explication en français simple. Si c'est une arnaque, l'outil explique quoi faire : ne pas cliquer, signaler à Pharos, contacter sa banque, déposer plainte.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Analyse gratuite | €0 | Verdict + explication + guide "que faire" |
+| Rapport détaillé | €1,99 | PDF : technique d'arnaque décryptée, preuves, historique de l'expéditeur |
+| Abonnement Alerte | €4,99/mo | Analyses illimitées + alertes push nouvelles arnaques dans votre région + protection famille (3 comptes) |
+| B2B Banques/Assurances | €500–€2K/mo | API intégrée dans l'application mobile bancaire (BNP, Société Générale, etc.) |
+
+**Unit economics :** Claude API ~€0.03/analyse → 99% gross margin. **Boucle virale naturelle :** une personne qui évite une arnaque partage l'outil à toute sa famille. Un seul post viral = 100K utilisateurs.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel) + PWA (pour partage facile depuis l'écran d'accueil mobile)
+- **AI analysis:** Claude API — base de connaissances des arnaques françaises actives (mise à jour hebdomadaire)
+- **Phishing database:** intégration Google Safe Browsing API (gratuit) + OpenPhish pour les URLs
+- **Image/QR analysis:** Claude vision API (analyse photo de documents suspects)
+- **Notifications push:** Web Push API (PWA) + Resend (emails d'alerte)
+- **Backend:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'ai analysé le SMS 'Colis La Poste' avec une IA — voici exactement comment ça marche" (contenu ultra-partageable)
+2. Facebook : groupes "Arnaques en France — Alertes", "Seniors et numérique", "Fraude bancaire France" (300K+ membres)
+3. SEO : "arnaque sms colis la poste", "fausse amende antai email", "vérifier arnaque cpf"
+4. Partenariats avec associations de seniors (UNAF, Generali Seniors) et La Poste (qui souffre de l'usurpation de sa marque)
+
+### Competitive Moat
+- Base de données des arnaques françaises actives est un moat data qui se consolide chaque semaine
+- La spécificité française (ANTAI, CPF, Ameli, La Poste) est un avantage qu'aucun outil global ne peut répliquer sans effort massif
+- Le canal B2B (intégration bancaire) est un levier de revenus scalable et récurrent
+- Les arnaques se renouvellent en permanence → l'abonnement "alerte" est une rétention naturelle
+- La marque "ArnaqueCheck" est un actif en soi : les journalistes et associations citent l'outil dès qu'une nouvelle vague d'arnaques éclate
+
+### Figma Schematic
+[View ArnaqueCheck French Scam Detector Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/5501daec-2338-4178-ab71-97575e6c0fc6)
+
+---
+
+## 27. MutuelleOptimizer
+
+> **Trouvez en 5 minutes la mutuelle santé qui correspond vraiment à votre profil — et économisez €200–€400/an**
+
+### Problem
+La France compte **55 millions d'assurés à une complémentaire santé (mutuelle)**. Depuis la loi Bourquin (résiliation infra-annuelle en vigueur depuis 2020), tout assuré peut changer de mutuelle à tout moment après 1 an de contrat, sans frais ni pénalité. Pourtant, **70% des Français gardent la même mutuelle par inertie**, souvent depuis leur employeur ou leur banque, alors qu'ils paient en moyenne **€150–€300/mois** (soit €1 800–€3 600/an) pour une couverture mal calibrée. Les comparateurs existants (LeLynx, Meilleurtaux, Hyperassur) sont des formulaires génériques qui renvoient des devis sans comprendre les vrais besoins de l'utilisateur. Personne ne prend en compte : le taux réel de remboursement Sécu pour votre situation, vos dépenses de santé réelles de l'année écoulée, ou si votre dentiste est en secteur 1, 2 ou 3.
+
+### Solution
+L'utilisateur répond à 10 questions en 3 minutes : situation (salarié, indépendant, retraité, étudiant), consommation médicale réelle (généraliste, spécialistes, dentiste, optique, hospitalisation), département (impact sur les tarifs), mutuelle actuelle et cotisation. L'IA calcule le **taux de retour réel** de la mutuelle actuelle (ce que vous recevez vs ce que vous payez) et le compare au marché. Elle recommande les 3 meilleures mutuelles du marché pour ce profil précis, avec simulation chiffrée économie/an. Chaque recommandation inclut un lien affilié vers l'assureur.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Analyse gratuite | €0 | Score d'adéquation actuelle + économie estimée |
+| Rapport complet | €5,99 | PDF : comparaison garantie par garantie, taux remboursement réel, classement personnalisé |
+| Abonnement Annuel | €9,99/an | Réévaluation automatique à chaque anniversaire de contrat + alertes nouvelles offres |
+| **Affiliation assureurs** | **€15–€40/souscription** | Commission versée par Harmonie Mutuelle, MGEN, Malakoff Humanis, Alan, Allianz sur chaque souscription |
+
+**Modèle économique principal = affiliation.** L'utilisateur bénéficie d'un outil gratuit ou quasi-gratuit. L'outil monétise sur les souscriptions générées. **Unit economics :** 10 000 utilisateurs × 5% conversion mutuelle × €25 commission = **€12 500/mois sans aucun abonné payant**. Le rapport payant est un bonus de marge pure.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **AI advisor:** Claude API — connaît les grilles de remboursement Sécu 2026, les niveaux OPTAM, les réseaux de soins (Carte Blanche, Kalivia, Santéclair)
+- **Data mutuelles:** Partenariats API assureurs (disponibles via les réseaux d'affiliation Papillon Assurance, April, Eficiens) ou scraping des grilles publiques
+- **Comparaison:** Moteur de calcul taux remboursement réel par poste de dépense
+- **Affiliation:** Liens affiliés via plateformes (Papillon, April) — aucune intégration technique requise au démarrage
+- **Auth + DB:** Supabase
+- **Payments:** Stripe (pour le rapport)
+
+### Go-to-Market (zero budget)
+1. SEO : "changer mutuelle quand on veut", "mutuelle pas chère indépendant", "meilleure mutuelle retraité 2026", "mutuelle trop chère que faire"
+2. TikTok/YouTube : "J'économise €340/an sur ma mutuelle depuis que j'ai fait ce calcul — voici comment"
+3. Facebook : groupes "Auto-entrepreneurs France", "Retraités actifs", "Indépendants et freelances" (500K+ membres)
+4. Cross-sell naturel avec AutoEntrepreneur.ai (#4) — même audience, même moment de vie (création d'activité = choix mutuelle)
+
+### Competitive Moat
+- Les comparateurs existants (LeLynx, Meilleurtaux) sont des formulaires sans IA — aucun ne calcule le taux de retour réel
+- Le profiling par consommation médicale réelle est une approche absente du marché et génère des recommandations objectivement meilleures
+- L'affiliation crée un modèle sans friction pour l'utilisateur (gratuit ou presque) = taux d'adoption élevé
+- Les assureurs paient déjà des commissions élevées aux courtiers → ArnaqueCheck remplace le courtier traditionnel à bien moindre coût
+
+### Figma Schematic
+[View MutuelleOptimizer AI Health Insurance Advisor Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/4bb97385-1401-4056-89b7-2655801e8dc1)
+
+---
+
+## 28. AssistanteMaternelle.ai
+
+> **Le dashboard tout-en-un pour les 300 000 assistantes maternelles — PAJEMPLOI, bulletins de salaire et contrats en 5 minutes**
+
+### Problem
+La France compte **300 000 assistantes maternelles agréées** (ATSEM, nounous à domicile, gardes d'enfants). Elles accueillent individuellement 1 à 4 enfants, sont employées directement par les parents, et doivent gérer seules une complexité administrative considérable : calcul du salaire net selon la CCN des assistantes maternelles, déclaration mensuelle via PAJEMPLOI (le service URSSAF dédié), gestion du Complément de libre choix du mode de garde (CMG) versé par la CAF, génération de bulletins de salaire conformes au Code du travail, gestion des congés payés et des absences, et renouvellement de l'agrément tous les 5 ans. La plupart utilisent **Excel ou du papier**, font des erreurs de calcul qui leur coûtent de l'argent ou créent des litiges avec les parents. Les logiciels existants (MonAssistante.com, Pajemploi+) sont datés, non mobiles, et peu intuitifs.
+
+### Solution
+L'assistante maternelle crée son profil (n° agrément, département, tarif horaire, indemnités entretien et repas) et ajoute chaque enfant gardé avec son contrat d'accueil. Chaque mois, elle saisit en 2 minutes les heures réelles, les absences et les congés. L'outil calcule automatiquement le salaire net selon la CCN 2026, génère un bulletin de salaire PDF conforme, et prépare la déclaration PAJEMPLOI pré-remplie à copier en un clic. Un calendrier annuel suit les droits à congés, les échéances de renouvellement d'agrément et les dates de versement CMG. Le parent reçoit un récapitulatif mensuel par email, avec le montant à déclarer pour son crédit d'impôt garde d'enfants.
+
+### Revenue Model
+| Tier | Price | For |
+|------|-------|-----|
+| Gratuit | €0 | 1 enfant, calcul salaire, sans génération PDF |
+| Pro | €7/mo | Jusqu'à 4 enfants, bulletins PDF, déclaration PAJEMPLOI pré-remplie, calendrier congés |
+| Expert | €12/mo | + Contrats personnalisés, attestations fiscales parents, rappels renouvellement agrément, historique 5 ans |
+
+**Unit economics :** Supabase + Claude API ~€0.30/utilisateur/mois → 96% gross margin à partir de 100 users. **Marché captif :** 300K assistantes maternelles, toutes avec le même problème mensuel récurrent. LTV exceptionnelle : une AM garde des enfants pendant 15–20 ans → LTV €7 × 12 × 15 = **€1 260 par cliente**.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — optimisé mobile, l'AM est souvent sur téléphone)
+- **Calcul salaire:** Moteur de règles CCN assistantes maternelles 2026 (grille indiciaire, heures complémentaires, majorations)
+- **PAJEMPLOI:** Export pré-rempli au format PAJEMPLOI (la plateforme URSSAF accepte les saisies manuelles guidées)
+- **PDF bulletins:** react-pdf (bulletin de salaire aux normes légales françaises)
+- **Email parents:** Resend (récapitulatifs mensuels + attestations fiscales)
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Assistantes Maternelles France", "Nounous Agréées", "PAJEMPLOI aide entraide" (200K+ membres combinés)
+2. TikTok/YouTube : "Je suis assistante maternelle et j'ai arrêté Excel — voici comment je gère PAJEMPLOI en 5 minutes"
+3. Partenariats avec RAM (Relais Assistantes Maternelles) — 3 500 RAM en France, chacun en contact avec des dizaines d'AM de sa commune
+4. SEO : "logiciel assistante maternelle gratuit", "calculer salaire pajemploi", "bulletin de salaire nounou modele"
+
+### Competitive Moat
+- Les RAM (Relais Assistantes Maternelles) sont un canal de distribution unique : ce sont des services publics locaux qui forment et accompagnent les AM — une recommandation d'un RAM = adoption de centaines d'AM dans la commune
+- La CCN des assistantes maternelles est une des plus complexes de France (indemnités entretien, repas, heures atypiques, gardes partagées) — la maintenir correctement est une barrière à l'entrée forte
+- L'export "récapitulatif crédit d'impôt" pour les parents crée une valeur B2B2C : l'AM propose l'outil et les parents l'adorent
+- LTV de 15–20 ans est extraordinaire pour un SaaS à €7/mo — le churn est quasi nul une fois l'habitude installée
+
+### Figma Schematic
+[View AssistanteMaternelle.ai Childminder Dashboard Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/399ce9ec-b617-48b4-af9f-8b6632f6ec2b)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1129,4 +1315,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-20 — Ideas 20–24 added (France-specific, ultra-low-budget: AlloDevis, GîteBoost, CoPro.ai, MenuSaisonnier, CourseFuté)*
+*Last updated: 2026-04-21 — Ideas 25–28 added (France-specific, ultra-low-budget: ParcourSup.ai, ArnaqueCheck, MutuelleOptimizer, AssistanteMaternelle.ai)*
