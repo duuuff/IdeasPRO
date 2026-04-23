@@ -36,6 +36,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 26 | [ArnaqueCheck](#26-arnaquecheck) | Freemium + Subscription | €5K–€35K | Low |
 | 27 | [MutuelleOptimizer](#27-mutuelleoptimizer) | Freemium + Affiliate | €10K–€80K | Low-Medium |
 | 28 | [AssistanteMaternelle.ai](#28-assistantematernelleai) | SaaS Subscription | €6K–€40K | Low |
+| 29 | [SantéWallet](#29-santéwallet) | Freemium + Subscription | €3K–€25K | Low |
+| 30 | [FormationCPF](#30-formationcpf) | Pay-per-plan + Subscription | €5K–€35K | Low |
+| 31 | [Coloc.ai](#31-colocai) | Freemium + Subscription | €4K–€20K | Low |
 
 ---
 
@@ -1303,6 +1306,141 @@ L'assistante maternelle crée son profil (n° agrément, département, tarif hor
 
 ---
 
+## 29. SantéWallet
+
+> **Suivez vos remboursements Sécu et mutuelle en temps réel — ne laissez plus de crédit santé sur la table**
+
+### Problem
+La France compte **55 millions d'assurés** entre la Sécu et une complémentaire santé, mais la grande majorité ne sait pas exactement ce qu'elle devrait toucher pour chaque acte médical. Les remboursements Ameli arrivent en différé, les mutuelles ont des délais variables, et personne ne vérifie si les montants sont corrects. Résultat : des millions de Français oublient de réclamer un remboursement, ignorent des actes couverts à 100% (bilan de prévention à 50 ans, dépistages du cancer, vaccins pris en charge par la Sécu), et ne savent pas combien ils ont réellement dépensé en santé sur l'année — alors que cette information est nécessaire pour la déclaration de revenus (frais médicaux non remboursés = déductibles en option frais réels).
+
+### Solution
+L'utilisateur saisit ses dépenses de santé au fil de l'eau (médecin, dentiste, optique, médicaments, kiné). Pour chaque acte, l'outil calcule automatiquement le remboursement théorique Sécu (selon les tarifs officiels) et le complément mutuelle selon son contrat. Il suit les remboursements effectivement reçus et alerte si un remboursement est en retard ou manquant. Un calendrier de soins préventifs reminde l'utilisateur des actes couverts à 100% qu'il serait dommage de manquer. En décembre, un export PDF annuel résume toutes les dépenses pour la déclaration fiscale.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | 5 actes/mois, résumé basique |
+| Mensuel | €3,99/mo | Actes illimités, alertes remboursements, calendrier préventif |
+| Annuel | €34,99/an | Tout compris + export fiscal PDF + historique 5 ans |
+
+**Unit economics :** Claude API ~€0,05/calcul → 99% gross margin. **Marché :** 55M assurés dont des millions avec des situations complexes (ALD, multi-spécialistes, enfants à charge, mutuelle d'entreprise + complémentaire personnelle).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — utilisable sur mobile en sortant du médecin)
+- **Tarifs officiels:** API Ameli open data + NGAP (nomenclature générale des actes professionnels — gratuit)
+- **Calculs:** Moteur de règles JS (taux de remboursement par acte, ticket modérateur, participation forfaitaire)
+- **AI:** Claude API — gère les cas complexes (ALD, maternité, AT/MP)
+- **Alertes:** Resend (email) + notifications PWA
+- **Auth + DB:** Supabase
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'avais €340 de remboursements en attente sans le savoir — voici comment je les ai récupérés"
+2. Facebook : groupes "Santé et mutuelle France", "ALD et remboursements", "Parents actifs France" (300K+ membres)
+3. Cross-sell naturel avec MutuelleOptimizer (#27) — même audience, complémentaire parfaite : choisir sa mutuelle → puis tracker ce qu'elle rembourse vraiment
+4. SEO : "suivi remboursements assurance maladie", "actes pris en charge 100% secu 2026", "frais medicaux déductibles impots"
+
+### Competitive Moat
+- Ameli.fr affiche les remboursements passés mais ne prédit rien, n'alerte pas, ne résume pas pour les impôts
+- L'agrégation Sécu + mutuelle en temps réel n'existe dans aucune application grand public
+- Le calendrier de soins préventifs basé sur l'âge et le profil est un feature unique à forte rétention
+- La synergie avec MutuelleOptimizer crée un écosystème : choisir → tracker → optimiser
+
+### Figma Schematic
+[View SantéWallet Healthcare Cost Tracker Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/d3a85eba-5afa-438f-bd4c-5c7723b7e229)
+
+---
+
+## 30. FormationCPF
+
+> **Trouvez la formation CPF qui vaut vraiment votre argent — sans tomber dans les arnaques**
+
+### Problem
+Le **Compte Personnel de Formation (CPF)** est l'une des aides les plus méconnues de France : chaque salarié cumule €500/an (€800 pour les non-qualifiés) sur son compte, jusqu'à un plafond de €5 000. En 2022, **€2,1 milliards** de CPF ont été dépensés — dont une fraction alarmante dans des formations inutiles ou des arnaques. La plateforme Mon Compte Formation contient **30 000+ organismes** dont des centaines ont été épinglés pour démarchage abusif. De l'autre côté, des millions de travailleurs laissent leur CPF dormir faute de savoir comment l'utiliser correctement : comment choisir une vraie formation certifiante ? Comment combiner CPF + OPCO + France Travail pour financer une reconversion ? Comment vérifier si un organisme est sérieux (certification Qualiopi obligatoire depuis 2022) ?
+
+### Solution
+L'utilisateur entre son profil (métier actuel, niveau d'études, objectif de reconversion ou d'évolution, solde CPF estimé). L'IA identifie les formations réellement pertinentes pour ses objectifs parmi les certifications reconnues (RNCP, CléA, BTS, titres professionnels), calcule le financement optimal (CPF + OPCO de son secteur + complément France Travail si demandeur d'emploi), et vérifie pour chaque organisme recommandé : certification Qualiopi active, avis vérifiés, taux d'insertion. Un plan d'action personnalisé PDF explique étape par étape comment activer le CPF, contacter l'OPCO, et s'inscrire sans frais cachés.
+
+### Revenue Model
+| Option | Price | Details |
+|--------|-------|---------|
+| Diagnostic gratuit | €0 | 3 formations recommandées + estimation financement total |
+| Plan complet | €4,99 | PDF : top 5 formations, calcul CPF + OPCO + France Travail, guide inscription, vérification organismes |
+| Abonnement Suivi | €9/mo | Plan mis à jour si votre situation change, alertes nouvelles formations, accompagnement reconversion sur 12 mois |
+
+**Timing :** les reconversions professionnelles explosent en France depuis 2020. **Unit economics :** Claude API ~€0,10/plan → 98% gross margin. Même 500 plans/mois = **€2 500 MRR** avec zéro infrastructure.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **Data formations:** API Mon Compte Formation (open data data.gouv.fr) + scraping RNCP France Compétences
+- **Verification Qualiopi:** Base officielle DGEFP (publique)
+- **OPCO matching:** Base OPCO par convention collective (publique) + règles de financement par secteur
+- **AI advisor:** Claude API (claude-sonnet-4-6) — connaît le système CPF/OPCO/France Travail
+- **PDF:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'avais €2 400 sur mon CPF qui dormaient depuis 4 ans — voici comment j'ai financé ma reconversion à 100%"
+2. Reddit : r/france, r/reconversion, r/emploi_france — démontrer l'outil sur un cas réel
+3. Facebook : "Reconversion professionnelle France", "CPF et formation", "Freelances et indépendants" (400K+ membres)
+4. SEO : "comment utiliser son CPF", "formation CPF reconversion", "organisme formation certifie qualiopi", "OPCO financement formation"
+
+### Competitive Moat
+- Mon Compte Formation officiel est un catalogue sans conseil — FormationCPF ajoute l'intelligence
+- La vérification anti-arnaque (Qualiopi + avis + taux insertion) est absente de la plateforme officielle
+- Le calcul de financement multi-sources (CPF + OPCO + France Travail) est complexe et non documenté simplement
+- Chaque utilisateur satisfait en reconversion devient un ambassadeur puissant (vie transformée = témoignage viral)
+
+### Figma Schematic
+[View FormationCPF Training Navigator Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/a6ce46a0-7f98-4e51-9006-059213501dbe)
+
+---
+
+## 31. Coloc.ai
+
+> **Trouvez des colocataires compatibles, générez votre convention, gérez vos dépenses partagées — tout en un**
+
+### Problem
+La France compte **plus d'1 million de colocations actives**, avec un flux permanent de 3 millions de jeunes (étudiants, jeunes actifs) cherchant à se loger en colocation. La recherche de colocataires se fait sur Le Bon Coin (listings sans compatibilité) ou Facebook (groupes locaux chaotiques). Une fois en colocation, 60% des conflits viennent des **dépenses partagées** (qui a payé quoi, qui doit combien) — aucune app n'est dédiée au contexte français (EDF, Orange, CAF APL partagée). Et la **convention de colocation** — le document légal qui protège tous les colocataires — est obligatoire pour tout bail en colocation mais rarement rédigée correctement, ce qui expose les colocataires aux litiges sur la caution et la responsabilité des dégradations.
+
+### Solution
+En trois étapes : **(1) Matching** — l'utilisateur remplit un questionnaire de compatibilité (horaires, tolérance au bruit, invités fréquents, animaux, budget, quartiers cibles, durée souhaitée) et est mis en contact avec des profils compatibles dans sa ville. **(2) Légal** — une fois le groupe formé, l'outil génère automatiquement une convention de colocation conforme à la loi Alur, avec répartition des charges, règles de préavis et inventaire de base. **(3) Gestion** — un tableau de bord partagé entre colocataires trace chaque dépense commune (loyer, EDF, Internet, courses), calcule qui doit combien à qui, et envoie des rappels de paiement automatiques.
+
+### Revenue Model
+| Tier | Price | Features |
+|------|-------|----------|
+| Gratuit | €0 | Profil + matching limité (3 contacts/mois) + convention basique |
+| Solo | €2,99/mo | Contacts illimités, convention personnalisée, accès gestionnaire de dépenses |
+| Coloc Pack | €1,99/mo/personne | Tous les colocataires inclus, notifications push, export comptable CAF |
+
+**Unit economics :** Claude API ~€0,08/convention → 99% gross margin. **Marché :** 3M de jeunes cherchant une coloc × flux permanent = audience massive. LTV forte : une coloc dure en moyenne 18 mois → **€54 par colocataire** au plan Solo.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — les jeunes utilisent leur téléphone)
+- **Matching algorithm:** Scoring de compatibilité côté serveur (distance cosinus entre vecteurs de préférences) + filtre géographique PostGIS Supabase
+- **Convention de colocation:** Claude API — génère le document selon la loi Alur 2014, personnalisé au profil
+- **Gestion dépenses:** Algorithme de règlement optimal (debt simplification, comme Tricount mais intégré)
+- **Notifications:** Resend (email) + Web Push API (rappels paiement)
+- **Auth + DB:** Supabase (realtime pour le tableau de bord partagé)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Voici pourquoi 80% des conflits en colocation viennent des dépenses — et l'app qui les règle"
+2. Partenariat avec CROUS et résidences étudiantes — millions d'étudiants cherchent une coloc chaque septembre
+3. Reddit/Discord : r/france, r/logement, serveurs étudiants des grandes villes (Paris, Lyon, Bordeaux, Toulouse)
+4. SEO : "trouver colocataire compatible Paris", "convention de colocation modele loi alur", "application gestion colocation France"
+
+### Competitive Moat
+- La combinaison matching + légal + gestion en un seul outil n'existe pas en France
+- Tricount est généraliste — Coloc.ai est français et intègre les spécificités (APL partagée, préavis légaux, loi Alur)
+- Le matching algorithmique crée un réseau data : plus d'utilisateurs = meilleur matching = plus d'utilisateurs
+- Le renouvellement naturel de la population (chaque année, une nouvelle promotion étudiante) garantit un flux constant de nouveaux utilisateurs
+
+### Figma Schematic
+[View Coloc.ai Roommate Match and Colocation Manager Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/d4f5c586-7330-4f58-b8c7-ce3e099b5e8c)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1315,4 +1453,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-21 — Ideas 25–28 added (France-specific, ultra-low-budget: ParcourSup.ai, ArnaqueCheck, MutuelleOptimizer, AssistanteMaternelle.ai)*
+*Last updated: 2026-04-23 — Ideas 29–31 added (France-specific, ultra-low-budget: SantéWallet, FormationCPF, Coloc.ai)*
