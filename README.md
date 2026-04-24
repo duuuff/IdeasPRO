@@ -39,6 +39,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 29 | [SantéWallet](#29-santéwallet) | Freemium + Subscription | €3K–€25K | Low |
 | 30 | [FormationCPF](#30-formationcpf) | Pay-per-plan + Subscription | €5K–€35K | Low |
 | 31 | [Coloc.ai](#31-colocai) | Freemium + Subscription | €4K–€20K | Low |
+| 32 | [BulletinPaie.ai](#32-bulletinpaieai) | Pay-per-analysis + Subscription | €5K–€35K | Low |
+| 33 | [RetraiteSimple](#33-retraitesimple) | Pay-per-plan + Subscription | €6K–€45K | Low-Medium |
+| 34 | [ZFE Navigator](#34-zfe-navigator) | Pay-per-report + B2B API | €5K–€30K | Low |
 
 ---
 
@@ -1441,6 +1444,142 @@ En trois étapes : **(1) Matching** — l'utilisateur remplit un questionnaire d
 
 ---
 
+## 32. BulletinPaie.ai
+
+> **Analyseur de bulletin de paie français — comprenez chaque ligne, détectez les erreurs, réclamez ce qui vous est dû**
+
+### Problem
+La France compte **26 millions de salariés** dont la grande majorité ne comprend pas leur bulletin de paie. Un bulletin français moyen contient 40 à 60 lignes de cotisations (URSSAF, AGIRC-ARRCO, prévoyance, mutuelle, CSG, CRDS…) avec des abréviations opaques. Les erreurs sont **fréquentes et sous-estimées** : taux d'heures supplémentaires mal appliqué, maintien de salaire absent lors d'un arrêt maladie, mauvaise application de la grille conventionnelle (chaque branche a sa propre convention collective). Une étude de l'UGICT-CGT estime que **30% des bulletins contiennent au moins une anomalie**. Le salarié lambda n'a aucun moyen de le vérifier — les RH sont injoignables, les syndicats sous-staffés, et un avocat prud'homal coûte €200/heure.
+
+### Solution
+L'utilisateur upload son bulletin (PDF ou photo). L'OCR + Claude API extrait chaque ligne, traduit chaque code en français clair ("AGIRC Tranche B = retraite complémentaire cadre sur la part de salaire entre 3 588 € et 14 352 €/mois"), vérifie la cohérence (taux légaux en vigueur, SMIC applicable, grille de la convention collective identifiée automatiquement). Si une anomalie est détectée (taux incorrect, ligne manquante, montant incohérent), l'outil génère un courrier de contestation prêt à envoyer aux RH, avec les références légales exactes.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | 5 lignes expliquées + nombre d'anomalies détectées |
+| Analyse complète | €2,99 | 100% du bulletin expliqué + rapport anomalies + lettre contestation si besoin |
+| Abonnement mensuel | €9/mo | Analyse automatique chaque mois + historique 12 mois + alertes changements légaux |
+
+**Unit economics :** Claude API ~€0,05/analyse → margin brute >98%. Même 1 000 analyses/mois = **€2 990 MRR**. La feature "lettre de contestation" crée un effet viral fort (le salarié qui récupère €400 en partage sur LinkedIn).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — les gens consultent leur fiche de paie sur téléphone)
+- **OCR:** Google Vision API ou Mistral OCR (open source)
+- **Convention collective matching:** Base IDCC (Identifiant Convention Collective) — open data data.gouv.fr — 700+ conventions
+- **Grilles salariales:** Scraping légal des avenants publiés au JO + Légifrance
+- **Taux légaux:** URSSAF API officielle (taux cotisations mis à jour automatiquement)
+- **AI analyzer:** Claude API (claude-sonnet-4-6) — prompt ingérant taux légaux + grille convention identifiée
+- **PDF rapport + lettre:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai uploadé mon bulletin de paie sur cette IA — elle a trouvé €320 d'erreurs en 10 secondes"
+2. Reddit : r/france, r/travail, r/salaire — posts avec vrai cas d'usage (erreur trouvée, argent récupéré)
+3. LinkedIn : cibler RH et syndicats — positionnement "outil de conformité" pour les entreprises (vendre en B2B aussi)
+4. SEO : "comprendre son bulletin de paie", "erreur fiche de paie recours", "convention collective salaire minimum"
+
+### Competitive Moat
+- Aucun outil grand public n'analyse le bulletin de paie français ligne par ligne
+- La base IDCC + grilles conventionnelles est publique mais complexe à structurer — barrière technique réelle
+- L'effet "j'ai trouvé une erreur" génère un NPS exceptionnel et un bouche-à-oreille naturel
+- Chaque mois, 26M de bulletins émis = flux constant d'utilisateurs potentiels
+
+### Figma Schematic
+[View BulletinPaie.ai Payslip Analyzer Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/877b9b43-b792-4ac1-b055-d1657b9644f9)
+
+---
+
+## 33. RetraiteSimple
+
+> **Calculez votre retraite française en 5 minutes — âge de départ, montant estimé, stratégie PER optimisée**
+
+### Problem
+Le système de retraite français est l'un des plus complexes au monde : **régime général CNAV** pour les salariés du privé, **AGIRC-ARRCO** pour les retraites complémentaires cadres, **SSI/RSI** pour les indépendants, **RAFP** pour les fonctionnaires, **régimes spéciaux** pour la SNCF, EDF, etc. La réforme 2023 (report de l'âge pivot à 64 ans, 43 annuités requises) a semé la confusion. Résultat : **60% des Français ne savent pas à quel âge ils pourront partir à la retraite** ni quel montant ils toucheront. Le simulateur officiel info-retraite.fr est incomplet pour les parcours mixtes (salarié puis indépendant, reconversion mi-carrière). Les conseillers patrimoniaux facturent €200–€500 la consultation.
+
+### Solution
+L'utilisateur entre son profil en 3 minutes : statut(s) au cours de carrière, années de début et fins de période, salaire moyen par période, enfants (trimestres supplémentaires), invalidité éventuelle. Claude calcule : nombre de trimestres validés vs. requis, âge de départ optimal (taux plein vs. décote vs. surcote), pension de base estimée + complémentaire AGIRC-ARRCO. Ensuite l'IA identifie le **gap mensuel** entre pension estimée et niveau de vie actuel, et propose une stratégie personnalisée : versements mensuels PER (déductibles des impôts), arbitrage assurance-vie, rachats de trimestres si rentables.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Âge de départ estimé + montant pension arrondi + gap en % |
+| Plan complet | €9,99 | PDF détaillé : calcul précis par régime, stratégie PER chiffrée, économie fiscale, timeline |
+| Suivi annuel | €19/mo | Recalcul automatique si réforme ou changement de situation + alertes rachat trimestres avantageux |
+
+**Timing :** la réforme des retraites 2023 a déclenché une angoisse massive sur ce sujet. **Unit economics :** Claude API ~€0,15/plan → 98,5% gross margin. 500 plans/mois = **€5 000 MRR** en revenus one-time seuls.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind
+- **Règles de calcul:** Algorithme déterministe pour trimestres + taux (règles publiques CNAV, AGIRC-ARRCO) codés en dur — pas de magie noire
+- **Points AGIRC-ARRCO:** Valeur du point connue et mise à jour (€1,4098 en 2025) — calcul simple
+- **Fiscalité PER:** Tranches d'imposition INSEE × plafond déductibilité (10% revenu, max 37 094 €/an en 2025)
+- **AI narrative:** Claude API — transforme les chiffres bruts en plan d'action lisible et personnalisé
+- **PDF:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai 38 ans — voici ce que je vais vraiment toucher à la retraite (et comment j'ai optimisé mon PER)"
+2. Reddit : r/france, r/finances_perso, r/impots — poster des analyses de cas réels anonymisés
+3. Partenariat avec conseillers en gestion de patrimoine indépendants (CGP) — lead gen pour eux, trafic pour nous
+4. SEO : "simulateur retraite france", "calcul trimestres retraite", "PER ou assurance vie retraite", "retraite indépendant france"
+
+### Competitive Moat
+- info-retraite.fr officiel ne couvre pas les parcours mixtes ni les stratégies de comblement du gap
+- Le couplage calcul + stratégie patrimoniale PER n'existe nulle part en accès direct grand public
+- Les réformes répétées (2003, 2010, 2014, 2023) maintiennent une demande permanente de recalcul
+- Chaque tranche d'âge (40–45 ans) découvre le sujet → flux constant de nouveaux utilisateurs
+
+### Figma Schematic
+[View RetraiteSimple French Retirement Planner Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/a25e7956-393f-4633-8aa7-e753673bc905)
+
+---
+
+## 34. ZFE Navigator
+
+> **Votre voiture est-elle bannie des villes françaises ? Trouvez les aides pour changer de véhicule**
+
+### Problem
+La France déploie progressivement les **Zones à Faibles Emissions mobilité (ZFE-m)** dans ses 13 plus grandes agglomérations (Paris, Lyon, Marseille, Strasbourg, Rouen, Grenoble…). D'ici 2025, **les voitures Crit'Air 3 et plus** — soit environ **12 millions de véhicules** — seront interdites dans la plupart de ces zones pendant les heures de pointe. Les amendes vont de **135 € à 750 €**. Or 70% des Français ne savent pas quelle est la vignette Crit'Air de leur voiture, et moins de 30% connaissent les aides disponibles pour changer de véhicule (bonus écologique jusqu'à €7 000, prime à la conversion jusqu'à €5 000, aides locales cumulables de certaines régions/métropoles). Le gouvernement a plusieurs simulateurs éparpillés sur différents sites — aucun ne donne une réponse intégrée "est-ce que ma voiture est bannie ? quand ? et qu'est-ce que j'ai droit comme aide ?".
+
+### Solution
+L'utilisateur entre sa **plaque d'immatriculation** (ou saisit manuellement carburant + année). L'outil interroge le SIV (Système d'Immatriculation des Véhicules — API publique) pour déduire la catégorie Crit'Air automatiquement. Puis le moteur de règles croise avec les 13 ZFE actives (calendriers d'interdiction par catégorie, horaires, exceptions) et produit un bilan instantané : "Votre Renault Clio diesel 2012 (Crit'Air 3) est **déjà interdite à Paris** du lundi au vendredi 8h–20h, sera interdite à Lyon à partir du 1er janvier 2026, et sera interdite à Strasbourg à partir du 1er juillet 2026." Le calculateur d'aides intègre toutes les subventions cumulables selon le **revenu fiscal de référence** (bonus écologique, prime à la conversion, aides Île-de-France Mobilités, aides Métropole de Lyon, etc.) et compare le coût réel d'un passage à l'électrique vs. la somme des amendes probables sur 3 ans.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Check rapide | €0 | Statut Crit'Air + liste des villes où la voiture est bannie + total aides estimé |
+| Rapport complet | €4,99 | PDF : calendrier précis ville par ville, guide demande de toutes les aides, comparatif 3 véhicules électriques/hybrides avec aides déduites |
+| API B2B | €199/mo | API REST pour assureurs, loueurs, flottes d'entreprise — vérification automatique des véhicules |
+
+**Unit economics :** SIV API gratuite + Claude API ~€0,05/rapport → margin brute >99%. **Timing :** les ZFE montent en puissance chaque année — le marché croît sans que l'outil ne nécessite de changement majeur. 1 000 rapports/mois = **€4 990 MRR**.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (résultat en temps réel, moins de 3 secondes)
+- **Données véhicule:** API SIV DGFIP (publique, accès data.gouv.fr) — décode immatriculation → type, carburant, année → Crit'Air déduit selon grille officielle
+- **Règles ZFE:** Base JSON maintenue manuellement (13 villes, mise à jour trimestrielle) — les arrêtés ZFE sont publics et stables
+- **Aides:** Algorithme de cumul des aides (bonus + prime à la conversion + aides locales) selon les plafonds RFR — données ADEME publiques
+- **AI narrative:** Claude API — génère l'explication personnalisée et le guide demande d'aides
+- **PDF rapport:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai scanné ma plaque — mon diesel est banni de Paris, Lyon ET Marseille. Voici les €9 500 d'aides que j'ignorais"
+2. Reddit : r/france, r/automobile, r/paris — cas d'usage réels avec plaque anonymisée
+3. Partenariat avec concessionnaires électriques — ils ont intérêt à ce que leurs prospects découvrent les aides
+4. SEO : "ma voiture est-elle interdite ZFE", "critair 3 interdit quand", "prime conversion voiture electrique", "ZFE Paris Lyon Marseille 2025"
+
+### Competitive Moat
+- L'API SIV + croisement multi-ZFE en temps réel n'existe dans aucun outil grand public
+- Le calcul de cumul des aides (bonus + prime + aides locales selon RFR) est introuvable ailleurs en un seul endroit
+- Les ZFE vont s'étendre à de nouvelles villes chaque année → croissance organique garantie du marché
+- Le B2B (assureurs, flottes) offre un revenu récurrent élevé sans acquisition client intensive
+
+### Figma Schematic
+[View ZFE Navigator Clean Air Zone Car Restriction Flow on FigJam](https://www.figma.com/online-whiteboard/create-diagram/35799868-ab80-4b0f-a15b-b8e4adad1232)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1453,4 +1592,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-23 — Ideas 29–31 added (France-specific, ultra-low-budget: SantéWallet, FormationCPF, Coloc.ai)*
+*Last updated: 2026-04-24 — Ideas 32–34 added (France-specific, ultra-low-budget: BulletinPaie.ai, RetraiteSimple, ZFE Navigator)*
