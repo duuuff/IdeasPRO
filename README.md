@@ -42,6 +42,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 32 | [BulletinPaie.ai](#32-bulletinpaieai) | Pay-per-analysis + Subscription | €5K–€35K | Low |
 | 33 | [RetraiteSimple](#33-retraitesimple) | Pay-per-plan + Subscription | €6K–€45K | Low-Medium |
 | 34 | [ZFE Navigator](#34-zfe-navigator) | Pay-per-report + B2B API | €5K–€30K | Low |
+| 35 | [FactureEnergie.ai](#35-factureénergieai) | Pay-per-report + Subscription + Affiliate | €6K–€40K | Low |
+| 36 | [Amendes.ai](#36-amendesai) | Pay-per-letter + Subscription | €4K–€28K | Low |
+| 37 | [PrestationsCAF.ai](#37-prestationscafai) | Pay-per-kit + Annual Subscription | €5K–€35K | Low |
 
 ---
 
@@ -1580,6 +1583,142 @@ L'utilisateur entre sa **plaque d'immatriculation** (ou saisit manuellement carb
 
 ---
 
+## 35. FactureEnergie.ai
+
+> **Comprenez, corrigez et optimisez votre facture d'énergie en 2 minutes — EDF, ENGIE, TotalEnergies et 15 autres fournisseurs**
+
+### Problem
+La France compte **30 millions de contrats résidentiels** d'électricité et 11 millions de contrats gaz. Depuis la crise énergétique de 2022, les prix ont doublé — et des millions de foyers paient **le mauvais tarif sans le savoir**. Une facture EDF française contient en moyenne 12 lignes opaques : abonnement, consommation, TURPE (transport), CTA, CSPE, TVA réduite, TVA normale… Les erreurs de facturation sont fréquentes (mauvais index relevé, puissance souscrite sous-dimensionnée, option tarif non appliquée). Et surtout : **la majorité des foyers sur Tarif Base gagneraient à passer en Heures Pleines/Heures Creuses (HP/HC)** — mais personne ne leur explique comment calculer si c'est rentable pour leur profil de consommation.
+
+### Solution
+L'utilisateur uploade sa facture (PDF ou photo) ou saisit manuellement son index et sa consommation. L'OCR + Claude API extrait chaque ligne, explique chaque poste en français simple ("TURPE = ce que vous payez pour le transport de l'électricité sur le réseau national — obligatoire quel que soit votre fournisseur"), puis : (1) détecte les anomalies de facturation (index erroné, option non appliquée, puissance sur-souscrite) et génère une lettre de contestation prête à envoyer ; (2) simule le gain annuel si l'utilisateur passe en HP/HC, change de fournisseur, ou optimise sa puissance souscrite ; (3) compare les offres du marché (agregateur de prix via APIs publiques) et génère un lien d'affiliation si le changement est recommandé.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse gratuite | €0 | Résumé de la facture + nombre d'anomalies détectées + gain potentiel estimé |
+| Rapport complet | €3,99 | Explication ligne par ligne + simulation HP/HC + lettre contestation si besoin |
+| Suivi mensuel | €4,99/mo | Alerte automatique si hausse anormale + recalcul optimal à chaque facture |
+
+**Unit economics :** Claude API ~€0,05/analyse → margin brute >98%. 1 000 rapports/mois = **€3 990 MRR**. Affiliate sur changement de fournisseur (~€40–€80/conversion) = revenu complémentaire significatif. La feature "j'ai trouvé €180/an d'économies" génère un fort bouche-à-oreille.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — les gens ouvrent leur facture sur téléphone)
+- **OCR:** Google Vision API ou Mistral OCR (gratuit open source)
+- **Données tarifaires:** API ENEDIS (open data — index, historique consommation) + grilles tarifaires TURPE publiques CRE
+- **Offres marché:** API comparateurs énergie (Energie-Auchan, Totalenergies, API publique DGEC prix-elec.fr)
+- **Moteur HP/HC:** Algorithme déterministe — profil de consommation × coût HP vs. HC × différentiel abonnement
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique chaque ligne + rédige lettre contestation + donne recommandation
+- **PDF rapport:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai uploadé ma facture EDF — l'IA a trouvé €240/an d'économies en 90 secondes"
+2. Reddit : r/france, r/finances_perso, r/ecologie — cas d'usage réels avec anonymisation
+3. SEO : "comprendre sa facture EDF", "HP HC rentable", "changer fournisseur électricité 2025", "contestation facture énergie"
+4. Partenariat avec comparateurs énergie (Selectra, Papernest) — affiliation croisée
+
+### Competitive Moat
+- Les comparateurs énergie (Selectra, Papernest) orientent vers le changement mais n'analysent pas la facture ligne par ligne
+- Aucun outil n'explique la facture ET détecte les erreurs ET simule l'optimisation tarifaire en un seul endroit
+- L'API ENEDIS (historique de consommation par heure) permet une simulation HP/HC ultra-précise impossible manuellement
+- La crise énergétique maintient un niveau d'attention élevé sur ce sujet pour les années à venir
+
+### Figma Schematic
+[View FactureEnergie.ai Energy Bill Analyzer Flow on FigJam](https://www.figma.com/board/mxWNg5yMVlRALU2pyNw2FS)
+
+---
+
+## 36. Amendes.ai
+
+> **Contestez votre amende en 2 minutes — radar, stationnement, RATP — lettre légale générée par IA**
+
+### Problem
+La France émet **20 millions d'amendes par an** : radars automatiques, stationnement, infractions RATP, contraventions de voie publique. Or une grande partie de ces amendes sont **contestables** : panneau non visible, radar non homologué, erreur de plaque, véhicule vendu, délai de prescription dépassé, problème de signalisation routière, vice de procédure. Seulement **3% des automobilistes contestent leurs amendes** — non pas parce qu'ils ont tort, mais parce que le processus est opaque : il faut écrire à l'OTC (Officier du Ministère Public), citer les textes légaux exacts (articles du Code de la Route, de la Procédure Pénale), et respecter des délais stricts (45 jours). Un avocat coûte €200–€500 pour rédiger ce qui est essentiellement une lettre de 200 mots.
+
+### Solution
+L'utilisateur entre les détails de son amende (ou uploade l'avis de contravention). L'outil classifie le type d'infraction, applique un moteur de règles pour identifier les **motifs de contestation légalement valides** (vice de procédure, prescription, signalisation défaillante, etc.), et génère une **lettre de contestation complète** avec références légales exactes, adressée au bon interlocuteur (OTC, Trésor Public, ou tribunal selon le cas). La lettre inclut automatiquement les délais légaux et la procédure d'envoi (LRAR). Pour les infractions non contestables, le rapport indique clairement pourquoi et propose le règlement avec réduction par paiement rapide (minoration de 20%).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | Type d'infraction identifié + contestable ou non + premier paragraphe de la lettre |
+| Lettre complète | €2,99 | Lettre complète avec références légales + guide d'envoi LRAR + délais à respecter |
+| Abonnement | €14,99/mo | Lettres illimitées + alertes délais + modèles pour véhicule de société |
+
+**Unit economics :** Claude API ~€0,03/lettre → margin brute >99%. Le prix psychologique €2,99 vs. amende de €135 est imbattable. 1 000 lettres/mois = **€2 990 MRR**. L'abonnement cible les flottes d'entreprise (commerciaux itinérants, VTC, transporteurs).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (simple form — 5 champs max)
+- **OCR (optionnel):** Google Vision API pour lire l'avis de contravention uploadé
+- **Moteur de règles:** Base JSON des motifs de contestation par type d'infraction (articles Code Route, CESEDA, CGCT) — maintenu manuellement, évolutif
+- **Délais légaux:** Algorithme calculant la deadline de contestation selon date de l'infraction + type
+- **AI drafting:** Claude API (claude-sonnet-4-6) — génère la lettre avec le bon registre juridique + personnalisation
+- **PDF lettre:** react-pdf (prêt à imprimer + envoyer)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon amende radar de €135 contestée et annulée — voici exactement comment" (avec la vraie lettre floutée)
+2. Reddit : r/france, r/juridique, r/droit — cas d'usage réels, anonymisés
+3. SEO : "contester amende radar", "lettre contestation contravention stationnement", "amende prescrite délai", "vice de procédure amende"
+4. Forums auto (Forum-Auto, Caradisiac) — communautés déjà sensibilisées à la contestation d'amendes
+
+### Competitive Moat
+- Aucun service grand public ne génère des lettres de contestation d'amendes personnalisées avec références légales
+- Le moteur de règles (motifs × type d'infraction × délais) est une barrière technique réelle à construire une fois
+- Chaque réforme du Code de la Route ou nouveau type de radar crée un pic de trafic naturel
+- L'extension B2B (flottes, VTC, transporteurs) offre un MRR récurrent élevé sans acquisition intensive
+
+### Figma Schematic
+[View Amendes.ai Fine Contestation Tool Flow on FigJam](https://www.figma.com/board/HvIF8tcIT1pgvj1uiBBkv4)
+
+---
+
+## 37. PrestationsCAF.ai
+
+> **Découvrez toutes les aides CAF auxquelles vous avez droit — et récupérez ce que vous n'avez pas encore demandé**
+
+### Problem
+La CAF gère **13 millions d'allocataires** en France, mais des études estiment que **2 à 3 millions de foyers supplémentaires sont éligibles à au moins une prestation sans le savoir ou sans l'avoir demandée**. Le non-recours aux aides sociales coûte des milliards aux ménages français chaque année. Le problème est double : (1) les aides sont nombreuses et leurs noms abscons (APL, ALS, ALF, PAJE, CMG, AEEH, AJPP, ASF, ARS, Prime de naissance, RSA, AAH…) ; (2) l'éligibilité dépend de combinaisons complexes de critères (composition du foyer, revenus N-2, loyer, situation professionnelle, handicap, garde d'enfants, etc.) que personne ne maîtrise en entier. Le simulateur CAF officiel est incomplet et ne couvre pas les aides cumulables ni les stratégies d'optimisation (déclaration des ressources, choix du mode de garde, impact d'un changement de situation).
+
+### Solution
+L'utilisateur remplit un formulaire de 5 minutes : composition du foyer, revenus, situation de logement, situation professionnelle, enfants (âges, mode de garde, handicap éventuel). L'algorithme d'éligibilité scanne **toutes les prestations CAF** (25+ aides) et compare les droits théoriques aux déclarations actives connues. Il identifie les **aides non demandées**, calcule le montant mensuel estimé, et génère un **kit de réclamation pas-à-pas** : documents à préparer, formulaires à remplir, délais de versement attendus. Claude API rend le résultat compréhensible ("Vous êtes potentiellement éligible à l'AEEH car votre enfant a un taux d'invalidité supérieur à 50% — voici comment constituer le dossier MDPH").
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Total des aides auxquelles vous êtes éligible (montant global) + liste des prestations |
+| Kit complet | €4,99 | Détail prestation par prestation + guide de demande + documents requis + délais |
+| Suivi annuel | €9,99/an | Recalcul automatique à chaque changement de situation + alertes réévaluation droits |
+
+**Unit economics :** Claude API ~€0,08/kit → margin brute >98%. L'effet "j'ai découvert €3 600/an d'aides non perçues" génère un NPS exceptionnel et un partage viral massif. 500 kits/mois = **€2 500 MRR** — conservateur. Le suivi annuel à €9,99 construit un revenu récurrent stable.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire étape par étape, mobile-first)
+- **Moteur d'éligibilité:** Algorithme déterministe (conditions d'éligibilité de chaque prestation codées en dur depuis les textes officiels legifrance.gouv.fr + caf.fr) — mis à jour à chaque loi de financement de la sécurité sociale
+- **Barèmes:** CNAF open data (plafonds de ressources, taux de cotisation, montants forfaitaires par prestation) — données publiques
+- **MDPH / handicap:** Référentiel taux d'invalidité + grilles AEEH publiées au JO
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique chaque aide en langage simple + génère les étapes de demande personnalisées
+- **PDF kit:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'avais droit à €480/mois que la CAF ne m'avait jamais versés — voici comment je l'ai découvert"
+2. Reddit : r/france, r/finances_perso, r/assistance_sociale — cas d'usage réels, anonymisés
+3. Partenariats avec assistantes sociales et travailleurs sociaux (ils orientent des dizaines de familles par semaine)
+4. SEO : "aides CAF auxquelles j'ai droit", "non recours prestations sociales", "APL simulation", "PAJE eligibilité", "prime naissance CAF"
+
+### Competitive Moat
+- Le simulateur officiel CAF ne couvre pas l'ensemble des 25+ prestations simultanément ni les stratégies d'optimisation
+- La combinaison "scan exhaustif + kit de demande pas-à-pas" n'existe dans aucun outil grand public
+- Le sujet génère une émotion forte (argent laissé sur la table par ignorance) → NPS et bouche-à-oreille exceptionnels
+- La mise à jour annuelle des barèmes et conditions crée une nécessité permanente de recourir au service
+
+### Figma Schematic
+[View PrestationsCAF.ai CAF Benefits Optimizer Flow on FigJam](https://www.figma.com/board/c0hlfz1eIEc1gy0jVdFeEq)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1592,4 +1731,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-24 — Ideas 32–34 added (France-specific, ultra-low-budget: BulletinPaie.ai, RetraiteSimple, ZFE Navigator)*
+*Last updated: 2026-04-25 — Ideas 35–37 added (France-specific, ultra-low-budget: FactureEnergie.ai, Amendes.ai, PrestationsCAF.ai)*
