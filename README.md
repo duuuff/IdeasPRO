@@ -45,6 +45,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 35 | [FactureEnergie.ai](#35-factureénergieai) | Pay-per-report + Subscription + Affiliate | €6K–€40K | Low |
 | 36 | [Amendes.ai](#36-amendesai) | Pay-per-letter + Subscription | €4K–€28K | Low |
 | 37 | [PrestationsCAF.ai](#37-prestationscafai) | Pay-per-kit + Annual Subscription | €5K–€35K | Low |
+| 38 | [RésilIA](#38-résilia) | Pay-per-letter + Subscription | €4K–€30K | Low |
+| 39 | [SinistreIA](#39-sinisteria) | Pay-per-dossier + Subscription | €5K–€35K | Low |
+| 40 | [TrajetPro.ai](#40-trajetproai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
 
 ---
 
@@ -1719,6 +1722,142 @@ L'utilisateur remplit un formulaire de 5 minutes : composition du foyer, revenus
 
 ---
 
+## 38. RésilIA
+
+> **Résiliez n'importe quel abonnement en 2 minutes — lettre LRAR légalement correcte générée par IA**
+
+### Problem
+La France compte **plus de 200 millions d'abonnements actifs** (téléphonie, internet, assurances, salles de sport, streaming, box énergie). Or résilier est un parcours du combattant : chaque contrat est soumis à une loi différente (Loi Hamon, Loi Chatel, Code des assurances, Code de la consommation), avec des préavis distincts, des délais de réception, des interlocuteurs différents (service client, siège social, adresse dédiée résiliation). Une erreur de procédure (mauvaise adresse, délai raté, manque de référence contrat) et l'abonné est prélevé plusieurs mois de plus. Les opérateurs télécoms et assureurs comptent sur cette opacité : chaque abonné retenu 2 mois de trop représente **€30–€80 de revenu supplémentaire**. Collectivement, le coût des résiliations ratées dépasse **€500M/an** pour les consommateurs français.
+
+### Solution
+L'utilisateur indique le type d'abonnement, l'opérateur, et la date de souscription. Le moteur de règles identifie automatiquement la **loi applicable**, le **délai de préavis exact**, l'**adresse légale de résiliation** et les **mentions obligatoires** à inclure. Il génère une lettre de résiliation prête à envoyer en LRAR, avec toutes les références légales, ou un email si le contrat autorise la résiliation en ligne. Une alerte de suivi prévient l'utilisateur si aucun accusé de réception n'est obtenu sous 8 jours.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification gratuite | €0 | Résiliable ou non + loi applicable + date limite |
+| Lettre complète | €1,99 | PDF LRAR + email template + guide envoi + alerte suivi |
+| Abonnement | €4,99/mo | Lettres illimitées + alertes préavis proactives + résiliations multiples |
+
+**Unit economics :** Claude API ~€0,02/lettre → margin brute >99%. Prix psychologique imbattable (€1,99 vs. 2 mois d'abonnement à oublier). 1 500 lettres/mois = **€2 985 MRR**. L'abonnement cible les personnes qui gèrent de nombreux contrats (familles, indépendants, gérants de petites structures).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire 4 champs, mobile-first)
+- **Moteur de règles:** Base JSON des lois de résiliation par type de contrat × opérateur — maintenu manuellement, source légifrance.gouv.fr
+- **Calcul préavis:** Algorithme déterministe (date souscription + durée minimale d'engagement + délai préavis = date d'envoi idéale)
+- **Base opérateurs:** ~500 opérateurs français avec leur adresse de résiliation dédiée (scrapée + maintenue)
+- **AI drafting:** Claude API (claude-sonnet-4-6) — personnalise la lettre + ton approprié + références légales exactes
+- **PDF lettre:** react-pdf (formatée pour impression + envoi LRAR)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment SFR m'a prélevé 4 mois après ma résiliation — et comment l'éviter avec cette lettre"
+2. Reddit : r/france, r/finances_perso — cas d'usage réels, opérateurs abusifs exposés
+3. SEO : "résilier abonnement SFR", "lettre résiliation assurance loi Hamon", "résilier salle de sport modèle lettre", "résiliation Free délai"
+4. Partenariats avec comparateurs (Selectra, LeLynx) — les résiliations précèdent souvent les souscriptions
+
+### Competitive Moat
+- Les modèles de lettres gratuits sur le web sont génériques et souvent obsolètes (adresses incorrectes, lois non à jour)
+- La base de données "adresses de résiliation par opérateur" est un actif réel et long à constituer
+- L'alerte de suivi (aucun accusé reçu → relance automatique) ajoute une valeur inexistante ailleurs
+- Chaque nouvelle loi consumériste (résiliation en 1 clic pour l'assurance auto depuis 2023) génère un pic de trafic naturel
+
+### Figma Schematic
+[View RésilIA Subscription Cancellation Flow on FigJam](https://www.figma.com/board/vB4H6EowhnAPuDCiouaeEg)
+
+---
+
+## 39. SinistreIA
+
+> **Déclarez votre sinistre assurance correctement — et contestez un refus en 2 minutes avec IA**
+
+### Problem
+La France enregistre **plus de 50 millions de sinistres déclarés par an** (auto, habitation, santé, prévoyance). Or deux problèmes massifs existent : (1) **des milliers de sinistres légitimes sont rejetés** parce que la déclaration initiale est mal rédigée — délai dépassé, mauvaise qualification du sinistre, pièces justificatives manquantes, formulation ambiguë qui permet à l'assureur d'invoquer une exclusion de garantie ; (2) **quand l'assureur refuse ou sous-évalue**, la grande majorité des assurés ne sait pas que le taux de succès des contestations formelles est supérieur à 60%, mais rédiger une mise en demeure citant les bons articles du Code des assurances et la jurisprudence applicable est hors de portée du citoyen ordinaire. Un avocat spécialisé facture **€150–€400** pour ce qui est souvent une lettre de 300 mots.
+
+### Solution
+L'utilisateur saisit le type de sinistre, l'assureur, la date, et une description libre des faits. Le moteur classe le sinistre, vérifie les délais légaux de déclaration (5 jours ouvrés pour vol/dégât des eaux, 10 jours pour catastrophe naturelle), et génère une **déclaration de sinistre optimisée** avec les formulations qui minimisent le risque de rejet et la checklist exacte des pièces à joindre. Si l'assureur refuse ou sous-évalue, une deuxième interface génère la **lettre de contestation** avec articles du Code des assurances et jurisprudence CCSF, adressée au bon interlocuteur (direction réclamations, médiateur de l'assurance, ou ACPR selon l'escalade).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Sinistre dans les délais? + garantie applicable? + premier résumé |
+| Dossier complet | €2,99 | Déclaration optimisée + checklist pièces + guide envoi |
+| Contestation | €3,99 | Lettre mise en demeure + saisine médiateur + refs légales + ACPR |
+| Abonnement courtier | €39,99/mo | Dossiers illimités + API + personnalisation marque blanche |
+
+**Unit economics :** Claude API ~€0,04/dossier → margin brute >98%. Le ROI utilisateur est immédiat (€2,99 pour défendre un sinistre de €1 500+). 800 dossiers/mois = **€2 392 MRR**. L'abonnement B2B (courtiers indépendants, comparateurs assurance) offre le vrai levier de croissance.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire multi-étapes — type sinistre → assureur → date → description → pièces)
+- **Moteur de règles:** Base JSON des délais légaux × types de sinistres × garanties standard (habitation multirisque, auto tous risques, etc.) — source Code des assurances + circulaires ACPR
+- **Vérification délais:** Algorithme calculant la fenêtre de déclaration légale selon type + date du sinistre
+- **AI drafting:** Claude API (claude-sonnet-4-6) — génère déclaration initiale OU lettre de contestation selon l'étape + ton juridique adapté
+- **Jurisprudence:** Base de cas types CCSF + médiateur assurance (données publiques) pour étayer les contestations
+- **PDF dossier:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon assurance habitation a refusé mon sinistre — voici la lettre qui a tout changé"
+2. Reddit : r/france, r/assurance, r/juridique — cas d'usage réels, assureurs mis en cause nommément
+3. SEO : "déclarer sinistre assurance habitation", "contester refus assurance auto", "mise en demeure assureur modèle", "délai déclaration sinistre dépassé"
+4. Partenariats avec courtiers indépendants (réseau PLANETE COURTIER, CSCA) — ils orientent leurs clients en cas de litige
+
+### Competitive Moat
+- Aucun outil grand public ne génère à la fois la déclaration initiale ET la contestation en cas de refus dans un même tunnel
+- La base de règles (délais × garanties × motifs de refus fréquents) constitue un vrai moat technique une fois construit
+- Le marché B2B (courtiers, comparateurs) est inexploité et récurrent : un courtier qui gère 200 sinistres/an paie son abonnement sans réfléchir
+- Chaque refus d'assureur médiatisé (inondations, incendies, intempéries) génère un afflux de trafic organique
+
+### Figma Schematic
+[View SinistreIA Insurance Claim Flow on FigJam](https://www.figma.com/board/uarqbGBA0xv2JLGGWPpaaW)
+
+---
+
+## 40. TrajetPro.ai
+
+> **Calculez vos indemnités kilométriques exactes et déduisez vos frais pro — barème DGFiP mis à jour chaque année**
+
+### Problem
+En France, **15 millions de salariés** utilisent leur véhicule personnel pour des déplacements professionnels, et **4 millions de micro-entrepreneurs/TNS** peuvent déduire leurs frais kilométriques de leur revenu imposable. Pourtant, la grande majorité sous-utilise ce droit : (1) le **barème kilométrique DGFiP** (publié chaque mars au Bulletin Officiel) est structuré en tranches et varie selon la **puissance fiscale** du véhicule — le calcul correct est une interpolation à 3 variables que personne ne fait à la main ; (2) les salariés ne savent pas qu'ils peuvent **forcer leur employeur à rembourser** les frais kilométriques au tarif légal via un simple email citant l'article 81 du CGI et la convention collective applicable ; (3) les TNS/AE ne savent pas quand les **frais réels** battent l'abattement forfaitaire (10% plafonné à €14 171). Résultat : des centaines de millions d'euros de déductions légitimes non réclamées chaque année.
+
+### Solution
+L'utilisateur entre son statut (salarié / AE / TNS / dirigeant), la puissance fiscale de son véhicule, et ses km professionnels annuels estimés. Le calculateur applique le **barème officiel DGFiP de l'année en cours** (mis à jour chaque mars automatiquement) et produit : (1) le montant exact déductible ou remboursable ; (2) pour les salariés, la **comparaison frais réels vs déduction forfaitaire 10%** pour savoir laquelle optimise l'imposition ; (3) pour les AE/TNS, la comparaison frais réels vs abattement forfaitaire ; (4) un **PDF récapitulatif** avec les cases exactes à remplir sur la déclaration 2042, et un email prêt à envoyer aux RH pour demander le remboursement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul gratuit | €0 | Montant déductible estimé + recommandation frais réels vs forfait |
+| Rapport complet | €1,99 | PDF détaillé + cases 2042 pré-remplies + notice explicative + email RH |
+| Abonnement annuel | €9,99/an | Recalcul automatique chaque mars + historique 3 ans + alerte si barème change |
+
+**Unit economics :** Zéro API cost pour le calcul pur (barème déterministe) + Claude API ~€0,02/rapport narratif → margin brute >99%. Le pic de trafic naturel est **mars–juin** (saison des déclarations fiscales). 1 000 rapports/mois en période fiscale = **€1 990 MRR**. L'abonnement annuel à €9,99 génère un revenu récurrent stable avec un churn quasi nul (l'outil est reutilisé chaque année par définition).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire 4 champs, mobile-first — les gens calculent sur téléphone en déplacement)
+- **Moteur barème:** Algorithme déterministe scrappant le BO DGFiP chaque mars — barème 5 puissances (3CV et moins, 4CV, 5CV, 6CV, 7CV et plus) × 3 tranches kilométriques — mis en cache statique
+- **Calcul frais réels:** Algorithme couvrant assurance + entretien + carburant (prix moyen INSEE) + dépréciation (argus simplifié) + péages
+- **Comparateur régimes:** Comparaison automatique régime micro (abattement 34%/50%/71%) vs frais réels selon CA déclaré
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique le résultat en langage simple + génère l'email RH personnalisé + la note de synthèse PDF
+- **PDF rapport:** react-pdf
+- **Payments:** Stripe (paiement unique + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai découvert que mon employeur me devait €1 200/an de frais kilométriques — voici comment le calculer et le réclamer"
+2. Reddit : r/france, r/finances_perso, r/AutoEntrepreneur — cas d'usage réels, calculs chiffrés
+3. SEO : "barème kilométrique 2026", "frais kilométriques déductibles", "indemnités kilométriques salariés", "frais réels vs forfait impôts"
+4. Pic saisonnier naturel : campagne payante micro-budget (Google Ads €50/mois) uniquement en mars–juin sur "barème kilométrique 2026"
+
+### Competitive Moat
+- Les calculateurs existants (impots.gouv.fr) donnent juste un chiffre sans explication ni export ni comparaison de régimes
+- La mise à jour automatique annuelle du barème + l'alerte abonnés crée une dépendance saisonnière forte
+- L'email RH "clé en main" (avec références légales) est un déclencheur émotionnel fort — personne d'autre ne le propose
+- La saisonnalité fiscale génère un trafic SEO massif et prévisible chaque année sur les mêmes mots-clés
+
+### Figma Schematic
+[View TrajetPro.ai Mileage Tax Calculator Flow on FigJam](https://www.figma.com/board/02CmmP0uOaUSBo1zejs4Ht)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1731,4 +1870,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-25 — Ideas 35–37 added (France-specific, ultra-low-budget: FactureEnergie.ai, Amendes.ai, PrestationsCAF.ai)*
+*Last updated: 2026-04-26 — Ideas 38–40 added (France-specific, ultra-low-budget: RésilIA, SinistreIA, TrajetPro.ai)*
