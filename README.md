@@ -48,6 +48,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 38 | [RésilIA](#38-résilia) | Pay-per-letter + Subscription | €4K–€30K | Low |
 | 39 | [SinistreIA](#39-sinisteria) | Pay-per-dossier + Subscription | €5K–€35K | Low |
 | 40 | [TrajetPro.ai](#40-trajetproai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
+| 41 | [DéménageFuté](#41-déménagefuté) | Pay-per-pack + Monthly Tracker | €3K–€20K | Low |
+| 42 | [BailCommercial.ai](#42-bailcommercialai) | Pay-per-analysis + B2B SaaS | €5K–€35K | Low-Medium |
+| 43 | [PensionAlimentaire.ai](#43-pensionalimentaireai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
 
 ---
 
@@ -1858,6 +1861,144 @@ L'utilisateur entre son statut (salarié / AE / TNS / dirigeant), la puissance f
 
 ---
 
+## 41. DéménageFuté
+
+> **Déménagez sans le stress admin — notifiez les 40 administrations de votre changement d'adresse en 10 minutes**
+
+### Problem
+La France enregistre **4 millions de déménagements par an**. Chaque déménagement déclenche la même corvée : notifier un par un les 30 à 40 organismes qui ont votre ancienne adresse — CAF, CPAM/Ameli, Direction des Impôts, France Travail, CNAV (retraite), banque(s), mutuelle, assurances, EDF/Engie, opérateur télécom, mairie, ANTS (carte grise, permis de conduire), notaire, employeur, caisse retraite complémentaire, etc. Un oubli et la CAF vous coupe une aide, un relevé bancaire part à l'ancienne adresse, ou votre carte grise reste invalide. **Ce processus prend en moyenne 3 à 6 semaines**, implique plusieurs dizaines de courriers ou de formulaires en ligne différents, et est une source constante d'oublis. Aucun outil grand public n'agrège toutes ces notifications en une seule opération.
+
+### Solution
+L'utilisateur saisit son ancienne et nouvelle adresse, la date de déménagement, et répond à un questionnaire de profil en 3 minutes (situation familiale, employeur, véhicule, allocations perçues, fournisseurs d'énergie, opérateur). L'IA génère un **pack de notification complet** : lettres PDF et emails pré-rédigés, adressés à chacun des 20 à 40 organismes identifiés selon le profil, dans le bon format légal (mentions obligatoires, références de contrat, formules de politesse adaptées). Un calendrier de relances indique quand chaque organisme doit accuser réception. Un tableau de bord permet de cocher au fur et à mesure et d'envoyer des rappels si aucune confirmation n'est reçue.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | 5 premières notifications + liste complète des organismes identifiés |
+| Pack Complet | €4,99 | Toutes les lettres PDF + emails, calendrier de relances, ZIP téléchargeable |
+| Tracker mensuel | €2,99/mo | Suivi des confirmations, alertes si organisme utilise encore l'ancienne adresse, relances automatiques |
+
+**Unit economics :** Claude API ~€0,08/pack → 98% gross margin. **4 millions de déménagements/an × 0.05%** de conversion sur le pack = 2 000 packs/mois → **€10 000 MRR** dès la première année. Le Tracker mensuel est souscrit par les personnes qui ont des litiges en cours (allocation coupée, courrier perdu) — fort taux de conversion naturel.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI:** Claude API (claude-sonnet-4-6) — génère les courriers selon le profil + les références légales par organisme
+- **Base organismes:** JSON maintenu manuellement (~60 organismes avec adresses officielles, formats acceptés, délais légaux de mise à jour)
+- **PDF / DOCX:** react-pdf + officegen — un fichier par organisme dans un ZIP
+- **Calendrier relances:** Supabase + Resend (emails automatiques J+15 si aucune confirmation)
+- **Auth + Tracker:** Supabase Realtime
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai déménagé à Paris — voici les 37 organismes que j'ai dû notifier (et l'outil qui le fait en 10 minutes)"
+2. Facebook Groups : "Déménagement France", "Expats en France", "Logement étudiant Paris/Lyon" (500K+ membres combinés)
+3. Partenariats avec agences immobilières et gestionnaires (IAD, Century 21) — outil offert à chaque nouveau locataire signataire
+4. SEO : "liste organismes à prévenir déménagement", "changement adresse CAF impôts", "notification déménagement France"
+
+### Competitive Moat
+- **Aucun outil agrégateur n'existe** pour les notifications de déménagement en France — le marché est entièrement vierge
+- La base "adresses de notification par organisme" est un actif long à constituer et facile à maintenir en avantage
+- Les partenariats avec agences = distribution gratuite au moment le plus pertinent (signature du bail)
+- L'usage est récurrent sur le cycle de vie d'un utilisateur (4M de déménagements/an = flux constant, pas de saisonnalité)
+
+### Figma Schematic
+[View DéménageFuté Address Change Notification Flow on FigJam](https://www.figma.com/board/na2tiFMFqDpL481VgpZdUk)
+
+---
+
+## 42. BailCommercial.ai
+
+> **Analysez votre bail commercial 3-6-9 avec l'IA — comprenez chaque clause, détectez les pièges, négociez mieux**
+
+### Problem
+La France compte **1,7 million de locaux commerciaux** et enregistre chaque année **300 000+ signatures ou renouvellements de baux commerciaux**. Contrairement au bail d'habitation (couvert par ContratIA #5), le bail commercial est régi par la **loi Pinel du 18 juin 2014** et ses décrets d'application — une des législations les plus complexes du droit des affaires français. Les clauses sont des pièges pour le non-initié : indexation ILC/ILAT mal calculée (erreurs fréquentes de plusieurs centaines d'euros/an), pas-de-porte vs. droit au bail (confusion aux conséquences fiscales majeures), répartition des charges récupérables (travaux mis à la charge du preneur alors que la loi les interdit), destination commerciale restrictive qui empêche toute évolution de l'activité, clause résolutoire avec délai de grâce insuffisant. Les petits commerçants et artisans signent sans avocat — un avocat spécialisé en droit commercial facture **€300–€600/h** pour une relecture de bail.
+
+### Solution
+L'utilisateur uploade son bail (PDF ou photo). L'OCR extrait le texte, Claude API identifie et analyse chaque clause selon la grille de la loi Pinel et de la jurisprudence disponible. Le rapport affiche : un **score de risque global (1–10)**, les clauses abusives ou illégales (charges non récupérables imputées au preneur, indexation incorrecte), les clauses défavorables mais légales (destination trop restrictive, durée ferme trop longue), et pour chaque problème, une **contre-proposition de négociation** prête à soumettre au bailleur ou à son notaire. Les commerçants en renouvellement voient aussi si les nouvelles conditions respectent le **plafonnement légal du loyer de renouvellement** (ILC pour les commerces, ILAT pour les activités tertiaires).
+
+### Revenue Model
+| Tier | Prix | Pour |
+|------|------|------|
+| Aperçu gratuit | €0 | Score de risque global + 3 principales clauses à vérifier |
+| Rapport Complet | €9,99 | Analyse clause par clause, contre-propositions, références légales loi Pinel |
+| Pack Renouvellement | €14,99 | Rapport complet + simulation plafonnement loyer + lettre de refus de conditions si dépassement |
+| Agent / Notaire | €39/mo | Analyses illimitées, rapports en marque blanche, API REST |
+
+**Unit economics :** Claude API ~€0,15/analyse → 98,5% gross margin. **300 000 baux/an** × 0,1% conversion = 300 rapports/mois → **€3 000 MRR** conservateur. Le plan B2B (notaires, agents, experts-comptables) est le vrai moteur : 50 professionnels à €39/mo = **€1 950 MRR récurrent** dès le lancement.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **OCR / parsing:** pdf-parse + Tesseract.js (beaucoup de baux sont des scans)
+- **AI analysis:** Claude API (claude-sonnet-4-6) avec prompt spécialisé loi Pinel, ILC/ILAT, jurisprudence Cour de Cassation
+- **Données ILC/ILAT:** Indices INSEE publiés trimestriellement (gratuits, open data) — calcul de l'indexation correcte automatisé
+- **PDF rapport:** react-pdf avec clauses surlignées et annotations
+- **Auth + DB:** Supabase
+- **Payments:** Stripe (one-time + abonnement B2B)
+
+### Go-to-Market (zero budget)
+1. LinkedIn : cibler les gérants de TPE/PME, agents immobiliers commerciaux, experts-comptables — posts avec cas réel "j'ai trouvé une indexation ILC incorrecte qui coûtait €2 400/an à mon client"
+2. Reddit / forums : r/france, r/entrepreneuriat, Forum-Auto-Entrepreneur.fr — cas d'usage réels
+3. Partenariats avec Chambres de Commerce et d'Industrie (CCI) — elles accompagnent les créateurs d'entreprise au moment de la signature du bail
+4. SEO : "analyser bail commercial", "indexation ILC bail commercial calcul", "charges récupérables bail commercial interdit", "renouvellement bail commercial plafonnement"
+
+### Competitive Moat
+- ContratIA (#5) couvre les contrats grand public (bail habitation, CDI, CGV) — BailCommercial.ai est une spécialisation technique distincte sur la loi Pinel
+- Le calcul automatique de l'indexation ILC/ILAT correct (et la détection des erreurs de bailleur) est un feature à forte valeur immédiate
+- Les CCI ont des dizaines de milliers de créateurs d'entreprise à accompagner — un seul partenariat national = acquisition massive
+- L'extension B2B (notaires, agents) crée un revenu récurrent élevé et un canal de distribution indirect vers les PME
+
+### Figma Schematic
+[View BailCommercial.ai Commercial Lease Analyzer Flow on FigJam](https://www.figma.com/board/xTeCTPlhnTo2SSUU8vNj15)
+
+---
+
+## 43. PensionAlimentaire.ai
+
+> **Calculez la pension alimentaire juste, récupérez les impayés avec l'ARIPA — tout en 5 minutes**
+
+### Problem
+La France enregistre **130 000 divorces par an** et compte **1,2 million de familles monoparentales** concernées par une pension alimentaire. Deux problèmes massifs coexistent : **(1) Le montant est mal calculé.** La table de référence officielle du Ministère de la Justice (publiée mais peu connue) croise revenus des deux parents, nombre d'enfants et modalités de garde pour donner le montant recommandé — mais la plupart des parents s'appuient sur un accord informel ou un avocat payé €200/h pour un calcul de 10 minutes. Des dizaines de milliers d'enfants perçoivent une pension sous-évaluée. **(2) Les impayés sont massifs et mal gérés.** 30% des pensions alimentaires ne sont pas payées régulièrement. La grande majorité des parents créanciers ignorent que l'**ARIPA** (Agence de Recouvrement des Impayés de Pensions Alimentaires, créée en 2021) peut récupérer les sommes dues directement par prélèvement sur le salaire du débiteur — sans avocat, sans tribunal, gratuitement. Et la **CAF verse l'ASF (Allocation de Soutien Familial)** en avance de trésorerie pendant le recouvrement. Ce dispositif est inconnu de la majorité des familles concernées.
+
+### Solution
+**(1) Calcul :** L'utilisateur entre son statut (parent créancier ou débiteur), les revenus nets de chacun, le nombre et l'âge des enfants, et les modalités de garde (résidence alternée, résidence principale + droits de visite). L'algorithme applique la **table de référence officielle** du Ministère de la Justice et produit le montant recommandé avec la fourchette légale haute/basse, la comparaison à la moyenne nationale, et les scenarii de révision si l'une des situations change. **(2) Récupération :** Si la pension n'est pas payée, un module dédié guide l'utilisateur à travers la **saisine ARIPA** (formulaire Cerfa 16183*01), la demande d'**ASF auprès de la CAF** (avance mensuelle pendant le recouvrement), et génère la lettre de mise en demeure préalable avec délai légal de 15 jours. **(3) Révision :** Un calculateur détermine si le changement de situation (nouveau conjoint, perte d'emploi, déménagement, nouveau revenu) justifie une demande de révision judiciaire (+/- 10% de variation recommandée).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Montant recommandé + fourchette + comparaison nationale |
+| Rapport Complet | €4,99 | PDF : calcul détaillé, base légale, scenarii révision, guide procédure |
+| Lettre de demande | €2,99 | Lettre de fixation ou révision de pension, format tribunal, prête à déposer |
+| Kit ARIPA complet | €3,99 | Saisine ARIPA pré-remplie + lettre mise en demeure + guide ASF |
+| Abonnement Suivi | €9/an | Alerte annuelle révision + recalcul si revenus déclarés changent + historique |
+
+**Unit economics :** Claude API ~€0,06/rapport → margin brute >99%. **Marché :** 130K divorces/an × 2 parents concernés × 0,2% conversion = 500+ rapports/mois → **€2 500 MRR** conservateur. Le Kit ARIPA (€3,99) cible les 30% de familles avec impayés — soit ~390 000 familles en détresse active → potentiel viral exceptionnel sur TikTok.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — accessible depuis le tribunal ou le bureau d'aide juridictionnelle)
+- **Calcul table de référence:** Algorithme déterministe appliquant la table officielle du Ministère de la Justice (PDF public mis à jour annuellement) — grille interpolée selon revenus + garde
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique le calcul, rédige les lettres et la saisine ARIPA en langage juridique correct
+- **Cerfa ARIPA:** Pré-remplissage du formulaire 16183*01 (accessible sur service-public.fr) + instructions de dépôt
+- **PDF rapport + lettres:** react-pdf
+- **Auth + DB:** Supabase (aucune donnée personnelle stockée après génération — RGPD by design)
+- **Payments:** Stripe (micro-paiements one-time + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Tu ne reçois plus ta pension alimentaire ? L'ARIPA peut la récupérer pour toi gratuitement — voici exactement comment" (contenu à fort potentiel viral : situation émotionnelle + solution actionnable)
+2. Facebook Groups : "Maman solo France", "Droits des parents séparés", "Pension alimentaire France" (400K+ membres combinés)
+3. Partenariats avec associations de familles monoparentales (ONISEP, FAMILLES DE FRANCE, Monoparentalité Positive) — outil recommandé à leurs membres
+4. SEO : "calcul pension alimentaire table référence", "ARIPA saisine pension impayée", "pension alimentaire révision", "ASF CAF pension impayée"
+
+### Competitive Moat
+- La table de référence Ministère Justice est publique mais personne ne l'a traduite en outil web simple — marché entièrement vierge
+- L'ARIPA est le dispositif le plus méconnu de France (lancé en 2021) alors qu'il aide des centaines de milliers de familles — être le premier à l'expliquer = référence nationale
+- Le sujet génère une émotion très forte (enfants, argent, injustice) → NPS exceptionnel + partage viral naturel
+- Chaque réforme du droit de la famille (nouveau barème, modification ARIPA) génère un regain d'attention médiatique → trafic organique récurrent
+
+### Figma Schematic
+[View PensionAlimentaire.ai Child Support Calculator and ARIPA Guide on FigJam](https://www.figma.com/board/CY0EKmYhLMb3T4qEo78uQD)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1870,4 +2011,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-26 — Ideas 38–40 added (France-specific, ultra-low-budget: RésilIA, SinistreIA, TrajetPro.ai)*
+*Last updated: 2026-04-29 — Ideas 41–43 added (France-specific, ultra-low-budget: DéménageFuté, BailCommercial.ai, PensionAlimentaire.ai)*
