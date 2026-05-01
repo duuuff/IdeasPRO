@@ -51,6 +51,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 41 | [DéménageFuté](#41-déménagefuté) | Pay-per-pack + Monthly Tracker | €3K–€20K | Low |
 | 42 | [BailCommercial.ai](#42-bailcommercialai) | Pay-per-analysis + B2B SaaS | €5K–€35K | Low-Medium |
 | 43 | [PensionAlimentaire.ai](#43-pensionalimentaireai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
+| 44 | [TitreDeSéjour.ai](#44-titredeséjourai) | Pay-per-pack + Subscription | €8K–€55K | Low |
+| 45 | [RQTH.ai](#45-rqthai) | Pay-per-kit + Freemium | €5K–€40K | Low |
+| 46 | [CessionVéhicule.ai](#46-cessionvéhiculeai) | Pay-per-pack + B2B SaaS | €4K–€28K | Low |
 
 ---
 
@@ -1999,6 +2002,140 @@ La France enregistre **130 000 divorces par an** et compte **1,2 million de fami
 
 ---
 
+## 44. TitreDeSéjour.ai
+
+> **Préparez votre dossier de renouvellement de titre de séjour sans erreur — adapté à votre statut et à votre préfecture**
+
+### Problem
+La France compte **3,8 millions de ressortissants étrangers** titulaires d'un titre de séjour. Chaque titre (étudiant, salarié, vie privée et familiale, passeport talent, visiteur…) a sa propre liste de pièces justificatives — qui varie également de préfecture en préfecture. L'**ANEF** (Administration Numérique pour les Étrangers en France), le portail officiel, est confus et souvent en rupture de créneaux. Une erreur dans le dossier (document manquant, mauvaise traduction, attestation périmée) entraîne un refus et peut placer le demandeur en **situation irrégulière** pendant plusieurs mois. Les avocats spécialisés en droit des étrangers facturent **€200–€500/h** pour une simple relecture de dossier. La plupart des demandeurs se tournent vers des forums ou des groupes Facebook désorganisés.
+
+### Solution
+L'utilisateur sélectionne son type de titre de séjour, sa préfecture, et sa date d'expiration. L'IA génère une **checklist personnalisée et à jour** des pièces requises (avec les références réglementaires), une **lettre de motivation adaptée** à la situation (renouvellement, changement de statut, motif particulier), et un guide pas-à-pas de navigation ANEF avec captures d'écran. Un calendrier de relances intégré envoie une alerte **3 mois avant l'expiration** du titre. Un abonnement multi-titre permet de gérer les renouvellements de toute une famille.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Checklist gratuite | €0 | Liste partielle + alerte expiration 30 jours |
+| Pack Complet | €7,99 | Checklist exhaustive + lettre de motivation + guide ANEF + FAQ préfecture |
+| Abonnement Famille | €4,99/mo | Multi-titre dashboard + alertes automatiques 3 mois avant expiry + mises à jour préfecture |
+
+**Unit economics :** Claude API ~€0,08/pack → 99% gross margin. **3,8M résidents × cycle de renouvellement 2–3 ans = 1,5M renouvellements/an × 0,1%** de conversion = 1 500 packs/mois → **€11 985 MRR** conservateur. L'abonnement famille (couples expats, familles recomposées) est souscrit massivement dès le premier titre d'un foyer.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI:** Claude API (claude-sonnet-4-6) — génère la checklist, la lettre de motivation et les conseils spécifiques à la situation
+- **Base de données:** JSON maintenu manuellement — 96 préfectures × ~12 types de titres × pièces requises (mise à jour mensuelle)
+- **Alertes:** Supabase + Resend (emails automatiques J-90, J-30, J-7)
+- **Auth + Dashboard:** Supabase Auth (multi-titre)
+- **Payments:** Stripe (one-time + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Algériens en France", "Marocains en France", "Erasmus France", "Expats Paris/Lyon" — 2M+ membres combinés, très actifs sur les questions de titre de séjour
+2. TikTok/YouTube : "Renouveler son titre de séjour en France en 2026 — les erreurs à éviter" (sujet à très fort taux de recherche et d'engagement)
+3. Partenariats avec associations de soutien aux étrangers (CIMADE, France Terre d'Asile, Emmaüs Connect) — outil recommandé à leurs bénéficiaires
+4. SEO : "renouvellement titre de séjour documents", "checklist préfecture étudiant étranger", "ANEF dossier étudiant salarié", "vie privée familiale renouvellement pièces"
+
+### Competitive Moat
+- Aucun outil centralise les requirements par **préfecture + type de titre** — la dispersion de l'info est le problème clé non résolu
+- La base "préfecture × statut → pièces" est un actif long à constituer (travail de veille réglementaire) et crée une barrière à l'entrée durable
+- Le calendrier d'alertes crée une rétention naturelle — l'utilisateur revient tous les 2–3 ans et renouvelle l'abonnement
+- Les communautés expats (groupes Facebook, Discord) ont des comportements de recommandation viraux : un dossier réussi = 10 nouveaux utilisateurs référés
+
+### Figma Schematic
+[View TitreDeSéjour.ai Renewal Dossier Flow on FigJam](https://www.figma.com/board/JMQV6jqcrBSkkNz0uI8G5p)
+
+---
+
+## 45. RQTH.ai
+
+> **Obtenez la Reconnaissance de la Qualité de Travailleur Handicapé — le dossier MDPH guidé étape par étape**
+
+### Problem
+La France compte **12 millions de personnes en situation de handicap**, mais seulement **3 millions ont la RQTH** (Reconnaissance de la Qualité de Travailleur Handicapé). Pourtant, la RQTH débloque des avantages massifs et souvent méconnus : **aide AGEFIPH de 1 000 à 9 000 €** pour l'aménagement du poste ou du matériel, maintien dans l'emploi garanti, **Allocation Adulte Handicapé (AAH, jusqu'à €971,37/mois)** si sans emploi, Carte Mobilité Inclusion (CMI), formation professionnelle prioritaire, et retraite anticipée. Le problème : le **dossier MDPH est un frein massif**. Le CERFA 13788*01 fait 12 pages, nécessite un certificat médical d'un médecin spécialiste dans un format précis, un "projet de vie" rédigé par le demandeur lui-même (exercice difficile et angoissant), une attestation de l'employeur, et d'autres pièces selon la situation. Le délai de traitement est de 4 à 6 mois. En cas de refus (30% des dossiers), le recours devant la CDAPH est encore plus complexe. Les associations d'aide sont surchargées. Le résultat : des millions d'éligibles abandonnent.
+
+### Solution
+Un **wizard guidé en 5 étapes** : (1) Quiz d'éligibilité (condition, impact sur le travail, situation actuelle). L'IA calcule les bénéfices potentiels applicables à la situation. (2) Checklist des documents médicaux à demander au médecin, avec le libellé exact à utiliser lors de la consultation (pour que le certificat soit dans le bon format MDPH). (3) **Rédaction assistée du "projet de vie"** — la partie la plus anxiogène : l'IA pose des questions ciblées et génère un brouillon structuré que l'utilisateur adapte. (4) Lettre à l'employeur pour déclencher l'aménagement de poste et l'attestation requise. (5) En cas de refus : lettre de recours CDAPH avec les arguments de droit correspondant au motif de refus.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification éligibilité | €0 | Quiz + calculateur de bénéfices + checklist documents à télécharger |
+| Kit Dossier | €5,99 | Guidance CERFA 13788*01 + projet de vie AI-généré + lettre employeur |
+| Guide Complet | €9,99 | Kit Dossier + lettre de recours CDAPH + timeline de suivi + FAQ MDPH |
+
+**Unit economics :** Claude API ~€0,10/kit → 98,3% gross margin. **9M éligibles non reconnus × 0,05%** de conversion annuelle = 4 500 kits/mois → **€26 955 MRR**. La croissance est exponentielle : chaque RQTH obtenu génère des recommandations dans l'entourage (famille, collègues) — le sujet est très communautaire.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — accessible depuis mobile, salle d'attente médicale)
+- **AI:** Claude API (claude-sonnet-4-6) — génère le projet de vie, les lettres, et les conseils personnalisés selon le type de handicap déclaré
+- **CERFA 13788*01:** Guide interactif page par page (pas de pré-remplissage PDF pour éviter les questions de responsabilité — l'utilisateur remplit lui-même, guidé)
+- **Calculateur AAH:** Algorithme déterministe appliquant le barème officiel AAH (revenus, situation familiale, taux d'incapacité estimé)
+- **PDF lettres:** react-pdf — projet de vie + lettre employeur + recours CDAPH
+- **Auth + DB:** Supabase (aucune donnée médicale stockée — RGPD by design, données effacées après téléchargement)
+- **Payments:** Stripe (paiements unitaires)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Handicap et Emploi", "MDPH France entraide", "Association maladies rares", "Fibromyalgie France", "Autisme France parents" — communautés très solidaires, fort taux de partage
+2. TikTok/YouTube : "La RQTH — ce que personne ne vous dit : 5 avantages que vous ratez sans le savoir" (format éducatif à très fort potentiel viral)
+3. Partenariats avec Cap Emploi (100 centres en France accompagnant les travailleurs handicapés vers l'emploi) — outil recommandé systématiquement
+4. SEO : "RQTH comment faire le dossier MDPH", "projet de vie MDPH exemple", "CERFA 13788 remplir", "recours CDAPH refus RQTH"
+
+### Competitive Moat
+- Aucun outil en ligne ne guide à travers le "projet de vie" MDPH avec l'IA — c'est le frein émotionnel et cognitif numéro 1 à l'obtention de la RQTH
+- Le calculateur de bénéfices (€ concrets affichés) est un déclencheur émotionnel fort : "vous ratez potentiellement €XXX/an" → conversion immédiate
+- Les communautés du handicap ont un NPS exceptionnel et partagent massivement les outils qui les aident réellement
+- Chaque réforme MDPH (révision des taux AAH, extension RQTH aux maladies chroniques) génère un pic de trafic SEO et médiatique prévisible
+
+### Figma Schematic
+[View RQTH.ai MDPH Disability Recognition Dossier Flow on FigJam](https://www.figma.com/board/v9lUtyF8ph4hLxjbWXVrEy)
+
+---
+
+## 46. CessionVéhicule.ai
+
+> **Vendez votre voiture sans erreur en 5 minutes — tous les documents légaux générés automatiquement**
+
+### Problem
+La France enregistre **6 millions de transactions de véhicules d'occasion par an** — la grande majorité entre particuliers. Chaque vente implique une série de documents obligatoires dont beaucoup ignorent l'existence complète : le **Cerfa 15776*01** (certificat de cession — obligatoire, doit être rempli en 3 exemplaires), la **déclaration de cession sur ANTS** (dans les 15 jours, sous peine d'amende), la **demande de certificat de situation administrative** (non-gage, pour l'acheteur), la **lettre de notification à l'assureur** (obligatoire sous 24h), et le **code de cession** à fournir à l'acheteur pour son immatriculation. Une erreur dans le Cerfa (numéro VIN incorrect, date, puissance fiscale) invalide le document et peut laisser le vendeur **responsable des infractions** commises par l'acheteur après la vente. Des escroqueries exploitent cette complexité (fausse déclaration de cession, acheteur qui ne réimmatricule pas). Pourtant il n'existe aucun outil simple qui génère l'ensemble du pack en une seule opération.
+
+### Solution
+Le vendeur saisit la plaque d'immatriculation (auto-fill via SIV API ou saisie manuelle), le VIN, le prix de vente, la date, et les coordonnées acheteur/vendeur. L'IA valide tous les champs selon les règles Cerfa (VIN 17 caractères, cohérence date, puissance fiscale valide) et signale les erreurs avant génération. Le pack généré comprend : (1) **Cerfa 15776*01 parfaitement rempli** en PDF imprimable (3 exemplaires), (2) guide pas-à-pas pour la **déclaration ANTS** avec capture d'écran de chaque étape, (3) lien vers le **certificat de non-gage officiel** (SIV, gratuit) avec guide de lecture, (4) **lettre de notification assurance** prête à envoyer, (5) **checklist acheteur** (documents à apporter, délai de réimmatriculation, assurance obligatoire avant conduite). Un rappel SMS est envoyé à l'acheteur J+20 s'il n'a pas encore immatriculé (protège le vendeur).
+
+### Revenue Model
+| Option | Prix | Pour |
+|--------|------|------|
+| Accès gratuit | €0 | Guide non-gage + walkthrough ANTS (sans génération PDF) |
+| Pack Vendeur | €3,99 | Cerfa généré + lettre assurance + checklist acheteur + SMS reminder |
+| Pack Pro | €29,99/mo | Cessions illimitées pour garages et marchands (batch, API REST, marque blanche) |
+
+**Unit economics :** Claude API ~€0,05/pack → 98,7% gross margin. **6M cessions/an × 0,03%** = 1 800 packs/mois → **€7 182 MRR** conservateur. Le Pack Pro (garages, mandataires) est le vrai moteur B2B : 100 professionnels à €29,99/mo = **€2 999 MRR récurrent additionnel** dès le lancement.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — utilisé au moment de la vente, souvent en extérieur)
+- **Auto-fill immatriculation:** API SIV (Système d'Immatriculation des Véhicules) ou scraping HistoVec pour pré-remplissage marque/modèle/puissance fiscale
+- **AI validation:** Claude API (claude-sonnet-4-6) — valide la cohérence des champs, détecte les erreurs, génère la lettre assurance
+- **PDF Cerfa:** react-pdf avec positionnement exact des champs sur le formulaire officiel 15776*01
+- **SMS reminder:** Twilio (coût ~€0,05/SMS, inclus dans le pack)
+- **Pack Pro / API:** Supabase + REST API + webhooks pour systèmes garage (DMS)
+- **Payments:** Stripe (one-time + abonnement mensuel B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment vendre sa voiture légalement en France en 2026 — les 5 documents que vous oubliez (et comment éviter les arnaques)" — format tutoriel, très cherché
+2. LeBonCoin / La Centrale / Vinted Autos : contenu organique dans les commentaires des annonces et dans les FAQ des forums associés
+3. Facebook Groups : "Vente voiture entre particuliers France", "Achat vente auto France" (300K+ membres combinés)
+4. SEO : "cerfa cession véhicule remplir", "déclaration cession ANTS étapes", "vente voiture particulier documents obligatoires", "non-gage comment obtenir"
+
+### Competitive Moat
+- Aucun outil agrège les 5 documents obligatoires en un seul pack — le marché est entièrement non servi malgré 6M de transactions/an
+- La validation IA des champs Cerfa avant génération (détection d'erreurs VIN, incohérences) est une valeur immédiate et non copiable facilement
+- Le SMS reminder J+20 à l'acheteur est un feature unique qui protège le vendeur légalement — argument émotionnel fort à la conversion
+- Le canal B2B (garages, mandataires) génère un MRR récurrent élevé et une barrière à l'entrée via les intégrations DMS
+
+### Figma Schematic
+[View CessionVéhicule.ai Used Car Transfer Document Flow on FigJam](https://www.figma.com/board/CzoQYPm3JRD45LiJ9Vl8B5)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2011,4 +2148,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-29 — Ideas 41–43 added (France-specific, ultra-low-budget: DéménageFuté, BailCommercial.ai, PensionAlimentaire.ai)*
+*Last updated: 2026-05-01 — Ideas 44–46 added (France-specific, ultra-low-budget: TitreDeSéjour.ai, RQTH.ai, CessionVéhicule.ai)*
