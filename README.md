@@ -42,6 +42,18 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 32 | [BulletinPaie.ai](#32-bulletinpaieai) | Pay-per-analysis + Subscription | €5K–€35K | Low |
 | 33 | [RetraiteSimple](#33-retraitesimple) | Pay-per-plan + Subscription | €6K–€45K | Low-Medium |
 | 34 | [ZFE Navigator](#34-zfe-navigator) | Pay-per-report + B2B API | €5K–€30K | Low |
+| 35 | [FactureEnergie.ai](#35-factureénergieai) | Pay-per-report + Subscription + Affiliate | €6K–€40K | Low |
+| 36 | [Amendes.ai](#36-amendesai) | Pay-per-letter + Subscription | €4K–€28K | Low |
+| 37 | [PrestationsCAF.ai](#37-prestationscafai) | Pay-per-kit + Annual Subscription | €5K–€35K | Low |
+| 38 | [RésilIA](#38-résilia) | Pay-per-letter + Subscription | €4K–€30K | Low |
+| 39 | [SinistreIA](#39-sinisteria) | Pay-per-dossier + Subscription | €5K–€35K | Low |
+| 40 | [TrajetPro.ai](#40-trajetproai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
+| 41 | [DéménageFuté](#41-déménagefuté) | Pay-per-pack + Monthly Tracker | €3K–€20K | Low |
+| 42 | [BailCommercial.ai](#42-bailcommercialai) | Pay-per-analysis + B2B SaaS | €5K–€35K | Low-Medium |
+| 43 | [PensionAlimentaire.ai](#43-pensionalimentaireai) | Pay-per-report + Annual Subscription | €4K–€28K | Low |
+| 44 | [TitreDeSéjour.ai](#44-titredeséjourai) | Pay-per-pack + Subscription | €8K–€55K | Low |
+| 45 | [RQTH.ai](#45-rqthai) | Pay-per-kit + Freemium | €5K–€40K | Low |
+| 46 | [CessionVéhicule.ai](#46-cessionvéhiculeai) | Pay-per-pack + B2B SaaS | €4K–€28K | Low |
 
 ---
 
@@ -1580,6 +1592,550 @@ L'utilisateur entre sa **plaque d'immatriculation** (ou saisit manuellement carb
 
 ---
 
+## 35. FactureEnergie.ai
+
+> **Comprenez, corrigez et optimisez votre facture d'énergie en 2 minutes — EDF, ENGIE, TotalEnergies et 15 autres fournisseurs**
+
+### Problem
+La France compte **30 millions de contrats résidentiels** d'électricité et 11 millions de contrats gaz. Depuis la crise énergétique de 2022, les prix ont doublé — et des millions de foyers paient **le mauvais tarif sans le savoir**. Une facture EDF française contient en moyenne 12 lignes opaques : abonnement, consommation, TURPE (transport), CTA, CSPE, TVA réduite, TVA normale… Les erreurs de facturation sont fréquentes (mauvais index relevé, puissance souscrite sous-dimensionnée, option tarif non appliquée). Et surtout : **la majorité des foyers sur Tarif Base gagneraient à passer en Heures Pleines/Heures Creuses (HP/HC)** — mais personne ne leur explique comment calculer si c'est rentable pour leur profil de consommation.
+
+### Solution
+L'utilisateur uploade sa facture (PDF ou photo) ou saisit manuellement son index et sa consommation. L'OCR + Claude API extrait chaque ligne, explique chaque poste en français simple ("TURPE = ce que vous payez pour le transport de l'électricité sur le réseau national — obligatoire quel que soit votre fournisseur"), puis : (1) détecte les anomalies de facturation (index erroné, option non appliquée, puissance sur-souscrite) et génère une lettre de contestation prête à envoyer ; (2) simule le gain annuel si l'utilisateur passe en HP/HC, change de fournisseur, ou optimise sa puissance souscrite ; (3) compare les offres du marché (agregateur de prix via APIs publiques) et génère un lien d'affiliation si le changement est recommandé.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse gratuite | €0 | Résumé de la facture + nombre d'anomalies détectées + gain potentiel estimé |
+| Rapport complet | €3,99 | Explication ligne par ligne + simulation HP/HC + lettre contestation si besoin |
+| Suivi mensuel | €4,99/mo | Alerte automatique si hausse anormale + recalcul optimal à chaque facture |
+
+**Unit economics :** Claude API ~€0,05/analyse → margin brute >98%. 1 000 rapports/mois = **€3 990 MRR**. Affiliate sur changement de fournisseur (~€40–€80/conversion) = revenu complémentaire significatif. La feature "j'ai trouvé €180/an d'économies" génère un fort bouche-à-oreille.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — les gens ouvrent leur facture sur téléphone)
+- **OCR:** Google Vision API ou Mistral OCR (gratuit open source)
+- **Données tarifaires:** API ENEDIS (open data — index, historique consommation) + grilles tarifaires TURPE publiques CRE
+- **Offres marché:** API comparateurs énergie (Energie-Auchan, Totalenergies, API publique DGEC prix-elec.fr)
+- **Moteur HP/HC:** Algorithme déterministe — profil de consommation × coût HP vs. HC × différentiel abonnement
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique chaque ligne + rédige lettre contestation + donne recommandation
+- **PDF rapport:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai uploadé ma facture EDF — l'IA a trouvé €240/an d'économies en 90 secondes"
+2. Reddit : r/france, r/finances_perso, r/ecologie — cas d'usage réels avec anonymisation
+3. SEO : "comprendre sa facture EDF", "HP HC rentable", "changer fournisseur électricité 2025", "contestation facture énergie"
+4. Partenariat avec comparateurs énergie (Selectra, Papernest) — affiliation croisée
+
+### Competitive Moat
+- Les comparateurs énergie (Selectra, Papernest) orientent vers le changement mais n'analysent pas la facture ligne par ligne
+- Aucun outil n'explique la facture ET détecte les erreurs ET simule l'optimisation tarifaire en un seul endroit
+- L'API ENEDIS (historique de consommation par heure) permet une simulation HP/HC ultra-précise impossible manuellement
+- La crise énergétique maintient un niveau d'attention élevé sur ce sujet pour les années à venir
+
+### Figma Schematic
+[View FactureEnergie.ai Energy Bill Analyzer Flow on FigJam](https://www.figma.com/board/mxWNg5yMVlRALU2pyNw2FS)
+
+---
+
+## 36. Amendes.ai
+
+> **Contestez votre amende en 2 minutes — radar, stationnement, RATP — lettre légale générée par IA**
+
+### Problem
+La France émet **20 millions d'amendes par an** : radars automatiques, stationnement, infractions RATP, contraventions de voie publique. Or une grande partie de ces amendes sont **contestables** : panneau non visible, radar non homologué, erreur de plaque, véhicule vendu, délai de prescription dépassé, problème de signalisation routière, vice de procédure. Seulement **3% des automobilistes contestent leurs amendes** — non pas parce qu'ils ont tort, mais parce que le processus est opaque : il faut écrire à l'OTC (Officier du Ministère Public), citer les textes légaux exacts (articles du Code de la Route, de la Procédure Pénale), et respecter des délais stricts (45 jours). Un avocat coûte €200–€500 pour rédiger ce qui est essentiellement une lettre de 200 mots.
+
+### Solution
+L'utilisateur entre les détails de son amende (ou uploade l'avis de contravention). L'outil classifie le type d'infraction, applique un moteur de règles pour identifier les **motifs de contestation légalement valides** (vice de procédure, prescription, signalisation défaillante, etc.), et génère une **lettre de contestation complète** avec références légales exactes, adressée au bon interlocuteur (OTC, Trésor Public, ou tribunal selon le cas). La lettre inclut automatiquement les délais légaux et la procédure d'envoi (LRAR). Pour les infractions non contestables, le rapport indique clairement pourquoi et propose le règlement avec réduction par paiement rapide (minoration de 20%).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | Type d'infraction identifié + contestable ou non + premier paragraphe de la lettre |
+| Lettre complète | €2,99 | Lettre complète avec références légales + guide d'envoi LRAR + délais à respecter |
+| Abonnement | €14,99/mo | Lettres illimitées + alertes délais + modèles pour véhicule de société |
+
+**Unit economics :** Claude API ~€0,03/lettre → margin brute >99%. Le prix psychologique €2,99 vs. amende de €135 est imbattable. 1 000 lettres/mois = **€2 990 MRR**. L'abonnement cible les flottes d'entreprise (commerciaux itinérants, VTC, transporteurs).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (simple form — 5 champs max)
+- **OCR (optionnel):** Google Vision API pour lire l'avis de contravention uploadé
+- **Moteur de règles:** Base JSON des motifs de contestation par type d'infraction (articles Code Route, CESEDA, CGCT) — maintenu manuellement, évolutif
+- **Délais légaux:** Algorithme calculant la deadline de contestation selon date de l'infraction + type
+- **AI drafting:** Claude API (claude-sonnet-4-6) — génère la lettre avec le bon registre juridique + personnalisation
+- **PDF lettre:** react-pdf (prêt à imprimer + envoyer)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon amende radar de €135 contestée et annulée — voici exactement comment" (avec la vraie lettre floutée)
+2. Reddit : r/france, r/juridique, r/droit — cas d'usage réels, anonymisés
+3. SEO : "contester amende radar", "lettre contestation contravention stationnement", "amende prescrite délai", "vice de procédure amende"
+4. Forums auto (Forum-Auto, Caradisiac) — communautés déjà sensibilisées à la contestation d'amendes
+
+### Competitive Moat
+- Aucun service grand public ne génère des lettres de contestation d'amendes personnalisées avec références légales
+- Le moteur de règles (motifs × type d'infraction × délais) est une barrière technique réelle à construire une fois
+- Chaque réforme du Code de la Route ou nouveau type de radar crée un pic de trafic naturel
+- L'extension B2B (flottes, VTC, transporteurs) offre un MRR récurrent élevé sans acquisition intensive
+
+### Figma Schematic
+[View Amendes.ai Fine Contestation Tool Flow on FigJam](https://www.figma.com/board/HvIF8tcIT1pgvj1uiBBkv4)
+
+---
+
+## 37. PrestationsCAF.ai
+
+> **Découvrez toutes les aides CAF auxquelles vous avez droit — et récupérez ce que vous n'avez pas encore demandé**
+
+### Problem
+La CAF gère **13 millions d'allocataires** en France, mais des études estiment que **2 à 3 millions de foyers supplémentaires sont éligibles à au moins une prestation sans le savoir ou sans l'avoir demandée**. Le non-recours aux aides sociales coûte des milliards aux ménages français chaque année. Le problème est double : (1) les aides sont nombreuses et leurs noms abscons (APL, ALS, ALF, PAJE, CMG, AEEH, AJPP, ASF, ARS, Prime de naissance, RSA, AAH…) ; (2) l'éligibilité dépend de combinaisons complexes de critères (composition du foyer, revenus N-2, loyer, situation professionnelle, handicap, garde d'enfants, etc.) que personne ne maîtrise en entier. Le simulateur CAF officiel est incomplet et ne couvre pas les aides cumulables ni les stratégies d'optimisation (déclaration des ressources, choix du mode de garde, impact d'un changement de situation).
+
+### Solution
+L'utilisateur remplit un formulaire de 5 minutes : composition du foyer, revenus, situation de logement, situation professionnelle, enfants (âges, mode de garde, handicap éventuel). L'algorithme d'éligibilité scanne **toutes les prestations CAF** (25+ aides) et compare les droits théoriques aux déclarations actives connues. Il identifie les **aides non demandées**, calcule le montant mensuel estimé, et génère un **kit de réclamation pas-à-pas** : documents à préparer, formulaires à remplir, délais de versement attendus. Claude API rend le résultat compréhensible ("Vous êtes potentiellement éligible à l'AEEH car votre enfant a un taux d'invalidité supérieur à 50% — voici comment constituer le dossier MDPH").
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Total des aides auxquelles vous êtes éligible (montant global) + liste des prestations |
+| Kit complet | €4,99 | Détail prestation par prestation + guide de demande + documents requis + délais |
+| Suivi annuel | €9,99/an | Recalcul automatique à chaque changement de situation + alertes réévaluation droits |
+
+**Unit economics :** Claude API ~€0,08/kit → margin brute >98%. L'effet "j'ai découvert €3 600/an d'aides non perçues" génère un NPS exceptionnel et un partage viral massif. 500 kits/mois = **€2 500 MRR** — conservateur. Le suivi annuel à €9,99 construit un revenu récurrent stable.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire étape par étape, mobile-first)
+- **Moteur d'éligibilité:** Algorithme déterministe (conditions d'éligibilité de chaque prestation codées en dur depuis les textes officiels legifrance.gouv.fr + caf.fr) — mis à jour à chaque loi de financement de la sécurité sociale
+- **Barèmes:** CNAF open data (plafonds de ressources, taux de cotisation, montants forfaitaires par prestation) — données publiques
+- **MDPH / handicap:** Référentiel taux d'invalidité + grilles AEEH publiées au JO
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique chaque aide en langage simple + génère les étapes de demande personnalisées
+- **PDF kit:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'avais droit à €480/mois que la CAF ne m'avait jamais versés — voici comment je l'ai découvert"
+2. Reddit : r/france, r/finances_perso, r/assistance_sociale — cas d'usage réels, anonymisés
+3. Partenariats avec assistantes sociales et travailleurs sociaux (ils orientent des dizaines de familles par semaine)
+4. SEO : "aides CAF auxquelles j'ai droit", "non recours prestations sociales", "APL simulation", "PAJE eligibilité", "prime naissance CAF"
+
+### Competitive Moat
+- Le simulateur officiel CAF ne couvre pas l'ensemble des 25+ prestations simultanément ni les stratégies d'optimisation
+- La combinaison "scan exhaustif + kit de demande pas-à-pas" n'existe dans aucun outil grand public
+- Le sujet génère une émotion forte (argent laissé sur la table par ignorance) → NPS et bouche-à-oreille exceptionnels
+- La mise à jour annuelle des barèmes et conditions crée une nécessité permanente de recourir au service
+
+### Figma Schematic
+[View PrestationsCAF.ai CAF Benefits Optimizer Flow on FigJam](https://www.figma.com/board/c0hlfz1eIEc1gy0jVdFeEq)
+
+---
+
+## 38. RésilIA
+
+> **Résiliez n'importe quel abonnement en 2 minutes — lettre LRAR légalement correcte générée par IA**
+
+### Problem
+La France compte **plus de 200 millions d'abonnements actifs** (téléphonie, internet, assurances, salles de sport, streaming, box énergie). Or résilier est un parcours du combattant : chaque contrat est soumis à une loi différente (Loi Hamon, Loi Chatel, Code des assurances, Code de la consommation), avec des préavis distincts, des délais de réception, des interlocuteurs différents (service client, siège social, adresse dédiée résiliation). Une erreur de procédure (mauvaise adresse, délai raté, manque de référence contrat) et l'abonné est prélevé plusieurs mois de plus. Les opérateurs télécoms et assureurs comptent sur cette opacité : chaque abonné retenu 2 mois de trop représente **€30–€80 de revenu supplémentaire**. Collectivement, le coût des résiliations ratées dépasse **€500M/an** pour les consommateurs français.
+
+### Solution
+L'utilisateur indique le type d'abonnement, l'opérateur, et la date de souscription. Le moteur de règles identifie automatiquement la **loi applicable**, le **délai de préavis exact**, l'**adresse légale de résiliation** et les **mentions obligatoires** à inclure. Il génère une lettre de résiliation prête à envoyer en LRAR, avec toutes les références légales, ou un email si le contrat autorise la résiliation en ligne. Une alerte de suivi prévient l'utilisateur si aucun accusé de réception n'est obtenu sous 8 jours.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification gratuite | €0 | Résiliable ou non + loi applicable + date limite |
+| Lettre complète | €1,99 | PDF LRAR + email template + guide envoi + alerte suivi |
+| Abonnement | €4,99/mo | Lettres illimitées + alertes préavis proactives + résiliations multiples |
+
+**Unit economics :** Claude API ~€0,02/lettre → margin brute >99%. Prix psychologique imbattable (€1,99 vs. 2 mois d'abonnement à oublier). 1 500 lettres/mois = **€2 985 MRR**. L'abonnement cible les personnes qui gèrent de nombreux contrats (familles, indépendants, gérants de petites structures).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire 4 champs, mobile-first)
+- **Moteur de règles:** Base JSON des lois de résiliation par type de contrat × opérateur — maintenu manuellement, source légifrance.gouv.fr
+- **Calcul préavis:** Algorithme déterministe (date souscription + durée minimale d'engagement + délai préavis = date d'envoi idéale)
+- **Base opérateurs:** ~500 opérateurs français avec leur adresse de résiliation dédiée (scrapée + maintenue)
+- **AI drafting:** Claude API (claude-sonnet-4-6) — personnalise la lettre + ton approprié + références légales exactes
+- **PDF lettre:** react-pdf (formatée pour impression + envoi LRAR)
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment SFR m'a prélevé 4 mois après ma résiliation — et comment l'éviter avec cette lettre"
+2. Reddit : r/france, r/finances_perso — cas d'usage réels, opérateurs abusifs exposés
+3. SEO : "résilier abonnement SFR", "lettre résiliation assurance loi Hamon", "résilier salle de sport modèle lettre", "résiliation Free délai"
+4. Partenariats avec comparateurs (Selectra, LeLynx) — les résiliations précèdent souvent les souscriptions
+
+### Competitive Moat
+- Les modèles de lettres gratuits sur le web sont génériques et souvent obsolètes (adresses incorrectes, lois non à jour)
+- La base de données "adresses de résiliation par opérateur" est un actif réel et long à constituer
+- L'alerte de suivi (aucun accusé reçu → relance automatique) ajoute une valeur inexistante ailleurs
+- Chaque nouvelle loi consumériste (résiliation en 1 clic pour l'assurance auto depuis 2023) génère un pic de trafic naturel
+
+### Figma Schematic
+[View RésilIA Subscription Cancellation Flow on FigJam](https://www.figma.com/board/vB4H6EowhnAPuDCiouaeEg)
+
+---
+
+## 39. SinistreIA
+
+> **Déclarez votre sinistre assurance correctement — et contestez un refus en 2 minutes avec IA**
+
+### Problem
+La France enregistre **plus de 50 millions de sinistres déclarés par an** (auto, habitation, santé, prévoyance). Or deux problèmes massifs existent : (1) **des milliers de sinistres légitimes sont rejetés** parce que la déclaration initiale est mal rédigée — délai dépassé, mauvaise qualification du sinistre, pièces justificatives manquantes, formulation ambiguë qui permet à l'assureur d'invoquer une exclusion de garantie ; (2) **quand l'assureur refuse ou sous-évalue**, la grande majorité des assurés ne sait pas que le taux de succès des contestations formelles est supérieur à 60%, mais rédiger une mise en demeure citant les bons articles du Code des assurances et la jurisprudence applicable est hors de portée du citoyen ordinaire. Un avocat spécialisé facture **€150–€400** pour ce qui est souvent une lettre de 300 mots.
+
+### Solution
+L'utilisateur saisit le type de sinistre, l'assureur, la date, et une description libre des faits. Le moteur classe le sinistre, vérifie les délais légaux de déclaration (5 jours ouvrés pour vol/dégât des eaux, 10 jours pour catastrophe naturelle), et génère une **déclaration de sinistre optimisée** avec les formulations qui minimisent le risque de rejet et la checklist exacte des pièces à joindre. Si l'assureur refuse ou sous-évalue, une deuxième interface génère la **lettre de contestation** avec articles du Code des assurances et jurisprudence CCSF, adressée au bon interlocuteur (direction réclamations, médiateur de l'assurance, ou ACPR selon l'escalade).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Sinistre dans les délais? + garantie applicable? + premier résumé |
+| Dossier complet | €2,99 | Déclaration optimisée + checklist pièces + guide envoi |
+| Contestation | €3,99 | Lettre mise en demeure + saisine médiateur + refs légales + ACPR |
+| Abonnement courtier | €39,99/mo | Dossiers illimités + API + personnalisation marque blanche |
+
+**Unit economics :** Claude API ~€0,04/dossier → margin brute >98%. Le ROI utilisateur est immédiat (€2,99 pour défendre un sinistre de €1 500+). 800 dossiers/mois = **€2 392 MRR**. L'abonnement B2B (courtiers indépendants, comparateurs assurance) offre le vrai levier de croissance.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire multi-étapes — type sinistre → assureur → date → description → pièces)
+- **Moteur de règles:** Base JSON des délais légaux × types de sinistres × garanties standard (habitation multirisque, auto tous risques, etc.) — source Code des assurances + circulaires ACPR
+- **Vérification délais:** Algorithme calculant la fenêtre de déclaration légale selon type + date du sinistre
+- **AI drafting:** Claude API (claude-sonnet-4-6) — génère déclaration initiale OU lettre de contestation selon l'étape + ton juridique adapté
+- **Jurisprudence:** Base de cas types CCSF + médiateur assurance (données publiques) pour étayer les contestations
+- **PDF dossier:** react-pdf
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon assurance habitation a refusé mon sinistre — voici la lettre qui a tout changé"
+2. Reddit : r/france, r/assurance, r/juridique — cas d'usage réels, assureurs mis en cause nommément
+3. SEO : "déclarer sinistre assurance habitation", "contester refus assurance auto", "mise en demeure assureur modèle", "délai déclaration sinistre dépassé"
+4. Partenariats avec courtiers indépendants (réseau PLANETE COURTIER, CSCA) — ils orientent leurs clients en cas de litige
+
+### Competitive Moat
+- Aucun outil grand public ne génère à la fois la déclaration initiale ET la contestation en cas de refus dans un même tunnel
+- La base de règles (délais × garanties × motifs de refus fréquents) constitue un vrai moat technique une fois construit
+- Le marché B2B (courtiers, comparateurs) est inexploité et récurrent : un courtier qui gère 200 sinistres/an paie son abonnement sans réfléchir
+- Chaque refus d'assureur médiatisé (inondations, incendies, intempéries) génère un afflux de trafic organique
+
+### Figma Schematic
+[View SinistreIA Insurance Claim Flow on FigJam](https://www.figma.com/board/uarqbGBA0xv2JLGGWPpaaW)
+
+---
+
+## 40. TrajetPro.ai
+
+> **Calculez vos indemnités kilométriques exactes et déduisez vos frais pro — barème DGFiP mis à jour chaque année**
+
+### Problem
+En France, **15 millions de salariés** utilisent leur véhicule personnel pour des déplacements professionnels, et **4 millions de micro-entrepreneurs/TNS** peuvent déduire leurs frais kilométriques de leur revenu imposable. Pourtant, la grande majorité sous-utilise ce droit : (1) le **barème kilométrique DGFiP** (publié chaque mars au Bulletin Officiel) est structuré en tranches et varie selon la **puissance fiscale** du véhicule — le calcul correct est une interpolation à 3 variables que personne ne fait à la main ; (2) les salariés ne savent pas qu'ils peuvent **forcer leur employeur à rembourser** les frais kilométriques au tarif légal via un simple email citant l'article 81 du CGI et la convention collective applicable ; (3) les TNS/AE ne savent pas quand les **frais réels** battent l'abattement forfaitaire (10% plafonné à €14 171). Résultat : des centaines de millions d'euros de déductions légitimes non réclamées chaque année.
+
+### Solution
+L'utilisateur entre son statut (salarié / AE / TNS / dirigeant), la puissance fiscale de son véhicule, et ses km professionnels annuels estimés. Le calculateur applique le **barème officiel DGFiP de l'année en cours** (mis à jour chaque mars automatiquement) et produit : (1) le montant exact déductible ou remboursable ; (2) pour les salariés, la **comparaison frais réels vs déduction forfaitaire 10%** pour savoir laquelle optimise l'imposition ; (3) pour les AE/TNS, la comparaison frais réels vs abattement forfaitaire ; (4) un **PDF récapitulatif** avec les cases exactes à remplir sur la déclaration 2042, et un email prêt à envoyer aux RH pour demander le remboursement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul gratuit | €0 | Montant déductible estimé + recommandation frais réels vs forfait |
+| Rapport complet | €1,99 | PDF détaillé + cases 2042 pré-remplies + notice explicative + email RH |
+| Abonnement annuel | €9,99/an | Recalcul automatique chaque mars + historique 3 ans + alerte si barème change |
+
+**Unit economics :** Zéro API cost pour le calcul pur (barème déterministe) + Claude API ~€0,02/rapport narratif → margin brute >99%. Le pic de trafic naturel est **mars–juin** (saison des déclarations fiscales). 1 000 rapports/mois en période fiscale = **€1 990 MRR**. L'abonnement annuel à €9,99 génère un revenu récurrent stable avec un churn quasi nul (l'outil est reutilisé chaque année par définition).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (formulaire 4 champs, mobile-first — les gens calculent sur téléphone en déplacement)
+- **Moteur barème:** Algorithme déterministe scrappant le BO DGFiP chaque mars — barème 5 puissances (3CV et moins, 4CV, 5CV, 6CV, 7CV et plus) × 3 tranches kilométriques — mis en cache statique
+- **Calcul frais réels:** Algorithme couvrant assurance + entretien + carburant (prix moyen INSEE) + dépréciation (argus simplifié) + péages
+- **Comparateur régimes:** Comparaison automatique régime micro (abattement 34%/50%/71%) vs frais réels selon CA déclaré
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique le résultat en langage simple + génère l'email RH personnalisé + la note de synthèse PDF
+- **PDF rapport:** react-pdf
+- **Payments:** Stripe (paiement unique + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai découvert que mon employeur me devait €1 200/an de frais kilométriques — voici comment le calculer et le réclamer"
+2. Reddit : r/france, r/finances_perso, r/AutoEntrepreneur — cas d'usage réels, calculs chiffrés
+3. SEO : "barème kilométrique 2026", "frais kilométriques déductibles", "indemnités kilométriques salariés", "frais réels vs forfait impôts"
+4. Pic saisonnier naturel : campagne payante micro-budget (Google Ads €50/mois) uniquement en mars–juin sur "barème kilométrique 2026"
+
+### Competitive Moat
+- Les calculateurs existants (impots.gouv.fr) donnent juste un chiffre sans explication ni export ni comparaison de régimes
+- La mise à jour automatique annuelle du barème + l'alerte abonnés crée une dépendance saisonnière forte
+- L'email RH "clé en main" (avec références légales) est un déclencheur émotionnel fort — personne d'autre ne le propose
+- La saisonnalité fiscale génère un trafic SEO massif et prévisible chaque année sur les mêmes mots-clés
+
+### Figma Schematic
+[View TrajetPro.ai Mileage Tax Calculator Flow on FigJam](https://www.figma.com/board/02CmmP0uOaUSBo1zejs4Ht)
+
+---
+
+## 41. DéménageFuté
+
+> **Déménagez sans le stress admin — notifiez les 40 administrations de votre changement d'adresse en 10 minutes**
+
+### Problem
+La France enregistre **4 millions de déménagements par an**. Chaque déménagement déclenche la même corvée : notifier un par un les 30 à 40 organismes qui ont votre ancienne adresse — CAF, CPAM/Ameli, Direction des Impôts, France Travail, CNAV (retraite), banque(s), mutuelle, assurances, EDF/Engie, opérateur télécom, mairie, ANTS (carte grise, permis de conduire), notaire, employeur, caisse retraite complémentaire, etc. Un oubli et la CAF vous coupe une aide, un relevé bancaire part à l'ancienne adresse, ou votre carte grise reste invalide. **Ce processus prend en moyenne 3 à 6 semaines**, implique plusieurs dizaines de courriers ou de formulaires en ligne différents, et est une source constante d'oublis. Aucun outil grand public n'agrège toutes ces notifications en une seule opération.
+
+### Solution
+L'utilisateur saisit son ancienne et nouvelle adresse, la date de déménagement, et répond à un questionnaire de profil en 3 minutes (situation familiale, employeur, véhicule, allocations perçues, fournisseurs d'énergie, opérateur). L'IA génère un **pack de notification complet** : lettres PDF et emails pré-rédigés, adressés à chacun des 20 à 40 organismes identifiés selon le profil, dans le bon format légal (mentions obligatoires, références de contrat, formules de politesse adaptées). Un calendrier de relances indique quand chaque organisme doit accuser réception. Un tableau de bord permet de cocher au fur et à mesure et d'envoyer des rappels si aucune confirmation n'est reçue.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | 5 premières notifications + liste complète des organismes identifiés |
+| Pack Complet | €4,99 | Toutes les lettres PDF + emails, calendrier de relances, ZIP téléchargeable |
+| Tracker mensuel | €2,99/mo | Suivi des confirmations, alertes si organisme utilise encore l'ancienne adresse, relances automatiques |
+
+**Unit economics :** Claude API ~€0,08/pack → 98% gross margin. **4 millions de déménagements/an × 0.05%** de conversion sur le pack = 2 000 packs/mois → **€10 000 MRR** dès la première année. Le Tracker mensuel est souscrit par les personnes qui ont des litiges en cours (allocation coupée, courrier perdu) — fort taux de conversion naturel.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI:** Claude API (claude-sonnet-4-6) — génère les courriers selon le profil + les références légales par organisme
+- **Base organismes:** JSON maintenu manuellement (~60 organismes avec adresses officielles, formats acceptés, délais légaux de mise à jour)
+- **PDF / DOCX:** react-pdf + officegen — un fichier par organisme dans un ZIP
+- **Calendrier relances:** Supabase + Resend (emails automatiques J+15 si aucune confirmation)
+- **Auth + Tracker:** Supabase Realtime
+- **Payments:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai déménagé à Paris — voici les 37 organismes que j'ai dû notifier (et l'outil qui le fait en 10 minutes)"
+2. Facebook Groups : "Déménagement France", "Expats en France", "Logement étudiant Paris/Lyon" (500K+ membres combinés)
+3. Partenariats avec agences immobilières et gestionnaires (IAD, Century 21) — outil offert à chaque nouveau locataire signataire
+4. SEO : "liste organismes à prévenir déménagement", "changement adresse CAF impôts", "notification déménagement France"
+
+### Competitive Moat
+- **Aucun outil agrégateur n'existe** pour les notifications de déménagement en France — le marché est entièrement vierge
+- La base "adresses de notification par organisme" est un actif long à constituer et facile à maintenir en avantage
+- Les partenariats avec agences = distribution gratuite au moment le plus pertinent (signature du bail)
+- L'usage est récurrent sur le cycle de vie d'un utilisateur (4M de déménagements/an = flux constant, pas de saisonnalité)
+
+### Figma Schematic
+[View DéménageFuté Address Change Notification Flow on FigJam](https://www.figma.com/board/na2tiFMFqDpL481VgpZdUk)
+
+---
+
+## 42. BailCommercial.ai
+
+> **Analysez votre bail commercial 3-6-9 avec l'IA — comprenez chaque clause, détectez les pièges, négociez mieux**
+
+### Problem
+La France compte **1,7 million de locaux commerciaux** et enregistre chaque année **300 000+ signatures ou renouvellements de baux commerciaux**. Contrairement au bail d'habitation (couvert par ContratIA #5), le bail commercial est régi par la **loi Pinel du 18 juin 2014** et ses décrets d'application — une des législations les plus complexes du droit des affaires français. Les clauses sont des pièges pour le non-initié : indexation ILC/ILAT mal calculée (erreurs fréquentes de plusieurs centaines d'euros/an), pas-de-porte vs. droit au bail (confusion aux conséquences fiscales majeures), répartition des charges récupérables (travaux mis à la charge du preneur alors que la loi les interdit), destination commerciale restrictive qui empêche toute évolution de l'activité, clause résolutoire avec délai de grâce insuffisant. Les petits commerçants et artisans signent sans avocat — un avocat spécialisé en droit commercial facture **€300–€600/h** pour une relecture de bail.
+
+### Solution
+L'utilisateur uploade son bail (PDF ou photo). L'OCR extrait le texte, Claude API identifie et analyse chaque clause selon la grille de la loi Pinel et de la jurisprudence disponible. Le rapport affiche : un **score de risque global (1–10)**, les clauses abusives ou illégales (charges non récupérables imputées au preneur, indexation incorrecte), les clauses défavorables mais légales (destination trop restrictive, durée ferme trop longue), et pour chaque problème, une **contre-proposition de négociation** prête à soumettre au bailleur ou à son notaire. Les commerçants en renouvellement voient aussi si les nouvelles conditions respectent le **plafonnement légal du loyer de renouvellement** (ILC pour les commerces, ILAT pour les activités tertiaires).
+
+### Revenue Model
+| Tier | Prix | Pour |
+|------|------|------|
+| Aperçu gratuit | €0 | Score de risque global + 3 principales clauses à vérifier |
+| Rapport Complet | €9,99 | Analyse clause par clause, contre-propositions, références légales loi Pinel |
+| Pack Renouvellement | €14,99 | Rapport complet + simulation plafonnement loyer + lettre de refus de conditions si dépassement |
+| Agent / Notaire | €39/mo | Analyses illimitées, rapports en marque blanche, API REST |
+
+**Unit economics :** Claude API ~€0,15/analyse → 98,5% gross margin. **300 000 baux/an** × 0,1% conversion = 300 rapports/mois → **€3 000 MRR** conservateur. Le plan B2B (notaires, agents, experts-comptables) est le vrai moteur : 50 professionnels à €39/mo = **€1 950 MRR récurrent** dès le lancement.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel)
+- **OCR / parsing:** pdf-parse + Tesseract.js (beaucoup de baux sont des scans)
+- **AI analysis:** Claude API (claude-sonnet-4-6) avec prompt spécialisé loi Pinel, ILC/ILAT, jurisprudence Cour de Cassation
+- **Données ILC/ILAT:** Indices INSEE publiés trimestriellement (gratuits, open data) — calcul de l'indexation correcte automatisé
+- **PDF rapport:** react-pdf avec clauses surlignées et annotations
+- **Auth + DB:** Supabase
+- **Payments:** Stripe (one-time + abonnement B2B)
+
+### Go-to-Market (zero budget)
+1. LinkedIn : cibler les gérants de TPE/PME, agents immobiliers commerciaux, experts-comptables — posts avec cas réel "j'ai trouvé une indexation ILC incorrecte qui coûtait €2 400/an à mon client"
+2. Reddit / forums : r/france, r/entrepreneuriat, Forum-Auto-Entrepreneur.fr — cas d'usage réels
+3. Partenariats avec Chambres de Commerce et d'Industrie (CCI) — elles accompagnent les créateurs d'entreprise au moment de la signature du bail
+4. SEO : "analyser bail commercial", "indexation ILC bail commercial calcul", "charges récupérables bail commercial interdit", "renouvellement bail commercial plafonnement"
+
+### Competitive Moat
+- ContratIA (#5) couvre les contrats grand public (bail habitation, CDI, CGV) — BailCommercial.ai est une spécialisation technique distincte sur la loi Pinel
+- Le calcul automatique de l'indexation ILC/ILAT correct (et la détection des erreurs de bailleur) est un feature à forte valeur immédiate
+- Les CCI ont des dizaines de milliers de créateurs d'entreprise à accompagner — un seul partenariat national = acquisition massive
+- L'extension B2B (notaires, agents) crée un revenu récurrent élevé et un canal de distribution indirect vers les PME
+
+### Figma Schematic
+[View BailCommercial.ai Commercial Lease Analyzer Flow on FigJam](https://www.figma.com/board/xTeCTPlhnTo2SSUU8vNj15)
+
+---
+
+## 43. PensionAlimentaire.ai
+
+> **Calculez la pension alimentaire juste, récupérez les impayés avec l'ARIPA — tout en 5 minutes**
+
+### Problem
+La France enregistre **130 000 divorces par an** et compte **1,2 million de familles monoparentales** concernées par une pension alimentaire. Deux problèmes massifs coexistent : **(1) Le montant est mal calculé.** La table de référence officielle du Ministère de la Justice (publiée mais peu connue) croise revenus des deux parents, nombre d'enfants et modalités de garde pour donner le montant recommandé — mais la plupart des parents s'appuient sur un accord informel ou un avocat payé €200/h pour un calcul de 10 minutes. Des dizaines de milliers d'enfants perçoivent une pension sous-évaluée. **(2) Les impayés sont massifs et mal gérés.** 30% des pensions alimentaires ne sont pas payées régulièrement. La grande majorité des parents créanciers ignorent que l'**ARIPA** (Agence de Recouvrement des Impayés de Pensions Alimentaires, créée en 2021) peut récupérer les sommes dues directement par prélèvement sur le salaire du débiteur — sans avocat, sans tribunal, gratuitement. Et la **CAF verse l'ASF (Allocation de Soutien Familial)** en avance de trésorerie pendant le recouvrement. Ce dispositif est inconnu de la majorité des familles concernées.
+
+### Solution
+**(1) Calcul :** L'utilisateur entre son statut (parent créancier ou débiteur), les revenus nets de chacun, le nombre et l'âge des enfants, et les modalités de garde (résidence alternée, résidence principale + droits de visite). L'algorithme applique la **table de référence officielle** du Ministère de la Justice et produit le montant recommandé avec la fourchette légale haute/basse, la comparaison à la moyenne nationale, et les scenarii de révision si l'une des situations change. **(2) Récupération :** Si la pension n'est pas payée, un module dédié guide l'utilisateur à travers la **saisine ARIPA** (formulaire Cerfa 16183*01), la demande d'**ASF auprès de la CAF** (avance mensuelle pendant le recouvrement), et génère la lettre de mise en demeure préalable avec délai légal de 15 jours. **(3) Révision :** Un calculateur détermine si le changement de situation (nouveau conjoint, perte d'emploi, déménagement, nouveau revenu) justifie une demande de révision judiciaire (+/- 10% de variation recommandée).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Montant recommandé + fourchette + comparaison nationale |
+| Rapport Complet | €4,99 | PDF : calcul détaillé, base légale, scenarii révision, guide procédure |
+| Lettre de demande | €2,99 | Lettre de fixation ou révision de pension, format tribunal, prête à déposer |
+| Kit ARIPA complet | €3,99 | Saisine ARIPA pré-remplie + lettre mise en demeure + guide ASF |
+| Abonnement Suivi | €9/an | Alerte annuelle révision + recalcul si revenus déclarés changent + historique |
+
+**Unit economics :** Claude API ~€0,06/rapport → margin brute >99%. **Marché :** 130K divorces/an × 2 parents concernés × 0,2% conversion = 500+ rapports/mois → **€2 500 MRR** conservateur. Le Kit ARIPA (€3,99) cible les 30% de familles avec impayés — soit ~390 000 familles en détresse active → potentiel viral exceptionnel sur TikTok.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — accessible depuis le tribunal ou le bureau d'aide juridictionnelle)
+- **Calcul table de référence:** Algorithme déterministe appliquant la table officielle du Ministère de la Justice (PDF public mis à jour annuellement) — grille interpolée selon revenus + garde
+- **AI narrative:** Claude API (claude-sonnet-4-6) — explique le calcul, rédige les lettres et la saisine ARIPA en langage juridique correct
+- **Cerfa ARIPA:** Pré-remplissage du formulaire 16183*01 (accessible sur service-public.fr) + instructions de dépôt
+- **PDF rapport + lettres:** react-pdf
+- **Auth + DB:** Supabase (aucune donnée personnelle stockée après génération — RGPD by design)
+- **Payments:** Stripe (micro-paiements one-time + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Tu ne reçois plus ta pension alimentaire ? L'ARIPA peut la récupérer pour toi gratuitement — voici exactement comment" (contenu à fort potentiel viral : situation émotionnelle + solution actionnable)
+2. Facebook Groups : "Maman solo France", "Droits des parents séparés", "Pension alimentaire France" (400K+ membres combinés)
+3. Partenariats avec associations de familles monoparentales (ONISEP, FAMILLES DE FRANCE, Monoparentalité Positive) — outil recommandé à leurs membres
+4. SEO : "calcul pension alimentaire table référence", "ARIPA saisine pension impayée", "pension alimentaire révision", "ASF CAF pension impayée"
+
+### Competitive Moat
+- La table de référence Ministère Justice est publique mais personne ne l'a traduite en outil web simple — marché entièrement vierge
+- L'ARIPA est le dispositif le plus méconnu de France (lancé en 2021) alors qu'il aide des centaines de milliers de familles — être le premier à l'expliquer = référence nationale
+- Le sujet génère une émotion très forte (enfants, argent, injustice) → NPS exceptionnel + partage viral naturel
+- Chaque réforme du droit de la famille (nouveau barème, modification ARIPA) génère un regain d'attention médiatique → trafic organique récurrent
+
+### Figma Schematic
+[View PensionAlimentaire.ai Child Support Calculator and ARIPA Guide on FigJam](https://www.figma.com/board/CY0EKmYhLMb3T4qEo78uQD)
+
+---
+
+## 44. TitreDeSéjour.ai
+
+> **Préparez votre dossier de renouvellement de titre de séjour sans erreur — adapté à votre statut et à votre préfecture**
+
+### Problem
+La France compte **3,8 millions de ressortissants étrangers** titulaires d'un titre de séjour. Chaque titre (étudiant, salarié, vie privée et familiale, passeport talent, visiteur…) a sa propre liste de pièces justificatives — qui varie également de préfecture en préfecture. L'**ANEF** (Administration Numérique pour les Étrangers en France), le portail officiel, est confus et souvent en rupture de créneaux. Une erreur dans le dossier (document manquant, mauvaise traduction, attestation périmée) entraîne un refus et peut placer le demandeur en **situation irrégulière** pendant plusieurs mois. Les avocats spécialisés en droit des étrangers facturent **€200–€500/h** pour une simple relecture de dossier. La plupart des demandeurs se tournent vers des forums ou des groupes Facebook désorganisés.
+
+### Solution
+L'utilisateur sélectionne son type de titre de séjour, sa préfecture, et sa date d'expiration. L'IA génère une **checklist personnalisée et à jour** des pièces requises (avec les références réglementaires), une **lettre de motivation adaptée** à la situation (renouvellement, changement de statut, motif particulier), et un guide pas-à-pas de navigation ANEF avec captures d'écran. Un calendrier de relances intégré envoie une alerte **3 mois avant l'expiration** du titre. Un abonnement multi-titre permet de gérer les renouvellements de toute une famille.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Checklist gratuite | €0 | Liste partielle + alerte expiration 30 jours |
+| Pack Complet | €7,99 | Checklist exhaustive + lettre de motivation + guide ANEF + FAQ préfecture |
+| Abonnement Famille | €4,99/mo | Multi-titre dashboard + alertes automatiques 3 mois avant expiry + mises à jour préfecture |
+
+**Unit economics :** Claude API ~€0,08/pack → 99% gross margin. **3,8M résidents × cycle de renouvellement 2–3 ans = 1,5M renouvellements/an × 0,1%** de conversion = 1 500 packs/mois → **€11 985 MRR** conservateur. L'abonnement famille (couples expats, familles recomposées) est souscrit massivement dès le premier titre d'un foyer.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (Vercel free tier)
+- **AI:** Claude API (claude-sonnet-4-6) — génère la checklist, la lettre de motivation et les conseils spécifiques à la situation
+- **Base de données:** JSON maintenu manuellement — 96 préfectures × ~12 types de titres × pièces requises (mise à jour mensuelle)
+- **Alertes:** Supabase + Resend (emails automatiques J-90, J-30, J-7)
+- **Auth + Dashboard:** Supabase Auth (multi-titre)
+- **Payments:** Stripe (one-time + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Algériens en France", "Marocains en France", "Erasmus France", "Expats Paris/Lyon" — 2M+ membres combinés, très actifs sur les questions de titre de séjour
+2. TikTok/YouTube : "Renouveler son titre de séjour en France en 2026 — les erreurs à éviter" (sujet à très fort taux de recherche et d'engagement)
+3. Partenariats avec associations de soutien aux étrangers (CIMADE, France Terre d'Asile, Emmaüs Connect) — outil recommandé à leurs bénéficiaires
+4. SEO : "renouvellement titre de séjour documents", "checklist préfecture étudiant étranger", "ANEF dossier étudiant salarié", "vie privée familiale renouvellement pièces"
+
+### Competitive Moat
+- Aucun outil centralise les requirements par **préfecture + type de titre** — la dispersion de l'info est le problème clé non résolu
+- La base "préfecture × statut → pièces" est un actif long à constituer (travail de veille réglementaire) et crée une barrière à l'entrée durable
+- Le calendrier d'alertes crée une rétention naturelle — l'utilisateur revient tous les 2–3 ans et renouvelle l'abonnement
+- Les communautés expats (groupes Facebook, Discord) ont des comportements de recommandation viraux : un dossier réussi = 10 nouveaux utilisateurs référés
+
+### Figma Schematic
+[View TitreDeSéjour.ai Renewal Dossier Flow on FigJam](https://www.figma.com/board/JMQV6jqcrBSkkNz0uI8G5p)
+
+---
+
+## 45. RQTH.ai
+
+> **Obtenez la Reconnaissance de la Qualité de Travailleur Handicapé — le dossier MDPH guidé étape par étape**
+
+### Problem
+La France compte **12 millions de personnes en situation de handicap**, mais seulement **3 millions ont la RQTH** (Reconnaissance de la Qualité de Travailleur Handicapé). Pourtant, la RQTH débloque des avantages massifs et souvent méconnus : **aide AGEFIPH de 1 000 à 9 000 €** pour l'aménagement du poste ou du matériel, maintien dans l'emploi garanti, **Allocation Adulte Handicapé (AAH, jusqu'à €971,37/mois)** si sans emploi, Carte Mobilité Inclusion (CMI), formation professionnelle prioritaire, et retraite anticipée. Le problème : le **dossier MDPH est un frein massif**. Le CERFA 13788*01 fait 12 pages, nécessite un certificat médical d'un médecin spécialiste dans un format précis, un "projet de vie" rédigé par le demandeur lui-même (exercice difficile et angoissant), une attestation de l'employeur, et d'autres pièces selon la situation. Le délai de traitement est de 4 à 6 mois. En cas de refus (30% des dossiers), le recours devant la CDAPH est encore plus complexe. Les associations d'aide sont surchargées. Le résultat : des millions d'éligibles abandonnent.
+
+### Solution
+Un **wizard guidé en 5 étapes** : (1) Quiz d'éligibilité (condition, impact sur le travail, situation actuelle). L'IA calcule les bénéfices potentiels applicables à la situation. (2) Checklist des documents médicaux à demander au médecin, avec le libellé exact à utiliser lors de la consultation (pour que le certificat soit dans le bon format MDPH). (3) **Rédaction assistée du "projet de vie"** — la partie la plus anxiogène : l'IA pose des questions ciblées et génère un brouillon structuré que l'utilisateur adapte. (4) Lettre à l'employeur pour déclencher l'aménagement de poste et l'attestation requise. (5) En cas de refus : lettre de recours CDAPH avec les arguments de droit correspondant au motif de refus.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification éligibilité | €0 | Quiz + calculateur de bénéfices + checklist documents à télécharger |
+| Kit Dossier | €5,99 | Guidance CERFA 13788*01 + projet de vie AI-généré + lettre employeur |
+| Guide Complet | €9,99 | Kit Dossier + lettre de recours CDAPH + timeline de suivi + FAQ MDPH |
+
+**Unit economics :** Claude API ~€0,10/kit → 98,3% gross margin. **9M éligibles non reconnus × 0,05%** de conversion annuelle = 4 500 kits/mois → **€26 955 MRR**. La croissance est exponentielle : chaque RQTH obtenu génère des recommandations dans l'entourage (famille, collègues) — le sujet est très communautaire.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — accessible depuis mobile, salle d'attente médicale)
+- **AI:** Claude API (claude-sonnet-4-6) — génère le projet de vie, les lettres, et les conseils personnalisés selon le type de handicap déclaré
+- **CERFA 13788*01:** Guide interactif page par page (pas de pré-remplissage PDF pour éviter les questions de responsabilité — l'utilisateur remplit lui-même, guidé)
+- **Calculateur AAH:** Algorithme déterministe appliquant le barème officiel AAH (revenus, situation familiale, taux d'incapacité estimé)
+- **PDF lettres:** react-pdf — projet de vie + lettre employeur + recours CDAPH
+- **Auth + DB:** Supabase (aucune donnée médicale stockée — RGPD by design, données effacées après téléchargement)
+- **Payments:** Stripe (paiements unitaires)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Handicap et Emploi", "MDPH France entraide", "Association maladies rares", "Fibromyalgie France", "Autisme France parents" — communautés très solidaires, fort taux de partage
+2. TikTok/YouTube : "La RQTH — ce que personne ne vous dit : 5 avantages que vous ratez sans le savoir" (format éducatif à très fort potentiel viral)
+3. Partenariats avec Cap Emploi (100 centres en France accompagnant les travailleurs handicapés vers l'emploi) — outil recommandé systématiquement
+4. SEO : "RQTH comment faire le dossier MDPH", "projet de vie MDPH exemple", "CERFA 13788 remplir", "recours CDAPH refus RQTH"
+
+### Competitive Moat
+- Aucun outil en ligne ne guide à travers le "projet de vie" MDPH avec l'IA — c'est le frein émotionnel et cognitif numéro 1 à l'obtention de la RQTH
+- Le calculateur de bénéfices (€ concrets affichés) est un déclencheur émotionnel fort : "vous ratez potentiellement €XXX/an" → conversion immédiate
+- Les communautés du handicap ont un NPS exceptionnel et partagent massivement les outils qui les aident réellement
+- Chaque réforme MDPH (révision des taux AAH, extension RQTH aux maladies chroniques) génère un pic de trafic SEO et médiatique prévisible
+
+### Figma Schematic
+[View RQTH.ai MDPH Disability Recognition Dossier Flow on FigJam](https://www.figma.com/board/v9lUtyF8ph4hLxjbWXVrEy)
+
+---
+
+## 46. CessionVéhicule.ai
+
+> **Vendez votre voiture sans erreur en 5 minutes — tous les documents légaux générés automatiquement**
+
+### Problem
+La France enregistre **6 millions de transactions de véhicules d'occasion par an** — la grande majorité entre particuliers. Chaque vente implique une série de documents obligatoires dont beaucoup ignorent l'existence complète : le **Cerfa 15776*01** (certificat de cession — obligatoire, doit être rempli en 3 exemplaires), la **déclaration de cession sur ANTS** (dans les 15 jours, sous peine d'amende), la **demande de certificat de situation administrative** (non-gage, pour l'acheteur), la **lettre de notification à l'assureur** (obligatoire sous 24h), et le **code de cession** à fournir à l'acheteur pour son immatriculation. Une erreur dans le Cerfa (numéro VIN incorrect, date, puissance fiscale) invalide le document et peut laisser le vendeur **responsable des infractions** commises par l'acheteur après la vente. Des escroqueries exploitent cette complexité (fausse déclaration de cession, acheteur qui ne réimmatricule pas). Pourtant il n'existe aucun outil simple qui génère l'ensemble du pack en une seule opération.
+
+### Solution
+Le vendeur saisit la plaque d'immatriculation (auto-fill via SIV API ou saisie manuelle), le VIN, le prix de vente, la date, et les coordonnées acheteur/vendeur. L'IA valide tous les champs selon les règles Cerfa (VIN 17 caractères, cohérence date, puissance fiscale valide) et signale les erreurs avant génération. Le pack généré comprend : (1) **Cerfa 15776*01 parfaitement rempli** en PDF imprimable (3 exemplaires), (2) guide pas-à-pas pour la **déclaration ANTS** avec capture d'écran de chaque étape, (3) lien vers le **certificat de non-gage officiel** (SIV, gratuit) avec guide de lecture, (4) **lettre de notification assurance** prête à envoyer, (5) **checklist acheteur** (documents à apporter, délai de réimmatriculation, assurance obligatoire avant conduite). Un rappel SMS est envoyé à l'acheteur J+20 s'il n'a pas encore immatriculé (protège le vendeur).
+
+### Revenue Model
+| Option | Prix | Pour |
+|--------|------|------|
+| Accès gratuit | €0 | Guide non-gage + walkthrough ANTS (sans génération PDF) |
+| Pack Vendeur | €3,99 | Cerfa généré + lettre assurance + checklist acheteur + SMS reminder |
+| Pack Pro | €29,99/mo | Cessions illimitées pour garages et marchands (batch, API REST, marque blanche) |
+
+**Unit economics :** Claude API ~€0,05/pack → 98,7% gross margin. **6M cessions/an × 0,03%** = 1 800 packs/mois → **€7 182 MRR** conservateur. Le Pack Pro (garages, mandataires) est le vrai moteur B2B : 100 professionnels à €29,99/mo = **€2 999 MRR récurrent additionnel** dès le lancement.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — utilisé au moment de la vente, souvent en extérieur)
+- **Auto-fill immatriculation:** API SIV (Système d'Immatriculation des Véhicules) ou scraping HistoVec pour pré-remplissage marque/modèle/puissance fiscale
+- **AI validation:** Claude API (claude-sonnet-4-6) — valide la cohérence des champs, détecte les erreurs, génère la lettre assurance
+- **PDF Cerfa:** react-pdf avec positionnement exact des champs sur le formulaire officiel 15776*01
+- **SMS reminder:** Twilio (coût ~€0,05/SMS, inclus dans le pack)
+- **Pack Pro / API:** Supabase + REST API + webhooks pour systèmes garage (DMS)
+- **Payments:** Stripe (one-time + abonnement mensuel B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment vendre sa voiture légalement en France en 2026 — les 5 documents que vous oubliez (et comment éviter les arnaques)" — format tutoriel, très cherché
+2. LeBonCoin / La Centrale / Vinted Autos : contenu organique dans les commentaires des annonces et dans les FAQ des forums associés
+3. Facebook Groups : "Vente voiture entre particuliers France", "Achat vente auto France" (300K+ membres combinés)
+4. SEO : "cerfa cession véhicule remplir", "déclaration cession ANTS étapes", "vente voiture particulier documents obligatoires", "non-gage comment obtenir"
+
+### Competitive Moat
+- Aucun outil agrège les 5 documents obligatoires en un seul pack — le marché est entièrement non servi malgré 6M de transactions/an
+- La validation IA des champs Cerfa avant génération (détection d'erreurs VIN, incohérences) est une valeur immédiate et non copiable facilement
+- Le SMS reminder J+20 à l'acheteur est un feature unique qui protège le vendeur légalement — argument émotionnel fort à la conversion
+- Le canal B2B (garages, mandataires) génère un MRR récurrent élevé et une barrière à l'entrée via les intégrations DMS
+
+### Figma Schematic
+[View CessionVéhicule.ai Used Car Transfer Document Flow on FigJam](https://www.figma.com/board/CzoQYPm3JRD45LiJ9Vl8B5)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -1592,4 +2148,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-04-24 — Ideas 32–34 added (France-specific, ultra-low-budget: BulletinPaie.ai, RetraiteSimple, ZFE Navigator)*
+*Last updated: 2026-05-01 — Ideas 44–46 added (France-specific, ultra-low-budget: TitreDeSéjour.ai, RQTH.ai, CessionVéhicule.ai)*
