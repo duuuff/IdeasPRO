@@ -54,6 +54,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 44 | [TitreDeSéjour.ai](#44-titredeséjourai) | Pay-per-pack + Subscription | €8K–€55K | Low |
 | 45 | [RQTH.ai](#45-rqthai) | Pay-per-kit + Freemium | €5K–€40K | Low |
 | 46 | [CessionVéhicule.ai](#46-cessionvéhiculeai) | Pay-per-pack + B2B SaaS | €4K–€28K | Low |
+| 47 | [TestamentSimple.ai](#47-testamentsimpleai) | Pay-per-guide + Subscription | €5K–€40K | Low |
+| 48 | [MaPrimeAdapt.ai](#48-maprimeadaptai) | Pay-per-dossier + Commission artisan | €8K–€60K | Low-Medium |
+| 49 | [PremierEmployeur.ai](#49-premieremployeurai) | Pay-per-pack + SaaS Subscription | €6K–€45K | Low |
 
 ---
 
@@ -2136,6 +2139,147 @@ Le vendeur saisit la plaque d'immatriculation (auto-fill via SIV API ou saisie m
 
 ---
 
+## 47. TestamentSimple.ai
+
+> **Rédigez un testament valide en France sans notaire — réserve héréditaire, quotité disponible, testament olographe guidé**
+
+### Problem
+La France compte **30 millions de ménages propriétaires ou détenteurs d'un patrimoine significatif**, mais seulement **3 millions de testaments** sont déposés chez les notaires. La grande majorité des Français mourront sans testament, laissant la répartition de leur patrimoine soumise aux seules règles légales de dévolution successorale — qui ignorent les volontés réelles (ex-conjoint non protégé, enfant d'une autre union favorisé, ami proche exclu, association caritative ignorée). Pourtant la solution la moins chère existe : le **testament olographe** (entièrement écrit à la main, daté et signé) est **totalement gratuit et légalement valide** — mais méconnu. Les erreurs qui le rendent nul sont nombreuses : une partie dactylographiée, une date manquante ou imprécise, un témoin inutile qui crée une confusion, ou des formulations ambiguës. Un notaire facture **€150–€300** pour rédiger un testament simple. La grande majorité des gens remettent à plus tard, et meurent intestats.
+
+### Solution
+L'utilisateur répond à un quiz de 5 minutes : situation maritale (célibataire, marié sous quel régime, pacsé, concubin), nombre et âge des enfants (y compris d'unions précédentes), patrimoine estimé (immobilier, comptes, véhicules, assurance-vie), et volontés précises (qui hérite de quoi, legs particuliers, désignation d'un tuteur pour enfants mineurs). L'IA calcule automatiquement la **réserve héréditaire** (la part que la loi impose de laisser aux enfants) et la **quotité disponible** (la part librement attribuable), puis détecte les conflits éventuels entre les volontés et la loi. Si la situation est gérable, l'outil génère le **texte exact à recopier à la main** (formulations juridiquement solides, sans ambiguïté), accompagné d'une checklist de validité (écriture manuscrite, date complète, signature, absence de ratures). Un module "mise en sécurité" guide pour enregistrer le testament au **Fichier Central des Dispositions de Dernières Volontés (FCDDV)** — €20 via un notaire, qui le rend opposable à tous les héritiers.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Calcul réserve héréditaire + quotité disponible + résumé de la situation |
+| Guide Complet | €4,99 | Texte exact à recopier + checklist de validité + notice légale + FAQ questions fréquentes |
+| Pack Testament + Donations | €9,99 | Guide testament + simulation donation-partage + clause bénéficiaire assurance-vie + lettre au notaire |
+| Abonnement Famille | €4,99/an | Révision annuelle rappelée (naissance, mariage, divorce, décès) + coffre numérique sécurisé |
+
+**Unit economics :** Claude API ~€0,08/guide → 98% gross margin. **Marché :** 30M ménages sans testament × 0,05% de conversion annuelle = 15 000 guides/an → **€6 250 MRR**. La croissance est soutenue par l'émotion forte liée au sujet (décès de proches, conflits familiaux) — chaque succession litigieuse médiatisée génère un pic de trafic. L'abonnement famille est reconduit chaque année après tout événement de vie majeur.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — souvent utilisé depuis une tablette, calme du soir)
+- **Quiz situation familiale:** Moteur de règles couvrant les régimes matrimoniaux (communauté légale, séparation de biens, participation aux acquêts), filiation (légitime, naturelle, adoptive), représentation successorale
+- **Calcul réserve héréditaire:** Algorithme déterministe selon articles 912–917 du Code civil (réserve = 1/2 si 1 enfant, 2/3 si 2, 3/4 si 3+; conjoint survivant hors réserve sauf concours avec enfants)
+- **AI rédaction:** Claude API (claude-sonnet-4-6) — génère les formulations exactes adaptées à la situation, avec variantes pour legs particuliers, usufruit au conjoint, désignation tuteur
+- **Détection conflits:** Alerte si volontés exprimées empiètent sur la réserve héréditaire (réduction de legs automatiquement calculée)
+- **PDF guide + texte:** react-pdf — le texte à recopier est présenté dans un format clair, avec espacement adapté à une rédaction manuscrite
+- **Auth + coffre:** Supabase (chiffrement AES-256 des données personnelles, aucune donnée de patrimoine en clair)
+- **Payments:** Stripe (paiements unitaires + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Ce testament olographe m'a pris 10 minutes et m'a évité 6 mois de conflit familial — voici exactement comment le rédiger" (sujet à très forte résonance émotionnelle)
+2. Facebook Groups : "Succession et héritage France", "Prévoyance familiale", "Seniors autonomes France" — communautés très actives sur les questions de transmission
+3. SEO : "testament olographe modèle", "réserve héréditaire calcul", "comment rédiger un testament en France", "testament sans notaire valide"
+4. Partenariats avec mutuelles et assureurs (MAIF, MACIF, MATMUT) — outil offert à leurs assurés comme service de prévoyance (canal B2B haute valeur)
+
+### Competitive Moat
+- Aucun outil en ligne ne calcule la réserve héréditaire ET génère le texte exact à recopier en tenant compte de la situation familiale complète — le marché est vierge
+- Le calcul des conflits entre volontés et loi (réduction de legs automatique) est un feature à très haute valeur perçue — personne d'autre ne le fait
+- Le sujet est intemporel et universel : tout adulte avec un patrimoine est une cible potentielle — pas de saisonnalité, flux constant
+- Les partenariats B2B avec mutuelles (MAIF, MACSF) sont une distribution massive à coût marginal nul, dès qu'un accord est signé
+
+### Figma Schematic
+[View TestamentSimple.ai Will Creation Flow on FigJam](https://www.figma.com/board/QBHL861jk5zkr33ddsF0bk)
+
+---
+
+## 48. MaPrimeAdapt.ai
+
+> **Obtenez jusqu'à 22 000 € de subvention ANAH pour adapter votre logement au vieillissement ou au handicap — dossier guidé étape par étape**
+
+### Problem
+La France a lancé **MaPrimeAdapt** en janvier 2024 — une aide ANAH pouvant couvrir **50% à 70% du coût des travaux d'adaptation** du logement pour les seniors (60+) et les personnes handicapées, dans la limite de **22 000 € de subvention** (soit jusqu'à 31 400 € de travaux couverts). C'est le dispositif le plus généreux de son genre, mais il est massivement sous-utilisé : **9 millions de seniors** vivent dans des logements inadaptés à leur perte d'autonomie, et **2 millions de personnes handicapées** en logement privé pourraient y prétendre. Les raisons du non-recours : **(1)** la plupart ignorent l'existence du dispositif (lancé en 2024, peu relayé) ; **(2)** les critères d'éligibilité croisent âge OU situation de handicap × niveau de revenus × propriétaire OU locataire avec accord bailleur — un labyrinthe administratif ; **(3)** seuls les **artisans labellisés RGE agréés ANAH** peuvent réaliser les travaux — trouver le bon prestataire dans son département est un parcours du combattant ; **(4)** la pré-autorisation ANAH doit être obtenue **avant** le début des travaux (commencer sans elle annule la subvention) — la plupart des gens l'ignorent et démarrent trop tôt. Résultat : des milliards d'euros de subventions légitimes non réclamées.
+
+### Solution
+**(1) Simulateur d'éligibilité :** L'utilisateur entre son âge (ou sa situation de handicap), son statut (propriétaire occupant / locataire / propriétaire bailleur), et ses revenus annuels du foyer. Le simulateur applique la grille officielle ANAH et affiche en 30 secondes : éligible / non éligible, le taux applicable (50% ou 70%), le montant maximum théorique de subvention, et la liste des travaux couverts adaptée à sa situation (douche à l'italienne, monte-escalier, élargissement des portes, barres d'appui, éclairage capteurs, interphone, cuisine adaptée PMR). **(2) Catalogue travaux + devis conforme :** Pour chaque type de travaux, le simulateur affiche le coût moyen dans la région et génère un brief technique pour demander un devis conforme aux exigences ANAH. **(3) Matching artisans RGE :** Annuaire filtrable des artisans agréés ANAH par code postal, type de travaux, et disponibilité — avec template de demande de devis. **(4) Constitution du dossier ANAH :** L'outil génère le dossier de demande complet (formulaire Cerfa, notice explicative, justificatifs requis par type de situation) et un guide de navigation sur le portail ANAH en ligne. **(5) Suivi post-accord :** Rappel avant expiration de la pré-autorisation (6 mois) et guide pour la demande de paiement une fois les travaux terminés.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Eligibilité + taux + montant max + liste travaux couverts |
+| Dossier Complet | €9,99 | Cerfa pré-rempli + liste justificatifs + guide portail ANAH + brief devis artisan |
+| Pack Suivi | €14,99 | Dossier Complet + suivi timeline + alerte expiration pré-autorisation + aide demande paiement |
+| Commission artisan | 2% du devis | Commission sur mise en relation artisan RGE (artisan paie, pas l'utilisateur) |
+
+**Unit economics :** Claude API ~€0,12/dossier → 98% gross margin. **Marché :** 9M seniors + 2M handicapés en logement inadapté × 0,05% de conversion annuelle = 5 500 dossiers/mois → **€55 000 MRR** potentiel. La commission artisan est le vrai moteur : un dossier moyen représente €8 000 de travaux → commission artisan €160 → revenu moyen par dossier = **€170** (paiement utilisateur + commission), CAC proche de zéro via SEO.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA mobile-first — seniors utilisent souvent tablette)
+- **Simulateur éligibilité:** Algorithme déterministe appliquant la grille ANAH 2024 (propriétaire occupant très modeste = 70%, modeste = 50%; locataire = 70% ou 50% avec accord bailleur; plafonds revenus par zone géographique A/B/C)
+- **Catalogue travaux:** JSON maintenu manuellement — 18 types de travaux × conditions techniques ANAH × coûts moyens régionaux (données ANAH open data)
+- **Matching artisans:** Base artisans RGE agréés ANAH (registre QUALIBAT/QUALIFELEC/RGE — données ouvertes) + formulaire de contact intégré
+- **AI dossier:** Claude API (claude-sonnet-4-6) — adapte la description des travaux au format ANAH, rédige la notice explicative, génère le brief devis conforme
+- **PDF Cerfa + guide:** react-pdf — Cerfa 15548*04 (demande de subvention ANAH) pré-rempli
+- **CRM suivi:** Supabase + Resend (alertes J-60 avant expiration pré-autorisation)
+- **Payments:** Stripe (paiements unitaires + commission artisan via Stripe Connect)
+
+### Go-to-Market (zero budget)
+1. Partenariats avec CARSAT et CNAV régionales — elles accompagnent les retraités et recommandent des outils de maintien à domicile : un accord national = distribution massive immédiate
+2. Facebook Groups : "Seniors connectés France", "Aidants familiaux France", "Vivre chez soi longtemps", "Association Alzheimer France" (700K+ membres combinés)
+3. TikTok/YouTube (contenu ciblé aidants 35-55 ans) : "Mes parents ont obtenu 18 000 € pour rénover leur salle de bain — voici comment" (format témoignage très partagé)
+4. SEO : "MaPrimeAdapt eligibilite", "ANAH travaux adaptation seniors", "subvention salle de bain PMR", "aide monte-escalier personnes agees", "dossier ANAH adaptation logement"
+
+### Competitive Moat
+- MaPrimeAdapt n'a été lancé qu'en janvier 2024 — aucun outil spécialisé n'existe encore, le marché SEO est entièrement vierge
+- La combinaison simulateur + matching artisans + génération de dossier est un tunnel complet que ni l'ANAH ni aucun acteur privé ne proposent
+- La commission artisan crée un modèle B2B2C où les artisans RGE financent en grande partie l'acquisition utilisateur
+- Les partenariats CARSAT/CNAV sont des canaux de distribution institutionnels à très faible coût qui génèrent un flux constant et qualifié
+
+### Figma Schematic
+[View MaPrimeAdapt.ai Senior Home Adaptation Grant Flow on FigJam](https://www.figma.com/board/cmP3ki0GXRetaPA9dTzwxG)
+
+---
+
+## 49. PremierEmployeur.ai
+
+> **Embauchez votre premier salarié en France sans prud'hommes ni amendes — DPAE, contrat, DUERP, mutuelle en un seul wizard**
+
+### Problem
+La France compte **1,5 million de TPE** (0 à 9 salariés) et enregistre chaque année **150 000+ premières embauches** par des employeurs qui n'ont jamais géré un salarié. L'embauche d'un premier salarié en France déclenche une cascade d'obligations administratives que la grande majorité des entrepreneurs découvrent après coup — souvent lors d'un contrôle URSSAF ou d'une saisine des prud'hommes. Les erreurs les plus courantes et coûteuses : **(1) DPAE non faite ou faite hors délai** (Déclaration Préalable à l'Embauche sur net-entreprises, obligatoire dans les 8 jours avant la prise de poste — amende forfaitaire €1 500 + risque de travail dissimulé, délit pénal) ; **(2) Contrat de travail non conforme à la convention collective applicable** (chaque code APE est associé à une convention collective avec ses propres maximums de période d'essai, ses indemnités de licenciement, ses primes obligatoires — un contrat générique trouvé sur Internet ignore tout cela) ; **(3) DUERP absent** (Document Unique d'Évaluation des Risques Professionnels — obligatoire dès le 1er jour du 1er salarié, amende de €1 500, et surtout responsabilité pénale de l'employeur en cas d'accident du travail) ; **(4) Mutuelle d'entreprise non mise en place dans les 3 mois** (obligation légale depuis 2016 — remboursement à la charge de l'employeur si absence) ; **(5) Registre unique du personnel non tenu** (inspection du travail peut le demander à tout moment — amende €750 par salarié non inscrit). La plupart des ressources disponibles (URSSAF, Service-Public.fr) donnent la liste des obligations sans fournir les documents.
+
+### Solution
+Un **wizard en 6 étapes** qui transforme l'intention d'embaucher en dossier administratif complet et conforme : **(1) Profil employeur** : l'utilisateur entre son SIRET (auto-fill via API INSEE pour récupérer code APE, forme juridique, convention collective applicable par défaut). **(2) DPAE generator** : formulaire pré-rempli pour net-entreprises avec guide de navigation pas-à-pas + calculateur du délai légal (J-8 avant prise de poste, pas "la veille") + alerte SMS/email si délai critique. **(3) Contrat de travail IA** : le moteur sélectionne la convention collective correcte selon le code APE, adapte les mentions obligatoires (période d'essai maximum, renouvellement, rémunération minimum conventionnelle, classification, clause de non-concurrence si applicable), et génère un contrat CDD ou CDI conforme en PDF signable. **(4) DUERP template** : document unique pré-rempli par secteur d'activité (restauration, BTP, bureau, commerce — 12 secteurs couverts) avec les risques types et les mesures de prévention correspondantes — personnalisable en 10 minutes. **(5) Mutuelle d'entreprise** : checklist de conformité (participation employeur minimum 50%, contrat responsable, catégories objectives de salariés) + modèle de décision unilatérale de l'employeur (DUE) si pas d'accord collectif. **(6) Registre du personnel** : template Excel/Google Sheets conforme avec toutes les mentions obligatoires (matricule, nom, emploi, qualification, date d'entrée, date de sortie).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Guide gratuit | €0 | Liste des obligations + calculateur délai DPAE + convention collective identifiée |
+| Pack Embauche | €19,99 | DPAE guide + contrat IA + DUERP template + DUE mutuelle + registre personnel |
+| Abonnement RH | €9,99/mo | Pack Embauche illimité + alertes obligations annuelles (visite médicale, entretien pro, NAO) + mises à jour convention collective |
+| Pack Pro RH | €49/mo | Abonnement RH + marque blanche pour experts-comptables (jusqu'à 20 clients employeurs) |
+
+**Unit economics :** Claude API ~€0,15/contrat → 99% gross margin. **Marché :** 150 000 premières embauches/an × 5% de conversion sur le Pack Embauche = 7 500 packs/an → **€12 500 MRR**. L'Abonnement RH (€9,99/mo) est reconduit chaque année par définition — l'employeur a toujours des obligations annuelles. Le Pack Pro (experts-comptables) est le vrai levier de croissance : 500 cabinets à €49/mo = **€24 500 MRR récurrent** dès l'année 2.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (dashboard desktop — utilisé au bureau)
+- **SIRET / convention collective:** API Recherche Entreprises (INSEE, gratuit) pour auto-fill + mapping code APE → convention collective (IDCC) maintenu en JSON — 300 conventions collectives principales couvrant 99% des TPE
+- **Contrat de travail IA:** Claude API (claude-sonnet-4-6) avec prompt spécialisé par convention collective — génère le contrat complet avec toutes les mentions légales adaptées
+- **DUERP:** Templates sectoriels pré-rédigés (12 secteurs, INRS-compatible) — personnalisation par IA selon l'activité décrite
+- **Convention collective:** Veille automatisée des mises à jour (LEGIFRANCE API — accès gratuit aux textes consolidés)
+- **PDF contrat + documents:** react-pdf (contrat signable numériquement via HelloSign API ou Yousign)
+- **Alertes RH:** Supabase + Resend — calendrier d'obligations basé sur la date d'embauche (visite médicale J+90, entretien pro tous les 2 ans, NAO annuelle si +50 salariés, etc.)
+- **Payments:** Stripe (paiements unitaires + abonnements récurrents)
+
+### Go-to-Market (zero budget)
+1. LinkedIn : cibler gérants TPE, créateurs d'entreprise, entrepreneurs qui recrutent — posts avec cas réel "j'ai eu une amende URSSAF de 1 500 € pour DPAE hors délai — voici l'erreur à ne pas faire" (fort engagement)
+2. Reddit / forums : r/AutoEntrepreneur, r/entrepreneuriat, Forum-Auto-Entrepreneur.fr, Café du Commerce — questions sur le premier salarié très fréquentes, sans bonne réponse structurée
+3. Partenariats avec experts-comptables (canal naturel : ils accompagnent leurs clients à chaque embauche) — le Pack Pro (marque blanche) leur permet de facturer le service à leurs clients sans effort
+4. SEO : "DPAE délai comment faire", "contrat de travail convention collective TPE", "DUERP modèle premier salarié", "obligations employeur premier salarié France"
+
+### Competitive Moat
+- Personne n'agrège les 5 obligations simultanées en un seul tunnel — les employeurs découvrent chacune isolément après coup, souvent après une amende
+- Le mapping code APE → convention collective automatique est un actif technique long à constituer et à maintenir (300 CCN) — forte barrière à l'entrée
+- Le canal expert-comptable (Pack Pro) crée un effet de levier massif : un seul accord avec un réseau de cabinets = des milliers d'embauches par an sans acquisition supplémentaire
+- La responsabilité engagée (amende, prud'hommes, accident du travail sans DUERP) crée un NPS exceptionnel et une rétention maximale
+
+### Figma Schematic
+[View PremierEmployeur.ai First Hire Admin Wizard Flow on FigJam](https://www.figma.com/board/SK1nRbdgWwIk4qeJQpdb3w)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2148,4 +2292,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-01 — Ideas 44–46 added (France-specific, ultra-low-budget: TitreDeSéjour.ai, RQTH.ai, CessionVéhicule.ai)*
+*Last updated: 2026-05-02 — Ideas 47–49 added (France-specific, ultra-low-budget: TestamentSimple.ai, MaPrimeAdapt.ai, PremierEmployeur.ai)*
