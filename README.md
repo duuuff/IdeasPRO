@@ -57,6 +57,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 47 | [TestamentSimple.ai](#47-testamentsimpleai) | Pay-per-guide + Subscription | €5K–€40K | Low |
 | 48 | [MaPrimeAdapt.ai](#48-maprimeadaptai) | Pay-per-dossier + Commission artisan | €8K–€60K | Low-Medium |
 | 49 | [PremierEmployeur.ai](#49-premieremployeurai) | Pay-per-pack + SaaS Subscription | €6K–€45K | Low |
+| 50 | [VAE.ai](#50-vaeai) | Pay-per-livret + Subscription | €5K–€38K | Low |
+| 51 | [TravauxPermis.ai](#51-travauxpermisai) | Pay-per-pack + B2B SaaS | €6K–€45K | Low |
+| 52 | [AssuranceVie.ai](#52-assurancevieai) | Freemium + Subscription + Affiliate | €10K–€80K | Low-Medium |
 
 ---
 
@@ -2280,6 +2283,144 @@ Un **wizard en 6 étapes** qui transforme l'intention d'embaucher en dossier adm
 
 ---
 
+## 50. VAE.ai
+
+> **Obtenez un diplôme reconnu par l'État grâce à votre expérience professionnelle — Livret 1 et Livret 2 guidés par IA**
+
+### Problem
+La France compte **3,5 millions de travailleurs sans aucun diplôme** et **12 millions supplémentaires** dont le niveau de qualification ne correspond pas au poste occupé. La **Validation des Acquis de l'Expérience (VAE)** permet depuis 2002 d'obtenir un diplôme d'État (CAP, BTS, Licence, Master) sans retourner en formation — uniquement en faisant valider son expérience professionnelle. C'est le seul dispositif français permettant d'accéder à un diplôme à faible coût (aide CPF, financement Pôle Emploi) sur la base du travail accompli. Pourtant, **seulement 30 000 VAE sont validées par an** alors que le potentiel est de plusieurs millions : (1) la grande majorité des éligibles ne connaissent pas le dispositif ; (2) ceux qui l'initient abandonnent face au **Livret 2** — un dossier de 40 à 80 pages décrivant précisément ses activités professionnelles en les reliant aux compétences du référentiel de certification ; (3) les délais sont longs (6 à 18 mois) et le manque d'accompagnement structuré est la première cause d'abandon. Les VAE Accompagnées (réforme 2022) exigent désormais 24 heures d'accompagnement — un marché de services entièrement à créer.
+
+### Solution
+**(1) Simulateur d'éligibilité :** L'utilisateur saisit son métier, son secteur, et ses années d'expérience. Le moteur de règles vérifie les conditions d'éligibilité (3 ans d'expérience minimum en lien avec la certification visée, pas forcément continus) et identifie les certifications RNCP les plus proches, avec le taux de validation historique de chaque jury. **(2) Livret 1 guidé :** Formulaire de recevabilité structuré par l'IA — description des activités, lien avec la certification, justificatifs à joindre. L'IA vérifie la cohérence et suggère les formulations conformes aux attentes du certificateur. **(3) Livret 2 assisté (cœur du produit) :** Le Livret 2 est la description détaillée de 3 à 5 situations professionnelles significatives, en lien avec chaque compétence du référentiel. L'IA génère une trame personnalisée basée sur la certification visée, guide l'utilisateur activité par activité, reformule les descriptions en langage de compétences, et vérifie la complétude avant dépôt. **(4) Préparation au jury :** Simulation de questions types + conseils de présentation orale pour le soutenance devant le jury VAE.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Éligibilité + certifications recommandées + taux de validation |
+| Livret 1 Guidé | €4,99 | Formulaire de recevabilité complet + liste justificatifs + envoi guidé |
+| Livret 2 Complet | €19,99 | Trame IA personnalisée + 3 situations professionnelles guidées + export PDF |
+| Accompagnement Full | €9,99/mo | Livret 1 + Livret 2 + 3 révisions IA + simulation jury + suivi jusqu'au résultat |
+
+**Unit economics :** Claude API ~€0,20/livret 2 → 99% gross margin. **Marché :** 30 000 VAE/an actuelles × objectif ×10 avec numérisation = 300 000 potentielles × 5% conversion Livret 2 = 15 000 × €19,99 = **€25 000 MRR**. Le financement CPF est utilisable pour la VAE Accompagnée — l'outil peut être référencé Mon Compte Formation, ce qui ouvre un flux de trésorerie B2G massif.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — souvent utilisé le soir, depuis un téléphone)
+- **Base certifications RNCP:** France Compétences API (accès gratuit) — 3 000+ certifications avec référentiels complets
+- **Simulateur éligibilité:** Moteur de règles couvrant les 3 ans d'expérience, la nature de l'activité (salariée, non-salariée, bénévole, stagiaire), et les critères spécifiques de chaque certificateur
+- **AI Livret 2:** Claude API (claude-sonnet-4-6) avec prompt spécialisé par référentiel RNCP — reformule les descriptions en langage de compétences, suggère des preuves cohérentes (attestations, photos, tableaux de bord)
+- **Export PDF:** react-pdf — mise en forme conforme aux gabarits officiels des certificateurs
+- **Auth + suivi dossier:** Supabase (stockage sécurisé des drafts, relances automatiques si inactivité)
+- **Payments:** Stripe (unitaires + abonnement mensuel) — intégration CPF via API Mon Compte Formation à terme
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai obtenu mon BTS sans retourner à l'école — voici comment la VAE m'a changé la vie" (format témoignage, très fort taux de partage dans la cible)
+2. Pôle Emploi / France Travail : partenariat — les conseillers recommandent la VAE aux demandeurs d'emploi sans qualification, un accord = canal de distribution massif immédiat
+3. Facebook Groups : "VAE France — Validation des Acquis", "Formation professionnelle continue", "Reconversion professionnelle France" (200K+ membres)
+4. SEO : "comment faire une VAE", "livret 2 VAE exemple", "VAE BTS aide", "VAE CAP sans école", "financement VAE CPF"
+
+### Competitive Moat
+- Aucun outil numérique n'assiste la rédaction du Livret 2 — les candidats s'appuient sur des accompagnateurs humains coûteux (€1 000–€3 000) ou abandonnent seuls
+- La base RNCP couvre 3 000 certifications avec leurs référentiels — constituer et maintenir ce mapping est une barrière à l'entrée significative
+- Le référencement Mon Compte Formation (CPF) crée un accès direct à des millions d'utilisateurs avec budget de formation pré-financé — barrière réglementaire forte pour les concurrents
+- La réforme VAE 2022 (VAE Accompagnée obligatoire) est une opportunité de marché entièrement nouvelle, non encore exploitée numériquement
+
+### Figma Schematic
+[View VAE.ai Diploma-by-Experience Flow on FigJam](https://www.figma.com/board/wlNnNfIQYSpULHWPULWWAv)
+
+---
+
+## 51. TravauxPermis.ai
+
+> **Suis-je obligé de demander un permis de construire ? — Générateur de dossier d'autorisation de travaux conforme au PLU en 10 minutes**
+
+### Problem
+La France enregistre **1,5 million de demandes d'autorisation d'urbanisme par an** (déclarations préalables + permis de construire + permis d'aménager). Pour chaque projet de travaux, le particulier doit répondre à une cascade de questions dont la complexité décourage la grande majorité : (1) **Quel régime s'applique ?** La surface créée, la hauteur, la nature des travaux (extension, clôture, piscine, véranda, ravalement, changement de destination) déterminent si aucune autorisation n'est nécessaire, si une déclaration préalable suffit, ou si un permis de construire est obligatoire — et les seuils varient selon que le terrain est en zone urbaine couverte par un PLU ou non (20 m² vs 40 m² en zone urbaine PLU). (2) **Le PLU local ajoute des contraintes supplémentaires** (retrait de limite séparative, hauteur maximale, aspect des matériaux, couleurs) que seul le service urbanisme de la mairie connaît. (3) **Les zones protégées** (ABF — Architectes des Bâtiments de France) dans les secteurs sauvegardés et aux abords des monuments historiques imposent une instruction complémentaire obligatoire. (4) Les **Cerfa sont nombreux et complexes** : 13703*09 pour la déclaration préalable, 13406*12 pour le permis de construire maison individuelle, 13409*11 pour le permis d'aménager — chacun avec des pièces à joindre différentes. Une erreur de dossier (pièce manquante, mauvais Cerfa) entraîne une demande de complément qui suspend le délai d'instruction et peut repousser les travaux de plusieurs mois. Résultat : des milliers de travaux réalisés sans autorisation (risque d'amende jusqu'à €300 000 + démolition) ou des dossiers incomplets qui traînent des mois.
+
+### Solution
+**(1) Diagnostic travaux :** L'utilisateur décrit son projet en répondant à 8 questions guidées (commune, type de travaux, surface créée, hauteur, nature — extension / piscine / clôture / garage / changement de destination…). Le moteur de règles applique le Code de l'Urbanisme article R421 et détermine le régime exact. **(2) Vérification PLU :** Le code INSEE de la commune permet de récupérer les règles PLU via Géoportail de l'Urbanisme (API ouverte) — recul par rapport aux voies, hauteur maximale, coefficient d'emprise au sol, règles de matériaux. **(3) Génération du dossier :** Le Cerfa correct est sélectionné et pré-rempli avec les informations saisies. La liste exacte des pièces à joindre est générée (plan de situation, plan de masse coté, plan en coupe, notice descriptive, photos) avec des gabarits et exemples téléchargeables. **(4) Guide de dépôt :** Pas-à-pas pour le dépôt en mairie ou sur le portail dématérialisé (AD'AU), avec calculateur du délai d'instruction (1 mois pour DP, 2 mois pour PC, +1 mois si ABF) et alerte si le délai approche. **(5) Recours :** Si refus, l'IA rédige un recours gracieux argumenté.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Régime applicable + synthèse PLU + liste pièces |
+| Pack Dossier | €7,99 | Cerfa pré-rempli + pièces listées + gabarits + guide dépôt + calculateur délai |
+| Pack Premium | €12,99 | Dossier + vérification IA complète PLU + alerte délai instruction + recours IA si refus |
+| B2B Architectes | €49/mo | Accès illimité + API + marque blanche pour agences d'architecture et constructeurs |
+
+**Unit economics :** Claude API ~€0,10/dossier → 99% gross margin. **Marché :** 1,5M dossiers/an × 2% conversion Pack Dossier = 30 000 dossiers/an → **€20 000 MRR**. Le B2B (architectes, constructeurs de maisons individuelles) est le vrai levier : 500 agences à €49/mo = **€24 500 MRR récurrent** stable.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop + mobile — utilisé sur chantier et en mairie)
+- **Moteur de règles urbanisme:** Algorithme basé sur Code de l'Urbanisme R421-1 à R421-42 — seuils par type de travaux, zone PLU/hors PLU, zone littorale/montagne
+- **PLU:** API Géoportail de l'Urbanisme (CNIG — accès gratuit) — récupération du règlement PLU par commune + zonage par parcelle cadastrale (API Géoportail)
+- **Cerfa generation:** react-pdf avec positionnement exact sur formulaires officiels (13703*09, 13406*12, 13409*11)
+- **AI vérification + recours:** Claude API (claude-sonnet-4-6) — détecte les incohérences dans le projet vs règlement PLU, rédige la notice descriptive et le recours gracieux
+- **Cadastre:** API Géoportail cadastre (gratuit) — identification de la parcelle par adresse, surface de terrain, contiguïté voies
+- **Payments:** Stripe (paiements unitaires + abonnements B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "On a failli avoir une amende de 50 000 € — on a fait notre extension sans permis par ignorance" (format témoignage, très fort impact émotionnel dans la cible propriétaires)
+2. Facebook Groups : "Construire sa maison en France", "Extension maison", "Auto-construction France", "Bricolage maison" (500K+ membres combinés)
+3. Forums : Système D, Ooreka, Houzz France — les questions sur permis de construire sont parmi les plus consultées
+4. SEO : "permis construire obligatoire surface", "declaration prealable travaux cerfa", "extension maison sans permis risque", "PLU mairie comment consulter", "délai instruction permis construire"
+
+### Competitive Moat
+- L'API Géoportail de l'Urbanisme (PLU par commune) couplée au moteur de règles R421 constitue un actif technique unique — aucun outil grand public ne l'exploite pour le particulier
+- La génération automatique du bon Cerfa pré-rempli (et non d'une liste de liens) est une valeur immédiate non copiable facilement
+- Le canal B2B (architectes, constructeurs, promoteurs) crée un MRR stable et une distribution à coût marginal nul — chaque professionnel amène ses clients
+- La responsabilité engagée (amende jusqu'à €300 000, démolition) crée une peur forte à la conversion et une fidélité maximale
+
+### Figma Schematic
+[View TravauxPermis.ai Building Permit Decision Flow on FigJam](https://www.figma.com/board/vVNVidqyZL93trhGDc1Yvb)
+
+---
+
+## 52. AssuranceVie.ai
+
+> **Auditez et optimisez la clause bénéficiaire de votre assurance vie — 38 millions de contrats mal configurés en France**
+
+### Problem
+La France possède **38 millions de contrats d'assurance vie** pour un encours total de **1 900 milliards d'euros** — c'est le premier produit d'épargne français. Mais la grande majorité de ces contrats souffrent d'un problème silencieux et potentiellement catastrophique : **la clause bénéficiaire est mal rédigée**. La "clause type" proposée par défaut par les assureurs ("mon conjoint, à défaut mes enfants nés ou à naître, à défaut mes héritiers") peut déclencher des conséquences fiscales désastreuses selon la situation familiale réelle : (1) **Concubins non protégés** — le concubin non marié ne bénéficie d'aucun abattement successoral mais paie 60% de droits sur les sommes reçues au-delà de 152 500 €, alors qu'une rédaction alternative (démembrement de clause, donation préalable) aurait pu l'exonérer totalement. (2) **Enfants mineurs bénéficiaires directs** — sans représentation légale explicite, les fonds sont bloqués sous tutelle jusqu'à la majorité, inaccessibles à l'époux survivant qui en aurait besoin. (3) **Clause "mes héritiers" en dernier ressort** — fait entrer le capital dans la succession et annule l'avantage hors succession de l'assurance vie (perte de l'abattement de €152 500). (4) **Démembrement de clause bénéficiaire** — la stratégie la plus efficace fiscalement (usufruitier = conjoint, nu-propriétaires = enfants) est quasiment inconnue des détenteurs. (5) **Absence de mise à jour après divorce, remariage, naissance** — le bénéficiaire désigné est souvent un ex-conjoint qui a droit aux fonds malgré le souhait du souscripteur, et rien ne l'en empêche. Un notaire ou conseiller en gestion de patrimoine facture €200–€500 pour auditer une clause bénéficiaire. La grande majorité des détenteurs ne le font jamais.
+
+### Solution
+**(1) Audit de clause :** L'utilisateur renseigne sa situation familiale (marié / pacsé / concubin / divorcé, enfants de l'union actuelle / d'unions précédentes) et colle le texte de sa clause bénéficiaire actuelle. L'IA analyse la clause contre sa situation et identifie les risques : bénéficiaire inadéquat, impact fiscal, absence de représentation mineurs, clause "héritiers" piège. **(2) Simulation fiscale :** Pour chaque bénéficiaire possible, le simulateur calcule l'abattement applicable (€152 500 par bénéficiaire pour versements avant 70 ans, €30 500 global au-delà), le taux de prélèvement résiduel, et compare avec une stratégie de démembrement ou de désignation optimisée. **(3) Génération de nouvelle clause :** L'IA génère le texte exact de la nouvelle clause bénéficiaire, adapté à la situation et fiscalement optimisé, avec les variantes possibles (avec ou sans démembrement, avec ou sans représentation). **(4) Courrier assureur :** Template de lettre recommandée pour modifier la clause auprès de l'assureur (changement de bénéficiaire, simple et gratuit — l'assureur est obligé d'accepter). **(5) Suivi des événements de vie :** Rappel automatique après mariage, naissance, divorce, décès d'un bénéficiaire pour réviser la clause.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Score de risque de la clause + identification des problèmes sans solution détaillée |
+| Audit Complet | €9,99 | Analyse détaillée + simulation fiscale + génération nouvelle clause + courrier assureur |
+| Abonnement Prévoyance | €4,99/an | Révision annuelle + alerte événements de vie + coffre numérique clause + accès illimité |
+| Affiliation CGPI | Commission | Redirection vers conseiller en gestion de patrimoine pour situations complexes (commission par lead qualifié) |
+
+**Unit economics :** Claude API ~€0,15/audit → 98% gross margin. **Marché :** 38M contrats × 0,05% de conversion annuelle Audit Complet = 19 000 audits/an → **€15 800 MRR**. L'affiliation CGPI (conseiller en gestion de patrimoine indépendant) est le vrai moteur : un lead qualifié "assurance vie à optimiser" vaut €50–€200 en commission — un seul accord avec un réseau de CGPI = revenus récurrents sans acquisition. L'abonnement annuel est reconduit après chaque événement de vie majeur.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé posément à la maison)
+- **Audit de clause:** Claude API (claude-sonnet-4-6) — analyse le texte libre de la clause bénéficiaire, identifie les formulations à risque, détecte les incohérences avec la situation familiale déclarée
+- **Simulateur fiscal:** Algorithme déterministe appliquant les articles 990 I et 757 B du CGI (abattements, taux de prélèvement, règles âge 70 ans, démembrement fiscal)
+- **Génération de clause:** Templates validés juridiquement pour les cas courants (clause standard sécurisée, clause avec démembrement, clause avec représentation mineurs) + adaptation IA pour situations complexes
+- **Réseau CGPI:** Annuaire de CGPI partenaires avec profil et spécialités — routing automatique selon la complexité du cas (régime matrimonial, contrat de mariage, trust)
+- **Auth + coffre:** Supabase (chiffrement AES-256, aucune donnée de patrimoine en clair) + Resend pour alertes événements de vie
+- **Payments:** Stripe (unitaire + abonnement annuel) + tracking affiliation CGPI (UTM + webhook)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon assurance vie allait tomber entre les mains de mon ex — voici comment l'éviter" (sujet à très fort impact émotionnel, touche absolument tout le monde)
+2. Facebook Groups : "Investissement et épargne France", "Gestion de patrimoine particuliers", "Assurance vie France — conseils" (400K+ membres)
+3. Partenariats avec mutuelles et banques en ligne (Boursorama, Fortuneo) — outil d'audit offert à leurs assurés comme service de fidélisation (B2B haute valeur)
+4. SEO : "clause bénéficiaire assurance vie exemple", "modifier bénéficiaire assurance vie", "assurance vie concubin fiscalité", "démembrement clause bénéficiaire", "assurance vie ex-conjoint comment changer"
+
+### Competitive Moat
+- Aucun outil en ligne n'audite une clause bénéficiaire existante ET génère la nouvelle clause — même les comparateurs d'assurance vie ne touchent pas à ce sujet
+- La simulation du démembrement de clause (stratégie ignorée de 95% des détenteurs) est une valeur perçue extrêmement haute — différenciation immédiate
+- L'affiliation CGPI transforme les cas complexes en revenus supplémentaires plutôt qu'en friction — modèle économique auto-amplificateur
+- Les 38 millions de contrats existants sont un marché captif permanent : chaque naissance, mariage, divorce, décès recrée un besoin — pas de saisonnalité
+
+### Figma Schematic
+[View AssuranceVie.ai Life Insurance Optimization Flow on FigJam](https://www.figma.com/board/rLlKEVaUkwCWJ3HbUgC9GR)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2292,4 +2433,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-02 — Ideas 47–49 added (France-specific, ultra-low-budget: TestamentSimple.ai, MaPrimeAdapt.ai, PremierEmployeur.ai)*
+*Last updated: 2026-05-03 — Ideas 50–52 added (France-specific, ultra-low-budget: VAE.ai, TravauxPermis.ai, AssuranceVie.ai)*
