@@ -60,6 +60,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 50 | [VAE.ai](#50-vaeai) | Pay-per-livret + Subscription | €5K–€38K | Low |
 | 51 | [TravauxPermis.ai](#51-travauxpermisai) | Pay-per-pack + B2B SaaS | €6K–€45K | Low |
 | 52 | [AssuranceVie.ai](#52-assurancevieai) | Freemium + Subscription + Affiliate | €10K–€80K | Low-Medium |
+| 53 | [Alternance.ai](#53-alternanceai) | Pay-per-dossier + Subscription | €6K–€45K | Low |
+| 54 | [MicroFoncier.ai](#54-microfoncierai) | Pay-per-declaration + Annual Subscription | €5K–€35K | Low |
+| 55 | [FranceTravail.ai](#55-francetravailai) | Freemium + Pay-per-simulation | €4K–€28K | Low |
 
 ---
 
@@ -2421,6 +2424,143 @@ La France possède **38 millions de contrats d'assurance vie** pour un encours t
 
 ---
 
+## 53. Alternance.ai
+
+> **L'assistant IA pour décrocher un contrat d'alternance — de la candidature à la signature du contrat**
+
+### Problem
+La France comptait **plus d'un million d'alternants** en 2024, et la demande explose avec les aides gouvernementales aux employeurs. Pourtant, trouver une entreprise reste l'obstacle numéro un : les étudiants en alternance sont livrés à eux-mêmes, sans conseils personnalisés, face à des portails comme 1jeune1solution ou LaBonneAlternance qui ne font que lister des offres sans aider à candidater. Les erreurs sont massives : lettre de motivation générique, CV non adapté au secteur, ciblage d'entreprises qui ne recrutent pas en alternance dans leur métier. Résultat : des mois perdus, des CFA en difficulté de placement, et des abandons avant même d'avoir commencé.
+
+### Solution
+**(1) Profil étudiant :** Formation (BTS, Bachelor, Master…), CFA, région, secteur visé, compétences. **(2) Ciblage intelligent :** Le moteur analyse les entreprises qui ont effectivement recruté des alternants dans le même secteur/région ces 2 ans (données DARES ouvertes + Sirene) et identifie les plus susceptibles de répondre. **(3) Dossier IA :** Génération d'un CV adapté au secteur et d'une lettre de motivation personnalisée pour chaque entreprise cible — pas un template générique, mais un texte qui cite le métier de l'entreprise et la valeur apportée. **(4) Pipeline tracker :** Tableau kanban pour suivre les candidatures (envoyée → réponse → entretien → contrat). **(5) Préparation entretien :** Questions typiques de l'entreprise et du secteur, simulateur d'entretien IA. **(6) Vérification contrat :** Une fois l'offre reçue, vérification automatique de la rémunération légale minimale (grille par âge et année de formation), des droits (RTT, congés, chômage partiel), et identification de l'OPCO compétent pour le financement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Accès gratuit | €0 | 3 lettres de motivation / CV de base / pipeline 10 candidatures |
+| Pack Recherche | €9,99 | Dossiers illimités (CV + LM personnalisés) + ciblage IA + pipeline illimité |
+| Abonnement CFA | €49/mo | Outil marque blanche pour les CFA — suivi des placements, tableau de bord CFA, exports |
+
+**Unit economics :** Claude API ~€0,15/dossier → 99% gross margin. **Marché :** 500 000 nouvelles recherches d'alternance/an × 3% conversion Pack = 15 000 packs → **€12 500 MRR**. Le B2B CFA est l'accélérateur : 1 000 CFA en France × €49/mo = **€49 000 MRR récurrent** si 10% adoptent l'outil.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — utilisé depuis le téléphone en cours)
+- **Ciblage entreprises:** API Sirene (SIREN/SIRET — gratuit) + DARES données ouvertes alternance par NAF/département + scraping LaBonneAlternance (API publique)
+- **AI dossier:** Claude API (claude-sonnet-4-6) — prompt spécialisé par secteur (BTP, santé, informatique, commerce, industrie) avec injection des infos de l'entreprise cible
+- **Vérification rémunération:** Grille légale SMIC alternance par âge et année de contrat (mise à jour annuelle) — moteur de règles déterministe
+- **Pipeline:** Supabase (candidatures, statuts, historique) + Resend (rappels relance J+15)
+- **B2B CFA:** Portail séparé, gestion multi-étudiants, analytics placement par formation
+- **Payments:** Stripe (unitaire + abonnement mensuel B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment j'ai trouvé mon alternance en 3 semaines avec l'IA" (format témoignage étudiant — viralité extrême dans la cible 17-25 ans)
+2. Partenariats CFA : Approcher les 1 000 CFA directement — ils ont un intérêt vital à placer leurs étudiants (financement lié au taux de placement)
+3. Discord/Reddit : Serveurs étudiants BTS/Bachelor/Master, r/france, r/etudiant
+4. SEO : "lettre de motivation alternance exemple", "trouver alternance BTS", "candidature spontanée alternance", "rémunération alternance 2026"
+
+### Competitive Moat
+- LaBonneAlternance et 1jeune1solution ne génèrent pas de dossier — ils listent des offres. Alternance.ai est le seul outil qui produit une candidature personnalisée par entreprise
+- Le ciblage par données DARES (qui a réellement recruté en alternance par secteur/département) est une donnée publique mais non exploitée — différenciation immédiate
+- Le canal CFA crée une distribution captive et récurrente : chaque rentrée = nouveau flux d'étudiants
+- La vérification de rémunération légale (souvent ignorée par les étudiants) crée une confiance et une utilité post-signature qui renforce la rétention
+
+### Figma Schematic
+[View Alternance.ai Application Flow on FigJam](https://www.figma.com/board/7M2VtGiH4ho6loakoC2pAh)
+
+---
+
+## 54. MicroFoncier.ai
+
+> **Optimisez votre imposition sur les revenus locatifs — micro-foncier ou régime réel, le bon choix en 5 minutes**
+
+### Problem
+La France compte **3 millions de bailleurs particuliers** qui déclarent des revenus fonciers chaque année. La grande majorité choisit par défaut le **régime micro-foncier** (abattement forfaitaire de 30%) sans jamais avoir comparé avec le **régime réel** — qui permet de déduire les charges réelles (intérêts d'emprunt, travaux, assurance, frais de gestion, taxe foncière, charges de copropriété). Le résultat : des milliers d'euros d'impôt payés inutilement. Pire, le **déficit foncier** — mécanisme permettant d'imputer jusqu'à €10 700/an de déficit sur le revenu global (et le reste sur les revenus fonciers des 10 années suivantes) — est quasi-inconnu des petits bailleurs. Un expert-comptable facture €300–€500 pour optimiser une déclaration foncière. La plupart des bailleurs ne s'y résoudront jamais.
+
+### Solution
+**(1) Saisie rapide :** L'utilisateur entre ses loyers annuels et ses charges (intérêts d'emprunt, travaux réalisés, assurance PNO, frais d'agence, taxe foncière, charges de copropriété non récupérables). **(2) Comparateur de régimes :** L'outil calcule exactement l'impôt et les prélèvements sociaux (17,2%) dans les deux scénarios, avec prise en compte de la tranche marginale d'imposition de l'utilisateur. **(3) Simulateur déficit foncier :** Si le régime réel génère un déficit, le simulateur calcule l'économie d'impôt sur le revenu global et projette l'imputation sur les années futures. **(4) Pré-remplissage formulaire :** Le bon formulaire est pré-rempli automatiquement — formulaire 2042 (ligne 4BE pour micro) ou formulaire 2044 (détail des charges pour réel) — exportable en PDF annoté. **(5) Guide déclaration :** Pas-à-pas pour saisir les données sur impots.gouv.fr, avec captures d'écran et alertes sur les erreurs courantes (oubli des charges de copropriété, mauvaise case pour les intérêts d'emprunt). **(6) Alerte annuelle :** Notification avant la période de déclaration (février–juin) pour relancer la saisie.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Comparaison micro vs réel sans formulaire |
+| Pack Déclaration | €7,99 | Formulaire pré-rempli (2042 ou 2044) + guide pas-à-pas + export PDF |
+| Abonnement Bailleur | €19,99/an | Accès annuel illimité + alertes + historique sur 5 ans + simulation déficit foncier multi-années |
+| Pack Multi-biens | €34,99/an | Jusqu'à 5 biens + consolidation globale + optimisation inter-biens |
+
+**Unit economics :** Claude API ~€0,05/simulation → 99% gross margin. **Marché :** 3M bailleurs × 0,3% conversion Pack Déclaration = 9 000 packs/an → **€6 000 MRR**. L'abonnement annuel Bailleur est le vrai moteur de récurrence : la déclaration revient chaque année, garantissant le renouvellement. Le Pack Multi-biens vise les 600 000 propriétaires de plusieurs biens locatifs.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé tranquillement à la maison face aux papiers)
+- **Moteur fiscal:** Algorithme déterministe appliquant les articles 14 à 31 du CGI (charges déductibles régime réel), les barèmes IR 2026, les prélèvements sociaux 17,2%, les règles de déficit foncier (articles 156 I 3° et 31 du CGI)
+- **AI catégorisation charges:** Claude API (claude-sonnet-4-6) — l'utilisateur peut coller une liste de dépenses en texte libre, l'IA les catégorise automatiquement (intérêts / travaux / assurance / frais gestion / charges copro / taxe foncière)
+- **Génération formulaire:** react-pdf — pré-remplissage exact des cases 2042 et 2044 avec positionnement conforme aux formulaires Cerfa officiels
+- **Historique:** Supabase — stockage des déclarations passées, calcul de la trajectoire déficit foncier sur 10 ans
+- **Alertes:** Resend — email de rappel en février (ouverture de la déclaration) et en mai (J-30 avant fermeture)
+- **Payments:** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai économisé 1 400 € d'impôts en changeant juste une case sur ma déclaration de revenus locatifs" (format révélation fiscale — très fort impact auprès des propriétaires)
+2. Facebook Groups : "Investissement immobilier locatif France", "SCI et gestion locative", "Gestion locative entre particuliers" (300K+ membres)
+3. Forums : Immozone, SeLoger Forum, MeilleursAgents Forum — les questions sur micro-foncier vs réel sont parmi les plus consultées
+4. SEO : "micro foncier ou regime reel calcul", "deficit foncier imputation revenu global", "formulaire 2044 comment remplir", "charges deductibles revenus fonciers", "simulateur impot revenus locatifs"
+
+### Competitive Moat
+- Aucun outil grand public ne fait la comparaison micro-foncier / régime réel avec le vrai impact fiscal personnalisé (tranche marginale + prélèvements sociaux) — les simulateurs impots.gouv sont limités à une seule case
+- La projection pluriannuelle du déficit foncier (10 ans d'imputation) est une valeur unique qui justifie l'abonnement annuel à elle seule
+- La récurrence naturelle (déclaration chaque année) garantit un taux de renouvellement élevé sans acquisition supplémentaire
+- Le canal "propriétaires bailleurs" est un segment premium : ils ont un actif immobilier = capacité et volonté de payer pour optimiser
+
+### Figma Schematic
+[View MicroFoncier.ai Landlord Fiscal Optimizer Flow on FigJam](https://www.figma.com/board/LD0a8IC31DXN3FPdmfpSB6)
+
+---
+
+## 55. FranceTravail.ai
+
+> **Comprenez et optimisez vos allocations chômage — ARE, déclarations mensuelles, et reprise d'activité sans erreur**
+
+### Problem
+**5,4 millions de personnes sont inscrites à France Travail** (ex-Pôle Emploi). La grande majorité ne comprend pas précisément comment leur ARE (Allocation d'aide au Retour à l'Emploi) est calculée, combien de temps elle durera, et comment elle évolue s'ils reprennent une activité partielle. Les erreurs dans les déclarations mensuelles sont fréquentes — et elles entraînent des **trop-perçus** (demandes de remboursement parfois de plusieurs milliers d'euros), voire des suspensions d'allocation. La règle de **cumul ARE + salaire** (possibilité de travailler partiellement tout en percevant une ARE réduite) est méconnue ou mal appliquée : beaucoup pensent qu'accepter un CDD d'un mois fait perdre tous leurs droits. En réalité, les règles sont favorables mais complexes — le nombre de jours indemnisables restants, le calcul du salaire journalier de référence (SJR), les règles de rechargement des droits — chaque notion est opaque pour un non-spécialiste. Un conseiller France Travail a en moyenne 300 demandeurs d'emploi à suivre : il n'a pas le temps d'expliquer tout cela à chacun.
+
+### Solution
+**(1) Calculateur ARE :** L'utilisateur saisit son ancien contrat (type, durée, salaire brut mensuel moyen sur 12 mois, motif de rupture). L'outil calcule son SJR, son taux d'indemnisation, son allocation journalière, et la durée de ses droits — avec le détail de chaque étape. **(2) Dashboard indemnisation :** Vue claire de l'allocation journalière, du capital de jours restants, et des dates clés (fin de différé d'indemnisation, date de rechargement des droits). **(3) Assistant déclaration mensuelle :** Guide pas-à-pas de l'actualisation mensuelle sur le portail France Travail — quelles cases cocher, comment déclarer une activité partielle, comment éviter les pièges (oubli d'un jour travaillé, mauvaise déclaration d'une période de maladie). **(4) Simulateur reprise d'activité :** L'utilisateur entre les conditions d'un job proposé (CDD, CDI partiel, nombre d'heures, salaire). L'outil calcule exactement l'ARE résiduelle, le revenu total (salaire + ARE), et compare avec la situation sans travail — visualisation graphique de l'intérêt financier. **(5) Vérificateur anti-trop-perçu :** Avant de soumettre la déclaration mensuelle, l'outil vérifie la cohérence entre les jours travaillés déclarés et les éléments saisis, et alerte sur les incohérences. **(6) Alertes :** Notification J-3 avant la date limite d'actualisation mensuelle.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Calcul ARE de base + durée des droits |
+| Pack Optimisation | €4,99 | Simulateur reprise activité + vérificateur trop-perçu + guide déclaration |
+| Abonnement Mensuel | €2,99/mo | Accès complet + alertes déclaration + re-simulation automatique chaque mois |
+| Module Employeur | €29/mo | Pour les TPE/PME — simulation du coût réel d'un CDD sur un demandeur d'emploi (impact ARE), outil RH de transparence |
+
+**Unit economics :** Claude API ~€0,05/simulation → 99% gross margin. **Marché :** 5,4M inscrits × 0,1% conversion Pack Optimisation = 5 400 packs → **€2 700 MRR immédiat**. L'abonnement mensuel est le moteur de récurrence : la déclaration revient chaque mois, les utilisateurs restent abonnés pendant toute la durée de leur chômage (en moyenne 12 mois). Le Module Employeur est un levier B2B émergent.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — souvent consulté en urgence la veille de la date limite)
+- **Calculateur ARE:** Moteur de règles appliquant la Convention d'assurance chômage (règlement AGS) — SJR (salaire journalier de référence), taux et montant minimum/maximum, différé de carence (franchise), différé spécifique (indemnités de rupture), durée d'indemnisation (1 jour indemnisé pour 1 jour cotisé, dans la limite de 24 mois — 36 mois pour les 55 ans et plus)
+- **Simulateur cumul:** Règle des 70% (ARE + salaire ≤ 70% du salaire antérieur) + calcul du nombre de jours non indemnisés par mois selon la formule réglementaire
+- **AI assistant déclaration:** Claude API (claude-sonnet-4-6) — répond en français aux questions complexes ("que se passe-t-il si je déclare 3 jours au lieu de 2 ?", "est-ce que ma période d'arrêt maladie suspend mes droits ?")
+- **Vérificateur:** Algorithme déterministe de cohérence croisée entre la déclaration saisie et les données du profil (alertes sur les incohérences avant envoi)
+- **Alertes:** Resend — notification mensuelle personnalisée avec la date limite d'actualisation de l'utilisateur
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Je croyais que j'allais perdre mes allocations en acceptant ce CDD — j'avais tout faux" (format révélation, énorme résonance chez les demandeurs d'emploi qui ont peur de travailler)
+2. Facebook Groups : "Pôle Emploi / France Travail — entraide et conseils", "Chômage et droits France", "Reconversion professionnelle" (600K+ membres)
+3. Forums : Cadremploi, Keljob, Forum-emploi.fr — les questions sur l'ARE et les déclarations sont parmi les plus consultées
+4. SEO : "calcul ARE chomage", "declaration mensuelle pole emploi comment remplir", "cumul ARE et salaire CDD", "trop percu pole emploi eviter", "reprise activite impact allocation chomage"
+
+### Competitive Moat
+- Le simulateur officiel de France Travail ne permet pas de simuler la reprise d'activité partielle avec un salaire donné — trou béant dans l'offre publique
+- La vérification anti-trop-perçu avant soumission de déclaration est une valeur émotionnelle extrêmement forte (peur du remboursement = conversion garantie)
+- La fréquence mensuelle d'usage (déclaration tous les mois) crée un taux de rétention naturel exceptionnel pendant toute la durée du chômage
+- Les règles ARE sont modifiées régulièrement (réforme 2023, réforme 2024) — la maintenance crée une barrière à l'entrée pour les clones
+
+### Figma Schematic
+[View FranceTravail.ai Unemployment Benefit Navigator Flow on FigJam](https://www.figma.com/board/7jMy6AUVtWw4iF3y0Pzex7)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2433,4 +2573,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-03 — Ideas 50–52 added (France-specific, ultra-low-budget: VAE.ai, TravauxPermis.ai, AssuranceVie.ai)*
+*Last updated: 2026-05-04 — Ideas 53–55 added (France-specific, ultra-low-budget: Alternance.ai, MicroFoncier.ai, FranceTravail.ai)*
