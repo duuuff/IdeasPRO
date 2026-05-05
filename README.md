@@ -63,6 +63,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 53 | [Alternance.ai](#53-alternanceai) | Pay-per-dossier + Subscription | €6K–€45K | Low |
 | 54 | [MicroFoncier.ai](#54-microfoncierai) | Pay-per-declaration + Annual Subscription | €5K–€35K | Low |
 | 55 | [FranceTravail.ai](#55-francetravailai) | Freemium + Pay-per-simulation | €4K–€28K | Low |
+| 56 | [DivorceSimple.ai](#56-divorcesimpleai) | Pay-per-pack + Mise en relation avocats | €8K–€60K | Low-Medium |
+| 57 | [PointsPermis.ai](#57-pointspermisai) | Freemium + Pay-per-pack + Subscription | €4K–€30K | Low |
+| 58 | [CESU.ai](#58-cesuai) | Pay-per-pack + Annual Subscription | €5K–€40K | Low |
 
 ---
 
@@ -2561,6 +2564,146 @@ La France compte **3 millions de bailleurs particuliers** qui déclarent des rev
 
 ---
 
+## 56. DivorceSimple.ai
+
+> **Préparez votre divorce amiable sans juge — dossier complet, simulation de partage et mise en relation avocats en moins d'une heure**
+
+### Problem
+La France enregistre **130 000 divorces par an**, dont près de 55 % sont des divorces par consentement mutuel. Depuis la loi du 18 novembre 2016 (entrée en vigueur le 1er janvier 2017), le divorce amiable se fait sans passage devant un juge — uniquement entre deux avocats et, si un bien immobilier est en jeu, devant un notaire. C'est une procédure radicalement simplifiée, mais qui reste coûteuse et stressante pour la plupart des couples car : (1) **Chaque époux doit avoir son propre avocat** — deux honoraires distincts de €800 à €3 000 chacun, soit €1 600 à €6 000 au total, dont une grande partie est consacrée à rassembler et analyser les informations que le couple aurait pu préparer seul. (2) **L'inventaire des biens communs est laborieux** — maison, comptes bancaires, PEL, assurance vie, véhicules, dettes : les couples ne savent pas quoi lister ni comment valoriser les actifs. (3) **La simulation du partage** selon le régime matrimonial (communauté réduite aux acquêts, séparation de biens, participation aux acquêts) est incompréhensible sans formation juridique. (4) **La prestation compensatoire** (PC) — cette somme que l'époux le mieux rémunéré verse à l'autre pour compenser la disparité de niveau de vie — est une négociation aveugle : les couples n'ont aucun outil pour estimer la fourchette légale et arrivent chez l'avocat sans base. (5) **La convention parentale** (garde, résidence habituelle, pension alimentaire, droit de visite) est rédigée de zéro alors qu'elle suit des critères standards. Résultat : des heures d'avocat facturées à €200/h pour structurer des informations basiques, un stress maximal, et souvent un accrochage sur la PC ou le partage faute de données neutres.
+
+### Solution
+**(1) Éligibilité :** Vérification automatique que le divorce amiable sans juge est possible (pas de mineur incapable de consentir, accord des deux époux). **(2) Inventaire guidé des biens :** L'utilisateur renseigne bien par bien (immobilier avec estimation notariale ou sites comme MeilleursAgents, comptes bancaires, épargne, véhicules, dettes) — l'outil calcule l'actif net commun à partager. **(3) Simulation de partage :** Selon le régime matrimonial déclaré, l'algorithme détermine ce qui est commun vs propre et propose la répartition légale + des scénarios alternatifs (rachat de la part de l'autre, vente du bien). **(4) Calcul de la prestation compensatoire :** L'IA analyse les critères légaux des articles 270–280 du Code civil — durée du mariage, écart de revenus actuels et futurs, droits à la retraite perdus, état de santé — et produit une fourchette estimée crédible, non opposable mais utile comme base de négociation. **(5) Convention parentale :** Template adapté à la situation (garde alternée, résidence principale, pension alimentaire selon barème indicatif du ministère). **(6) Mise en relation avocats :** Réseau de 200+ avocats droit de la famille dans toute la France avec tarifs fixes convenus pour les clients de DivorceSimple.ai — le brief pré-rempli est transmis automatiquement pour éviter toute heure facturée à prendre en note.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Éligibilité gratuite | €0 | Vérification éligibilité divorce amiable + checklist documents à réunir |
+| Pack Préparation | €29 | Inventaire des biens + simulation partage + calcul PC + convention parentale + export PDF complet |
+| Mise en relation avocats | €49 | 2 avocats partenaires dans le département + brief pré-rempli transmis + tarif fixe négocié |
+| Suivi post-divorce | €4,99/mo | Guide démarches post-divorce (CAF, banque, impôts, changement de nom) + alertes pension alimentaire |
+
+**Unit economics :** Claude API ~€0,20/dossier → 97%+ gross margin. **Marché :** 70 000 divorces par consentement mutuel/an × 2% conversion Pack Préparation = 1 400 packs → **€3 400 MRR**. La mise en relation est le vrai moteur : €49 × 2 500 mises en relation/an = **€10 200 MRR**. La commission sur les avocats partenaires (€50–€150 par dossier conclu) est le levier de scale.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé tranquillement en couple à la maison)
+- **Moteur de partage:** Algorithme déterministe appliquant le Code civil — régime légal communauté réduite aux acquêts (articles 1400–1491 CC), séparation de biens (articles 1536–1543 CC), participation aux acquêts (articles 1569–1581 CC) — identification des biens propres vs communs, calcul de la récompense, simulation de liquidation
+- **Calcul PC:** Modèle multicritères basé sur les critères des articles 270–280 du Code civil et la jurisprudence des cours d'appel — production d'une fourchette estimée avec facteurs pondérés (durée mariage, écart revenus, situation pro de chaque époux, droits retraite constitués pendant le mariage)
+- **Convention parentale:** Templates juridiquement conformes aux articles 373-2 et suivants du Code civil — garde alternée symétrique, résidence principale chez un parent, droit de visite élargi — avec barème indicatif pension alimentaire (tableau ministère de la Justice 2024)
+- **Réseau avocats:** Annuaire de 200+ avocats droit de la famille avec profil, département, tarif fixe DivorceSimple.ai — routing automatique par département + brief pré-rempli envoyé par API email
+- **AI assistant:** Claude API (claude-sonnet-4-6) — répond aux questions sur les articles du Code civil en français simple, explique les termes juridiques (récompense, propre, acquêt, liquidation)
+- **Auth + DB:** Supabase (chiffrement AES-256, RGPD — droit à l'effacement automatique 2 ans après la procédure)
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "On peut divorcer sans aller au tribunal depuis 2017 — voici comment ça marche exactement" (fort impact : la majorité des Français l'ignorent encore)
+2. Facebook Groups : "Séparation et divorce en France", "Divorce par consentement mutuel", "Familles recomposées France" (500K+ membres)
+3. Forums : Auféminin, Doctissimo, JeParents — les fils de discussion divorce par consentement mutuel sont parmi les plus consultés
+4. SEO : "divorce consentement mutuel sans juge comment", "coût divorce amiable avocat 2026", "convention parentale garde alternée modèle", "prestation compensatoire calcul estimation", "partage biens divorce communauté"
+
+### Competitive Moat
+- Aucun outil en France ne guide l'inventaire des biens ET simule le partage selon le régime matrimonial ET calcule la fourchette de PC — les avocats font payer €200/h pour ce travail de collecte
+- La mise en relation avec des avocats à tarif fixe est un modèle économique récurrent : chaque couple est un client des deux avocats, soit deux commissions
+- Le brief pré-rempli transmis à l'avocat réduit le temps de traitement = l'avocat a intérêt à recommander l'outil à ses clients
+- Les données du divorce (actifs, revenus, enfants) permettent un upsell naturel vers d'autres produits (MicroFoncier.ai pour les revenus locatifs, AssuranceVie.ai pour les clauses bénéficiaires à mettre à jour après divorce)
+
+### Figma Schematic
+[View DivorceSimple.ai Amicable Divorce Preparation Flow on FigJam](https://www.figma.com/board/K8Mdx44oHbrtGFhj5N9x6u)
+
+---
+
+## 57. PointsPermis.ai
+
+> **Gérez et récupérez vos points de permis de conduire — solde exact, simulation de récupération, recherche de stage**
+
+### Problem
+La France compte **38 millions de conducteurs** titulaires d'un permis de conduire. Le capital points (12 à l'obtention du permis, 6 pendant la période probatoire) est une source d'anxiété permanente pour des millions d'entre eux, et ce pour plusieurs raisons mal comprises : (1) **Opacité du solde réel :** Le site officiel Télépoints (télépoints.interieur.gouv.fr) existe mais est peu connu et peu utilisé. La plupart des conducteurs ont une estimation vague de leur solde basée sur les infractions qu'ils se rappellent. Les contentieux longue date sur des PV réclamés par courrier mois après l'infraction compliquent le calcul. (2) **Récupération automatique méconnue :** Peu de conducteurs savent que chaque année sans infraction récupère 1 point (jusqu'à 12), et que 3 années consécutives sans infraction remettent le capital à 12 points quel que soit le solde de départ — cette règle simple pourrait changer le comportement de millions de conducteurs. (3) **Stage de récupération sous-utilisé :** Le stage de récupération de points (+4 points, une fois par an minimum, si solde ≥ 1 point) coûte €150–€300 et peut sauver un permis — mais beaucoup de conducteurs qui en auraient besoin ne le font pas faute d'information sur le bon moment et le bon centre. (4) **Contestation de PV perçue comme impossible :** Un PV attribué à tort (erreur de plaque, radar mal étalonné, vice de procédure) peut être contesté — mais la procédure est perçue comme complexe. (5) **Conducteurs en période probatoire particulièrement perdus :** 6 points initiaux, gains de 2 points par an sans infraction — les jeunes conducteurs ne savent jamais exactement où ils en sont ni combien de temps avant d'avoir leur permis définitif.
+
+### Solution
+**(1) Calcul du solde :** L'utilisateur saisit les infractions dont il se souvient (date, nature : excès de vitesse <20km/h, 20-30km/h, téléphone au volant, ceinture, feu rouge, alcoolémie…) et l'outil calcule le solde théorique avec le détail des points retirés par infraction. **(2) Lien Télépoints :** Guide pas-à-pas pour consulter son solde officiel sur télépoints.interieur.gouv.fr (avec France Connect) — le solde officiel est comparé au solde calculé pour identifier les divergences. **(3) Simulation récupération automatique :** Projection graphique du solde sur 3 ans selon les scenarios "zéro infraction", "1 infraction légère", "2 infractions" — visualisation claire du moment où le permis sera complet. **(4) Stage de récupération :** Si le solde est ≤ 8 points, recommandation de stage + moteur de recherche des centres agréés par département + comparateur de prix + réservation directe. **(5) Générateur de lettre de contestation :** L'utilisateur décrit le PV, l'outil identifie les vices de procédure possibles (défaut de signature de l'officier, radar non homologué, plaque illisible, prescription) et génère la lettre de contestation motivée avec les textes de loi applicables. **(6) Alertes :** Notification à J+1 an (récupération d'1 point), à J+2 ans, à J+3 ans (remise à 12). Alerte si le solde calculé descend sous 6 ou 3 points.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Calcul solde théorique + guide Télépoints + dates de récupération automatique |
+| Pack Optimisation | €4,99 | Simulation graphique 3 ans + générateur lettre contestation + recherche de stages + alerte solde critique |
+| Abonnement Vigilance | €2,99/mo | Alertes personnalisées de récupération + rappels + mise à jour automatique des règles Code de la route + alerte nouvelles ZFE |
+| Commission stages | 5–10% | Commission sur réservation de stage de récupération via partenaires agréés |
+
+**Unit economics :** Claude API ~€0,10/analyse → 95%+ gross margin. **Marché :** 38M conducteurs × 0,05% Pack Optimisation = 19 000 packs → **€7 900 MRR**. La commission sur stages est le levier de scale : 100 000 stages/an en France × 3% de part de marché × €250 prix moyen × 7% commission = **€5 250 MRR additionnel**. L'abonnement Vigilance cible les conducteurs professionnels (VTC, livreurs, commerciaux) pour qui le permis est le fond de commerce.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — souvent utilisé depuis le téléphone après une verbalisation)
+- **Moteur de points:** Algorithme appliquant l'annexe à l'article R223-1 du Code de la route — tableau complet des 73 infractions entraînant retrait de points (1, 2, 3, 4, 6 points selon gravité), règles de récupération automatique (article R223-3 : 1 point par an sans infraction, remise à 12 si 3 ans sans), règles de stage (article L223-6 : +4 points, 1 fois par an, solde ≥ 1 point)
+- **Intégration Télépoints:** Guide illustré de connexion via France Connect + télépoints.interieur.gouv.fr — l'utilisateur saisit manuellement son solde officiel, l'outil le stocke et l'utilise comme base de calcul
+- **Moteur de recherche stages:** Données des centres agréés (liste publique ministère de l'Intérieur) + géolocalisation Google Maps API (gratuit jusqu'à 28 500 requêtes/mo) + scraping des disponibilités et prix
+- **AI contestation:** Claude API (claude-sonnet-4-6) — analyse le PV décrit par l'utilisateur, identifie les vices de procédure courants selon la jurisprudence (défaut de notification dans les délais, absence de signature, erreur plaque, prescription 3 ans), génère la lettre LRAR motivée avec articles R/L du Code de la route
+- **Alertes:** Resend — alertes J+1 an, J+2 ans, J+3 ans automatisées à la date de l'infraction
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'avais 4 points de permis — voici comment j'en suis revenu à 12 sans repasser l'examen" (fort impact émotionnel, concerne chaque conducteur)
+2. Facebook Groups : "Conducteurs France", "Infractions radars PV contestation", "Auto-école permis B France" (800K+ membres)
+3. Forums : Permisecole.com, Auto-infos.fr, Service-public.fr commentaires — les questions sur les points sont parmi les plus consultées
+4. SEO : "combien de points il me reste permis", "recuperer points permis comment", "stage recuperation points prix comparatif", "contester pv permis modele lettre", "permis probatoire combien de points"
+
+### Competitive Moat
+- Télépoints montre le solde mais n'explique pas comment récupérer les points ni ne génère de lettre de contestation — trou béant dans l'offre publique
+- Le moteur de recherche de stages avec comparaison des prix est inexistant : les conducteurs appellent 10 centres à la main
+- La contestation de PV est perçue comme complexe — le générateur de lettre avec les articles de loi applicables est une valeur émotionnelle très forte (sentiment de reprendre le contrôle)
+- Les conducteurs professionnels (VTC, livreurs Uber Eats, commerciaux) sont un segment premium : leur permis est leur outil de travail → volonté de payer élevée pour l'abonnement Vigilance
+
+### Figma Schematic
+[View PointsPermis.ai Driving Licence Points Recovery Flow on FigJam](https://www.figma.com/board/L9VKj7bcx428LBgUNLs6Qw)
+
+---
+
+## 58. CESU.ai
+
+> **Optimisez votre emploi à domicile — coût réel après crédit d'impôt 50%, bulletins de paie automatiques et guide déclaration URSSAF**
+
+### Problem
+La France compte **1,5 million de particuliers employeurs** qui déclarent leur salarié à domicile via le CESU (Chèque Emploi Service Universel) — garde d'enfants, ménage, jardinage, aide aux personnes âgées, soutien scolaire. Le secteur représente **3,5 millions de salariés**. Malgré son ampleur, ce système souffre de plusieurs frictions majeures qui coûtent de l'argent aux employeurs et créent des risques de redressement : (1) **Le crédit d'impôt de 50% est sous-optimisé :** L'article 199 sexdecies du CGI accorde un crédit d'impôt de 50% sur toutes les dépenses d'emploi à domicile, dans la limite de €12 000/an (+ €1 500 par enfant à charge ou personne âgée en dépendance, jusqu'à €15 000). Autrement dit, une babysitter payée €1 000 brut/mois ne coûte en réalité que ~€500 net après crédit d'impôt — mais la majorité des employeurs ne calcule jamais le coût réel et pilote à l'aveugle. (2) **L'acompte de 60% en janvier déstabilise la trésorerie :** Depuis 2022, l'administration verse automatiquement en janvier un acompte de 60% du crédit d'impôt de l'année précédente. Si les dépenses ont changé, cet acompte peut être supérieur au crédit réel de l'année en cours → remboursement imposé en mai. Beaucoup d'employeurs découvrent ce mécanisme trop tard. (3) **La déclaration CESU mensuelle est source d'erreurs :** La plateforme cesu.urssaf.fr génère automatiquement les bulletins de paie mais ne prévient pas des erreurs de saisie (oubli de jours, mauvais taux horaire, dépassement du plafond de la Sécurité Sociale). (4) **Le plafond de dépenses éligibles est méconnu :** Les majorations (+€1 500 par enfant, +€1 500 pour un parent en dépendance, +€1 000 pour premier emploi d'un salarié) sont ignorées des employeurs qui croient atteindre le plafond alors qu'ils pourraient déclarer davantage. (5) **L'embauche d'un premier salarié est stressante :** DPAE (déclaration préalable à l'embauche), calcul du salaire net/brut CESU, détermination de la convention collective applicable (convention nationale du particulier employeur) — autant d'obstacles qui retardent ou empêchent la régularisation de situations informelles.
+
+### Solution
+**(1) Calculateur de coût réel :** L'employeur saisit le salaire horaire net, le nombre d'heures par mois et sa tranche marginale d'imposition. L'outil calcule instantanément le coût brut CESU, les cotisations patronales, le coût total, et surtout le **coût réel après crédit d'impôt** — avec projection mensuelle et annuelle. **(2) Optimiseur de plafond :** En fonction de la situation familiale (enfants à charge, parent en dépendance, premier emploi), l'outil calcule le plafond éligible personnalisé et indique si l'employeur peut déclarer davantage de dépenses. **(3) Simulateur d'acompte :** L'outil compare le crédit estimé de l'année N avec l'acompte versé en janvier (basé sur N-1) et alerte sur le risque de remboursement — avec recommandation de contacter l'administration pour moduler l'acompte. **(4) Guide déclaration CESU :** Pas-à-pas illustré pour déclarer sur cesu.urssaf.fr — captures d'écran annotées, alertes sur les erreurs courantes, rappel mensuel avant la date limite. **(5) Génération bulletins de paie :** Export PDF du bulletin de paie CESU au format réglementaire, pré-rempli avec les données de l'employeur et du salarié. **(6) Pack embauche :** Guide DPAE (déclaration en 2 minutes sur net-entreprises.fr) + calcul salaire net/brut CESU + lettre de mission pré-remplie selon la convention collective particuliers employeurs.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Coût réel après crédit d'impôt pour un salaire et un nombre d'heures donnés |
+| Pack Employeur | €9,99/an | Optimiseur de plafond + guide déclaration CESU + bulletins de paie PDF + alertes mensuelles + récapitulatif fiscal annuel (ligne 7DB) |
+| Abonnement Multi-emploi | €19,99/an | Jusqu'à 5 salariés + consolidation globale + simulateur acompte + alerte risque remboursement |
+| Pack Embauche | €4,99 | Guide DPAE + lettre de mission + calcul net/brut + inscription CESU en ligne guidée |
+
+**Unit economics :** Claude API ~€0,05/calcul → 99% gross margin. **Marché :** 1,5M d'employeurs × 0,3% conversion Pack Employeur = 4 500 packs → **€3 750 MRR**. L'abonnement annuel garantit le renouvellement : la déclaration revient chaque mois, la situation familiale change (nouvelle naissance = nouveau plafond). Le Pack Embauche cible les 300 000 nouvelles embauches CESU par an (dont une partie est encore informelle).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop/mobile — utilisé calmement à la maison, souvent en fin de mois)
+- **Moteur fiscal:** Algorithme déterministe appliquant l'article 199 sexdecies du CGI — plafond de base €12 000, majorations par enfant à charge (€1 500, max €15 000), par personne en dépendance (€1 500), pour premier emploi d'un salarié (€1 000) ; calcul du crédit d'impôt = 50% des dépenses éligibles dans la limite du plafond ; taux de cotisations CESU 2026 (patronales : ~22,7% ; salariales : ~22% net employeur) avec calcul du brut depuis le net ou du net depuis le brut
+- **Simulateur acompte:** Comparaison crédit N-1 × 60% (acompte versé) vs crédit N estimé (dépenses saisies annualisées) — alerte si risque de remboursement > €200 avec lien vers le formulaire de modulation d'acompte impots.gouv.fr
+- **Génération bulletins:** react-pdf — bulletin de paie CESU au format réglementaire (convention nationale du particulier employeur, grille des salaires horaires minimaux par catégorie)
+- **Guide déclaration:** Screenshots annotés de chaque étape cesu.urssaf.fr + détection des erreurs de saisie courantes (heures dépassant le contrat, taux < SMIC, oubli de mois)
+- **Alertes:** Resend — notification mensuelle avec la date limite de déclaration CESU (avant le 5 du mois suivant) + montant pré-calculé à déclarer
+- **AI assistant:** Claude API (claude-sonnet-4-6) — répond aux questions en français (congés payés CESU, 13e mois, mutuelle obligatoire exception CESU, majoration heures supplémentaires, préavis de licenciement)
+- **Payments:** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Ma baby-sitter me coûte 900€/mois — après crédit d'impôt je paie en réalité 450€. Voici le calcul exact" (format révélation, touche tous les parents employeurs)
+2. Facebook Groups : "Parents et nounous garde d'enfants France", "Aide à domicile CESU employeurs", "Bien vieillir à domicile France" (400K+ membres)
+3. Partenariats : crèches et RAM (Relais Assistantes Maternelles), agences de placement à domicile, ADMR et services d'aide aux personnes âgées — ils ont intérêt à orienter leurs clients vers un outil qui clarifie le coût réel
+4. SEO : "credit impot emploi domicile calcul 2026", "CESU déclarer comment pas à pas", "coût baby sitter après avantage fiscal", "CESU bulletin de paie générateur gratuit", "plafond crédit impôt services à la personne enfants"
+
+### Competitive Moat
+- La plateforme officielle cesu.urssaf.fr génère les bulletins mais ne montre jamais le coût réel après crédit d'impôt — trou majeur que CESU.ai comble seul
+- Le simulateur d'acompte (risque de remboursement en mai) est une valeur émotionnelle très forte : les employeurs n'ont aucun autre outil pour anticiper ce mécanisme
+- Les majorations de plafond (€1 500 par enfant) sont ignorées de la grande majorité des employeurs — la découverte de "vous pouvez déclarer €1 500 de plus" crée une conversion quasi-instantanée
+- La fidélité est structurelle : chaque nouvelle naissance ou parent en dépendance recrée un besoin de recalcul = rétention naturelle sans effort
+
+### Figma Schematic
+[View CESU.ai Home Employment Optimizer Flow on FigJam](https://www.figma.com/board/wIEKGn60OJ8sufGpF3YMeX)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2573,4 +2716,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-04 — Ideas 53–55 added (France-specific, ultra-low-budget: Alternance.ai, MicroFoncier.ai, FranceTravail.ai)*
+*Last updated: 2026-05-05 — Ideas 56–58 added (France-specific, ultra-low-budget: DivorceSimple.ai, PointsPermis.ai, CESU.ai)*
