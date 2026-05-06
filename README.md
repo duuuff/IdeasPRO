@@ -57,6 +57,18 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 47 | [TestamentSimple.ai](#47-testamentsimpleai) | Pay-per-guide + Subscription | €5K–€40K | Low |
 | 48 | [MaPrimeAdapt.ai](#48-maprimeadaptai) | Pay-per-dossier + Commission artisan | €8K–€60K | Low-Medium |
 | 49 | [PremierEmployeur.ai](#49-premieremployeurai) | Pay-per-pack + SaaS Subscription | €6K–€45K | Low |
+| 50 | [VAE.ai](#50-vaeai) | Pay-per-livret + Subscription | €5K–€38K | Low |
+| 51 | [TravauxPermis.ai](#51-travauxpermisai) | Pay-per-pack + B2B SaaS | €6K–€45K | Low |
+| 52 | [AssuranceVie.ai](#52-assurancevieai) | Freemium + Subscription + Affiliate | €10K–€80K | Low-Medium |
+| 53 | [Alternance.ai](#53-alternanceai) | Pay-per-dossier + Subscription | €6K–€45K | Low |
+| 54 | [MicroFoncier.ai](#54-microfoncierai) | Pay-per-declaration + Annual Subscription | €5K–€35K | Low |
+| 55 | [FranceTravail.ai](#55-francetravailai) | Freemium + Pay-per-simulation | €4K–€28K | Low |
+| 56 | [DivorceSimple.ai](#56-divorcesimpleai) | Pay-per-pack + Mise en relation avocats | €8K–€60K | Low-Medium |
+| 57 | [PointsPermis.ai](#57-pointspermisai) | Freemium + Pay-per-pack + Subscription | €4K–€30K | Low |
+| 58 | [CESU.ai](#58-cesuai) | Pay-per-pack + Annual Subscription | €5K–€40K | Low |
+| 59 | [MaisonDeRetraite.ai](#59-maisonderettraiteai) | Pay-per-report + Référencement EHPAD | €8K–€60K | Low-Medium |
+| 60 | [LMNP.ai](#60-lmnpai) | Pay-per-analysis + Annual Subscription | €6K–€45K | Low-Medium |
+| 61 | [NotaireSimple.ai](#61-notairesimpleai) | Freemium + Pay-per-report + Référencement notaires | €10K–€70K | Low |
 
 ---
 
@@ -2280,6 +2292,560 @@ Un **wizard en 6 étapes** qui transforme l'intention d'embaucher en dossier adm
 
 ---
 
+## 50. VAE.ai
+
+> **Obtenez un diplôme reconnu par l'État grâce à votre expérience professionnelle — Livret 1 et Livret 2 guidés par IA**
+
+### Problem
+La France compte **3,5 millions de travailleurs sans aucun diplôme** et **12 millions supplémentaires** dont le niveau de qualification ne correspond pas au poste occupé. La **Validation des Acquis de l'Expérience (VAE)** permet depuis 2002 d'obtenir un diplôme d'État (CAP, BTS, Licence, Master) sans retourner en formation — uniquement en faisant valider son expérience professionnelle. C'est le seul dispositif français permettant d'accéder à un diplôme à faible coût (aide CPF, financement Pôle Emploi) sur la base du travail accompli. Pourtant, **seulement 30 000 VAE sont validées par an** alors que le potentiel est de plusieurs millions : (1) la grande majorité des éligibles ne connaissent pas le dispositif ; (2) ceux qui l'initient abandonnent face au **Livret 2** — un dossier de 40 à 80 pages décrivant précisément ses activités professionnelles en les reliant aux compétences du référentiel de certification ; (3) les délais sont longs (6 à 18 mois) et le manque d'accompagnement structuré est la première cause d'abandon. Les VAE Accompagnées (réforme 2022) exigent désormais 24 heures d'accompagnement — un marché de services entièrement à créer.
+
+### Solution
+**(1) Simulateur d'éligibilité :** L'utilisateur saisit son métier, son secteur, et ses années d'expérience. Le moteur de règles vérifie les conditions d'éligibilité (3 ans d'expérience minimum en lien avec la certification visée, pas forcément continus) et identifie les certifications RNCP les plus proches, avec le taux de validation historique de chaque jury. **(2) Livret 1 guidé :** Formulaire de recevabilité structuré par l'IA — description des activités, lien avec la certification, justificatifs à joindre. L'IA vérifie la cohérence et suggère les formulations conformes aux attentes du certificateur. **(3) Livret 2 assisté (cœur du produit) :** Le Livret 2 est la description détaillée de 3 à 5 situations professionnelles significatives, en lien avec chaque compétence du référentiel. L'IA génère une trame personnalisée basée sur la certification visée, guide l'utilisateur activité par activité, reformule les descriptions en langage de compétences, et vérifie la complétude avant dépôt. **(4) Préparation au jury :** Simulation de questions types + conseils de présentation orale pour le soutenance devant le jury VAE.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Éligibilité + certifications recommandées + taux de validation |
+| Livret 1 Guidé | €4,99 | Formulaire de recevabilité complet + liste justificatifs + envoi guidé |
+| Livret 2 Complet | €19,99 | Trame IA personnalisée + 3 situations professionnelles guidées + export PDF |
+| Accompagnement Full | €9,99/mo | Livret 1 + Livret 2 + 3 révisions IA + simulation jury + suivi jusqu'au résultat |
+
+**Unit economics :** Claude API ~€0,20/livret 2 → 99% gross margin. **Marché :** 30 000 VAE/an actuelles × objectif ×10 avec numérisation = 300 000 potentielles × 5% conversion Livret 2 = 15 000 × €19,99 = **€25 000 MRR**. Le financement CPF est utilisable pour la VAE Accompagnée — l'outil peut être référencé Mon Compte Formation, ce qui ouvre un flux de trésorerie B2G massif.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — souvent utilisé le soir, depuis un téléphone)
+- **Base certifications RNCP:** France Compétences API (accès gratuit) — 3 000+ certifications avec référentiels complets
+- **Simulateur éligibilité:** Moteur de règles couvrant les 3 ans d'expérience, la nature de l'activité (salariée, non-salariée, bénévole, stagiaire), et les critères spécifiques de chaque certificateur
+- **AI Livret 2:** Claude API (claude-sonnet-4-6) avec prompt spécialisé par référentiel RNCP — reformule les descriptions en langage de compétences, suggère des preuves cohérentes (attestations, photos, tableaux de bord)
+- **Export PDF:** react-pdf — mise en forme conforme aux gabarits officiels des certificateurs
+- **Auth + suivi dossier:** Supabase (stockage sécurisé des drafts, relances automatiques si inactivité)
+- **Payments:** Stripe (unitaires + abonnement mensuel) — intégration CPF via API Mon Compte Formation à terme
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai obtenu mon BTS sans retourner à l'école — voici comment la VAE m'a changé la vie" (format témoignage, très fort taux de partage dans la cible)
+2. Pôle Emploi / France Travail : partenariat — les conseillers recommandent la VAE aux demandeurs d'emploi sans qualification, un accord = canal de distribution massif immédiat
+3. Facebook Groups : "VAE France — Validation des Acquis", "Formation professionnelle continue", "Reconversion professionnelle France" (200K+ membres)
+4. SEO : "comment faire une VAE", "livret 2 VAE exemple", "VAE BTS aide", "VAE CAP sans école", "financement VAE CPF"
+
+### Competitive Moat
+- Aucun outil numérique n'assiste la rédaction du Livret 2 — les candidats s'appuient sur des accompagnateurs humains coûteux (€1 000–€3 000) ou abandonnent seuls
+- La base RNCP couvre 3 000 certifications avec leurs référentiels — constituer et maintenir ce mapping est une barrière à l'entrée significative
+- Le référencement Mon Compte Formation (CPF) crée un accès direct à des millions d'utilisateurs avec budget de formation pré-financé — barrière réglementaire forte pour les concurrents
+- La réforme VAE 2022 (VAE Accompagnée obligatoire) est une opportunité de marché entièrement nouvelle, non encore exploitée numériquement
+
+### Figma Schematic
+[View VAE.ai Diploma-by-Experience Flow on FigJam](https://www.figma.com/board/wlNnNfIQYSpULHWPULWWAv)
+
+---
+
+## 51. TravauxPermis.ai
+
+> **Suis-je obligé de demander un permis de construire ? — Générateur de dossier d'autorisation de travaux conforme au PLU en 10 minutes**
+
+### Problem
+La France enregistre **1,5 million de demandes d'autorisation d'urbanisme par an** (déclarations préalables + permis de construire + permis d'aménager). Pour chaque projet de travaux, le particulier doit répondre à une cascade de questions dont la complexité décourage la grande majorité : (1) **Quel régime s'applique ?** La surface créée, la hauteur, la nature des travaux (extension, clôture, piscine, véranda, ravalement, changement de destination) déterminent si aucune autorisation n'est nécessaire, si une déclaration préalable suffit, ou si un permis de construire est obligatoire — et les seuils varient selon que le terrain est en zone urbaine couverte par un PLU ou non (20 m² vs 40 m² en zone urbaine PLU). (2) **Le PLU local ajoute des contraintes supplémentaires** (retrait de limite séparative, hauteur maximale, aspect des matériaux, couleurs) que seul le service urbanisme de la mairie connaît. (3) **Les zones protégées** (ABF — Architectes des Bâtiments de France) dans les secteurs sauvegardés et aux abords des monuments historiques imposent une instruction complémentaire obligatoire. (4) Les **Cerfa sont nombreux et complexes** : 13703*09 pour la déclaration préalable, 13406*12 pour le permis de construire maison individuelle, 13409*11 pour le permis d'aménager — chacun avec des pièces à joindre différentes. Une erreur de dossier (pièce manquante, mauvais Cerfa) entraîne une demande de complément qui suspend le délai d'instruction et peut repousser les travaux de plusieurs mois. Résultat : des milliers de travaux réalisés sans autorisation (risque d'amende jusqu'à €300 000 + démolition) ou des dossiers incomplets qui traînent des mois.
+
+### Solution
+**(1) Diagnostic travaux :** L'utilisateur décrit son projet en répondant à 8 questions guidées (commune, type de travaux, surface créée, hauteur, nature — extension / piscine / clôture / garage / changement de destination…). Le moteur de règles applique le Code de l'Urbanisme article R421 et détermine le régime exact. **(2) Vérification PLU :** Le code INSEE de la commune permet de récupérer les règles PLU via Géoportail de l'Urbanisme (API ouverte) — recul par rapport aux voies, hauteur maximale, coefficient d'emprise au sol, règles de matériaux. **(3) Génération du dossier :** Le Cerfa correct est sélectionné et pré-rempli avec les informations saisies. La liste exacte des pièces à joindre est générée (plan de situation, plan de masse coté, plan en coupe, notice descriptive, photos) avec des gabarits et exemples téléchargeables. **(4) Guide de dépôt :** Pas-à-pas pour le dépôt en mairie ou sur le portail dématérialisé (AD'AU), avec calculateur du délai d'instruction (1 mois pour DP, 2 mois pour PC, +1 mois si ABF) et alerte si le délai approche. **(5) Recours :** Si refus, l'IA rédige un recours gracieux argumenté.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Régime applicable + synthèse PLU + liste pièces |
+| Pack Dossier | €7,99 | Cerfa pré-rempli + pièces listées + gabarits + guide dépôt + calculateur délai |
+| Pack Premium | €12,99 | Dossier + vérification IA complète PLU + alerte délai instruction + recours IA si refus |
+| B2B Architectes | €49/mo | Accès illimité + API + marque blanche pour agences d'architecture et constructeurs |
+
+**Unit economics :** Claude API ~€0,10/dossier → 99% gross margin. **Marché :** 1,5M dossiers/an × 2% conversion Pack Dossier = 30 000 dossiers/an → **€20 000 MRR**. Le B2B (architectes, constructeurs de maisons individuelles) est le vrai levier : 500 agences à €49/mo = **€24 500 MRR récurrent** stable.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop + mobile — utilisé sur chantier et en mairie)
+- **Moteur de règles urbanisme:** Algorithme basé sur Code de l'Urbanisme R421-1 à R421-42 — seuils par type de travaux, zone PLU/hors PLU, zone littorale/montagne
+- **PLU:** API Géoportail de l'Urbanisme (CNIG — accès gratuit) — récupération du règlement PLU par commune + zonage par parcelle cadastrale (API Géoportail)
+- **Cerfa generation:** react-pdf avec positionnement exact sur formulaires officiels (13703*09, 13406*12, 13409*11)
+- **AI vérification + recours:** Claude API (claude-sonnet-4-6) — détecte les incohérences dans le projet vs règlement PLU, rédige la notice descriptive et le recours gracieux
+- **Cadastre:** API Géoportail cadastre (gratuit) — identification de la parcelle par adresse, surface de terrain, contiguïté voies
+- **Payments:** Stripe (paiements unitaires + abonnements B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "On a failli avoir une amende de 50 000 € — on a fait notre extension sans permis par ignorance" (format témoignage, très fort impact émotionnel dans la cible propriétaires)
+2. Facebook Groups : "Construire sa maison en France", "Extension maison", "Auto-construction France", "Bricolage maison" (500K+ membres combinés)
+3. Forums : Système D, Ooreka, Houzz France — les questions sur permis de construire sont parmi les plus consultées
+4. SEO : "permis construire obligatoire surface", "declaration prealable travaux cerfa", "extension maison sans permis risque", "PLU mairie comment consulter", "délai instruction permis construire"
+
+### Competitive Moat
+- L'API Géoportail de l'Urbanisme (PLU par commune) couplée au moteur de règles R421 constitue un actif technique unique — aucun outil grand public ne l'exploite pour le particulier
+- La génération automatique du bon Cerfa pré-rempli (et non d'une liste de liens) est une valeur immédiate non copiable facilement
+- Le canal B2B (architectes, constructeurs, promoteurs) crée un MRR stable et une distribution à coût marginal nul — chaque professionnel amène ses clients
+- La responsabilité engagée (amende jusqu'à €300 000, démolition) crée une peur forte à la conversion et une fidélité maximale
+
+### Figma Schematic
+[View TravauxPermis.ai Building Permit Decision Flow on FigJam](https://www.figma.com/board/vVNVidqyZL93trhGDc1Yvb)
+
+---
+
+## 52. AssuranceVie.ai
+
+> **Auditez et optimisez la clause bénéficiaire de votre assurance vie — 38 millions de contrats mal configurés en France**
+
+### Problem
+La France possède **38 millions de contrats d'assurance vie** pour un encours total de **1 900 milliards d'euros** — c'est le premier produit d'épargne français. Mais la grande majorité de ces contrats souffrent d'un problème silencieux et potentiellement catastrophique : **la clause bénéficiaire est mal rédigée**. La "clause type" proposée par défaut par les assureurs ("mon conjoint, à défaut mes enfants nés ou à naître, à défaut mes héritiers") peut déclencher des conséquences fiscales désastreuses selon la situation familiale réelle : (1) **Concubins non protégés** — le concubin non marié ne bénéficie d'aucun abattement successoral mais paie 60% de droits sur les sommes reçues au-delà de 152 500 €, alors qu'une rédaction alternative (démembrement de clause, donation préalable) aurait pu l'exonérer totalement. (2) **Enfants mineurs bénéficiaires directs** — sans représentation légale explicite, les fonds sont bloqués sous tutelle jusqu'à la majorité, inaccessibles à l'époux survivant qui en aurait besoin. (3) **Clause "mes héritiers" en dernier ressort** — fait entrer le capital dans la succession et annule l'avantage hors succession de l'assurance vie (perte de l'abattement de €152 500). (4) **Démembrement de clause bénéficiaire** — la stratégie la plus efficace fiscalement (usufruitier = conjoint, nu-propriétaires = enfants) est quasiment inconnue des détenteurs. (5) **Absence de mise à jour après divorce, remariage, naissance** — le bénéficiaire désigné est souvent un ex-conjoint qui a droit aux fonds malgré le souhait du souscripteur, et rien ne l'en empêche. Un notaire ou conseiller en gestion de patrimoine facture €200–€500 pour auditer une clause bénéficiaire. La grande majorité des détenteurs ne le font jamais.
+
+### Solution
+**(1) Audit de clause :** L'utilisateur renseigne sa situation familiale (marié / pacsé / concubin / divorcé, enfants de l'union actuelle / d'unions précédentes) et colle le texte de sa clause bénéficiaire actuelle. L'IA analyse la clause contre sa situation et identifie les risques : bénéficiaire inadéquat, impact fiscal, absence de représentation mineurs, clause "héritiers" piège. **(2) Simulation fiscale :** Pour chaque bénéficiaire possible, le simulateur calcule l'abattement applicable (€152 500 par bénéficiaire pour versements avant 70 ans, €30 500 global au-delà), le taux de prélèvement résiduel, et compare avec une stratégie de démembrement ou de désignation optimisée. **(3) Génération de nouvelle clause :** L'IA génère le texte exact de la nouvelle clause bénéficiaire, adapté à la situation et fiscalement optimisé, avec les variantes possibles (avec ou sans démembrement, avec ou sans représentation). **(4) Courrier assureur :** Template de lettre recommandée pour modifier la clause auprès de l'assureur (changement de bénéficiaire, simple et gratuit — l'assureur est obligé d'accepter). **(5) Suivi des événements de vie :** Rappel automatique après mariage, naissance, divorce, décès d'un bénéficiaire pour réviser la clause.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Score de risque de la clause + identification des problèmes sans solution détaillée |
+| Audit Complet | €9,99 | Analyse détaillée + simulation fiscale + génération nouvelle clause + courrier assureur |
+| Abonnement Prévoyance | €4,99/an | Révision annuelle + alerte événements de vie + coffre numérique clause + accès illimité |
+| Affiliation CGPI | Commission | Redirection vers conseiller en gestion de patrimoine pour situations complexes (commission par lead qualifié) |
+
+**Unit economics :** Claude API ~€0,15/audit → 98% gross margin. **Marché :** 38M contrats × 0,05% de conversion annuelle Audit Complet = 19 000 audits/an → **€15 800 MRR**. L'affiliation CGPI (conseiller en gestion de patrimoine indépendant) est le vrai moteur : un lead qualifié "assurance vie à optimiser" vaut €50–€200 en commission — un seul accord avec un réseau de CGPI = revenus récurrents sans acquisition. L'abonnement annuel est reconduit après chaque événement de vie majeur.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé posément à la maison)
+- **Audit de clause:** Claude API (claude-sonnet-4-6) — analyse le texte libre de la clause bénéficiaire, identifie les formulations à risque, détecte les incohérences avec la situation familiale déclarée
+- **Simulateur fiscal:** Algorithme déterministe appliquant les articles 990 I et 757 B du CGI (abattements, taux de prélèvement, règles âge 70 ans, démembrement fiscal)
+- **Génération de clause:** Templates validés juridiquement pour les cas courants (clause standard sécurisée, clause avec démembrement, clause avec représentation mineurs) + adaptation IA pour situations complexes
+- **Réseau CGPI:** Annuaire de CGPI partenaires avec profil et spécialités — routing automatique selon la complexité du cas (régime matrimonial, contrat de mariage, trust)
+- **Auth + coffre:** Supabase (chiffrement AES-256, aucune donnée de patrimoine en clair) + Resend pour alertes événements de vie
+- **Payments:** Stripe (unitaire + abonnement annuel) + tracking affiliation CGPI (UTM + webhook)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon assurance vie allait tomber entre les mains de mon ex — voici comment l'éviter" (sujet à très fort impact émotionnel, touche absolument tout le monde)
+2. Facebook Groups : "Investissement et épargne France", "Gestion de patrimoine particuliers", "Assurance vie France — conseils" (400K+ membres)
+3. Partenariats avec mutuelles et banques en ligne (Boursorama, Fortuneo) — outil d'audit offert à leurs assurés comme service de fidélisation (B2B haute valeur)
+4. SEO : "clause bénéficiaire assurance vie exemple", "modifier bénéficiaire assurance vie", "assurance vie concubin fiscalité", "démembrement clause bénéficiaire", "assurance vie ex-conjoint comment changer"
+
+### Competitive Moat
+- Aucun outil en ligne n'audite une clause bénéficiaire existante ET génère la nouvelle clause — même les comparateurs d'assurance vie ne touchent pas à ce sujet
+- La simulation du démembrement de clause (stratégie ignorée de 95% des détenteurs) est une valeur perçue extrêmement haute — différenciation immédiate
+- L'affiliation CGPI transforme les cas complexes en revenus supplémentaires plutôt qu'en friction — modèle économique auto-amplificateur
+- Les 38 millions de contrats existants sont un marché captif permanent : chaque naissance, mariage, divorce, décès recrée un besoin — pas de saisonnalité
+
+### Figma Schematic
+[View AssuranceVie.ai Life Insurance Optimization Flow on FigJam](https://www.figma.com/board/rLlKEVaUkwCWJ3HbUgC9GR)
+
+---
+
+## 53. Alternance.ai
+
+> **L'assistant IA pour décrocher un contrat d'alternance — de la candidature à la signature du contrat**
+
+### Problem
+La France comptait **plus d'un million d'alternants** en 2024, et la demande explose avec les aides gouvernementales aux employeurs. Pourtant, trouver une entreprise reste l'obstacle numéro un : les étudiants en alternance sont livrés à eux-mêmes, sans conseils personnalisés, face à des portails comme 1jeune1solution ou LaBonneAlternance qui ne font que lister des offres sans aider à candidater. Les erreurs sont massives : lettre de motivation générique, CV non adapté au secteur, ciblage d'entreprises qui ne recrutent pas en alternance dans leur métier. Résultat : des mois perdus, des CFA en difficulté de placement, et des abandons avant même d'avoir commencé.
+
+### Solution
+**(1) Profil étudiant :** Formation (BTS, Bachelor, Master…), CFA, région, secteur visé, compétences. **(2) Ciblage intelligent :** Le moteur analyse les entreprises qui ont effectivement recruté des alternants dans le même secteur/région ces 2 ans (données DARES ouvertes + Sirene) et identifie les plus susceptibles de répondre. **(3) Dossier IA :** Génération d'un CV adapté au secteur et d'une lettre de motivation personnalisée pour chaque entreprise cible — pas un template générique, mais un texte qui cite le métier de l'entreprise et la valeur apportée. **(4) Pipeline tracker :** Tableau kanban pour suivre les candidatures (envoyée → réponse → entretien → contrat). **(5) Préparation entretien :** Questions typiques de l'entreprise et du secteur, simulateur d'entretien IA. **(6) Vérification contrat :** Une fois l'offre reçue, vérification automatique de la rémunération légale minimale (grille par âge et année de formation), des droits (RTT, congés, chômage partiel), et identification de l'OPCO compétent pour le financement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Accès gratuit | €0 | 3 lettres de motivation / CV de base / pipeline 10 candidatures |
+| Pack Recherche | €9,99 | Dossiers illimités (CV + LM personnalisés) + ciblage IA + pipeline illimité |
+| Abonnement CFA | €49/mo | Outil marque blanche pour les CFA — suivi des placements, tableau de bord CFA, exports |
+
+**Unit economics :** Claude API ~€0,15/dossier → 99% gross margin. **Marché :** 500 000 nouvelles recherches d'alternance/an × 3% conversion Pack = 15 000 packs → **€12 500 MRR**. Le B2B CFA est l'accélérateur : 1 000 CFA en France × €49/mo = **€49 000 MRR récurrent** si 10% adoptent l'outil.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (PWA — utilisé depuis le téléphone en cours)
+- **Ciblage entreprises:** API Sirene (SIREN/SIRET — gratuit) + DARES données ouvertes alternance par NAF/département + scraping LaBonneAlternance (API publique)
+- **AI dossier:** Claude API (claude-sonnet-4-6) — prompt spécialisé par secteur (BTP, santé, informatique, commerce, industrie) avec injection des infos de l'entreprise cible
+- **Vérification rémunération:** Grille légale SMIC alternance par âge et année de contrat (mise à jour annuelle) — moteur de règles déterministe
+- **Pipeline:** Supabase (candidatures, statuts, historique) + Resend (rappels relance J+15)
+- **B2B CFA:** Portail séparé, gestion multi-étudiants, analytics placement par formation
+- **Payments:** Stripe (unitaire + abonnement mensuel B2B)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Comment j'ai trouvé mon alternance en 3 semaines avec l'IA" (format témoignage étudiant — viralité extrême dans la cible 17-25 ans)
+2. Partenariats CFA : Approcher les 1 000 CFA directement — ils ont un intérêt vital à placer leurs étudiants (financement lié au taux de placement)
+3. Discord/Reddit : Serveurs étudiants BTS/Bachelor/Master, r/france, r/etudiant
+4. SEO : "lettre de motivation alternance exemple", "trouver alternance BTS", "candidature spontanée alternance", "rémunération alternance 2026"
+
+### Competitive Moat
+- LaBonneAlternance et 1jeune1solution ne génèrent pas de dossier — ils listent des offres. Alternance.ai est le seul outil qui produit une candidature personnalisée par entreprise
+- Le ciblage par données DARES (qui a réellement recruté en alternance par secteur/département) est une donnée publique mais non exploitée — différenciation immédiate
+- Le canal CFA crée une distribution captive et récurrente : chaque rentrée = nouveau flux d'étudiants
+- La vérification de rémunération légale (souvent ignorée par les étudiants) crée une confiance et une utilité post-signature qui renforce la rétention
+
+### Figma Schematic
+[View Alternance.ai Application Flow on FigJam](https://www.figma.com/board/7M2VtGiH4ho6loakoC2pAh)
+
+---
+
+## 54. MicroFoncier.ai
+
+> **Optimisez votre imposition sur les revenus locatifs — micro-foncier ou régime réel, le bon choix en 5 minutes**
+
+### Problem
+La France compte **3 millions de bailleurs particuliers** qui déclarent des revenus fonciers chaque année. La grande majorité choisit par défaut le **régime micro-foncier** (abattement forfaitaire de 30%) sans jamais avoir comparé avec le **régime réel** — qui permet de déduire les charges réelles (intérêts d'emprunt, travaux, assurance, frais de gestion, taxe foncière, charges de copropriété). Le résultat : des milliers d'euros d'impôt payés inutilement. Pire, le **déficit foncier** — mécanisme permettant d'imputer jusqu'à €10 700/an de déficit sur le revenu global (et le reste sur les revenus fonciers des 10 années suivantes) — est quasi-inconnu des petits bailleurs. Un expert-comptable facture €300–€500 pour optimiser une déclaration foncière. La plupart des bailleurs ne s'y résoudront jamais.
+
+### Solution
+**(1) Saisie rapide :** L'utilisateur entre ses loyers annuels et ses charges (intérêts d'emprunt, travaux réalisés, assurance PNO, frais d'agence, taxe foncière, charges de copropriété non récupérables). **(2) Comparateur de régimes :** L'outil calcule exactement l'impôt et les prélèvements sociaux (17,2%) dans les deux scénarios, avec prise en compte de la tranche marginale d'imposition de l'utilisateur. **(3) Simulateur déficit foncier :** Si le régime réel génère un déficit, le simulateur calcule l'économie d'impôt sur le revenu global et projette l'imputation sur les années futures. **(4) Pré-remplissage formulaire :** Le bon formulaire est pré-rempli automatiquement — formulaire 2042 (ligne 4BE pour micro) ou formulaire 2044 (détail des charges pour réel) — exportable en PDF annoté. **(5) Guide déclaration :** Pas-à-pas pour saisir les données sur impots.gouv.fr, avec captures d'écran et alertes sur les erreurs courantes (oubli des charges de copropriété, mauvaise case pour les intérêts d'emprunt). **(6) Alerte annuelle :** Notification avant la période de déclaration (février–juin) pour relancer la saisie.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Comparaison micro vs réel sans formulaire |
+| Pack Déclaration | €7,99 | Formulaire pré-rempli (2042 ou 2044) + guide pas-à-pas + export PDF |
+| Abonnement Bailleur | €19,99/an | Accès annuel illimité + alertes + historique sur 5 ans + simulation déficit foncier multi-années |
+| Pack Multi-biens | €34,99/an | Jusqu'à 5 biens + consolidation globale + optimisation inter-biens |
+
+**Unit economics :** Claude API ~€0,05/simulation → 99% gross margin. **Marché :** 3M bailleurs × 0,3% conversion Pack Déclaration = 9 000 packs/an → **€6 000 MRR**. L'abonnement annuel Bailleur est le vrai moteur de récurrence : la déclaration revient chaque année, garantissant le renouvellement. Le Pack Multi-biens vise les 600 000 propriétaires de plusieurs biens locatifs.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé tranquillement à la maison face aux papiers)
+- **Moteur fiscal:** Algorithme déterministe appliquant les articles 14 à 31 du CGI (charges déductibles régime réel), les barèmes IR 2026, les prélèvements sociaux 17,2%, les règles de déficit foncier (articles 156 I 3° et 31 du CGI)
+- **AI catégorisation charges:** Claude API (claude-sonnet-4-6) — l'utilisateur peut coller une liste de dépenses en texte libre, l'IA les catégorise automatiquement (intérêts / travaux / assurance / frais gestion / charges copro / taxe foncière)
+- **Génération formulaire:** react-pdf — pré-remplissage exact des cases 2042 et 2044 avec positionnement conforme aux formulaires Cerfa officiels
+- **Historique:** Supabase — stockage des déclarations passées, calcul de la trajectoire déficit foncier sur 10 ans
+- **Alertes:** Resend — email de rappel en février (ouverture de la déclaration) et en mai (J-30 avant fermeture)
+- **Payments:** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'ai économisé 1 400 € d'impôts en changeant juste une case sur ma déclaration de revenus locatifs" (format révélation fiscale — très fort impact auprès des propriétaires)
+2. Facebook Groups : "Investissement immobilier locatif France", "SCI et gestion locative", "Gestion locative entre particuliers" (300K+ membres)
+3. Forums : Immozone, SeLoger Forum, MeilleursAgents Forum — les questions sur micro-foncier vs réel sont parmi les plus consultées
+4. SEO : "micro foncier ou regime reel calcul", "deficit foncier imputation revenu global", "formulaire 2044 comment remplir", "charges deductibles revenus fonciers", "simulateur impot revenus locatifs"
+
+### Competitive Moat
+- Aucun outil grand public ne fait la comparaison micro-foncier / régime réel avec le vrai impact fiscal personnalisé (tranche marginale + prélèvements sociaux) — les simulateurs impots.gouv sont limités à une seule case
+- La projection pluriannuelle du déficit foncier (10 ans d'imputation) est une valeur unique qui justifie l'abonnement annuel à elle seule
+- La récurrence naturelle (déclaration chaque année) garantit un taux de renouvellement élevé sans acquisition supplémentaire
+- Le canal "propriétaires bailleurs" est un segment premium : ils ont un actif immobilier = capacité et volonté de payer pour optimiser
+
+### Figma Schematic
+[View MicroFoncier.ai Landlord Fiscal Optimizer Flow on FigJam](https://www.figma.com/board/LD0a8IC31DXN3FPdmfpSB6)
+
+---
+
+## 55. FranceTravail.ai
+
+> **Comprenez et optimisez vos allocations chômage — ARE, déclarations mensuelles, et reprise d'activité sans erreur**
+
+### Problem
+**5,4 millions de personnes sont inscrites à France Travail** (ex-Pôle Emploi). La grande majorité ne comprend pas précisément comment leur ARE (Allocation d'aide au Retour à l'Emploi) est calculée, combien de temps elle durera, et comment elle évolue s'ils reprennent une activité partielle. Les erreurs dans les déclarations mensuelles sont fréquentes — et elles entraînent des **trop-perçus** (demandes de remboursement parfois de plusieurs milliers d'euros), voire des suspensions d'allocation. La règle de **cumul ARE + salaire** (possibilité de travailler partiellement tout en percevant une ARE réduite) est méconnue ou mal appliquée : beaucoup pensent qu'accepter un CDD d'un mois fait perdre tous leurs droits. En réalité, les règles sont favorables mais complexes — le nombre de jours indemnisables restants, le calcul du salaire journalier de référence (SJR), les règles de rechargement des droits — chaque notion est opaque pour un non-spécialiste. Un conseiller France Travail a en moyenne 300 demandeurs d'emploi à suivre : il n'a pas le temps d'expliquer tout cela à chacun.
+
+### Solution
+**(1) Calculateur ARE :** L'utilisateur saisit son ancien contrat (type, durée, salaire brut mensuel moyen sur 12 mois, motif de rupture). L'outil calcule son SJR, son taux d'indemnisation, son allocation journalière, et la durée de ses droits — avec le détail de chaque étape. **(2) Dashboard indemnisation :** Vue claire de l'allocation journalière, du capital de jours restants, et des dates clés (fin de différé d'indemnisation, date de rechargement des droits). **(3) Assistant déclaration mensuelle :** Guide pas-à-pas de l'actualisation mensuelle sur le portail France Travail — quelles cases cocher, comment déclarer une activité partielle, comment éviter les pièges (oubli d'un jour travaillé, mauvaise déclaration d'une période de maladie). **(4) Simulateur reprise d'activité :** L'utilisateur entre les conditions d'un job proposé (CDD, CDI partiel, nombre d'heures, salaire). L'outil calcule exactement l'ARE résiduelle, le revenu total (salaire + ARE), et compare avec la situation sans travail — visualisation graphique de l'intérêt financier. **(5) Vérificateur anti-trop-perçu :** Avant de soumettre la déclaration mensuelle, l'outil vérifie la cohérence entre les jours travaillés déclarés et les éléments saisis, et alerte sur les incohérences. **(6) Alertes :** Notification J-3 avant la date limite d'actualisation mensuelle.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Calcul ARE de base + durée des droits |
+| Pack Optimisation | €4,99 | Simulateur reprise activité + vérificateur trop-perçu + guide déclaration |
+| Abonnement Mensuel | €2,99/mo | Accès complet + alertes déclaration + re-simulation automatique chaque mois |
+| Module Employeur | €29/mo | Pour les TPE/PME — simulation du coût réel d'un CDD sur un demandeur d'emploi (impact ARE), outil RH de transparence |
+
+**Unit economics :** Claude API ~€0,05/simulation → 99% gross margin. **Marché :** 5,4M inscrits × 0,1% conversion Pack Optimisation = 5 400 packs → **€2 700 MRR immédiat**. L'abonnement mensuel est le moteur de récurrence : la déclaration revient chaque mois, les utilisateurs restent abonnés pendant toute la durée de leur chômage (en moyenne 12 mois). Le Module Employeur est un levier B2B émergent.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — souvent consulté en urgence la veille de la date limite)
+- **Calculateur ARE:** Moteur de règles appliquant la Convention d'assurance chômage (règlement AGS) — SJR (salaire journalier de référence), taux et montant minimum/maximum, différé de carence (franchise), différé spécifique (indemnités de rupture), durée d'indemnisation (1 jour indemnisé pour 1 jour cotisé, dans la limite de 24 mois — 36 mois pour les 55 ans et plus)
+- **Simulateur cumul:** Règle des 70% (ARE + salaire ≤ 70% du salaire antérieur) + calcul du nombre de jours non indemnisés par mois selon la formule réglementaire
+- **AI assistant déclaration:** Claude API (claude-sonnet-4-6) — répond en français aux questions complexes ("que se passe-t-il si je déclare 3 jours au lieu de 2 ?", "est-ce que ma période d'arrêt maladie suspend mes droits ?")
+- **Vérificateur:** Algorithme déterministe de cohérence croisée entre la déclaration saisie et les données du profil (alertes sur les incohérences avant envoi)
+- **Alertes:** Resend — notification mensuelle personnalisée avec la date limite d'actualisation de l'utilisateur
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Je croyais que j'allais perdre mes allocations en acceptant ce CDD — j'avais tout faux" (format révélation, énorme résonance chez les demandeurs d'emploi qui ont peur de travailler)
+2. Facebook Groups : "Pôle Emploi / France Travail — entraide et conseils", "Chômage et droits France", "Reconversion professionnelle" (600K+ membres)
+3. Forums : Cadremploi, Keljob, Forum-emploi.fr — les questions sur l'ARE et les déclarations sont parmi les plus consultées
+4. SEO : "calcul ARE chomage", "declaration mensuelle pole emploi comment remplir", "cumul ARE et salaire CDD", "trop percu pole emploi eviter", "reprise activite impact allocation chomage"
+
+### Competitive Moat
+- Le simulateur officiel de France Travail ne permet pas de simuler la reprise d'activité partielle avec un salaire donné — trou béant dans l'offre publique
+- La vérification anti-trop-perçu avant soumission de déclaration est une valeur émotionnelle extrêmement forte (peur du remboursement = conversion garantie)
+- La fréquence mensuelle d'usage (déclaration tous les mois) crée un taux de rétention naturel exceptionnel pendant toute la durée du chômage
+- Les règles ARE sont modifiées régulièrement (réforme 2023, réforme 2024) — la maintenance crée une barrière à l'entrée pour les clones
+
+### Figma Schematic
+[View FranceTravail.ai Unemployment Benefit Navigator Flow on FigJam](https://www.figma.com/board/7jMy6AUVtWw4iF3y0Pzex7)
+
+---
+
+## 56. DivorceSimple.ai
+
+> **Préparez votre divorce amiable sans juge — dossier complet, simulation de partage et mise en relation avocats en moins d'une heure**
+
+### Problem
+La France enregistre **130 000 divorces par an**, dont près de 55 % sont des divorces par consentement mutuel. Depuis la loi du 18 novembre 2016 (entrée en vigueur le 1er janvier 2017), le divorce amiable se fait sans passage devant un juge — uniquement entre deux avocats et, si un bien immobilier est en jeu, devant un notaire. C'est une procédure radicalement simplifiée, mais qui reste coûteuse et stressante pour la plupart des couples car : (1) **Chaque époux doit avoir son propre avocat** — deux honoraires distincts de €800 à €3 000 chacun, soit €1 600 à €6 000 au total, dont une grande partie est consacrée à rassembler et analyser les informations que le couple aurait pu préparer seul. (2) **L'inventaire des biens communs est laborieux** — maison, comptes bancaires, PEL, assurance vie, véhicules, dettes : les couples ne savent pas quoi lister ni comment valoriser les actifs. (3) **La simulation du partage** selon le régime matrimonial (communauté réduite aux acquêts, séparation de biens, participation aux acquêts) est incompréhensible sans formation juridique. (4) **La prestation compensatoire** (PC) — cette somme que l'époux le mieux rémunéré verse à l'autre pour compenser la disparité de niveau de vie — est une négociation aveugle : les couples n'ont aucun outil pour estimer la fourchette légale et arrivent chez l'avocat sans base. (5) **La convention parentale** (garde, résidence habituelle, pension alimentaire, droit de visite) est rédigée de zéro alors qu'elle suit des critères standards. Résultat : des heures d'avocat facturées à €200/h pour structurer des informations basiques, un stress maximal, et souvent un accrochage sur la PC ou le partage faute de données neutres.
+
+### Solution
+**(1) Éligibilité :** Vérification automatique que le divorce amiable sans juge est possible (pas de mineur incapable de consentir, accord des deux époux). **(2) Inventaire guidé des biens :** L'utilisateur renseigne bien par bien (immobilier avec estimation notariale ou sites comme MeilleursAgents, comptes bancaires, épargne, véhicules, dettes) — l'outil calcule l'actif net commun à partager. **(3) Simulation de partage :** Selon le régime matrimonial déclaré, l'algorithme détermine ce qui est commun vs propre et propose la répartition légale + des scénarios alternatifs (rachat de la part de l'autre, vente du bien). **(4) Calcul de la prestation compensatoire :** L'IA analyse les critères légaux des articles 270–280 du Code civil — durée du mariage, écart de revenus actuels et futurs, droits à la retraite perdus, état de santé — et produit une fourchette estimée crédible, non opposable mais utile comme base de négociation. **(5) Convention parentale :** Template adapté à la situation (garde alternée, résidence principale, pension alimentaire selon barème indicatif du ministère). **(6) Mise en relation avocats :** Réseau de 200+ avocats droit de la famille dans toute la France avec tarifs fixes convenus pour les clients de DivorceSimple.ai — le brief pré-rempli est transmis automatiquement pour éviter toute heure facturée à prendre en note.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Éligibilité gratuite | €0 | Vérification éligibilité divorce amiable + checklist documents à réunir |
+| Pack Préparation | €29 | Inventaire des biens + simulation partage + calcul PC + convention parentale + export PDF complet |
+| Mise en relation avocats | €49 | 2 avocats partenaires dans le département + brief pré-rempli transmis + tarif fixe négocié |
+| Suivi post-divorce | €4,99/mo | Guide démarches post-divorce (CAF, banque, impôts, changement de nom) + alertes pension alimentaire |
+
+**Unit economics :** Claude API ~€0,20/dossier → 97%+ gross margin. **Marché :** 70 000 divorces par consentement mutuel/an × 2% conversion Pack Préparation = 1 400 packs → **€3 400 MRR**. La mise en relation est le vrai moteur : €49 × 2 500 mises en relation/an = **€10 200 MRR**. La commission sur les avocats partenaires (€50–€150 par dossier conclu) est le levier de scale.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — utilisé tranquillement en couple à la maison)
+- **Moteur de partage:** Algorithme déterministe appliquant le Code civil — régime légal communauté réduite aux acquêts (articles 1400–1491 CC), séparation de biens (articles 1536–1543 CC), participation aux acquêts (articles 1569–1581 CC) — identification des biens propres vs communs, calcul de la récompense, simulation de liquidation
+- **Calcul PC:** Modèle multicritères basé sur les critères des articles 270–280 du Code civil et la jurisprudence des cours d'appel — production d'une fourchette estimée avec facteurs pondérés (durée mariage, écart revenus, situation pro de chaque époux, droits retraite constitués pendant le mariage)
+- **Convention parentale:** Templates juridiquement conformes aux articles 373-2 et suivants du Code civil — garde alternée symétrique, résidence principale chez un parent, droit de visite élargi — avec barème indicatif pension alimentaire (tableau ministère de la Justice 2024)
+- **Réseau avocats:** Annuaire de 200+ avocats droit de la famille avec profil, département, tarif fixe DivorceSimple.ai — routing automatique par département + brief pré-rempli envoyé par API email
+- **AI assistant:** Claude API (claude-sonnet-4-6) — répond aux questions sur les articles du Code civil en français simple, explique les termes juridiques (récompense, propre, acquêt, liquidation)
+- **Auth + DB:** Supabase (chiffrement AES-256, RGPD — droit à l'effacement automatique 2 ans après la procédure)
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "On peut divorcer sans aller au tribunal depuis 2017 — voici comment ça marche exactement" (fort impact : la majorité des Français l'ignorent encore)
+2. Facebook Groups : "Séparation et divorce en France", "Divorce par consentement mutuel", "Familles recomposées France" (500K+ membres)
+3. Forums : Auféminin, Doctissimo, JeParents — les fils de discussion divorce par consentement mutuel sont parmi les plus consultés
+4. SEO : "divorce consentement mutuel sans juge comment", "coût divorce amiable avocat 2026", "convention parentale garde alternée modèle", "prestation compensatoire calcul estimation", "partage biens divorce communauté"
+
+### Competitive Moat
+- Aucun outil en France ne guide l'inventaire des biens ET simule le partage selon le régime matrimonial ET calcule la fourchette de PC — les avocats font payer €200/h pour ce travail de collecte
+- La mise en relation avec des avocats à tarif fixe est un modèle économique récurrent : chaque couple est un client des deux avocats, soit deux commissions
+- Le brief pré-rempli transmis à l'avocat réduit le temps de traitement = l'avocat a intérêt à recommander l'outil à ses clients
+- Les données du divorce (actifs, revenus, enfants) permettent un upsell naturel vers d'autres produits (MicroFoncier.ai pour les revenus locatifs, AssuranceVie.ai pour les clauses bénéficiaires à mettre à jour après divorce)
+
+### Figma Schematic
+[View DivorceSimple.ai Amicable Divorce Preparation Flow on FigJam](https://www.figma.com/board/K8Mdx44oHbrtGFhj5N9x6u)
+
+---
+
+## 57. PointsPermis.ai
+
+> **Gérez et récupérez vos points de permis de conduire — solde exact, simulation de récupération, recherche de stage**
+
+### Problem
+La France compte **38 millions de conducteurs** titulaires d'un permis de conduire. Le capital points (12 à l'obtention du permis, 6 pendant la période probatoire) est une source d'anxiété permanente pour des millions d'entre eux, et ce pour plusieurs raisons mal comprises : (1) **Opacité du solde réel :** Le site officiel Télépoints (télépoints.interieur.gouv.fr) existe mais est peu connu et peu utilisé. La plupart des conducteurs ont une estimation vague de leur solde basée sur les infractions qu'ils se rappellent. Les contentieux longue date sur des PV réclamés par courrier mois après l'infraction compliquent le calcul. (2) **Récupération automatique méconnue :** Peu de conducteurs savent que chaque année sans infraction récupère 1 point (jusqu'à 12), et que 3 années consécutives sans infraction remettent le capital à 12 points quel que soit le solde de départ — cette règle simple pourrait changer le comportement de millions de conducteurs. (3) **Stage de récupération sous-utilisé :** Le stage de récupération de points (+4 points, une fois par an minimum, si solde ≥ 1 point) coûte €150–€300 et peut sauver un permis — mais beaucoup de conducteurs qui en auraient besoin ne le font pas faute d'information sur le bon moment et le bon centre. (4) **Contestation de PV perçue comme impossible :** Un PV attribué à tort (erreur de plaque, radar mal étalonné, vice de procédure) peut être contesté — mais la procédure est perçue comme complexe. (5) **Conducteurs en période probatoire particulièrement perdus :** 6 points initiaux, gains de 2 points par an sans infraction — les jeunes conducteurs ne savent jamais exactement où ils en sont ni combien de temps avant d'avoir leur permis définitif.
+
+### Solution
+**(1) Calcul du solde :** L'utilisateur saisit les infractions dont il se souvient (date, nature : excès de vitesse <20km/h, 20-30km/h, téléphone au volant, ceinture, feu rouge, alcoolémie…) et l'outil calcule le solde théorique avec le détail des points retirés par infraction. **(2) Lien Télépoints :** Guide pas-à-pas pour consulter son solde officiel sur télépoints.interieur.gouv.fr (avec France Connect) — le solde officiel est comparé au solde calculé pour identifier les divergences. **(3) Simulation récupération automatique :** Projection graphique du solde sur 3 ans selon les scenarios "zéro infraction", "1 infraction légère", "2 infractions" — visualisation claire du moment où le permis sera complet. **(4) Stage de récupération :** Si le solde est ≤ 8 points, recommandation de stage + moteur de recherche des centres agréés par département + comparateur de prix + réservation directe. **(5) Générateur de lettre de contestation :** L'utilisateur décrit le PV, l'outil identifie les vices de procédure possibles (défaut de signature de l'officier, radar non homologué, plaque illisible, prescription) et génère la lettre de contestation motivée avec les textes de loi applicables. **(6) Alertes :** Notification à J+1 an (récupération d'1 point), à J+2 ans, à J+3 ans (remise à 12). Alerte si le solde calculé descend sous 6 ou 3 points.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Calcul solde théorique + guide Télépoints + dates de récupération automatique |
+| Pack Optimisation | €4,99 | Simulation graphique 3 ans + générateur lettre contestation + recherche de stages + alerte solde critique |
+| Abonnement Vigilance | €2,99/mo | Alertes personnalisées de récupération + rappels + mise à jour automatique des règles Code de la route + alerte nouvelles ZFE |
+| Commission stages | 5–10% | Commission sur réservation de stage de récupération via partenaires agréés |
+
+**Unit economics :** Claude API ~€0,10/analyse → 95%+ gross margin. **Marché :** 38M conducteurs × 0,05% Pack Optimisation = 19 000 packs → **€7 900 MRR**. La commission sur stages est le levier de scale : 100 000 stages/an en France × 3% de part de marché × €250 prix moyen × 7% commission = **€5 250 MRR additionnel**. L'abonnement Vigilance cible les conducteurs professionnels (VTC, livreurs, commerciaux) pour qui le permis est le fond de commerce.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — souvent utilisé depuis le téléphone après une verbalisation)
+- **Moteur de points:** Algorithme appliquant l'annexe à l'article R223-1 du Code de la route — tableau complet des 73 infractions entraînant retrait de points (1, 2, 3, 4, 6 points selon gravité), règles de récupération automatique (article R223-3 : 1 point par an sans infraction, remise à 12 si 3 ans sans), règles de stage (article L223-6 : +4 points, 1 fois par an, solde ≥ 1 point)
+- **Intégration Télépoints:** Guide illustré de connexion via France Connect + télépoints.interieur.gouv.fr — l'utilisateur saisit manuellement son solde officiel, l'outil le stocke et l'utilise comme base de calcul
+- **Moteur de recherche stages:** Données des centres agréés (liste publique ministère de l'Intérieur) + géolocalisation Google Maps API (gratuit jusqu'à 28 500 requêtes/mo) + scraping des disponibilités et prix
+- **AI contestation:** Claude API (claude-sonnet-4-6) — analyse le PV décrit par l'utilisateur, identifie les vices de procédure courants selon la jurisprudence (défaut de notification dans les délais, absence de signature, erreur plaque, prescription 3 ans), génère la lettre LRAR motivée avec articles R/L du Code de la route
+- **Alertes:** Resend — alertes J+1 an, J+2 ans, J+3 ans automatisées à la date de l'infraction
+- **Payments:** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "J'avais 4 points de permis — voici comment j'en suis revenu à 12 sans repasser l'examen" (fort impact émotionnel, concerne chaque conducteur)
+2. Facebook Groups : "Conducteurs France", "Infractions radars PV contestation", "Auto-école permis B France" (800K+ membres)
+3. Forums : Permisecole.com, Auto-infos.fr, Service-public.fr commentaires — les questions sur les points sont parmi les plus consultées
+4. SEO : "combien de points il me reste permis", "recuperer points permis comment", "stage recuperation points prix comparatif", "contester pv permis modele lettre", "permis probatoire combien de points"
+
+### Competitive Moat
+- Télépoints montre le solde mais n'explique pas comment récupérer les points ni ne génère de lettre de contestation — trou béant dans l'offre publique
+- Le moteur de recherche de stages avec comparaison des prix est inexistant : les conducteurs appellent 10 centres à la main
+- La contestation de PV est perçue comme complexe — le générateur de lettre avec les articles de loi applicables est une valeur émotionnelle très forte (sentiment de reprendre le contrôle)
+- Les conducteurs professionnels (VTC, livreurs Uber Eats, commerciaux) sont un segment premium : leur permis est leur outil de travail → volonté de payer élevée pour l'abonnement Vigilance
+
+### Figma Schematic
+[View PointsPermis.ai Driving Licence Points Recovery Flow on FigJam](https://www.figma.com/board/L9VKj7bcx428LBgUNLs6Qw)
+
+---
+
+## 58. CESU.ai
+
+> **Optimisez votre emploi à domicile — coût réel après crédit d'impôt 50%, bulletins de paie automatiques et guide déclaration URSSAF**
+
+### Problem
+La France compte **1,5 million de particuliers employeurs** qui déclarent leur salarié à domicile via le CESU (Chèque Emploi Service Universel) — garde d'enfants, ménage, jardinage, aide aux personnes âgées, soutien scolaire. Le secteur représente **3,5 millions de salariés**. Malgré son ampleur, ce système souffre de plusieurs frictions majeures qui coûtent de l'argent aux employeurs et créent des risques de redressement : (1) **Le crédit d'impôt de 50% est sous-optimisé :** L'article 199 sexdecies du CGI accorde un crédit d'impôt de 50% sur toutes les dépenses d'emploi à domicile, dans la limite de €12 000/an (+ €1 500 par enfant à charge ou personne âgée en dépendance, jusqu'à €15 000). Autrement dit, une babysitter payée €1 000 brut/mois ne coûte en réalité que ~€500 net après crédit d'impôt — mais la majorité des employeurs ne calcule jamais le coût réel et pilote à l'aveugle. (2) **L'acompte de 60% en janvier déstabilise la trésorerie :** Depuis 2022, l'administration verse automatiquement en janvier un acompte de 60% du crédit d'impôt de l'année précédente. Si les dépenses ont changé, cet acompte peut être supérieur au crédit réel de l'année en cours → remboursement imposé en mai. Beaucoup d'employeurs découvrent ce mécanisme trop tard. (3) **La déclaration CESU mensuelle est source d'erreurs :** La plateforme cesu.urssaf.fr génère automatiquement les bulletins de paie mais ne prévient pas des erreurs de saisie (oubli de jours, mauvais taux horaire, dépassement du plafond de la Sécurité Sociale). (4) **Le plafond de dépenses éligibles est méconnu :** Les majorations (+€1 500 par enfant, +€1 500 pour un parent en dépendance, +€1 000 pour premier emploi d'un salarié) sont ignorées des employeurs qui croient atteindre le plafond alors qu'ils pourraient déclarer davantage. (5) **L'embauche d'un premier salarié est stressante :** DPAE (déclaration préalable à l'embauche), calcul du salaire net/brut CESU, détermination de la convention collective applicable (convention nationale du particulier employeur) — autant d'obstacles qui retardent ou empêchent la régularisation de situations informelles.
+
+### Solution
+**(1) Calculateur de coût réel :** L'employeur saisit le salaire horaire net, le nombre d'heures par mois et sa tranche marginale d'imposition. L'outil calcule instantanément le coût brut CESU, les cotisations patronales, le coût total, et surtout le **coût réel après crédit d'impôt** — avec projection mensuelle et annuelle. **(2) Optimiseur de plafond :** En fonction de la situation familiale (enfants à charge, parent en dépendance, premier emploi), l'outil calcule le plafond éligible personnalisé et indique si l'employeur peut déclarer davantage de dépenses. **(3) Simulateur d'acompte :** L'outil compare le crédit estimé de l'année N avec l'acompte versé en janvier (basé sur N-1) et alerte sur le risque de remboursement — avec recommandation de contacter l'administration pour moduler l'acompte. **(4) Guide déclaration CESU :** Pas-à-pas illustré pour déclarer sur cesu.urssaf.fr — captures d'écran annotées, alertes sur les erreurs courantes, rappel mensuel avant la date limite. **(5) Génération bulletins de paie :** Export PDF du bulletin de paie CESU au format réglementaire, pré-rempli avec les données de l'employeur et du salarié. **(6) Pack embauche :** Guide DPAE (déclaration en 2 minutes sur net-entreprises.fr) + calcul salaire net/brut CESU + lettre de mission pré-remplie selon la convention collective particuliers employeurs.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur gratuit | €0 | Coût réel après crédit d'impôt pour un salaire et un nombre d'heures donnés |
+| Pack Employeur | €9,99/an | Optimiseur de plafond + guide déclaration CESU + bulletins de paie PDF + alertes mensuelles + récapitulatif fiscal annuel (ligne 7DB) |
+| Abonnement Multi-emploi | €19,99/an | Jusqu'à 5 salariés + consolidation globale + simulateur acompte + alerte risque remboursement |
+| Pack Embauche | €4,99 | Guide DPAE + lettre de mission + calcul net/brut + inscription CESU en ligne guidée |
+
+**Unit economics :** Claude API ~€0,05/calcul → 99% gross margin. **Marché :** 1,5M d'employeurs × 0,3% conversion Pack Employeur = 4 500 packs → **€3 750 MRR**. L'abonnement annuel garantit le renouvellement : la déclaration revient chaque mois, la situation familiale change (nouvelle naissance = nouveau plafond). Le Pack Embauche cible les 300 000 nouvelles embauches CESU par an (dont une partie est encore informelle).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop/mobile — utilisé calmement à la maison, souvent en fin de mois)
+- **Moteur fiscal:** Algorithme déterministe appliquant l'article 199 sexdecies du CGI — plafond de base €12 000, majorations par enfant à charge (€1 500, max €15 000), par personne en dépendance (€1 500), pour premier emploi d'un salarié (€1 000) ; calcul du crédit d'impôt = 50% des dépenses éligibles dans la limite du plafond ; taux de cotisations CESU 2026 (patronales : ~22,7% ; salariales : ~22% net employeur) avec calcul du brut depuis le net ou du net depuis le brut
+- **Simulateur acompte:** Comparaison crédit N-1 × 60% (acompte versé) vs crédit N estimé (dépenses saisies annualisées) — alerte si risque de remboursement > €200 avec lien vers le formulaire de modulation d'acompte impots.gouv.fr
+- **Génération bulletins:** react-pdf — bulletin de paie CESU au format réglementaire (convention nationale du particulier employeur, grille des salaires horaires minimaux par catégorie)
+- **Guide déclaration:** Screenshots annotés de chaque étape cesu.urssaf.fr + détection des erreurs de saisie courantes (heures dépassant le contrat, taux < SMIC, oubli de mois)
+- **Alertes:** Resend — notification mensuelle avec la date limite de déclaration CESU (avant le 5 du mois suivant) + montant pré-calculé à déclarer
+- **AI assistant:** Claude API (claude-sonnet-4-6) — répond aux questions en français (congés payés CESU, 13e mois, mutuelle obligatoire exception CESU, majoration heures supplémentaires, préavis de licenciement)
+- **Payments:** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Ma baby-sitter me coûte 900€/mois — après crédit d'impôt je paie en réalité 450€. Voici le calcul exact" (format révélation, touche tous les parents employeurs)
+2. Facebook Groups : "Parents et nounous garde d'enfants France", "Aide à domicile CESU employeurs", "Bien vieillir à domicile France" (400K+ membres)
+3. Partenariats : crèches et RAM (Relais Assistantes Maternelles), agences de placement à domicile, ADMR et services d'aide aux personnes âgées — ils ont intérêt à orienter leurs clients vers un outil qui clarifie le coût réel
+4. SEO : "credit impot emploi domicile calcul 2026", "CESU déclarer comment pas à pas", "coût baby sitter après avantage fiscal", "CESU bulletin de paie générateur gratuit", "plafond crédit impôt services à la personne enfants"
+
+### Competitive Moat
+- La plateforme officielle cesu.urssaf.fr génère les bulletins mais ne montre jamais le coût réel après crédit d'impôt — trou majeur que CESU.ai comble seul
+- Le simulateur d'acompte (risque de remboursement en mai) est une valeur émotionnelle très forte : les employeurs n'ont aucun autre outil pour anticiper ce mécanisme
+- Les majorations de plafond (€1 500 par enfant) sont ignorées de la grande majorité des employeurs — la découverte de "vous pouvez déclarer €1 500 de plus" crée une conversion quasi-instantanée
+- La fidélité est structurelle : chaque nouvelle naissance ou parent en dépendance recrée un besoin de recalcul = rétention naturelle sans effort
+
+### Figma Schematic
+[View CESU.ai Home Employment Optimizer Flow on FigJam](https://www.figma.com/board/wIEKGn60OJ8sufGpF3YMeX)
+
+---
+
+## 59. MaisonDeRetraite.ai
+
+> **Simulez le coût réel d'un EHPAD, calculez l'APA et l'ASH, répartissez l'obligation alimentaire entre les enfants**
+
+### Problem
+La France compte **760 000 résidents en EHPAD** (Établissements d'Hébergement pour Personnes Âgées Dépendantes) et le nombre de personnes âgées de plus de 85 ans va doubler d'ici 2050. Pourtant, lorsqu'une famille doit envisager l'entrée d'un parent en EHPAD, elle se heurte à un mur d'opacité financière et juridique qui génère stress, conflits familiaux, et souvent une mauvaise décision économique : (1) **Le coût réel d'un EHPAD est incompréhensible :** La facture se décompose en trois parties — le tarif hébergement (payé par le résident ou sa famille, entre €1 500 et €3 500/mois selon l'établissement et le département), le tarif dépendance (partiellement couvert par l'APA) et le tarif soins (couvert à 100% par l'Assurance Maladie). La majorité des familles ne sait pas quelle partie est à leur charge et quelle partie est couverte. (2) **L'APA est sous-utilisée :** L'Allocation Personnalisée d'Autonomie (APA) est attribuée par le département en fonction du niveau de dépendance (GIR 1 à 4) et des revenus du bénéficiaire. Son montant en EHPAD varie de €500 à €1 800/mois, mais peu de familles savent à combien elles ont droit avant d'entamer les démarches. (3) **L'Aide Sociale à l'Hébergement est méconnue :** Lorsque le résident n'a pas les moyens de payer le tarif hébergement, le département peut prendre en charge tout ou partie du coût — mais en contrepartie, ses biens peuvent être saisis après décès (récupération sur succession) et l'**obligation alimentaire** s'applique aux descendants et au conjoint. Cette obligation légale (articles 205 à 211 du Code civil) force les enfants à contribuer financièrement selon leurs revenus. Presque aucune famille ne comprend son montant et ses règles avant de se retrouver face au service social du département. (4) **Le choix entre établissements est opaque :** Les tarifs varient du simple au double entre établissements publics, privés non-lucratifs (associatifs) et privés commerciaux — pour des prestations parfois équivalentes. Il n'existe pas d'outil simple pour comparer le reste à charge réel après APA et ASH pour un profil donné.
+
+### Solution
+**(1) Calcul du niveau GIR :** L'utilisateur répond à 17 questions sur les capacités fonctionnelles du parent (cohérence, orientation, toilette, habillage, alimentation, déplacements, communication) — l'outil estime le GIR (1 = très dépendant, 6 = autonome) et donc l'éligibilité à l'APA. **(2) Simulation APA :** Calcul du montant APA en EHPAD selon le GIR estimé, les revenus du bénéficiaire (participation du bénéficiaire calculée selon la grille nationale) et le département — résultat : montant APA mensualisé et participation résiduelle du résident. **(3) Simulation ASH :** Vérification d'éligibilité selon le patrimoine du résident et son revenu — si éligible, calcul de la prise en charge départementale et de la participation résiduelle. **(4) Obligation alimentaire :** Si l'ASH est accordée, calcul de la contribution demandée à chaque enfant/descendant selon leurs revenus déclarés, selon la méthode utilisée par les CDAS (Centres Départementaux d'Action Sociale) — simulateur basé sur les revenus nets de chaque enfant saisi par l'utilisateur. **(5) Comparateur EHPAD :** Basé sur les données publiques (portail officiel annuaire.action-sociale.org), filtrage par département, statut (public/privé/associatif), tarif hébergement, et calcul du reste à charge réel après APA pour le profil saisi. **(6) Export PDF :** Plan de financement complet mensuel (tarif hébergement − APA − ASH = reste à charge) + répartition obligation alimentaire entre les enfants + checklist des démarches.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Estimation GIR + montant APA indicatif + éligibilité ASH |
+| Pack Famille Complet | €19 | Simulation APA précise + calcul ASH + obligation alimentaire + comparateur EHPAD + export PDF plan de financement |
+| Abonnement Suivi | €4,99/mo | Alertes revalorisation APA + renouvellement dossier ASH + rappels démarches annuelles + suivi tarifs EHPAD |
+| Référencement EHPAD | €30–€150/mois | Abonnement pour établissements partenaires (profil premium, visibilité dans le comparateur, réception des demandes de mise en relation) |
+
+**Unit economics :** Claude API ~€0,15/simulation → 98% gross margin. **Marché :** 250 000 nouvelles entrées en EHPAD/an × 3% conversion Pack Famille = 7 500 packs → **€11 250 MRR**. Le référencement EHPAD est le levier principal : 7 500 EHPAD en France × 5% partenariats × €75 moyenne = **€28 125 MRR additionnel**. L'abonnement Suivi cible les familles sur le long terme (durée moyenne de séjour en EHPAD : 2,5 ans).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop-first — décision sérieuse prise à la maison en famille)
+- **Moteur GIR:** Grille AGGIR (Autonomie Gérontologie Groupes Iso-Ressources) — 17 variables, 10 discriminantes, algorithme de calcul des GIR conforme à la grille officielle HAS/CNSA
+- **Calcul APA :** Grille nationale des montants APA en EHPAD 2026 (tarif global ou partiel selon le type d'EHPAD) — participation du bénéficiaire calculée selon le barème CNSA (revenus < 2 447 €/mois : participation nulle ; entre 2 447 € et 3 932 € : 20% ; > 3 932 € : 80% du tarif dépendance)
+- **Simulation ASH :** Seuils de patrimoine par département (données publiques) — calcul de la créance départementale récupérable sur succession + simulation obligation alimentaire selon la méthode des revenus disponibles (revenus nets − charges fixes − minimum vital)
+- **Comparateur EHPAD :** Données de l'annuaire national des EHPAD (data.gouv.fr — mise à jour annuelle) — filtrage par département + statut + calcul dynamique du reste à charge selon le profil saisi
+- **AI assistant :** Claude API (claude-sonnet-4-6) — répond aux questions en français (recours contre décision APA, procédure ASH, délai de traitement, tutelle/curatelle, résidence autonomie vs EHPAD)
+- **Auth + DB :** Supabase (RGPD — données de santé anonymisées, droit à l'effacement)
+- **Payments :** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Ma mère entre en EHPAD — voici combien ça va vraiment coûter après les aides de l'État (calcul exact)" (format révélation, concerne 12 millions d'aidants familiaux en France)
+2. Facebook Groups : "Aidants familiaux France", "EHPAD et maisons de retraite — témoignages et conseils", "Alzheimer France entraide" (700K+ membres)
+3. Partenariats : ADMR, Croix-Rouge, CCAS des communes, mutuelles (MGEN, Harmonie Mutuelle) — ils accompagnent des familles en détresse et cherchent des outils clairs à recommander
+4. SEO : "coût EHPAD après aide état calcul", "APA montant EHPAD 2026", "aide sociale hébergement éligibilité", "obligation alimentaire EHPAD enfants calcul", "comparateur maison retraite reste a charge"
+
+### Competitive Moat
+- Le simulateur APA officiel de la CNSA donne une indication très grossière — aucun outil ne combine APA + ASH + obligation alimentaire en un seul calcul personnalisé par famille
+- L'obligation alimentaire est le sujet le plus anxiogène de la démarche : les familles découvrent souvent l'existence de cette contribution chez le travailleur social, sans aucun outil pour anticiper le montant — la révélation crée une conversion quasi-instantanée
+- Le référencement EHPAD est un modèle de revenus récurrents éprouvé (Senioradom, Petits-fils, etc.) — MaisonDeRetraite.ai l'adosse à une simulation financière gratuite qui génère un trafic qualifié
+- La durée moyenne de séjour (2,5 ans) garantit une rétention élevée pour l'abonnement Suivi sans effort marketing
+
+### Figma Schematic
+[View MaisonDeRetraite.ai EHPAD Cost & Aid Flow on FigJam](https://www.figma.com/board/17mRGcOQOW2FAoGCeLuwGF)
+
+---
+
+## 60. LMNP.ai
+
+> **Optimisez votre régime fiscal LMNP : micro-BIC vs régime réel, calcul d'amortissements et génération de la liasse 2031-SD**
+
+### Problem
+La France compte **3,5 millions de propriétaires de logements meublés** déclarant des revenus sous le statut LMNP (Loueur en Meublé Non Professionnel). C'est l'un des régimes d'investissement immobilier les plus avantageux fiscalement — mais aussi l'un des plus complexes à optimiser, ce qui coûte des milliers d'euros d'impôts en trop chaque année : (1) **L'abattement micro-BIC de 50% est connu mais le régime réel est presque toujours plus avantageux :** Au régime réel simplifié, le propriétaire déduit ses charges réelles (intérêts d'emprunt, travaux, frais de gestion, CFE, assurances) ET amortit le bien (composantes : gros œuvre, façade, toiture, équipements) et le mobilier sur 5 à 30 ans selon les composants. Pour un bien de €200 000, l'amortissement annuel dépasse souvent €7 000 — soit €7 000 de revenus non imposés. La majorité des propriétaires LMNP ignorent ce mécanisme. (2) **La liasse fiscale 2031-SD est un obstacle :** Le régime réel LMNP impose de déposer une liasse fiscale (formulaire 2031-SD + annexes 2033-A à 2033-G) en plus de la déclaration de revenus. Cette liasse effraie les propriétaires et les pousse à prendre un comptable (€500–€1 500/an) même pour un seul bien — ou à rester au micro-BIC par défaut. (3) **Le tableau d'amortissement est ignoré de la plupart des propriétaires :** Les règles de découpage en composants (article 15bis de l'annexe II du CGI) et les durées d'amortissement reconnues par l'administration fiscale sont opaques. Un mauvais tableau est redressé — un tableau inexistant signifie des milliers d'euros d'impôts en trop. (4) **Le déficit BIC reportable est sous-exploité :** Contrairement aux déficits fonciers (limités à €10 700 imputables sur le revenu global), les déficits BIC du LMNP sont reportables indéfiniment sur les bénéfices BIC des 10 années suivantes — un levier fiscal puissant, presque jamais utilisé faute d'outil de suivi. (5) **La question LMP vs LMNP est mal comprise :** Au-dessus de €23 000 de recettes annuelles ET si ces recettes excèdent les autres revenus du foyer, le loueur bascule en LMP (Loueur en Meublé Professionnel) — avec des conséquences majeures (cotisations sociales, mais aussi imputation des déficits sur le revenu global). Peu de propriétaires surveillent ce seuil.
+
+### Solution
+**(1) Comparateur micro-BIC vs régime réel :** L'utilisateur saisit ses données (valeur d'achat du bien, quote-part terrain, valeur du mobilier, loyers annuels, intérêts d'emprunt, charges réelles) — l'outil calcule le revenu imposable dans les deux régimes et affiche le gain fiscal annuel du régime réel. **(2) Tableau d'amortissement :** Découpage automatique en composants (gros œuvre 50% / 80 ans, façade 15% / 30 ans, toiture 10% / 25 ans, équipements 15% / 15 ans, agencements 10% / 10 ans) selon les recommandations de l'administration + mobilier (5–10 ans) + travaux capitalisés — tableau annuel conforme pour annexe 2033-C. **(3) Calcul du résultat net BIC :** Loyers − charges déductibles − amortissements = résultat net ou déficit, avec suivi du stock de déficits reportables année après année. **(4) Génération liasse 2031-SD :** Export PDF des formulaires 2031-SD + 2033-A (bilan simplifié) + 2033-B (compte de résultat) + 2033-C (immobilisations et amortissements) pré-remplis avec les données saisies. **(5) Alerte seuil LMP :** Si recettes > €23 000, vérification automatique si elles excèdent les autres revenus du foyer — alerte et explications sur les conséquences du basculement LMP. **(6) Déclaration 2042-C Pro :** Guidage pour reporter le résultat LMNP sur la déclaration de revenus principale (case 5NA, 5NK, 5QL selon le régime).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Comparateur gratuit | €0 | Micro-BIC vs régime réel — gain fiscal annuel estimé |
+| Pack Optimisation | €29/an | Tableau d'amortissement complet + calcul résultat BIC + alerte seuil LMP + guide 2042-C Pro |
+| Pack Liasse Complète | €49/an | Tout le Pack Optimisation + génération PDF liasse 2031-SD + annexes 2033-A/B/C pré-remplies + vérification anti-redressement |
+| Multi-biens | €79/an | Jusqu'à 5 biens + consolidation globale des déficits reportables + comparatif portefeuille |
+
+**Unit economics :** Claude API ~€0,10/analyse → 99% gross margin. **Marché :** 3,5M de LMNP × 0,5% conversion Pack Optimisation = 17 500 packs → **€42 700 MRR**. Le Pack Liasse est le vrai moteur : les propriétaires paient €500–€1 500/an à un comptable pour ce service — €49/an est une conversion quasi-certaine pour les propriétaires qui ont déjà un bien. Le référencement naturel "lmnp régime réel" attire un trafic à très forte intention.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — travail de déclaration fiscale effectué tranquillement à domicile)
+- **Moteur amortissement :** Algorithme de découpage en composants selon la doctrine administrative (BOI-BIC-AMT-10-40 et pratique jurisprudentielle CRC) — gros œuvre 50% / 80 ans, ravalement 15% / 30 ans, toiture 10% / 25 ans, équipements techniques 15% / 15 ans, agencements intérieurs 10% / 10 ans + quote-part terrain non amortissable (usuellement 15–20%) + mobilier 5–10 ans selon catégorie (literie, électroménager, mobilier) + travaux capitalisés vs. charges immédiates selon le seuil de €500
+- **Calcul résultat BIC :** Loyers bruts − charges déductibles (intérêts emprunt, assurance PNO, frais de gestion, CFE, taxe foncière au prorata, frais comptabilité, assurance loyers impayés) − amortissements de l'exercice = résultat net ou déficit + suivi stock déficits reportables avec millésime
+- **Génération liasse :** react-pdf — formulaires Cerfa 2031-SD, 2033-A (bilan simplifié actif/passif), 2033-B (compte de résultat), 2033-C (tableau des immobilisations) pré-remplis selon les données saisies ; validation anti-redressement (cohérence actif/passif, respect planchers amortissements, absence d'amortissement du terrain)
+- **Alerte LMP :** Comparaison automatique recettes LMNP vs revenus professionnels du foyer fiscal (salaires, BIC/BNC autres activités) — déclenchement alerte si seuil LMP franchi avec calcul des cotisations sociales additionnelles (SSI : ~42% du résultat net)
+- **AI assistant :** Claude API (claude-sonnet-4-6) — répond aux questions en français (LMNP ancien vs VEFA, amortissement résidence principale transformée en meublé, règles de sortie du régime réel, SCI à l'IS vs LMNP en nom propre, impact réforme LMNP loi de finances 2025)
+- **Payments :** Stripe (abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon appartement meublé me faisait payer €3 000/an d'impôts en trop — le régime réel LMNP expliqué en 3 minutes" (fort impact : chaque propriétaire LMNP au micro-BIC est une conversion potentielle)
+2. Facebook Groups : "LMNP investisseurs immo France", "Investissement locatif meublé", "Airbnb et location courte durée France" (500K+ membres)
+3. Forums : ImmoInvestisseur.fr, Forum-fiscalite.com, SeLoger investissement — les fils LMNP régime réel sont parmi les plus consultés
+4. SEO : "lmnp régime réel vs micro bic calcul", "tableau amortissement lmnp composants", "liasse 2031 sd comment remplir", "deficit lmnp reportable comment déclarer", "lmnp régime réel comptable obligatoire"
+
+### Competitive Moat
+- Le seul concurrent direct est le comptable (€500–€1 500/an) — LMNP.ai propose le même service pour €49/an avec un tableau d'amortissement aussi solide
+- La génération automatique de la liasse 2031-SD est une barrière technique forte : aucun outil grand public en France ne le fait (Jotform, Indy, Pennylane ciblent les entreprises, pas les particuliers LMNP)
+- Le stock de déficits reportables crée une rétention structurelle : le propriétaire doit continuer à utiliser l'outil année après année pour suivre et reporter ses déficits correctement
+- La réforme LMNP de la loi de finances 2025 (réintégration des amortissements dans la plus-value à la revente) a créé une complexité supplémentaire — LMNP.ai peut intégrer le simulateur de plus-value ajustée en upsell
+
+### Figma Schematic
+[View LMNP.ai Furnished Rental Tax Optimizer Flow on FigJam](https://www.figma.com/board/q26X3cUtKTERq4tUHafTL2)
+
+---
+
+## 61. NotaireSimple.ai
+
+> **Calculez vos frais de notaire au centime, optimisez votre acquisition et simulez votre PTZ**
+
+### Problem
+En France, **1,1 million de transactions immobilières** ont lieu chaque année (source : Notaires de France). Pour chaque acquéreur, les frais de notaire représentent un poste budgétaire majeur — entre **7 et 8% du prix de vente dans l'ancien**, et 2 à 3% dans le neuf — soit €14 000 à €24 000 sur un bien à €300 000. Or ce poste est systématiquement mal anticipé, pour plusieurs raisons : (1) **La décomposition des frais est incompréhensible :** Les frais de notaire ne vont pas entièrement dans la poche du notaire. Ils se décomposent en : droits de mutation à titre onéreux (DMTO : 5,80% dans la quasi-totalité des départements, ou 5,09% dans les rares départements ayant choisi le taux réduit), émoluments du notaire (barème réglementé par le décret du 26 février 2016 — tarif proportionnel dégressif par tranches), débours (cadastre, conservateur des hypothèques, géomètre-expert, frais de copropriété) et contribution de sécurité immobilière (0,10%). Personne ne fait ce calcul à l'avance. (2) **Les optimisations légales sont ignorées :** La valeur du mobilier (cuisine équipée, électroménager, parquet, volets) peut être **déduite du prix de vente** dans le calcul des droits de mutation si elle est listée dans un acte séparé — une cuisine à €15 000 déduite peut faire économiser €870 de DMTO. De même, acheter en prix net vendeur vs. honoraires d'agence à la charge de l'acquéreur change l'assiette de calcul. (3) **Le PTZ (Prêt à Taux Zéro) est mal compris :** Relancé en 2024 pour tout le territoire (PTZ 2024–2027), le PTZ est réservé aux primo-accédants mais ses conditions d'éligibilité (zone géographique, composition du foyer, ressources) et son montant (jusqu'à 50% du prix dans les zones tendues) sont méconnus. Les simulateurs officiels de l'ANIL sont corrects mais peu pédagogiques. (4) **La comparaison neuf vs. ancien est rarement faite correctement :** À budget identique, acheter un appartement neuf en VEFA avec frais réduits (2–3%) revient souvent moins cher en coût total sur 20 ans qu'un bien ancien avec frais à 8% — mais personne ne fait ce calcul avant de visiter. (5) **La mise en concurrence des notaires est ignorée :** Les émoluments sont réglementés, mais la remise sur émoluments (possible jusqu'à 20% au-delà de €150 000 depuis le décret de 2016) et la qualité du service varient. La plupart des acquéreurs acceptent le notaire proposé par le vendeur.
+
+### Solution
+**(1) Calculateur de frais exact :** L'utilisateur saisit le prix de vente, le département, le type de bien (ancien ou VEFA/neuf) et si des honoraires d'agence sont à la charge de l'acquéreur — l'outil décompose au centime chaque poste (DMTO, émoluments par tranche, débours estimés, CSI). **(2) Optimiseur mobilier :** Champ dédié pour déduire la valeur des meubles et équipements — l'outil calcule l'économie de DMTO et génère le modèle de liste de mobilier à inclure dans l'acte. **(3) Comparatif neuf vs. ancien :** Pour un budget total identique, simulation du coût total (frais de notaire + prix + TVA VEFA) et du bien accessible dans chaque catégorie — aide à la décision d'orientation du projet. **(4) Simulateur PTZ 2024–2027 :** Éligibilité selon le nombre de personnes dans le foyer, les ressources N-2 et la zone géographique du bien (A/A bis, B1, B2/C avec conditions spécifiques) — montant PTZ calculé, quotité, durée de différé possible (jusqu'à 15 ans), mensualité PTZ + impact sur capacité d'emprunt principale. **(5) Simulation capacité d'emprunt globale :** PTZ + prêt principal avec calcul du taux d'endettement — vérification que l'acquisition est finançable (règle HCSF 35%). **(6) Mise en relation notaires :** Annuaire de notaires partenaires par département avec notation des délais de traitement, tarif de remise appliqué (jusqu'à 20%), et possibilité de pré-réserver un rendez-vous — commission de référencement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur frais | €0 | Décomposition exacte des frais de notaire pour un prix et un département donnés |
+| Pack Acheteur Complet | €9 | Optimiseur mobilier + comparatif neuf/ancien + liste mobilier générée + économies calculées |
+| Pack PTZ | €4,99 | Simulation PTZ complète (éligibilité + montant + différé + mensualités) + simulation capacité d'emprunt combinée |
+| Mise en relation notaires | €0 pour l'acheteur | Commission de €50–€200 par dossier signé payée par le notaire partenaire |
+
+**Unit economics :** Claude API ~€0,05/calcul → 99% gross margin. **Marché :** 1,1M transactions/an × 1,5% conversion Pack Acheteur = 16 500 packs → **€10 230 MRR**. Le vrai moteur est la mise en relation : même à 0,5% de part de marché = 5 500 transactions × €100 commission moyenne = **€45 800 MRR**. Le PTZ a été relancé pour 2024–2027 avec un fort effet de recherche — le pic de trafic SEO est maintenant.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — décision réfléchie avant une visite ou une signature de compromis)
+- **Moteur frais de notaire :** Algorithme appliquant le décret n°2016-230 du 26 février 2016 — émoluments proportionnels par tranches (3,945‰ jusqu'à €6 500 ; 1,627‰ de €6 500 à €17 000 ; 1,085‰ de €17 000 à €60 000 ; 0,814‰ au-delà de €60 000) + DMTO (5,80665% par défaut ou 5,09131% dans les 3 départements concernés : Indre, Isère, Morbihan) + CSI (0,10%) + débours forfaitaires estimés (€800–€1 200 selon la complexité) ; possibilité de remise sur émoluments jusqu'à 20% au-delà de €150 000 (article 16 du décret)
+- **Optimiseur mobilier :** Catégories de meubles déductibles (cuisine équipée, luminaires, parquet flottant non scellé, volets, électroménager) avec valeurs de marché préchargées — génération automatique d'un tableau de mobilier au format réglementaire (CGI art. 683 I) réduisant l'assiette des DMTO
+- **Simulateur PTZ 2024–2027 :** Référentiel officiel PTZ (décret n°2023-1139) — barème de ressources par zone et composition de foyer, calcul quotité (50% zone A/Abis, 40% zone B1, 20% zones B2/C avec conditions), durée de remboursement (20 à 25 ans) + différé (5, 10 ou 15 ans selon revenus), calcul de la mensualité PTZ et de la mensualité résiduelle prêt principal avec taux marché courant
+- **Comparatif neuf/ancien :** Pour un budget identique, calcul du bien accessible dans les deux catégories (prix brut accessible = budget − frais de notaire − apport personnel requis) + simulation sur 20 ans (remboursement, coût total des frais)
+- **Annuaire notaires :** Données publiques des notaires de France (Conseil Supérieur du Notariat — API RENOIRH) + système de notation interne (délai de réponse, qualité du dossier, remise appliquée) + prise de RDV en ligne (Calendly-like intégré)
+- **Payments :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Vous allez acheter un appartement à 250 000€ ? Voici exactement combien vous paierez de frais de notaire (et comment en économiser 1 500€ légalement)" (fort impact : touche tous les acheteurs au moment le plus stressant de leur vie)
+2. Facebook Groups : "Primo-accédants France", "Immobilier investissement locatif France", "Acheter son premier appartement" (600K+ membres)
+3. Partenariats : courtiers en crédit immobilier (CAFPI, Meilleurtaux, Vousfinancer) — ils ont intérêt à utiliser l'outil avec leurs clients pour clarifier le budget acquisition
+4. SEO : "frais de notaire calcul exact 2026", "frais de notaire ancien combien pourcentage", "ptz 2026 eligible calcul montant", "déduire mobilier frais de notaire comment", "frais de notaire neuf vs ancien différence"
+
+### Competitive Moat
+- Le simulateur officiel des Notaires de France (immobilier.notaires.fr) donne un total global — NotaireSimple.ai décompose au centime chaque poste ET montre les optimisations légales que le vendeur et son notaire ne mentionneront jamais
+- L'optimiseur mobilier est invisible dans l'offre concurrente : personne ne mentionne cette astuce légale qui peut économiser €500–€2 000 sur une transaction courante — une valeur perçue immédiate qui génère une conversion forte
+- La relance du PTZ 2024–2027 crée un pic de recherche avec une demande insatisfaite : les outils existants de l'ANIL et des banques sont corrects mais pas combinés avec le calcul des frais de notaire
+- Le modèle de référencement notaires est récurrent et scalable : les notaires cherchent activement à capter des clients acquéreurs, le brief pré-rempli réduisant leur temps d'accueil est un argument commercial fort
+
+### Figma Schematic
+[View NotaireSimple.ai Frais de Notaire Calculator Flow on FigJam](https://www.figma.com/board/ZDV6qCfcpG0KSgTf2SzoTo)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2292,4 +2858,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-02 — Ideas 47–49 added (France-specific, ultra-low-budget: TestamentSimple.ai, MaPrimeAdapt.ai, PremierEmployeur.ai)*
+*Last updated: 2026-05-06 — Ideas 59–61 added (France-specific, ultra-low-budget: MaisonDeRetraite.ai, LMNP.ai, NotaireSimple.ai)*
