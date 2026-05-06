@@ -66,6 +66,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 56 | [DivorceSimple.ai](#56-divorcesimpleai) | Pay-per-pack + Mise en relation avocats | €8K–€60K | Low-Medium |
 | 57 | [PointsPermis.ai](#57-pointspermisai) | Freemium + Pay-per-pack + Subscription | €4K–€30K | Low |
 | 58 | [CESU.ai](#58-cesuai) | Pay-per-pack + Annual Subscription | €5K–€40K | Low |
+| 59 | [MaisonDeRetraite.ai](#59-maisonderettraiteai) | Pay-per-report + Référencement EHPAD | €8K–€60K | Low-Medium |
+| 60 | [LMNP.ai](#60-lmnpai) | Pay-per-analysis + Annual Subscription | €6K–€45K | Low-Medium |
+| 61 | [NotaireSimple.ai](#61-notairesimpleai) | Freemium + Pay-per-report + Référencement notaires | €10K–€70K | Low |
 
 ---
 
@@ -2704,6 +2707,145 @@ La France compte **1,5 million de particuliers employeurs** qui déclarent leur 
 
 ---
 
+## 59. MaisonDeRetraite.ai
+
+> **Simulez le coût réel d'un EHPAD, calculez l'APA et l'ASH, répartissez l'obligation alimentaire entre les enfants**
+
+### Problem
+La France compte **760 000 résidents en EHPAD** (Établissements d'Hébergement pour Personnes Âgées Dépendantes) et le nombre de personnes âgées de plus de 85 ans va doubler d'ici 2050. Pourtant, lorsqu'une famille doit envisager l'entrée d'un parent en EHPAD, elle se heurte à un mur d'opacité financière et juridique qui génère stress, conflits familiaux, et souvent une mauvaise décision économique : (1) **Le coût réel d'un EHPAD est incompréhensible :** La facture se décompose en trois parties — le tarif hébergement (payé par le résident ou sa famille, entre €1 500 et €3 500/mois selon l'établissement et le département), le tarif dépendance (partiellement couvert par l'APA) et le tarif soins (couvert à 100% par l'Assurance Maladie). La majorité des familles ne sait pas quelle partie est à leur charge et quelle partie est couverte. (2) **L'APA est sous-utilisée :** L'Allocation Personnalisée d'Autonomie (APA) est attribuée par le département en fonction du niveau de dépendance (GIR 1 à 4) et des revenus du bénéficiaire. Son montant en EHPAD varie de €500 à €1 800/mois, mais peu de familles savent à combien elles ont droit avant d'entamer les démarches. (3) **L'Aide Sociale à l'Hébergement est méconnue :** Lorsque le résident n'a pas les moyens de payer le tarif hébergement, le département peut prendre en charge tout ou partie du coût — mais en contrepartie, ses biens peuvent être saisis après décès (récupération sur succession) et l'**obligation alimentaire** s'applique aux descendants et au conjoint. Cette obligation légale (articles 205 à 211 du Code civil) force les enfants à contribuer financièrement selon leurs revenus. Presque aucune famille ne comprend son montant et ses règles avant de se retrouver face au service social du département. (4) **Le choix entre établissements est opaque :** Les tarifs varient du simple au double entre établissements publics, privés non-lucratifs (associatifs) et privés commerciaux — pour des prestations parfois équivalentes. Il n'existe pas d'outil simple pour comparer le reste à charge réel après APA et ASH pour un profil donné.
+
+### Solution
+**(1) Calcul du niveau GIR :** L'utilisateur répond à 17 questions sur les capacités fonctionnelles du parent (cohérence, orientation, toilette, habillage, alimentation, déplacements, communication) — l'outil estime le GIR (1 = très dépendant, 6 = autonome) et donc l'éligibilité à l'APA. **(2) Simulation APA :** Calcul du montant APA en EHPAD selon le GIR estimé, les revenus du bénéficiaire (participation du bénéficiaire calculée selon la grille nationale) et le département — résultat : montant APA mensualisé et participation résiduelle du résident. **(3) Simulation ASH :** Vérification d'éligibilité selon le patrimoine du résident et son revenu — si éligible, calcul de la prise en charge départementale et de la participation résiduelle. **(4) Obligation alimentaire :** Si l'ASH est accordée, calcul de la contribution demandée à chaque enfant/descendant selon leurs revenus déclarés, selon la méthode utilisée par les CDAS (Centres Départementaux d'Action Sociale) — simulateur basé sur les revenus nets de chaque enfant saisi par l'utilisateur. **(5) Comparateur EHPAD :** Basé sur les données publiques (portail officiel annuaire.action-sociale.org), filtrage par département, statut (public/privé/associatif), tarif hébergement, et calcul du reste à charge réel après APA pour le profil saisi. **(6) Export PDF :** Plan de financement complet mensuel (tarif hébergement − APA − ASH = reste à charge) + répartition obligation alimentaire entre les enfants + checklist des démarches.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gratuit | €0 | Estimation GIR + montant APA indicatif + éligibilité ASH |
+| Pack Famille Complet | €19 | Simulation APA précise + calcul ASH + obligation alimentaire + comparateur EHPAD + export PDF plan de financement |
+| Abonnement Suivi | €4,99/mo | Alertes revalorisation APA + renouvellement dossier ASH + rappels démarches annuelles + suivi tarifs EHPAD |
+| Référencement EHPAD | €30–€150/mois | Abonnement pour établissements partenaires (profil premium, visibilité dans le comparateur, réception des demandes de mise en relation) |
+
+**Unit economics :** Claude API ~€0,15/simulation → 98% gross margin. **Marché :** 250 000 nouvelles entrées en EHPAD/an × 3% conversion Pack Famille = 7 500 packs → **€11 250 MRR**. Le référencement EHPAD est le levier principal : 7 500 EHPAD en France × 5% partenariats × €75 moyenne = **€28 125 MRR additionnel**. L'abonnement Suivi cible les familles sur le long terme (durée moyenne de séjour en EHPAD : 2,5 ans).
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop-first — décision sérieuse prise à la maison en famille)
+- **Moteur GIR:** Grille AGGIR (Autonomie Gérontologie Groupes Iso-Ressources) — 17 variables, 10 discriminantes, algorithme de calcul des GIR conforme à la grille officielle HAS/CNSA
+- **Calcul APA :** Grille nationale des montants APA en EHPAD 2026 (tarif global ou partiel selon le type d'EHPAD) — participation du bénéficiaire calculée selon le barème CNSA (revenus < 2 447 €/mois : participation nulle ; entre 2 447 € et 3 932 € : 20% ; > 3 932 € : 80% du tarif dépendance)
+- **Simulation ASH :** Seuils de patrimoine par département (données publiques) — calcul de la créance départementale récupérable sur succession + simulation obligation alimentaire selon la méthode des revenus disponibles (revenus nets − charges fixes − minimum vital)
+- **Comparateur EHPAD :** Données de l'annuaire national des EHPAD (data.gouv.fr — mise à jour annuelle) — filtrage par département + statut + calcul dynamique du reste à charge selon le profil saisi
+- **AI assistant :** Claude API (claude-sonnet-4-6) — répond aux questions en français (recours contre décision APA, procédure ASH, délai de traitement, tutelle/curatelle, résidence autonomie vs EHPAD)
+- **Auth + DB :** Supabase (RGPD — données de santé anonymisées, droit à l'effacement)
+- **Payments :** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Ma mère entre en EHPAD — voici combien ça va vraiment coûter après les aides de l'État (calcul exact)" (format révélation, concerne 12 millions d'aidants familiaux en France)
+2. Facebook Groups : "Aidants familiaux France", "EHPAD et maisons de retraite — témoignages et conseils", "Alzheimer France entraide" (700K+ membres)
+3. Partenariats : ADMR, Croix-Rouge, CCAS des communes, mutuelles (MGEN, Harmonie Mutuelle) — ils accompagnent des familles en détresse et cherchent des outils clairs à recommander
+4. SEO : "coût EHPAD après aide état calcul", "APA montant EHPAD 2026", "aide sociale hébergement éligibilité", "obligation alimentaire EHPAD enfants calcul", "comparateur maison retraite reste a charge"
+
+### Competitive Moat
+- Le simulateur APA officiel de la CNSA donne une indication très grossière — aucun outil ne combine APA + ASH + obligation alimentaire en un seul calcul personnalisé par famille
+- L'obligation alimentaire est le sujet le plus anxiogène de la démarche : les familles découvrent souvent l'existence de cette contribution chez le travailleur social, sans aucun outil pour anticiper le montant — la révélation crée une conversion quasi-instantanée
+- Le référencement EHPAD est un modèle de revenus récurrents éprouvé (Senioradom, Petits-fils, etc.) — MaisonDeRetraite.ai l'adosse à une simulation financière gratuite qui génère un trafic qualifié
+- La durée moyenne de séjour (2,5 ans) garantit une rétention élevée pour l'abonnement Suivi sans effort marketing
+
+### Figma Schematic
+[View MaisonDeRetraite.ai EHPAD Cost & Aid Flow on FigJam](https://www.figma.com/board/17mRGcOQOW2FAoGCeLuwGF)
+
+---
+
+## 60. LMNP.ai
+
+> **Optimisez votre régime fiscal LMNP : micro-BIC vs régime réel, calcul d'amortissements et génération de la liasse 2031-SD**
+
+### Problem
+La France compte **3,5 millions de propriétaires de logements meublés** déclarant des revenus sous le statut LMNP (Loueur en Meublé Non Professionnel). C'est l'un des régimes d'investissement immobilier les plus avantageux fiscalement — mais aussi l'un des plus complexes à optimiser, ce qui coûte des milliers d'euros d'impôts en trop chaque année : (1) **L'abattement micro-BIC de 50% est connu mais le régime réel est presque toujours plus avantageux :** Au régime réel simplifié, le propriétaire déduit ses charges réelles (intérêts d'emprunt, travaux, frais de gestion, CFE, assurances) ET amortit le bien (composantes : gros œuvre, façade, toiture, équipements) et le mobilier sur 5 à 30 ans selon les composants. Pour un bien de €200 000, l'amortissement annuel dépasse souvent €7 000 — soit €7 000 de revenus non imposés. La majorité des propriétaires LMNP ignorent ce mécanisme. (2) **La liasse fiscale 2031-SD est un obstacle :** Le régime réel LMNP impose de déposer une liasse fiscale (formulaire 2031-SD + annexes 2033-A à 2033-G) en plus de la déclaration de revenus. Cette liasse effraie les propriétaires et les pousse à prendre un comptable (€500–€1 500/an) même pour un seul bien — ou à rester au micro-BIC par défaut. (3) **Le tableau d'amortissement est ignoré de la plupart des propriétaires :** Les règles de découpage en composants (article 15bis de l'annexe II du CGI) et les durées d'amortissement reconnues par l'administration fiscale sont opaques. Un mauvais tableau est redressé — un tableau inexistant signifie des milliers d'euros d'impôts en trop. (4) **Le déficit BIC reportable est sous-exploité :** Contrairement aux déficits fonciers (limités à €10 700 imputables sur le revenu global), les déficits BIC du LMNP sont reportables indéfiniment sur les bénéfices BIC des 10 années suivantes — un levier fiscal puissant, presque jamais utilisé faute d'outil de suivi. (5) **La question LMP vs LMNP est mal comprise :** Au-dessus de €23 000 de recettes annuelles ET si ces recettes excèdent les autres revenus du foyer, le loueur bascule en LMP (Loueur en Meublé Professionnel) — avec des conséquences majeures (cotisations sociales, mais aussi imputation des déficits sur le revenu global). Peu de propriétaires surveillent ce seuil.
+
+### Solution
+**(1) Comparateur micro-BIC vs régime réel :** L'utilisateur saisit ses données (valeur d'achat du bien, quote-part terrain, valeur du mobilier, loyers annuels, intérêts d'emprunt, charges réelles) — l'outil calcule le revenu imposable dans les deux régimes et affiche le gain fiscal annuel du régime réel. **(2) Tableau d'amortissement :** Découpage automatique en composants (gros œuvre 50% / 80 ans, façade 15% / 30 ans, toiture 10% / 25 ans, équipements 15% / 15 ans, agencements 10% / 10 ans) selon les recommandations de l'administration + mobilier (5–10 ans) + travaux capitalisés — tableau annuel conforme pour annexe 2033-C. **(3) Calcul du résultat net BIC :** Loyers − charges déductibles − amortissements = résultat net ou déficit, avec suivi du stock de déficits reportables année après année. **(4) Génération liasse 2031-SD :** Export PDF des formulaires 2031-SD + 2033-A (bilan simplifié) + 2033-B (compte de résultat) + 2033-C (immobilisations et amortissements) pré-remplis avec les données saisies. **(5) Alerte seuil LMP :** Si recettes > €23 000, vérification automatique si elles excèdent les autres revenus du foyer — alerte et explications sur les conséquences du basculement LMP. **(6) Déclaration 2042-C Pro :** Guidage pour reporter le résultat LMNP sur la déclaration de revenus principale (case 5NA, 5NK, 5QL selon le régime).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Comparateur gratuit | €0 | Micro-BIC vs régime réel — gain fiscal annuel estimé |
+| Pack Optimisation | €29/an | Tableau d'amortissement complet + calcul résultat BIC + alerte seuil LMP + guide 2042-C Pro |
+| Pack Liasse Complète | €49/an | Tout le Pack Optimisation + génération PDF liasse 2031-SD + annexes 2033-A/B/C pré-remplies + vérification anti-redressement |
+| Multi-biens | €79/an | Jusqu'à 5 biens + consolidation globale des déficits reportables + comparatif portefeuille |
+
+**Unit economics :** Claude API ~€0,10/analyse → 99% gross margin. **Marché :** 3,5M de LMNP × 0,5% conversion Pack Optimisation = 17 500 packs → **€42 700 MRR**. Le Pack Liasse est le vrai moteur : les propriétaires paient €500–€1 500/an à un comptable pour ce service — €49/an est une conversion quasi-certaine pour les propriétaires qui ont déjà un bien. Le référencement naturel "lmnp régime réel" attire un trafic à très forte intention.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — travail de déclaration fiscale effectué tranquillement à domicile)
+- **Moteur amortissement :** Algorithme de découpage en composants selon la doctrine administrative (BOI-BIC-AMT-10-40 et pratique jurisprudentielle CRC) — gros œuvre 50% / 80 ans, ravalement 15% / 30 ans, toiture 10% / 25 ans, équipements techniques 15% / 15 ans, agencements intérieurs 10% / 10 ans + quote-part terrain non amortissable (usuellement 15–20%) + mobilier 5–10 ans selon catégorie (literie, électroménager, mobilier) + travaux capitalisés vs. charges immédiates selon le seuil de €500
+- **Calcul résultat BIC :** Loyers bruts − charges déductibles (intérêts emprunt, assurance PNO, frais de gestion, CFE, taxe foncière au prorata, frais comptabilité, assurance loyers impayés) − amortissements de l'exercice = résultat net ou déficit + suivi stock déficits reportables avec millésime
+- **Génération liasse :** react-pdf — formulaires Cerfa 2031-SD, 2033-A (bilan simplifié actif/passif), 2033-B (compte de résultat), 2033-C (tableau des immobilisations) pré-remplis selon les données saisies ; validation anti-redressement (cohérence actif/passif, respect planchers amortissements, absence d'amortissement du terrain)
+- **Alerte LMP :** Comparaison automatique recettes LMNP vs revenus professionnels du foyer fiscal (salaires, BIC/BNC autres activités) — déclenchement alerte si seuil LMP franchi avec calcul des cotisations sociales additionnelles (SSI : ~42% du résultat net)
+- **AI assistant :** Claude API (claude-sonnet-4-6) — répond aux questions en français (LMNP ancien vs VEFA, amortissement résidence principale transformée en meublé, règles de sortie du régime réel, SCI à l'IS vs LMNP en nom propre, impact réforme LMNP loi de finances 2025)
+- **Payments :** Stripe (abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Mon appartement meublé me faisait payer €3 000/an d'impôts en trop — le régime réel LMNP expliqué en 3 minutes" (fort impact : chaque propriétaire LMNP au micro-BIC est une conversion potentielle)
+2. Facebook Groups : "LMNP investisseurs immo France", "Investissement locatif meublé", "Airbnb et location courte durée France" (500K+ membres)
+3. Forums : ImmoInvestisseur.fr, Forum-fiscalite.com, SeLoger investissement — les fils LMNP régime réel sont parmi les plus consultés
+4. SEO : "lmnp régime réel vs micro bic calcul", "tableau amortissement lmnp composants", "liasse 2031 sd comment remplir", "deficit lmnp reportable comment déclarer", "lmnp régime réel comptable obligatoire"
+
+### Competitive Moat
+- Le seul concurrent direct est le comptable (€500–€1 500/an) — LMNP.ai propose le même service pour €49/an avec un tableau d'amortissement aussi solide
+- La génération automatique de la liasse 2031-SD est une barrière technique forte : aucun outil grand public en France ne le fait (Jotform, Indy, Pennylane ciblent les entreprises, pas les particuliers LMNP)
+- Le stock de déficits reportables crée une rétention structurelle : le propriétaire doit continuer à utiliser l'outil année après année pour suivre et reporter ses déficits correctement
+- La réforme LMNP de la loi de finances 2025 (réintégration des amortissements dans la plus-value à la revente) a créé une complexité supplémentaire — LMNP.ai peut intégrer le simulateur de plus-value ajustée en upsell
+
+### Figma Schematic
+[View LMNP.ai Furnished Rental Tax Optimizer Flow on FigJam](https://www.figma.com/board/q26X3cUtKTERq4tUHafTL2)
+
+---
+
+## 61. NotaireSimple.ai
+
+> **Calculez vos frais de notaire au centime, optimisez votre acquisition et simulez votre PTZ**
+
+### Problem
+En France, **1,1 million de transactions immobilières** ont lieu chaque année (source : Notaires de France). Pour chaque acquéreur, les frais de notaire représentent un poste budgétaire majeur — entre **7 et 8% du prix de vente dans l'ancien**, et 2 à 3% dans le neuf — soit €14 000 à €24 000 sur un bien à €300 000. Or ce poste est systématiquement mal anticipé, pour plusieurs raisons : (1) **La décomposition des frais est incompréhensible :** Les frais de notaire ne vont pas entièrement dans la poche du notaire. Ils se décomposent en : droits de mutation à titre onéreux (DMTO : 5,80% dans la quasi-totalité des départements, ou 5,09% dans les rares départements ayant choisi le taux réduit), émoluments du notaire (barème réglementé par le décret du 26 février 2016 — tarif proportionnel dégressif par tranches), débours (cadastre, conservateur des hypothèques, géomètre-expert, frais de copropriété) et contribution de sécurité immobilière (0,10%). Personne ne fait ce calcul à l'avance. (2) **Les optimisations légales sont ignorées :** La valeur du mobilier (cuisine équipée, électroménager, parquet, volets) peut être **déduite du prix de vente** dans le calcul des droits de mutation si elle est listée dans un acte séparé — une cuisine à €15 000 déduite peut faire économiser €870 de DMTO. De même, acheter en prix net vendeur vs. honoraires d'agence à la charge de l'acquéreur change l'assiette de calcul. (3) **Le PTZ (Prêt à Taux Zéro) est mal compris :** Relancé en 2024 pour tout le territoire (PTZ 2024–2027), le PTZ est réservé aux primo-accédants mais ses conditions d'éligibilité (zone géographique, composition du foyer, ressources) et son montant (jusqu'à 50% du prix dans les zones tendues) sont méconnus. Les simulateurs officiels de l'ANIL sont corrects mais peu pédagogiques. (4) **La comparaison neuf vs. ancien est rarement faite correctement :** À budget identique, acheter un appartement neuf en VEFA avec frais réduits (2–3%) revient souvent moins cher en coût total sur 20 ans qu'un bien ancien avec frais à 8% — mais personne ne fait ce calcul avant de visiter. (5) **La mise en concurrence des notaires est ignorée :** Les émoluments sont réglementés, mais la remise sur émoluments (possible jusqu'à 20% au-delà de €150 000 depuis le décret de 2016) et la qualité du service varient. La plupart des acquéreurs acceptent le notaire proposé par le vendeur.
+
+### Solution
+**(1) Calculateur de frais exact :** L'utilisateur saisit le prix de vente, le département, le type de bien (ancien ou VEFA/neuf) et si des honoraires d'agence sont à la charge de l'acquéreur — l'outil décompose au centime chaque poste (DMTO, émoluments par tranche, débours estimés, CSI). **(2) Optimiseur mobilier :** Champ dédié pour déduire la valeur des meubles et équipements — l'outil calcule l'économie de DMTO et génère le modèle de liste de mobilier à inclure dans l'acte. **(3) Comparatif neuf vs. ancien :** Pour un budget total identique, simulation du coût total (frais de notaire + prix + TVA VEFA) et du bien accessible dans chaque catégorie — aide à la décision d'orientation du projet. **(4) Simulateur PTZ 2024–2027 :** Éligibilité selon le nombre de personnes dans le foyer, les ressources N-2 et la zone géographique du bien (A/A bis, B1, B2/C avec conditions spécifiques) — montant PTZ calculé, quotité, durée de différé possible (jusqu'à 15 ans), mensualité PTZ + impact sur capacité d'emprunt principale. **(5) Simulation capacité d'emprunt globale :** PTZ + prêt principal avec calcul du taux d'endettement — vérification que l'acquisition est finançable (règle HCSF 35%). **(6) Mise en relation notaires :** Annuaire de notaires partenaires par département avec notation des délais de traitement, tarif de remise appliqué (jusqu'à 20%), et possibilité de pré-réserver un rendez-vous — commission de référencement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur frais | €0 | Décomposition exacte des frais de notaire pour un prix et un département donnés |
+| Pack Acheteur Complet | €9 | Optimiseur mobilier + comparatif neuf/ancien + liste mobilier générée + économies calculées |
+| Pack PTZ | €4,99 | Simulation PTZ complète (éligibilité + montant + différé + mensualités) + simulation capacité d'emprunt combinée |
+| Mise en relation notaires | €0 pour l'acheteur | Commission de €50–€200 par dossier signé payée par le notaire partenaire |
+
+**Unit economics :** Claude API ~€0,05/calcul → 99% gross margin. **Marché :** 1,1M transactions/an × 1,5% conversion Pack Acheteur = 16 500 packs → **€10 230 MRR**. Le vrai moteur est la mise en relation : même à 0,5% de part de marché = 5 500 transactions × €100 commission moyenne = **€45 800 MRR**. Le PTZ a été relancé pour 2024–2027 avec un fort effet de recherche — le pic de trafic SEO est maintenant.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — décision réfléchie avant une visite ou une signature de compromis)
+- **Moteur frais de notaire :** Algorithme appliquant le décret n°2016-230 du 26 février 2016 — émoluments proportionnels par tranches (3,945‰ jusqu'à €6 500 ; 1,627‰ de €6 500 à €17 000 ; 1,085‰ de €17 000 à €60 000 ; 0,814‰ au-delà de €60 000) + DMTO (5,80665% par défaut ou 5,09131% dans les 3 départements concernés : Indre, Isère, Morbihan) + CSI (0,10%) + débours forfaitaires estimés (€800–€1 200 selon la complexité) ; possibilité de remise sur émoluments jusqu'à 20% au-delà de €150 000 (article 16 du décret)
+- **Optimiseur mobilier :** Catégories de meubles déductibles (cuisine équipée, luminaires, parquet flottant non scellé, volets, électroménager) avec valeurs de marché préchargées — génération automatique d'un tableau de mobilier au format réglementaire (CGI art. 683 I) réduisant l'assiette des DMTO
+- **Simulateur PTZ 2024–2027 :** Référentiel officiel PTZ (décret n°2023-1139) — barème de ressources par zone et composition de foyer, calcul quotité (50% zone A/Abis, 40% zone B1, 20% zones B2/C avec conditions), durée de remboursement (20 à 25 ans) + différé (5, 10 ou 15 ans selon revenus), calcul de la mensualité PTZ et de la mensualité résiduelle prêt principal avec taux marché courant
+- **Comparatif neuf/ancien :** Pour un budget identique, calcul du bien accessible dans les deux catégories (prix brut accessible = budget − frais de notaire − apport personnel requis) + simulation sur 20 ans (remboursement, coût total des frais)
+- **Annuaire notaires :** Données publiques des notaires de France (Conseil Supérieur du Notariat — API RENOIRH) + système de notation interne (délai de réponse, qualité du dossier, remise appliquée) + prise de RDV en ligne (Calendly-like intégré)
+- **Payments :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Vous allez acheter un appartement à 250 000€ ? Voici exactement combien vous paierez de frais de notaire (et comment en économiser 1 500€ légalement)" (fort impact : touche tous les acheteurs au moment le plus stressant de leur vie)
+2. Facebook Groups : "Primo-accédants France", "Immobilier investissement locatif France", "Acheter son premier appartement" (600K+ membres)
+3. Partenariats : courtiers en crédit immobilier (CAFPI, Meilleurtaux, Vousfinancer) — ils ont intérêt à utiliser l'outil avec leurs clients pour clarifier le budget acquisition
+4. SEO : "frais de notaire calcul exact 2026", "frais de notaire ancien combien pourcentage", "ptz 2026 eligible calcul montant", "déduire mobilier frais de notaire comment", "frais de notaire neuf vs ancien différence"
+
+### Competitive Moat
+- Le simulateur officiel des Notaires de France (immobilier.notaires.fr) donne un total global — NotaireSimple.ai décompose au centime chaque poste ET montre les optimisations légales que le vendeur et son notaire ne mentionneront jamais
+- L'optimiseur mobilier est invisible dans l'offre concurrente : personne ne mentionne cette astuce légale qui peut économiser €500–€2 000 sur une transaction courante — une valeur perçue immédiate qui génère une conversion forte
+- La relance du PTZ 2024–2027 crée un pic de recherche avec une demande insatisfaite : les outils existants de l'ANIL et des banques sont corrects mais pas combinés avec le calcul des frais de notaire
+- Le modèle de référencement notaires est récurrent et scalable : les notaires cherchent activement à capter des clients acquéreurs, le brief pré-rempli réduisant leur temps d'accueil est un argument commercial fort
+
+### Figma Schematic
+[View NotaireSimple.ai Frais de Notaire Calculator Flow on FigJam](https://www.figma.com/board/ZDV6qCfcpG0KSgTf2SzoTo)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2716,4 +2858,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-05 — Ideas 56–58 added (France-specific, ultra-low-budget: DivorceSimple.ai, PointsPermis.ai, CESU.ai)*
+*Last updated: 2026-05-06 — Ideas 59–61 added (France-specific, ultra-low-budget: MaisonDeRetraite.ai, LMNP.ai, NotaireSimple.ai)*
