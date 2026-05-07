@@ -69,6 +69,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 59 | [MaisonDeRetraite.ai](#59-maisonderettraiteai) | Pay-per-report + Référencement EHPAD | €8K–€60K | Low-Medium |
 | 60 | [LMNP.ai](#60-lmnpai) | Pay-per-analysis + Annual Subscription | €6K–€45K | Low-Medium |
 | 61 | [NotaireSimple.ai](#61-notairesimpleai) | Freemium + Pay-per-report + Référencement notaires | €10K–€70K | Low |
+| 62 | [SociétéSimple.ai](#62-sociétésimpleai) | Pay-per-pack + Référencement EC | €8K–€50K | Low |
+| 63 | [TropPerçuCAF.ai](#63-trop-perçucafai) | Pay-per-letter + Annual Subscription | €5K–€35K | Low |
+| 64 | [Obsèques.ai](#64-obsèquesai) | Pay-per-pack + Référencement pompes funèbres | €8K–€55K | Low |
 
 ---
 
@@ -2843,6 +2846,142 @@ En France, **1,1 million de transactions immobilières** ont lieu chaque année 
 
 ### Figma Schematic
 [View NotaireSimple.ai Frais de Notaire Calculator Flow on FigJam](https://www.figma.com/board/ZDV6qCfcpG0KSgTf2SzoTo)
+
+---
+
+## 62. SociétéSimple.ai
+
+> **Créez votre SAS/SARL/SASU/EURL en moins de 7 jours avec des statuts générés par IA**
+
+### Problem
+En France, **1,1 million de nouvelles entreprises** sont créées chaque année (source : INSEE 2023), dont 400 000+ sous forme de sociétés (SAS, SARL, SASU, EURL). Pourtant, le parcours de création reste un labyrinthe administratif : choisir entre les 4 formes juridiques (SAS vs SARL : régime du président assimilé-salarié vs gérant TNS, différences IS/IR, flexibilité des statuts), rédiger des statuts conformes au Code de commerce, déposer le capital sur un compte bloqué, publier une annonce légale (€150–€250), s'immatriculer sur le guichet unique INPI. Les erreurs dans les statuts (clause abusive, mentions obligatoires manquantes) bloquent l'immatriculation et coûtent du temps et de l'argent. Pour éviter ces pièges, les entrepreneurs font appel à un expert-comptable (€500–€1 500) ou à des LegalTech généralistes (Captain Contrat, Legalstart : €300–€500) qui livrent des statuts standardisés sans accompagnement personnalisé. L'auto-entrepreneur qui monte en régime de société pour dépasser les seuils de TVA ou de CA se retrouve seul face à une décision structurante qu'il ne comprend pas.
+
+### Solution
+**(1) Questionnaire de situation :** En 10 questions, l'outil détermine la forme juridique optimale — nombre d'associés, besoin de flexibilité statutaire, régime social préféré (TNS vs assimilé-salarié), perspective de levée de fonds, activité réglementée. **(2) Comparateur détaillé SAS/SASU/SARL/EURL :** Tableau côte-à-côte des différences sur 8 critères clés (charges sociales, régime fiscal, cession de parts, responsabilité, commissaire aux comptes). **(3) Génération des statuts IA :** Statuts personnalisés conformes au Code de commerce et à la loi PACTE 2019 — siège social, objet social sur-mesure, répartition des parts, clauses d'agrément, de préemption et d'exclusion. **(4) Checklist d'immatriculation INPI :** Étapes séquencées avec liens vers les formulaires officiels — dépôt du capital (banques en ligne acceptant les dépôts de capital : Shine, Qonto, BoursoBank), publication d'annonce légale (comparateur des journaux habilités par département), dépôt sur guichet-unique.fr. **(5) Simulateur charges sociales :** Pour un même niveau de rémunération, simulation des charges TNS (gérant SARL majoritaire) vs assimilé-salarié (président SAS) — net après charges, cotisations, protection sociale. **(6) Domiciliation :** Modèle de contrat de domiciliation conforme à la loi.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Comparateur + Recommandation | €0 | Accès gratuit pour générer du trafic SEO |
+| Pack Création Complet | €49 | Statuts IA + checklist INPI + simulateur charges + modèle domiciliation |
+| Pack Statuts SAS multi-associés | €89 | Clauses avancées : pacte d'associés, actions de préférence, DPS, clause de bad leaver |
+| Mise en relation expert-comptable | €0 pour l'entrepreneur | Commission €50–€150 par mise en relation signée |
+
+**Unit economics :** Claude API ~€0,05/génération → coût marginal quasi nul. **Marché :** Sur 400 000 créations de sociétés/an, même à 0,5% de conversion = 2 000 packs × €49 = **€8 166 MRR**. La mise en relation EC est récurrente : les entrepreneurs ont besoin d'un EC pour la liasse fiscale annuelle — commission fidélisante.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — décision réfléchie, pas mobile-first)
+- **Génération statuts :** Claude API avec prompt juridique structuré par forme juridique + base de clauses templates validées (Code de commerce art. L227-1 à L227-20 pour SAS, L223-1 à L223-43 pour SARL)
+- **Simulateur TNS vs assimilé-salarié :** Algorithme avec taux SSI (~45% des revenus nets TNS) vs assimilé-salarié (~80% du brut employeur) — taux 2025 actualisés
+- **Comparateur annonces légales :** Partenariat ou scraping des journaux habilités par département (liste DILA) — prix unitaire par département et type de société
+- **PDF generation:** react-pdf (statuts livrés en PDF signables électroniquement)
+- **Paiements:** Stripe
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "SAS ou SARL : quelle différence ? Je gagne combien de plus avec la bonne forme ?" (très haut volume de recherche chez les auto-entrepreneurs qui évoluent)
+2. Reddit/forums : r/AutoEntrepreneur, Forum-Auto-Entrepreneur.fr, Forum Compta Online — réponses approfondies aux questions "comment passer en société"
+3. SEO : "créer sas sans avocat", "statuts sas modèle gratuit", "sas vs sarl charges différence", "sasu charges sociales calcul", "frais création sarl 2025 combien"
+4. Partenariats : banques pro (Shine, Qonto, Blank) qui référencent des outils de création pour leurs nouveaux clients entrepreneurs
+
+### Competitive Moat
+- Captain Contrat et Legalstart facturent €300–€500 pour des statuts standardisés avec peu de personnalisation — SociétéSimple.ai livre des statuts sur-mesure pour €49
+- Le simulateur TNS vs assimilé-salarié est le seul outil qui traduit le choix juridique en euros concrets sur le salaire net — argument de conversion massif
+- La cible auto-entrepreneur → société est un segment sous-adressé : les LegalTech ciblent les créateurs first-time, pas les évolutions de régime
+- L'annonce légale est un coût caché que personne n'anticipe — l'outil qui le révèle et l'optimise crée une confiance immédiate
+
+### Figma Schematic
+[View SociétéSimple.ai Company Creation Flow on FigJam](https://www.figma.com/board/REXbB0Qts4BAodwJIcUHnq)
+
+---
+
+## 63. TropPerçuCAF.ai
+
+> **Répondez à votre avis de trop-perçu CAF, Pôle Emploi ou URSSAF en 30 minutes — contestation, remise de dette ou plan d'apurement**
+
+### Problem
+En France, **le trop-perçu est une épidémie silencieuse :** la CAF envoie chaque année des avis de trop-perçu à **1 allocataire sur 4** (source : rapport de la Cour des comptes 2022). Pôle Emploi (désormais France Travail) émet 800 000 avis de trop-perçu par an sur les allocations chômage. L'URSSAF relance régulièrement les auto-entrepreneurs en situation de régularisation. Ces avis ont plusieurs caractéristiques communes : (1) **Montants élevés :** Un trop-perçu CAF peut atteindre €5 000–€15 000 sur plusieurs années de RSA ou d'APL non déclarés correctement. (2) **Délai de contestation court :** 2 mois pour contester auprès de la Commission de Recours Amiable (CRA) — la plupart des allocataires ne le savent pas. (3) **Taux d'erreur élevé côté CAF :** La Cour des comptes estime à 20–30% la part des trop-perçus résultant d'une erreur de traitement CAF (revenus non intégrés, statut familial mal enregistré). (4) **Options méconnues :** La remise de dette totale ou partielle est possible pour les personnes en situation de précarité, mais la demande doit être formulée correctement. (5) **Aucun outil grand public n'existe :** Les associations (UDAF, Secours Catholique) aident, mais sur rendez-vous avec des délais de 3–6 semaines. Les avocats en droit social facturent €150–€300/heure.
+
+### Solution
+**(1) Analyse de l'avis :** L'utilisateur saisit ou prend en photo son avis de trop-perçu — l'IA extrait l'organisme, le montant, la période de référence, le motif invoqué et la date limite de contestation. **(2) Diagnostic de contestabilité :** L'IA compare le motif invoqué avec les causes légales de trop-perçu non fautif (erreur de l'organisme, changement de situation notifié dans les délais légaux, calcul erroné) et évalue la probabilité de succès d'une contestation. **(3) Génération de la lettre appropriée :** Selon le diagnostic — lettre de recours amiable auprès de la CRA (CAF), contestation PE devant le TJ, demande de remise de dette (formulaire Cerfa 15669*01 pré-rempli), ou demande de plan d'apurement mensuel. **(4) Pack justificatifs :** Liste précise des pièces à joindre selon le type de recours. **(5) Suivi et relance :** Rappel automatique à 6 semaines si pas de réponse (délai légal CRA : 2 mois), modèle de lettre de relance.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Analyse de l'avis + évaluation de contestabilité |
+| Lettre unique | €9 | Génération d'une lettre (contestation OU remise de dette OU plan d'apurement) + liste justificatifs |
+| Pack Complet | €19 | Toutes les lettres + suivi + modèle de relance + accès 6 mois |
+| Abonnement annuel | €29/an | Accès illimité + alertes trop-perçu (pour allocataires récurrents) |
+
+**Unit economics :** Claude API ~€0,03/analyse → coût quasi nul. **Marché :** 3M+ avis de trop-perçu/an (CAF + PE + URSSAF) × 1% conversion lettres payantes = 30 000 lettres × €9 = **€22 500 MRR**. Le taux de réussite des contestations (estimé à 40% quand bien rédigées) est le principal argument marketing — chaque euro dépensé peut en récupérer 500.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — l'avis arrive par courrier ou mail, l'utilisateur est souvent en situation de stress sur mobile)
+- **OCR avis :** Google Vision API ou Mistral OCR — extraction du montant, de l'organisme, de la période et du motif depuis un scan ou une photo
+- **Moteur de diagnostic :** Claude API avec prompts spécialisés par organisme (CAF : Code de la sécurité sociale art. L553-2 sur la bonne foi ; PE : Règlement Annexe 4 Unédic ; URSSAF : procédure de régularisation SSI)
+- **Génération de lettres :** Templates validés juridiquement pour chaque type de recours — l'IA personnalise avec les données extraites de l'avis
+- **Rappels :** Resend (emails) ou Twilio (SMS) pour les alertes de suivi à 6 semaines
+- **Paiements :** Stripe (unitaire + abonnement)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "La CAF me réclame 3 000€ — voilà exactement comment j'ai contesté et récupéré mes droits en 45 jours" (format témoignage très viral)
+2. Facebook Groups : "Entraide CAF", "Allocataires CAF et Pôle Emploi France", "RSA et aides sociales" (500K+ membres au total)
+3. Partenariats associations : UDAF, Secours Populaire, Croix-Rouge numérique — outil gratuit pour le diagnostic, les associations orientent leurs bénéficiaires
+4. SEO : "trop-perçu caf comment contester", "remise de dette caf demande", "lettre contestation trop-perçu pole emploi modèle", "plan apurement caf mensualité", "recours amiable caf délai"
+
+### Competitive Moat
+- Aucun outil grand public n'automatise la contestation de trop-perçu en France — le marché est servi uniquement par des associations surchargées et des avocats hors de prix
+- Le diagnostic de contestabilité est la vraie valeur : distinguer le trop-perçu de bonne foi (remissible) du trop-perçu frauduleux (non remissible) demande une connaissance juridique précise que l'IA peut encoder
+- Le taux de réussite élevé crée un bouche-à-oreille naturel dans des communautés très actives sur les réseaux sociaux
+- La récurrence est structurelle : certains allocataires reçoivent des trop-perçus plusieurs années de suite → abonnement annuel à €29 rentabilisé dès le premier recours réussi
+
+### Figma Schematic
+[View TropPerçuCAF.ai Overpayment Response Flow on FigJam](https://www.figma.com/board/11leqls7i4OyeIPNkZZHOD)
+
+---
+
+## 64. Obsèques.ai
+
+> **Comparez les devis pompes funèbres, préparez vos obsèques à l'avance et protégez vos proches des pièges tarifaires**
+
+### Problem
+En France, **600 000 décès surviennent chaque année** (source : INSEE). Pour chaque famille endeuillée, les premières 24 heures sont une course contre la montre administrative dans un état de choc émotionnel : contacter les pompes funèbres, choisir une prestation, signer un devis. Plusieurs problèmes structurels s'accumulent : (1) **Des prix opaques et très variables :** La loi du 8 janvier 1993 oblige chaque pompe funèbre à afficher un devis type standardisé (arrêté du 23 août 2010), mais les tarifs varient de 1 à 5 pour des prestations similaires selon la région et l'opérateur. Un enterrement simple coûte en moyenne €3 500 en France, mais peut atteindre €8 000–€12 000 avec les options ajoutées sous pression émotionnelle. (2) **La vente sous pression :** Les pompes funèbres proposent leurs services dans les heures qui suivent le décès — moment où la famille est incapable de comparer. Les options (cercueil premium, fleurs, plaque) sont présentées comme "standards" alors qu'elles sont optionnelles. (3) **Les contrats obsèques incompris :** 5 millions de Français ont souscrit un contrat obsèques (assurance prévoyance), mais beaucoup ne savent pas ce qu'il couvre exactement ni comment l'activer. (4) **30+ formalités post-décès :** La famille doit accomplir plus de 30 démarches dans les 3 mois suivant le décès (déclaration à la mairie, comptes bancaires, successions, CAF, retraite…) sans guide structuré. (5) **La préplanification reste un tabou :** Organiser ses obsèques à l'avance est légal et protège la famille, mais rares sont les outils grand public et non anxiogènes pour cette démarche.
+
+### Solution
+**(1) Comparateur de devis pompes funèbres :** L'utilisateur renseigne le code postal et le type de prestation — l'outil agrège les prix pratiqués par les pompes funèbres locales à partir de leurs devis types publics (obligation légale depuis loi 1993) et affiche une fourchette de prix par poste (transport de corps, cercueil, convoi, crémation, inhumation). **(2) Checklist post-décès :** Guide séquencé des 30 démarches obligatoires avec délais légaux — déclaration de décès (24h), certificat de décès, banque, sécurité sociale, caisse de retraite, CAF, bailleur, impôts, succession. Chaque étape inclut le formulaire officiel et le contact à joindre. **(3) Analyseur de contrat obsèques :** L'utilisateur upload son contrat obsèques — l'IA vérifie : contrat en prestations ou en capital ? Somme revalorisée chaque année ? Comment l'activer ? Que couvre-t-il et que reste-t-il à payer ? **(4) Module préplanification :** Formulaire guidé pour consigner ses souhaits (inhumation/crémation, musique, lieu, personnes à prévenir) générant un PDF à conserver avec ses papiers importants. **(5) Annuaire pompes funèbres partenaires :** Prestataires ayant accepté une charte de transparence tarifaire et de non-pression commerciale — commission de référencement à la signature.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Comparateur de prix | €0 | Fourchettes de prix par prestation et département |
+| Pack Famille Urgence | €9 | Checklist post-décès complète + contacts par département + modèles de lettres résiliation |
+| Pack Analyseur Contrat Obsèques | €9 | Analyse du contrat assurance obsèques + rapport sur couverture et lacunes |
+| Pack Préplanification | €4,99 | Formulaire de souhaits + PDF + guide don d'organes / directives anticipées |
+| Référencement pompes funèbres | €0 famille | Commission €100–€300 par prestation signée via la plateforme |
+
+**Unit economics :** Claude API ~€0,04/analyse → coût marginal négligeable. **Marché :** 600 000 décès/an. Si 2% des familles utilisent le Pack Famille Urgence = 12 000 packs × €9 = **€9 000 MRR**. Le vrai moteur est le référencement : 0,3% des 600 000 obsèques via la plateforme = 1 800 × €150 commission moyenne = **€22 500 MRR**. La préplanification (5M de contrats obsèques à analyser) est un marché parallèle stable.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop pour préplanification, mobile-first pour urgence post-décès)
+- **Données pompes funèbres :** Agrégation des devis types publics (arrêté 2010) — scraping des sites + données DGCCRF + liste des pompes funèbres habilitées par département (Habilitation préfectorale, liste publique) ; affichage d'une fourchette par poste (transport avant mise en bière, cercueil par gamme, convoi, inhumation/crémation)
+- **Checklist post-décès :** Base de données des 30 démarches séquencées avec délais légaux codifiés (CGCT pour déclaration de décès, Code des assurances pour contrats, Code civil pour succession) — enrichie par département (coordonnées mairie, TJ, CAF, CARSAT)
+- **Analyseur contrat obsèques :** Claude API avec prompt de vérification des 8 points critiques d'un contrat obsèques (type de contrat, revalorisation, prestataire désigné vs libre, conditions d'activation, portabilité géographique)
+- **PDF préplanification :** react-pdf — document non contractuel de souhaits funéraires
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. SEO : "prix pompes funèbres comparaison", "démarches après décès liste complète", "contrat obsèques avis comment fonctionne", "organiser obsèques à l'avance", "combien coûte un enterrement france 2025" — mots-clés à forte intention avec peu de concurrence de qualité
+2. Partenariats associations : CLCV, 60 Millions de Consommateurs (comparatif annuel sur les pompes funèbres), associations de patients (cancer, maladies chroniques)
+3. YouTube : "Ce que les pompes funèbres ne vous diront jamais sur le devis" (format investigation — très partagé)
+4. Partenariats notaires et mutuelles : Les notaires traitent les successions (checklist post-décès complémentaire), les mutuelles proposent des garanties obsèques (analyseur en marque blanche)
+
+### Competitive Moat
+- Comparateur.fr et MoneyVox font des articles ponctuels sur les prix des obsèques, mais aucun outil interactif par département et par type de prestation n'existe
+- La charte de non-pression commerciale des partenaires est un avantage différenciant : les familles cherchent explicitement à éviter la vente sous pression — le signal de confiance est fort
+- L'analyseur de contrat obsèques est totalement vierge en France : des millions de Français ont souscrit un contrat sans comprendre ce qu'il couvre — et découvrent les lacunes trop tard
+- La barrière émotionnelle est une barrière d'entrée réelle pour les concurrents tech : le bon ton et la bienveillance dans le design sont difficiles à imiter et créent une préférence de marque durable
+
+### Figma Schematic
+[View Obsèques.ai Funeral Planning and Price Comparison Flow on FigJam](https://www.figma.com/board/4RpqC9sJBUC4NjWiCz9t9M)
 
 ---
 
