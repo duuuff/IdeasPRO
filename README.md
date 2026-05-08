@@ -72,6 +72,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 62 | [SociétéSimple.ai](#62-sociétésimpleai) | Pay-per-pack + Référencement EC | €8K–€50K | Low |
 | 63 | [TropPerçuCAF.ai](#63-trop-perçucafai) | Pay-per-letter + Annual Subscription | €5K–€35K | Low |
 | 64 | [Obsèques.ai](#64-obsèquesai) | Pay-per-pack + Référencement pompes funèbres | €8K–€55K | Low |
+| 65 | [AssuranceEmprunteur.ai](#65-assuranceemprunteurai) | Pay-per-simulation + Pay-per-letter | €8K–€60K | Low |
+| 66 | [SCI.ai](#66-sciai) | Pay-per-pack + Annual Subscription | €6K–€45K | Low |
+| 67 | [AideJuridiction.ai](#67-aidejuridictionai) | Pay-per-dossier + Freemium | €4K–€30K | Low |
 
 ---
 
@@ -2985,6 +2988,143 @@ En France, **600 000 décès surviennent chaque année** (source : INSEE). Pour 
 
 ---
 
+## 65. AssuranceEmprunteur.ai
+
+> **Économisez €10 000–€30 000 sur votre crédit immobilier en changeant d'assurance emprunteur — simulation, comparaison et lettre de résiliation Loi Lemoine**
+
+### Problem
+En France, **7,5 millions de ménages** remboursent actuellement un crédit immobilier (source : Banque de France). Pour chaque emprunteur, l'assurance emprunteur représente en moyenne **30 à 40% du coût total du crédit** — soit €15 000 à €30 000 sur un prêt de 20 ans à €250 000. Pourtant, l'immense majorité des emprunteurs conservent l'assurance groupe imposée par leur banque lors de la souscription, alors que la délégation d'assurance permet d'économiser €10 000 à €30 000 sans aucun risque. Plusieurs obstacles structurels empêchent cette optimisation : (1) **La Loi Lemoine 2022 est méconnue :** Depuis le 1er septembre 2022, tout emprunteur peut résilier et changer son assurance emprunteur **à tout moment** (sans frais ni pénalités), quelle que soit l'ancienneté du contrat. Avant la Loi Lemoine, il fallait attendre la date anniversaire. Or seulement 8% des emprunteurs ont effectivement changé d'assurance depuis cette loi (source : CCSF 2024). (2) **Le questionnaire de santé est supprimé pour la majorité :** Pour les prêts dont le capital restant dû est inférieur à €200 000 et dont l'échéance intervient avant le 60e anniversaire de l'emprunteur, plus aucune déclaration d'état de santé n'est requise depuis la Loi Lemoine — une révolution ignorée. (3) **La démarche est perçue comme complexe :** Calculer l'équivalence de garanties (mort, PTIA, ITT, IPT, IPP, PE — 11 critères fixés par le CCSF), rédiger la lettre de substitution conforme, gérer le délai de réponse de 10 jours ouvrés — autant d'obstacles qui découragent l'emprunteur. (4) **Les bancassureurs bloquent activement :** Certaines banques tentent de ralentir ou de compliquer les démarches de résiliation, pratique illégale mais répandue. (5) **Les courtiers en assurance (Meilleurtaux Assurance, April, Cardif) prennent 15–25% de commission** sur la première année de prime — un outil direct moins cher est donc supérieur pour l'emprunteur.
+
+### Solution
+**(1) Simulateur d'économies :** L'utilisateur saisit le capital restant dû, la durée restante, le taux d'assurance actuel (lisible sur le TEG de l'offre de prêt) — l'outil calcule le coût total de l'assurance actuelle sur la durée restante et l'économie réalisable en passant aux meilleures offres du marché. **(2) Vérification éligibilité Loi Lemoine :** Capital restant < €200K et âge < 60 ans → aucun questionnaire médical requis — l'outil le confirme et l'explique clairement. **(3) Comparateur d'assurances déléguées :** Présentation des 8–10 assureurs alternatifs les moins chers (Crédit Agricole Assurances, MAIF, SwissLife, Prévoir, April…) avec taux TAEA et tarif mensuel — filtrés par l'équivalence des 11 garanties CCSF obligatoires. **(4) Génération de la lettre de substitution :** Lettre conforme à la Loi Lemoine et à l'article L313-31 du Code de la consommation, pré-remplie avec les données de l'emprunteur, le numéro du prêt et la référence de la nouvelle assurance. **(5) Guide de relance en cas de blocage :** Si la banque refuse ou ne répond pas dans les 10 jours ouvrés, l'outil génère une lettre de mise en demeure et les coordonnées du médiateur bancaire compétent. **(6) Tableau de bord économies :** Suivi mensuel des économies réalisées depuis le changement.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur d'économies | €0 | Calcul de l'économie réalisable — outil d'acquisition |
+| Pack Changement Complet | €9 | Rapport d'équivalence des garanties + lettre de substitution + guide de suivi |
+| Pack Blocage Banque | €4,99 | Lettre de mise en demeure + contacts médiateur + modèle de réclamation ACPR |
+| Abonnement annuel | €19/an | Veille sur les taux + rappel si meilleure offre disponible |
+
+**Unit economics :** Claude API ~€0,04/génération → coût marginal quasi nul. **Marché :** 7,5M de prêts en cours × 8% qui savent qu'ils peuvent changer × 15% conversion Pack = 90 000 packs × €9 = **€67 500 MRR en régime de croisière**. Même à 0,2% du marché total = 15 000 packs → **€11 250 MRR** avec un outil à €0 pour l'acquisition SEO. La Loi Lemoine 2022 crée un pic de recherche permanent — tout emprunteur qui découvre la loi cherche comment l'appliquer.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — décision financière réfléchie)
+- **Simulateur économies :** Algorithme de calcul du coût d'assurance sur capital amorti (méthode actuarielle du capital restant dû mensuel × taux TAEA / 12) — comparé au TAEA du marché actuel
+- **Vérification éligibilité :** Règles Loi Lemoine codifiées (capital restant dû < €200 000 selon art. L113-14 du Code des assurances, âge < 60 ans à l'échéance)
+- **Équivalence garanties CCSF :** Base des 11 critères minimaux fixés par l'arrêté du 6 octobre 2015 (décès, PTIA, ITT, IPT, IPP — définitions précises de chaque garantie) — vérification automatique que la nouvelle assurance couvre au moins les mêmes garanties que l'assurance groupe
+- **Génération lettre :** Template juridique conforme à l'article L313-31 du Code de la consommation tel que modifié par la Loi Lemoine — personnalisé avec les données du prêt
+- **Paiements :** Stripe (unitaire + abonnement)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "Votre banque vous coûte €20 000 de trop sur votre crédit immo — voici comment le récupérer légalement en 2026" (format révélation — très viral chez les propriétaires de 30–50 ans)
+2. Reddit : r/vosfinances, r/investissement — réponses approfondies aux questions sur l'assurance emprunteur
+3. Facebook Groups : "Primo-accédants France", "Investissement immobilier locatif France", "Renégociation prêt immobilier" (1M+ membres)
+4. SEO : "changer assurance emprunteur loi lemoine comment", "lettre résiliation assurance emprunteur modèle", "économiser assurance prêt immobilier", "délégation assurance emprunteur calcul", "questionnaire santé supprimé assurance emprunteur"
+
+### Competitive Moat
+- Les courtiers comme Meilleurtaux Assurance, April et Cardif prennent 15–25% de commission sur la première année de prime — AssuranceEmprunteur.ai facture €9 une fois et l'emprunteur garde 100% des économies annuelles
+- L'outil d'équivalence des 11 garanties CCSF est la barrière d'entrée technique principale : mal fait, il expose l'emprunteur à un refus de substitution — bien fait, c'est la clé du changement réussi
+- La Loi Lemoine 2022 a créé une demande massive non satisfaite : des millions d'emprunteurs savent qu'ils peuvent changer mais ne savent pas comment — le SEO est en plein pic
+- La génération de la lettre de mise en demeure (anti-blocage banque) est un différenciateur invisible chez les concurrents : si la banque bloque, l'emprunteur se retrouve seul
+
+### Figma Schematic
+[View AssuranceEmprunteur.ai Mortgage Insurance Switch Flow on FigJam](https://www.figma.com/board/hFcaPF0yr1Nrv2wShTUu7e)
+
+---
+
+## 66. SCI.ai
+
+> **Créez et gérez votre Société Civile Immobilière familiale : statuts IA, choix IS/IR, dissolution-partage et gestion des parts entre associés**
+
+### Problem
+En France, **la SCI (Société Civile Immobilière) est le véhicule de détention immobilière familial le plus répandu** — environ 350 000 SCI sont créées chaque année (source : INSEE Répertoire SIRENE). Pourtant, la SCI reste méconnue et inaccessible pour la majorité des Français qui en auraient besoin, pour plusieurs raisons : (1) **Le coût de création est perçu comme élevé :** Un notaire facture €1 500–€3 000 pour rédiger des statuts de SCI, un avocat en droit des affaires entre €1 000 et €2 500, un expert-comptable entre €800 et €1 500. Les plateformes LegalTech (Captain Contrat, Legalstart) proposent des SCI pour €300–€500 mais sans accompagnement ni simulation du régime fiscal. (2) **Le choix IS vs IR est incompris :** La SCI est transparente fiscalement par défaut (régime IR — les revenus fonciers remontent chez les associés selon leur quote-part), mais peut opter pour l'IS (impôt sur les sociétés) — choix irrévocable qui change radicalement la fiscalité des loyers, des plus-values et de la transmission. Ce choix structurant est rarement bien expliqué avant la création. (3) **La SCI n'est pas une société commerciale :** Elle suit le Code civil (art. 1845 à 1870-1) et non le Code de commerce — les règles sont différentes (pas de bilan commercial, AGO annuelle non obligatoire mais recommandée, cession de parts par acte sous seing privé enregistré aux impôts). Les entrepreneurs qui ont créé des SAS/SARL font des erreurs en transposant les règles. (4) **La cession de parts est un angle mort :** Lorsqu'un associé veut sortir ou qu'un bien est vendu, la dissolution-partage génère une plus-value immobilière chez les associés (régime IR, abattements pour durée de détention) — ou une plus-value professionnelle en IS — avec des implications fiscales drastiquement différentes que personne n'anticipe à la création.
+
+### Solution
+**(1) Questionnaire situation (10 questions) :** Nombre d'associés (couple, famille, amis), type de bien (résidence principale, locatif, LMNP), objectif (transmission patrimoniale, gestion locative, achat en commun), horizon de détention — l'outil détermine si la SCI est adaptée et quel régime fiscal est optimal. **(2) Simulateur IS vs IR :** Pour un loyer brut annuel donné, simulation sur 20 ans du net après impôt en IS (taux 15% jusqu'à €42 500, 25% au-delà — avec déductibilité de l'amortissement du bien) vs IR (barème progressif + prélèvements sociaux 17,2% — sans amortissement) + impact sur la plus-value à la revente dans chaque régime. **(3) Génération des statuts IA :** Statuts conformes au Code civil — dénomination, siège social, objet social (détention et gestion de biens immobiliers), durée (jusqu'à 99 ans), capital et répartition des parts, gérance (durée, pouvoirs, révocation), clauses d'agrément (droit de veto des associés sur l'entrée d'un tiers). **(4) Guide de création pas à pas :** Dépôt du capital (compte bancaire dédié — BoursoBank Pro, Shine acceptent les SCI), publication d'annonce légale (comparateur par département), immatriculation INPI sur guichet-unique.fr (SCI = régime simplifié, pas d'URSSAF). **(5) Outils de gestion ongoing :** Modèle de convocation et de PV d'AG annuelle (vote de l'approbation des comptes — recommandé même si non obligatoire), acte de cession de parts (sous seing privé, à enregistrer aux impôts dans 1 mois), guide dissolution-partage avec simulation de la plus-value selon durée de détention.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Questionnaire + recommandation SCI | €0 | Diagnostic gratuit — outil d'acquisition SEO |
+| Simulateur IS vs IR | €4,99 | Simulation complète sur 20 ans + impact plus-value à la revente |
+| Pack Création SCI | €49 | Statuts IA + guide création + comparateur annonces légales + checklist INPI |
+| Pack Gestion Annuelle | €19/an | PV AG annuel + modèle cession de parts + mise à jour réglementaire |
+| Mise en relation notaire / EC | €0 pour l'associé | Commission €50–€150 par mise en relation (acte authentique ou liasse fiscale) |
+
+**Unit economics :** Claude API ~€0,05/génération → coût marginal quasi nul. **Marché :** 350 000 SCI créées/an × 2% conversion Pack Création = 7 000 packs × €49 = **€28 583 MRR**. La gestion annuelle est récurrente : même 20 000 SCI abonnées à €19/an = **€31 666 MRR** après 3 ans. La cession de parts et la dissolution sont des événements à fort enjeu financier — fort levier de conversion.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (desktop — décision patrimoniale réfléchie)
+- **Simulateur IS vs IR :** Algorithme de simulation sur horizon choisi — régime IR : loyers bruts − charges − intérêts d'emprunt × (TMI associé + 17,2% PS) ; régime IS : loyers bruts − charges − intérêts − amortissement bien (linéaire sur 25–30 ans) × 15/25% IS ; plus-value revente : IR = régime des particuliers avec abattements progressifs (0% après 22 ans, exo PS après 30 ans) vs IS = plus-value professionnelle sans abattement
+- **Génération statuts :** Claude API avec prompt spécialisé SCI (Code civil art. 1845–1870-1) — clauses d'agrément, gérance, apports, objet social personnalisé (selon le type de bien et l'objectif)
+- **Annonces légales :** Comparateur journaux habilités (liste DILA) — prix unitaire par département pour SCI
+- **PV AG et cession de parts :** Templates juridiques simples (acte de cession à enregistrer au bureau d'enregistrement des impôts — droits d'enregistrement : 5% sur prix de cession des parts, minimum €25)
+- **Paiements :** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. TikTok/YouTube : "SCI ou achat en direct : j'achète un appartement avec ma femme — quelle est la meilleure solution en 2026 ?" (cible couples primo-accédants et investisseurs locatifs — très haut volume)
+2. Reddit/forums : r/vosfinances, r/investissement, Forum Compta Online — réponses aux questions "comment créer une SCI familiale", "SCI IS ou IR quelle différence"
+3. SEO : "créer sci familiale comment", "sci is ou ir simulation", "statuts sci modèle gratuit", "sci création démarche 2026", "sci cession parts comment faire"
+4. Partenariats : agents immobiliers (conseil aux acquéreurs) + banques (Crédit Foncier, Caisse d'Épargne proposent des prêts SCI — l'outil en amont crée un biais de prescription)
+
+### Competitive Moat
+- SociétéSimple.ai (#62 dans cette liste) couvre les sociétés commerciales (SAS, SARL) mais pas la SCI qui suit le Code civil et une fiscalité complètement différente — SCI.ai est le spécialiste complémentaire
+- Le simulateur IS vs IR sur 20 ans est la vraie valeur : c'est le seul outil qui traduit le choix de régime fiscal en euros concrets sur toute la durée de détention ET à la revente — aucun concurrent direct en format accessible à €5
+- La gestion annuelle récurrente (€19/an) crée des revenus prévisibles et un lien permanent avec la base d'associés — les événements de vie (cession, dissolution) sont ensuite naturellement monétisés
+- Le tabou de la SCI en famille (conflits entre associés, succession) est exactement le type de sujet où un outil neutre et non jugeant crée de la confiance — angle marketing unique
+
+### Figma Schematic
+[View SCI.ai Société Civile Immobilière Creation Flow on FigJam](https://www.figma.com/board/Dk1jcuN1eMXxsvxTib9aaj)
+
+---
+
+## 67. AideJuridiction.ai
+
+> **Vérifiez votre éligibilité à l'aide juridictionnelle, préparez votre dossier complet en 20 minutes et accédez à un avocat payé par l'État**
+
+### Problem
+En France, **l'aide juridictionnelle (AJ)** est un dispositif qui permet à toute personne dont les ressources sont insuffisantes d'obtenir la prise en charge totale ou partielle par l'État de ses frais de justice (honoraires d'avocat, frais d'huissier, frais d'expertise). En 2023, **1,3 million de demandes d'AJ** ont été déposées — mais ce chiffre sous-estime massivement les besoins réels, car la plupart des éligibles ne savent pas qu'ils le sont ou renoncent face à la complexité. Les problèmes sont multiples : (1) **Les plafonds de ressources sont méconnus :** Le seuil d'AJ totale en 2025 est de **€11 624/an de ressources mensuelles nettes** (soit ~€969/mois), et l'AJ partielle concerne jusqu'à **€17 436/an** (~€1 453/mois). Des millions de travailleurs précaires, d'allocataires CAF, d'auto-entrepreneurs en difficulté sont éligibles sans le savoir. (2) **Le dossier Cerfa 15626*01 est intimidant :** 5 pages de questions sur les ressources (salaires, pensions, revenus fonciers, revenus de capitaux mobiliers, prestations sociales), le patrimoine (biens immobiliers, placements financiers), la composition du foyer — avec des justificatifs précis pour chaque rubrique. Une erreur ou un justificatif manquant entraîne un rejet et une nouvelle demande depuis le début. (3) **Les délais sont longs et peu anticipés :** Les Bureaux d'Aide Juridictionnelle (BAJ) mettent 2 à 6 mois pour traiter les dossiers — des délais qui dépassent parfois les délais de prescription du litige lui-même. (4) **Les alternatives gratuites sont inconnues :** Consultations gratuites des barreaux (permanences juridiques), Maisons de Justice et du Droit (MJD), ADIL (immobilier), Défenseur des droits — autant de ressources accessibles immédiatement mais ignorées. (5) **L'AJ n'est pas accessible pour toutes les procédures :** Certaines procédures (divorce amiable par consentement mutuel, arbitrage) sont exclues — ce qu'il faut savoir avant de déposer.
+
+### Solution
+**(1) Calculateur d'éligibilité instantané :** L'utilisateur saisit la composition du foyer, les ressources mensuelles nettes de chacun des membres du foyer (salaires, allocations CAF, pensions alimentaires reçues, revenus du patrimoine) et la valeur des biens immobiliers non professionnels — l'outil applique le barème 2025 et indique en 30 secondes si l'AJ totale, partielle ou aucune AJ est applicable. **(2) Vérification de la procédure couverte :** L'utilisateur décrit son litige — l'outil identifie le type de procédure (prud'hommes, TJ, tribunal administratif, Cour d'appel, divorce, accident de la route, litige locatif) et confirme si l'AJ est applicable ou si des exclusions jouent. **(3) Génération du dossier Cerfa pré-rempli :** À partir des données saisies, le Cerfa 15626*01 est pré-rempli — l'utilisateur n'a plus qu'à vérifier et signer. **(4) Checklist de justificatifs précise :** Liste personnalisée des pièces à joindre selon la situation (dernier avis d'imposition ou attestation de non-imposition, justificatifs de ressources des 3 derniers mois, titre de propriété si bien immobilier, extrait de naissance) — avec explication de comment obtenir chaque pièce. **(5) Localisateur de BAJ :** Coordonnées du Bureau d'Aide Juridictionnelle compétent par département, avec adresse, horaires, contact et délai moyen de traitement constaté. **(6) Alternatives immédiates :** Pour les litiges urgents, présentation des consultations gratuites disponibles localement (permanences d'avocats au barreau, MJD, ADIL, Défenseur des droits) avec calendrier et conditions d'accès.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur d'éligibilité | €0 | Résultat instantané — acquisition SEO et bouche-à-oreille |
+| Pack Dossier Complet | €9 | Cerfa pré-rempli + checklist justificatifs personnalisée + localisateur BAJ + modèle lettre d'accompagnement |
+| Pack Urgent | €4,99 | Alternatives immédiates (permanences gratuites locales) + planning de consultation |
+| Abonnement Accès Illimité | €19/an | Accès à toutes les fonctionnalités + mise à jour des barèmes annuels + suivi de dossier |
+
+**Unit economics :** Claude API ~€0,03/calcul → coût quasi nul. **Marché :** Estimation 5M de Français éligibles à l'AJ mais non demandeurs. Si 0,3% utilisent le Pack Dossier = 15 000 packs × €9 = **€11 250 MRR**. La vraie force est le SEO : les personnes en situation de conflit juridique cherchent activement de l'aide — forte intention de paiement. Le tarif de €9 est symbolique vs. un avocat à €200+/heure.
+
+### Tech Stack
+- **Frontend:** Next.js + Tailwind (mobile-first — les publics précaires utilisent avant tout un smartphone)
+- **Moteur d'éligibilité :** Algorithme appliquant le barème AJ 2025 (décret n°2020-1717 du 28 décembre 2020, mis à jour annuellement) — calcul des ressources annuelles nettes × 12 + valeur du patrimoine, comparé aux plafonds par composition de foyer (seul, couple, avec enfants à charge — majoration de €196/an par personne à charge supplémentaire au-delà de la 2e)
+- **Vérification procédure :** Base de données des procédures couvertes et exclues (art. 10 et 10-1 de la loi n°91-647 du 10 juillet 1991 — AJ inapplicable au divorce par consentement mutuel par acte d'avocat, à l'arbitrage, aux actes préventifs)
+- **Cerfa 15626*01 :** Génération PDF rempli avec les données saisies — export signable électroniquement (PDF standard)
+- **Localisateur BAJ :** Base de données des 165 BAJ répartis dans les TGI/TJ de France — coordonnées, horaires, mode de dépôt (courrier, en ligne sur portail-aj.justice.fr)
+- **Permanences gratuites :** Partenariat ou scraping des calendriers de permanences des barreaux + MJD (répertoire du Ministère de la Justice)
+- **Paiements :** Stripe (unitaire + abonnement)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Aide juridique France", "Droit du travail France", "Locataires en difficulté", "RSA et aides sociales" — présence là où les personnes précaires cherchent de l'aide
+2. Partenariats associations : Secours Catholique, Croix-Rouge numérique, Restos du Cœur, CCAS des mairies — référencement outil dans les permanences sociales
+3. TikTok/Reels : "Votre avocat peut être gratuit — et personne ne vous le dit" (format révélation — très viral sur les publics précaires)
+4. SEO : "aide juridictionnelle eligibilite calcul", "aide juridictionnelle dossier comment remplir", "avocat gratuit france comment faire", "aide juridique conditions ressources 2026", "bureau aide juridictionnelle adresse"
+
+### Competitive Moat
+- Le site officiel service-public.fr et portail-aj.justice.fr permettent de déposer un dossier mais n'aident pas à le remplir — AideJuridiction.ai est le guide humain que l'État ne fournit pas
+- Le calculateur d'éligibilité en 30 secondes est la fonction la plus demandée : des millions de personnes ne savent pas si elles y ont droit — la réponse instantanée crée une valeur immédiate avant toute monétisation
+- La cible est structurellement sous-adressée par les LegalTech (Captain Contrat, Legalstart ciblent les entrepreneurs et les classes moyennes) — AideJuridiction.ai cible les personnes précaires, un marché immense et non servi par le secteur privé
+- Le bouche-à-oreille dans les communautés précaires est extrêmement fort : une personne qui obtient un avocat gratuit grâce à l'outil en parle à tout son entourage — CAC très faible à terme
+
+### Figma Schematic
+[View AideJuridiction.ai Legal Aid Eligibility and Application Flow on FigJam](https://www.figma.com/board/8SLJThDPSvgj0TBfW2u3qU)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -2997,4 +3137,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-06 — Ideas 59–61 added (France-specific, ultra-low-budget: MaisonDeRetraite.ai, LMNP.ai, NotaireSimple.ai)*
+*Last updated: 2026-05-08 — Ideas 65–67 added (France-specific, ultra-low-budget: AssuranceEmprunteur.ai, SCI.ai, AideJuridiction.ai)*
