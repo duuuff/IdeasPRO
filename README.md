@@ -75,6 +75,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 65 | [AssuranceEmprunteur.ai](#65-assuranceemprunteurai) | Pay-per-simulation + Pay-per-letter | €8K–€60K | Low |
 | 66 | [SCI.ai](#66-sciai) | Pay-per-pack + Annual Subscription | €6K–€45K | Low |
 | 67 | [AideJuridiction.ai](#67-aidejuridictionai) | Pay-per-dossier + Freemium | €4K–€30K | Low |
+| 68 | [RuptureConv.ai](#68-ruptureconvai) | Freemium + Pay-per-pack | €10K–€65K | Low |
+| 69 | [C2S.ai](#69-c2sai) | Pay-per-dossier + Commission organisme | €5K–€35K | Low |
+| 70 | [DroitsRH.ai](#70-droitsrhai) | Pay-per-pack + Freemium | €8K–€55K | Low |
 
 ---
 
@@ -3125,6 +3128,141 @@ En France, **l'aide juridictionnelle (AJ)** est un dispositif qui permet à tout
 
 ---
 
+## 68. RuptureConv.ai
+
+> **Calculez votre indemnité minimale de rupture conventionnelle, négociez avec votre employeur et simulez vos allocations chômage**
+
+### Problem
+En France, **600 000 ruptures conventionnelles** sont signées chaque année (source : DARES 2023), représentant la voie de sortie du contrat de travail la plus utilisée après la démission. La rupture conventionnelle permet une séparation à l'amiable avec accès aux allocations chômage (ARE) — un avantage décisif par rapport à la démission. Pourtant, trois obstacles structurels empêchent les salariés de défendre leurs droits : (1) **Le calcul de l'indemnité légale est opaque :** La formule est précise mais méconnue (1/4 de mois de salaire de référence par année d'ancienneté jusqu'à 10 ans, puis 1/3 de mois au-delà — décret n°2008-715 du 18 juillet 2008 modifié par la loi Travail 2016). Le salaire de référence est lui-même calculé sur la meilleure des deux options : la moyenne des 12 derniers mois ou la moyenne des 3 derniers mois. La plupart des salariés ne savent pas leur minimum légal et acceptent l'offre de l'employeur sans vérifier — parfois 30 à 50% en dessous du légal. (2) **La négociation est psychologiquement difficile :** Le salarié ne sait pas comment initier la discussion, quels éléments négocier en plus de l'indemnité (indemnité supra-légale, date de départ, solde de tout compte, clause de non-concurrence), ni comment réagir si l'employeur refuse ou traîne. (3) **Les délais légaux sont mal connus :** 15 jours de rétractation après signature de la convention, puis 15 jours ouvrables d'instruction par la DREETS — au total 5 à 6 semaines entre la signature et la fin du contrat. Les erreurs de forme (oubli de mention obligatoire sur le Cerfa) entraînent un refus d'homologation et recommencer depuis le début. (4) **La simulation ARE est ignorée :** Beaucoup de salariés ne savent pas combien ils toucheront après, pendant combien de temps et comment la "carence" (délai de carence ARE = indemnité de rupture divisée par 90, plafonné à 150 jours) réduit la durée d'indemnisation.
+
+### Solution
+**(1) Calculateur d'indemnité minimale légale :** L'utilisateur saisit sa date d'entrée, son salaire brut des 12 derniers mois (ou 3 derniers mois) — l'outil calcule le salaire de référence en prenant l'option la plus favorable, applique la formule légale par tranche d'ancienneté et affiche le montant minimum auquel il a droit. Si l'employeur propose moins, le delta est affiché en rouge. **(2) Guide de négociation pas-à-pas :** Séquence de 5 étapes : initier la demande (courrier ou entretien), premier entretien (éléments à préparer), négociation de l'indemnité supra-légale et de la date de départ, lecture du Cerfa avant signature, exercice éventuel du droit de rétractation. Modèle de lettre de demande de rupture conventionnelle inclus. **(3) Génération du Cerfa 14598*01 :** Le formulaire officiel de convention de rupture individuelle pré-rempli avec les données saisies — date de signature, montant de l'indemnité, date de rupture souhaitée, coordonnées des parties. Export PDF imprimable et signable. **(4) Calculateur ARE après rupture :** Simulation du montant des allocations (SJR × 75% pour les bas salaires, SJR × 57% pour les plus hauts — formule Unédic 2024 actualisée), durée d'indemnisation (en mois), délai de carence spécifique à la rupture (7 jours fixes + carence différée liée à l'indemnité supra-légale). **(5) Checklist d'homologation DREETS :** Mentions obligatoires du Cerfa, délai de dépôt (15 jours après fin du délai de rétractation), statut de la demande en ligne (si la DREETS ne répond pas dans les 15 jours ouvrables = homologation tacite).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul indemnité minimale | €0 | Simulateur d'indemnité légale avec formule détaillée |
+| Pack Négociation | €14 | Cerfa pré-rempli + guide négociation + lettre de demande + calculateur ARE |
+| Pack Complet | €29 | Pack Négociation + simulateur carence détaillé + modèle de lettre de rétractation + checklist solde de tout compte |
+
+**Unit economics :** Claude API ~€0,03/simulation → coût quasi nul. **Marché :** 600 000 ruptures conventionnelles/an. À 2% de conversion sur le Pack Négociation = 12 000 packs × €14 = **€14 000 MRR**. Fort potentiel viral : les salariés qui découvrent qu'ils se sont fait "sous-payer" leur indemnité partagent massivement l'outil.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop — décision réfléchie, souvent en semaine sur le lieu de travail ou à la maison)
+- **Calculateur indemnité :** Algorithme appliquant le décret n°2008-715 du 18 juillet 2008 modifié par la loi Travail n°2016-1088 — calcul du salaire de référence (meilleur entre moyenne 12 mois et moyenne 3 derniers mois) + tranches d'ancienneté (1/4 mois jusqu'à 10 ans d'ancienneté, 1/3 mois au-delà) + vérification que l'indemnité ≥ indemnité légale de licenciement (art. L1237-19-4 du Code du travail)
+- **Cerfa 14598*01 :** Génération PDF côté serveur (PDFKit ou react-pdf) avec les champs obligatoires du formulaire DREETS — date de la demande, date de l'entretien préalable, date de signature, montant de l'indemnité, date de rupture envisagée, coordonnées employeur et salarié, cachet SIRET
+- **Calculateur ARE :** Algorithme Unédic 2024 — SJR (salaire journalier de référence = total brut des 24 derniers mois / 730), ARE journalière = max(29,38€ ; 57% × SJR) avec plancher et plafond actualisés ; durée d'indemnisation = durée d'affiliation / 2 (plafonnée à 24 mois pour moins de 53 ans, 30 mois pour 53–54 ans, 36 mois pour 55 ans+) ; délai de carence = 7 jours + (indemnité supra-légale / 90), plafonné à 150 jours
+- **Guide négociation :** Contenu structuré dans un CMS (Contentful ou Notion-as-CMS) mis à jour selon les évolutions jurisprudentielles
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Mon employeur m'a proposé 3 200€ de rupture conventionnelle. J'avais droit à 5 100€. Voilà comment j'ai recalculé" (format révélation — fort taux de partage chez les salariés)
+2. Reddit/forums : r/france, r/conseiljuridique, Forum-Auto-Entrepreneur.fr — réponses aux questions "comment faire une rupture conventionnelle", "rupture conventionnelle montant minimum"
+3. Facebook Groups : "Rupture conventionnelle France", "Droit du travail France" (500K+ membres au total)
+4. SEO : "indemnite rupture conventionnelle calcul", "rupture conventionnelle minimum legal 2026", "cerfa rupture conventionnelle remplir", "chomage apres rupture conventionnelle combien", "rupture conventionnelle délai homologation dreets"
+
+### Competitive Moat
+- Le simulateur officiel du Ministère du Travail (code.travail.gouv.fr) calcule l'indemnité mais ne génère pas le Cerfa, ne guide pas la négociation et ne simule pas l'ARE — RuptureConv.ai est le pipeline complet
+- Le delta entre "ce que l'employeur propose" et "le minimum légal" est la killer feature : un salarié qui découvre qu'il laisse 1 500€ sur la table convertit immédiatement à €14
+- Aucune LegalTech grand public ne s'est spécialisée sur la rupture conventionnelle individuelle (Captain Contrat cible les entreprises, pas les salariés)
+- La saisonnalité est forte : forte demande en janvier (résolutions de Nouvel An) et en septembre (rentrée) — deux pics SEO naturels
+
+### Figma Schematic
+[View RuptureConv.ai Rupture Conventionnelle Flow on FigJam](https://www.figma.com/board/ahd7u5wUxamqszk1xUus7K)
+
+---
+
+## 69. C2S.ai
+
+> **Vérifiez en 2 minutes si vous avez droit à une mutuelle gratuite ou à €1/jour — et obtenez votre attestation C2S sans vous perdre dans les formulaires**
+
+### Problem
+En France, **la Complémentaire Santé Solidaire (C2S)** est l'une des aides sociales les plus puissantes et les moins demandées. Elle permet aux foyers à faibles revenus d'avoir une mutuelle complète totalement gratuite (C2S sans participation) ou à environ €1/jour (C2S avec participation financière réduite). Pourtant, le taux de non-recours est massif : **(1) Des millions d'éligibles ne la réclament pas :** Le rapport HCAAM 2022 estime à 3–4 millions le nombre de personnes éligibles mais non bénéficiaires. Les raisons : méconnaissance du dispositif (31% des non-demandeurs ne savaient pas qu'ils y avaient droit — enquête DREES 2021), sentiment de stigmatisation, complexité perçue du dossier. **(2) Les plafonds de ressources sont complexes :** Le plafond pour la C2S gratuite (ex-CMU-C) dépend de la composition du foyer — €1 006/mois pour une personne seule, majoré de +50% pour les 2e et 3e membres, +30% à partir du 4e membre (barème 2025). La C2S avec participation (ex-ACS) s'applique entre 100% et 135% de ce plafond. Calculer soi-même si l'on est éligible demande de comprendre la définition des "ressources retenues" (revenus nets imposables N-2, abattements sur pensions alimentaires, exclusion des aides au logement). **(3) Le dossier est décourageant :** Le formulaire Cerfa 12504*05 est long (14 pages), la liste des pièces justificatives varie selon la situation (salarié, auto-entrepreneur, chômeur, retraité, étudiant), et l'organisme à contacter dépend du régime d'assurance maladie (CPAM, MSA, régime spécial). **(4) L'impact financier est ignoré :** La C2S couvre le ticket modérateur, le forfait hospitalier (18€/jour), les dépassements d'honoraires en secteur 1, les soins dentaires (jusqu'à €400/an pour les plus de 16 ans) et les équipements optiques (verres + monture selon un barème). Pour une famille de 4 personnes, l'économie annuelle peut atteindre €2 000–€3 000 comparé à une mutuelle individuelle standard. **(5) Les organismes C2S varient en qualité :** Toutes les mutuelles ne proposent pas la C2S, et parmi celles qui la proposent, le réseau de soins, les délais d'adhésion et la qualité du service varient considérablement — aucun comparateur n'existe.
+
+### Solution
+**(1) Simulateur d'éligibilité en 2 minutes :** 5 questions (composition du foyer, statut professionnel de chaque adulte, revenus nets des 12 derniers mois, régime d'assurance maladie) → résultat immédiat : éligible C2S gratuite, éligible C2S participative, ou non éligible avec renvoi vers MutuelleOptimizer. **(2) Calculateur d'économie annuelle :** Pour les éligibles, simulation du coût d'une mutuelle équivalente en dehors de la C2S (tarif moyen par âge et composition du foyer) vs €0 ou contribution mensuelle réduite — l'impact financier affiché en euros concrets crée une motivation immédiate à faire le dossier. **(3) Dossier de demande guidé :** L'outil génère une liste personnalisée des pièces justificatives selon la situation de l'utilisateur (avis d'imposition, justificatif de résidence, attestation Pôle Emploi si chômeur, etc.) + aide au remplissage du Cerfa 12504*05 avec les données saisies pré-remplies. **(4) Comparateur des organismes C2S :** Parmi les 40+ mutuelles proposant la C2S (MGEN, Harmonie Mutuelle, Mutuelle Générale, MAIF, etc.), comparatif sur 4 critères : taille du réseau de soins tiers payant, délai d'adhésion moyen, qualité du service client (notation), bonus optique/dentaire au-delà du barème C2S. **(5) Suivi de renouvellement :** La C2S se renouvelle chaque année — rappel automatique 2 mois avant l'échéance avec guide de renouvellement simplifié.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur éligibilité | €0 | Résultat et économie estimée — génère du trafic et convertit |
+| Pack Dossier | €4,99 | Cerfa pré-rempli + liste justificatifs personnalisée + comparateur organismes |
+| Commission organisme partenaire | €0 pour l'utilisateur | €20–€50 par dossier C2S souscrit via la plateforme, versé par l'organisme |
+| Rappel renouvellement | Inclus | Suivi annuel — fidélisation |
+
+**Unit economics :** Claude API ~€0,01/simulation → coût quasi nul. **Marché :** 3–4M éligibles non-demandeurs. À 0,3% de conversion dossier payant = 12 000 packs × €5 = **€5 000 MRR**. La vraie force est la commission organisme : si 5 000 dossiers/an sont souscrits via la plateforme × €30 commission moyenne = **€12 500 MRR**. Les mutuelles ont un fort intérêt à acquérir ces bénéficiaires (subvention état couvrant les soins → rentabilité assurée). Impact social majeur : chaque dossier traité représente €500–€3 000 d'économies annuelles pour un foyer précaire.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — la cible utilise principalement un smartphone)
+- **Moteur d'éligibilité :** Algorithme appliquant le barème C2S 2025 (arrêté du 29 décembre 2024) — plafond de base pour personne seule (€1 006/mois) + coefficients de composition du foyer (1,5 pour le 2e membre, 0,5 par membre supplémentaire jusqu'au 3e, 0,3 à partir du 4e membre) ; définition des ressources retenues (art. R861-4 à R861-10 CSS) — exclusion des APL, AAH, RSA socle, pensions de guerre, minima sociaux de certaines allocations
+- **Générateur Cerfa 12504*05 :** react-pdf avec pré-remplissage des champs selon les données saisies — identité, composition foyer, ressources déclarées, organisme choisi ; export PDF prêt à envoyer
+- **Comparateur organismes :** Base de données des organismes agréés C2S (liste publiée par la CNAM) enrichie avec des indicateurs de qualité collectés manuellement puis mis à jour semestriellement
+- **Notifications renouvellement :** Resend (emails) ou Brevo — rappel 60 et 30 jours avant la date d'échéance annuelle de la C2S
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Si vous gagnez moins de 1 006€/mois, vous avez peut-être droit à une mutuelle 100% gratuite — et vous ne le savez probablement pas" (format révélation — très viral dans les communautés précaires)
+2. Facebook Groups : "Entraide CAF", "RSA et aides sociales", "Logement social France", "Chômeurs et demandeurs d'emploi" (1M+ membres au total)
+3. Partenariats associations : Secours Catholique, Croix-Rouge numérique, Banques alimentaires, CCAS des mairies — outil gratuit pour le diagnostic, les associations orientent leurs bénéficiaires
+4. SEO : "complementaire sante solidaire eligibilite calcul", "mutuelle gratuite cmu conditions revenus", "c2s dossier comment faire", "ancienne acs complementaire sante solidaire difference", "mutuelle gratuite salaire minimum 2026"
+
+### Competitive Moat
+- Le site officiel Ameli.fr et les portails CPAM permettent de faire la demande mais aucun outil ne calcule en 2 minutes si on est éligible et combien on économise — la friction est trop haute et le non-recours est massif
+- Le comparateur des organismes C2S est totalement vierge : les mutuelles ne communiquent pas sur la C2S (elles préfèrent vendre leurs contrats payants) — C2S.ai est le seul guide indépendant
+- La cible (3–4M de non-demandeurs) est structurellement sous-adressée par les acteurs traditionnels : les mutuelles commerciales ne veulent pas orienter leurs prospects vers un contrat gratuit, les pouvoirs publics manquent de moyens pour la communication ciblée
+- La commission par dossier souscrit aligne les intérêts : les organismes C2S partenaires bénéficient d'acquisitions qualifiées (éligibilité vérifiée, dossier pré-rempli) — modèle B2B récurrent invisible pour l'utilisateur final
+
+### Figma Schematic
+[View C2S.ai Complementaire Sante Solidaire Eligibility and Application Flow on FigJam](https://www.figma.com/board/mINFAWrJWOkDMqoyMgKjy8)
+
+---
+
+## 70. DroitsRH.ai
+
+> **Identifiez votre convention collective, calculez vos congés (y compris le rétroactif loi DDADUE 2024) et vérifiez que votre bulletin de paie est conforme**
+
+### Problem
+En France, **26 millions de salariés** travaillent sous l'une des 600+ conventions collectives de branche (identifiées par un code IDCC). Chaque convention collective accorde des droits spécifiques au-delà du Code du travail — congés supplémentaires conventionnels, primes d'ancienneté, délais de carence maladie réduits ou améliorés, indemnités de licenciement majorées — mais la grande majorité des salariés ne connaît pas ces droits. Trois problèmes structurels s'accumulent : **(1) La convention collective est souvent ignorée :** Le bulletin de paie doit mentionner le nom de la convention collective applicable (décret n°2016-190 du 25 février 2016), mais beaucoup de salariés ne font jamais le lien entre cette mention et des droits concrets. Une CCN comme celle des bureaux d'études techniques (SYNTEC — IDCC 1486) accorde 3 jours de congés supplémentaires, des RTT et des primes spécifiques ; la CCN de la restauration rapide (IDCC 1501) impose un 13e mois et des majorations de nuit. **(2) Le calcul des congés payés est complexe :** Deux méthodes coexistent en droit français (1/10 du salaire brut annuel vs 2,5 jours ouvrables × 12 = 30 jours ouvrables) — l'employeur doit retenir la plus favorable au salarié. La période de référence (1er juin – 31 mai) est souvent mal comprise. En cas de prise de congés avant acquisition complète, les règles de comptabilisation divergent. **(3) La loi DDADUE 2024 crée un droit rétroactif mal connu :** La loi n°2024-364 du 22 avril 2024 (transposition de la directive européenne) a introduit l'acquisition de congés payés pendant les arrêts maladie non professionnels — une révolution pour les salariés malades depuis des années. Depuis le 24 avril 2024, les salariés acquièrent 2 jours de congé par mois d'arrêt maladie (dans la limite de 24 jours/an) rétroactivement sur les 3 dernières années. Les entreprises ont jusqu'au 23 octobre 2025 pour régulariser. Des millions de salariés ayant eu des arrêts longs (COVID, maladie grave, accident de la vie) ont potentiellement des jours à récupérer ou à faire indemniser. **(4) Le bulletin de paie est incompréhensible :** Le décret n°2016-190 liste 45 mentions obligatoires (identité employeur, SIRET, URSSAF, CCN, qualification, SMIC vérification, cotisations par lignes…). Des erreurs fréquentes existent : taux de cotisations obsolètes, classification inadaptée à l'ancienneté, base de calcul des heures supplémentaires incorrecte.
+
+### Solution
+**(1) Identificateur de convention collective :** L'utilisateur saisit le SIRET de son employeur ou le nom de l'entreprise → l'outil retrouve le code IDCC via la base officielle du Ministère du Travail (API Légifrance + base KALI) et affiche : nom de la CCN, congés supplémentaires conventionnels, prime d'ancienneté, délai de carence maladie selon la CCN, indemnités de licenciement conventionnelles. **(2) Simulateur de congés payés :** Calcul des droits acquis selon les deux méthodes légales (1/10 et 2,5 jours/mois) + prise en compte des congés conventionnels supplémentaires → solde de congés restants. **(3) Module loi DDADUE 2024 :** L'utilisateur renseigne ses périodes d'arrêt maladie non professionnel depuis le 1er décembre 2021 → calcul du nombre de jours de congés acquis pendant ces arrêts (2 jours/mois, plafonné à 24 jours/an) → génération de la lettre de demande de régularisation à envoyer à l'employeur avant le 23 octobre 2025, avec les textes légaux de référence (art. L3141-5 nouveau et art. 37 de la loi n°2024-364). **(4) Vérificateur de bulletin de paie :** L'utilisateur upload son bulletin (photo ou PDF) → l'OCR extrait les éléments clés → vérification automatique des 45 mentions obligatoires, cohérence des taux de cotisation (barème URSSAF 2025), conformité de la classification avec l'ancienneté déclarée dans la CCN identifiée → rapport de conformité avec les anomalies détectées en rouge. **(5) Calculateur heures supplémentaires :** Vérification du taux de majoration applicable (25% pour les 8 premières heures, 50% au-delà — sauf accord de branche dérogatoire) et du contingent annuel d'heures supplémentaires selon la CCN.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Identification CCN + droits | €0 | IDCC + congés supplémentaires + prime ancienneté — génère du trafic SEO |
+| Pack Loi DDADUE 2024 | €9 | Calcul rétroactif des jours acquis pendant les arrêts + lettre de régularisation employeur |
+| Pack Vérification Bulletin | €9 | Rapport de conformité des 45 mentions + anomalies + taux cotisations |
+| Pack Droits Complet | €19 | Les deux packs + simulateur congés + calculateur heures supplémentaires |
+
+**Unit economics :** Claude API ~€0,04/analyse → coût quasi nul. **Marché :** 26M salariés. La loi DDADUE 2024 est un déclencheur SEO massif pour 2025–2026. À 0,05% de conversion Pack DDADUE = 13 000 packs × €9 = **€9 750 MRR**. Le Pack Bulletin est récurrent (annuel, à la prise de poste). Potentiel viral : "Votre employeur vous doit peut-être des congés depuis 2021 — calculez en 2 minutes."
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop — décision professionnelle, souvent en semaine)
+- **Identificateur CCN :** API Légifrance (KALI — base des conventions collectives) + SIRENE/INSEE pour le SIRET → correspondance branche/IDCC ; base de données enrichie avec les droits-clés de chaque CCN (congés sup., prime ancienneté, délai de carence, indemnité licenciement) indexés sur le code IDCC
+- **Simulateur congés :** Algorithme duel (méthode 1/10 et méthode 2,5 jours/mois), période de référence 1er juin – 31 mai, intégration des congés conventionnels supplémentaires récupérés depuis la base CCN
+- **Module DDADUE :** Algorithme appliquant l'art. L3141-5 du Code du travail issu de la loi n°2024-364 — acquisition de 2 jours de congé par mois d'arrêt maladie non professionnel (plafonné à 24 jours/an), période rétroactive du 1er décembre 2021 au 24 avril 2024 selon jurisprudence CJUE ; génération de la lettre de mise en œuvre avec fondements légaux
+- **OCR bulletin de paie :** Google Vision API ou Mistral OCR — extraction du SIRET, CCN, salaire brut, cotisations, classification ; vérification des 45 mentions (décret n°2016-190) et des taux de cotisation par une table de référence URSSAF actualisée trimestriellement
+- **PDF génération :** react-pdf (rapport de conformité + lettre DDADUE)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Avez-vous eu un arrêt maladie entre 2021 et 2024 ? Votre employeur vous doit peut-être des congés payés non pris — et il doit régulariser avant octobre 2025" (fort impact médiatique sur la loi DDADUE)
+2. Facebook Groups : "Droit du travail France", "Salariés en difficulté", "Rupture conventionnelle France" (600K+ membres)
+3. Partenariats syndicaux : CGT, CFDT, FO — les syndicats cherchent des outils pour aider leurs adhérents à faire valoir leurs droits DDADUE 2024 (fort levier de distribution)
+4. SEO : "loi ddadue 2024 conges maladie calcul", "conges payes arret maladie droits 2024", "convention collective identifier mon entreprise", "bulletin de paie mentions obligatoires verifier", "heures supplementaires taux majoration calcul"
+
+### Competitive Moat
+- La loi DDADUE 2024 est un événement légal majeur avec une fenêtre de régularisation limitée (jusqu'au 23 octobre 2025) — aucun outil grand public ne calcule automatiquement les droits rétroactifs acquis pendant les arrêts maladie
+- L'identificateur de CCN par SIRET est une fonctionnalité absente de tous les outils RH grand public actuels — légifrance.fr liste les conventions mais ne fait pas le lien avec le SIRET de l'employeur
+- Le vérificateur de bulletin est une demande récurrente sur les forums : des milliers de personnes cherchent à comprendre leur fiche de paie chaque mois — SEO permanent
+- Le potentiel viral est élevé : les arrêts maladie longue durée (COVID, cancers, burn-out) concernent des millions de personnes qui ont une communauté active sur les réseaux sociaux et partagent toute aide concrète
+
+### Figma Schematic
+[View DroitsRH.ai Convention Collective and Paid Leave Flow on FigJam](https://www.figma.com/board/R23QFYTRZdnB9fR6XUChLn)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3137,4 +3275,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-08 — Ideas 65–67 added (France-specific, ultra-low-budget: AssuranceEmprunteur.ai, SCI.ai, AideJuridiction.ai)*
+*Last updated: 2026-05-09 — Ideas 68–70 added (France-specific, ultra-low-budget: RuptureConv.ai, C2S.ai, DroitsRH.ai)*
