@@ -78,6 +78,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 68 | [RuptureConv.ai](#68-ruptureconvai) | Freemium + Pay-per-pack | €10K–€65K | Low |
 | 69 | [C2S.ai](#69-c2sai) | Pay-per-dossier + Commission organisme | €5K–€35K | Low |
 | 70 | [DroitsRH.ai](#70-droitsrhai) | Pay-per-pack + Freemium | €8K–€55K | Low |
+| 71 | [IndemnisationVol.ai](#71-indemnisationvolai) | Freemium + Pay-per-pack | €10K–€70K | Low |
+| 72 | [SurendettementGuide.ai](#72-surendettementguideai) | Pay-per-dossier + Partenariats associations | €3K–€20K | Low |
+| 73 | [AppelOffres.ai](#73-appeloffresai) | Pay-per-pack + SaaS Mensuel + B2B | €15K–€90K | Low-Medium |
 
 ---
 
@@ -3263,6 +3266,141 @@ En France, **26 millions de salariés** travaillent sous l'une des 600+ conventi
 
 ---
 
+## 71. IndemnisationVol.ai
+
+> **Obtenez jusqu'à €600 de compensation pour votre vol retardé ou annulé — sans payer 30% de commission à AirHelp**
+
+### Problem
+En France, le règlement européen **CE 261/2004** donne droit à €250, €400 ou €600 par passager pour tout vol décollant d'un aéroport de l'UE (ou opéré par une compagnie européenne vers l'UE) retardé de 3h+ ou annulé sans préavis de 14 jours. Environ **25–30 millions de passagers français** sont concernés chaque année par une perturbation éligible. Pourtant, trois obstacles empêchent les passagers de faire valoir leurs droits : **(1) La méconnaissance du règlement :** 80% des passagers ignorent qu'ils ont un droit légal à compensation — non pas une "geste commerciale" mais une obligation légale de la compagnie. **(2) Les services existants prennent une commission de 25–35% + TVA :** AirHelp, Flightright, ClaimCompass prélèvent €150–€210 sur une compensation de €600. Ils s'appuient sur la passivité des passagers et la complexité perçue de la démarche. **(3) La démarche directe est en réalité simple :** Une lettre recommandée à la compagnie, un refus ou un silence de 30 jours, puis saisine du médiateur du tourisme ou du tribunal d'instance (procédure simplifiée < €5 000). Des millions de passagers laissent des centaines d'euros sur la table chaque année par méconnaissance ou par flemme.
+
+### Solution
+**(1) Éligibilité en 30 secondes :** L'utilisateur saisit le numéro de vol, la date et la durée du retard → vérification automatique via API de données de vols (AviationStack) → résultat immédiat : éligible ou non, avec le montant exact (€250 pour vol < 1 500 km, €400 pour vol 1 500–3 500 km, €600 pour vol > 3 500 km). **(2) Génération de la lettre de réclamation officielle :** Courrier en français ET en anglais, avec référence précise à l'article 7 du règlement CE 261/2004, le montant réclamé, le numéro de vol, les données de retard vérifiées par l'API. Format prêt à imprimer ou envoyer par email. **(3) Pack escalade si refus :** Modèle de mise en demeure LRAR, procédure de saisine du Médiateur du Tourisme et du Voyage (MTV) ou de la DGAC, et — si nécessaire — guide pour la procédure simplifiée au tribunal d'instance. **(4) Tracker de dossier :** Rappels automatiques des délais (30 jours pour la première réponse, puis 60 jours pour le médiateur) et templates de relance.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification éligibilité + montant | €0 | Génère du trafic SEO et crée l'effet "wow" immédiat |
+| Lettre de réclamation basique | €0 | Version simple pour convertir les utilisateurs |
+| Pack Complet | €9 | Lettre officielle FR+EN + mise en demeure LRAR + guide médiateur + tracker 90 jours |
+| Pack Judiciaire | €14 | Pack Complet + guide tribunal d'instance + modèle de requête |
+
+**Unit economics :** Claude API ~€0,02/lettre → coût quasi nul. AviationStack : 10 000 requêtes/mois gratuites. **Marché :** ~5M Français en retard >3h/an. À 0,5% de conversion Pack Complet = 25 000 packs × €9 = **€18 750 MRR**. Fort potentiel viral : "AirHelp m'aurait pris €180 sur €600. IndemnisationVol.ai m'a coûté €9."
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent utilisé depuis l'aéroport ou juste après le voyage)
+- **Éligibilité :** API AviationStack (données historiques de vols — retards, annulations, causes) gratuit jusqu'à 10K req/mois ; fallback FlightAware API (payant, si volume croissant)
+- **Calcul compensation :** Algorithme CE 261/2004 — distance orthodromique entre les aéroports (formule haversine) → €250 / €400 / €600 ; vérification des cas d'exonération légaux (circonstances extraordinaires : grève du contrôle aérien, météo extrême documentée)
+- **Génération des courriers :** Claude API + react-pdf (export PDF prêt à imprimer et signer)
+- **Tracker dossier :** Supabase (historique dossiers par email) + Resend (rappels email automatisés aux J+30, J+60, J+90)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Mon vol était en retard de 4h. La compagnie me devait €400. AirHelp m'a proposé de gérer pour 35% de commission. Voilà comment j'ai tout récupéré seul pour €9." (format révélation — très viral chez les voyageurs)
+2. SEO : "indemnisation vol retardé comment faire soi-même", "lettre réclamation vol annulé CE 261/2004", "airhelp alternative moins cher", "réclamer compensation vol sans agence"
+3. Reddit/forums : r/france, r/voyages, TripAdvisor forums — réponses aux questions "j'ai eu un vol retardé, que faire ?"
+4. Facebook Groups : "Bons plans vols France", "Voyageurs malins", "Budget Voyage"
+
+### Competitive Moat
+- AirHelp/Flightright = 25–35% commission sur la compensation obtenue. IndemnisationVol.ai = €9 flat. Pour une compensation de €600, l'utilisateur économise €150–€200 — un ROI de 15x sur le prix du pack
+- L'API de données de vols transforme le dossier en preuve vérifiée : la compagnie ne peut pas nier le retard si les données de l'outil correspondent aux registres officiels
+- La fenêtre de réclamation est de 2 ans (prescription) → l'outil peut cibler les voyageurs avec des vols passés et créer une campagne "vérifiez vos anciens vols"
+- Le champ d'application est large : toutes les compagnies décollant d'un aéroport européen — EasyJet, Ryanair, Air France, mais aussi Turkish Airlines sur un vol Paris–Istanbul
+
+### Figma Schematic
+[View IndemnisationVol.ai Flight Compensation CE 261/2004 Flow on FigJam](https://www.figma.com/board/xVCJs2lSr9PqG3yKjECOvR)
+
+---
+
+## 72. SurendettementGuide.ai
+
+> **Constituez votre dossier de surendettement Banque de France en moins d'une heure — sans avocat, sans agence, sans frais cachés**
+
+### Problem
+En France, **130 000 dossiers de surendettement** sont déposés chaque année à la Banque de France (données BdF 2023). Le profil type du ménage surendetté : revenu médian de €1 400/mois, dette totale de €30 000 (crédits à la consommation, découverts bancaires, impôts et loyers impayés). La procédure légale est **entièrement gratuite** — la Banque de France traite les dossiers sans aucun frais — mais quatre obstacles structurels maintiennent des centaines de milliers de ménages dans une situation de souffrance sans déposer : **(1) La méconnaissance de la procédure :** Beaucoup de ménages surendettés ne savent pas que le simple dépôt d'un dossier recevable déclenche **la suspension immédiate de toutes les poursuites** (saisies, expulsions, relances d'huissier) — c'est l'article L722-2 du Code de la consommation. Cette information seule changerait la décision de milliers de familles. **(2) Le formulaire S3201 (Cerfa 13594) est intimidant :** 14 pages, vocabulaire juridique, nécessité de lister tous ses créanciers avec montants exacts, numéros de contrat et situations (contentieux, procédure en cours, jugement) — beaucoup de personnes abandonnent avant même de commencer. **(3) Des cabinets frauduleux exploitent la détresse :** Des "agences de gestion de dettes" facturent €500–€1 500 pour remplir un formulaire qui est légalement gratuit. La Banque de France alerte régulièrement sur ces pratiques. **(4) Le calcul du "reste à vivre" est mal compris :** Le plan de redressement est calculé sur la base du RAV (reste à vivre) — le revenu minimum légal au-delà duquel les remboursements ne peuvent pas empiéter. Ce minimum est indexé sur le RSA (€607/mois pour une personne seule en 2025), et beaucoup de ménages acceptent des plans trop restrictifs car ils ne connaissent pas leur RAV légal.
+
+### Solution
+**(1) Estimateur de situation en 3 minutes :** Revenus nets du foyer, total des dettes par catégorie (crédits, loyers, impôts), charges fixes essentielles → calcul du taux d'endettement et du reste à vivre actuel → confirmation immédiate si la procédure de surendettement est la bonne voie. **(2) Guide de collecte des pièces :** Liste personnalisée selon la situation (salarié, chômeur, retraité, indépendant) des documents à rassembler avant de démarrer le dossier — avis d'imposition, derniers relevés bancaires, contrats de crédit, lettres de mise en demeure, jugements éventuels. **(3) Aide au remplissage du Cerfa S3201 :** Parcours guidé champ par champ, en langage simple, avec explications contextuelles des termes juridiques ("ménage", "foyer fiscal", "capacité mensuelle de remboursement"). Calcul automatique du RAV légal selon la composition du foyer. **(4) Pack payant :** Génération du Cerfa S3201 pré-rempli en PDF + lettre d'accompagnement expliquant la situation (humaine et factuelle) pour la commission de surendettement. **(5) Guide post-dépôt :** Que se passe-t-il une fois le dossier déposé ? Délai d'instruction (3 mois), types de plans (plan conventionnel de redressement, mesures imposées, rétablissement personnel), rôle du FICP (inscription au fichier des incidents).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur situation + liste de pièces | €0 | Impact social — génère confiance et trafic SEO |
+| Pack Dossier | €9 | Cerfa S3201 pré-rempli PDF + lettre d'accompagnement + guide RAV légal |
+| Partenariat associations / CCAS | €0 pour l'utilisateur | Licence white-label pour assistantes sociales et travailleurs sociaux : €49/mois par structure |
+
+**Unit economics :** Claude API ~€0,02/dossier → coût quasi nul. **Marché :** 130K dossiers/an + 500K ménages en pré-surendettement actif. À 5% de conversion Pack Dossier = 6 500 packs × €9 = **€4 875 MRR** (direct). La vraie force est le B2B social : 15 000 CCAS en France × €49/mois = potentiel énorme si 1% adoptent = **€7 350 MRR** récurrent. Impact social direct : chaque dossier déposé stoppe les poursuites et protège le foyer.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — la cible utilise principalement un smartphone, souvent en situation de stress)
+- **Formulaire guidé :** react-hook-form multi-étapes avec validation en temps réel + explications contextuelles (Claude API pour les reformulations en langage simple)
+- **Calcul RAV légal :** Algorithme fondé sur les barèmes RSA (art. R712-6 du Code de la consommation) — RAV minimum = montant RSA socle × composition du foyer (coefficients familiaux) + forfait logement
+- **Générateur Cerfa S3201 :** PDFKit ou react-pdf — génération du Cerfa 13594*02 avec tous les champs pré-remplis depuis les données saisies, respect du formatage officiel
+- **Guide post-dépôt :** Contenu structuré dans Notion-as-CMS mis à jour selon les évolutions légales
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Partenariats associations : CRESUS, Points Conseil Budget (PCB), UNCCAS, Secours Catholique, Croix-Rouge numérique — outil gratuit pour le diagnostic, les structures orientent leurs bénéficiaires
+2. Facebook Groups : "Dettes et surendettement France", "Aides sociales CAF", "RSA et difficultés financières" (800K+ membres au total)
+3. SEO : "comment faire dossier surendettement banque de france", "formulaire s3201 aide remplir", "surendettement que faire étapes 2026", "suspension poursuites surendettement"
+4. TikTok/Reels : "Si des huissiers vous harcèlent, sachez que déposer un dossier à la Banque de France stoppe TOUT immédiatement — et c'est 100% gratuit" (fort impact dans les communautés précaires)
+
+### Competitive Moat
+- La procédure est légalement gratuite → aucune legaltech ne peut s'y imposer avec des tarifs élevés. SurendettementGuide.ai est le seul outil numérique accessible à €9 (vs €500–€1 500 pratiqués par les agences frauduleuses)
+- CRESUS et les Points Conseil Budget ont des délais d'attente de 4–8 semaines ; l'outil est disponible 24h/24 et génère le dossier en moins d'une heure
+- Les partenariats avec les CCAS et associations sociales créent une distribution capillaire à coût nul — chaque travailleur social qui utilise l'outil devient un prescripteur
+- L'impact social est un levier de PR et de subventions : des fondations et collectivités financent des outils d'accès au droit pour les populations précaires
+
+### Figma Schematic
+[View SurendettementGuide.ai Dossier Banque de France Flow on FigJam](https://www.figma.com/board/VTCwIyBiZFW3nng6WK010c)
+
+---
+
+## 73. AppelOffres.ai
+
+> **Répondez à vos premiers marchés publics en 15 minutes — DUME, mémoire technique et candidature clé-en-main pour les artisans et TPE françaises**
+
+### Problem
+Le marché de la commande publique en France représente **€200 milliards/an** (environ 8% du PIB), avec 130 000+ avis de marché publiés chaque année sur la plateforme PLACE et les profils acheteurs des collectivités. Les TPE/artisans (< 20 salariés) représentent 99% des entreprises françaises mais décrochent seulement 30% des marchés publics — un écart structurel largement dû à la complexité administrative des dossiers de candidature. Quatre obstacles bloquent les petits opérateurs : **(1) Le DUME est inconnu et intimidant :** Le Document Unique de Marché Européen (DUME) est le formulaire standardisé pour attester des capacités administratives, économiques et techniques d'un candidat. Depuis 2018, il est obligatoire pour tous les marchés > €40 000. La grande majorité des artisans ne savent pas le remplir — son format XML/eSPD est abscons et les interfaces des profils acheteurs sont peu ergonomiques. **(2) Le mémoire technique est la barrière principale :** Ce document justifie la méthodologie proposée, les moyens humains et matériels, les mesures de qualité/sécurité/environnement et les références. C'est sur ce document que les acheteurs discriminent les candidats. Un artisan maçon ou un micro-entrepreneur en informatique n'a pas l'habitude de se "vendre" par écrit dans un format professionnel — c'est 4 à 8 heures de travail pour un non-initié. **(3) La veille des appels d'offres est un métier :** Des milliers d'annonces sont publiées chaque semaine sur PLACE (marchés nationaux), les profils acheteurs régionaux, departementaux et communaux. Sans outil de veille, un artisan rate les opportunités pertinentes. **(4) La liste des pièces varie selon le marché :** Kbis, attestation URSSAF à jour (délivrée depuis moins de 6 mois), attestation fiscale, déclaration sur l'honneur DC1, DC2, RIB — la liste change selon le type de marché (travaux, fournitures, services) et le montant. Un oubli d'une pièce = dossier éliminé.
+
+### Solution
+**(1) Veille personnalisée des marchés :** L'utilisateur configure son profil (SIRET, code(s) NAF, région, mots-clés métier) → alertes email hebdomadaires ou quotidiennes des marchés correspondants publiés sur PLACE et BOAMP (via les APIs data.gouv.fr, libres et gratuites). **(2) Générateur de DUME pré-rempli :** Saisie du SIRET → récupération automatique des données entreprise via API SIRENE (nom, SIRET, adresse, code NAF, date de création) → pré-remplissage du formulaire DUME avec les champs habituels (CA des 3 dernières années, effectif, certifications RGE/Qualibat/MASE le cas échéant) → export du fichier eSPD/XML conforme au standard européen ET du PDF pour impression. **(3) Générateur de mémoire technique IA :** L'utilisateur décrit son entreprise (en 5 minutes : métier principal, effectif, équipements clés, 2–3 références de travaux passés) + saisit les critères du marché cible (nature des travaux/services, délais, critères de notation) → Claude génère un mémoire technique professionnel en 15 minutes, structuré en 5 parties standard (présentation entreprise, organisation de la mission, moyens humains et matériels, démarche qualité/sécurité/environnement, références). **(4) Checklist de candidature personnalisée :** Selon le type de marché et le montant (procédure adaptée < €40K ou procédure formalisée > €40K), l'outil génère la liste exacte des pièces à joindre — avec les formulaires DC1/DC2 pré-remplis. **(5) Bibliothèque de références :** L'utilisateur stocke ses références de marchés passés (nom du client, montant, nature des travaux, contact pour attestation) pour les réutiliser automatiquement dans les futurs mémoires.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Veille marchés (1 alerte/semaine, 3 mots-clés) | €0 | Acquisition et habitude — génère du trafic SEO |
+| Pack Candidature | €19 | DUME pré-rempli + mémoire technique IA + checklist pièces + DC1/DC2 |
+| Abonnement Mensuel | €49/mois | Veille illimitée + 3 mémoires techniques/mois + bibliothèque de références + mises à jour des templates |
+| Licence cabinet conseil TPE | €299/mois | Multi-clients illimité + marque blanche pour CCI, experts-comptables, cabinets d'appui PME |
+
+**Unit economics :** Claude API ~€0,10/mémoire technique (document long) → très faible vs €19. APIs PLACE/BOAMP et SIRENE gratuites. **Marché :** 3M TPE/artisans en France. À 0,1% conversion Pack Candidature = 3 000 packs × €19 = **€57 000 MRR** (potentiel). L'abonnement mensuel est le moteur de croissance récurrent. La licence B2B (CCI, experts-comptables) crée un canal de distribution massif sans CAC.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop — usage professionnel, souvent le soir en préparant une réponse)
+- **Veille marchés :** API data.gouv.fr / BOAMP (Journal Officiel des marchés publics) + API profils acheteurs régionaux (Klekoon API, AWS Marchés ou scraping légal des plateformes publiques) — alertes email via Resend
+- **DUME/eSPD :** Génération du fichier XML conforme au schéma eSPD v2.1.1 (standard européen open source) + API SIRENE pour pré-remplissage automatique des données entreprise depuis le SIRET
+- **Mémoire technique IA :** Claude API (claude-sonnet-4-6) avec prompt structuré — 5 sections, ~2 000 mots, ton professionnel et adapté au secteur d'activité (bâtiment, informatique, nettoyage, transport, etc.)
+- **DC1/DC2 :** Génération PDF des formulaires officiels DAJ pré-remplis (Cerfa/DAJC disponibles librement)
+- **Bibliothèque références :** Supabase (stockage par utilisateur)
+- **Paiements :** Stripe (unitaire + abonnement récurrent)
+
+### Go-to-Market (zero budget)
+1. Partenariats CCI : Les 124 Chambres de Commerce et d'Industrie en France proposent des formations "marchés publics" à leurs adhérents — AppelOffres.ai peut être référencé comme outil complémentaire gratuit
+2. Partenariats fédérations : FFB (Fédération Française du Bâtiment, 50 000 entreprises adhérentes), CAPEB (artisans du bâtiment), SYNTEC (ESN et ingénierie) — leurs membres sont exactement la cible
+3. YouTube/LinkedIn : "Comment répondre à votre 1er marché public en 2026 — guide complet pour artisans (DUME, mémoire technique, pièces)" — contenu long format qui positionne sur des requêtes SEO compétitives mais peu disputées
+4. SEO : "comment répondre appel d offres public artisan", "dume comment remplir tpe", "mémoire technique marché public modèle gratuit", "dc1 dc2 pré-rempli télécharger"
+
+### Competitive Moat
+- Les logiciels existants (Klekoon, Achat Public, AWS Marchés) ciblent les PME avec des budgets annuels de €5K–€20K. AppelOffres.ai cible l'artisan individuel à €19/réponse — un marché de masse entièrement vierge
+- Le générateur de mémoire technique IA est la fonctionnalité différenciante : écrire un mémoire prend 4–8h à un artisan non initié ; l'outil le fait en 15 minutes → ROI immédiat et mesurable
+- Les APIs publiques françaises (PLACE, BOAMP via data.gouv.fr, SIRENE) sont gratuites et officielles → coût d'infrastructure quasi nul, données fiables et légitimes
+- Le canal CCI/fédérations est un distributeur naturel : ils cherchent en permanence des outils gratuits ou bon marché à proposer à leurs membres — c'est une distribution sans CAC pour le fondateur
+
+### Figma Schematic
+[View AppelOffres.ai Réponse Marchés Publics TPE Flow on FigJam](https://www.figma.com/board/EiN1I356kyMBJFFOXUiB6k)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3275,4 +3413,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-09 — Ideas 68–70 added (France-specific, ultra-low-budget: RuptureConv.ai, C2S.ai, DroitsRH.ai)*
+*Last updated: 2026-05-11 — Ideas 71–73 added (France-specific, ultra-low-budget: IndemnisationVol.ai, SurendettementGuide.ai, AppelOffres.ai)*
