@@ -81,6 +81,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 71 | [IndemnisationVol.ai](#71-indemnisationvolai) | Freemium + Pay-per-pack | €10K–€70K | Low |
 | 72 | [SurendettementGuide.ai](#72-surendettementguideai) | Pay-per-dossier + Partenariats associations | €3K–€20K | Low |
 | 73 | [AppelOffres.ai](#73-appeloffresai) | Pay-per-pack + SaaS Mensuel + B2B | €15K–€90K | Low-Medium |
+| 74 | [PrêtZéro.ai](#74-prêtzéroai) | Pay-per-report + B2B SaaS | €9K–€60K | Low |
+| 75 | [VisaleGarant.ai](#75-visalegarantai) | Pay-per-pack + Affiliation | €5K–€35K | Low |
+| 76 | [BourseÉtudiant.ai](#76-bourseétudiantai) | Freemium + Pay-per-guide | €3K–€20K | Low |
 
 ---
 
@@ -3401,6 +3404,192 @@ Le marché de la commande publique en France représente **€200 milliards/an**
 
 ---
 
+## 74. PrêtZéro.ai
+
+> **Calculez en 5 minutes l'ensemble des prêts aidés auxquels vous avez droit pour votre premier achat immobilier — PTZ, PAS, Action Logement et aides régionales**
+
+### Problem
+L'accession à la propriété en France est subventionnée par **6 à 8 dispositifs d'aide cumulables** que la grande majorité des primo-accédants ne connaissent pas ou n'activent qu'en partie. En moyenne, un primo-accédant éligible à tous les dispositifs laisse entre **€20 000 et €60 000 d'aides** sur la table faute d'information.
+
+Quatre obstacles structurels expliquent ce non-recours massif :
+
+**(1) Le PTZ 2024 a été entièrement reconfiguré :** La loi de finances 2024 a étendu le PTZ à la construction neuve sur toute la France (y compris les zones B2 et C, auparavant exclues depuis 2020) et l'a maintenu pour l'ancien avec travaux dans les zones détendues. Le PTZ peut couvrir jusqu'à 50% du prix en zone A/A bis (Île-de-France, Côte d'Azur, Genevois) pour un ménage sous plafonds de ressources. Ces plafonds ont également été relevés. Des millions de ménages qui pensaient ne pas être éligibles le sont désormais.
+
+**(2) Le prêt Action Logement est méconnu :** Les employés de sociétés privées de 10 salariés ou plus (soit ~10 millions de salariés) ont accès à un prêt accession Action Logement à **1% d'intérêt** (hors assurance) jusqu'à €40 000. Il est cumulable avec le PTZ. Ce prêt est distribué par les employeurs et beaucoup de salariés ne savent même pas que leur entreprise cotise à Action Logement.
+
+**(3) Les aides régionales sont invisibles :** Chaque région, département et même certaines communes ont leurs propres aides complémentaires : prêts à taux zéro régionaux (ex. Pass Primo en Île-de-France jusqu'à €30 000 ; prêt Habitat Jeunes en Bretagne…), subventions directes, exonérations de droits de mutation. Aucun agrégateur ne recense ces aides.
+
+**(4) Les banques ne jouent pas le jeu :** Les conseillers bancaires ont intérêt à maximiser la part de crédit "classique" (qui génère des marges) et minimisent parfois l'information sur les prêts aidés qui réduisent leur production. Des milliers d'emprunteurs sortent d'un rendez-vous bancaire sans avoir entendu parler du PAS ou du prêt Action Logement.
+
+### Solution
+**(1) Simulateur de prêts aidés en 5 minutes :** L'utilisateur renseigne sa situation (revenus net imposable N-2, composition du foyer, zone géographique du bien, prix d'achat) → le simulateur calcule en temps réel l'ensemble des dispositifs auxquels il a droit :
+- **PTZ :** montant maximal (règle des 20%/40%/50% du prix selon zone), plafond de ressources applicable (tableau ANAH 2024), durée de remboursement et période de franchise
+- **PAS (Prêt d'Accession Sociale) :** taux plafond selon zone, conditions de ressources, APL accession applicable
+- **Prêt Action Logement :** éligibilité (10 salariés+), montant max €40K, taux 1%
+- **Aides régionales :** base de données des aides par région/département mise à jour trimestriellement
+- **Montant total aidé :** synthèse du "plan de financement optimal" avec la quote-part de crédit classique résiduelle
+
+**(2) Rapport PDF personnalisé :** Export d'un document structuré récapitulant tous les dispositifs activables, les conditions précises à remplir, les formulaires de demande et le plan de financement optimal à présenter à la banque.
+
+**(3) Simulation de mensualités :** Comparaison mensualités avec/sans optimisation des prêts aidés — impact concret sur le reste à vivre mensuel et sur le coût total du crédit.
+
+**(4) Guide de démarche :** Pour chaque dispositif, le parcours d'accès : comment demander le PTZ (via la banque agréée), comment obtenir son attestation Action Logement (via son employeur puis un établissement bancaire partenaire), comment solliciter les aides régionales.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation PTZ + Action Logement uniquement | €0 | Acquisition — l'effet "wow" du montant aidé calculé gratuitement |
+| Pack Rapport Complet | €19 | Simulation tous dispositifs + rapport PDF + plan de financement optimal + guide démarches |
+| Licence courtier | B2B €99/mois | Accès multi-clients pour courtiers immobiliers et conseillers ANIL — 10 rapports/mois inclus |
+
+**Unit economics :** Claude API ~€0,05/rapport → coût quasi nul. **Marché :** 750 000 transactions immobilières/an en France, dont ~40% de primo-accédants = 300 000 cibles/an. À 2% de conversion Pack Rapport = 6 000 × €19 = **€9 500 MRR**. La licence courtier (5 000 courtiers indépendants) représente un potentiel B2B additionnel de **€100K+ MRR** si 1 000 s'abonnent.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop-first — décision patrimoniale importante, prise à tête reposée)
+- **Simulateur PTZ :** Algorithme fondé sur la grille officielle ANAH (zones A/A bis/B1/B2/C, plafonds de ressources 2024, quotité finançable 20/40/50%, tranches de remboursement et franchise selon revenus) ; mise à jour annuelle via les arrêtés publiés au Journal Officiel
+- **Simulateur PAS :** Grille de taux plafond du PAS par zone et par durée (publiée par la SGFGAS), conditions de ressources identiques au PTZ
+- **Base aides régionales :** JSON structuré par département (100 entrées) — données collectées depuis les sites des conseils régionaux, ADIL et ANIL ; mise à jour trimestrielle
+- **Rapport PDF :** react-pdf avec mise en page professionnelle, récapitulatif chiffré et tableaux comparatifs
+- **Paiements :** Stripe (unitaire + abonnement B2B récurrent)
+
+### Go-to-Market (zero budget)
+1. Partenariats ADIL/ANIL : Les 88 Agences Départementales d'Information sur le Logement conseillent gratuitement les primo-accédants — PrêtZéro.ai peut être référencé comme outil de pré-simulation avant rendez-vous conseiller
+2. SEO : "ptz 2024 simulation calcul", "prêt action logement primo accédant conditions", "aides achat immobilier premier logement cumul", "combien ptz je peux avoir calcul"
+3. Partenariats courtiers : IAD, Cafpi, Vousfinancer et courtiers indépendants cherchent des outils de valeur ajoutée — la licence B2B est leur argument commercial
+4. TikTok/Reels : "J'ai failli acheter mon appartement avec un crédit classique à 3,9%. J'avais droit à €40K à 0% et €25K à 1% — voilà comment calculer vos droits en 5 minutes."
+
+### Competitive Moat
+- Le PTZ 2024 a créé une rupture : des millions de ménages auparavant exclus sont désormais éligibles, mais les simulateurs existants (ANIL.fr, Empruntis, Meilleurtaux) n'ont pas tous mis à jour leurs outils correctement → fenêtre de marché temporaire mais significative
+- La base des aides régionales est un avantage défensif : la collecter et la maintenir est un travail éditorial que les grands acteurs (banques, courtiers) ne font pas pour la partie régionale
+- Les banques ont un conflit d'intérêt structurel → elles ne construisent pas ce type d'outil ; les ADIL sont sous-staffées → marché structurellement sous-servi malgré des enjeux financiers considérables
+
+### Figma Schematic
+[View PrêtZéro.ai Simulateur Prêts Aidés Primo-accédant on FigJam](https://www.figma.com/board/5EkfsHuzEXpCtgd5VHVTAq)
+
+---
+
+## 75. VisaleGarant.ai
+
+> **Obtenez une garantie locative gratuite ou économique en 10 minutes — Visale, Loca-Pass et alternatives pour louer sans garant personnel**
+
+### Problem
+En France, **40 à 50% des candidats locataires** se voient refuser un logement à cause de l'absence d'un garant physique. Cette situation touche particulièrement **les jeunes de 18–30 ans, les étudiants étrangers, les personnes seules, les intérimaires et les indépendants.** Trois dispositifs publics et gratuits ou quasi-gratuits existent mais sont massivement méconnus :
+
+**(1) Visale (Action Logement) est gratuit mais invisible :** La garantie Visale est une caution locative gratuite accordée par Action Logement. Elle couvre les loyers impayés et les dégradations jusqu'à 36 mois de loyers. Éligibilité : jeunes de 18 à 30 ans sans restriction, salariés du secteur privé de 30 à 31 ans entrant dans un nouveau logement dans le cadre d'une mobilité professionnelle, et salariés précaires (CDD, intérim). **Seulement 2 millions de bénéficiaires pour 7 millions d'éligibles.** Le site actionlogement.fr est réputé pour son ergonomie catastrophique, ses bugs techniques et sa complexité administrative — ce qui explique le non-recours massif.
+
+**(2) L'avance Loca-Pass est ignorée :** Action Logement propose une avance sans intérêt jusqu'à €1 200 pour financer le dépôt de garantie, remboursable sur 25 mois. Pour des dizaines de milliers de jeunes en mobilité, €1 200 à avancer est un obstacle réel. Presque personne ne connaît cette aide.
+
+**(3) Le FSL (Fonds de Solidarité Logement) est méconnu :** Géré par les Conseils Départementaux, le FSL peut accorder des aides ou des avances pour le dépôt de garantie, les frais d'agence, le premier loyer ou les impayés de loyer. Les conditions et montants varient par département. Il n'existe aucun outil agrégateur.
+
+**(4) Les alternatives privées coûtent cher :** Cautio (€9/mois), GarantMe (€9–€39/mois), Unkle (€1/jour) — ces services facturent les locataires pour ce qu'ils pourraient obtenir gratuitement via Visale. Des millions de personnes paient alors qu'ils ont droit à la gratuité.
+
+### Solution
+**(1) Éligibilité Visale en 30 secondes :** L'utilisateur renseigne son âge, sa situation professionnelle (CDI/CDD/intérim/étudiant), son contrat de travail → résultat immédiat : éligible Visale ou non, avec le cas précis qui s'applique (convention Visale 2024). Pour les éligibles, guide pas-à-pas pour créer le compte sur actionlogement.fr et obtenir l'attestation Visale (avec captures d'écran des étapes problématiques).
+
+**(2) Éligibilité Loca-Pass :** Mêmes conditions que Visale + calcul du montant remboursable (jusqu'à €1 200 pour le dépôt) et des mensualités de remboursement (€48/mois sur 25 mois).
+
+**(3) FSL par département :** L'utilisateur sélectionne son département → informations sur le FSL local : conditions de ressources, montants accordés, pièces à fournir, adresse du service instructeur du Conseil Départemental. Base de données des 100 FSL départementaux.
+
+**(4) Comparateur garanties privées :** Si l'utilisateur n'est pas éligible Visale, comparaison objective Cautio vs GarantMe vs Unkle (coût mensuel, délai d'obtention, conditions d'éligibilité, couverture du bailleur) — avec lien d'affiliation au meilleur taux.
+
+**(5) Lettre d'accompagnement pour le bailleur :** Beaucoup de propriétaires ne connaissent pas Visale et hésitent. VisaleGarant.ai génère une lettre explicative professionnelle à joindre au dossier de candidature, expliquant le fonctionnement de la garantie, son équivalence avec une caution traditionnelle et les avantages pour le bailleur.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Éligibilité Visale + guide Loca-Pass | €0 | Fort impact social — génère confiance et trafic SEO |
+| Pack Dossier Complet | €7 | Guide Visale illustré + lettre bailleur personnalisée + FSL local + comparateur privés |
+| Affiliation garanties privées | ~€15–€30 CPA | Commission par souscription orientée (pour les non-éligibles Visale) |
+| Widget bailleurs / agences | B2B €29/mois | Intégration pour agences immobilières — "garant accepté via Visale" dans les annonces |
+
+**Unit economics :** Claude API ~€0,01/lettre → coût quasi nul. **Marché :** ~2,2M de nouvelles locations/an en France. Les 5M éligibles Visale non inscrits = cible principale. À 1% conversion Pack Dossier = 22 000 × €7 = **€12 833 MRR**. L'affiliation monétise les non-éligibles (500K+/an). Le B2B agences crée un canal de distribution organique.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent utilisé pendant une recherche d'appartement active)
+- **Moteur éligibilité Visale :** Algorithme fondé sur la convention Visale 2024 — critères d'âge, de contrat (CDI/CDD/intérim/apprenti), de mobilité pro pour les 30–31 ans ; arbre de décision en 4 questions maximum
+- **Base FSL :** JSON par département (100 entrées) avec conditions-clés, montants-types, contacts instructeurs — collecte manuelle depuis les sites des Conseils Départementaux, mise à jour annuelle
+- **Comparateur garanties privées :** Table statique des tarifs et conditions des 4 principaux acteurs (Cautio, GarantMe, Unkle, Garantme PRO), mise à jour mensuelle
+- **Génération lettre bailleur :** Claude API + react-pdf
+- **Affiliations :** Liens d'affiliation Cautio et GarantMe (programmes d'affiliation existants)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. SEO : "visale comment obtenir etapes", "garant appartement sans parents que faire", "garantie locative gratuite jeune", "visale action logement eligibilite"
+2. TikTok/Reels : "Vous n'avez pas de garant pour votre appartement ? L'État vous offre une garantie gratuite et personne ne vous en parle — voici comment l'obtenir en 15 minutes" (viral chez les 18–30 ans)
+3. Partenariats CROUS : Les CROUS gèrent 175 000 logements étudiants et orientent des centaines de milliers d'étudiants vers le parc privé — référencer VisaleGarant.ai dans leurs guides logement
+4. Facebook Groups / Discord étudiants : "Logement étudiant Paris", "Coloc & appartement Lyon", communautés d'étudiants internationaux (qui ne connaissent absolument pas Visale)
+
+### Competitive Moat
+- Visale est 100% gratuit → aucun acteur commercial ne l'aide à se promouvoir (ils préfèrent vendre leurs services payants). VisaleGarant.ai est le premier outil indépendant dédié à maximiser l'accès à Visale
+- Le guide illustré (screenshots pas-à-pas) est la vraie valeur : le site actionlogement.fr est notoire pour ses bugs et son manque d'ergonomie — le guide résout un problème concret et documenté
+- La base FSL départementalisée est une donnée qu'aucun agrégateur ne compile aujourd'hui : c'est un avantage éditorial défensif
+- L'affiliation aux alternatives privées monétise les non-éligibles de façon éthique et transparente → le modèle est aligné avec l'intérêt de l'utilisateur
+
+### Figma Schematic
+[View VisaleGarant.ai Garantie Locative Gratuite ou Économique on FigJam](https://www.figma.com/board/JOUVjNxgkq7fdsCaSHuEPU)
+
+---
+
+## 76. BourseÉtudiant.ai
+
+> **Simulez votre échelon de bourse CROUS en 3 minutes et ne ratez plus jamais le dépôt du Dossier Social Étudiant**
+
+### Problem
+Le système de bourses sur critères sociaux (BCS) du CROUS verse chaque année **€2,1 milliards à 740 000 étudiants** (données MESRI 2023–2024). Mais des centaines de milliers d'étudiants éligibles ne font pas de demande ou sont mal orientés. Quatre problèmes structurels expliquent ce non-recours :
+
+**(1) La simulation de l'échelon est opaque :** Le montant de la bourse dépend d'un "échelon" de 0 bis à 7 (de €1 660 à €6 335 annuels). Cet échelon est calculé selon un algorithme combinant le Revenu Fiscal de Référence des parents (RFR N-2), le nombre de "points de charge" (distance domicile-université, nombre de frères et sœurs étudiants, parents étrangers, etc.) et un barème officiel. Ce calcul n'est exposé nulle part en clair — même le formulaire DSE ne dit pas comment l'échelon sera calculé. Des milliers d'étudiants ne déposent pas de DSE en pensant "mes parents gagnent trop" alors qu'ils auraient droit à l'échelon 0 ou 0 bis.
+
+**(2) La deadline du DSE est critique et mal connue :** Le Dossier Social Étudiant doit être déposé **chaque année sur messervices.etudiant.gouv.fr entre janvier et le 31 mai** (avec des variations selon les académies). Passé ce délai, toute demande est irrecevable pour l'année universitaire suivante — c'est une perte sèche de €1 660 à €6 335. Des milliers d'étudiants ratent ce délai faute d'information.
+
+**(3) Les aides régionales et municipales sont invisibles :** Au-delà des BCS nationales, des dizaines de régions, départements et communes versent des compléments : bourse régionale, aide mobilité internationale, bourse du mérite, bourse sociale des grandes villes. Ces aides sont cumulables avec les BCS mais dispersées sur des sites institutionnels peu visibles.
+
+**(4) La notion d'"étudiant indépendant" est méconnue :** Un étudiant peut demander à être considéré comme "indépendant" de ses parents pour le calcul des ressources si certaines conditions sont réunies (pas de lien de dépendance depuis 2 ans, fiscalement séparé, ressources propres). Cette disposition change radicalement le calcul pour les étudiants ayant des parents aisés mais sans lien avec eux — des milliers de situations non exploitées.
+
+### Solution
+**(1) Simulateur d'échelon en 3 minutes :** L'utilisateur saisit le RFR N-2 des parents (ligne 14 de l'avis d'imposition), la composition du foyer fiscal, la distance domicile-université, le nombre de frères et sœurs dans l'enseignement supérieur → calcul instantané de l'échelon probable (0 bis à 7) avec le montant annuel et mensuel correspondant. Explication de chaque "point de charge" appliqué.
+
+**(2) Vérificateur "étudiant indépendant" :** 5 questions sur la situation familiale (hébergement, déclaration fiscale séparée, perception de ressources propres, durée de séparation financière des parents) → éligibilité à la dérogation + guide pour faire valoir le statut d'indépendant dans le DSE.
+
+**(3) Rappels automatiques :** L'utilisateur renseigne son email + son académie → rappel en janvier ("DSE ouvert"), en mars ("Pensez à votre DSE"), en mai ("DERNIER DÉLAI"). 100% gratuit, valeur vitale (€1 660–€6 335 d'enjeu).
+
+**(4) Guide DSE pas-à-pas :** Instructions illustrées pour remplir le DSE sur messervices.etudiant.gouv.fr — les 5 étapes (profil, ressources, logement, documents justificatifs, validation) avec les erreurs fréquentes à éviter.
+
+**(5) Base des aides régionales :** Pour chaque région académique, liste des bourses complémentaires disponibles (bourse régionale, aide mobilité internationale, aide mérite), conditions d'éligibilité et liens vers les formulaires.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation échelon + rappels DSE | €0 | Impact social direct — acquisition par viralité et SEO |
+| Pack Guide Complet | €5 | Guide DSE illustré + vérificateur indépendant + base aides régionales personnalisée |
+| Pack Famille | €9 | Pack Complet + simulation pour 3 enfants + guide frères/sœurs dans l'enseignement supérieur |
+
+**Unit economics :** Claude API ~€0,01/simulation → quasi nul. **Marché :** 2,9M étudiants du supérieur en France, dont 1,5M potentiellement éligibles à une bourse. À 0,5% conversion Pack Complet = 7 500 × €5 = **€3 125 MRR** (conservateur). Les rappels email gratuits créent une rétention annuelle (les étudiants reviennent chaque année). Fort potentiel viral en septembre–octobre (rentrée universitaire) et en janvier (ouverture DSE).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les étudiants utilisent leur téléphone pour tout)
+- **Simulateur échelon :** Algorithme fondé sur le barème officiel des BCS 2024–2025 (publié par le MESRI dans la circulaire annuelle) — grille RFR × points de charge → échelon ; calcul des points de charge selon les critères officiels (distance, fratrie étudiante, parents étrangers, parent isolé…)
+- **Moteur "indépendant" :** Arbre de décision fondé sur les critères DSE officiels (critère C3 du formulaire) — 5 questions maximum, résultat binaire + cas borderline
+- **Rappels email :** Resend + cron jobs (rappels automatiques en janvier, mars, mai selon l'académie) ; données académies stockées dans Supabase
+- **Base aides régionales :** JSON par région académique (26 académies) — collecte manuelle depuis les sites des conseils régionaux et CROUS régionaux, mise à jour annuelle en juillet–août
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Partenariats lycées terminales : Les conseillers d'orientation (CPE/CIO) manquent d'outils numériques simples pour expliquer les bourses — BourseÉtudiant.ai peut être distribué dans les lycées via les fédérations de l'éducation
+2. TikTok/Reels : "Si vos parents gagnent moins de €40 000/an, vous avez probablement droit à une bourse de €1 600 à €6 300. Voici comment calculer votre échelon en 3 minutes avant le 31 mai" (format urgence + montant concret — viral chez les lycéens et étudiants)
+3. SEO : "bourse crous calcul echelon simulation", "dossier social etudiant DSE date limite 2026", "echelon bourse etudiant 0 bis condition", "bourse etudiant independant conditions parents"
+4. Partenariats AFEV, associations étudiantes (FAGE, UNEF) : Ces associations cherchent des outils concrets pour leurs adhérents — distribution capillaire gratuite
+
+### Competitive Moat
+- Le simulateur d'échelon officiel sur messervices.etudiant.gouv.fr calcule après soumission du DSE — il n'existe aucun outil qui simule AVANT le dépôt pour aider l'étudiant à décider s'il vaut la peine de faire la démarche
+- Les rappels email gratuits créent une récurrence annuelle naturelle : l'utilisateur revient chaque année sans effort marketing
+- La base des aides régionales est un avantage éditorial unique — aucun autre outil ne les agrège de façon actionnable avec les BCS nationales
+- La cible (étudiants 18–22 ans) est hyper-virale sur TikTok : une vidéo réussie peut générer des dizaines de milliers de visites en quelques jours — CAC quasi nul
+
+### Figma Schematic
+[View BourseÉtudiant.ai Simulateur Échelon CROUS et Guide DSE on FigJam](https://www.figma.com/board/2WxF4pPVCNAfssBbnWDlVZ)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3413,4 +3602,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-11 — Ideas 71–73 added (France-specific, ultra-low-budget: IndemnisationVol.ai, SurendettementGuide.ai, AppelOffres.ai)*
+*Last updated: 2026-05-13 — Ideas 74–76 added (France-specific, ultra-low-budget: PrêtZéro.ai, VisaleGarant.ai, BourseÉtudiant.ai)*
