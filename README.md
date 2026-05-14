@@ -84,6 +84,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 74 | [PrêtZéro.ai](#74-prêtzéroai) | Pay-per-report + B2B SaaS | €9K–€60K | Low |
 | 75 | [VisaleGarant.ai](#75-visalegarantai) | Pay-per-pack + Affiliation | €5K–€35K | Low |
 | 76 | [BourseÉtudiant.ai](#76-bourseétudiantai) | Freemium + Pay-per-guide | €3K–€20K | Low |
+| 77 | [CongesPayés.ai](#77-congespayésai) | Pay-per-letter + Subscription | €5K–€40K | Low |
+| 78 | [ÉcoBonus.ai](#78-écobonusai) | Freemium + Pay-per-pack + Affiliate | €8K–€55K | Low |
+| 79 | [IntérimFuté.ai](#79-intérimfutéai) | Pay-per-pack + Freemium | €6K–€45K | Low |
 
 ---
 
@@ -3587,6 +3590,186 @@ Le système de bourses sur critères sociaux (BCS) du CROUS verse chaque année 
 
 ### Figma Schematic
 [View BourseÉtudiant.ai Simulateur Échelon CROUS et Guide DSE on FigJam](https://www.figma.com/board/2WxF4pPVCNAfssBbnWDlVZ)
+
+---
+
+## 77. CongesPayés.ai
+
+> **Calculez vos jours de congés payés acquis pendant vos arrêts maladie et réclamez-les à votre employeur en un clic — loi du 22 avril 2024**
+
+### Problem
+La loi du 22 avril 2024 (transposition de la directive européenne 2003/88 suite à l'arrêt de la CJUE) a radicalement modifié le droit français : **les salariés accumulent désormais des congés payés pendant leurs arrêts maladie**, qu'ils soient d'origine professionnelle ou non. Cette réforme crée trois problèmes massifs pour les salariés :
+
+**(1) Des millions de jours de CP ignorés :** Avant la loi, un salarié en arrêt maladie non professionnel n'acquérait aucun CP. Depuis le 1er décembre 2009 (date retenue pour la rétroactivité), les salariés ont le droit de réclamer **jusqu'à 15 mois en arrière** les jours de CP non accordés pendant leurs arrêts maladie. Un salarié ayant eu 3 arrêts maladie cumulant 60 jours en 3 ans peut réclamer environ 5 jours de CP supplémentaires — soit potentiellement €500–€1 500 de valeur directe. Des millions de salariés ne savent même pas que ce droit existe.
+
+**(2) Le calcul est opaque :** Les règles sont complexes : pour un arrêt maladie ordinaire, le salarié acquiert 2 jours de CP par mois de travail effectif assimilé (au lieu de 2,5 jours pour un mois de présence), dans la limite de 24 jours par an (au lieu de 30). Pour un arrêt d'origine professionnelle (AT/MP), l'acquisition est complète à 2,5 jours par mois. Aucun outil ne permet de simuler ces différences.
+
+**(3) L'employeur n'informe pas spontanément :** Les employeurs ont l'obligation d'informer le salarié dans un délai d'un mois de son retour de son solde de CP acquis pendant l'arrêt. En pratique, très peu le font correctement — et peu de salariés connaissent ce droit pour le réclamer.
+
+### Solution
+**(1) Calculateur intelligent :** L'utilisateur saisit ses arrêts maladie (dates de début et fin, type : ordinaire ou AT/MP), son salaire mensuel brut et son ancienneté. Le moteur calcule les jours de CP acquis pendant chaque arrêt selon les nouvelles règles, le total réclam­able, et la valeur financière en euros.
+
+**(2) Vérificateur rétroactivité :** Questions sur la date des arrêts (depuis décembre 2009 = éligible), l'information reçue de l'employeur (solde transmis ou non), le droit à la prescription (15 mois après retour) → éligibilité à une réclamation rétroactive.
+
+**(3) Courrier de réclamation RH généré en 30 secondes :** Courrier recommandé AR personnalisé, cité les textes de loi (C. trav. art. L.3141-5 modifié, loi 2024-364), mentionné les jours exacts calculés et leur valeur, avec mention du délai légal de réponse employeur.
+
+**(4) Tableau de bord CP en temps réel :** Pour les abonnés, suivi automatique des CP acquis mois par mois, alerte quand un arrêt futur impacte les droits, rappel de la date de prescription des droits rétroactifs.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur jours acquis | €0 | Acquisition SEO + viralité LinkedIn/RH |
+| Courrier réclamation RH | €4 | PDF certifié avec références légales, personnalisé |
+| Abonnement suivi CP | €3/mois | Tableau de bord annuel + alertes arrêts futurs |
+| Pack Rétroactivité Complète | €9 | Calcul rétroactif 3 ans + 2 courriers + guide tribunal prud'hommes si refus |
+
+**Unit economics :** Claude API ~€0,01/courrier → coût quasi nul. **Marché :** 26M salariés du privé en France, dont ~8M ont eu au moins un arrêt maladie au cours des 3 dernières années (données DREES). Loi très récente → fenêtre de marché ouverte maintenant. À 0,3% conversion Pack courrier = 24 000 × €4 = **€8 000 MRR**. Fort potentiel B2B : syndicats, CE/CSE, cabinets RH cherchent un outil clé en main pour informer leurs adhérents/salariés.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (formulaire simple en 5 champs)
+- **Moteur de calcul CP :** Algorithme fondé sur C. trav. art. L.3141-5 (modifié par loi 2024-364) — différentiel 2 j/mois (arrêt ordinaire) vs 2,5 j/mois (AT/MP), plafond 24j/an vs 30j/an, calcul en jours ouvrables ou ouvrés selon convention collective
+- **Courrier generation :** Claude API + react-pdf — courrier recommandé AR avec références légales exactes, calcul personnalisé
+- **Suivi abonnement :** Supabase + cron mensuels pour le suivi automatique des droits
+- **Paiements :** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. LinkedIn : Audience RH/DRH + salariés — "La loi du 22 avril 2024 oblige votre employeur à vous donner des CP pour vos arrêts maladie. Savez-vous combien vous êtes dû ?" (contenu très partageable dans les réseaux professionnels)
+2. Partenariats syndicaux : CGT, CFDT, FO, CFTC cherchent des outils concrets pour leurs adhérents — CongesPayés.ai peut être distribué via leurs réseaux locaux gratuitement
+3. SEO : "conges payes arret maladie loi 2024", "congés payés maladie calcul jours", "réclamer congés payés arrêt maladie lettre", "loi 22 avril 2024 conges maladie"
+4. TikTok/Reels : "Votre employeur vous doit peut-être des jours de congés payés pour vos arrêts maladie — et il ne vous le dira jamais. Voici comment calculer ce que vous lui réclamez."
+
+### Competitive Moat
+- Loi très récente (2024) : zéro outil spécialisé n'existe encore — fenêtre de premier entrant sur un marché de 26M de salariés
+- Le calcul différencié AT/MP vs ordinaire est une barrière technique réelle — les outils génériques comme Mon Compte Formation ou les simulateurs paie ne l'intègrent pas
+- Les courriers avec citations légales précises ont une valeur concrète perçue par le salarié : c'est de la protection juridique accessible sans avocat
+- Le B2B syndicats/CE crée un canal de distribution capillaire gratuit — chaque organisation syndicale est un multiplicateur de diffusion
+
+### Figma Schematic
+[View CongesPayés.ai — Congés payés & arrêt maladie 2024 on FigJam](https://www.figma.com/board/rUFoIQz9d8AzP8pWJdR37u)
+
+---
+
+## 78. ÉcoBonus.ai
+
+> **Découvrez en 2 minutes toutes les primes vertes auxquelles vous avez droit — vélo électrique, voiture électrique, rénovation, mobilités durables — calculées selon votre revenu**
+
+### Problem
+La France dispose du système d'aides à la transition écologique le plus généreux d'Europe, mais il est **totalement fragmenté et inaccessible** pour les ménages modestes — précisément ceux qui en ont le plus besoin et qui y ont le plus droit :
+
+**(1) Le bonus vélo électrique est sous-utilisé :** L'ADEME verse jusqu'à **€400 pour les ménages modestes** (revenus inférieurs à €14 000/an de RFR) et €150 pour les autres sur l'achat d'un vélo à assistance électrique. La prime à la conversion (vieux véhicule polluant → vélo électrique) ajoute jusqu'à **€1 500** pour les ménages très modestes. Des millions d'acheteurs ne demandent pas ces aides ou ne savent pas qu'ils y ont droit. La procédure se fait sur Coup de pouce vélo et Mon Aide Vélo — deux plateformes peu connues et peu intuitives.
+
+**(2) Le bonus écologique voiture électrique est mal compris :** En 2024, le bonus atteint **€7 000 pour les ménages modestes** (RFR ≤ €15 400) sur une voiture électrique neuve, et **€13 000 en leasing social** (programme suspendu puis relancé selon les années). Beaucoup de ménages modestes pensent ne pas avoir les moyens d'une voiture électrique sans réaliser que le bonus + leasing social rend certains véhicules moins chers qu'un véhicule thermique d'occasion.
+
+**(3) La prime à la conversion est invisible :** La mise à la casse d'un vieux véhicule polluant (Crit'Air 3, 4, 5 ou non classé) en échange d'un véhicule propre (électrique, hybride rechargeable, ou même véhicule thermique récent peu polluant) donne droit à une prime allant jusqu'à **€5 000 pour les ménages très modestes.** Très peu de Français connaissent les conditions précises.
+
+**(4) Le forfait mobilités durables employeur est négligé :** Les employeurs peuvent verser jusqu'à **€700/an exonérés d'impôt** aux salariés qui viennent travailler à vélo, en covoiturage ou en transport en commun. Moins de 20% des salariés éligibles en bénéficient — ils ne savent simplement pas qu'ils peuvent le demander.
+
+**(5) MaPrimeRénov' est complexe à naviguer :** L'aide à la rénovation énergétique atteint **70% du coût des travaux** pour les ménages très modestes. Mais le parcours ANAH, les conditions de gestes éligibles, le rôle de Mon Accompagnateur Rénov' et les délais de traitement rebutent beaucoup de ménages qui pourraient en bénéficier.
+
+### Solution
+**(1) Profil revenu en 30 secondes :** L'utilisateur saisit son Revenu Fiscal de Référence (ligne 14 de l'avis d'imposition) et la composition du foyer → affectation automatique à la tranche de revenus (très modeste / modeste / intermédiaire / supérieur) qui détermine le montant de chaque aide.
+
+**(2) Calculateur multi-aides :** Pour chaque projet (vélo, voiture, prime conversion, mobilités durables, rénovation), affichage du montant exact de la prime dans la tranche de revenus de l'utilisateur — avec conditions d'éligibilité simplifiées (critères clés uniquement).
+
+**(3) Simulateur combinaison d'aides :** Pour l'achat d'un vélo ou d'une voiture, calcul du coût réel après cumul de toutes les aides applicables (bonus + prime conversion + aide régionale si disponible) — "Ce vélo à 1 500€ vous coûte réellement 0€ avec les aides auxquelles vous avez droit."
+
+**(4) Guide démarche pas-à-pas :** Pour chaque aide, procédure simplifiée : quelle plateforme, quelles pièces justificatives, quel délai de traitement, quand et comment le virement est versé.
+
+**(5) Pack dossier complet :** Formulaires pré-remplis avec les informations de l'utilisateur, checklist des documents, calendrier des démarches — pour éviter les dossiers rejetés.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation montant par aide | €0 | Freemium — viralité et SEO |
+| Pack Dossier Complet (1 aide) | €5 | Guide illustré + formulaires pré-remplis + checklist + calendrier |
+| Pack Multi-Aides | €9 | 3 aides au choix + simulateur combinaison + suivi dossier |
+| Affiliation vélo & voiture électrique | ~€20–€50 CPA | Commissions sur achats orientés (programmes marchands cyclistes/auto) |
+
+**Unit economics :** Claude API ~€0,01/dossier → coût quasi nul. **Marché :** 15M de ménages modestes et très modestes en France sont les plus éligibles aux aides maximales. Le bonus vélo seul représente 1,3M de vélos électriques vendus par an en France (chiffres COLIPED 2023). À 0,2% conversion Pack Dossier = 26 000 × €5 = **€10 833 MRR**. L'affiliation sur les achats orientés peut atteindre 5× le revenu abonnement.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent consulté en magasin ou avant un achat)
+- **Moteur de calcul :** Table des barèmes officiels par tranche RFR pour chaque aide (bonus ADEME vélo, bonus écologique voiture, prime conversion, FMD employeur, MaPrimeRénov') — mise à jour à chaque arrêté ADEME/ANAH
+- **Simulateur cumul :** Algorithme de combinaison des aides (certaines sont cumulables, d'autres non) avec affichage du coût net final
+- **Base aides régionales :** JSON par région (13 régions métropolitaines) — aides régionales complémentaires sur le vélo et la rénovation
+- **Génération PDF :** react-pdf pour les packs dossier
+- **Affiliation :** Programmes marchands cyclistes (Cyclable, Decathlon Pro) et auto (leasing social agréé)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Ce vélo électrique à 1 500€ vous coûte 0€ si vous gagnez moins de 20 000€/an. Voici comment calculer vos primes en 2 minutes." — format choc très viral dans la cible modeste/primo-acheteur
+2. SEO : "bonus velo electrique montant 2024 calcul", "prime voiture electrique revenus modestes", "maprimerenov simulation montant", "prime conversion voiture conditions eligibilite"
+3. Partenariats associations consommateurs : 60 Millions de Consommateurs, UFC-Que Choisir cherchent des outils pratiques pour leurs lecteurs — ÉcoBonus.ai est leur contenu parfait
+4. Partenariats magasins vélo : Les points de vente de vélos électriques cherchent à conclure des ventes plus facilement — ÉcoBonus.ai peut être proposé en partenariat comme outil de calcul en magasin (conversion de prospects)
+
+### Competitive Moat
+- Les simulateurs officiels (ADEME, ANAH) sont fragmentés par aide et ne permettent pas de calculer le cumul : ÉcoBonus.ai est le premier outil d'agrégation multi-primes
+- La tranche de revenus est la clé : les ménages modestes ont accès à 3–5× plus d'aides que les ménages aisés, mais ce sont eux qui naviguent le moins bien dans les dispositifs — ÉcoBonus.ai cible exactement ce paradoxe
+- L'affiliation aux achats (vélos, voitures, artisans MaPrimeRénov') crée une monétisation très puissante sans friction pour l'utilisateur : il est déjà en mode achat, ÉcoBonus.ai l'aide et est rémunéré
+- La mise à jour annuelle des barèmes (chaque arrêté ADEME / loi de finances) est un travail éditorial que les agrégateurs généralistes (comparateurs d'assurance, etc.) ne font pas sur les aides écologiques
+
+### Figma Schematic
+[View ÉcoBonus.ai — Calculateur de primes vertes françaises on FigJam](https://www.figma.com/board/zfddyNMbrgGhdz8mToOqXv)
+
+---
+
+## 79. IntérimFuté.ai
+
+> **Calculez les indemnités que votre agence d'intérim vous doit — IFM, ICCP, FASTT — et réclamez ce qui vous appartient**
+
+### Problem
+La France compte **3,5 millions de travailleurs intérimaires** (données Prism'emploi 2023), dont une grande majorité enchaîne les missions courtes avec plusieurs agences. Ce segment est structurellement vulnérable face à trois sources massives de sous-paiement ignorées :
+
+**(1) L'IFM est systématiquement mal calculée :** L'Indemnité de Fin de Mission représente **10% du total brut des rémunérations perçues** pendant la mission. Elle est obligatoire pour toutes les missions sauf exceptions (embauche en CDI, refus de CDI proposé, contrat saisonnier). En pratique, des erreurs de calcul fréquentes surviennent : taux appliqué sur un assiette incomplète (oubli des heures supplémentaires, primes, paniers), IFM versée en retard, IFM non versée pour des missions très courtes. Un intérimaire qui enchaîne 12 missions/an peut se faire spolier de €200 à €1 200 sans le savoir.
+
+**(2) L'ICCP est ignorée :** L'Indemnité Compensatrice de Congés Payés représente **10% du total brut incluant l'IFM** — soit 10% de (salaire + IFM). Cumulée sur 12 mois de missions, c'est un montant significatif. De nombreux intérimaires ne savent pas que l'ICCP s'applique sur l'IFM elle-même (et pas seulement sur le salaire brut), créant un manque à gagner systématique.
+
+**(3) Le FASTT est massivement sous-utilisé :** Le Fonds d'Action Sociale du Travail Temporaire est financé par les cotisations des agences (toutes les grandes agences y cotisent : Adecco, Manpower, Randstad, Synergie, etc.). Il offre des services gratuits ou quasi-gratuits : **prêts personnel sans intérêt** (jusqu'à €3 000 en 48h), **garde d'enfant** (subvention crèche), **accès au logement** (garantie locative, avance dépôt), **assurance auto** à tarif préférentiel, **formation qualifiante.** Moins de 15% des intérimaires éligibles utilisent le FASTT, faute d'en connaître l'existence.
+
+**(4) La convention collective applicable est opaque :** L'intérimaire est couvert par la convention collective de l'entreprise cliente (utilisatrice) pour les conditions de travail, et par la convention collective du travail temporaire pour les indemnités. Peu d'intérimaires savent identifier leur convention collective de branche et les droits spécifiques qu'elle confère (primes de panier, indemnités de déplacement, etc.).
+
+### Solution
+**(1) Calculateur IFM/ICCP multi-agences :** L'utilisateur saisit ses missions (agence, durée, salaire brut, primes, heures supplémentaires) → calcul automatique de l'IFM et ICCP théoriques pour chaque mission, total cumulé sur 12 mois, comparaison avec les montants perçus (fiches de paie intérim).
+
+**(2) Vérificateur d'écart :** Si un écart est détecté entre ce qui est dû et ce qui a été versé, alerte immédiate : "Vous êtes potentiellement dû de €X sur votre mission du [date] avec [agence]" — avec explication du calcul.
+
+**(3) Guide FASTT personnalisé :** L'utilisateur renseigne sa situation (besoin de prêt, garde d'enfant, logement, assurance) → liste des aides FASTT disponibles dans sa situation avec procédure de demande et coordonnées du service FASTT compétent.
+
+**(4) Courrier de réclamation agence :** Pour les écarts détectés, génération d'un courrier recommandé AR personnalisé à l'agence d'intérim, citant le Code du travail (C. trav. art. L.1251-32 et L.1251-33), le calcul précis de l'écart et une mise en demeure de régularisation.
+
+**(5) Modèle mise en demeure Prudhommes :** Si l'agence ne régularise pas sous 30 jours, guide pour saisir le Conseil de Prud'hommes (compétent pour les litiges intérim) avec le formulaire pré-rempli et les pièces à joindre.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul IFM/ICCP + alerte écart | €0 | Freemium — viralité forte dans les communautés intérimaires |
+| Guide FASTT personnalisé | €0 | Impact social — acquisition organique |
+| Pack Réclamation Agence | €6 | Courrier recommandé AR personnalisé + calcul certifié + suivi |
+| Pack Prudhommes | €12 | Tout le Pack Réclamation + formulaire R517 pré-rempli + guide audience + modèle conclusions |
+
+**Unit economics :** Claude API ~€0,01/courrier → coût quasi nul. **Marché :** 3,5M d'intérimaires actifs, dont ~1M enchaînent les missions toute l'année. Taux d'erreur de calcul IFM/ICCP estimé à 15–20% selon les syndicats du secteur. À 0,5% conversion Pack Réclamation = 17 500 × €6 = **€8 750 MRR**. B2B syndicats (CGT Intérim, FO Intérim) : licence annuelle pour distribuer l'outil à leurs adhérents.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les intérimaires consultent entre deux missions, souvent sur téléphone)
+- **Moteur IFM/ICCP :** Algorithme fondé sur C. trav. art. L.1251-32 — assiette brute incluant salaire + primes + HS + IFM pour le calcul ICCP ; gestion des exceptions (CDI proposé, saisonnier, stagiaire)
+- **Base FASTT :** JSON des aides FASTT disponibles par situation (prêt, garde, logement, assurance, formation) avec liens vers les formulaires FASTT et numéros de contact ; mise à jour semestrielle
+- **Génération courriers :** Claude API + react-pdf — courrier recommandé AR avec références légales, calcul certifié, tableau récapitulatif
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups intérimaires : "Emploi intérimaire France", "Adecco / Manpower / Randstad — Conseils et entraide" — des dizaines de groupes actifs avec des centaines de milliers de membres
+2. TikTok/Reels : "Vous faites de l'intérim ? Votre agence vous doit 20% de plus que votre salaire brut en fin de mission. Voici comment vérifier si vous avez tout reçu." — format révélation très viral dans la cible
+3. SEO : "IFM indemnité fin de mission calcul", "ICCP intérim comment calculer", "FASTT aide intérimaire logement", "agence intérim ne paie pas IFM que faire"
+4. Partenariats syndicaux intérim : CGT Intérim et FO Intérim ont des structures dédiées aux travailleurs temporaires — IntérimFuté.ai peut être l'outil officiel de vérification de leurs adhérents
+
+### Competitive Moat
+- Aucun outil spécialisé n'existe pour la vérification IFM/ICCP — les agences d'intérim ont un avantage informationnel structurel sur les intérimaires ; IntérimFuté.ai le supprime
+- Le FASTT est un avantage défensif unique : c'est un service que les agences financent mais ne promeuvent pas (car mieux connu = moins d'intérimaires fidèles à leur agence) — IntérimFuté.ai est aligné avec l'intérêt du travailleur
+- La cible est très virale sur les réseaux sociaux d'entraide (Facebook, WhatsApp) : un intérimaire lésé qui récupère €400 grâce à l'outil en parle à 10 collègues
+- Le B2B syndicats crée une distribution institutionnelle gratuite et confère de la légitimité — les syndicats valident l'outil comme fiable, ce qui rassure les utilisateurs pour payer le Pack Réclamation
+
+### Figma Schematic
+[View IntérimFuté.ai — Droits & indemnités des travailleurs temporaires on FigJam](https://www.figma.com/board/zpI81gC4nkVHOPx6iWkj04)
 
 ---
 
