@@ -87,6 +87,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 77 | [CongesPayés.ai](#77-congespayésai) | Pay-per-letter + Subscription | €5K–€40K | Low |
 | 78 | [ÉcoBonus.ai](#78-écobonusai) | Freemium + Pay-per-pack + Affiliate | €8K–€55K | Low |
 | 79 | [IntérimFuté.ai](#79-intérimfutéai) | Pay-per-pack + Freemium | €6K–€45K | Low |
+| 80 | [FraisBancaires.ai](#80-fraisbancairesai) | Freemium + Pay-per-report | €6K–€40K | Low |
+| 81 | [GardeAlternée.ai](#81-gardealtérnéeai) | Pay-per-report + Annual Subscription | €7K–€50K | Low |
+| 82 | [AidantFamilial.ai](#82-aidantfamilialai) | Pay-per-pack + Freemium | €5K–€38K | Low |
 
 ---
 
@@ -3773,6 +3776,187 @@ La France compte **3,5 millions de travailleurs intérimaires** (données Prism'
 
 ---
 
+## 80. FraisBancaires.ai
+
+> **Analysez votre relevé bancaire en 30 secondes — trouvez les frais cachés et changez de banque en 1 clic**
+
+### Problem
+Un Français moyen paie **€150 à €400/an** en frais bancaires sans en avoir conscience : frais de tenue de compte, commissions d'intervention (incident de paiement), options souscrites et oubliées, frais de virement international, cotisation carte bancaire. Ces frais apparaissent sur le relevé de compte en lignes cryptiques ("COTISATION CB VISA CLASSIC", "COM MOUVEMENT TRI 03", "FRAIS VIRL IRR"). La **loi Macron 2017 (mobilité bancaire)** permet de changer de banque gratuitement en 22 jours ouvrés — la nouvelle banque prend en charge le transfert de tous les prélèvements automatiques. Pourtant, **moins de 5% des Français utilisent ce droit** faute de savoir combien ils paient réellement et à quoi se comparer.
+
+Les banques en ligne gratuites (Boursorama, Hello Bank, Fortuneo, Ma French Bank) offrent des comptes courants à **€0/an** avec carte Visa gratuite. Pour un ménage standard, le gain annuel moyen en changeant de BNP/SG/CA vers Boursorama est de **€200 à €350/an**.
+
+### Solution
+L'utilisateur uploade son relevé de compte PDF (1 mois suffit). L'IA extrait ligne par ligne toutes les opérations portant des frais (en distinguant les frais des vrais mouvements), les catégorise, calcule le coût mensuel et annuel, et les compare aux offres gratuites du marché. Si les économies potentielles dépassent €50/an, un rapport payant génère :
+
+1. **Rapport de frais détaillé** : toutes les lignes de frais classées par catégorie, explication en français simple de ce que chacune représente
+2. **Comparatif personnalisé** : 3 banques gratuites recommandées selon le profil (voyage, investissement, nomade)
+3. **Pack Changement de Banque** : checklist personnalisée étape par étape, lettre de clôture de compte rédigée, calendrier de migration des prélèvements automatiques, lien direct vers le formulaire de mobilité bancaire
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse de base | €0 | Total des frais mensuels + alerte si > €20/mois |
+| Rapport complet | €3 | Détail ligne par ligne + explication en clair + comparatif banques gratuites |
+| Pack Changement de Banque | €5 | Tout le rapport + lettre de clôture + checklist migration + formulaire mobilité bancaire |
+| Abonnement Annuel | €9/an | Analyse mensuelle automatique + alerte si nouveaux frais + rapport fiscal annuel |
+
+**Unit economics :** Claude API ~€0,05/analyse → 98% gross margin. **Marché :** 47 millions de comptes bancaires courants en France, dont 80% sont dans une banque traditionnelle avec des frais. À 0,1% conversion Pack = 47 000 × €5 = **€23 500 MRR**. L'abonnement annuel à €9 crée de la récurrence : un client qui a changé de banque grâce à FraisBancaires.ai revient chaque année pour surveiller sa nouvelle banque.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Extraction PDF :** Claude API vision — le modèle lit le relevé PDF directement et extrait les lignes de frais sans OCR séparé
+- **Base de données frais :** JSON des intitulés de frais courants par banque (BNP, SG, CA, LCL, CIC, La Banque Postale) — mis à jour à chaque changement tarifaire (les grilles tarifaires sont publiques)
+- **Comparateur :** Table statique des offres gratuites (Boursorama, Hello Bank, Fortuneo, Ma French Bank, Revolut, Nickel) mise à jour trimestriellement
+- **Génération PDF :** react-pdf
+- **Paiements :** Stripe (unitaire)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'ai scanné mon relevé de banque avec l'IA — elle a trouvé €240/an de frais que je savais même pas que je payais" — format choc très viral, tout le monde a un compte en banque
+2. SEO : "frais bancaires réduire", "combien je paie de frais bancaires", "changer banque gratuitement loi macron", "boursorama vs bnp frais comparaison"
+3. Reddit : r/france, r/financespersonnelles — la question "quelle banque choisir" revient toutes les semaines
+4. Partenariats comparateurs : LeLynx.fr, LesFurets.com, Meilleurtaux cherchent des outils d'acquisition — FraisBancaires.ai peut être proposé en widget gratuit sur leurs sites (partage de revenus)
+
+### Competitive Moat
+- Les comparateurs existants (Panorabanques, LesFurets) comparent les offres mais ne partent PAS de votre relevé réel — FraisBancaires.ai part du vécu et non de l'abstrait
+- L'analyse du relevé PDF via vision Claude est instantanée et fonctionne avec tous les formats bancaires français sans intégration API bancaire (évite la réglementation DSP2)
+- Le Pack Changement de Banque avec lettre de clôture et checklist migration est unique : c'est l'obstacle psychologique numéro 1 qui empêche les gens de changer (peur de rater un prélèvement)
+- L'abonnement annuel à €9 justifie la récurrence : les banques ajoutent des frais progressivement (boiling frog) — FraisBancaires.ai est le détecteur
+
+### Figma Schematic
+[View FraisBancaires.ai — Analyseur de frais bancaires on FigJam](https://www.figma.com/board/PfVT7Eoc0rz4PIerGqdxx4)
+
+---
+
+## 81. GardeAlternée.ai
+
+> **L'outil admin complet pour les parents en garde alternée — impôts, CAF, calendrier, co-parentalité**
+
+### Problem
+En France, **370 000 divorces et séparations** ont lieu chaque année, dont ~180 000 concernent des enfants mineurs. La **garde alternée concerne aujourd'hui ~3 millions de familles**. Elle crée une complexité administrative massive que ni les juges, ni les avocats, ni la CAF n'expliquent clairement :
+
+**(1) L'optimisation fiscale est contre-intuitive :** Par défaut, chaque parent déclare 50% des enfants à charge (demi-part pour chacun). Mais selon les revenus respectifs, il peut être plus avantageux que **l'un des deux parents déclare 100% des enfants** en échange d'une pension alimentaire déductible pour lui. Ce calcul est rarement fait → des milliers d'euros d'impôts perdus chaque année.
+
+**(2) Les allocations CAF sont indivisibles :** Les allocations familiales (AF) ne peuvent pas être partagées entre deux parents — elles vont à un seul foyer. Le choix du perceveur impacte aussi le droit au complément de libre choix de garde, à la prime de naissance et aux aides au logement. Aucun outil ne simule l'impact financier global.
+
+**(3) Le calendrier de garde est une source permanente de conflits :** Les week-ends alternés, les vacances scolaires, les jours fériés, les jours de la rentrée — chaque zone scolaire (A, B, C) a un calendrier différent. Les parents perdent des heures à négocier et recalculer manuellement.
+
+**(4) La communication co-parentale génère des litiges** sur les frais scolaires (qui paie la cantine ? les activités extra-scolaires ?), les décisions médicales, les informations scolaires. Les parents n'ont pas de format standardisé pour documenter leurs échanges.
+
+### Solution
+**(1) Simulateur fiscal garde alternée :** L'utilisateur entre les revenus des deux parents et le nombre d'enfants → calcul des deux scénarios (50/50 ou 100% un parent) → recommandation chiffrée + rapport PDF.
+
+**(2) Simulateur CAF :** Qui doit percevoir les allocations pour maximiser le revenu global du foyer ? Simulation des montants selon chaque configuration + guide pour changer le perceveur en ligne.
+
+**(3) Calendrier partagé intelligent :** Saisie des zones scolaires et du mode de garde → génération automatique du calendrier sur 12 mois avec export iCal (Google Calendar, Apple Calendar) + calcul du nombre de nuits par parent (utile pour les impôts et la CAF).
+
+**(4) Pack Communication co-parentale :** Templates de messages pour les décisions médicales, les informations scolaires, le suivi des frais partagés, les demandes de modification de calendrier — dans un format que le juge aux affaires familiales (JAF) peut lire en cas de litige.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur fiscal (comparatif) | €0 | Gratuit — acquisition |
+| Rapport fiscal PDF | €6 | Résultat chiffré des 2 scénarios + notice explicative pour le fisc + courrier pour l'ex-conjoint |
+| Guide CAF personnalisé | €0 | Gratuit — acquisition virale dans les groupes Facebook séparation |
+| Calendrier partagé (1 an) | €4 | iCal export + PDF imprimable + calcul nuits par parent |
+| Pack Communication | €8 | 12 templates co-parentalité + journal des échanges + export PDF pour JAF |
+| Abonnement Annuel | €19/an | Tout inclus + mise à jour calendrier scolaire annuel + alertes délais légaux |
+
+**Unit economics :** Claude API ~€0,02/simulation → coût quasi nul. **Marché :** 3 millions de familles en garde alternée en France dont ~500 000 refont leur déclaration fiscale chaque année sans optimiser. À 0,5% conversion Rapport Fiscal = 15 000 × €6 = **€7 500 MRR**. L'abonnement annuel à €19 vise les parents en garde alternée durable (les enfants restent mineurs en moyenne 9 ans après le divorce = LTV de €171 par famille).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les parents consultent depuis leur téléphone pendant les échanges)
+- **Moteur fiscal :** Algorithme barème IR 2026 avec simulation des 2 configurations de demi-parts (articles 194 et 196B du CGI) — recalculé à chaque loi de finances
+- **Moteur CAF :** Barèmes AF + complément de libre choix par configuration familiale (données CAF publiques)
+- **Calendrier :** Données calendrier scolaire par zone (A/B/C) — API data.education.gouv.fr — export iCal standard RFC 5545
+- **Génération PDF :** react-pdf (rapport fiscal exportable, calendrier imprimable)
+- **Auth + DB :** Supabase (stockage calendrier, historique des simulations)
+- **Paiements :** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Séparation et divorce France", "Garde alternée témoignages et conseils", "Co-parentalité positive" — des centaines de milliers de membres, posts très actifs sur les questions fiscales et CAF
+2. TikTok/Reels : "Si vous êtes en garde alternée, vous déclarez probablement mal vos enfants aux impôts. Voici le calcul exact." — format révélation, touche directement les parents divorcés
+3. SEO : "impots garde alternee qui declare enfants", "allocations familiales garde alternee qui percoit", "calendrier garde alternee generateur", "frais scolaires garde alternee partage"
+4. Partenariat avocats de famille : les avocats en droit de la famille cherchent des outils pour leurs clients post-séparation — GardeAlternée.ai peut être recommandé ou intégré dans les dossiers de divorce (modèle white-label)
+
+### Competitive Moat
+- Aucun outil français ne combine les 4 modules (impôts + CAF + calendrier + co-parentalité) — les parents naviguent entre 4 outils distincts aujourd'hui
+- Le simulateur fiscal est objectivement meilleur que ce que font la plupart des comptables pour ce cas précis : la configuration garde alternée est mal connue même par les professionnels
+- Le calendrier scolaire automatique avec export iCal est immédiatement utile et crée de la récurrence (les parents reviennent chaque rentrée)
+- La viralité est forte : un parent qui optimise ses impôts grâce à GardeAlternée.ai en parle immédiatement à son ex-conjoint — les deux deviennent clients
+
+### Figma Schematic
+[View GardeAlternée.ai — Admin toolkit co-parentalité on FigJam](https://www.figma.com/board/l5EjAcJ9oNUM2EVumSCupa)
+
+---
+
+## 82. AidantFamilial.ai
+
+> **Réclamez vos droits d'aidant familial en France — AJPA, APA, PCH, congé de proche aidant**
+
+### Problem
+La France compte **11 millions d'aidants familiaux** — des personnes qui aident au quotidien un proche âgé, malade ou handicapé (parent, conjoint, enfant). C'est **1 Français sur 6**. L'aidance représente en moyenne **3,5 heures par jour** d'aide non rémunérée, et constitue une des premières causes d'épuisement, de perte d'emploi et de précarisation chez les actifs.
+
+Ces 11 millions de personnes ont accès à des droits considérables — massivement sous-utilisés :
+
+**(1) L'AJPA (Allocation Journalière du Proche Aidant) :** Versée par la Sécurité Sociale, elle atteint **€64,54/jour en 2026** pendant le congé de proche aidant (3 mois renouvelables, soit jusqu'à ~€5 800 de prestations). Moins de **250 000 aidants l'ont demandée** malgré 11 millions d'éligibles potentiels. Le formulaire CPAM est complexe, les conditions méconnues.
+
+**(2) L'APA (Allocation Personnalisée d'Autonomie) :** Versée par le Conseil Départemental, elle finance les heures d'aide à domicile pour les personnes de plus de 60 ans en perte d'autonomie (GIR 1 à 4). Montant : **€774 à €1 748/mois** selon le niveau de dépendance et les revenus. Beaucoup de familles ne font pas la demande car elles ne savent pas que la personne aidée y a droit.
+
+**(3) La PCH (Prestation de Compensation du Handicap) :** Pour les personnes handicapées de moins de 60 ans, elle finance les aides humaines, techniques et l'aménagement du logement. Montant variable, souvent > €1 000/mois. Les dossiers MDPH sont notoirement complexes.
+
+**(4) Le crédit d'impôt services à la personne :** Si l'aidant recourt au CESU pour faire intervenir une aide à domicile (auxiliaire de vie, assistante de vie), **50% du coût est crédité d'impôt**. Peu d'aidants déclarent correctement ces dépenses ou les optimisent.
+
+**(5) Le congé de proche aidant :** Tout salarié peut prendre jusqu'à 3 mois de congé (renouvelable une fois) sans risque de licenciement. L'employeur ne peut pas refuser si les conditions légales sont remplies. La lettre à l'employeur est simple mais peu d'aidants osent la rédiger seuls.
+
+### Solution
+**(1) Calculateur de droits AJPA :** Questionnaire en 5 questions (lien avec l'aidé, nature de la dépendance/handicap, situation professionnelle) → éligibilité AJPA + montant calculé + dossier CPAM pré-rempli (formulaire Cerfa 15431).
+
+**(2) Simulateur APA :** Saisie de l'âge, des revenus et du niveau d'autonomie (grille GIR simplifiée) → montant APA estimé + guide pour faire la demande auprès du Conseil Départemental compétent.
+
+**(3) Simulateur PCH :** Questionnaire handicap (nature, besoins d'aide) → simulation PCH + liste des pièces pour le dossier MDPH.
+
+**(4) Pack Congé de Proche Aidant :** Lettre à l'employeur conforme au Code du travail (art. L3142-16 à L3142-27), formulaire CPAM pour l'AJPA, calendrier des droits.
+
+**(5) Guide CESU & crédit d'impôt :** Comment déclarer les dépenses d'aide à domicile pour maximiser le crédit d'impôt de 50%.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur AJPA + éligibilité | €0 | Freemium — fort impact social et SEO |
+| Simulateur APA & PCH | €0 | Gratuit — acquisition |
+| Pack Congé de Proche Aidant | €5 | Lettre employeur + formulaire CPAM + calendrier droits + guide recours si refus |
+| Pack Complet Aidant | €12 | Tous les simulateurs + dossiers pré-remplis CPAM/MDPH/CD + guide CESU + suivi annuel |
+| B2B associations aidants | €99/an | Licence association — outil de service pour leurs adhérents (Aidants Connect, France Alzheimer, APF France Handicap) |
+
+**Unit economics :** Claude API ~€0,01/simulation → coût quasi nul. **Marché :** 11 millions d'aidants, dont ~3 millions d'actifs en emploi éligibles à l'AJPA ou au congé de proche aidant. À 0,3% conversion Pack Complet = 33 000 × €12 = **€16 500 MRR**. Le B2B associations est un canal de distribution massif : France Alzheimer a 350 délégations locales, APF France Handicap a 100 associations territoriales — une seule licence par structure = €9 900/an sans effort de vente individuel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les aidants sont souvent à côté de leur proche, sur téléphone)
+- **Moteur AJPA :** Conditions d'éligibilité et taux journaliers AJPA (décret n°2020-1258) — mis à jour à chaque revalorisation SMIC
+- **Grille GIR simplifiée :** Questionnaire d'autonomie en 10 questions (version simplifiée de la grille AGGIR officielle) pour estimer le GIR → montant APA estimé par tranche de revenus
+- **Base PCH :** Critères PCH (décret n°2005-1587) et grille d'évaluation simplifiée par type de besoin (aide humaine, technique, logement)
+- **Génération courriers :** Claude API + react-pdf — lettre employeur congé de proche aidant avec références Code du travail, formulaire CPAM pré-rempli
+- **Paiements :** Stripe (unitaire)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Aidants familiaux France", "Proche aidant de parent Alzheimer", "Parents d'enfants handicapés" — des dizaines de groupes avec plusieurs centaines de milliers de membres, forte détresse et besoin d'information pratique
+2. TikTok/Reels : "Si vous aidez un parent âgé ou malade, vous avez droit à jusqu'à 64€/jour de la Sécurité Sociale. La plupart des aidants ne le savent pas." — format révélation très impactant
+3. SEO : "AJPA dossier comment faire", "allocation proche aidant montant 2026", "conge proche aidant lettre employeur", "APA simulation montant", "droits aidant familial"
+4. Partenariats associations : France Alzheimer (350 délégations), APF France Handicap, Aidants Connect (structure gouvernementale de soutien aux aidants) — ces structures cherchent des outils pratiques pour leurs adhérents et ont une légitimité institutionnelle que AidantFamilial.ai peut exploiter
+
+### Competitive Moat
+- Aucun outil unifie les 5 droits aidants en un seul parcours — la fragmentation (CPAM pour AJPA, Conseil Départemental pour APA, MDPH pour PCH, CAF pour garde d'enfant, employeur pour le congé) est l'obstacle principal
+- Le formulaire Cerfa 15431 (AJPA) est notoirement difficile à compléter — AidantFamilial.ai le pré-remplit automatiquement : c'est un gain de temps réel qui justifie le paiement
+- Le marché des aidants grossit structurellement : le vieillissement de la population (+200 000 aidants/an) et l'augmentation des maladies chroniques font de ce marché un des plus résilients
+- La légitimité via les associations partenaires est difficile à répliquer pour un concurrent tardif : les associations ne certifient qu'un outil à la fois
+
+### Figma Schematic
+[View AidantFamilial.ai — Droits et aides pour aidants proches on FigJam](https://www.figma.com/board/5kiz1hVFVKCEKeysbh9pAO)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3785,4 +3969,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-13 — Ideas 74–76 added (France-specific, ultra-low-budget: PrêtZéro.ai, VisaleGarant.ai, BourseÉtudiant.ai)*
+*Last updated: 2026-05-15 — Ideas 80–82 added (France-specific, ultra-low-budget: FraisBancaires.ai, GardeAlternée.ai, AidantFamilial.ai)*
