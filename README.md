@@ -78,6 +78,18 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 68 | [RuptureConv.ai](#68-ruptureconvai) | Freemium + Pay-per-pack | €10K–€65K | Low |
 | 69 | [C2S.ai](#69-c2sai) | Pay-per-dossier + Commission organisme | €5K–€35K | Low |
 | 70 | [DroitsRH.ai](#70-droitsrhai) | Pay-per-pack + Freemium | €8K–€55K | Low |
+| 71 | [IndemnisationVol.ai](#71-indemnisationvolai) | Freemium + Pay-per-pack | €10K–€70K | Low |
+| 72 | [SurendettementGuide.ai](#72-surendettementguideai) | Pay-per-dossier + Partenariats associations | €3K–€20K | Low |
+| 73 | [AppelOffres.ai](#73-appeloffresai) | Pay-per-pack + SaaS Mensuel + B2B | €15K–€90K | Low-Medium |
+| 74 | [PrêtZéro.ai](#74-prêtzéroai) | Pay-per-report + B2B SaaS | €9K–€60K | Low |
+| 75 | [VisaleGarant.ai](#75-visalegarantai) | Pay-per-pack + Affiliation | €5K–€35K | Low |
+| 76 | [BourseÉtudiant.ai](#76-bourseétudiantai) | Freemium + Pay-per-guide | €3K–€20K | Low |
+| 77 | [CongesPayés.ai](#77-congespayésai) | Pay-per-letter + Subscription | €5K–€40K | Low |
+| 78 | [ÉcoBonus.ai](#78-écobonusai) | Freemium + Pay-per-pack + Affiliate | €8K–€55K | Low |
+| 79 | [IntérimFuté.ai](#79-intérimfutéai) | Pay-per-pack + Freemium | €6K–€45K | Low |
+| 80 | [FraisBancaires.ai](#80-fraisbancairesai) | Freemium + Pay-per-report | €6K–€40K | Low |
+| 81 | [GardeAlternée.ai](#81-gardealtérnéeai) | Pay-per-report + Annual Subscription | €7K–€50K | Low |
+| 82 | [AidantFamilial.ai](#82-aidantfamilialai) | Pay-per-pack + Freemium | €5K–€38K | Low |
 
 ---
 
@@ -3263,6 +3275,688 @@ En France, **26 millions de salariés** travaillent sous l'une des 600+ conventi
 
 ---
 
+## 71. IndemnisationVol.ai
+
+> **Obtenez jusqu'à €600 de compensation pour votre vol retardé ou annulé — sans payer 30% de commission à AirHelp**
+
+### Problem
+En France, le règlement européen **CE 261/2004** donne droit à €250, €400 ou €600 par passager pour tout vol décollant d'un aéroport de l'UE (ou opéré par une compagnie européenne vers l'UE) retardé de 3h+ ou annulé sans préavis de 14 jours. Environ **25–30 millions de passagers français** sont concernés chaque année par une perturbation éligible. Pourtant, trois obstacles empêchent les passagers de faire valoir leurs droits : **(1) La méconnaissance du règlement :** 80% des passagers ignorent qu'ils ont un droit légal à compensation — non pas une "geste commerciale" mais une obligation légale de la compagnie. **(2) Les services existants prennent une commission de 25–35% + TVA :** AirHelp, Flightright, ClaimCompass prélèvent €150–€210 sur une compensation de €600. Ils s'appuient sur la passivité des passagers et la complexité perçue de la démarche. **(3) La démarche directe est en réalité simple :** Une lettre recommandée à la compagnie, un refus ou un silence de 30 jours, puis saisine du médiateur du tourisme ou du tribunal d'instance (procédure simplifiée < €5 000). Des millions de passagers laissent des centaines d'euros sur la table chaque année par méconnaissance ou par flemme.
+
+### Solution
+**(1) Éligibilité en 30 secondes :** L'utilisateur saisit le numéro de vol, la date et la durée du retard → vérification automatique via API de données de vols (AviationStack) → résultat immédiat : éligible ou non, avec le montant exact (€250 pour vol < 1 500 km, €400 pour vol 1 500–3 500 km, €600 pour vol > 3 500 km). **(2) Génération de la lettre de réclamation officielle :** Courrier en français ET en anglais, avec référence précise à l'article 7 du règlement CE 261/2004, le montant réclamé, le numéro de vol, les données de retard vérifiées par l'API. Format prêt à imprimer ou envoyer par email. **(3) Pack escalade si refus :** Modèle de mise en demeure LRAR, procédure de saisine du Médiateur du Tourisme et du Voyage (MTV) ou de la DGAC, et — si nécessaire — guide pour la procédure simplifiée au tribunal d'instance. **(4) Tracker de dossier :** Rappels automatiques des délais (30 jours pour la première réponse, puis 60 jours pour le médiateur) et templates de relance.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Vérification éligibilité + montant | €0 | Génère du trafic SEO et crée l'effet "wow" immédiat |
+| Lettre de réclamation basique | €0 | Version simple pour convertir les utilisateurs |
+| Pack Complet | €9 | Lettre officielle FR+EN + mise en demeure LRAR + guide médiateur + tracker 90 jours |
+| Pack Judiciaire | €14 | Pack Complet + guide tribunal d'instance + modèle de requête |
+
+**Unit economics :** Claude API ~€0,02/lettre → coût quasi nul. AviationStack : 10 000 requêtes/mois gratuites. **Marché :** ~5M Français en retard >3h/an. À 0,5% de conversion Pack Complet = 25 000 packs × €9 = **€18 750 MRR**. Fort potentiel viral : "AirHelp m'aurait pris €180 sur €600. IndemnisationVol.ai m'a coûté €9."
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent utilisé depuis l'aéroport ou juste après le voyage)
+- **Éligibilité :** API AviationStack (données historiques de vols — retards, annulations, causes) gratuit jusqu'à 10K req/mois ; fallback FlightAware API (payant, si volume croissant)
+- **Calcul compensation :** Algorithme CE 261/2004 — distance orthodromique entre les aéroports (formule haversine) → €250 / €400 / €600 ; vérification des cas d'exonération légaux (circonstances extraordinaires : grève du contrôle aérien, météo extrême documentée)
+- **Génération des courriers :** Claude API + react-pdf (export PDF prêt à imprimer et signer)
+- **Tracker dossier :** Supabase (historique dossiers par email) + Resend (rappels email automatisés aux J+30, J+60, J+90)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Mon vol était en retard de 4h. La compagnie me devait €400. AirHelp m'a proposé de gérer pour 35% de commission. Voilà comment j'ai tout récupéré seul pour €9." (format révélation — très viral chez les voyageurs)
+2. SEO : "indemnisation vol retardé comment faire soi-même", "lettre réclamation vol annulé CE 261/2004", "airhelp alternative moins cher", "réclamer compensation vol sans agence"
+3. Reddit/forums : r/france, r/voyages, TripAdvisor forums — réponses aux questions "j'ai eu un vol retardé, que faire ?"
+4. Facebook Groups : "Bons plans vols France", "Voyageurs malins", "Budget Voyage"
+
+### Competitive Moat
+- AirHelp/Flightright = 25–35% commission sur la compensation obtenue. IndemnisationVol.ai = €9 flat. Pour une compensation de €600, l'utilisateur économise €150–€200 — un ROI de 15x sur le prix du pack
+- L'API de données de vols transforme le dossier en preuve vérifiée : la compagnie ne peut pas nier le retard si les données de l'outil correspondent aux registres officiels
+- La fenêtre de réclamation est de 2 ans (prescription) → l'outil peut cibler les voyageurs avec des vols passés et créer une campagne "vérifiez vos anciens vols"
+- Le champ d'application est large : toutes les compagnies décollant d'un aéroport européen — EasyJet, Ryanair, Air France, mais aussi Turkish Airlines sur un vol Paris–Istanbul
+
+### Figma Schematic
+[View IndemnisationVol.ai Flight Compensation CE 261/2004 Flow on FigJam](https://www.figma.com/board/xVCJs2lSr9PqG3yKjECOvR)
+
+---
+
+## 72. SurendettementGuide.ai
+
+> **Constituez votre dossier de surendettement Banque de France en moins d'une heure — sans avocat, sans agence, sans frais cachés**
+
+### Problem
+En France, **130 000 dossiers de surendettement** sont déposés chaque année à la Banque de France (données BdF 2023). Le profil type du ménage surendetté : revenu médian de €1 400/mois, dette totale de €30 000 (crédits à la consommation, découverts bancaires, impôts et loyers impayés). La procédure légale est **entièrement gratuite** — la Banque de France traite les dossiers sans aucun frais — mais quatre obstacles structurels maintiennent des centaines de milliers de ménages dans une situation de souffrance sans déposer : **(1) La méconnaissance de la procédure :** Beaucoup de ménages surendettés ne savent pas que le simple dépôt d'un dossier recevable déclenche **la suspension immédiate de toutes les poursuites** (saisies, expulsions, relances d'huissier) — c'est l'article L722-2 du Code de la consommation. Cette information seule changerait la décision de milliers de familles. **(2) Le formulaire S3201 (Cerfa 13594) est intimidant :** 14 pages, vocabulaire juridique, nécessité de lister tous ses créanciers avec montants exacts, numéros de contrat et situations (contentieux, procédure en cours, jugement) — beaucoup de personnes abandonnent avant même de commencer. **(3) Des cabinets frauduleux exploitent la détresse :** Des "agences de gestion de dettes" facturent €500–€1 500 pour remplir un formulaire qui est légalement gratuit. La Banque de France alerte régulièrement sur ces pratiques. **(4) Le calcul du "reste à vivre" est mal compris :** Le plan de redressement est calculé sur la base du RAV (reste à vivre) — le revenu minimum légal au-delà duquel les remboursements ne peuvent pas empiéter. Ce minimum est indexé sur le RSA (€607/mois pour une personne seule en 2025), et beaucoup de ménages acceptent des plans trop restrictifs car ils ne connaissent pas leur RAV légal.
+
+### Solution
+**(1) Estimateur de situation en 3 minutes :** Revenus nets du foyer, total des dettes par catégorie (crédits, loyers, impôts), charges fixes essentielles → calcul du taux d'endettement et du reste à vivre actuel → confirmation immédiate si la procédure de surendettement est la bonne voie. **(2) Guide de collecte des pièces :** Liste personnalisée selon la situation (salarié, chômeur, retraité, indépendant) des documents à rassembler avant de démarrer le dossier — avis d'imposition, derniers relevés bancaires, contrats de crédit, lettres de mise en demeure, jugements éventuels. **(3) Aide au remplissage du Cerfa S3201 :** Parcours guidé champ par champ, en langage simple, avec explications contextuelles des termes juridiques ("ménage", "foyer fiscal", "capacité mensuelle de remboursement"). Calcul automatique du RAV légal selon la composition du foyer. **(4) Pack payant :** Génération du Cerfa S3201 pré-rempli en PDF + lettre d'accompagnement expliquant la situation (humaine et factuelle) pour la commission de surendettement. **(5) Guide post-dépôt :** Que se passe-t-il une fois le dossier déposé ? Délai d'instruction (3 mois), types de plans (plan conventionnel de redressement, mesures imposées, rétablissement personnel), rôle du FICP (inscription au fichier des incidents).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur situation + liste de pièces | €0 | Impact social — génère confiance et trafic SEO |
+| Pack Dossier | €9 | Cerfa S3201 pré-rempli PDF + lettre d'accompagnement + guide RAV légal |
+| Partenariat associations / CCAS | €0 pour l'utilisateur | Licence white-label pour assistantes sociales et travailleurs sociaux : €49/mois par structure |
+
+**Unit economics :** Claude API ~€0,02/dossier → coût quasi nul. **Marché :** 130K dossiers/an + 500K ménages en pré-surendettement actif. À 5% de conversion Pack Dossier = 6 500 packs × €9 = **€4 875 MRR** (direct). La vraie force est le B2B social : 15 000 CCAS en France × €49/mois = potentiel énorme si 1% adoptent = **€7 350 MRR** récurrent. Impact social direct : chaque dossier déposé stoppe les poursuites et protège le foyer.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — la cible utilise principalement un smartphone, souvent en situation de stress)
+- **Formulaire guidé :** react-hook-form multi-étapes avec validation en temps réel + explications contextuelles (Claude API pour les reformulations en langage simple)
+- **Calcul RAV légal :** Algorithme fondé sur les barèmes RSA (art. R712-6 du Code de la consommation) — RAV minimum = montant RSA socle × composition du foyer (coefficients familiaux) + forfait logement
+- **Générateur Cerfa S3201 :** PDFKit ou react-pdf — génération du Cerfa 13594*02 avec tous les champs pré-remplis depuis les données saisies, respect du formatage officiel
+- **Guide post-dépôt :** Contenu structuré dans Notion-as-CMS mis à jour selon les évolutions légales
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Partenariats associations : CRESUS, Points Conseil Budget (PCB), UNCCAS, Secours Catholique, Croix-Rouge numérique — outil gratuit pour le diagnostic, les structures orientent leurs bénéficiaires
+2. Facebook Groups : "Dettes et surendettement France", "Aides sociales CAF", "RSA et difficultés financières" (800K+ membres au total)
+3. SEO : "comment faire dossier surendettement banque de france", "formulaire s3201 aide remplir", "surendettement que faire étapes 2026", "suspension poursuites surendettement"
+4. TikTok/Reels : "Si des huissiers vous harcèlent, sachez que déposer un dossier à la Banque de France stoppe TOUT immédiatement — et c'est 100% gratuit" (fort impact dans les communautés précaires)
+
+### Competitive Moat
+- La procédure est légalement gratuite → aucune legaltech ne peut s'y imposer avec des tarifs élevés. SurendettementGuide.ai est le seul outil numérique accessible à €9 (vs €500–€1 500 pratiqués par les agences frauduleuses)
+- CRESUS et les Points Conseil Budget ont des délais d'attente de 4–8 semaines ; l'outil est disponible 24h/24 et génère le dossier en moins d'une heure
+- Les partenariats avec les CCAS et associations sociales créent une distribution capillaire à coût nul — chaque travailleur social qui utilise l'outil devient un prescripteur
+- L'impact social est un levier de PR et de subventions : des fondations et collectivités financent des outils d'accès au droit pour les populations précaires
+
+### Figma Schematic
+[View SurendettementGuide.ai Dossier Banque de France Flow on FigJam](https://www.figma.com/board/VTCwIyBiZFW3nng6WK010c)
+
+---
+
+## 73. AppelOffres.ai
+
+> **Répondez à vos premiers marchés publics en 15 minutes — DUME, mémoire technique et candidature clé-en-main pour les artisans et TPE françaises**
+
+### Problem
+Le marché de la commande publique en France représente **€200 milliards/an** (environ 8% du PIB), avec 130 000+ avis de marché publiés chaque année sur la plateforme PLACE et les profils acheteurs des collectivités. Les TPE/artisans (< 20 salariés) représentent 99% des entreprises françaises mais décrochent seulement 30% des marchés publics — un écart structurel largement dû à la complexité administrative des dossiers de candidature. Quatre obstacles bloquent les petits opérateurs : **(1) Le DUME est inconnu et intimidant :** Le Document Unique de Marché Européen (DUME) est le formulaire standardisé pour attester des capacités administratives, économiques et techniques d'un candidat. Depuis 2018, il est obligatoire pour tous les marchés > €40 000. La grande majorité des artisans ne savent pas le remplir — son format XML/eSPD est abscons et les interfaces des profils acheteurs sont peu ergonomiques. **(2) Le mémoire technique est la barrière principale :** Ce document justifie la méthodologie proposée, les moyens humains et matériels, les mesures de qualité/sécurité/environnement et les références. C'est sur ce document que les acheteurs discriminent les candidats. Un artisan maçon ou un micro-entrepreneur en informatique n'a pas l'habitude de se "vendre" par écrit dans un format professionnel — c'est 4 à 8 heures de travail pour un non-initié. **(3) La veille des appels d'offres est un métier :** Des milliers d'annonces sont publiées chaque semaine sur PLACE (marchés nationaux), les profils acheteurs régionaux, departementaux et communaux. Sans outil de veille, un artisan rate les opportunités pertinentes. **(4) La liste des pièces varie selon le marché :** Kbis, attestation URSSAF à jour (délivrée depuis moins de 6 mois), attestation fiscale, déclaration sur l'honneur DC1, DC2, RIB — la liste change selon le type de marché (travaux, fournitures, services) et le montant. Un oubli d'une pièce = dossier éliminé.
+
+### Solution
+**(1) Veille personnalisée des marchés :** L'utilisateur configure son profil (SIRET, code(s) NAF, région, mots-clés métier) → alertes email hebdomadaires ou quotidiennes des marchés correspondants publiés sur PLACE et BOAMP (via les APIs data.gouv.fr, libres et gratuites). **(2) Générateur de DUME pré-rempli :** Saisie du SIRET → récupération automatique des données entreprise via API SIRENE (nom, SIRET, adresse, code NAF, date de création) → pré-remplissage du formulaire DUME avec les champs habituels (CA des 3 dernières années, effectif, certifications RGE/Qualibat/MASE le cas échéant) → export du fichier eSPD/XML conforme au standard européen ET du PDF pour impression. **(3) Générateur de mémoire technique IA :** L'utilisateur décrit son entreprise (en 5 minutes : métier principal, effectif, équipements clés, 2–3 références de travaux passés) + saisit les critères du marché cible (nature des travaux/services, délais, critères de notation) → Claude génère un mémoire technique professionnel en 15 minutes, structuré en 5 parties standard (présentation entreprise, organisation de la mission, moyens humains et matériels, démarche qualité/sécurité/environnement, références). **(4) Checklist de candidature personnalisée :** Selon le type de marché et le montant (procédure adaptée < €40K ou procédure formalisée > €40K), l'outil génère la liste exacte des pièces à joindre — avec les formulaires DC1/DC2 pré-remplis. **(5) Bibliothèque de références :** L'utilisateur stocke ses références de marchés passés (nom du client, montant, nature des travaux, contact pour attestation) pour les réutiliser automatiquement dans les futurs mémoires.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Veille marchés (1 alerte/semaine, 3 mots-clés) | €0 | Acquisition et habitude — génère du trafic SEO |
+| Pack Candidature | €19 | DUME pré-rempli + mémoire technique IA + checklist pièces + DC1/DC2 |
+| Abonnement Mensuel | €49/mois | Veille illimitée + 3 mémoires techniques/mois + bibliothèque de références + mises à jour des templates |
+| Licence cabinet conseil TPE | €299/mois | Multi-clients illimité + marque blanche pour CCI, experts-comptables, cabinets d'appui PME |
+
+**Unit economics :** Claude API ~€0,10/mémoire technique (document long) → très faible vs €19. APIs PLACE/BOAMP et SIRENE gratuites. **Marché :** 3M TPE/artisans en France. À 0,1% conversion Pack Candidature = 3 000 packs × €19 = **€57 000 MRR** (potentiel). L'abonnement mensuel est le moteur de croissance récurrent. La licence B2B (CCI, experts-comptables) crée un canal de distribution massif sans CAC.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop — usage professionnel, souvent le soir en préparant une réponse)
+- **Veille marchés :** API data.gouv.fr / BOAMP (Journal Officiel des marchés publics) + API profils acheteurs régionaux (Klekoon API, AWS Marchés ou scraping légal des plateformes publiques) — alertes email via Resend
+- **DUME/eSPD :** Génération du fichier XML conforme au schéma eSPD v2.1.1 (standard européen open source) + API SIRENE pour pré-remplissage automatique des données entreprise depuis le SIRET
+- **Mémoire technique IA :** Claude API (claude-sonnet-4-6) avec prompt structuré — 5 sections, ~2 000 mots, ton professionnel et adapté au secteur d'activité (bâtiment, informatique, nettoyage, transport, etc.)
+- **DC1/DC2 :** Génération PDF des formulaires officiels DAJ pré-remplis (Cerfa/DAJC disponibles librement)
+- **Bibliothèque références :** Supabase (stockage par utilisateur)
+- **Paiements :** Stripe (unitaire + abonnement récurrent)
+
+### Go-to-Market (zero budget)
+1. Partenariats CCI : Les 124 Chambres de Commerce et d'Industrie en France proposent des formations "marchés publics" à leurs adhérents — AppelOffres.ai peut être référencé comme outil complémentaire gratuit
+2. Partenariats fédérations : FFB (Fédération Française du Bâtiment, 50 000 entreprises adhérentes), CAPEB (artisans du bâtiment), SYNTEC (ESN et ingénierie) — leurs membres sont exactement la cible
+3. YouTube/LinkedIn : "Comment répondre à votre 1er marché public en 2026 — guide complet pour artisans (DUME, mémoire technique, pièces)" — contenu long format qui positionne sur des requêtes SEO compétitives mais peu disputées
+4. SEO : "comment répondre appel d offres public artisan", "dume comment remplir tpe", "mémoire technique marché public modèle gratuit", "dc1 dc2 pré-rempli télécharger"
+
+### Competitive Moat
+- Les logiciels existants (Klekoon, Achat Public, AWS Marchés) ciblent les PME avec des budgets annuels de €5K–€20K. AppelOffres.ai cible l'artisan individuel à €19/réponse — un marché de masse entièrement vierge
+- Le générateur de mémoire technique IA est la fonctionnalité différenciante : écrire un mémoire prend 4–8h à un artisan non initié ; l'outil le fait en 15 minutes → ROI immédiat et mesurable
+- Les APIs publiques françaises (PLACE, BOAMP via data.gouv.fr, SIRENE) sont gratuites et officielles → coût d'infrastructure quasi nul, données fiables et légitimes
+- Le canal CCI/fédérations est un distributeur naturel : ils cherchent en permanence des outils gratuits ou bon marché à proposer à leurs membres — c'est une distribution sans CAC pour le fondateur
+
+### Figma Schematic
+[View AppelOffres.ai Réponse Marchés Publics TPE Flow on FigJam](https://www.figma.com/board/EiN1I356kyMBJFFOXUiB6k)
+
+---
+
+## 74. PrêtZéro.ai
+
+> **Calculez en 5 minutes l'ensemble des prêts aidés auxquels vous avez droit pour votre premier achat immobilier — PTZ, PAS, Action Logement et aides régionales**
+
+### Problem
+L'accession à la propriété en France est subventionnée par **6 à 8 dispositifs d'aide cumulables** que la grande majorité des primo-accédants ne connaissent pas ou n'activent qu'en partie. En moyenne, un primo-accédant éligible à tous les dispositifs laisse entre **€20 000 et €60 000 d'aides** sur la table faute d'information.
+
+Quatre obstacles structurels expliquent ce non-recours massif :
+
+**(1) Le PTZ 2024 a été entièrement reconfiguré :** La loi de finances 2024 a étendu le PTZ à la construction neuve sur toute la France (y compris les zones B2 et C, auparavant exclues depuis 2020) et l'a maintenu pour l'ancien avec travaux dans les zones détendues. Le PTZ peut couvrir jusqu'à 50% du prix en zone A/A bis (Île-de-France, Côte d'Azur, Genevois) pour un ménage sous plafonds de ressources. Ces plafonds ont également été relevés. Des millions de ménages qui pensaient ne pas être éligibles le sont désormais.
+
+**(2) Le prêt Action Logement est méconnu :** Les employés de sociétés privées de 10 salariés ou plus (soit ~10 millions de salariés) ont accès à un prêt accession Action Logement à **1% d'intérêt** (hors assurance) jusqu'à €40 000. Il est cumulable avec le PTZ. Ce prêt est distribué par les employeurs et beaucoup de salariés ne savent même pas que leur entreprise cotise à Action Logement.
+
+**(3) Les aides régionales sont invisibles :** Chaque région, département et même certaines communes ont leurs propres aides complémentaires : prêts à taux zéro régionaux (ex. Pass Primo en Île-de-France jusqu'à €30 000 ; prêt Habitat Jeunes en Bretagne…), subventions directes, exonérations de droits de mutation. Aucun agrégateur ne recense ces aides.
+
+**(4) Les banques ne jouent pas le jeu :** Les conseillers bancaires ont intérêt à maximiser la part de crédit "classique" (qui génère des marges) et minimisent parfois l'information sur les prêts aidés qui réduisent leur production. Des milliers d'emprunteurs sortent d'un rendez-vous bancaire sans avoir entendu parler du PAS ou du prêt Action Logement.
+
+### Solution
+**(1) Simulateur de prêts aidés en 5 minutes :** L'utilisateur renseigne sa situation (revenus net imposable N-2, composition du foyer, zone géographique du bien, prix d'achat) → le simulateur calcule en temps réel l'ensemble des dispositifs auxquels il a droit :
+- **PTZ :** montant maximal (règle des 20%/40%/50% du prix selon zone), plafond de ressources applicable (tableau ANAH 2024), durée de remboursement et période de franchise
+- **PAS (Prêt d'Accession Sociale) :** taux plafond selon zone, conditions de ressources, APL accession applicable
+- **Prêt Action Logement :** éligibilité (10 salariés+), montant max €40K, taux 1%
+- **Aides régionales :** base de données des aides par région/département mise à jour trimestriellement
+- **Montant total aidé :** synthèse du "plan de financement optimal" avec la quote-part de crédit classique résiduelle
+
+**(2) Rapport PDF personnalisé :** Export d'un document structuré récapitulant tous les dispositifs activables, les conditions précises à remplir, les formulaires de demande et le plan de financement optimal à présenter à la banque.
+
+**(3) Simulation de mensualités :** Comparaison mensualités avec/sans optimisation des prêts aidés — impact concret sur le reste à vivre mensuel et sur le coût total du crédit.
+
+**(4) Guide de démarche :** Pour chaque dispositif, le parcours d'accès : comment demander le PTZ (via la banque agréée), comment obtenir son attestation Action Logement (via son employeur puis un établissement bancaire partenaire), comment solliciter les aides régionales.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation PTZ + Action Logement uniquement | €0 | Acquisition — l'effet "wow" du montant aidé calculé gratuitement |
+| Pack Rapport Complet | €19 | Simulation tous dispositifs + rapport PDF + plan de financement optimal + guide démarches |
+| Licence courtier | B2B €99/mois | Accès multi-clients pour courtiers immobiliers et conseillers ANIL — 10 rapports/mois inclus |
+
+**Unit economics :** Claude API ~€0,05/rapport → coût quasi nul. **Marché :** 750 000 transactions immobilières/an en France, dont ~40% de primo-accédants = 300 000 cibles/an. À 2% de conversion Pack Rapport = 6 000 × €19 = **€9 500 MRR**. La licence courtier (5 000 courtiers indépendants) représente un potentiel B2B additionnel de **€100K+ MRR** si 1 000 s'abonnent.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (desktop-first — décision patrimoniale importante, prise à tête reposée)
+- **Simulateur PTZ :** Algorithme fondé sur la grille officielle ANAH (zones A/A bis/B1/B2/C, plafonds de ressources 2024, quotité finançable 20/40/50%, tranches de remboursement et franchise selon revenus) ; mise à jour annuelle via les arrêtés publiés au Journal Officiel
+- **Simulateur PAS :** Grille de taux plafond du PAS par zone et par durée (publiée par la SGFGAS), conditions de ressources identiques au PTZ
+- **Base aides régionales :** JSON structuré par département (100 entrées) — données collectées depuis les sites des conseils régionaux, ADIL et ANIL ; mise à jour trimestrielle
+- **Rapport PDF :** react-pdf avec mise en page professionnelle, récapitulatif chiffré et tableaux comparatifs
+- **Paiements :** Stripe (unitaire + abonnement B2B récurrent)
+
+### Go-to-Market (zero budget)
+1. Partenariats ADIL/ANIL : Les 88 Agences Départementales d'Information sur le Logement conseillent gratuitement les primo-accédants — PrêtZéro.ai peut être référencé comme outil de pré-simulation avant rendez-vous conseiller
+2. SEO : "ptz 2024 simulation calcul", "prêt action logement primo accédant conditions", "aides achat immobilier premier logement cumul", "combien ptz je peux avoir calcul"
+3. Partenariats courtiers : IAD, Cafpi, Vousfinancer et courtiers indépendants cherchent des outils de valeur ajoutée — la licence B2B est leur argument commercial
+4. TikTok/Reels : "J'ai failli acheter mon appartement avec un crédit classique à 3,9%. J'avais droit à €40K à 0% et €25K à 1% — voilà comment calculer vos droits en 5 minutes."
+
+### Competitive Moat
+- Le PTZ 2024 a créé une rupture : des millions de ménages auparavant exclus sont désormais éligibles, mais les simulateurs existants (ANIL.fr, Empruntis, Meilleurtaux) n'ont pas tous mis à jour leurs outils correctement → fenêtre de marché temporaire mais significative
+- La base des aides régionales est un avantage défensif : la collecter et la maintenir est un travail éditorial que les grands acteurs (banques, courtiers) ne font pas pour la partie régionale
+- Les banques ont un conflit d'intérêt structurel → elles ne construisent pas ce type d'outil ; les ADIL sont sous-staffées → marché structurellement sous-servi malgré des enjeux financiers considérables
+
+### Figma Schematic
+[View PrêtZéro.ai Simulateur Prêts Aidés Primo-accédant on FigJam](https://www.figma.com/board/5EkfsHuzEXpCtgd5VHVTAq)
+
+---
+
+## 75. VisaleGarant.ai
+
+> **Obtenez une garantie locative gratuite ou économique en 10 minutes — Visale, Loca-Pass et alternatives pour louer sans garant personnel**
+
+### Problem
+En France, **40 à 50% des candidats locataires** se voient refuser un logement à cause de l'absence d'un garant physique. Cette situation touche particulièrement **les jeunes de 18–30 ans, les étudiants étrangers, les personnes seules, les intérimaires et les indépendants.** Trois dispositifs publics et gratuits ou quasi-gratuits existent mais sont massivement méconnus :
+
+**(1) Visale (Action Logement) est gratuit mais invisible :** La garantie Visale est une caution locative gratuite accordée par Action Logement. Elle couvre les loyers impayés et les dégradations jusqu'à 36 mois de loyers. Éligibilité : jeunes de 18 à 30 ans sans restriction, salariés du secteur privé de 30 à 31 ans entrant dans un nouveau logement dans le cadre d'une mobilité professionnelle, et salariés précaires (CDD, intérim). **Seulement 2 millions de bénéficiaires pour 7 millions d'éligibles.** Le site actionlogement.fr est réputé pour son ergonomie catastrophique, ses bugs techniques et sa complexité administrative — ce qui explique le non-recours massif.
+
+**(2) L'avance Loca-Pass est ignorée :** Action Logement propose une avance sans intérêt jusqu'à €1 200 pour financer le dépôt de garantie, remboursable sur 25 mois. Pour des dizaines de milliers de jeunes en mobilité, €1 200 à avancer est un obstacle réel. Presque personne ne connaît cette aide.
+
+**(3) Le FSL (Fonds de Solidarité Logement) est méconnu :** Géré par les Conseils Départementaux, le FSL peut accorder des aides ou des avances pour le dépôt de garantie, les frais d'agence, le premier loyer ou les impayés de loyer. Les conditions et montants varient par département. Il n'existe aucun outil agrégateur.
+
+**(4) Les alternatives privées coûtent cher :** Cautio (€9/mois), GarantMe (€9–€39/mois), Unkle (€1/jour) — ces services facturent les locataires pour ce qu'ils pourraient obtenir gratuitement via Visale. Des millions de personnes paient alors qu'ils ont droit à la gratuité.
+
+### Solution
+**(1) Éligibilité Visale en 30 secondes :** L'utilisateur renseigne son âge, sa situation professionnelle (CDI/CDD/intérim/étudiant), son contrat de travail → résultat immédiat : éligible Visale ou non, avec le cas précis qui s'applique (convention Visale 2024). Pour les éligibles, guide pas-à-pas pour créer le compte sur actionlogement.fr et obtenir l'attestation Visale (avec captures d'écran des étapes problématiques).
+
+**(2) Éligibilité Loca-Pass :** Mêmes conditions que Visale + calcul du montant remboursable (jusqu'à €1 200 pour le dépôt) et des mensualités de remboursement (€48/mois sur 25 mois).
+
+**(3) FSL par département :** L'utilisateur sélectionne son département → informations sur le FSL local : conditions de ressources, montants accordés, pièces à fournir, adresse du service instructeur du Conseil Départemental. Base de données des 100 FSL départementaux.
+
+**(4) Comparateur garanties privées :** Si l'utilisateur n'est pas éligible Visale, comparaison objective Cautio vs GarantMe vs Unkle (coût mensuel, délai d'obtention, conditions d'éligibilité, couverture du bailleur) — avec lien d'affiliation au meilleur taux.
+
+**(5) Lettre d'accompagnement pour le bailleur :** Beaucoup de propriétaires ne connaissent pas Visale et hésitent. VisaleGarant.ai génère une lettre explicative professionnelle à joindre au dossier de candidature, expliquant le fonctionnement de la garantie, son équivalence avec une caution traditionnelle et les avantages pour le bailleur.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Éligibilité Visale + guide Loca-Pass | €0 | Fort impact social — génère confiance et trafic SEO |
+| Pack Dossier Complet | €7 | Guide Visale illustré + lettre bailleur personnalisée + FSL local + comparateur privés |
+| Affiliation garanties privées | ~€15–€30 CPA | Commission par souscription orientée (pour les non-éligibles Visale) |
+| Widget bailleurs / agences | B2B €29/mois | Intégration pour agences immobilières — "garant accepté via Visale" dans les annonces |
+
+**Unit economics :** Claude API ~€0,01/lettre → coût quasi nul. **Marché :** ~2,2M de nouvelles locations/an en France. Les 5M éligibles Visale non inscrits = cible principale. À 1% conversion Pack Dossier = 22 000 × €7 = **€12 833 MRR**. L'affiliation monétise les non-éligibles (500K+/an). Le B2B agences crée un canal de distribution organique.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent utilisé pendant une recherche d'appartement active)
+- **Moteur éligibilité Visale :** Algorithme fondé sur la convention Visale 2024 — critères d'âge, de contrat (CDI/CDD/intérim/apprenti), de mobilité pro pour les 30–31 ans ; arbre de décision en 4 questions maximum
+- **Base FSL :** JSON par département (100 entrées) avec conditions-clés, montants-types, contacts instructeurs — collecte manuelle depuis les sites des Conseils Départementaux, mise à jour annuelle
+- **Comparateur garanties privées :** Table statique des tarifs et conditions des 4 principaux acteurs (Cautio, GarantMe, Unkle, Garantme PRO), mise à jour mensuelle
+- **Génération lettre bailleur :** Claude API + react-pdf
+- **Affiliations :** Liens d'affiliation Cautio et GarantMe (programmes d'affiliation existants)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. SEO : "visale comment obtenir etapes", "garant appartement sans parents que faire", "garantie locative gratuite jeune", "visale action logement eligibilite"
+2. TikTok/Reels : "Vous n'avez pas de garant pour votre appartement ? L'État vous offre une garantie gratuite et personne ne vous en parle — voici comment l'obtenir en 15 minutes" (viral chez les 18–30 ans)
+3. Partenariats CROUS : Les CROUS gèrent 175 000 logements étudiants et orientent des centaines de milliers d'étudiants vers le parc privé — référencer VisaleGarant.ai dans leurs guides logement
+4. Facebook Groups / Discord étudiants : "Logement étudiant Paris", "Coloc & appartement Lyon", communautés d'étudiants internationaux (qui ne connaissent absolument pas Visale)
+
+### Competitive Moat
+- Visale est 100% gratuit → aucun acteur commercial ne l'aide à se promouvoir (ils préfèrent vendre leurs services payants). VisaleGarant.ai est le premier outil indépendant dédié à maximiser l'accès à Visale
+- Le guide illustré (screenshots pas-à-pas) est la vraie valeur : le site actionlogement.fr est notoire pour ses bugs et son manque d'ergonomie — le guide résout un problème concret et documenté
+- La base FSL départementalisée est une donnée qu'aucun agrégateur ne compile aujourd'hui : c'est un avantage éditorial défensif
+- L'affiliation aux alternatives privées monétise les non-éligibles de façon éthique et transparente → le modèle est aligné avec l'intérêt de l'utilisateur
+
+### Figma Schematic
+[View VisaleGarant.ai Garantie Locative Gratuite ou Économique on FigJam](https://www.figma.com/board/JOUVjNxgkq7fdsCaSHuEPU)
+
+---
+
+## 76. BourseÉtudiant.ai
+
+> **Simulez votre échelon de bourse CROUS en 3 minutes et ne ratez plus jamais le dépôt du Dossier Social Étudiant**
+
+### Problem
+Le système de bourses sur critères sociaux (BCS) du CROUS verse chaque année **€2,1 milliards à 740 000 étudiants** (données MESRI 2023–2024). Mais des centaines de milliers d'étudiants éligibles ne font pas de demande ou sont mal orientés. Quatre problèmes structurels expliquent ce non-recours :
+
+**(1) La simulation de l'échelon est opaque :** Le montant de la bourse dépend d'un "échelon" de 0 bis à 7 (de €1 660 à €6 335 annuels). Cet échelon est calculé selon un algorithme combinant le Revenu Fiscal de Référence des parents (RFR N-2), le nombre de "points de charge" (distance domicile-université, nombre de frères et sœurs étudiants, parents étrangers, etc.) et un barème officiel. Ce calcul n'est exposé nulle part en clair — même le formulaire DSE ne dit pas comment l'échelon sera calculé. Des milliers d'étudiants ne déposent pas de DSE en pensant "mes parents gagnent trop" alors qu'ils auraient droit à l'échelon 0 ou 0 bis.
+
+**(2) La deadline du DSE est critique et mal connue :** Le Dossier Social Étudiant doit être déposé **chaque année sur messervices.etudiant.gouv.fr entre janvier et le 31 mai** (avec des variations selon les académies). Passé ce délai, toute demande est irrecevable pour l'année universitaire suivante — c'est une perte sèche de €1 660 à €6 335. Des milliers d'étudiants ratent ce délai faute d'information.
+
+**(3) Les aides régionales et municipales sont invisibles :** Au-delà des BCS nationales, des dizaines de régions, départements et communes versent des compléments : bourse régionale, aide mobilité internationale, bourse du mérite, bourse sociale des grandes villes. Ces aides sont cumulables avec les BCS mais dispersées sur des sites institutionnels peu visibles.
+
+**(4) La notion d'"étudiant indépendant" est méconnue :** Un étudiant peut demander à être considéré comme "indépendant" de ses parents pour le calcul des ressources si certaines conditions sont réunies (pas de lien de dépendance depuis 2 ans, fiscalement séparé, ressources propres). Cette disposition change radicalement le calcul pour les étudiants ayant des parents aisés mais sans lien avec eux — des milliers de situations non exploitées.
+
+### Solution
+**(1) Simulateur d'échelon en 3 minutes :** L'utilisateur saisit le RFR N-2 des parents (ligne 14 de l'avis d'imposition), la composition du foyer fiscal, la distance domicile-université, le nombre de frères et sœurs dans l'enseignement supérieur → calcul instantané de l'échelon probable (0 bis à 7) avec le montant annuel et mensuel correspondant. Explication de chaque "point de charge" appliqué.
+
+**(2) Vérificateur "étudiant indépendant" :** 5 questions sur la situation familiale (hébergement, déclaration fiscale séparée, perception de ressources propres, durée de séparation financière des parents) → éligibilité à la dérogation + guide pour faire valoir le statut d'indépendant dans le DSE.
+
+**(3) Rappels automatiques :** L'utilisateur renseigne son email + son académie → rappel en janvier ("DSE ouvert"), en mars ("Pensez à votre DSE"), en mai ("DERNIER DÉLAI"). 100% gratuit, valeur vitale (€1 660–€6 335 d'enjeu).
+
+**(4) Guide DSE pas-à-pas :** Instructions illustrées pour remplir le DSE sur messervices.etudiant.gouv.fr — les 5 étapes (profil, ressources, logement, documents justificatifs, validation) avec les erreurs fréquentes à éviter.
+
+**(5) Base des aides régionales :** Pour chaque région académique, liste des bourses complémentaires disponibles (bourse régionale, aide mobilité internationale, aide mérite), conditions d'éligibilité et liens vers les formulaires.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation échelon + rappels DSE | €0 | Impact social direct — acquisition par viralité et SEO |
+| Pack Guide Complet | €5 | Guide DSE illustré + vérificateur indépendant + base aides régionales personnalisée |
+| Pack Famille | €9 | Pack Complet + simulation pour 3 enfants + guide frères/sœurs dans l'enseignement supérieur |
+
+**Unit economics :** Claude API ~€0,01/simulation → quasi nul. **Marché :** 2,9M étudiants du supérieur en France, dont 1,5M potentiellement éligibles à une bourse. À 0,5% conversion Pack Complet = 7 500 × €5 = **€3 125 MRR** (conservateur). Les rappels email gratuits créent une rétention annuelle (les étudiants reviennent chaque année). Fort potentiel viral en septembre–octobre (rentrée universitaire) et en janvier (ouverture DSE).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les étudiants utilisent leur téléphone pour tout)
+- **Simulateur échelon :** Algorithme fondé sur le barème officiel des BCS 2024–2025 (publié par le MESRI dans la circulaire annuelle) — grille RFR × points de charge → échelon ; calcul des points de charge selon les critères officiels (distance, fratrie étudiante, parents étrangers, parent isolé…)
+- **Moteur "indépendant" :** Arbre de décision fondé sur les critères DSE officiels (critère C3 du formulaire) — 5 questions maximum, résultat binaire + cas borderline
+- **Rappels email :** Resend + cron jobs (rappels automatiques en janvier, mars, mai selon l'académie) ; données académies stockées dans Supabase
+- **Base aides régionales :** JSON par région académique (26 académies) — collecte manuelle depuis les sites des conseils régionaux et CROUS régionaux, mise à jour annuelle en juillet–août
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Partenariats lycées terminales : Les conseillers d'orientation (CPE/CIO) manquent d'outils numériques simples pour expliquer les bourses — BourseÉtudiant.ai peut être distribué dans les lycées via les fédérations de l'éducation
+2. TikTok/Reels : "Si vos parents gagnent moins de €40 000/an, vous avez probablement droit à une bourse de €1 600 à €6 300. Voici comment calculer votre échelon en 3 minutes avant le 31 mai" (format urgence + montant concret — viral chez les lycéens et étudiants)
+3. SEO : "bourse crous calcul echelon simulation", "dossier social etudiant DSE date limite 2026", "echelon bourse etudiant 0 bis condition", "bourse etudiant independant conditions parents"
+4. Partenariats AFEV, associations étudiantes (FAGE, UNEF) : Ces associations cherchent des outils concrets pour leurs adhérents — distribution capillaire gratuite
+
+### Competitive Moat
+- Le simulateur d'échelon officiel sur messervices.etudiant.gouv.fr calcule après soumission du DSE — il n'existe aucun outil qui simule AVANT le dépôt pour aider l'étudiant à décider s'il vaut la peine de faire la démarche
+- Les rappels email gratuits créent une récurrence annuelle naturelle : l'utilisateur revient chaque année sans effort marketing
+- La base des aides régionales est un avantage éditorial unique — aucun autre outil ne les agrège de façon actionnable avec les BCS nationales
+- La cible (étudiants 18–22 ans) est hyper-virale sur TikTok : une vidéo réussie peut générer des dizaines de milliers de visites en quelques jours — CAC quasi nul
+
+### Figma Schematic
+[View BourseÉtudiant.ai Simulateur Échelon CROUS et Guide DSE on FigJam](https://www.figma.com/board/2WxF4pPVCNAfssBbnWDlVZ)
+
+---
+
+## 77. CongesPayés.ai
+
+> **Calculez vos jours de congés payés acquis pendant vos arrêts maladie et réclamez-les à votre employeur en un clic — loi du 22 avril 2024**
+
+### Problem
+La loi du 22 avril 2024 (transposition de la directive européenne 2003/88 suite à l'arrêt de la CJUE) a radicalement modifié le droit français : **les salariés accumulent désormais des congés payés pendant leurs arrêts maladie**, qu'ils soient d'origine professionnelle ou non. Cette réforme crée trois problèmes massifs pour les salariés :
+
+**(1) Des millions de jours de CP ignorés :** Avant la loi, un salarié en arrêt maladie non professionnel n'acquérait aucun CP. Depuis le 1er décembre 2009 (date retenue pour la rétroactivité), les salariés ont le droit de réclamer **jusqu'à 15 mois en arrière** les jours de CP non accordés pendant leurs arrêts maladie. Un salarié ayant eu 3 arrêts maladie cumulant 60 jours en 3 ans peut réclamer environ 5 jours de CP supplémentaires — soit potentiellement €500–€1 500 de valeur directe. Des millions de salariés ne savent même pas que ce droit existe.
+
+**(2) Le calcul est opaque :** Les règles sont complexes : pour un arrêt maladie ordinaire, le salarié acquiert 2 jours de CP par mois de travail effectif assimilé (au lieu de 2,5 jours pour un mois de présence), dans la limite de 24 jours par an (au lieu de 30). Pour un arrêt d'origine professionnelle (AT/MP), l'acquisition est complète à 2,5 jours par mois. Aucun outil ne permet de simuler ces différences.
+
+**(3) L'employeur n'informe pas spontanément :** Les employeurs ont l'obligation d'informer le salarié dans un délai d'un mois de son retour de son solde de CP acquis pendant l'arrêt. En pratique, très peu le font correctement — et peu de salariés connaissent ce droit pour le réclamer.
+
+### Solution
+**(1) Calculateur intelligent :** L'utilisateur saisit ses arrêts maladie (dates de début et fin, type : ordinaire ou AT/MP), son salaire mensuel brut et son ancienneté. Le moteur calcule les jours de CP acquis pendant chaque arrêt selon les nouvelles règles, le total réclam­able, et la valeur financière en euros.
+
+**(2) Vérificateur rétroactivité :** Questions sur la date des arrêts (depuis décembre 2009 = éligible), l'information reçue de l'employeur (solde transmis ou non), le droit à la prescription (15 mois après retour) → éligibilité à une réclamation rétroactive.
+
+**(3) Courrier de réclamation RH généré en 30 secondes :** Courrier recommandé AR personnalisé, cité les textes de loi (C. trav. art. L.3141-5 modifié, loi 2024-364), mentionné les jours exacts calculés et leur valeur, avec mention du délai légal de réponse employeur.
+
+**(4) Tableau de bord CP en temps réel :** Pour les abonnés, suivi automatique des CP acquis mois par mois, alerte quand un arrêt futur impacte les droits, rappel de la date de prescription des droits rétroactifs.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur jours acquis | €0 | Acquisition SEO + viralité LinkedIn/RH |
+| Courrier réclamation RH | €4 | PDF certifié avec références légales, personnalisé |
+| Abonnement suivi CP | €3/mois | Tableau de bord annuel + alertes arrêts futurs |
+| Pack Rétroactivité Complète | €9 | Calcul rétroactif 3 ans + 2 courriers + guide tribunal prud'hommes si refus |
+
+**Unit economics :** Claude API ~€0,01/courrier → coût quasi nul. **Marché :** 26M salariés du privé en France, dont ~8M ont eu au moins un arrêt maladie au cours des 3 dernières années (données DREES). Loi très récente → fenêtre de marché ouverte maintenant. À 0,3% conversion Pack courrier = 24 000 × €4 = **€8 000 MRR**. Fort potentiel B2B : syndicats, CE/CSE, cabinets RH cherchent un outil clé en main pour informer leurs adhérents/salariés.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (formulaire simple en 5 champs)
+- **Moteur de calcul CP :** Algorithme fondé sur C. trav. art. L.3141-5 (modifié par loi 2024-364) — différentiel 2 j/mois (arrêt ordinaire) vs 2,5 j/mois (AT/MP), plafond 24j/an vs 30j/an, calcul en jours ouvrables ou ouvrés selon convention collective
+- **Courrier generation :** Claude API + react-pdf — courrier recommandé AR avec références légales exactes, calcul personnalisé
+- **Suivi abonnement :** Supabase + cron mensuels pour le suivi automatique des droits
+- **Paiements :** Stripe (unitaire + abonnement mensuel)
+
+### Go-to-Market (zero budget)
+1. LinkedIn : Audience RH/DRH + salariés — "La loi du 22 avril 2024 oblige votre employeur à vous donner des CP pour vos arrêts maladie. Savez-vous combien vous êtes dû ?" (contenu très partageable dans les réseaux professionnels)
+2. Partenariats syndicaux : CGT, CFDT, FO, CFTC cherchent des outils concrets pour leurs adhérents — CongesPayés.ai peut être distribué via leurs réseaux locaux gratuitement
+3. SEO : "conges payes arret maladie loi 2024", "congés payés maladie calcul jours", "réclamer congés payés arrêt maladie lettre", "loi 22 avril 2024 conges maladie"
+4. TikTok/Reels : "Votre employeur vous doit peut-être des jours de congés payés pour vos arrêts maladie — et il ne vous le dira jamais. Voici comment calculer ce que vous lui réclamez."
+
+### Competitive Moat
+- Loi très récente (2024) : zéro outil spécialisé n'existe encore — fenêtre de premier entrant sur un marché de 26M de salariés
+- Le calcul différencié AT/MP vs ordinaire est une barrière technique réelle — les outils génériques comme Mon Compte Formation ou les simulateurs paie ne l'intègrent pas
+- Les courriers avec citations légales précises ont une valeur concrète perçue par le salarié : c'est de la protection juridique accessible sans avocat
+- Le B2B syndicats/CE crée un canal de distribution capillaire gratuit — chaque organisation syndicale est un multiplicateur de diffusion
+
+### Figma Schematic
+[View CongesPayés.ai — Congés payés & arrêt maladie 2024 on FigJam](https://www.figma.com/board/rUFoIQz9d8AzP8pWJdR37u)
+
+---
+
+## 78. ÉcoBonus.ai
+
+> **Découvrez en 2 minutes toutes les primes vertes auxquelles vous avez droit — vélo électrique, voiture électrique, rénovation, mobilités durables — calculées selon votre revenu**
+
+### Problem
+La France dispose du système d'aides à la transition écologique le plus généreux d'Europe, mais il est **totalement fragmenté et inaccessible** pour les ménages modestes — précisément ceux qui en ont le plus besoin et qui y ont le plus droit :
+
+**(1) Le bonus vélo électrique est sous-utilisé :** L'ADEME verse jusqu'à **€400 pour les ménages modestes** (revenus inférieurs à €14 000/an de RFR) et €150 pour les autres sur l'achat d'un vélo à assistance électrique. La prime à la conversion (vieux véhicule polluant → vélo électrique) ajoute jusqu'à **€1 500** pour les ménages très modestes. Des millions d'acheteurs ne demandent pas ces aides ou ne savent pas qu'ils y ont droit. La procédure se fait sur Coup de pouce vélo et Mon Aide Vélo — deux plateformes peu connues et peu intuitives.
+
+**(2) Le bonus écologique voiture électrique est mal compris :** En 2024, le bonus atteint **€7 000 pour les ménages modestes** (RFR ≤ €15 400) sur une voiture électrique neuve, et **€13 000 en leasing social** (programme suspendu puis relancé selon les années). Beaucoup de ménages modestes pensent ne pas avoir les moyens d'une voiture électrique sans réaliser que le bonus + leasing social rend certains véhicules moins chers qu'un véhicule thermique d'occasion.
+
+**(3) La prime à la conversion est invisible :** La mise à la casse d'un vieux véhicule polluant (Crit'Air 3, 4, 5 ou non classé) en échange d'un véhicule propre (électrique, hybride rechargeable, ou même véhicule thermique récent peu polluant) donne droit à une prime allant jusqu'à **€5 000 pour les ménages très modestes.** Très peu de Français connaissent les conditions précises.
+
+**(4) Le forfait mobilités durables employeur est négligé :** Les employeurs peuvent verser jusqu'à **€700/an exonérés d'impôt** aux salariés qui viennent travailler à vélo, en covoiturage ou en transport en commun. Moins de 20% des salariés éligibles en bénéficient — ils ne savent simplement pas qu'ils peuvent le demander.
+
+**(5) MaPrimeRénov' est complexe à naviguer :** L'aide à la rénovation énergétique atteint **70% du coût des travaux** pour les ménages très modestes. Mais le parcours ANAH, les conditions de gestes éligibles, le rôle de Mon Accompagnateur Rénov' et les délais de traitement rebutent beaucoup de ménages qui pourraient en bénéficier.
+
+### Solution
+**(1) Profil revenu en 30 secondes :** L'utilisateur saisit son Revenu Fiscal de Référence (ligne 14 de l'avis d'imposition) et la composition du foyer → affectation automatique à la tranche de revenus (très modeste / modeste / intermédiaire / supérieur) qui détermine le montant de chaque aide.
+
+**(2) Calculateur multi-aides :** Pour chaque projet (vélo, voiture, prime conversion, mobilités durables, rénovation), affichage du montant exact de la prime dans la tranche de revenus de l'utilisateur — avec conditions d'éligibilité simplifiées (critères clés uniquement).
+
+**(3) Simulateur combinaison d'aides :** Pour l'achat d'un vélo ou d'une voiture, calcul du coût réel après cumul de toutes les aides applicables (bonus + prime conversion + aide régionale si disponible) — "Ce vélo à 1 500€ vous coûte réellement 0€ avec les aides auxquelles vous avez droit."
+
+**(4) Guide démarche pas-à-pas :** Pour chaque aide, procédure simplifiée : quelle plateforme, quelles pièces justificatives, quel délai de traitement, quand et comment le virement est versé.
+
+**(5) Pack dossier complet :** Formulaires pré-remplis avec les informations de l'utilisateur, checklist des documents, calendrier des démarches — pour éviter les dossiers rejetés.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation montant par aide | €0 | Freemium — viralité et SEO |
+| Pack Dossier Complet (1 aide) | €5 | Guide illustré + formulaires pré-remplis + checklist + calendrier |
+| Pack Multi-Aides | €9 | 3 aides au choix + simulateur combinaison + suivi dossier |
+| Affiliation vélo & voiture électrique | ~€20–€50 CPA | Commissions sur achats orientés (programmes marchands cyclistes/auto) |
+
+**Unit economics :** Claude API ~€0,01/dossier → coût quasi nul. **Marché :** 15M de ménages modestes et très modestes en France sont les plus éligibles aux aides maximales. Le bonus vélo seul représente 1,3M de vélos électriques vendus par an en France (chiffres COLIPED 2023). À 0,2% conversion Pack Dossier = 26 000 × €5 = **€10 833 MRR**. L'affiliation sur les achats orientés peut atteindre 5× le revenu abonnement.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — souvent consulté en magasin ou avant un achat)
+- **Moteur de calcul :** Table des barèmes officiels par tranche RFR pour chaque aide (bonus ADEME vélo, bonus écologique voiture, prime conversion, FMD employeur, MaPrimeRénov') — mise à jour à chaque arrêté ADEME/ANAH
+- **Simulateur cumul :** Algorithme de combinaison des aides (certaines sont cumulables, d'autres non) avec affichage du coût net final
+- **Base aides régionales :** JSON par région (13 régions métropolitaines) — aides régionales complémentaires sur le vélo et la rénovation
+- **Génération PDF :** react-pdf pour les packs dossier
+- **Affiliation :** Programmes marchands cyclistes (Cyclable, Decathlon Pro) et auto (leasing social agréé)
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "Ce vélo électrique à 1 500€ vous coûte 0€ si vous gagnez moins de 20 000€/an. Voici comment calculer vos primes en 2 minutes." — format choc très viral dans la cible modeste/primo-acheteur
+2. SEO : "bonus velo electrique montant 2024 calcul", "prime voiture electrique revenus modestes", "maprimerenov simulation montant", "prime conversion voiture conditions eligibilite"
+3. Partenariats associations consommateurs : 60 Millions de Consommateurs, UFC-Que Choisir cherchent des outils pratiques pour leurs lecteurs — ÉcoBonus.ai est leur contenu parfait
+4. Partenariats magasins vélo : Les points de vente de vélos électriques cherchent à conclure des ventes plus facilement — ÉcoBonus.ai peut être proposé en partenariat comme outil de calcul en magasin (conversion de prospects)
+
+### Competitive Moat
+- Les simulateurs officiels (ADEME, ANAH) sont fragmentés par aide et ne permettent pas de calculer le cumul : ÉcoBonus.ai est le premier outil d'agrégation multi-primes
+- La tranche de revenus est la clé : les ménages modestes ont accès à 3–5× plus d'aides que les ménages aisés, mais ce sont eux qui naviguent le moins bien dans les dispositifs — ÉcoBonus.ai cible exactement ce paradoxe
+- L'affiliation aux achats (vélos, voitures, artisans MaPrimeRénov') crée une monétisation très puissante sans friction pour l'utilisateur : il est déjà en mode achat, ÉcoBonus.ai l'aide et est rémunéré
+- La mise à jour annuelle des barèmes (chaque arrêté ADEME / loi de finances) est un travail éditorial que les agrégateurs généralistes (comparateurs d'assurance, etc.) ne font pas sur les aides écologiques
+
+### Figma Schematic
+[View ÉcoBonus.ai — Calculateur de primes vertes françaises on FigJam](https://www.figma.com/board/zfddyNMbrgGhdz8mToOqXv)
+
+---
+
+## 79. IntérimFuté.ai
+
+> **Calculez les indemnités que votre agence d'intérim vous doit — IFM, ICCP, FASTT — et réclamez ce qui vous appartient**
+
+### Problem
+La France compte **3,5 millions de travailleurs intérimaires** (données Prism'emploi 2023), dont une grande majorité enchaîne les missions courtes avec plusieurs agences. Ce segment est structurellement vulnérable face à trois sources massives de sous-paiement ignorées :
+
+**(1) L'IFM est systématiquement mal calculée :** L'Indemnité de Fin de Mission représente **10% du total brut des rémunérations perçues** pendant la mission. Elle est obligatoire pour toutes les missions sauf exceptions (embauche en CDI, refus de CDI proposé, contrat saisonnier). En pratique, des erreurs de calcul fréquentes surviennent : taux appliqué sur un assiette incomplète (oubli des heures supplémentaires, primes, paniers), IFM versée en retard, IFM non versée pour des missions très courtes. Un intérimaire qui enchaîne 12 missions/an peut se faire spolier de €200 à €1 200 sans le savoir.
+
+**(2) L'ICCP est ignorée :** L'Indemnité Compensatrice de Congés Payés représente **10% du total brut incluant l'IFM** — soit 10% de (salaire + IFM). Cumulée sur 12 mois de missions, c'est un montant significatif. De nombreux intérimaires ne savent pas que l'ICCP s'applique sur l'IFM elle-même (et pas seulement sur le salaire brut), créant un manque à gagner systématique.
+
+**(3) Le FASTT est massivement sous-utilisé :** Le Fonds d'Action Sociale du Travail Temporaire est financé par les cotisations des agences (toutes les grandes agences y cotisent : Adecco, Manpower, Randstad, Synergie, etc.). Il offre des services gratuits ou quasi-gratuits : **prêts personnel sans intérêt** (jusqu'à €3 000 en 48h), **garde d'enfant** (subvention crèche), **accès au logement** (garantie locative, avance dépôt), **assurance auto** à tarif préférentiel, **formation qualifiante.** Moins de 15% des intérimaires éligibles utilisent le FASTT, faute d'en connaître l'existence.
+
+**(4) La convention collective applicable est opaque :** L'intérimaire est couvert par la convention collective de l'entreprise cliente (utilisatrice) pour les conditions de travail, et par la convention collective du travail temporaire pour les indemnités. Peu d'intérimaires savent identifier leur convention collective de branche et les droits spécifiques qu'elle confère (primes de panier, indemnités de déplacement, etc.).
+
+### Solution
+**(1) Calculateur IFM/ICCP multi-agences :** L'utilisateur saisit ses missions (agence, durée, salaire brut, primes, heures supplémentaires) → calcul automatique de l'IFM et ICCP théoriques pour chaque mission, total cumulé sur 12 mois, comparaison avec les montants perçus (fiches de paie intérim).
+
+**(2) Vérificateur d'écart :** Si un écart est détecté entre ce qui est dû et ce qui a été versé, alerte immédiate : "Vous êtes potentiellement dû de €X sur votre mission du [date] avec [agence]" — avec explication du calcul.
+
+**(3) Guide FASTT personnalisé :** L'utilisateur renseigne sa situation (besoin de prêt, garde d'enfant, logement, assurance) → liste des aides FASTT disponibles dans sa situation avec procédure de demande et coordonnées du service FASTT compétent.
+
+**(4) Courrier de réclamation agence :** Pour les écarts détectés, génération d'un courrier recommandé AR personnalisé à l'agence d'intérim, citant le Code du travail (C. trav. art. L.1251-32 et L.1251-33), le calcul précis de l'écart et une mise en demeure de régularisation.
+
+**(5) Modèle mise en demeure Prudhommes :** Si l'agence ne régularise pas sous 30 jours, guide pour saisir le Conseil de Prud'hommes (compétent pour les litiges intérim) avec le formulaire pré-rempli et les pièces à joindre.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul IFM/ICCP + alerte écart | €0 | Freemium — viralité forte dans les communautés intérimaires |
+| Guide FASTT personnalisé | €0 | Impact social — acquisition organique |
+| Pack Réclamation Agence | €6 | Courrier recommandé AR personnalisé + calcul certifié + suivi |
+| Pack Prudhommes | €12 | Tout le Pack Réclamation + formulaire R517 pré-rempli + guide audience + modèle conclusions |
+
+**Unit economics :** Claude API ~€0,01/courrier → coût quasi nul. **Marché :** 3,5M d'intérimaires actifs, dont ~1M enchaînent les missions toute l'année. Taux d'erreur de calcul IFM/ICCP estimé à 15–20% selon les syndicats du secteur. À 0,5% conversion Pack Réclamation = 17 500 × €6 = **€8 750 MRR**. B2B syndicats (CGT Intérim, FO Intérim) : licence annuelle pour distribuer l'outil à leurs adhérents.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les intérimaires consultent entre deux missions, souvent sur téléphone)
+- **Moteur IFM/ICCP :** Algorithme fondé sur C. trav. art. L.1251-32 — assiette brute incluant salaire + primes + HS + IFM pour le calcul ICCP ; gestion des exceptions (CDI proposé, saisonnier, stagiaire)
+- **Base FASTT :** JSON des aides FASTT disponibles par situation (prêt, garde, logement, assurance, formation) avec liens vers les formulaires FASTT et numéros de contact ; mise à jour semestrielle
+- **Génération courriers :** Claude API + react-pdf — courrier recommandé AR avec références légales, calcul certifié, tableau récapitulatif
+- **Paiements :** Stripe (unitaire)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups intérimaires : "Emploi intérimaire France", "Adecco / Manpower / Randstad — Conseils et entraide" — des dizaines de groupes actifs avec des centaines de milliers de membres
+2. TikTok/Reels : "Vous faites de l'intérim ? Votre agence vous doit 20% de plus que votre salaire brut en fin de mission. Voici comment vérifier si vous avez tout reçu." — format révélation très viral dans la cible
+3. SEO : "IFM indemnité fin de mission calcul", "ICCP intérim comment calculer", "FASTT aide intérimaire logement", "agence intérim ne paie pas IFM que faire"
+4. Partenariats syndicaux intérim : CGT Intérim et FO Intérim ont des structures dédiées aux travailleurs temporaires — IntérimFuté.ai peut être l'outil officiel de vérification de leurs adhérents
+
+### Competitive Moat
+- Aucun outil spécialisé n'existe pour la vérification IFM/ICCP — les agences d'intérim ont un avantage informationnel structurel sur les intérimaires ; IntérimFuté.ai le supprime
+- Le FASTT est un avantage défensif unique : c'est un service que les agences financent mais ne promeuvent pas (car mieux connu = moins d'intérimaires fidèles à leur agence) — IntérimFuté.ai est aligné avec l'intérêt du travailleur
+- La cible est très virale sur les réseaux sociaux d'entraide (Facebook, WhatsApp) : un intérimaire lésé qui récupère €400 grâce à l'outil en parle à 10 collègues
+- Le B2B syndicats crée une distribution institutionnelle gratuite et confère de la légitimité — les syndicats valident l'outil comme fiable, ce qui rassure les utilisateurs pour payer le Pack Réclamation
+
+### Figma Schematic
+[View IntérimFuté.ai — Droits & indemnités des travailleurs temporaires on FigJam](https://www.figma.com/board/zpI81gC4nkVHOPx6iWkj04)
+
+---
+
+## 80. FraisBancaires.ai
+
+> **Analysez votre relevé bancaire en 30 secondes — trouvez les frais cachés et changez de banque en 1 clic**
+
+### Problem
+Un Français moyen paie **€150 à €400/an** en frais bancaires sans en avoir conscience : frais de tenue de compte, commissions d'intervention (incident de paiement), options souscrites et oubliées, frais de virement international, cotisation carte bancaire. Ces frais apparaissent sur le relevé de compte en lignes cryptiques ("COTISATION CB VISA CLASSIC", "COM MOUVEMENT TRI 03", "FRAIS VIRL IRR"). La **loi Macron 2017 (mobilité bancaire)** permet de changer de banque gratuitement en 22 jours ouvrés — la nouvelle banque prend en charge le transfert de tous les prélèvements automatiques. Pourtant, **moins de 5% des Français utilisent ce droit** faute de savoir combien ils paient réellement et à quoi se comparer.
+
+Les banques en ligne gratuites (Boursorama, Hello Bank, Fortuneo, Ma French Bank) offrent des comptes courants à **€0/an** avec carte Visa gratuite. Pour un ménage standard, le gain annuel moyen en changeant de BNP/SG/CA vers Boursorama est de **€200 à €350/an**.
+
+### Solution
+L'utilisateur uploade son relevé de compte PDF (1 mois suffit). L'IA extrait ligne par ligne toutes les opérations portant des frais (en distinguant les frais des vrais mouvements), les catégorise, calcule le coût mensuel et annuel, et les compare aux offres gratuites du marché. Si les économies potentielles dépassent €50/an, un rapport payant génère :
+
+1. **Rapport de frais détaillé** : toutes les lignes de frais classées par catégorie, explication en français simple de ce que chacune représente
+2. **Comparatif personnalisé** : 3 banques gratuites recommandées selon le profil (voyage, investissement, nomade)
+3. **Pack Changement de Banque** : checklist personnalisée étape par étape, lettre de clôture de compte rédigée, calendrier de migration des prélèvements automatiques, lien direct vers le formulaire de mobilité bancaire
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse de base | €0 | Total des frais mensuels + alerte si > €20/mois |
+| Rapport complet | €3 | Détail ligne par ligne + explication en clair + comparatif banques gratuites |
+| Pack Changement de Banque | €5 | Tout le rapport + lettre de clôture + checklist migration + formulaire mobilité bancaire |
+| Abonnement Annuel | €9/an | Analyse mensuelle automatique + alerte si nouveaux frais + rapport fiscal annuel |
+
+**Unit economics :** Claude API ~€0,05/analyse → 98% gross margin. **Marché :** 47 millions de comptes bancaires courants en France, dont 80% sont dans une banque traditionnelle avec des frais. À 0,1% conversion Pack = 47 000 × €5 = **€23 500 MRR**. L'abonnement annuel à €9 crée de la récurrence : un client qui a changé de banque grâce à FraisBancaires.ai revient chaque année pour surveiller sa nouvelle banque.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Extraction PDF :** Claude API vision — le modèle lit le relevé PDF directement et extrait les lignes de frais sans OCR séparé
+- **Base de données frais :** JSON des intitulés de frais courants par banque (BNP, SG, CA, LCL, CIC, La Banque Postale) — mis à jour à chaque changement tarifaire (les grilles tarifaires sont publiques)
+- **Comparateur :** Table statique des offres gratuites (Boursorama, Hello Bank, Fortuneo, Ma French Bank, Revolut, Nickel) mise à jour trimestriellement
+- **Génération PDF :** react-pdf
+- **Paiements :** Stripe (unitaire)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. TikTok/Reels : "J'ai scanné mon relevé de banque avec l'IA — elle a trouvé €240/an de frais que je savais même pas que je payais" — format choc très viral, tout le monde a un compte en banque
+2. SEO : "frais bancaires réduire", "combien je paie de frais bancaires", "changer banque gratuitement loi macron", "boursorama vs bnp frais comparaison"
+3. Reddit : r/france, r/financespersonnelles — la question "quelle banque choisir" revient toutes les semaines
+4. Partenariats comparateurs : LeLynx.fr, LesFurets.com, Meilleurtaux cherchent des outils d'acquisition — FraisBancaires.ai peut être proposé en widget gratuit sur leurs sites (partage de revenus)
+
+### Competitive Moat
+- Les comparateurs existants (Panorabanques, LesFurets) comparent les offres mais ne partent PAS de votre relevé réel — FraisBancaires.ai part du vécu et non de l'abstrait
+- L'analyse du relevé PDF via vision Claude est instantanée et fonctionne avec tous les formats bancaires français sans intégration API bancaire (évite la réglementation DSP2)
+- Le Pack Changement de Banque avec lettre de clôture et checklist migration est unique : c'est l'obstacle psychologique numéro 1 qui empêche les gens de changer (peur de rater un prélèvement)
+- L'abonnement annuel à €9 justifie la récurrence : les banques ajoutent des frais progressivement (boiling frog) — FraisBancaires.ai est le détecteur
+
+### Figma Schematic
+[View FraisBancaires.ai — Analyseur de frais bancaires on FigJam](https://www.figma.com/board/PfVT7Eoc0rz4PIerGqdxx4)
+
+---
+
+## 81. GardeAlternée.ai
+
+> **L'outil admin complet pour les parents en garde alternée — impôts, CAF, calendrier, co-parentalité**
+
+### Problem
+En France, **370 000 divorces et séparations** ont lieu chaque année, dont ~180 000 concernent des enfants mineurs. La **garde alternée concerne aujourd'hui ~3 millions de familles**. Elle crée une complexité administrative massive que ni les juges, ni les avocats, ni la CAF n'expliquent clairement :
+
+**(1) L'optimisation fiscale est contre-intuitive :** Par défaut, chaque parent déclare 50% des enfants à charge (demi-part pour chacun). Mais selon les revenus respectifs, il peut être plus avantageux que **l'un des deux parents déclare 100% des enfants** en échange d'une pension alimentaire déductible pour lui. Ce calcul est rarement fait → des milliers d'euros d'impôts perdus chaque année.
+
+**(2) Les allocations CAF sont indivisibles :** Les allocations familiales (AF) ne peuvent pas être partagées entre deux parents — elles vont à un seul foyer. Le choix du perceveur impacte aussi le droit au complément de libre choix de garde, à la prime de naissance et aux aides au logement. Aucun outil ne simule l'impact financier global.
+
+**(3) Le calendrier de garde est une source permanente de conflits :** Les week-ends alternés, les vacances scolaires, les jours fériés, les jours de la rentrée — chaque zone scolaire (A, B, C) a un calendrier différent. Les parents perdent des heures à négocier et recalculer manuellement.
+
+**(4) La communication co-parentale génère des litiges** sur les frais scolaires (qui paie la cantine ? les activités extra-scolaires ?), les décisions médicales, les informations scolaires. Les parents n'ont pas de format standardisé pour documenter leurs échanges.
+
+### Solution
+**(1) Simulateur fiscal garde alternée :** L'utilisateur entre les revenus des deux parents et le nombre d'enfants → calcul des deux scénarios (50/50 ou 100% un parent) → recommandation chiffrée + rapport PDF.
+
+**(2) Simulateur CAF :** Qui doit percevoir les allocations pour maximiser le revenu global du foyer ? Simulation des montants selon chaque configuration + guide pour changer le perceveur en ligne.
+
+**(3) Calendrier partagé intelligent :** Saisie des zones scolaires et du mode de garde → génération automatique du calendrier sur 12 mois avec export iCal (Google Calendar, Apple Calendar) + calcul du nombre de nuits par parent (utile pour les impôts et la CAF).
+
+**(4) Pack Communication co-parentale :** Templates de messages pour les décisions médicales, les informations scolaires, le suivi des frais partagés, les demandes de modification de calendrier — dans un format que le juge aux affaires familiales (JAF) peut lire en cas de litige.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur fiscal (comparatif) | €0 | Gratuit — acquisition |
+| Rapport fiscal PDF | €6 | Résultat chiffré des 2 scénarios + notice explicative pour le fisc + courrier pour l'ex-conjoint |
+| Guide CAF personnalisé | €0 | Gratuit — acquisition virale dans les groupes Facebook séparation |
+| Calendrier partagé (1 an) | €4 | iCal export + PDF imprimable + calcul nuits par parent |
+| Pack Communication | €8 | 12 templates co-parentalité + journal des échanges + export PDF pour JAF |
+| Abonnement Annuel | €19/an | Tout inclus + mise à jour calendrier scolaire annuel + alertes délais légaux |
+
+**Unit economics :** Claude API ~€0,02/simulation → coût quasi nul. **Marché :** 3 millions de familles en garde alternée en France dont ~500 000 refont leur déclaration fiscale chaque année sans optimiser. À 0,5% conversion Rapport Fiscal = 15 000 × €6 = **€7 500 MRR**. L'abonnement annuel à €19 vise les parents en garde alternée durable (les enfants restent mineurs en moyenne 9 ans après le divorce = LTV de €171 par famille).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les parents consultent depuis leur téléphone pendant les échanges)
+- **Moteur fiscal :** Algorithme barème IR 2026 avec simulation des 2 configurations de demi-parts (articles 194 et 196B du CGI) — recalculé à chaque loi de finances
+- **Moteur CAF :** Barèmes AF + complément de libre choix par configuration familiale (données CAF publiques)
+- **Calendrier :** Données calendrier scolaire par zone (A/B/C) — API data.education.gouv.fr — export iCal standard RFC 5545
+- **Génération PDF :** react-pdf (rapport fiscal exportable, calendrier imprimable)
+- **Auth + DB :** Supabase (stockage calendrier, historique des simulations)
+- **Paiements :** Stripe (unitaire + abonnement annuel)
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Séparation et divorce France", "Garde alternée témoignages et conseils", "Co-parentalité positive" — des centaines de milliers de membres, posts très actifs sur les questions fiscales et CAF
+2. TikTok/Reels : "Si vous êtes en garde alternée, vous déclarez probablement mal vos enfants aux impôts. Voici le calcul exact." — format révélation, touche directement les parents divorcés
+3. SEO : "impots garde alternee qui declare enfants", "allocations familiales garde alternee qui percoit", "calendrier garde alternee generateur", "frais scolaires garde alternee partage"
+4. Partenariat avocats de famille : les avocats en droit de la famille cherchent des outils pour leurs clients post-séparation — GardeAlternée.ai peut être recommandé ou intégré dans les dossiers de divorce (modèle white-label)
+
+### Competitive Moat
+- Aucun outil français ne combine les 4 modules (impôts + CAF + calendrier + co-parentalité) — les parents naviguent entre 4 outils distincts aujourd'hui
+- Le simulateur fiscal est objectivement meilleur que ce que font la plupart des comptables pour ce cas précis : la configuration garde alternée est mal connue même par les professionnels
+- Le calendrier scolaire automatique avec export iCal est immédiatement utile et crée de la récurrence (les parents reviennent chaque rentrée)
+- La viralité est forte : un parent qui optimise ses impôts grâce à GardeAlternée.ai en parle immédiatement à son ex-conjoint — les deux deviennent clients
+
+### Figma Schematic
+[View GardeAlternée.ai — Admin toolkit co-parentalité on FigJam](https://www.figma.com/board/l5EjAcJ9oNUM2EVumSCupa)
+
+---
+
+## 82. AidantFamilial.ai
+
+> **Réclamez vos droits d'aidant familial en France — AJPA, APA, PCH, congé de proche aidant**
+
+### Problem
+La France compte **11 millions d'aidants familiaux** — des personnes qui aident au quotidien un proche âgé, malade ou handicapé (parent, conjoint, enfant). C'est **1 Français sur 6**. L'aidance représente en moyenne **3,5 heures par jour** d'aide non rémunérée, et constitue une des premières causes d'épuisement, de perte d'emploi et de précarisation chez les actifs.
+
+Ces 11 millions de personnes ont accès à des droits considérables — massivement sous-utilisés :
+
+**(1) L'AJPA (Allocation Journalière du Proche Aidant) :** Versée par la Sécurité Sociale, elle atteint **€64,54/jour en 2026** pendant le congé de proche aidant (3 mois renouvelables, soit jusqu'à ~€5 800 de prestations). Moins de **250 000 aidants l'ont demandée** malgré 11 millions d'éligibles potentiels. Le formulaire CPAM est complexe, les conditions méconnues.
+
+**(2) L'APA (Allocation Personnalisée d'Autonomie) :** Versée par le Conseil Départemental, elle finance les heures d'aide à domicile pour les personnes de plus de 60 ans en perte d'autonomie (GIR 1 à 4). Montant : **€774 à €1 748/mois** selon le niveau de dépendance et les revenus. Beaucoup de familles ne font pas la demande car elles ne savent pas que la personne aidée y a droit.
+
+**(3) La PCH (Prestation de Compensation du Handicap) :** Pour les personnes handicapées de moins de 60 ans, elle finance les aides humaines, techniques et l'aménagement du logement. Montant variable, souvent > €1 000/mois. Les dossiers MDPH sont notoirement complexes.
+
+**(4) Le crédit d'impôt services à la personne :** Si l'aidant recourt au CESU pour faire intervenir une aide à domicile (auxiliaire de vie, assistante de vie), **50% du coût est crédité d'impôt**. Peu d'aidants déclarent correctement ces dépenses ou les optimisent.
+
+**(5) Le congé de proche aidant :** Tout salarié peut prendre jusqu'à 3 mois de congé (renouvelable une fois) sans risque de licenciement. L'employeur ne peut pas refuser si les conditions légales sont remplies. La lettre à l'employeur est simple mais peu d'aidants osent la rédiger seuls.
+
+### Solution
+**(1) Calculateur de droits AJPA :** Questionnaire en 5 questions (lien avec l'aidé, nature de la dépendance/handicap, situation professionnelle) → éligibilité AJPA + montant calculé + dossier CPAM pré-rempli (formulaire Cerfa 15431).
+
+**(2) Simulateur APA :** Saisie de l'âge, des revenus et du niveau d'autonomie (grille GIR simplifiée) → montant APA estimé + guide pour faire la demande auprès du Conseil Départemental compétent.
+
+**(3) Simulateur PCH :** Questionnaire handicap (nature, besoins d'aide) → simulation PCH + liste des pièces pour le dossier MDPH.
+
+**(4) Pack Congé de Proche Aidant :** Lettre à l'employeur conforme au Code du travail (art. L3142-16 à L3142-27), formulaire CPAM pour l'AJPA, calendrier des droits.
+
+**(5) Guide CESU & crédit d'impôt :** Comment déclarer les dépenses d'aide à domicile pour maximiser le crédit d'impôt de 50%.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur AJPA + éligibilité | €0 | Freemium — fort impact social et SEO |
+| Simulateur APA & PCH | €0 | Gratuit — acquisition |
+| Pack Congé de Proche Aidant | €5 | Lettre employeur + formulaire CPAM + calendrier droits + guide recours si refus |
+| Pack Complet Aidant | €12 | Tous les simulateurs + dossiers pré-remplis CPAM/MDPH/CD + guide CESU + suivi annuel |
+| B2B associations aidants | €99/an | Licence association — outil de service pour leurs adhérents (Aidants Connect, France Alzheimer, APF France Handicap) |
+
+**Unit economics :** Claude API ~€0,01/simulation → coût quasi nul. **Marché :** 11 millions d'aidants, dont ~3 millions d'actifs en emploi éligibles à l'AJPA ou au congé de proche aidant. À 0,3% conversion Pack Complet = 33 000 × €12 = **€16 500 MRR**. Le B2B associations est un canal de distribution massif : France Alzheimer a 350 délégations locales, APF France Handicap a 100 associations territoriales — une seule licence par structure = €9 900/an sans effort de vente individuel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les aidants sont souvent à côté de leur proche, sur téléphone)
+- **Moteur AJPA :** Conditions d'éligibilité et taux journaliers AJPA (décret n°2020-1258) — mis à jour à chaque revalorisation SMIC
+- **Grille GIR simplifiée :** Questionnaire d'autonomie en 10 questions (version simplifiée de la grille AGGIR officielle) pour estimer le GIR → montant APA estimé par tranche de revenus
+- **Base PCH :** Critères PCH (décret n°2005-1587) et grille d'évaluation simplifiée par type de besoin (aide humaine, technique, logement)
+- **Génération courriers :** Claude API + react-pdf — lettre employeur congé de proche aidant avec références Code du travail, formulaire CPAM pré-rempli
+- **Paiements :** Stripe (unitaire)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. Facebook Groups : "Aidants familiaux France", "Proche aidant de parent Alzheimer", "Parents d'enfants handicapés" — des dizaines de groupes avec plusieurs centaines de milliers de membres, forte détresse et besoin d'information pratique
+2. TikTok/Reels : "Si vous aidez un parent âgé ou malade, vous avez droit à jusqu'à 64€/jour de la Sécurité Sociale. La plupart des aidants ne le savent pas." — format révélation très impactant
+3. SEO : "AJPA dossier comment faire", "allocation proche aidant montant 2026", "conge proche aidant lettre employeur", "APA simulation montant", "droits aidant familial"
+4. Partenariats associations : France Alzheimer (350 délégations), APF France Handicap, Aidants Connect (structure gouvernementale de soutien aux aidants) — ces structures cherchent des outils pratiques pour leurs adhérents et ont une légitimité institutionnelle que AidantFamilial.ai peut exploiter
+
+### Competitive Moat
+- Aucun outil unifie les 5 droits aidants en un seul parcours — la fragmentation (CPAM pour AJPA, Conseil Départemental pour APA, MDPH pour PCH, CAF pour garde d'enfant, employeur pour le congé) est l'obstacle principal
+- Le formulaire Cerfa 15431 (AJPA) est notoirement difficile à compléter — AidantFamilial.ai le pré-remplit automatiquement : c'est un gain de temps réel qui justifie le paiement
+- Le marché des aidants grossit structurellement : le vieillissement de la population (+200 000 aidants/an) et l'augmentation des maladies chroniques font de ce marché un des plus résilients
+- La légitimité via les associations partenaires est difficile à répliquer pour un concurrent tardif : les associations ne certifient qu'un outil à la fois
+
+### Figma Schematic
+[View AidantFamilial.ai — Droits et aides pour aidants proches on FigJam](https://www.figma.com/board/5kiz1hVFVKCEKeysbh9pAO)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3275,4 +3969,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-09 — Ideas 68–70 added (France-specific, ultra-low-budget: RuptureConv.ai, C2S.ai, DroitsRH.ai)*
+*Last updated: 2026-05-15 — Ideas 80–82 added (France-specific, ultra-low-budget: FraisBancaires.ai, GardeAlternée.ai, AidantFamilial.ai)*
