@@ -90,6 +90,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 80 | [FraisBancaires.ai](#80-fraisbancairesai) | Freemium + Pay-per-report | €6K–€40K | Low |
 | 81 | [GardeAlternée.ai](#81-gardealtérnéeai) | Pay-per-report + Annual Subscription | €7K–€50K | Low |
 | 82 | [AidantFamilial.ai](#82-aidantfamilialai) | Pay-per-pack + Freemium | €5K–€38K | Low |
+| 83 | [DepôtGarantie.ai](#83-depôtgarantieai) | Pay-per-pack + Freemium | €6K–€42K | Low |
+| 84 | [MédiationConso.ai](#84-médiationconsoi) | Freemium + Pay-per-pack | €8K–€55K | Low |
+| 85 | [CreancesPME.ai](#85-creancespmeai) | Pay-per-dossier + SaaS Subscription | €10K–€70K | Low-Medium |
 
 ---
 
@@ -3957,6 +3960,189 @@ Ces 11 millions de personnes ont accès à des droits considérables — massive
 
 ---
 
+## 83. DepôtGarantie.ai
+
+> **Récupérez votre dépôt de garantie — lettres, conciliation et tribunal en quelques clics**
+
+### Problem
+En France, **7,2 millions de locataires** quittent leur logement chaque année. La loi Alur est claire : le bailleur doit restituer le dépôt de garantie dans **1 mois** (pas de dégradations) ou **2 mois** (avec dégradations constatées à l'état des lieux). En cas de dépassement, une **pénalité de 10% du montant du loyer par mois de retard** s'applique — une règle que 95% des locataires ignorent.
+
+Les problèmes fréquents sont massifs :
+- **Retard de restitution** (bailleur qui "oublie" ou tarde) : la pénalité court dès J+30 ou J+60, mais les locataires ne la réclament jamais
+- **Retenues abusives** : "nettoyage €800", "peinture complète €2 000" alors que l'usure normale est à la charge du bailleur — les locataires ne savent pas contester
+- **Non-restitution totale** : le bailleur garde tout, le locataire ne sait pas quoi faire sans avocat
+- **Recours intimidants** : Commission Départementale de Conciliation (CDC), Tribunal de proximité — des procédures gratuites mais méconnues et perçues comme complexes
+
+**Le marché** : 7,2 millions de sorties × 40% de litiges partiels ou totaux = ~2,9 millions de locataires avec un problème chaque année. Montant moyen du dépôt de garantie en France : €800–€1 200. Stakes élevés, colère forte, besoin immédiat.
+
+### Solution
+**(1) Diagnostic gratuit :** Date de sortie + montant du dépôt + situation (rendu / partiellement rendu / non rendu) → calcul automatique du délai légal, de la pénalité due et de la stratégie recommandée.
+
+**(2) Générateur de lettres :** Lettre de relance simple, lettre de mise en demeure avec pénalités, lettre de contestation de retenues (avec références légales précises : décret n°87-712 sur les réparations locatives, vétusté).
+
+**(3) Pack Conciliation CDC :** Dossier de saisine de la Commission Départementale de Conciliation pré-rempli, liste des pièces à joindre, guide de présentation orale — la CDC est **gratuite et obligatoire** avant tout recours au tribunal dans de nombreux cas.
+
+**(4) Pack Tribunal de Proximité :** Requête en injonction de payer ou en référé pré-rédigée, guide pour le greffe, argumentaire juridique type — sans avocat, frais de justice <€35.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic + calcul pénalités | €0 | Freemium — fort SEO et viralité |
+| Lettre de relance simple | €0 | Gratuit — acquisition |
+| Pack Contentieux (3 lettres + guide CDC) | €9 | Lettre mise en demeure + contestation retenues + dossier CDC |
+| Pack Tribunal | €15 | Requête tribunal pré-rédigée + argumentaire + guide greffe |
+| Pack Complet | €19 | Tout inclus + suivi relances + modèles d'attestation |
+| B2B agences immo & syndics | €49/mois | Outil white-label pour gérer les fins de bail côté bailleur (conformité, justificatifs) |
+
+**Unit economics :** Claude API ~€0,01/lettre → coût quasi nul. **Marché :** 2,9 millions de locataires avec litige/an. À 0,2% conversion Pack Contentieux = 5 800 × €9 = **€52 200 MRR**. Le B2B agences est un canal de distribution direct : 12 000 agences immobilières en France.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les locataires cherchent en urgence depuis leur téléphone)
+- **Moteur de calcul :** Règles légales dépôt de garantie (loi du 6 juillet 1989, art. 22, décret n°2015-342), calcul automatique des pénalités et de la vétusté par type de bien (grille ANIL)
+- **Génération courriers :** Claude API + react-pdf — lettres avec références juridiques précises, personnalisées selon le type de litige
+- **Base CDC :** Annuaire des 101 Commissions Départementales de Conciliation (CDC) par département, procédures de saisine
+- **Paiements :** Stripe (unitaire + abonnement B2B)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "caution non rendue lettre", "dépôt de garantie non restitué que faire", "retenue caution abusive contestation", "lettre mise en demeure caution locataire" — requêtes à très haute intention commerciale
+2. Reddit r/france, r/droit, forums SeLoger/PAP : les litiges caution sont parmi les sujets les plus discutés dans ces communautés
+3. TikTok/Reels : "Votre propriétaire ne vous rend pas votre caution ? Il vous doit 10% de pénalité par mois de retard. Voici comment l'exiger en 3 minutes." — format révélation à fort potentiel viral
+4. Partenariat ANIL/ADIL : les 92 Agences Départementales d'Information sur le Logement conseillent gratuitement les locataires — DepôtGarantie.ai peut être recommandé comme outil complémentaire
+
+### Competitive Moat
+- Le calcul automatique des pénalités (10%/mois) combiné à la grille de vétusté (durée de vie légale de chaque élément) est unique — les locataires ne savent pas que la peinture de 8 ans ne peut pas être facturée à 100%
+- La CDC est gratuite mais personne ne la connaît — DepôtGarantie.ai est le seul à expliquer, guider et pré-remplir le dossier CDC de façon simple
+- La viralité est forte : un locataire qui récupère €800 grâce à DepôtGarantie.ai en parle à tous ses amis qui déménagent
+
+### Figma Schematic
+[View DepôtGarantie.ai — Récupérez votre caution locative on FigJam](https://www.figma.com/board/CGTrQXEYlz19V74XyRY3K7)
+
+---
+
+## 84. MédiationConso.ai
+
+> **Résolvez gratuitement vos litiges avec télécom, énergie, banque et e-commerce — sans avocat, sans tribunal**
+
+### Problem
+Depuis 2016, **toutes les entreprises françaises** qui vendent à des consommateurs ont l'**obligation légale** de proposer un médiateur de la consommation agréé (ordonnance n°2015-1033). Ce médiateur **traite gratuitement** les litiges non résolus entre consommateurs et professionnels — en 90 jours. La décision n'est pas contraignante, mais **75% des avis de médiateurs sont suivis** par les entreprises car le processus est public et crédible.
+
+Le problème : **99% des consommateurs ne savent pas comment s'en servir.**
+
+Les litiges concernés sont massifs :
+- **Télécoms** (SFR, Orange, Free, Bouygues) : factures abusives, résiliation refusée, service non conforme — le médiateur des communications électroniques (ARCEP) traite 50 000+ dossiers/an
+- **Énergie** (EDF, Engie, ENI) : surfacturation, problèmes de compteur Linky, résiliation — le médiateur national de l'énergie traite 20 000+ dossiers/an
+- **Banque/Assurance** (tous les réseaux) : frais contestés, sinistre refusé, crédit litigieux — le médiateur de l'AMF, de l'ACPR, et les médiateurs bancaires
+- **E-commerce** (Amazon, Fnac, La Redoute, Vinted) : colis non reçu, remboursement refusé, garantie ignorée — médiateur du e-commerce (FEVAD)
+- **Transport** (SNCF, Air France, compagnies bus) : retards, bagages, remboursements
+
+**L'obstacle :** Pour saisir un médiateur, il faut avoir envoyé une réclamation écrite préalable à l'entreprise (souvent ignorée ou refusée) ET attendre 2 mois sans réponse satisfaisante. La plupart des consommateurs abandonnent à ce stade — ils ne savent pas rédiger la réclamation, ni identifier le bon médiateur, ni constituer le dossier.
+
+### Solution
+**(1) Sélecteur de litige :** Secteur (télécom, énergie, banque, e-commerce, transport...) + entreprise concernée → identification du médiateur compétent + conditions d'éligibilité.
+
+**(2) Générateur de réclamation préalable :** Lettre de réclamation formelle à envoyer à l'entreprise (prérequis légal), avec les bons arguments, les références légales et la mention de saisine du médiateur si non-réponse — souvent, cette lettre seule suffit à débloquer la situation.
+
+**(3) Dossier de saisine médiateur :** Après 2 mois sans réponse satisfaisante, dossier de saisine pré-rempli selon les exigences de chaque médiateur (formulaire + chronologie des faits + pièces à joindre), avec le lien vers le portail de dépôt en ligne.
+
+**(4) Escalade DGCCRF :** Si la médiation échoue, signalement guidé à la DGCCRF (Direction Générale de la Concurrence) ou saisine du tribunal — modèles inclus.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Sélecteur médiateur + éligibilité | €0 | Freemium — SEO puissant |
+| Lettre de réclamation préalable | €0 | Gratuit — conversion ultérieure |
+| Pack Médiation | €7 | Lettre réclamation + dossier saisine médiateur + suivi calendaire |
+| Pack Litige Complet | €15 | Tout inclus + escalade DGCCRF + modèle plainte tribunal si échec |
+| B2B associations de consommateurs | €79/mois | Licence association — outil de service pour leurs adhérents (UFC-Que Choisir délégations, CLCV, associations sectorielles) |
+
+**Unit economics :** Claude API ~€0,01/dossier → coût quasi nul. **Marché :** En France, 80 millions de contrats télécom + ~30 millions de clients énergie + 90% des Français font des achats en ligne. Chaque Français a en moyenne 1,8 litige consommateur par an non résolu. À 0,15% conversion Pack Médiation sur le marché adressable : énorme. Le canal B2B associations est direct : UFC-Que Choisir a 150 associations locales, CLCV a 120 associations, l'UNAF représente 3 millions de familles.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Base médiateurs :** Annuaire des ~60 médiateurs agréés CECMC (Commission d'Évaluation et de Contrôle de la Médiation de la Consommation), mis à jour annuellement, avec le secteur, les conditions d'éligibilité et les portails de saisine
+- **Moteur d'éligibilité :** Règles de la directive 2013/11/UE transposée en droit français — vérification automatique des conditions (réclamation préalable, délai 1 an, litige B2C)
+- **Génération courriers :** Claude API + react-pdf — lettre de réclamation + dossier médiateur personnalisés par secteur et entreprise
+- **Paiements :** Stripe
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "réclamation SFR lettre", "litige EDF que faire", "médiateur télécom saisir comment", "Amazon colis non reçu remboursement refusé" — mots-clés à très haute intention, des millions de requêtes/mois en France
+2. YouTube/TikTok : "Votre opérateur vous a surtaxé ? Il existe un médiateur gratuit obligatoire que vous n'avez jamais utilisé — voici comment forcer SFR/Orange/Free à vous rembourser en 90 jours sans avocat"
+3. Forums consommateurs : Commentcamarche.net, forums UFC-Que Choisir, r/france — les litiges télécom et énergie sont parmi les sujets les plus actifs
+4. Partenariat UFC-Que Choisir : l'organisation manque d'outils digitaux pour ses 150 délégations locales — MédiationConso.ai peut être leur outil de référence
+
+### Competitive Moat
+- L'annuaire des 60 médiateurs agréés avec les règles d'éligibilité par secteur est du travail de recherche que personne n'a fait en format outil pratique — c'est la barrière à l'entrée
+- La lettre de réclamation préalable est souvent décisive : bien rédigée, avec la mention "je me réserve le droit de saisir votre médiateur agréé", les entreprises cèdent plus souvent — MédiationConso.ai crée de la valeur immédiate avant même la médiation
+- La viralité est naturelle : un consommateur remboursé par EDF grâce à une lettre de 3 minutes en parle immédiatement à son entourage
+
+### Figma Schematic
+[View MédiationConso.ai — Résolvez vos litiges consommateurs gratuitement on FigJam](https://www.figma.com/board/GGC9t1S0WvzM9XPk2qmjvQ)
+
+---
+
+## 85. CreancesPME.ai
+
+> **Recouvrez vos factures impayées — injonction de payer sans avocat pour freelances et TPE/PME**
+
+### Problem
+En France, les impayés représentent **12 milliards d'euros par an** et constituent la **première cause de faillite des PME et TPE** (56% des défaillances d'entreprises ont des impayés comme facteur déclencheur, selon la Banque de France). Les freelances et micro-entrepreneurs sont particulièrement vulnérables : une seule facture impayée peut représenter 1-3 mois de revenus.
+
+**La loi protège fortement les créanciers professionnels :**
+- **Intérêts de retard légaux :** Depuis 2024, le taux BCE + 10 points = ~13,5% annuel, plus une **indemnité forfaitaire de €40** par facture impayée (art. L441-10 du Code de commerce) — automatiquement dus sans avoir à les réclamer explicitement dans la facture
+- **L'injonction de payer :** Procédure judiciaire ultra-rapide (15-30 jours), **sans avocat obligatoire**, pour des créances incontestables. Formulaire Cerfa 12947, dépôt au greffe du tribunal de commerce ou tribunal judiciaire selon la qualité du débiteur. Frais de justice : €33,47. Taux de succès si le client ne fait pas opposition : **~90%** (ordonnance exécutoire rendue par le juge).
+- **La mise en demeure bien rédigée** avec mention des pénalités légales déclenche souvent le paiement immédiatement — sans procédure.
+
+**Le problème :** 3,5 millions d'auto-entrepreneurs et 1,5 million de TPE n'utilisent pas ces outils car ils ne savent pas les utiliser, ont peur de "froisser" leurs clients, ou croient que ça coûte cher. Des dizaines de milliers d'euros de créances sont abandonnées chaque année par manque d'information.
+
+### Solution
+**(1) Tableau de bord impayés :** Import ou saisie manuelle des factures impayées (numéro, montant, date échéance, client) → calcul automatique des intérêts de retard dus + indemnité €40 + montant total à réclamer.
+
+**(2) Mise en demeure automatique :** Lettre de mise en demeure avec le montant exact (capital + intérêts légaux + indemnité forfaitaire), délai de paiement (15 jours), et mention de l'injonction de payer en cas de non-paiement — le ton parfait pour être ferme sans briser la relation.
+
+**(3) Dossier Injonction de Payer :** Formulaire Cerfa 12947 pré-rempli (requête en injonction de payer), identification du tribunal compétent (tribunal de commerce si débiteur commerçant, tribunal judiciaire sinon), liste des pièces à joindre (facture, bon de commande, échanges email), guide pour le dépôt au greffe.
+
+**(4) Suivi et escalade :** Si le client fait opposition à l'ordonnance (~10% des cas), guide pour l'audience contradictoire avec argumentaire juridique type et liste des preuves à préparer. Si paiement obtenu, calculateur de frais récupérables (art. 700 CPC).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Tableau de bord + calcul intérêts | €0 | Freemium — fort SEO et acquisition |
+| Mise en demeure (lettre) | €0 | Gratuit — conversion ultérieure |
+| Pack Injonction de Payer | €19 | Cerfa pré-rempli + identification tribunal + guide greffe + argumentaire opposition |
+| Abonnement Mensuel | €29/mois | Factures illimitées + tableau de bord suivi + relances automatiques + mises en demeure illimitées |
+| B2B Expert-comptables | €99/mois | Outil marque blanche pour intégration dans leur offre client |
+
+**Unit economics :** Claude API ~€0,02/dossier → coût minimal. **Marché :** 3,5 millions d'auto-entrepreneurs + 1,5 million de TPE = 5 millions de structures potentiellement exposées aux impayés. 30% ont au moins 1 impayé significatif/an = 1,5 million d'opportunités/an. À 0,3% conversion Pack Injonction = 4 500 × €19 = **€85 500 MRR**. L'abonnement mensuel crée de la récurrence : un freelance qui a 2-3 impayés/an garde l'abonnement actif.
+
+**Canal B2B :** 21 000 experts-comptables en France, chacun avec 50-200 clients TPE/PME. Un seul partenariat avec un cabinet = centaines d'utilisateurs. Les plateformes comme Pennylane, Axonaut ou Indy pourraient intégrer CreancesPME.ai en white-label.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (dashboard SaaS)
+- **Moteur de calcul créances :** Taux BCE + 10 pts (mis à jour chaque semestre), indemnité forfaitaire €40 (art. L441-10 C.com.), calcul prorata temporis des intérêts
+- **Base tribunaux :** Annuaire des 134 tribunaux de commerce + tribunaux judiciaires avec juridictions compétentes par département et seuil (commerce vs civil)
+- **Génération documents :** Claude API + react-pdf — Cerfa 12947 pré-rempli, lettre mise en demeure, argumentaire audience
+- **Paiements :** Stripe (unitaire + abonnement récurrent)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "facture impayée que faire", "injonction de payer comment faire sans avocat", "mise en demeure facture modèle", "intérêts de retard facture calcul" — mots-clés à très forte intention commerciale, faible concurrence SEO
+2. LinkedIn : les freelances et dirigeants de TPE y sont très actifs — "Vous avez une facture impayée depuis 60 jours ? Voici pourquoi l'injonction de payer est votre meilleure arme et comment la déposer en 20 minutes pour €33" → fort potentiel viral sur LinkedIn
+3. Groupes Facebook Auto-entrepreneurs : "Auto-entrepreneurs France" (200 000+ membres), "Freelances et indépendants" — les impayés sont un sujet récurrent et douloureux dans ces groupes
+4. Partenariats plateformes de facturation : Freebe, Indy, Zervant, Henrri — ces outils de facturation pour freelances ont des millions d'utilisateurs et manquent d'un module de recouvrement intégré
+
+### Competitive Moat
+- Le calcul automatique des intérêts légaux + indemnité €40 + identification du tribunal compétent est unique — aucun outil grand public ne fait ça aujourd'hui
+- Le Cerfa 12947 pré-rempli supprime l'obstacle psychologique principal (le formulaire judiciaire est perçu comme intimidant) : c'est la valeur ajoutée clé
+- Les intégrations avec les plateformes de facturation créent un effet de réseau et une barrière à la copie : une fois intégré dans Freebe ou Indy, il est difficile d'en sortir
+- La viralité est très forte : un freelance qui récupère €3 000 d'impayés grâce à CreancesPME.ai devient un ambassadeur immédiat dans ses communautés professionnelles
+
+### Figma Schematic
+[View CreancesPME.ai — Recouvrez vos factures impayées on FigJam](https://www.figma.com/board/Rg6JpAQegV91dn7xS76aXc)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3969,4 +4155,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-15 — Ideas 80–82 added (France-specific, ultra-low-budget: FraisBancaires.ai, GardeAlternée.ai, AidantFamilial.ai)*
+*Last updated: 2026-05-16 — Ideas 83–85 added (France-specific, ultra-low-budget: DepôtGarantie.ai, MédiationConso.ai, CreancesPME.ai)*
