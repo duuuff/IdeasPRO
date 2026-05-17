@@ -93,6 +93,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 83 | [DepôtGarantie.ai](#83-depôtgarantieai) | Pay-per-pack + Freemium | €6K–€42K | Low |
 | 84 | [MédiationConso.ai](#84-médiationconsoi) | Freemium + Pay-per-pack | €8K–€55K | Low |
 | 85 | [CreancesPME.ai](#85-creancespmeai) | Pay-per-dossier + SaaS Subscription | €10K–€70K | Low-Medium |
+| 86 | [TaxeFoncière.ai](#86-taxefoncièreai) | Pay-per-pack + Freemium | €6K–€45K | Low |
+| 87 | [ImmoBroken.ai](#87-immobrokenai) | Pay-per-pack + Freemium | €8K–€55K | Low |
+| 88 | [FraisGarde.ai](#88-fraisgardeai) | Pay-per-report + Freemium | €5K–€40K | Low |
 
 ---
 
@@ -4143,6 +4146,188 @@ En France, les impayés représentent **12 milliards d'euros par an** et constit
 
 ---
 
+## 86. TaxeFoncière.ai
+
+> **Contester votre taxe foncière en 5 minutes — récupérez jusqu'à 3 ans de trop-perçu**
+
+### Problem
+La taxe foncière a bondi de **26% en moyenne en 2023** (revalorisation forfaitaire des bases cadastrales) et continue d'augmenter. En France, la valeur locative cadastrale — la base de calcul de la taxe foncière — est encore fondée sur des données de 1970 actualisées forfaitairement. Elle contient des erreurs systématiques : mauvaise surface déclarée, mauvaise classification (3 pièces au lieu de 4, cave non comptabilisée, véranda ajoutée non déclarée), ou tarif de commune mal appliqué.
+
+**Selon la DGFIP elle-même, 10–15% des 36 millions de logements taxés présentent au moins une anomalie corrigeable.** Or, presque aucun propriétaire ne sait que :
+- Il peut contester la valeur locative auprès du centre des impôts **jusqu'au 31 décembre de l'année suivant l'avis**
+- En cas d'erreur avérée, le dégrèvement peut être **rétroactif sur 3 ans**
+- La procédure ne nécessite **aucun avocat** — juste un formulaire et une lettre
+
+### Solution
+**(1) Diagnostic gratuit :** L'utilisateur entre l'adresse, la surface, le nombre de pièces, les dépendances (garage, cave, véranda) et l'année de construction. L'IA interroge les données publiques (API data.gouv.fr, plan cadastral, référentiels DVF) et compare la valeur locative déclarée aux biens similaires de la même commune/section cadastrale.
+
+**(2) Estimation du trop-perçu :** Si une anomalie est détectée, affichage immédiat du montant de dégrèvement potentiel (annuel et sur 3 ans). Exemple type : surface sous-déclarée de 8m² dans une commune où le taux d'imposition est 45% → économie de €180/an → €540 sur 3 ans.
+
+**(3) Pack contestation (payant) :** Lettre de contestation DGFIP pré-rédigée avec les références légales exactes (art. 1508 CGI pour erreur matérielle, art. 1514 pour mise à jour), identification du centre des impôts fonciers compétent par adresse, liste des justificatifs à joindre (plan du logement, photos, titre de propriété), et guide de suivi de la contestation.
+
+**(4) Tableau de bord suivi :** Rappels automatiques des délais, notification si la DGFIP répond, guide de recours si la contestation est rejetée (commission départementale des impôts).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Résultat anomalie/conforme + estimation trop-perçu |
+| Pack Contestation | €9 | Lettre DGFIP + identification centre + guide justificatifs + suivi |
+| Abonnement Propriétaire | €19/an | Surveillance annuelle de l'avis + alertes revalorisation + pack inclus |
+| B2B Syndics/Notaires | €149/mois | Outil marque blanche + API — analyse portefeuille multi-lots |
+
+**Unit economics :** Claude API ~€0,03/analyse → 99,7% de marge brute sur le Pack €9. Un propriétaire qui apprend qu'il peut récupérer €540 paie €9 immédiatement — taux de conversion attendu >40% sur les anomalies détectées.
+
+**Marché :** 36 millions de logements taxés. Si 12% présentent une anomalie = 4,3 millions de propriétaires concernés. 5% convertis au Pack = 215 000 × €9 = **€1,9M de revenus potentiels**. L'abonnement annuel à €19 crée de la récurrence sur une taxe qui augmente chaque année.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Données cadastrales :** API Géoportail de l'urbanisme, Plan Cadastral Informatisé (PCI) data.gouv.fr, DVF (Demandes de Valeurs Foncières) pour comparables
+- **Géocodage :** api-adresse.data.gouv.fr (officiel, gratuit)
+- **Génération lettre :** Claude API (claude-sonnet-4-6) avec templates légaux art. 1508 / 1514 CGI
+- **PDF :** react-pdf
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "taxe foncière trop élevée recours", "contester valeur locative cadastrale", "erreur taxe foncière remboursement 2025" — mots-clés à très forte intention et faible concurrence
+2. TikTok/Reels : "J'ai récupéré €480 de taxe foncière payée en trop — voici comment" — contenu viral de type "money hack"
+3. Forums propriétaires : SeLoger forum, PAP, r/france, groupes Facebook "Propriétaires bailleurs France" (180 000+ membres)
+4. Partenariat syndics de copropriété : chaque syndic gère des centaines de lots — un seul partenariat = centaines d'utilisateurs
+
+### Competitive Moat
+- La comparaison automatique avec les données cadastrales publiques pour détecter les anomalies n'existe dans aucun outil grand public aujourd'hui
+- Le délai légal de contestation (31 décembre N+1) crée une urgence naturelle = conversions saisonnières très fortes après réception des avis (septembre–décembre)
+- Les données DVF permettent de construire une base de référence propriétaire qui s'améliore avec chaque analyse — data moat progressif
+- Extension naturelle vers la taxe d'habitation sur résidences secondaires et la TEOM (taxe sur les ordures ménagères)
+
+### Figma Schematic
+[View TaxeFoncière.ai — Contest Your Property Tax on FigJam](https://www.figma.com/board/6c3kiWK13aBHqNQtSeWv4n)
+
+---
+
+## 87. ImmoBroken.ai
+
+> **Renégociez votre crédit immobilier vous-même — calculez votre IRA et envoyez la bonne lettre à votre banque**
+
+### Problem
+Entre 2022 et 2024, les taux immobiliers français sont passés de 1% à 4,5%. Depuis début 2025, ils reculent progressivement (3,2–3,6% sur 20 ans en mai 2026). Résultat :
+- **Les emprunteurs à taux élevé (3,5–4,5%)** peuvent désormais renégocier ou faire racheter leur crédit et économiser des dizaines de milliers d'euros
+- **Les emprunteurs à taux bas (1–2%)** qui veulent vendre leur bien ignorent si casser leur prêt coûte plus ou moins que de le garder
+
+**L'obstacle principal : l'IRA (Indemnité de Remboursement Anticipé).** Légalement plafonnée à 6 mois d'intérêts ou 3% du capital restant dû (le plus bas des deux, art. L313-47 du Code de la consommation), elle est quasi impossible à calculer sans les données exactes du tableau d'amortissement. Les banques ne la communiquent pas spontanément. Résultat : des millions d'emprunteurs ne renégocient pas par peur d'un coût opaque, ou paient des IRA surdimensionnées faute de les avoir vérifiées.
+
+**Données clés :** 10 millions de crédits immobiliers en cours en France. 2,5 millions contractés entre mi-2022 et fin-2023 à des taux >3,5%. Sur ces 2,5 millions, un rachat de crédit peut économiser en moyenne €15 000–€30 000 sur la durée restante.
+
+### Solution
+**(1) Calculateur IRA instantané :** L'utilisateur entre le capital restant dû, le taux actuel, la durée restante et la mensualité. L'IA calcule l'IRA légale maximale (les deux plafonds), la compare au gain potentiel d'une renégociation aux taux actuels du marché, et affiche le **seuil de rentabilité** (mois de break-even).
+
+**(2) Simulation 3 scénarios :**
+- **Scénario A — Renégociation interne :** Négociation du taux directement avec sa propre banque (sans frais de mainlevée hypothèque). Gain net calculé.
+- **Scénario B — Rachat de crédit :** Transfert vers une autre banque au meilleur taux du marché. Inclut frais de mainlevée (~€800), frais de dossier (~€1 000), assurance emprunteur recalculée. Gain net calculé.
+- **Scénario C — Statu quo :** Coût total si on ne fait rien. Sert de référence émotionnelle.
+
+**(3) Pack complet (payant) :** Lettre de renégociation bancaire personnalisée avec les bons arguments (taux de marché actuel, fidélité client, menace de rachat concurrent), simulation mensuelle détaillée en PDF, et script d'appel avec le conseiller (objections fréquentes et réponses).
+
+**(4) Guide rachat si refus :** Si la banque refuse, guide pour contacter un courtier ou faire une demande de rachat avec comparateur des meilleures offres du moment.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur IRA + 3 scénarios | €0 | Résultat immédiat — fort potentiel viral |
+| Pack Renégociation | €19 | Lettre banque + PDF simulation + script appel |
+| Pack Rachat de Crédit | €29 | Guide rachat + comparateur courtiers partenaires + lettre de mise en concurrence |
+| Affiliation courtiers | Commission | €50–€150 par dossier transmis à un courtier partenaire (CAFPI, Meilleurtaux, Vousfinancer) |
+
+**Unit economics :** Claude API ~€0,05/simulation → marge brute >99% sur le pack €19. Un emprunteur qui apprend qu'il peut économiser €18 000 sur son crédit paiera €19 sans hésiter — taux de conversion attendu >35%.
+
+**Potentiel affiliation :** Si 5% des utilisateurs transmettent leur dossier à un courtier partenaire à €80 de commission = énorme levier de revenus passifs.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Moteur de calcul :** Formule IRA légale (art. L313-47 C.conso.), tableau d'amortissement généré côté client, comparaison taux marché (données APILR ou scraping Meilleurtaux/CAFPI hebdomadaire)
+- **Génération documents :** Claude API + react-pdf
+- **Paiements :** Stripe (one-shot)
+- **Auth + DB :** Supabase
+- **Tracking :** Plausible Analytics (RGPD-friendly, open-source)
+
+### Go-to-Market (zero budget)
+1. SEO : "calculer indemnité remboursement anticipé", "renégocier crédit immobilier 2026", "IRA crédit immo calcul gratuit", "rachat crédit immobilier taux actuel" — requêtes à très fort volume et très forte intention commerciale
+2. YouTube/TikTok : "Mon banquier ne voulait pas me dire mon IRA — voici comment je l'ai calculé moi-même et économisé €22 000"
+3. Reddit/forums : r/france, r/immobilier, Meilleurtaux forum, SeLoger forum — contenu pédagogique sur l'IRA avec lien vers l'outil gratuit
+4. LinkedIn : cibler les emprunteurs qui ont posté sur la hausse des taux — contenu "Avez-vous vérifié si votre IRA est correctement calculée ?"
+
+### Competitive Moat
+- Les calculateurs IRA existants (rares) sont des Excel statiques sans génération de lettre — ImmoBroken.ai est le seul à combiner calcul + action (lettre + script)
+- Le modèle d'affiliation avec les courtiers crée un revenu passif et une barrière : les courtiers partenaires ont intérêt à recommander l'outil à leurs prospects
+- La base de taux du marché mise à jour hebdomadairement devient une ressource SEO en soi (page "Taux immobiliers du moment")
+- Extension vers le calcul d'assurance emprunteur (délégation d'assurance, loi Lemoine 2022 — résiliation à tout moment) pour un deuxième produit complémentaire
+
+### Figma Schematic
+[View ImmoBroken.ai — Mortgage Renegotiation Optimizer on FigJam](https://www.figma.com/board/tD7cEa3gfoofNtZiktwfUe)
+
+---
+
+## 88. FraisGarde.ai
+
+> **Calculez votre vrai coût de garde d'enfant — après CAF, CMG, et crédit d'impôt**
+
+### Problem
+En France, une place en crèche collective coûte €0 à €1 500/mois selon les revenus (barème CAF). Une assistante maternelle agréée coûte €700 à €1 400/mois brut, mais après CMG (Complément de Libre Choix du Mode de Garde) et crédit d'impôt de 50%, le coût net peut descendre à €200–€600/mois. Une garde à domicile coûte €1 800–€3 000/mois brut, mais avec le CMG majoré et le crédit d'impôt, peut revenir à €600–€900/mois net.
+
+**Le problème : 80% des parents français ne connaissent pas leur coût net réel de garde.** Ils regardent le tarif brut, pensent ne pas pouvoir se payer une assistante maternelle ou une garde à domicile, et n'explorent même pas l'option. Résultat : des places en crèche collectivement surdemandées, des assistantes maternelles sous-utilisées dans certains bassins, et des familles qui perdent €300–€800/mois d'aides auxquelles elles ont droit.
+
+**Le système est volontairement complexe :**
+- **PAJE (Prestation d'Accueil du Jeune Enfant) :** Prime naissance + allocation de base selon revenus
+- **CMG :** Aide variable selon revenus (0 à €1 248/mois pour garde à domicile) — versée directement à l'employeur via PAJEMPLOI
+- **Crédit d'impôt :** 50% des dépenses de garde restantes après CMG, plafonné à €2 300/an
+- **CESU préfinancé :** Certains employeurs abondent jusqu'à €2 301/an de CESU exonérés — que peu de salariés activent
+- **Bourse crèche municipale :** Variable selon commune (certaines villes subventionnent jusqu'à 100% selon QF)
+
+### Solution
+**(1) Simulateur net complet :** L'utilisateur entre revenus du foyer (net imposable), nombre d'enfants concernés, âges, code postal. L'IA calcule le coût net mensuel de **4 modes de garde** en parallèle : crèche municipale, crèche privée, assistante maternelle, garde à domicile.
+
+**(2) Toutes les aides incluses :** PAJE applicable, tranche CMG exact (barème CAF 2026 intégré), crédit d'impôt proratisé, CESU préfinancé employeur (si applicable), aides communales spécifiques pour les 20 plus grandes villes.
+
+**(3) Recommandation personnalisée :** Classement des 4 options par coût net croissant avec explication des écarts. Mise en évidence des économies laissées sur la table si on ne demande pas certaines aides.
+
+**(4) Pack dossiers (payant) :** Guide complet de demande CMG à la CAF (pièces requises, formulaires Cerfa), déclaration PAJEMPLOI (employeur particulier), dossier d'inscription crèche municipale pour la ville concernée, activation CESU préfinancé via l'employeur, et calendrier des démarches avec délais.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur net 4 modes | €0 | Fort effet "wow" — viral dans les groupes parents |
+| Pack Dossiers Complet | €5 | Cerfa CAF + PAJEMPLOI + guide crèche + calendrier |
+| Abonnement Famille | €12/an | Mis à jour annuelle du calcul selon nouveaux barèmes CAF |
+| B2B Employeurs (CESU) | €199/mois | Module calculateur intégré à l'intranet RH — aide les RH à activer les CESU pour leurs salariés |
+
+**Unit economics :** Claude API ~€0,02/simulation → marge >99% sur le pack €5. L'effet "J'aurais dû savoir ça avant" est extrêmement fort — les parents partagent massivement ce type d'outil dans leurs réseaux (groupes grossesse, forums parents).
+
+**B2B levier :** Les grandes entreprises ont souvent un budget CESU non consommé car les salariés n'activent pas leur aide. Un DRH qui déploie FraisGarde.ai pour ses 500 salariés parents = €199/mois et des dizaines d'utilisateurs actifs qui paient le pack €5 individuellement.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Moteur de calcul :** Barèmes CAF 2026 (PAJE, CMG tranches A/B/C), taux de crédit d'impôt 50% avec plafond, CESU préfinancé (plafond exonération €2 301/an), tarifs crèche par commune (20 grandes villes codées en dur + fallback barème CAF standard)
+- **Génération dossiers :** Claude API (claude-sonnet-4-6) + react-pdf pour les guides personnalisés
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "coût réel assistante maternelle après aides", "CMG calcul 2026", "garde enfant crédit impôt combien", "FraisGarde simulateur CAF" — mots-clés à fort volume, peu concurrentiels
+2. Groupes Facebook parents : "Grossesse et maternité France" (500 000+ membres), "Assistantes maternelles et parents" — partager le simulateur gratuit déclenche une vague de partages organiques
+3. Maternités et PMI (Protection Maternelle Infantile) : distribuer des QR codes vers l'outil gratuit lors des consultations de grossesse — coût zéro, audience parfaite
+4. Partenariat mutuelles et comités d'entreprise : proposer FraisGarde.ai comme avantage salarié pour les parents — le CE paye l'abonnement B2B, les salariés utilisent l'outil gratuitement
+
+### Competitive Moat
+- Le simulateur multi-modes simultané (crèche + AM + garde à domicile) avec toutes les aides combinées en une seule interface n'existe pas aujourd'hui — les outils CAF calculent une aide à la fois
+- Les barèmes CAF sont mis à jour chaque année : l'abonnement annuel crée de la récurrence naturelle sur un événement calendaire prévisible
+- La viralité dans les groupes parents est extrêmement forte : un parent qui découvre qu'il peut économiser €350/mois partage immédiatement — coût d'acquisition < €0,50 par utilisateur
+- Extension naturelle vers la garde de nuit, les centres de loisirs (ALSH — Accueil de Loisirs Sans Hébergement avec aide CAF), et la garde partagée (nanny share) pour couvrir tout le cycle 0–12 ans
+
+### Figma Schematic
+[View FraisGarde.ai — Childcare Cost Optimizer on FigJam](https://www.figma.com/board/Qv5TEEqnNr3br1DQRWGGQu)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -4155,4 +4340,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-16 — Ideas 83–85 added (France-specific, ultra-low-budget: DepôtGarantie.ai, MédiationConso.ai, CreancesPME.ai)*
+*Last updated: 2026-05-17 — Ideas 86–88 added (France-specific, ultra-low-budget: TaxeFoncière.ai, ImmoBroken.ai, FraisGarde.ai)*
