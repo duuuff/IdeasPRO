@@ -96,6 +96,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 86 | [TaxeFoncière.ai](#86-taxefoncièreai) | Pay-per-pack + Freemium | €6K–€45K | Low |
 | 87 | [ImmoBroken.ai](#87-immobrokenai) | Pay-per-pack + Freemium | €8K–€55K | Low |
 | 88 | [FraisGarde.ai](#88-fraisgardeai) | Pay-per-report + Freemium | €5K–€40K | Low |
+| 89 | [ElectriPass.ai](#89-electripassai) | Freemium + Pay-per-pack + Subscription | €8K–€60K | Low |
 
 ---
 
@@ -4325,6 +4326,70 @@ En France, une place en crèche collective coûte €0 à €1 500/mois selon le
 
 ### Figma Schematic
 [View FraisGarde.ai — Childcare Cost Optimizer on FigJam](https://www.figma.com/board/Qv5TEEqnNr3br1DQRWGGQu)
+
+---
+
+## 89. ElectriPass.ai
+
+> **Calculez en 2 minutes toutes vos aides pour passer à l'électrique — cumulées, personnalisées, actionnables**
+
+### Problem
+La France est l'un des marchés EV les plus subventionnés au monde, mais le système d'aides est un labyrinthe : bonus écologique national, leasing social à €100/mois (sous conditions de revenus), prime à la conversion (cumulable), aides régionales (Île-de-France, AURA, PACA — chacune a ses propres critères), aides départementales, et dans certains cas aides des collectivités locales. **80% des ménages modestes ne savent pas qu'ils sont éligibles au leasing social**, dont le plafond de revenus couvre pourtant 50% des foyers français (RFR < €15 400/part).
+
+**Le problème concret :** Un ouvrier en Île-de-France avec un vieux diesel Crit'Air 3 peut cumuler :
+- Bonus écologique : €7 000 (sous plafond revenus)
+- Prime à la conversion : €3 000 (véhicule < Crit'Air 2 éliminé)
+- Aide Île-de-France : €2 000
+- Soit **€12 000 de rabais** sur une Dacia Spring à €18 000 → voiture à **€6 000**
+
+Il ne le sait pas. Il cherche sur Google, tombe sur des articles contradictoires de 2023, et repart sans rien acheter. Le site ADEME et Service-Public.fr ne permettent pas de tout cumuler en une seule simulation.
+
+### Solution
+**(1) Simulateur tout-en-un :** L'utilisateur saisit en 90 secondes : revenus du foyer (RFR de la dernière déclaration), région, département, code postal, véhicule actuel (plaque ou modèle — pour déterminer Crit'Air et éligibilité prime à la conversion). L'IA calcule instantanément le cumul maximal d'aides auquel il a droit, en temps réel avec les barèmes en vigueur.
+
+**(2) Classement personnalisé de véhicules :** Basé sur le budget net après toutes les aides, les 10–15 EVs les moins chères disponibles en France sont classées par coût réel. Prix catalogue → prix après toutes les aides → coût mensuel en leasing ou LOA equivalent.
+
+**(3) Alerte ZFE :** Selon le code postal saisi, l'outil indique si l'utilisateur est concerné par une Zone à Faibles Émissions (Paris, Lyon, Toulouse, Strasbourg, Grenoble, Rouen, Montpellier, Reims) et la date à laquelle son Crit'Air actuel sera interdit — créant une urgence naturelle à agir.
+
+**(4) Pack Dossier (payant) :** Guide complet pour chaque aide applicable (formulaires Cerfa ADEME, justificatifs requis, délais, organismes de contact), modèle de lettre pour la prime à la conversion (destruction véhicule), checklist leasing social avec les concessionnaires partenaires.
+
+**(5) Abonnement Veille (payant) :** Notification push/email dès qu'un nouveau bonus régional, une extension du leasing social, ou un changement de barème bonus écologique est publié — avec recalcul automatique pour l'utilisateur.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur complet | €0 | Résultat viral — fort partage dans groupes voiture, forums budget |
+| Pack Dossier | €5 | Guide démarches + Cerfa + checklist leasing social |
+| Abonnement Veille | €9/mois | Alertes nouveaux bonus + recalcul auto si barèmes changent |
+| B2B Employeurs | €149/mois | Widget intégré à l'intranet RH pour accompagner les salariés vers le leasing social |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99% sur le pack €5. Le lien de résultat personnalisé partageable (ex : "J'ai découvert que je pouvais avoir une voiture électrique pour €89/mois") génère des boucles virales naturelles. CAC cible < €1 par acquisition organique.
+
+**B2B levier :** Les grandes entreprises ont des obligations de verdissement de flotte (loi LOM) et un intérêt à accompagner leurs salariés vers le leasing social — cela améliore leur bilan carbone déclaré. Un DRH qui déploie ElectriPass.ai pour 500 salariés = €149/mois récurrents.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Barèmes bonus écologique ADEME 2026 (tranches RFR), critères leasing social (liste concessionnaires partenaires ADEME), prime à la conversion (barème Crit'Air + RFR), aides régionales codées (12 grandes régions) + aides départementales pour les 20 principaux départements
+- **Données ZFE :** API ZFE-m ou données statiques des 11 ZFE françaises avec calendrier de restrictions par Crit'Air
+- **Génération dossiers :** Claude API (claude-sonnet-4-6) + react-pdf
+- **Paiements :** Stripe (one-shot pack + abonnement mensuel)
+- **Auth + DB :** Supabase
+- **Alertes :** Resend (webhooks sur mise à jour barèmes) — gratuit jusqu'à 3K/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "leasing social voiture électrique éligible", "bonus écologique 2026 plafond revenus", "prime conversion crit'air cumul", "aide voiture electrique region ile de france" — mots-clés à fort volume, peu concurrentiels car ADEME et service-public.fr n'offrent pas de simulateur cumulatif
+2. **Groupes Facebook :** "Voiture électrique France" (280 000+ membres), "Bons plans voitures électriques" (150 000+ membres), "Leasing social et voitures électriques" — partager le simulateur gratuit avec capture d'écran d'un résultat "€12 000 d'aides" génère des milliers de partages organiques
+3. **Forums :** Forum-Auto.com, Tesla Owners Club France, Automobile Propre (site leader de l'EV en France, 800K visiteurs/mois) — post de présentation de l'outil
+4. **YouTube Shorts / TikTok :** "Comment j'ai eu ma voiture électrique pour €6 000 grâce à ces 4 aides" — format viral, facile à créer, reproductible par ville/situation
+
+### Competitive Moat
+- **Aucun simulateur cumulatif n'existe :** ADEME, Service-Public.fr, et les comparateurs auto (LaCentrale, L'Argus) calculent les aides une par une — jamais cumulées avec personnalisation région + revenus + Crit'Air
+- **L'urgence ZFE est un déclencheur fort :** Quand l'outil dit "Votre Crit'Air 3 sera interdit à Paris en janvier 2027", il crée une action immédiate — meilleur convertisseur que n'importe quelle publicité
+- **Mise à jour annuelle des barèmes :** Les bonus évoluent chaque année → l'abonnement veille crée une récurrence sur un événement externe prévisible
+- **Extension naturelle :** Ajouter les bornes de recharge à domicile (ADVENIR, CEE) et les aides aux panneaux solaires pour créer un "pack maison + voiture 100% verte" qui rassemble 3 simulateurs en un
+
+### Figma Schematic
+[View ElectriPass.ai — French EV Incentives Calculator on FigJam](https://www.figma.com/board/TsFwStlHoAEVHpYFAq2mTC)
 
 ---
 
