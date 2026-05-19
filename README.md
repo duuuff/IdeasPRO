@@ -90,6 +90,16 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 80 | [FraisBancaires.ai](#80-fraisbancairesai) | Freemium + Pay-per-report | €6K–€40K | Low |
 | 81 | [GardeAlternée.ai](#81-gardealtérnéeai) | Pay-per-report + Annual Subscription | €7K–€50K | Low |
 | 82 | [AidantFamilial.ai](#82-aidantfamilialai) | Pay-per-pack + Freemium | €5K–€38K | Low |
+| 83 | [DepôtGarantie.ai](#83-depôtgarantieai) | Pay-per-pack + Freemium | €6K–€42K | Low |
+| 84 | [MédiationConso.ai](#84-médiationconsoi) | Freemium + Pay-per-pack | €8K–€55K | Low |
+| 85 | [CreancesPME.ai](#85-creancespmeai) | Pay-per-dossier + SaaS Subscription | €10K–€70K | Low-Medium |
+| 86 | [TaxeFoncière.ai](#86-taxefoncièreai) | Pay-per-pack + Freemium | €6K–€45K | Low |
+| 87 | [ImmoBroken.ai](#87-immobrokenai) | Pay-per-pack + Freemium | €8K–€55K | Low |
+| 88 | [FraisGarde.ai](#88-fraisgardeai) | Pay-per-report + Freemium | €5K–€40K | Low |
+| 89 | [ElectriPass.ai](#89-electripassai) | Freemium + Pay-per-pack + Subscription | €8K–€60K | Low |
+| 90 | [AirbnbFiscal.ai](#90-airbnbfiscalai) | Freemium + Pay-per-pack | €9K–€65K | Low |
+| 91 | [VéloSubvention.ai](#91-vélosubventionai) | Freemium + Pay-per-pack | €5K–€35K | Low |
+| 92 | [SantéMentale.ai](#92-santémentaleai) | Freemium + Pay-per-pack | €4K–€30K | Low |
 
 ---
 
@@ -3957,6 +3967,635 @@ Ces 11 millions de personnes ont accès à des droits considérables — massive
 
 ---
 
+## 83. DepôtGarantie.ai
+
+> **Récupérez votre dépôt de garantie — lettres, conciliation et tribunal en quelques clics**
+
+### Problem
+En France, **7,2 millions de locataires** quittent leur logement chaque année. La loi Alur est claire : le bailleur doit restituer le dépôt de garantie dans **1 mois** (pas de dégradations) ou **2 mois** (avec dégradations constatées à l'état des lieux). En cas de dépassement, une **pénalité de 10% du montant du loyer par mois de retard** s'applique — une règle que 95% des locataires ignorent.
+
+Les problèmes fréquents sont massifs :
+- **Retard de restitution** (bailleur qui "oublie" ou tarde) : la pénalité court dès J+30 ou J+60, mais les locataires ne la réclament jamais
+- **Retenues abusives** : "nettoyage €800", "peinture complète €2 000" alors que l'usure normale est à la charge du bailleur — les locataires ne savent pas contester
+- **Non-restitution totale** : le bailleur garde tout, le locataire ne sait pas quoi faire sans avocat
+- **Recours intimidants** : Commission Départementale de Conciliation (CDC), Tribunal de proximité — des procédures gratuites mais méconnues et perçues comme complexes
+
+**Le marché** : 7,2 millions de sorties × 40% de litiges partiels ou totaux = ~2,9 millions de locataires avec un problème chaque année. Montant moyen du dépôt de garantie en France : €800–€1 200. Stakes élevés, colère forte, besoin immédiat.
+
+### Solution
+**(1) Diagnostic gratuit :** Date de sortie + montant du dépôt + situation (rendu / partiellement rendu / non rendu) → calcul automatique du délai légal, de la pénalité due et de la stratégie recommandée.
+
+**(2) Générateur de lettres :** Lettre de relance simple, lettre de mise en demeure avec pénalités, lettre de contestation de retenues (avec références légales précises : décret n°87-712 sur les réparations locatives, vétusté).
+
+**(3) Pack Conciliation CDC :** Dossier de saisine de la Commission Départementale de Conciliation pré-rempli, liste des pièces à joindre, guide de présentation orale — la CDC est **gratuite et obligatoire** avant tout recours au tribunal dans de nombreux cas.
+
+**(4) Pack Tribunal de Proximité :** Requête en injonction de payer ou en référé pré-rédigée, guide pour le greffe, argumentaire juridique type — sans avocat, frais de justice <€35.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic + calcul pénalités | €0 | Freemium — fort SEO et viralité |
+| Lettre de relance simple | €0 | Gratuit — acquisition |
+| Pack Contentieux (3 lettres + guide CDC) | €9 | Lettre mise en demeure + contestation retenues + dossier CDC |
+| Pack Tribunal | €15 | Requête tribunal pré-rédigée + argumentaire + guide greffe |
+| Pack Complet | €19 | Tout inclus + suivi relances + modèles d'attestation |
+| B2B agences immo & syndics | €49/mois | Outil white-label pour gérer les fins de bail côté bailleur (conformité, justificatifs) |
+
+**Unit economics :** Claude API ~€0,01/lettre → coût quasi nul. **Marché :** 2,9 millions de locataires avec litige/an. À 0,2% conversion Pack Contentieux = 5 800 × €9 = **€52 200 MRR**. Le B2B agences est un canal de distribution direct : 12 000 agences immobilières en France.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — les locataires cherchent en urgence depuis leur téléphone)
+- **Moteur de calcul :** Règles légales dépôt de garantie (loi du 6 juillet 1989, art. 22, décret n°2015-342), calcul automatique des pénalités et de la vétusté par type de bien (grille ANIL)
+- **Génération courriers :** Claude API + react-pdf — lettres avec références juridiques précises, personnalisées selon le type de litige
+- **Base CDC :** Annuaire des 101 Commissions Départementales de Conciliation (CDC) par département, procédures de saisine
+- **Paiements :** Stripe (unitaire + abonnement B2B)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "caution non rendue lettre", "dépôt de garantie non restitué que faire", "retenue caution abusive contestation", "lettre mise en demeure caution locataire" — requêtes à très haute intention commerciale
+2. Reddit r/france, r/droit, forums SeLoger/PAP : les litiges caution sont parmi les sujets les plus discutés dans ces communautés
+3. TikTok/Reels : "Votre propriétaire ne vous rend pas votre caution ? Il vous doit 10% de pénalité par mois de retard. Voici comment l'exiger en 3 minutes." — format révélation à fort potentiel viral
+4. Partenariat ANIL/ADIL : les 92 Agences Départementales d'Information sur le Logement conseillent gratuitement les locataires — DepôtGarantie.ai peut être recommandé comme outil complémentaire
+
+### Competitive Moat
+- Le calcul automatique des pénalités (10%/mois) combiné à la grille de vétusté (durée de vie légale de chaque élément) est unique — les locataires ne savent pas que la peinture de 8 ans ne peut pas être facturée à 100%
+- La CDC est gratuite mais personne ne la connaît — DepôtGarantie.ai est le seul à expliquer, guider et pré-remplir le dossier CDC de façon simple
+- La viralité est forte : un locataire qui récupère €800 grâce à DepôtGarantie.ai en parle à tous ses amis qui déménagent
+
+### Figma Schematic
+[View DepôtGarantie.ai — Récupérez votre caution locative on FigJam](https://www.figma.com/board/CGTrQXEYlz19V74XyRY3K7)
+
+---
+
+## 84. MédiationConso.ai
+
+> **Résolvez gratuitement vos litiges avec télécom, énergie, banque et e-commerce — sans avocat, sans tribunal**
+
+### Problem
+Depuis 2016, **toutes les entreprises françaises** qui vendent à des consommateurs ont l'**obligation légale** de proposer un médiateur de la consommation agréé (ordonnance n°2015-1033). Ce médiateur **traite gratuitement** les litiges non résolus entre consommateurs et professionnels — en 90 jours. La décision n'est pas contraignante, mais **75% des avis de médiateurs sont suivis** par les entreprises car le processus est public et crédible.
+
+Le problème : **99% des consommateurs ne savent pas comment s'en servir.**
+
+Les litiges concernés sont massifs :
+- **Télécoms** (SFR, Orange, Free, Bouygues) : factures abusives, résiliation refusée, service non conforme — le médiateur des communications électroniques (ARCEP) traite 50 000+ dossiers/an
+- **Énergie** (EDF, Engie, ENI) : surfacturation, problèmes de compteur Linky, résiliation — le médiateur national de l'énergie traite 20 000+ dossiers/an
+- **Banque/Assurance** (tous les réseaux) : frais contestés, sinistre refusé, crédit litigieux — le médiateur de l'AMF, de l'ACPR, et les médiateurs bancaires
+- **E-commerce** (Amazon, Fnac, La Redoute, Vinted) : colis non reçu, remboursement refusé, garantie ignorée — médiateur du e-commerce (FEVAD)
+- **Transport** (SNCF, Air France, compagnies bus) : retards, bagages, remboursements
+
+**L'obstacle :** Pour saisir un médiateur, il faut avoir envoyé une réclamation écrite préalable à l'entreprise (souvent ignorée ou refusée) ET attendre 2 mois sans réponse satisfaisante. La plupart des consommateurs abandonnent à ce stade — ils ne savent pas rédiger la réclamation, ni identifier le bon médiateur, ni constituer le dossier.
+
+### Solution
+**(1) Sélecteur de litige :** Secteur (télécom, énergie, banque, e-commerce, transport...) + entreprise concernée → identification du médiateur compétent + conditions d'éligibilité.
+
+**(2) Générateur de réclamation préalable :** Lettre de réclamation formelle à envoyer à l'entreprise (prérequis légal), avec les bons arguments, les références légales et la mention de saisine du médiateur si non-réponse — souvent, cette lettre seule suffit à débloquer la situation.
+
+**(3) Dossier de saisine médiateur :** Après 2 mois sans réponse satisfaisante, dossier de saisine pré-rempli selon les exigences de chaque médiateur (formulaire + chronologie des faits + pièces à joindre), avec le lien vers le portail de dépôt en ligne.
+
+**(4) Escalade DGCCRF :** Si la médiation échoue, signalement guidé à la DGCCRF (Direction Générale de la Concurrence) ou saisine du tribunal — modèles inclus.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Sélecteur médiateur + éligibilité | €0 | Freemium — SEO puissant |
+| Lettre de réclamation préalable | €0 | Gratuit — conversion ultérieure |
+| Pack Médiation | €7 | Lettre réclamation + dossier saisine médiateur + suivi calendaire |
+| Pack Litige Complet | €15 | Tout inclus + escalade DGCCRF + modèle plainte tribunal si échec |
+| B2B associations de consommateurs | €79/mois | Licence association — outil de service pour leurs adhérents (UFC-Que Choisir délégations, CLCV, associations sectorielles) |
+
+**Unit economics :** Claude API ~€0,01/dossier → coût quasi nul. **Marché :** En France, 80 millions de contrats télécom + ~30 millions de clients énergie + 90% des Français font des achats en ligne. Chaque Français a en moyenne 1,8 litige consommateur par an non résolu. À 0,15% conversion Pack Médiation sur le marché adressable : énorme. Le canal B2B associations est direct : UFC-Que Choisir a 150 associations locales, CLCV a 120 associations, l'UNAF représente 3 millions de familles.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Base médiateurs :** Annuaire des ~60 médiateurs agréés CECMC (Commission d'Évaluation et de Contrôle de la Médiation de la Consommation), mis à jour annuellement, avec le secteur, les conditions d'éligibilité et les portails de saisine
+- **Moteur d'éligibilité :** Règles de la directive 2013/11/UE transposée en droit français — vérification automatique des conditions (réclamation préalable, délai 1 an, litige B2C)
+- **Génération courriers :** Claude API + react-pdf — lettre de réclamation + dossier médiateur personnalisés par secteur et entreprise
+- **Paiements :** Stripe
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "réclamation SFR lettre", "litige EDF que faire", "médiateur télécom saisir comment", "Amazon colis non reçu remboursement refusé" — mots-clés à très haute intention, des millions de requêtes/mois en France
+2. YouTube/TikTok : "Votre opérateur vous a surtaxé ? Il existe un médiateur gratuit obligatoire que vous n'avez jamais utilisé — voici comment forcer SFR/Orange/Free à vous rembourser en 90 jours sans avocat"
+3. Forums consommateurs : Commentcamarche.net, forums UFC-Que Choisir, r/france — les litiges télécom et énergie sont parmi les sujets les plus actifs
+4. Partenariat UFC-Que Choisir : l'organisation manque d'outils digitaux pour ses 150 délégations locales — MédiationConso.ai peut être leur outil de référence
+
+### Competitive Moat
+- L'annuaire des 60 médiateurs agréés avec les règles d'éligibilité par secteur est du travail de recherche que personne n'a fait en format outil pratique — c'est la barrière à l'entrée
+- La lettre de réclamation préalable est souvent décisive : bien rédigée, avec la mention "je me réserve le droit de saisir votre médiateur agréé", les entreprises cèdent plus souvent — MédiationConso.ai crée de la valeur immédiate avant même la médiation
+- La viralité est naturelle : un consommateur remboursé par EDF grâce à une lettre de 3 minutes en parle immédiatement à son entourage
+
+### Figma Schematic
+[View MédiationConso.ai — Résolvez vos litiges consommateurs gratuitement on FigJam](https://www.figma.com/board/GGC9t1S0WvzM9XPk2qmjvQ)
+
+---
+
+## 85. CreancesPME.ai
+
+> **Recouvrez vos factures impayées — injonction de payer sans avocat pour freelances et TPE/PME**
+
+### Problem
+En France, les impayés représentent **12 milliards d'euros par an** et constituent la **première cause de faillite des PME et TPE** (56% des défaillances d'entreprises ont des impayés comme facteur déclencheur, selon la Banque de France). Les freelances et micro-entrepreneurs sont particulièrement vulnérables : une seule facture impayée peut représenter 1-3 mois de revenus.
+
+**La loi protège fortement les créanciers professionnels :**
+- **Intérêts de retard légaux :** Depuis 2024, le taux BCE + 10 points = ~13,5% annuel, plus une **indemnité forfaitaire de €40** par facture impayée (art. L441-10 du Code de commerce) — automatiquement dus sans avoir à les réclamer explicitement dans la facture
+- **L'injonction de payer :** Procédure judiciaire ultra-rapide (15-30 jours), **sans avocat obligatoire**, pour des créances incontestables. Formulaire Cerfa 12947, dépôt au greffe du tribunal de commerce ou tribunal judiciaire selon la qualité du débiteur. Frais de justice : €33,47. Taux de succès si le client ne fait pas opposition : **~90%** (ordonnance exécutoire rendue par le juge).
+- **La mise en demeure bien rédigée** avec mention des pénalités légales déclenche souvent le paiement immédiatement — sans procédure.
+
+**Le problème :** 3,5 millions d'auto-entrepreneurs et 1,5 million de TPE n'utilisent pas ces outils car ils ne savent pas les utiliser, ont peur de "froisser" leurs clients, ou croient que ça coûte cher. Des dizaines de milliers d'euros de créances sont abandonnées chaque année par manque d'information.
+
+### Solution
+**(1) Tableau de bord impayés :** Import ou saisie manuelle des factures impayées (numéro, montant, date échéance, client) → calcul automatique des intérêts de retard dus + indemnité €40 + montant total à réclamer.
+
+**(2) Mise en demeure automatique :** Lettre de mise en demeure avec le montant exact (capital + intérêts légaux + indemnité forfaitaire), délai de paiement (15 jours), et mention de l'injonction de payer en cas de non-paiement — le ton parfait pour être ferme sans briser la relation.
+
+**(3) Dossier Injonction de Payer :** Formulaire Cerfa 12947 pré-rempli (requête en injonction de payer), identification du tribunal compétent (tribunal de commerce si débiteur commerçant, tribunal judiciaire sinon), liste des pièces à joindre (facture, bon de commande, échanges email), guide pour le dépôt au greffe.
+
+**(4) Suivi et escalade :** Si le client fait opposition à l'ordonnance (~10% des cas), guide pour l'audience contradictoire avec argumentaire juridique type et liste des preuves à préparer. Si paiement obtenu, calculateur de frais récupérables (art. 700 CPC).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Tableau de bord + calcul intérêts | €0 | Freemium — fort SEO et acquisition |
+| Mise en demeure (lettre) | €0 | Gratuit — conversion ultérieure |
+| Pack Injonction de Payer | €19 | Cerfa pré-rempli + identification tribunal + guide greffe + argumentaire opposition |
+| Abonnement Mensuel | €29/mois | Factures illimitées + tableau de bord suivi + relances automatiques + mises en demeure illimitées |
+| B2B Expert-comptables | €99/mois | Outil marque blanche pour intégration dans leur offre client |
+
+**Unit economics :** Claude API ~€0,02/dossier → coût minimal. **Marché :** 3,5 millions d'auto-entrepreneurs + 1,5 million de TPE = 5 millions de structures potentiellement exposées aux impayés. 30% ont au moins 1 impayé significatif/an = 1,5 million d'opportunités/an. À 0,3% conversion Pack Injonction = 4 500 × €19 = **€85 500 MRR**. L'abonnement mensuel crée de la récurrence : un freelance qui a 2-3 impayés/an garde l'abonnement actif.
+
+**Canal B2B :** 21 000 experts-comptables en France, chacun avec 50-200 clients TPE/PME. Un seul partenariat avec un cabinet = centaines d'utilisateurs. Les plateformes comme Pennylane, Axonaut ou Indy pourraient intégrer CreancesPME.ai en white-label.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (dashboard SaaS)
+- **Moteur de calcul créances :** Taux BCE + 10 pts (mis à jour chaque semestre), indemnité forfaitaire €40 (art. L441-10 C.com.), calcul prorata temporis des intérêts
+- **Base tribunaux :** Annuaire des 134 tribunaux de commerce + tribunaux judiciaires avec juridictions compétentes par département et seuil (commerce vs civil)
+- **Génération documents :** Claude API + react-pdf — Cerfa 12947 pré-rempli, lettre mise en demeure, argumentaire audience
+- **Paiements :** Stripe (unitaire + abonnement récurrent)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "facture impayée que faire", "injonction de payer comment faire sans avocat", "mise en demeure facture modèle", "intérêts de retard facture calcul" — mots-clés à très forte intention commerciale, faible concurrence SEO
+2. LinkedIn : les freelances et dirigeants de TPE y sont très actifs — "Vous avez une facture impayée depuis 60 jours ? Voici pourquoi l'injonction de payer est votre meilleure arme et comment la déposer en 20 minutes pour €33" → fort potentiel viral sur LinkedIn
+3. Groupes Facebook Auto-entrepreneurs : "Auto-entrepreneurs France" (200 000+ membres), "Freelances et indépendants" — les impayés sont un sujet récurrent et douloureux dans ces groupes
+4. Partenariats plateformes de facturation : Freebe, Indy, Zervant, Henrri — ces outils de facturation pour freelances ont des millions d'utilisateurs et manquent d'un module de recouvrement intégré
+
+### Competitive Moat
+- Le calcul automatique des intérêts légaux + indemnité €40 + identification du tribunal compétent est unique — aucun outil grand public ne fait ça aujourd'hui
+- Le Cerfa 12947 pré-rempli supprime l'obstacle psychologique principal (le formulaire judiciaire est perçu comme intimidant) : c'est la valeur ajoutée clé
+- Les intégrations avec les plateformes de facturation créent un effet de réseau et une barrière à la copie : une fois intégré dans Freebe ou Indy, il est difficile d'en sortir
+- La viralité est très forte : un freelance qui récupère €3 000 d'impayés grâce à CreancesPME.ai devient un ambassadeur immédiat dans ses communautés professionnelles
+
+### Figma Schematic
+[View CreancesPME.ai — Recouvrez vos factures impayées on FigJam](https://www.figma.com/board/Rg6JpAQegV91dn7xS76aXc)
+
+---
+
+## 86. TaxeFoncière.ai
+
+> **Contester votre taxe foncière en 5 minutes — récupérez jusqu'à 3 ans de trop-perçu**
+
+### Problem
+La taxe foncière a bondi de **26% en moyenne en 2023** (revalorisation forfaitaire des bases cadastrales) et continue d'augmenter. En France, la valeur locative cadastrale — la base de calcul de la taxe foncière — est encore fondée sur des données de 1970 actualisées forfaitairement. Elle contient des erreurs systématiques : mauvaise surface déclarée, mauvaise classification (3 pièces au lieu de 4, cave non comptabilisée, véranda ajoutée non déclarée), ou tarif de commune mal appliqué.
+
+**Selon la DGFIP elle-même, 10–15% des 36 millions de logements taxés présentent au moins une anomalie corrigeable.** Or, presque aucun propriétaire ne sait que :
+- Il peut contester la valeur locative auprès du centre des impôts **jusqu'au 31 décembre de l'année suivant l'avis**
+- En cas d'erreur avérée, le dégrèvement peut être **rétroactif sur 3 ans**
+- La procédure ne nécessite **aucun avocat** — juste un formulaire et une lettre
+
+### Solution
+**(1) Diagnostic gratuit :** L'utilisateur entre l'adresse, la surface, le nombre de pièces, les dépendances (garage, cave, véranda) et l'année de construction. L'IA interroge les données publiques (API data.gouv.fr, plan cadastral, référentiels DVF) et compare la valeur locative déclarée aux biens similaires de la même commune/section cadastrale.
+
+**(2) Estimation du trop-perçu :** Si une anomalie est détectée, affichage immédiat du montant de dégrèvement potentiel (annuel et sur 3 ans). Exemple type : surface sous-déclarée de 8m² dans une commune où le taux d'imposition est 45% → économie de €180/an → €540 sur 3 ans.
+
+**(3) Pack contestation (payant) :** Lettre de contestation DGFIP pré-rédigée avec les références légales exactes (art. 1508 CGI pour erreur matérielle, art. 1514 pour mise à jour), identification du centre des impôts fonciers compétent par adresse, liste des justificatifs à joindre (plan du logement, photos, titre de propriété), et guide de suivi de la contestation.
+
+**(4) Tableau de bord suivi :** Rappels automatiques des délais, notification si la DGFIP répond, guide de recours si la contestation est rejetée (commission départementale des impôts).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic gratuit | €0 | Résultat anomalie/conforme + estimation trop-perçu |
+| Pack Contestation | €9 | Lettre DGFIP + identification centre + guide justificatifs + suivi |
+| Abonnement Propriétaire | €19/an | Surveillance annuelle de l'avis + alertes revalorisation + pack inclus |
+| B2B Syndics/Notaires | €149/mois | Outil marque blanche + API — analyse portefeuille multi-lots |
+
+**Unit economics :** Claude API ~€0,03/analyse → 99,7% de marge brute sur le Pack €9. Un propriétaire qui apprend qu'il peut récupérer €540 paie €9 immédiatement — taux de conversion attendu >40% sur les anomalies détectées.
+
+**Marché :** 36 millions de logements taxés. Si 12% présentent une anomalie = 4,3 millions de propriétaires concernés. 5% convertis au Pack = 215 000 × €9 = **€1,9M de revenus potentiels**. L'abonnement annuel à €19 crée de la récurrence sur une taxe qui augmente chaque année.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Données cadastrales :** API Géoportail de l'urbanisme, Plan Cadastral Informatisé (PCI) data.gouv.fr, DVF (Demandes de Valeurs Foncières) pour comparables
+- **Géocodage :** api-adresse.data.gouv.fr (officiel, gratuit)
+- **Génération lettre :** Claude API (claude-sonnet-4-6) avec templates légaux art. 1508 / 1514 CGI
+- **PDF :** react-pdf
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "taxe foncière trop élevée recours", "contester valeur locative cadastrale", "erreur taxe foncière remboursement 2025" — mots-clés à très forte intention et faible concurrence
+2. TikTok/Reels : "J'ai récupéré €480 de taxe foncière payée en trop — voici comment" — contenu viral de type "money hack"
+3. Forums propriétaires : SeLoger forum, PAP, r/france, groupes Facebook "Propriétaires bailleurs France" (180 000+ membres)
+4. Partenariat syndics de copropriété : chaque syndic gère des centaines de lots — un seul partenariat = centaines d'utilisateurs
+
+### Competitive Moat
+- La comparaison automatique avec les données cadastrales publiques pour détecter les anomalies n'existe dans aucun outil grand public aujourd'hui
+- Le délai légal de contestation (31 décembre N+1) crée une urgence naturelle = conversions saisonnières très fortes après réception des avis (septembre–décembre)
+- Les données DVF permettent de construire une base de référence propriétaire qui s'améliore avec chaque analyse — data moat progressif
+- Extension naturelle vers la taxe d'habitation sur résidences secondaires et la TEOM (taxe sur les ordures ménagères)
+
+### Figma Schematic
+[View TaxeFoncière.ai — Contest Your Property Tax on FigJam](https://www.figma.com/board/6c3kiWK13aBHqNQtSeWv4n)
+
+---
+
+## 87. ImmoBroken.ai
+
+> **Renégociez votre crédit immobilier vous-même — calculez votre IRA et envoyez la bonne lettre à votre banque**
+
+### Problem
+Entre 2022 et 2024, les taux immobiliers français sont passés de 1% à 4,5%. Depuis début 2025, ils reculent progressivement (3,2–3,6% sur 20 ans en mai 2026). Résultat :
+- **Les emprunteurs à taux élevé (3,5–4,5%)** peuvent désormais renégocier ou faire racheter leur crédit et économiser des dizaines de milliers d'euros
+- **Les emprunteurs à taux bas (1–2%)** qui veulent vendre leur bien ignorent si casser leur prêt coûte plus ou moins que de le garder
+
+**L'obstacle principal : l'IRA (Indemnité de Remboursement Anticipé).** Légalement plafonnée à 6 mois d'intérêts ou 3% du capital restant dû (le plus bas des deux, art. L313-47 du Code de la consommation), elle est quasi impossible à calculer sans les données exactes du tableau d'amortissement. Les banques ne la communiquent pas spontanément. Résultat : des millions d'emprunteurs ne renégocient pas par peur d'un coût opaque, ou paient des IRA surdimensionnées faute de les avoir vérifiées.
+
+**Données clés :** 10 millions de crédits immobiliers en cours en France. 2,5 millions contractés entre mi-2022 et fin-2023 à des taux >3,5%. Sur ces 2,5 millions, un rachat de crédit peut économiser en moyenne €15 000–€30 000 sur la durée restante.
+
+### Solution
+**(1) Calculateur IRA instantané :** L'utilisateur entre le capital restant dû, le taux actuel, la durée restante et la mensualité. L'IA calcule l'IRA légale maximale (les deux plafonds), la compare au gain potentiel d'une renégociation aux taux actuels du marché, et affiche le **seuil de rentabilité** (mois de break-even).
+
+**(2) Simulation 3 scénarios :**
+- **Scénario A — Renégociation interne :** Négociation du taux directement avec sa propre banque (sans frais de mainlevée hypothèque). Gain net calculé.
+- **Scénario B — Rachat de crédit :** Transfert vers une autre banque au meilleur taux du marché. Inclut frais de mainlevée (~€800), frais de dossier (~€1 000), assurance emprunteur recalculée. Gain net calculé.
+- **Scénario C — Statu quo :** Coût total si on ne fait rien. Sert de référence émotionnelle.
+
+**(3) Pack complet (payant) :** Lettre de renégociation bancaire personnalisée avec les bons arguments (taux de marché actuel, fidélité client, menace de rachat concurrent), simulation mensuelle détaillée en PDF, et script d'appel avec le conseiller (objections fréquentes et réponses).
+
+**(4) Guide rachat si refus :** Si la banque refuse, guide pour contacter un courtier ou faire une demande de rachat avec comparateur des meilleures offres du moment.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur IRA + 3 scénarios | €0 | Résultat immédiat — fort potentiel viral |
+| Pack Renégociation | €19 | Lettre banque + PDF simulation + script appel |
+| Pack Rachat de Crédit | €29 | Guide rachat + comparateur courtiers partenaires + lettre de mise en concurrence |
+| Affiliation courtiers | Commission | €50–€150 par dossier transmis à un courtier partenaire (CAFPI, Meilleurtaux, Vousfinancer) |
+
+**Unit economics :** Claude API ~€0,05/simulation → marge brute >99% sur le pack €19. Un emprunteur qui apprend qu'il peut économiser €18 000 sur son crédit paiera €19 sans hésiter — taux de conversion attendu >35%.
+
+**Potentiel affiliation :** Si 5% des utilisateurs transmettent leur dossier à un courtier partenaire à €80 de commission = énorme levier de revenus passifs.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Moteur de calcul :** Formule IRA légale (art. L313-47 C.conso.), tableau d'amortissement généré côté client, comparaison taux marché (données APILR ou scraping Meilleurtaux/CAFPI hebdomadaire)
+- **Génération documents :** Claude API + react-pdf
+- **Paiements :** Stripe (one-shot)
+- **Auth + DB :** Supabase
+- **Tracking :** Plausible Analytics (RGPD-friendly, open-source)
+
+### Go-to-Market (zero budget)
+1. SEO : "calculer indemnité remboursement anticipé", "renégocier crédit immobilier 2026", "IRA crédit immo calcul gratuit", "rachat crédit immobilier taux actuel" — requêtes à très fort volume et très forte intention commerciale
+2. YouTube/TikTok : "Mon banquier ne voulait pas me dire mon IRA — voici comment je l'ai calculé moi-même et économisé €22 000"
+3. Reddit/forums : r/france, r/immobilier, Meilleurtaux forum, SeLoger forum — contenu pédagogique sur l'IRA avec lien vers l'outil gratuit
+4. LinkedIn : cibler les emprunteurs qui ont posté sur la hausse des taux — contenu "Avez-vous vérifié si votre IRA est correctement calculée ?"
+
+### Competitive Moat
+- Les calculateurs IRA existants (rares) sont des Excel statiques sans génération de lettre — ImmoBroken.ai est le seul à combiner calcul + action (lettre + script)
+- Le modèle d'affiliation avec les courtiers crée un revenu passif et une barrière : les courtiers partenaires ont intérêt à recommander l'outil à leurs prospects
+- La base de taux du marché mise à jour hebdomadairement devient une ressource SEO en soi (page "Taux immobiliers du moment")
+- Extension vers le calcul d'assurance emprunteur (délégation d'assurance, loi Lemoine 2022 — résiliation à tout moment) pour un deuxième produit complémentaire
+
+### Figma Schematic
+[View ImmoBroken.ai — Mortgage Renegotiation Optimizer on FigJam](https://www.figma.com/board/tD7cEa3gfoofNtZiktwfUe)
+
+---
+
+## 88. FraisGarde.ai
+
+> **Calculez votre vrai coût de garde d'enfant — après CAF, CMG, et crédit d'impôt**
+
+### Problem
+En France, une place en crèche collective coûte €0 à €1 500/mois selon les revenus (barème CAF). Une assistante maternelle agréée coûte €700 à €1 400/mois brut, mais après CMG (Complément de Libre Choix du Mode de Garde) et crédit d'impôt de 50%, le coût net peut descendre à €200–€600/mois. Une garde à domicile coûte €1 800–€3 000/mois brut, mais avec le CMG majoré et le crédit d'impôt, peut revenir à €600–€900/mois net.
+
+**Le problème : 80% des parents français ne connaissent pas leur coût net réel de garde.** Ils regardent le tarif brut, pensent ne pas pouvoir se payer une assistante maternelle ou une garde à domicile, et n'explorent même pas l'option. Résultat : des places en crèche collectivement surdemandées, des assistantes maternelles sous-utilisées dans certains bassins, et des familles qui perdent €300–€800/mois d'aides auxquelles elles ont droit.
+
+**Le système est volontairement complexe :**
+- **PAJE (Prestation d'Accueil du Jeune Enfant) :** Prime naissance + allocation de base selon revenus
+- **CMG :** Aide variable selon revenus (0 à €1 248/mois pour garde à domicile) — versée directement à l'employeur via PAJEMPLOI
+- **Crédit d'impôt :** 50% des dépenses de garde restantes après CMG, plafonné à €2 300/an
+- **CESU préfinancé :** Certains employeurs abondent jusqu'à €2 301/an de CESU exonérés — que peu de salariés activent
+- **Bourse crèche municipale :** Variable selon commune (certaines villes subventionnent jusqu'à 100% selon QF)
+
+### Solution
+**(1) Simulateur net complet :** L'utilisateur entre revenus du foyer (net imposable), nombre d'enfants concernés, âges, code postal. L'IA calcule le coût net mensuel de **4 modes de garde** en parallèle : crèche municipale, crèche privée, assistante maternelle, garde à domicile.
+
+**(2) Toutes les aides incluses :** PAJE applicable, tranche CMG exact (barème CAF 2026 intégré), crédit d'impôt proratisé, CESU préfinancé employeur (si applicable), aides communales spécifiques pour les 20 plus grandes villes.
+
+**(3) Recommandation personnalisée :** Classement des 4 options par coût net croissant avec explication des écarts. Mise en évidence des économies laissées sur la table si on ne demande pas certaines aides.
+
+**(4) Pack dossiers (payant) :** Guide complet de demande CMG à la CAF (pièces requises, formulaires Cerfa), déclaration PAJEMPLOI (employeur particulier), dossier d'inscription crèche municipale pour la ville concernée, activation CESU préfinancé via l'employeur, et calendrier des démarches avec délais.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur net 4 modes | €0 | Fort effet "wow" — viral dans les groupes parents |
+| Pack Dossiers Complet | €5 | Cerfa CAF + PAJEMPLOI + guide crèche + calendrier |
+| Abonnement Famille | €12/an | Mis à jour annuelle du calcul selon nouveaux barèmes CAF |
+| B2B Employeurs (CESU) | €199/mois | Module calculateur intégré à l'intranet RH — aide les RH à activer les CESU pour leurs salariés |
+
+**Unit economics :** Claude API ~€0,02/simulation → marge >99% sur le pack €5. L'effet "J'aurais dû savoir ça avant" est extrêmement fort — les parents partagent massivement ce type d'outil dans leurs réseaux (groupes grossesse, forums parents).
+
+**B2B levier :** Les grandes entreprises ont souvent un budget CESU non consommé car les salariés n'activent pas leur aide. Un DRH qui déploie FraisGarde.ai pour ses 500 salariés parents = €199/mois et des dizaines d'utilisateurs actifs qui paient le pack €5 individuellement.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind
+- **Moteur de calcul :** Barèmes CAF 2026 (PAJE, CMG tranches A/B/C), taux de crédit d'impôt 50% avec plafond, CESU préfinancé (plafond exonération €2 301/an), tarifs crèche par commune (20 grandes villes codées en dur + fallback barème CAF standard)
+- **Génération dossiers :** Claude API (claude-sonnet-4-6) + react-pdf pour les guides personnalisés
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Auth + DB :** Supabase
+
+### Go-to-Market (zero budget)
+1. SEO : "coût réel assistante maternelle après aides", "CMG calcul 2026", "garde enfant crédit impôt combien", "FraisGarde simulateur CAF" — mots-clés à fort volume, peu concurrentiels
+2. Groupes Facebook parents : "Grossesse et maternité France" (500 000+ membres), "Assistantes maternelles et parents" — partager le simulateur gratuit déclenche une vague de partages organiques
+3. Maternités et PMI (Protection Maternelle Infantile) : distribuer des QR codes vers l'outil gratuit lors des consultations de grossesse — coût zéro, audience parfaite
+4. Partenariat mutuelles et comités d'entreprise : proposer FraisGarde.ai comme avantage salarié pour les parents — le CE paye l'abonnement B2B, les salariés utilisent l'outil gratuitement
+
+### Competitive Moat
+- Le simulateur multi-modes simultané (crèche + AM + garde à domicile) avec toutes les aides combinées en une seule interface n'existe pas aujourd'hui — les outils CAF calculent une aide à la fois
+- Les barèmes CAF sont mis à jour chaque année : l'abonnement annuel crée de la récurrence naturelle sur un événement calendaire prévisible
+- La viralité dans les groupes parents est extrêmement forte : un parent qui découvre qu'il peut économiser €350/mois partage immédiatement — coût d'acquisition < €0,50 par utilisateur
+- Extension naturelle vers la garde de nuit, les centres de loisirs (ALSH — Accueil de Loisirs Sans Hébergement avec aide CAF), et la garde partagée (nanny share) pour couvrir tout le cycle 0–12 ans
+
+### Figma Schematic
+[View FraisGarde.ai — Childcare Cost Optimizer on FigJam](https://www.figma.com/board/Qv5TEEqnNr3br1DQRWGGQu)
+
+---
+
+## 89. ElectriPass.ai
+
+> **Calculez en 2 minutes toutes vos aides pour passer à l'électrique — cumulées, personnalisées, actionnables**
+
+### Problem
+La France est l'un des marchés EV les plus subventionnés au monde, mais le système d'aides est un labyrinthe : bonus écologique national, leasing social à €100/mois (sous conditions de revenus), prime à la conversion (cumulable), aides régionales (Île-de-France, AURA, PACA — chacune a ses propres critères), aides départementales, et dans certains cas aides des collectivités locales. **80% des ménages modestes ne savent pas qu'ils sont éligibles au leasing social**, dont le plafond de revenus couvre pourtant 50% des foyers français (RFR < €15 400/part).
+
+**Le problème concret :** Un ouvrier en Île-de-France avec un vieux diesel Crit'Air 3 peut cumuler :
+- Bonus écologique : €7 000 (sous plafond revenus)
+- Prime à la conversion : €3 000 (véhicule < Crit'Air 2 éliminé)
+- Aide Île-de-France : €2 000
+- Soit **€12 000 de rabais** sur une Dacia Spring à €18 000 → voiture à **€6 000**
+
+Il ne le sait pas. Il cherche sur Google, tombe sur des articles contradictoires de 2023, et repart sans rien acheter. Le site ADEME et Service-Public.fr ne permettent pas de tout cumuler en une seule simulation.
+
+### Solution
+**(1) Simulateur tout-en-un :** L'utilisateur saisit en 90 secondes : revenus du foyer (RFR de la dernière déclaration), région, département, code postal, véhicule actuel (plaque ou modèle — pour déterminer Crit'Air et éligibilité prime à la conversion). L'IA calcule instantanément le cumul maximal d'aides auquel il a droit, en temps réel avec les barèmes en vigueur.
+
+**(2) Classement personnalisé de véhicules :** Basé sur le budget net après toutes les aides, les 10–15 EVs les moins chères disponibles en France sont classées par coût réel. Prix catalogue → prix après toutes les aides → coût mensuel en leasing ou LOA equivalent.
+
+**(3) Alerte ZFE :** Selon le code postal saisi, l'outil indique si l'utilisateur est concerné par une Zone à Faibles Émissions (Paris, Lyon, Toulouse, Strasbourg, Grenoble, Rouen, Montpellier, Reims) et la date à laquelle son Crit'Air actuel sera interdit — créant une urgence naturelle à agir.
+
+**(4) Pack Dossier (payant) :** Guide complet pour chaque aide applicable (formulaires Cerfa ADEME, justificatifs requis, délais, organismes de contact), modèle de lettre pour la prime à la conversion (destruction véhicule), checklist leasing social avec les concessionnaires partenaires.
+
+**(5) Abonnement Veille (payant) :** Notification push/email dès qu'un nouveau bonus régional, une extension du leasing social, ou un changement de barème bonus écologique est publié — avec recalcul automatique pour l'utilisateur.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur complet | €0 | Résultat viral — fort partage dans groupes voiture, forums budget |
+| Pack Dossier | €5 | Guide démarches + Cerfa + checklist leasing social |
+| Abonnement Veille | €9/mois | Alertes nouveaux bonus + recalcul auto si barèmes changent |
+| B2B Employeurs | €149/mois | Widget intégré à l'intranet RH pour accompagner les salariés vers le leasing social |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99% sur le pack €5. Le lien de résultat personnalisé partageable (ex : "J'ai découvert que je pouvais avoir une voiture électrique pour €89/mois") génère des boucles virales naturelles. CAC cible < €1 par acquisition organique.
+
+**B2B levier :** Les grandes entreprises ont des obligations de verdissement de flotte (loi LOM) et un intérêt à accompagner leurs salariés vers le leasing social — cela améliore leur bilan carbone déclaré. Un DRH qui déploie ElectriPass.ai pour 500 salariés = €149/mois récurrents.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Barèmes bonus écologique ADEME 2026 (tranches RFR), critères leasing social (liste concessionnaires partenaires ADEME), prime à la conversion (barème Crit'Air + RFR), aides régionales codées (12 grandes régions) + aides départementales pour les 20 principaux départements
+- **Données ZFE :** API ZFE-m ou données statiques des 11 ZFE françaises avec calendrier de restrictions par Crit'Air
+- **Génération dossiers :** Claude API (claude-sonnet-4-6) + react-pdf
+- **Paiements :** Stripe (one-shot pack + abonnement mensuel)
+- **Auth + DB :** Supabase
+- **Alertes :** Resend (webhooks sur mise à jour barèmes) — gratuit jusqu'à 3K/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "leasing social voiture électrique éligible", "bonus écologique 2026 plafond revenus", "prime conversion crit'air cumul", "aide voiture electrique region ile de france" — mots-clés à fort volume, peu concurrentiels car ADEME et service-public.fr n'offrent pas de simulateur cumulatif
+2. **Groupes Facebook :** "Voiture électrique France" (280 000+ membres), "Bons plans voitures électriques" (150 000+ membres), "Leasing social et voitures électriques" — partager le simulateur gratuit avec capture d'écran d'un résultat "€12 000 d'aides" génère des milliers de partages organiques
+3. **Forums :** Forum-Auto.com, Tesla Owners Club France, Automobile Propre (site leader de l'EV en France, 800K visiteurs/mois) — post de présentation de l'outil
+4. **YouTube Shorts / TikTok :** "Comment j'ai eu ma voiture électrique pour €6 000 grâce à ces 4 aides" — format viral, facile à créer, reproductible par ville/situation
+
+### Competitive Moat
+- **Aucun simulateur cumulatif n'existe :** ADEME, Service-Public.fr, et les comparateurs auto (LaCentrale, L'Argus) calculent les aides une par une — jamais cumulées avec personnalisation région + revenus + Crit'Air
+- **L'urgence ZFE est un déclencheur fort :** Quand l'outil dit "Votre Crit'Air 3 sera interdit à Paris en janvier 2027", il crée une action immédiate — meilleur convertisseur que n'importe quelle publicité
+- **Mise à jour annuelle des barèmes :** Les bonus évoluent chaque année → l'abonnement veille crée une récurrence sur un événement externe prévisible
+- **Extension naturelle :** Ajouter les bornes de recharge à domicile (ADVENIR, CEE) et les aides aux panneaux solaires pour créer un "pack maison + voiture 100% verte" qui rassemble 3 simulateurs en un
+
+### Figma Schematic
+[View ElectriPass.ai — French EV Incentives Calculator on FigJam](https://www.figma.com/board/TsFwStlHoAEVHpYFAq2mTC)
+
+---
+
+## 90. AirbnbFiscal.ai
+
+> **Choisissez le bon régime fiscal pour vos revenus Airbnb — simulateur post loi anti-Airbnb 2024**
+
+### Problem
+La loi de finances 2024 a bouleversé la fiscalité des locations meublées de tourisme en France : pour les **meublés non classés** (la majorité des hosts Airbnb), le plafond micro-BIC a été réduit de €77 700 à **€15 000**, et l'abattement de 50% à **30%** — soit une multiplication par 3 de l'impôt pour certains hosts. Puis une loi corrective a partiellement rétabli les anciens plafonds, créant une confusion totale.
+
+**Le résultat :** 400 000 hosts Airbnb en France ne savent plus quel régime déclarer pour 2025 et 2026. Certains sur-déclarent (régime réel inutile quand le micro-BIC suffit), d'autres sous-optimisent (maintien au micro-BIC alors que le régime réel avec amortissement serait 2× plus avantageux). Les experts-comptables facturent €400–€800 pour un conseil que l'IA peut délivrer en 2 minutes.
+
+**Les 3 régimes possibles — mal compris par 90% des hosts :**
+- **Micro-BIC meublé classé :** Plafond €77 700, abattement 71% (très avantageux si revenus modérés)
+- **Micro-BIC non classé :** Plafond €15 000, abattement 30% (souvent défavorable vs régime réel)
+- **Régime réel simplifié :** Déduction de toutes les charges réelles + amortissement du bien et du mobilier (optimal au-delà de ~€12 000 de revenus locatifs bruts dans un bien en propriété)
+
+**Donnée clé :** Sur les 400 000 hosts français, seulement ~8% ont fait classer leur logement. 92% subissent le régime non classé. Sur ces 92%, environ 35% auraient intérêt à basculer au régime réel — mais ne le savent pas.
+
+### Solution
+**(1) Simulateur régime optimal en 2 minutes :** L'utilisateur entre : revenus Airbnb annuels bruts, charges réelles (crédit, charges de copropriété, assurance, ménage, consommables), valeur du bien (pour l'amortissement), statut du logement (classé ou non), et tranche marginale d'imposition. L'IA calcule l'impôt exact dans les 3 régimes et affiche le **gagnant en euros économisés**.
+
+**(2) Simulateur de classification :** Si le logement n'est pas classé, l'outil explique comment le faire classer (procédure Atout France, critères, coût ~€150), et recalcule si cela vaut le coup (retour sur investissement de la classification).
+
+**(3) Alerte plafond en temps réel :** Intégré à la API Airbnb (via OAuth) ou saisie manuelle du revenus cumulés — alerte quand le host approche du plafond micro-BIC pour éviter le passage au régime réel non souhaité.
+
+**(4) Pack Complet (payant) :** Formulaire 2042 C PRO pré-rempli avec les bons montants, guide déclaration étape par étape (case par case), liste des charges déductibles au régime réel avec justificatifs requis, modèle de tableau d'amortissement (Cerfa format), alerte CFE si revenus dépassent €5 000/an (obligation de déclaration Cotisation Foncière des Entreprises), et comparatif avec simulateur pour 2026 (anticiper la prochaine déclaration).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur 3 régimes | €0 | Fort effet "aha" — résultat partageable sur forums Airbnb |
+| Pack Déclaration | €19 | 2042 C PRO pré-rempli + guide pas-à-pas + tableau amortissement |
+| Consultation Expert | €49 | Session 30min avec un expert-comptable partenaire via Calendly |
+| B2B Conciergeries | €99/mois | Widget intégré au dashboard des gestionnaires de biens Airbnb (Hostaway, Smoobu) |
+
+**Unit economics :** Claude API ~€0,04/simulation → marge >99% sur le pack €19. Un host qui découvre qu'il paie €2 000 d'impôt de trop paiera €19 sans réfléchir — taux de conversion attendu >40%. La commission expert-comptable (€49 − coût de placement ~€15 = €34 marge) est un levier supplémentaire.
+
+**Potentiel affiliation :** Partenariat avec des experts-comptables spécialisés LMNP (Loueur Meublé Non Professionnel) — référencement sur la plateforme vs commission par dossier transmis (€80–€150 par client).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Formules fiscales françaises : micro-BIC (abattement × taux marginal), régime réel (charges − amortissement linéaire selon durée de vie : bien 30 ans, mobilier 7 ans, électroménager 5 ans)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le 2042 C PRO et le tableau d'amortissement
+- **Auth + DB :** Supabase
+- **Paiements :** Stripe (one-shot)
+- **Alertes seuil :** Resend (email) — gratuit jusqu'à 3K emails/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "déclaration airbnb 2026 quel régime", "micro-BIC location meublée non classée 2025", "régime réel LMNP amortissement calcul", "loi anti-Airbnb fiscalité impact" — mots-clés à très fort volume et forte intention, peu de bons outils en résultats
+2. **Communautés hosts :** Facebook "Airbnb Hosts France" (90 000+ membres), forum Airbnb Community France, r/airbnb — la confusion fiscale est le sujet le plus discuté depuis la loi 2024, un simulateur gratuit déclenche des dizaines de partages
+3. **YouTube/TikTok :** "La nouvelle loi Airbnb vous coûte peut-être €3 000 de trop — simulez maintenant" — format choc très partageable
+4. **Partenariat conciergeries :** Les gestionnaires Airbnb (Hostaway, Smoobu, Lodgify) ont des dizaines de clients hosts — un widget B2B avec commission crée un canal d'acquisition scalable à coût zéro
+
+### Competitive Moat
+- Les simulateurs LMNP existants (MeilleurTaux, Gridky) sont axés sur l'investissement, pas sur la déclaration fiscale des revenus existants — AirbnbFiscal.ai est le premier outil centré sur la déclaration annuelle des hosts
+- La génération du 2042 C PRO pré-rempli est un différenciateur fort : personne ne veut faire cette case par case
+- La connexion avec des experts-comptables partenaires crée un modèle hybride AI + humain difficile à copier par les grands acteurs fiscaux (trop généralistes)
+- Extension naturelle : intégration Booking.com + Abritel (les autres grandes plateformes de location courte durée soumises aux mêmes règles) pour couvrir 100% du marché location courte durée en France
+
+### Figma Schematic
+[View AirbnbFiscal.ai — French Airbnb Tax Optimizer on FigJam](https://www.figma.com/board/GNS6RpAj4OvSCJkaWppIYP)
+
+---
+
+## 91. VéloSubvention.ai
+
+> **Calculez en 90 secondes toutes vos aides pour acheter un vélo électrique — cumulées, personnalisées, actionnables**
+
+### Problem
+La France est l'un des marchés de vélos électriques les plus subventionnés au monde, mais le système d'aides est aussi fragmenté que pour les voitures : bonus national ADEME, aides régionales (11 régions avec des programmes propres), aides municipales (50+ villes), et le Forfait Mobilités Durables (FMD) versé par l'employeur. **80% des acheteurs potentiels ne savent pas qu'ils peuvent cumuler jusqu'à €1 600 d'aides sur un vélo à €2 000.**
+
+**Exemple concret — Salarié à Paris, RFR < €6 300/part :**
+- Bonus ADEME (vélo cargo ou standard) : jusqu'à **€400** (ménages modestes) ou €300 (autres)
+- Aide Île-de-France : **€500** (programme "Je roule en Île-de-France", sous conditions)
+- Aide Ville de Paris : **€400** supplémentaires (programme spécifique)
+- FMD employeur : jusqu'à **€800/an exonéré** de charges et d'impôt
+- **Total théorique : €2 100 d'aides** sur un vélo cargo à €2 500 → vélo à **€400**
+
+**Les blocages :**
+- Aucun simulateur cumulatif n'existe : l'ADEME, les régions et les mairies ont chacun leur formulaire séparé
+- Le FMD est méconnu : seuls 23% des salariés éligibles l'activent (source ADEME 2024), car les DRH ne communiquent pas dessus
+- Les aides locales changent souvent : les sites officiels sont mal maintenus et contradictoires
+- Le Bonus ADEME nécessite que l'achat soit fait chez un vendeur agréé — beaucoup d'acheteurs font leur achat ailleurs et ratent l'aide
+
+**Marché :** 800 000 vélos électriques vendus en France en 2025. Si 10% des acheteurs utilisent un simulateur avant d'acheter = 80 000 utilisateurs potentiels/an.
+
+### Solution
+**(1) Simulateur tout-en-un :** L'utilisateur saisit en 90 secondes : revenus du foyer (RFR), région, code postal, statut (salarié, auto-entrepreneur, étudiant, retraité), type de vélo souhaité (standard, cargo, pliant, trottinette). L'IA calcule en temps réel toutes les aides cumulables.
+
+**(2) Calculateur FMD employeur :** Outil spécifique pour activer le Forfait Mobilités Durables : montant selon l'employeur (les entreprises peuvent verser de €0 à €800/an), justificatifs à fournir, modèle de demande à envoyer aux RH. C'est souvent l'aide la plus importante et la moins connue.
+
+**(3) Classement vélos par prix net :** Basé sur le budget net après toutes les aides, les 15 vélos éligibles les moins chers disponibles chez des revendeurs agréés ADEME sont classés par coût réel. Prix catalogue → prix après toutes les aides → lien d'achat chez un revendeur agréé (affiliation possible).
+
+**(4) Alerte renouvellement :** Le bonus ADEME se renouvelle chaque année (par propriétaire, pas par vélo). Notification par email quand le prochain bonus est disponible pour un 2e vélo dans le foyer ou pour un renouvellement.
+
+**(5) Pack Dossier (payant) :** Guide complet pour chaque aide applicable (formulaire ADEME, justificatifs, délai de réponse, que faire si rejet), modèle de courrier au DRH pour activer le FMD, checklist revendeur agréé, et alerte si l'aide régionale ou municipale expire.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur complet | €0 | Résultat partageable (lien viral) — "J'ai eu mon vélo à €400" |
+| Pack Dossier | €5 | Guide ADEME + courrier DRH FMD + checklist revendeur agréé |
+| Abonnement Veille | €7/an | Alerte si nouvel aide régionale/municipale ou renouvellement bonus ADEME |
+| Affiliation revendeurs | Commission | €15–€40 par vente générée chez un revendeur agréé partenaire |
+| B2B Employeurs | €99/mois | Widget FMD intégré à l'intranet RH — les RH activent le FMD pour leurs salariés |
+
+**Unit economics :** Claude API ~€0,02/simulation → marge >99% sur le pack €5. Le lien de résultat partageable ("Voici combien d'aides tu as pour ton vélo électrique : [lien]") génère des boucles virales naturelles dans les groupes vélo et les forums mobilité.
+
+**Affiliation levier :** Les revendeurs agréés ADEME (Decathlon, Culture Vélo, O2Feel, etc.) ont un intérêt direct à envoyer des clients pré-qualifiés depuis VéloSubvention.ai — un partenariat affiliation à €20/vente sur 500 ventes/mois = €10 000 MRR passifs.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Barèmes Bonus ADEME 2026 (tranches RFR : <€6 300/part → €400, autres → €300), aides régionales codées pour 11 régions (IDF, AURA, Nouvelle-Aquitaine, etc.), aides municipales pour 50+ villes (Paris, Lyon, Marseille, Toulouse, Bordeaux, etc.), plafond FMD employeur (€800/an exonéré selon art. L3261-3-1 du Code du travail)
+- **Base vélos agréés :** Liste des revendeurs agréés ADEME (API ADEME ou scraping hebdomadaire de la liste officielle), top 15 modèles par prix net avec filtres (type, autonomie, budget)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Alertes :** Resend (email) — gratuit jusqu'à 3K/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "bonus vélo électrique 2026 montant", "aide vélo électrique île-de-france cumul", "forfait mobilités durables vélo comment demander", "subvention vélo cargo Paris Lyon" — mots-clés à fort volume, très peu de bons simulateurs cumulatifs en résultats
+2. **Groupes Facebook :** "Vélo électrique France" (180 000+ membres), "Vélo cargo France" (45 000+ membres), "Mobilité douce France" — partager le résultat "€1 600 d'aides pour mon vélo" génère des centaines de réactions et de partages organiques
+3. **Associations vélo :** FUB (Fédération des Usagers de la Bicyclette) et ses 250+ associations locales — ces associations cherchent des outils pédagogiques à recommander à leurs membres
+4. **Partenariat employeurs :** Contacter les DRH des grandes entreprises françaises pour proposer le widget FMD gratuit — certaines entreprises ont un budget mobilités durables non consommé chaque année
+
+### Competitive Moat
+- **Aucun simulateur cumulatif vélo n'existe :** Le site ADEME permet de demander le bonus national, mais ne calcule pas les aides régionales/municipales — VéloSubvention.ai est le seul outil qui cumule les 4 couches d'aides
+- **Le FMD est une mine d'or ignorée :** Être le premier outil à aider les salariés à activer leur FMD crée une fidélité forte — ils reviennent chaque année pour renouveler
+- **Base de vélos agréés = référencement naturel :** La page "Meilleurs vélos électriques moins chers après aides 2026" ranke naturellement sur des requêtes à fort volume commercial
+- **Distinct de ElectriPass.ai (voitures) :** Les audiences sont différentes (cyclistes vs automobilistes), les mécanismes d'aides sont différents (pas de leasing social ni de ZFE pour les vélos), et la psychologie d'achat est différente — les deux outils peuvent coexister et se référencer mutuellement
+
+### Figma Schematic
+[View VéloSubvention.ai — French E-Bike Subsidy Calculator on FigJam](https://www.figma.com/board/bvGsIewBqc6CJ6BVCtaMHL)
+
+---
+
+## 92. SantéMentale.ai
+
+> **Accédez à un psy gratuitement — guide complet Mon Soutien Psy + remboursement mutuelle + dispositifs régionaux**
+
+### Problem
+Depuis 2022, le programme **"Mon Soutien Psy"** (anciennement "MonPsy") offre **12 séances gratuites** par an chez un psychologue agréé à tous les Français, remboursées à 100% par l'Assurance Maladie. C'est l'une des meilleures avancées en santé mentale de la décennie — mais **75% des Français n'en ont jamais entendu parler** et seulement 3% des éligibles l'ont utilisé depuis son lancement (source DREES 2024).
+
+**Les obstacles réels :**
+- Il faut d'abord **une ordonnance du médecin traitant** — beaucoup ne savent pas comment l'obtenir ni quoi demander exactement
+- Seuls certains psychologues sont **conventionnés** par la CPAM — impossible de trouver facilement ceux disponibles près de chez soi
+- La **mutuelle peut compléter** au-delà des 12 séances — mais les gens ne savent pas ce que dit leur contrat ni comment demander le remboursement
+- Il existe des **dispositifs complémentaires** peu connus : Nightline (étudiants, gratuit 24h/24), Psyta74 (moins de 30 ans, 0€), programmes régionaux (certaines régions financent jusqu'à 20 séances supplémentaires)
+- Les **délais d'attente** chez les psys conventionnés sont longs (2–6 semaines) — sans guide, les gens abandonnent avant même de commencer
+
+**Données clés :** 1 Français sur 5 souffre d'un trouble mental chaque année (INSERM). 67% n'ont jamais consulté un professionnel de santé mentale par manque d'information ou de moyens. Mon Soutien Psy couvre 100% du reste à charge (séance remboursée €50, dont €40 CPAM + €10 patient = €0 net si mutuelle couvre la différence).
+
+### Solution
+**(1) Guide de démarrage personnalisé :** L'utilisateur répond à 5 questions (âge, statut étudiant ou non, région, mutuelle complémentaire, urgence perçue). L'IA génère un **plan d'action personnalisé en 3 étapes** : obtenir l'ordonnance, trouver un psy conventionné disponible, activer le remboursement.
+
+**(2) Script pour le médecin traitant :** L'obstacle #1 est d'oser demander l'ordonnance. L'outil génère un message pré-rédigé (à envoyer par messagerie sécurisée ou à dire au médecin) qui explique le besoin sans sur-dramatiser, pour maximiser les chances d'obtenir la prescription rapidement.
+
+**(3) Annuaire psys disponibles :** Basé sur le code postal, l'outil affiche les psychologues conventionnés Mon Soutien Psy avec leur délai d'attente estimé (via les données CPAM) et leurs spécialités (anxiété, dépression, TCA, TDAH adulte, etc.).
+
+**(4) Calculateur remboursement mutuelle :** L'utilisateur entre son contrat de mutuelle (ou le sélectionne dans une liste de ~50 grands contrats français), l'outil calcule le remboursement pour les séances au-delà des 12 gratuites, et génère le formulaire de demande pré-rempli à envoyer à sa mutuelle.
+
+**(5) Cartographie des dispositifs complémentaires :** Selon le profil (étudiant, moins de 30 ans, région, situation de crise), l'outil identifie les dispositifs supplémentaires disponibles et explique comment y accéder.
+
+**(6) Pack Complet (payant) :** Lettre pré-rédigée au médecin, formulaire de demande de remboursement mutuelle pré-rempli, agenda de suivi des séances en PDF (pour suivre les progrès et noter les points à aborder), guide "que faire si la liste d'attente est trop longue" (alternatives : psychologue en ligne remboursé, plateformes type Doctolib), et rappel automatique à J+30 pour vérifier si les 12 séances ont été utilisées.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Guide + Annuaire psys | €0 | Fort impact social — viralité dans les groupes santé mentale et entre proches |
+| Pack Complet | €9 | Lettre médecin + formulaire mutuelle + agenda suivi + alternatives |
+| B2B Entreprises (RH) | €149/mois | Module bien-être intégré à l'intranet RH — aide les salariés à accéder à Mon Soutien Psy |
+| B2B Mutuelles | €299/mois | Widget calculateur remboursement intégré à l'espace assuré de la mutuelle |
+
+**Unit economics :** Claude API ~€0,03/session → marge >99% sur le pack €9. L'aspect "accès à la santé mentale" crée une viralité émotionnelle forte — les gens partagent naturellement ce type d'outil dans leur entourage car ils pensent à leurs proches qui en ont besoin.
+
+**Impact social + revenus :** Le modèle B2B est potentiellement très lucratif : les grandes entreprises ont des obligations en matière de qualité de vie au travail (QVT) et cherchent des outils concrets. Un partenariat avec une mutuelle (qui rembourse les séances additionnelles) peut générer un revenu fixe mensuel sans acquisition utilisateur.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Annuaire psys :** Données CPAM (liste des psychologues conventionnés Mon Soutien Psy, publique et téléchargeable) + enrichissement Doctolib API (disponibilités) — mise à jour hebdomadaire via cron job
+- **Moteur de calcul mutuelle :** Base de données des 50 grands contrats de complémentaire santé français avec les taux de remboursement en actes psychologiques (code NABM 99), mise à jour annuelle
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour la lettre médecin et le formulaire mutuelle
+- **Paiements :** Stripe (one-shot)
+- **Auth + DB :** Supabase
+- **Alertes suivi :** Resend (email J+30, J+60, J+90) — rappels pour utiliser les 12 séances
+
+### Go-to-Market (zero budget)
+1. **SEO :** "mon soutien psy comment ça marche", "psychologue gratuit france 2026", "12 séances psy remboursées comment demander", "mutuelle remboursement psychologue" — mots-clés à fort volume et très faible concurrence en termes d'outils pratiques
+2. **Réseaux sociaux santé mentale :** Instagram et TikTok comptent des dizaines de créateurs français spécialisés en santé mentale (psys, coaches, associations) avec 50K–500K abonnés — un partenariat organique ou une simple mention du tool gratuit génère des milliers d'utilisateurs
+3. **Universités et CROUS :** Les services de santé étudiante cherchent des outils à recommander — Nightline France, le BDE de Sciences Po, les CROUS de toutes les villes partagent des ressources santé mentale à leurs étudiants
+4. **Médecins traitants :** Un flyer ou email type à envoyer aux cabinets médicaux pour qu'ils orientent leurs patients vers le tool — les médecins débordés sont soulagés d'avoir un outil qui guide les patients autonomement
+
+### Competitive Moat
+- **Mon Soutien Psy est inconnu mais officiel :** Être le premier à créer un outil d'accès à ce programme crée un avantage de premier mover très fort — quand le bouche-à-oreille s'active, le trafic organique est auto-entretenu
+- **Le script pour le médecin** est une innovation unique : aucun outil de santé mentale ne propose de pre-rédiger la demande d'ordonnance — c'est pourtant le blocage #1
+- **Base de données mutuelle** : construire et maintenir la base de remboursement de 50 mutuelles est une barrière à l'entrée technique (temps de recherche) qui protège de la copie rapide
+- **Extension naturelle :** Ajouter un module pour les aidants (comment aider un proche à accéder à Mon Soutien Psy), pour les adolescents (dispositif spécifique 11–17 ans), et pour les situations de crise (numéros d'urgence, hospitalisation à la demande) pour couvrir tout le spectre santé mentale en France
+
+### Figma Schematic
+[View SantéMentale.ai — French Mental Health Reimbursement Guide on FigJam](https://www.figma.com/board/AS4UjBIgvXBBQFGEA6cN5a)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -3969,4 +4608,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-15 — Ideas 80–82 added (France-specific, ultra-low-budget: FraisBancaires.ai, GardeAlternée.ai, AidantFamilial.ai)*
+*Last updated: 2026-05-19 — Ideas 90–92 added (France-specific, ultra-low-budget: AirbnbFiscal.ai, VéloSubvention.ai, SantéMentale.ai)*
