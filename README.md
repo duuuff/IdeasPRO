@@ -97,6 +97,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 87 | [ImmoBroken.ai](#87-immobrokenai) | Pay-per-pack + Freemium | €8K–€55K | Low |
 | 88 | [FraisGarde.ai](#88-fraisgardeai) | Pay-per-report + Freemium | €5K–€40K | Low |
 | 89 | [ElectriPass.ai](#89-electripassai) | Freemium + Pay-per-pack + Subscription | €8K–€60K | Low |
+| 90 | [AirbnbFiscal.ai](#90-airbnbfiscalai) | Freemium + Pay-per-pack | €9K–€65K | Low |
+| 91 | [VéloSubvention.ai](#91-vélosubventionai) | Freemium + Pay-per-pack | €5K–€35K | Low |
+| 92 | [SantéMentale.ai](#92-santémentaleai) | Freemium + Pay-per-pack | €4K–€30K | Low |
 
 ---
 
@@ -4393,6 +4396,206 @@ Il ne le sait pas. Il cherche sur Google, tombe sur des articles contradictoires
 
 ---
 
+## 90. AirbnbFiscal.ai
+
+> **Choisissez le bon régime fiscal pour vos revenus Airbnb — simulateur post loi anti-Airbnb 2024**
+
+### Problem
+La loi de finances 2024 a bouleversé la fiscalité des locations meublées de tourisme en France : pour les **meublés non classés** (la majorité des hosts Airbnb), le plafond micro-BIC a été réduit de €77 700 à **€15 000**, et l'abattement de 50% à **30%** — soit une multiplication par 3 de l'impôt pour certains hosts. Puis une loi corrective a partiellement rétabli les anciens plafonds, créant une confusion totale.
+
+**Le résultat :** 400 000 hosts Airbnb en France ne savent plus quel régime déclarer pour 2025 et 2026. Certains sur-déclarent (régime réel inutile quand le micro-BIC suffit), d'autres sous-optimisent (maintien au micro-BIC alors que le régime réel avec amortissement serait 2× plus avantageux). Les experts-comptables facturent €400–€800 pour un conseil que l'IA peut délivrer en 2 minutes.
+
+**Les 3 régimes possibles — mal compris par 90% des hosts :**
+- **Micro-BIC meublé classé :** Plafond €77 700, abattement 71% (très avantageux si revenus modérés)
+- **Micro-BIC non classé :** Plafond €15 000, abattement 30% (souvent défavorable vs régime réel)
+- **Régime réel simplifié :** Déduction de toutes les charges réelles + amortissement du bien et du mobilier (optimal au-delà de ~€12 000 de revenus locatifs bruts dans un bien en propriété)
+
+**Donnée clé :** Sur les 400 000 hosts français, seulement ~8% ont fait classer leur logement. 92% subissent le régime non classé. Sur ces 92%, environ 35% auraient intérêt à basculer au régime réel — mais ne le savent pas.
+
+### Solution
+**(1) Simulateur régime optimal en 2 minutes :** L'utilisateur entre : revenus Airbnb annuels bruts, charges réelles (crédit, charges de copropriété, assurance, ménage, consommables), valeur du bien (pour l'amortissement), statut du logement (classé ou non), et tranche marginale d'imposition. L'IA calcule l'impôt exact dans les 3 régimes et affiche le **gagnant en euros économisés**.
+
+**(2) Simulateur de classification :** Si le logement n'est pas classé, l'outil explique comment le faire classer (procédure Atout France, critères, coût ~€150), et recalcule si cela vaut le coup (retour sur investissement de la classification).
+
+**(3) Alerte plafond en temps réel :** Intégré à la API Airbnb (via OAuth) ou saisie manuelle du revenus cumulés — alerte quand le host approche du plafond micro-BIC pour éviter le passage au régime réel non souhaité.
+
+**(4) Pack Complet (payant) :** Formulaire 2042 C PRO pré-rempli avec les bons montants, guide déclaration étape par étape (case par case), liste des charges déductibles au régime réel avec justificatifs requis, modèle de tableau d'amortissement (Cerfa format), alerte CFE si revenus dépassent €5 000/an (obligation de déclaration Cotisation Foncière des Entreprises), et comparatif avec simulateur pour 2026 (anticiper la prochaine déclaration).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur 3 régimes | €0 | Fort effet "aha" — résultat partageable sur forums Airbnb |
+| Pack Déclaration | €19 | 2042 C PRO pré-rempli + guide pas-à-pas + tableau amortissement |
+| Consultation Expert | €49 | Session 30min avec un expert-comptable partenaire via Calendly |
+| B2B Conciergeries | €99/mois | Widget intégré au dashboard des gestionnaires de biens Airbnb (Hostaway, Smoobu) |
+
+**Unit economics :** Claude API ~€0,04/simulation → marge >99% sur le pack €19. Un host qui découvre qu'il paie €2 000 d'impôt de trop paiera €19 sans réfléchir — taux de conversion attendu >40%. La commission expert-comptable (€49 − coût de placement ~€15 = €34 marge) est un levier supplémentaire.
+
+**Potentiel affiliation :** Partenariat avec des experts-comptables spécialisés LMNP (Loueur Meublé Non Professionnel) — référencement sur la plateforme vs commission par dossier transmis (€80–€150 par client).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Formules fiscales françaises : micro-BIC (abattement × taux marginal), régime réel (charges − amortissement linéaire selon durée de vie : bien 30 ans, mobilier 7 ans, électroménager 5 ans)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le 2042 C PRO et le tableau d'amortissement
+- **Auth + DB :** Supabase
+- **Paiements :** Stripe (one-shot)
+- **Alertes seuil :** Resend (email) — gratuit jusqu'à 3K emails/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "déclaration airbnb 2026 quel régime", "micro-BIC location meublée non classée 2025", "régime réel LMNP amortissement calcul", "loi anti-Airbnb fiscalité impact" — mots-clés à très fort volume et forte intention, peu de bons outils en résultats
+2. **Communautés hosts :** Facebook "Airbnb Hosts France" (90 000+ membres), forum Airbnb Community France, r/airbnb — la confusion fiscale est le sujet le plus discuté depuis la loi 2024, un simulateur gratuit déclenche des dizaines de partages
+3. **YouTube/TikTok :** "La nouvelle loi Airbnb vous coûte peut-être €3 000 de trop — simulez maintenant" — format choc très partageable
+4. **Partenariat conciergeries :** Les gestionnaires Airbnb (Hostaway, Smoobu, Lodgify) ont des dizaines de clients hosts — un widget B2B avec commission crée un canal d'acquisition scalable à coût zéro
+
+### Competitive Moat
+- Les simulateurs LMNP existants (MeilleurTaux, Gridky) sont axés sur l'investissement, pas sur la déclaration fiscale des revenus existants — AirbnbFiscal.ai est le premier outil centré sur la déclaration annuelle des hosts
+- La génération du 2042 C PRO pré-rempli est un différenciateur fort : personne ne veut faire cette case par case
+- La connexion avec des experts-comptables partenaires crée un modèle hybride AI + humain difficile à copier par les grands acteurs fiscaux (trop généralistes)
+- Extension naturelle : intégration Booking.com + Abritel (les autres grandes plateformes de location courte durée soumises aux mêmes règles) pour couvrir 100% du marché location courte durée en France
+
+### Figma Schematic
+[View AirbnbFiscal.ai — French Airbnb Tax Optimizer on FigJam](https://www.figma.com/board/GNS6RpAj4OvSCJkaWppIYP)
+
+---
+
+## 91. VéloSubvention.ai
+
+> **Calculez en 90 secondes toutes vos aides pour acheter un vélo électrique — cumulées, personnalisées, actionnables**
+
+### Problem
+La France est l'un des marchés de vélos électriques les plus subventionnés au monde, mais le système d'aides est aussi fragmenté que pour les voitures : bonus national ADEME, aides régionales (11 régions avec des programmes propres), aides municipales (50+ villes), et le Forfait Mobilités Durables (FMD) versé par l'employeur. **80% des acheteurs potentiels ne savent pas qu'ils peuvent cumuler jusqu'à €1 600 d'aides sur un vélo à €2 000.**
+
+**Exemple concret — Salarié à Paris, RFR < €6 300/part :**
+- Bonus ADEME (vélo cargo ou standard) : jusqu'à **€400** (ménages modestes) ou €300 (autres)
+- Aide Île-de-France : **€500** (programme "Je roule en Île-de-France", sous conditions)
+- Aide Ville de Paris : **€400** supplémentaires (programme spécifique)
+- FMD employeur : jusqu'à **€800/an exonéré** de charges et d'impôt
+- **Total théorique : €2 100 d'aides** sur un vélo cargo à €2 500 → vélo à **€400**
+
+**Les blocages :**
+- Aucun simulateur cumulatif n'existe : l'ADEME, les régions et les mairies ont chacun leur formulaire séparé
+- Le FMD est méconnu : seuls 23% des salariés éligibles l'activent (source ADEME 2024), car les DRH ne communiquent pas dessus
+- Les aides locales changent souvent : les sites officiels sont mal maintenus et contradictoires
+- Le Bonus ADEME nécessite que l'achat soit fait chez un vendeur agréé — beaucoup d'acheteurs font leur achat ailleurs et ratent l'aide
+
+**Marché :** 800 000 vélos électriques vendus en France en 2025. Si 10% des acheteurs utilisent un simulateur avant d'acheter = 80 000 utilisateurs potentiels/an.
+
+### Solution
+**(1) Simulateur tout-en-un :** L'utilisateur saisit en 90 secondes : revenus du foyer (RFR), région, code postal, statut (salarié, auto-entrepreneur, étudiant, retraité), type de vélo souhaité (standard, cargo, pliant, trottinette). L'IA calcule en temps réel toutes les aides cumulables.
+
+**(2) Calculateur FMD employeur :** Outil spécifique pour activer le Forfait Mobilités Durables : montant selon l'employeur (les entreprises peuvent verser de €0 à €800/an), justificatifs à fournir, modèle de demande à envoyer aux RH. C'est souvent l'aide la plus importante et la moins connue.
+
+**(3) Classement vélos par prix net :** Basé sur le budget net après toutes les aides, les 15 vélos éligibles les moins chers disponibles chez des revendeurs agréés ADEME sont classés par coût réel. Prix catalogue → prix après toutes les aides → lien d'achat chez un revendeur agréé (affiliation possible).
+
+**(4) Alerte renouvellement :** Le bonus ADEME se renouvelle chaque année (par propriétaire, pas par vélo). Notification par email quand le prochain bonus est disponible pour un 2e vélo dans le foyer ou pour un renouvellement.
+
+**(5) Pack Dossier (payant) :** Guide complet pour chaque aide applicable (formulaire ADEME, justificatifs, délai de réponse, que faire si rejet), modèle de courrier au DRH pour activer le FMD, checklist revendeur agréé, et alerte si l'aide régionale ou municipale expire.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur complet | €0 | Résultat partageable (lien viral) — "J'ai eu mon vélo à €400" |
+| Pack Dossier | €5 | Guide ADEME + courrier DRH FMD + checklist revendeur agréé |
+| Abonnement Veille | €7/an | Alerte si nouvel aide régionale/municipale ou renouvellement bonus ADEME |
+| Affiliation revendeurs | Commission | €15–€40 par vente générée chez un revendeur agréé partenaire |
+| B2B Employeurs | €99/mois | Widget FMD intégré à l'intranet RH — les RH activent le FMD pour leurs salariés |
+
+**Unit economics :** Claude API ~€0,02/simulation → marge >99% sur le pack €5. Le lien de résultat partageable ("Voici combien d'aides tu as pour ton vélo électrique : [lien]") génère des boucles virales naturelles dans les groupes vélo et les forums mobilité.
+
+**Affiliation levier :** Les revendeurs agréés ADEME (Decathlon, Culture Vélo, O2Feel, etc.) ont un intérêt direct à envoyer des clients pré-qualifiés depuis VéloSubvention.ai — un partenariat affiliation à €20/vente sur 500 ventes/mois = €10 000 MRR passifs.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Barèmes Bonus ADEME 2026 (tranches RFR : <€6 300/part → €400, autres → €300), aides régionales codées pour 11 régions (IDF, AURA, Nouvelle-Aquitaine, etc.), aides municipales pour 50+ villes (Paris, Lyon, Marseille, Toulouse, Bordeaux, etc.), plafond FMD employeur (€800/an exonéré selon art. L3261-3-1 du Code du travail)
+- **Base vélos agréés :** Liste des revendeurs agréés ADEME (API ADEME ou scraping hebdomadaire de la liste officielle), top 15 modèles par prix net avec filtres (type, autonomie, budget)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf
+- **Paiements :** Stripe (one-shot + abonnement annuel)
+- **Alertes :** Resend (email) — gratuit jusqu'à 3K/mois
+
+### Go-to-Market (zero budget)
+1. **SEO :** "bonus vélo électrique 2026 montant", "aide vélo électrique île-de-france cumul", "forfait mobilités durables vélo comment demander", "subvention vélo cargo Paris Lyon" — mots-clés à fort volume, très peu de bons simulateurs cumulatifs en résultats
+2. **Groupes Facebook :** "Vélo électrique France" (180 000+ membres), "Vélo cargo France" (45 000+ membres), "Mobilité douce France" — partager le résultat "€1 600 d'aides pour mon vélo" génère des centaines de réactions et de partages organiques
+3. **Associations vélo :** FUB (Fédération des Usagers de la Bicyclette) et ses 250+ associations locales — ces associations cherchent des outils pédagogiques à recommander à leurs membres
+4. **Partenariat employeurs :** Contacter les DRH des grandes entreprises françaises pour proposer le widget FMD gratuit — certaines entreprises ont un budget mobilités durables non consommé chaque année
+
+### Competitive Moat
+- **Aucun simulateur cumulatif vélo n'existe :** Le site ADEME permet de demander le bonus national, mais ne calcule pas les aides régionales/municipales — VéloSubvention.ai est le seul outil qui cumule les 4 couches d'aides
+- **Le FMD est une mine d'or ignorée :** Être le premier outil à aider les salariés à activer leur FMD crée une fidélité forte — ils reviennent chaque année pour renouveler
+- **Base de vélos agréés = référencement naturel :** La page "Meilleurs vélos électriques moins chers après aides 2026" ranke naturellement sur des requêtes à fort volume commercial
+- **Distinct de ElectriPass.ai (voitures) :** Les audiences sont différentes (cyclistes vs automobilistes), les mécanismes d'aides sont différents (pas de leasing social ni de ZFE pour les vélos), et la psychologie d'achat est différente — les deux outils peuvent coexister et se référencer mutuellement
+
+### Figma Schematic
+[View VéloSubvention.ai — French E-Bike Subsidy Calculator on FigJam](https://www.figma.com/board/bvGsIewBqc6CJ6BVCtaMHL)
+
+---
+
+## 92. SantéMentale.ai
+
+> **Accédez à un psy gratuitement — guide complet Mon Soutien Psy + remboursement mutuelle + dispositifs régionaux**
+
+### Problem
+Depuis 2022, le programme **"Mon Soutien Psy"** (anciennement "MonPsy") offre **12 séances gratuites** par an chez un psychologue agréé à tous les Français, remboursées à 100% par l'Assurance Maladie. C'est l'une des meilleures avancées en santé mentale de la décennie — mais **75% des Français n'en ont jamais entendu parler** et seulement 3% des éligibles l'ont utilisé depuis son lancement (source DREES 2024).
+
+**Les obstacles réels :**
+- Il faut d'abord **une ordonnance du médecin traitant** — beaucoup ne savent pas comment l'obtenir ni quoi demander exactement
+- Seuls certains psychologues sont **conventionnés** par la CPAM — impossible de trouver facilement ceux disponibles près de chez soi
+- La **mutuelle peut compléter** au-delà des 12 séances — mais les gens ne savent pas ce que dit leur contrat ni comment demander le remboursement
+- Il existe des **dispositifs complémentaires** peu connus : Nightline (étudiants, gratuit 24h/24), Psyta74 (moins de 30 ans, 0€), programmes régionaux (certaines régions financent jusqu'à 20 séances supplémentaires)
+- Les **délais d'attente** chez les psys conventionnés sont longs (2–6 semaines) — sans guide, les gens abandonnent avant même de commencer
+
+**Données clés :** 1 Français sur 5 souffre d'un trouble mental chaque année (INSERM). 67% n'ont jamais consulté un professionnel de santé mentale par manque d'information ou de moyens. Mon Soutien Psy couvre 100% du reste à charge (séance remboursée €50, dont €40 CPAM + €10 patient = €0 net si mutuelle couvre la différence).
+
+### Solution
+**(1) Guide de démarrage personnalisé :** L'utilisateur répond à 5 questions (âge, statut étudiant ou non, région, mutuelle complémentaire, urgence perçue). L'IA génère un **plan d'action personnalisé en 3 étapes** : obtenir l'ordonnance, trouver un psy conventionné disponible, activer le remboursement.
+
+**(2) Script pour le médecin traitant :** L'obstacle #1 est d'oser demander l'ordonnance. L'outil génère un message pré-rédigé (à envoyer par messagerie sécurisée ou à dire au médecin) qui explique le besoin sans sur-dramatiser, pour maximiser les chances d'obtenir la prescription rapidement.
+
+**(3) Annuaire psys disponibles :** Basé sur le code postal, l'outil affiche les psychologues conventionnés Mon Soutien Psy avec leur délai d'attente estimé (via les données CPAM) et leurs spécialités (anxiété, dépression, TCA, TDAH adulte, etc.).
+
+**(4) Calculateur remboursement mutuelle :** L'utilisateur entre son contrat de mutuelle (ou le sélectionne dans une liste de ~50 grands contrats français), l'outil calcule le remboursement pour les séances au-delà des 12 gratuites, et génère le formulaire de demande pré-rempli à envoyer à sa mutuelle.
+
+**(5) Cartographie des dispositifs complémentaires :** Selon le profil (étudiant, moins de 30 ans, région, situation de crise), l'outil identifie les dispositifs supplémentaires disponibles et explique comment y accéder.
+
+**(6) Pack Complet (payant) :** Lettre pré-rédigée au médecin, formulaire de demande de remboursement mutuelle pré-rempli, agenda de suivi des séances en PDF (pour suivre les progrès et noter les points à aborder), guide "que faire si la liste d'attente est trop longue" (alternatives : psychologue en ligne remboursé, plateformes type Doctolib), et rappel automatique à J+30 pour vérifier si les 12 séances ont été utilisées.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Guide + Annuaire psys | €0 | Fort impact social — viralité dans les groupes santé mentale et entre proches |
+| Pack Complet | €9 | Lettre médecin + formulaire mutuelle + agenda suivi + alternatives |
+| B2B Entreprises (RH) | €149/mois | Module bien-être intégré à l'intranet RH — aide les salariés à accéder à Mon Soutien Psy |
+| B2B Mutuelles | €299/mois | Widget calculateur remboursement intégré à l'espace assuré de la mutuelle |
+
+**Unit economics :** Claude API ~€0,03/session → marge >99% sur le pack €9. L'aspect "accès à la santé mentale" crée une viralité émotionnelle forte — les gens partagent naturellement ce type d'outil dans leur entourage car ils pensent à leurs proches qui en ont besoin.
+
+**Impact social + revenus :** Le modèle B2B est potentiellement très lucratif : les grandes entreprises ont des obligations en matière de qualité de vie au travail (QVT) et cherchent des outils concrets. Un partenariat avec une mutuelle (qui rembourse les séances additionnelles) peut générer un revenu fixe mensuel sans acquisition utilisateur.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Annuaire psys :** Données CPAM (liste des psychologues conventionnés Mon Soutien Psy, publique et téléchargeable) + enrichissement Doctolib API (disponibilités) — mise à jour hebdomadaire via cron job
+- **Moteur de calcul mutuelle :** Base de données des 50 grands contrats de complémentaire santé français avec les taux de remboursement en actes psychologiques (code NABM 99), mise à jour annuelle
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour la lettre médecin et le formulaire mutuelle
+- **Paiements :** Stripe (one-shot)
+- **Auth + DB :** Supabase
+- **Alertes suivi :** Resend (email J+30, J+60, J+90) — rappels pour utiliser les 12 séances
+
+### Go-to-Market (zero budget)
+1. **SEO :** "mon soutien psy comment ça marche", "psychologue gratuit france 2026", "12 séances psy remboursées comment demander", "mutuelle remboursement psychologue" — mots-clés à fort volume et très faible concurrence en termes d'outils pratiques
+2. **Réseaux sociaux santé mentale :** Instagram et TikTok comptent des dizaines de créateurs français spécialisés en santé mentale (psys, coaches, associations) avec 50K–500K abonnés — un partenariat organique ou une simple mention du tool gratuit génère des milliers d'utilisateurs
+3. **Universités et CROUS :** Les services de santé étudiante cherchent des outils à recommander — Nightline France, le BDE de Sciences Po, les CROUS de toutes les villes partagent des ressources santé mentale à leurs étudiants
+4. **Médecins traitants :** Un flyer ou email type à envoyer aux cabinets médicaux pour qu'ils orientent leurs patients vers le tool — les médecins débordés sont soulagés d'avoir un outil qui guide les patients autonomement
+
+### Competitive Moat
+- **Mon Soutien Psy est inconnu mais officiel :** Être le premier à créer un outil d'accès à ce programme crée un avantage de premier mover très fort — quand le bouche-à-oreille s'active, le trafic organique est auto-entretenu
+- **Le script pour le médecin** est une innovation unique : aucun outil de santé mentale ne propose de pre-rédiger la demande d'ordonnance — c'est pourtant le blocage #1
+- **Base de données mutuelle** : construire et maintenir la base de remboursement de 50 mutuelles est une barrière à l'entrée technique (temps de recherche) qui protège de la copie rapide
+- **Extension naturelle :** Ajouter un module pour les aidants (comment aider un proche à accéder à Mon Soutien Psy), pour les adolescents (dispositif spécifique 11–17 ans), et pour les situations de crise (numéros d'urgence, hospitalisation à la demande) pour couvrir tout le spectre santé mentale en France
+
+### Figma Schematic
+[View SantéMentale.ai — French Mental Health Reimbursement Guide on FigJam](https://www.figma.com/board/AS4UjBIgvXBBQFGEA6cN5a)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -4405,4 +4608,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-17 — Ideas 86–88 added (France-specific, ultra-low-budget: TaxeFoncière.ai, ImmoBroken.ai, FraisGarde.ai)*
+*Last updated: 2026-05-19 — Ideas 90–92 added (France-specific, ultra-low-budget: AirbnbFiscal.ai, VéloSubvention.ai, SantéMentale.ai)*
