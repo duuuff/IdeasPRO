@@ -100,6 +100,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 90 | [AirbnbFiscal.ai](#90-airbnbfiscalai) | Freemium + Pay-per-pack | €9K–€65K | Low |
 | 91 | [VéloSubvention.ai](#91-vélosubventionai) | Freemium + Pay-per-pack | €5K–€35K | Low |
 | 92 | [SantéMentale.ai](#92-santémentaleai) | Freemium + Pay-per-pack | €4K–€30K | Low |
+| 93 | [PortageSalarial.ai](#93-portagesalarialai) | Freemium + Pay-per-pack + B2B SaaS | €10K–€70K | Low |
+| 94 | [ÉpargneRetraite.ai](#94-épargnerettraiteai) | Freemium + Pay-per-pack + Affiliate | €12K–€80K | Low |
+| 95 | [LogementSocial.ai](#95-logementsocialai) | Freemium + Pay-per-pack + B2B Communes | €5K–€38K | Low |
 
 ---
 
@@ -4596,6 +4599,220 @@ Depuis 2022, le programme **"Mon Soutien Psy"** (anciennement "MonPsy") offre **
 
 ---
 
+## 93. PortageSalarial.ai
+
+> **Auto-entrepreneur, SASU ou portage salarial ? Simulateur complet de revenu net pour 1 million de freelances français**
+
+### Problem
+En France, plus de 1 million de personnes travaillent en indépendant. Le choix du statut juridique est l'une des décisions les plus impactantes sur le revenu net — et pourtant aucun outil ne compare honnêtement les trois options réelles :
+
+- **Auto-entrepreneur :** cotisations ~22% sur le CA → revenu net ~€3 900/mois pour €5 000 facturés, MAIS plafond CA de €77 700 (services intellectuels) et **zéro accès au chômage**
+- **SASU/EURL :** possibilité d'optimisation via dividendes (flat tax 30%) → net possible €3 200–€3 800 selon profil, MAIS complexité comptable et charges fixes élevées
+- **Portage salarial :** frais gestion 8–10% + cotisations salariales → net ~€2 800–€3 200, MAIS **accès complet au chômage** (ARE), CPAM comme salarié, zéro gestion administrative
+
+**Exemple concret — Consultant IT facturant €6 000 HT/mois :**
+- Auto-entrepreneur net : ~€4 680 (mais pas de chômage — risque de zéro revenu si mission perdue)
+- SASU avec optimisation dividendes : ~€3 800–€4 200 net après IS + flat tax
+- Portage salarial : ~€3 400 net, mais droits chômage accumulés → **sécurité de €1 800/mois en cas d'arrêt de mission**
+
+Le vrai choix n'est pas "qui paye le moins de charges" mais "quel revenu net + quelle sécurité + quelle complexité". **Aucun simulateur ne fait cette comparaison complète** en tenant compte de : l'imposition sur le revenu personnalisée, les optimisations dividendes, la protection sociale réelle, les seuils TVA, et l'ACRE (exonération cotisations les 2 premières années).
+
+**Marché :** 1 million d'auto-entrepreneurs actifs + 100 000 nouveaux contrats de portage salarial/an + 300 000 SAS/EURL de freelances. Si 3% font une simulation = 42 000 utilisateurs. À €19 de conversion → €800 000 de revenus potentiels, plus le B2B.
+
+### Solution
+**(1) Simulateur comparatif 3 statuts :** L'utilisateur entre : CA mensuel ou annuel, secteur d'activité, charges réelles (loyer bureau, matériel, déplacements, frais pros), situation personnelle (TMI, situation de famille), ancienneté en tant qu'indépendant. L'IA calcule le revenu net mensuel réel dans chacun des 3 statuts, avec toutes les cotisations, l'IR personnalisé, et les optimisations applicables.
+
+**(2) Score protection sociale :** En plus du net mensuel, un score de sécurité (retraite, arrêt maladie, chômage) par statut — pour prendre une décision éclairée quand le portage donne €300/mois de moins en net mais offre l'accès à €20 000+ de droits chômage en cas de mission perdue.
+
+**(3) Simulateur de seuils :** Alert automatique si le CA projeté dépasse le plafond micro-entrepreneur (€77 700 en 2026 pour services intellectuels) — avec simulation du coût réel de ce dépassement (régularisation TVA, obligation de création de société).
+
+**(4) Comparatif pluriannuel :** Projection sur 3 ans avec l'effet ACRE (réduction cotisations 50% an 1, 25% an 2 pour l'AE), l'optimisation IS + dividendes pour la SASU, et le cumul de droits chômage en portage.
+
+**(5) Pack Optimisation (payant) :** Plan d'action complet avec le statut recommandé, guide de création adapté (liens URSSAF, INPI, étapes), simulateur dividendes pour SASU, liste des sociétés de portage agréées Syntec avec comparatif de leurs frais (de 7% à 12% selon les acteurs), et modèle de contrat de portage à vérifier avant signature.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur 3 statuts | €0 | Fort effet "aha" — partageable sur LinkedIn, forums freelance, Malt |
+| Pack Optimisation | €19 | Plan d'action + guide création + comparatif 20 sociétés portage + simulateur dividendes |
+| Consultation Expert | €45 | Session 30min avec un expert-comptable spécialisé freelance via Calendly |
+| B2B Sociétés de portage | €199/mois | Widget simulateur intégré au site de la société de portage — conversion de prospects pré-qualifiés |
+| Affiliation portage | Commission | €80–€150 par contrat signé via la plateforme |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99% sur le pack €19. Les sociétés de portage salarial ont un CAC (coût d'acquisition client) de €300–€600 — un widget qui leur amène des prospects convertis à €199/mois est une évidence commerciale. 10 sociétés partenaires = €1 990 MRR garanti en B2B.
+
+**Levier affiliation :** À €100 de commission par contrat signé × 50 contrats/mois = €5 000/mois passif. Les sociétés de portage cherchent des canaux d'acquisition — elles sont prêtes à payer pour des leads qualifiés qui ont déjà simulé leur net.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Cotisations AE 2026 (22% services intellectuels, 12,3% commercial, 6% libéral BNC), SASU assimilé salarié (charges patronales ~42% + salariales ~22% du brut), dividendes SASU (IS 15% jusqu'à €42 500 de bénéfice, puis 25% + flat tax 30% sur dividendes), portage salarial (frais gestion 7–12% + cotisations salariales ~22% + patronales ~42%), IR progressif 2026 (0%, 11%, 30%, 41%, 45%), ACRE (50% réduction an 1, 25% an 2 pour AE), seuils TVA (€36 800 franchise en base, €91 900 seuil réel simplifié)
+- **Base sociétés de portage :** Liste des ~200 sociétés agréées avec leurs frais réels et spécialités — mise à jour trimestrielle
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le plan d'action
+- **Auth + DB :** Supabase
+- **Paiements :** Stripe (one-shot)
+
+### Go-to-Market (zero budget)
+1. **SEO :** "portage salarial vs auto entrepreneur net 2026", "quel statut freelance France simulation", "SASU ou micro entrepreneur comparatif", "simulation revenu net freelance France" — mots-clés à fort volume (10K+ recherches/mois) et très peu de bons simulateurs comparatifs
+2. **LinkedIn :** La communauté freelance française est très active sur LinkedIn — un post "J'ai calculé le vrai net pour €5 000 de CA selon chaque statut — résultat surprenant" avec le lien peut atteindre 100K+ vues
+3. **Communautés :** Malt Community (200K+ freelances inscrits), Reddit r/france (discussions freelance), forum Compta Online, groupes Facebook "Freelances en France"
+4. **Partenariats sociétés de portage :** Les 5 grandes sociétés (Umalis, Créativ'Network, PortailPro, etc.) cherchent des partenariats de croissance — leur proposer le widget B2B crée un canal d'acquisition immédiat
+
+### Competitive Moat
+- **Comparaison honnête incluant la protection sociale :** Les simulateurs existants comparent le brut-net mais ignorent l'ACRE, l'optimisation dividendes, et la valeur du chômage — PortageSalarial.ai va au bout de la comparaison vraie
+- **Base sociétés de portage :** Agréger et maintenir les frais réels de 200 sociétés de portage est une barrière à l'entrée significative en termes de temps et de mise à jour
+- **Widget B2B inexploité :** Aucun concurrent ne propose un widget white-label pour les sociétés de portage — c'est un marché B2B intact
+- **Extension naturelle :** Ajouter la comparaison avec le salariat classique (pour les freelances qui envisagent de revenir en CDI), le comparatif France vs. Portugal/Espagne pour les nomades digitaux, et le simulateur de passage SASU → holding
+
+### Figma Schematic
+[View PortageSalarial.ai — French Freelance Status Simulator on FigJam](https://www.figma.com/board/TMiDcQOKCOC2sIAJUiSB5M)
+
+---
+
+## 94. ÉpargneRetraite.ai
+
+> **PER : calculez en 30 secondes combien vous économisez en impôts cette année — et ce que vous aurez à la retraite**
+
+### Problem
+Le Plan d'Épargne Retraite (PER), créé par la Loi Pacte 2019, est probablement **l'outil d'optimisation fiscale le plus puissant accessible à tous les Français** : les versements sont déductibles à 100% du revenu imposable, dans la limite de 10% des revenus professionnels (plafond : €37 094 en 2026 sur revenus 2025). Pourtant, **seulement 8 millions de Français ont un PER** sur 40 millions d'actifs — et parmi ceux qui en ont un, la majorité verse sans jamais avoir simulé le gain fiscal réel.
+
+**Exemple concret — Cadre en TMI 30%, revenu net imposable €50 000 :**
+- Plafond PER disponible 2026 : **€5 000**
+- Si versement de €5 000 dans le PER avant le 31 décembre : économie d'impôt **€1 500 cette année** (30% × €5 000)
+- Capital PER dans 20 ans à 5%/an : **€13 266**
+- Si retraite en TMI 11% (revenus retraite plus faibles) : impôt à la sortie = €5 500 × 11% = **€605** au lieu de €1 500 payés aujourd'hui → gain net = **€895 + intérêts composés sur 20 ans**
+
+**Les blocages :**
+- Aucun outil simple ne répond à "si je verse €X dans mon PER ce mois-ci, de combien baisse mon impôt en septembre ?"
+- Le plafond disponible est indiqué sur l'avis d'imposition (case 6PS/6QS) mais 80% des contribuables ne savent pas où le trouver
+- La question "rente ou capital à la sortie" est incomprise — la plupart choisissent sans connaître les implications fiscales (rente : imposée à l'IR avec abattement 10% ; capital : fraction versements à TMI + intérêts à flat tax 30%)
+- Fonctionnaires (RAFP), salariés (PERECO), indépendants (Madelin/PERIN) ont des mécanismes différents — personne ne comprend ce qu'il a déjà et ce qui est encore optimisable
+- La confusion PER vs assurance vie bloque l'action : "l'assurance vie c'est mieux non ?" — en réalité ils sont complémentaires mais pas substituables
+
+**Données clés :** Le plafond PER moyen non utilisé par un TMI 30% représente ~€3 000 d'économie d'impôt/an. Sur 10 ans, c'est €30 000 d'impôts payés en trop. 32 millions d'actifs n'ont pas de PER optimisé.
+
+### Solution
+**(1) Simulateur gain fiscal immédiat :** L'utilisateur entre son revenu net imposable (ou sélectionne sa tranche), sa TMI (ou l'IA la calcule), et le montant qu'il envisage de verser. En 30 secondes : **"Si vous versez €X dans votre PER ce soir, vous économisez €Y sur votre prochain avis d'imposition."** C'est la révélation qui déclenche l'action.
+
+**(2) Calculateur de sortie optimale :** L'outil projette la situation fiscale à la retraite (revenus estimés, TMI à la retraite) et compare : sortie en rente (IR avec abattement 10%), sortie en capital (flat tax 30% pour les intérêts, TMI pour les versements), ou mixte. Affiche la stratégie optimale en euros économisés sur 20 ans.
+
+**(3) Inventaire PER personnalisé :** L'utilisateur indique son statut (salarié, indépendant TNS, fonctionnaire) et ses contrats existants. L'IA identifie ce qu'il a (PERECO, RAFP, Madelin) et ce qui est encore optimisable via un PER individuel (PERIN).
+
+**(4) Comparatif PER vs alternatives :** Tableau clair : PER (déduction fiscale immédiate, bloqué jusqu'à la retraite), assurance vie (disponible à tout moment, avantage fiscal à la sortie après 8 ans), livret A (plafond €22 950, taux réglementé, aucun avantage fiscal). Pour chaque profil, la combinaison optimale.
+
+**(5) Pack Optimisation (payant) :** Calcul précis des versements optimaux par trimestre, stratégie de sortie rente vs capital avec projections, comparatif des 15 meilleurs PER du marché (frais d'entrée, frais de gestion, ETF World disponibles, performances 3/5/10 ans), formulaire de transfert PER pour consolider plusieurs contrats, et alerte novembre pour utiliser le plafond avant le 31 décembre.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur gain fiscal | €0 | "€1 500 d'impôts économisés ce soir" — résultat choc très partageable |
+| Pack Optimisation | €15 | Versements optimaux + stratégie sortie rente/capital + top 15 PER marché |
+| Consultation CGP | €59 | Session 45min avec un conseiller en gestion de patrimoine partenaire |
+| Affiliation assureurs PER | Commission | €30–€80 par PER ouvert via la plateforme (Linxea, Lucya, Yomoni, etc.) |
+| B2B CGP / banques | €149/mois | Widget simulateur PER marque blanche intégré au site du CGP ou de la banque |
+
+**Unit economics :** Claude API ~€0,02/simulation → marge >99% sur le pack €15. L'affiliation est le levier principal : 1 000 PER ouverts/mois × €50 de commission = **€50 000 MRR passif**. Les assureurs paient des commissions élevées car le PER est un produit de long terme très rentable (engagement de 20–30 ans).
+
+**Potentiel affiliation :** Les comparateurs de PER (MoneyVox, Le Revenu, Meilleurtaux) génèrent des dizaines de millions d'euros/an en commissions. ÉpargneRetraite.ai peut capter une part de ce marché avec un outil plus pédagogique, axé sur le gain fiscal concret plutôt que sur les performances de fonds.
+
+**Timing :** La fenêtre novembre-décembre est critique — les Français cherchent des optimisations fiscales de dernière minute. Une campagne d'emailing "Il vous reste €3 000 de plafond PER à utiliser avant le 31 décembre — économisez €900 d'impôts ce soir" sur liste opt-in peut générer des pics de conversion massifs.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Plafond PER 2026 (10% revenus pro 2025 plafonnés à €37 094 pour les salariés, ou 10% bénéfice + 15% entre 1 et 8 PASS pour les TNS via Madelin), barème IR 2026, TMI marginale sur versement, projection avec intérêts composés sur horizon 5/10/15/20/30 ans, imposition à la sortie (rente : IR avec abattement 10% ; capital : versements à TMI + intérêts à PFU 30%), différentiel TMI entrée vs TMI retraite
+- **Base PER marché :** Top 15 PER avec frais d'entrée (objectif 0%), frais de gestion (objectif <1%/an), ETF World disponibles, performances 3/5/10 ans — mise à jour semestrielle
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le plan d'optimisation
+- **Auth + DB :** Supabase
+- **Paiements :** Stripe (one-shot)
+- **Alertes :** Resend — rappel en novembre "Profitez de votre plafond PER avant le 31 décembre !" (versement doit être effectué avant fin d'année pour être déductible sur les revenus de cette année)
+
+### Go-to-Market (zero budget)
+1. **SEO :** "combien j'économise si je verse dans mon PER", "PER 2026 plafond déduction calcul", "plan épargne retraite simulation économie impôt", "PER vs assurance vie comparatif" — mots-clés à fort volume et peu de simulateurs vraiment pratiques dans les résultats
+2. **Communautés finance perso :** Reddit r/vosfinances (200K+ membres), forum Boursorama (très actif sur l'épargne retraite), forum MoneyVox, newsletter Snowball et Pognon&Sérenité — des questions sur le PER sont posées chaque semaine sans réponse claire et actionnable
+3. **LinkedIn :** La communauté "finance personnelle" française est active — un post "J'ai versé €5 000 dans mon PER hier. Voici exactement combien j'économise en impôts" avec le simulateur viral peut atteindre 50K+ vues
+4. **Timing fiscal :** Campagne septembre-décembre — c'est quand les Français cherchent des optimisations de dernière minute après avoir reçu leur avis d'imposition
+
+### Competitive Moat
+- **Le gain fiscal immédiat :** Personne ne présente l'économie d'impôt CETTE ANNÉE aussi clairement — les comparateurs de PER comparent les frais et performances, pas le gain fiscal personnalisé en euros. C'est la révélation qui déclenche l'action immédiate
+- **Alerte plafond novembre :** L'email de rappel "il reste €X de plafond PER à utiliser avant le 31 décembre" est un levier de rétention et de conversion unique — les utilisateurs reviennent chaque année
+- **Base comparatif PER :** Agréger, vérifier et maintenir les frais et performances de 30+ PER du marché est une barrière à l'entrée en termes de temps et d'actualisation
+- **Extension naturelle :** Ajouter le simulateur PERECO avec abondement employeur (souvent méconnu), le bilan patrimonial complet (PER + assurance vie + immobilier), et le comparatif international pour les Français qui envisagent de s'expatrier
+
+### Figma Schematic
+[View ÉpargneRetraite.ai — French PER Retirement Savings Optimizer on FigJam](https://www.figma.com/board/scPUGZ1YDUaSAnYkoW0Iwd)
+
+---
+
+## 95. LogementSocial.ai
+
+> **Accélérez votre demande de HLM : priorités légales, recours DALO, stratégie dossier — réduisez votre attente de 5 ans à 18 mois**
+
+### Problem
+La France compte **2,4 millions de demandes de HLM actives** en 2026, avec un délai d'attente moyen national de **5,7 ans** (et jusqu'à 12 ans à Paris, source ministère du Logement). Mais dans ce système kafkaïen, **des critères de priorité légaux existent** — définis par la loi DALO (Droit Au Logement Opposable, articles L.441-1 et L.441-2-3 du Code de la construction) — qui permettent d'obtenir un logement en quelques mois plutôt que des années. Seulement **5% des demandeurs** connaissent ces critères et savent les activer.
+
+**Les critères légaux de priorité (méconnus de 95% des demandeurs) :**
+- **Logement insalubre ou dangereux** (arrêté préfectoral) → relogement sous 6 mois
+- **Suroccupation grave** (moins de 9 m² par personne au sens de l'art. R.111-5) → priorité nationale
+- **Violences conjugales** (ordonnance de protection ou signalement) → priorité absolue avec protocole dédié
+- **Handicap ou dépendance grave** → attribution dans un délai raisonnable défini par la commission DALO
+- **Décohabitation urgente** (majeurs hébergés chez les parents involontairement depuis plus de 2 ans) → critère reconnu
+- **Recours DALO** → si le délai "anormalement long" est dépassé (6 mois à Paris, 12–18 mois en province selon l'arrêté préfectoral), la commission DALO peut **obliger l'État à reloger dans les 6 mois**
+
+**Le problème :** Ces critères sont dans des textes légaux complexes et éparpillés. Les agents communaux ne les communiquent pas spontanément. Les associations (DAL, Fondation Abbé Pierre) sont surchargées. Résultat : des familles attendent 8 ans dans un appartement suroccupé alors qu'elles auraient pu activer un recours DALO après 18 mois.
+
+**Données clés :** En 2025, seulement **80 000 recours DALO** ont été déposés pour 2,4 millions de demandeurs — soit **3,3% d'utilisation**. Et parmi les recours DALO déposés, **60% sont rejetés pour vice de forme** (dossier incomplet, mauvais justificatifs, exposé de situation insuffisant). Un outil qui aide à rédiger un recours DALO complet et sans erreur est une révolution pour les 2,3 millions de demandeurs qui n'ont jamais utilisé ce droit.
+
+**Marché :** 2,4 millions de demandeurs actifs. Si 2% utilisent un outil d'aide = 48 000 utilisateurs. À €12 de pack = €576 000 de revenus potentiels, plus le B2B communal.
+
+### Solution
+**(1) Diagnostic priorité :** L'utilisateur répond à 10 questions (surface habitée, nombre de personnes, nature du logement actuel, date de dépôt de la demande, département, situation familiale). L'IA identifie automatiquement si des critères de priorité légale s'appliquent et lesquels — avec le texte de loi correspondant pour justifier la demande.
+
+**(2) Calculateur recours DALO :** En croisant le département et la date de dépôt de la demande, l'outil indique si le demandeur peut déjà déposer un recours DALO (délai anormalement long atteint) et quelle est la probabilité de succès basée sur les statistiques DALO du département (taux d'acceptation, délai médian de relogement après acceptation).
+
+**(3) Guide d'optimisation du dossier :** Quels documents ajouter pour maximiser le score de priorité (attestation de suroccupation par la CAF, rapport d'insalubrité par le SCHS, ordonnance de protection si VIF, attestation employeur si mutation), comment rédiger l'exposé de situation (souvent sous-estimé), et quels éléments mentionner dans les actualisations annuelles pour garder le dossier actif et à jour.
+
+**(4) Annuaire bailleurs sociaux par délai :** Pour chaque département et commune, la liste des bailleurs sociaux avec leurs délais moyens d'attribution par type de logement (T2, T3, T4) — certains bailleurs ont des délais 2x plus courts pour des loyers équivalents. Choisir le bon bailleur au moment de la demande peut économiser 2–3 ans d'attente.
+
+**(5) Pack Dossier Prioritaire (payant) :** Recours DALO pré-rédigé et personnalisé à la situation spécifique (les 60% rejetés pour vice de forme seraient évités), modèle de lettre au maire ou au préfet pour activer la commission de médiation, guide de suivi mensuel du dossier (qui appeler, quelle fréquence, que demander par écrit pour créer un historique), et checklist des pièces justificatives pour chaque critère de priorité.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic + Guide priorité | €0 | Fort impact social — partage naturel dans les groupes de quartier et associations |
+| Pack Dossier Prioritaire | €12 | Recours DALO pré-rédigé + lettre maire + guide suivi mensuel + checklist pièces |
+| Suivi Annuel | €8/an | Rappel d'actualisation + nouveaux critères applicables + alerte si délai anormalement long atteint |
+| B2B Communes / CCAS | €99/mois | Module de gestion des demandeurs prioritaires pour les services logement communaux |
+| Partenariats associations | Revenue sharing | Commission sur dons générés pour le DAL, Fondation Abbé Pierre, CLAJ (en échange de recommandations) |
+
+**Unit economics :** Claude API ~€0,02/diagnostic → marge >99% sur le pack €12. La viralité est très forte : les personnes en attente de HLM sont regroupées dans des associations, des forums de quartier, des groupes Facebook locaux — un outil qui promet de réduire l'attente de 5 ans à 18 mois est partagé instantanément dans ces réseaux.
+
+**Impact social comme levier marketing :** LogementSocial.ai répond à un besoin fondamental souvent ignoré par les startups tech. Cette mission crée une couverture médiatique naturelle (presse locale, podcasts sociaux, associations) et une crédibilité institutionnelle qui accélère les partenariats B2B communaux.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de priorité :** Critères DALO codifiés (articles L.441-1 et L.441-2-3 CCH), seuils de suroccupation (art. R.111-5 : 14 m² pour 1 personne, 16 m² pour 2 + 9 m²/personne supplémentaire), délais anormalement longs par département (arrêtés préfectoraux mis à jour chaque année — de 6 mois à Paris à 18 mois dans les départements moins tendus)
+- **Base bailleurs sociaux :** Données du répertoire RPLS (Répertoire du Parc Locatif Social, données publiques Data.gouv.fr) — ~750 organismes HLM avec leurs communes d'implantation, types de logements, et délais estimés via les rapports annuels publics
+- **Base statistiques DALO :** Publiées chaque année par le ministère du Logement — taux d'acceptation des recours par département, délai médian d'attribution après acceptation, stock de relogements dus
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le recours DALO et les lettres
+- **Auth + DB :** Supabase
+- **Rappels :** Resend — alerte annuelle pour mettre à jour la demande (obligatoire chaque année, sinon la demande est annulée de plein droit après 2 ans sans actualisation)
+
+### Go-to-Market (zero budget)
+1. **SEO :** "recours DALO comment faire 2026", "HLM prioritaire critères légaux", "demande HLM trop longue que faire", "logement social délai anormalement long département" — mots-clés à fort besoin, très peu d'outils pratiques dans les résultats (les premiers résultats sont des sites gouvernementaux illisibles)
+2. **Associations logement :** DAL (Droit Au Logement), Fondation Abbé Pierre, CLAJ (Comité pour le Logement Autonome des Jeunes) — ces associations cherchent des outils à recommander et n'ont pas les ressources pour les développer elles-mêmes
+3. **Groupes Facebook locaux :** Les groupes de quartier et de ville comptent des dizaines de milliers de membres — les questions HLM y sont fréquentes, une réponse avec un lien vers LogementSocial.ai génère un trafic organique massif depuis des personnes en situation de besoin réel
+4. **CCAS :** Les Centres Communaux d'Action Sociale accompagnent les personnes en demande de HLM — être recommandé par les CCAS crée un canal d'acquisition institutionnel gratuit et très crédible, avec effet de réputation
+
+### Competitive Moat
+- **Recours DALO automatisé :** Aucun outil existant ne génère un recours DALO pré-rédigé et personnalisé — c'est le document le plus impactant et le plus difficile à rédiger correctement. Réduire le taux de rejet de 60% à <10% est une proposition de valeur unique et vérifiable
+- **Base délais DALO par département :** Agréger et mettre à jour annuellement les statistiques DALO de chaque département (taux d'acceptation, délai médian de relogement) est une barrière à l'entrée technique qui protège de la copie rapide
+- **Mission sociale comme bouclier concurrentiel :** Un concurrent commercial pur-play se priverait des partenariats associatifs et de la couverture médiatique "tech for good" — LogementSocial.ai peut accéder à des financements Fondation de France, BPI, ou programme Startups d'État qui restent fermés aux acteurs purement commerciaux
+- **Extension naturelle :** Ajouter le dispositif "Logement d'Abord" (priorité absolue aux personnes sans domicile), les pensions de famille, les résidences sociales pour les jeunes travailleurs, et le guide des aides à l'accession à la propriété (PTZ, BRS) pour couvrir l'ensemble du parcours logement des ménages modestes
+
+### Figma Schematic
+[View LogementSocial.ai — French Social Housing Accelerator on FigJam](https://www.figma.com/board/eCBnuee1Wqe4neM6iCntwn)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -4608,4 +4825,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-19 — Ideas 90–92 added (France-specific, ultra-low-budget: AirbnbFiscal.ai, VéloSubvention.ai, SantéMentale.ai)*
+*Last updated: 2026-05-20 — Ideas 93–95 added (France-specific, ultra-low-budget: PortageSalarial.ai, ÉpargneRetraite.ai, LogementSocial.ai)*
