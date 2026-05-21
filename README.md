@@ -103,6 +103,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 93 | [PortageSalarial.ai](#93-portagesalarialai) | Freemium + Pay-per-pack + B2B SaaS | €10K–€70K | Low |
 | 94 | [ÉpargneRetraite.ai](#94-épargnerettraiteai) | Freemium + Pay-per-pack + Affiliate | €12K–€80K | Low |
 | 95 | [LogementSocial.ai](#95-logementsocialai) | Freemium + Pay-per-pack + B2B Communes | €5K–€38K | Low |
+| 96 | [SantéDentaire.ai](#96-santédentaireai) | Pay-per-pack + Affiliate mutuelles | €6K–€45K | Low |
+| 97 | [TélétravailFrais.ai](#97-télétravailfraisai) | Pay-per-pack + Freemium | €4K–€30K | Low |
+| 98 | [CumulEmploiRetraite.ai](#98-cumulemploirettraiteai) | Pay-per-pack + Freemium | €5K–€40K | Low |
 
 ---
 
@@ -4810,6 +4813,201 @@ La France compte **2,4 millions de demandes de HLM actives** en 2026, avec un d�
 
 ### Figma Schematic
 [View LogementSocial.ai — French Social Housing Accelerator on FigJam](https://www.figma.com/board/eCBnuee1Wqe4neM6iCntwn)
+
+---
+
+## 96. SantéDentaire.ai
+
+> **Trouvez le meilleur dentiste RAC 0 près de chez vous, comprenez votre devis, et économisez jusqu'à €1 500 sur vos soins dentaires grâce à la réforme 100% Santé**
+
+### Problem
+Les soins dentaires sont le premier poste de reste à charge en santé pour les Français. Une couronne coûte entre €600 et €1 500 chez un praticien en secteur 2 ou 3. Pourtant, depuis le **1er janvier 2021**, la réforme **100% Santé (RAC 0)** garantit €0 de reste à charge sur un panier de soins complet : certaines prothèses, certains bridges, bagues orthodontiques pour adultes — **mais seulement chez les praticiens en secteur 1 qui respectent les tarifs opposables**.
+
+**Le problème :** 68% des Français ne savent pas quels soins dentaires sont couverts à 100% par la réforme RAC 0 (sondage IFOP 2023). Les devis dentaires sont illisibles : codes NGAP, cotations, différentiel entre panier libre et panier RAC 0. Et trouver un dentiste secteur 1 qui propose vraiment du RAC 0 — sans liste d'attente de 8 mois — relève du parcours du combattant.
+
+**Données clés :**
+- 40 millions de Français chez le dentiste chaque année
+- Reste à charge moyen annuel dentaire : **€228/personne** (source DREES 2024) — mais pour les soins lourds (prothèses, orthodontie), il dépasse souvent **€800–€1 500**
+- 1 Français sur 3 renonce aux soins dentaires pour raisons financières (Baromètre Renoncement aux Soins 2024)
+- Les comparateurs de mutuelles comparent les garanties sur le papier, mais personne n'aide à savoir si on est **vraiment couvert** pour son soin spécifique cette année, chez son dentiste actuel
+
+### Solution
+**(1) Classificateur RAC 0 :** L'utilisateur décrit son soin dentaire en langage naturel ("il me faut une couronne sur la molaire du bas") ou entre le code NGAP depuis son devis. L'IA détermine si ce soin appartient au panier RAC 0, au panier modéré (honoraires encadrés) ou au secteur libre — avec le montant CPAM de base, la prise en charge mutuelle standard, et le reste à charge estimé selon le type de mutuelle.
+
+**(2) Déchiffreur de devis :** L'utilisateur prend en photo ou copie-colle son devis dentaire. L'IA traduit chaque ligne en langage clair (code → "couronne céramo-métallique sur incisive"), calcule le RAC total, et compare le devis reçu avec les tarifs du panier RAC 0 pour le même soin — pour savoir si le praticien propose vraiment le meilleur prix.
+
+**(3) Trouveur dentiste RAC 0 :** Localisation des dentistes secteur 1 qui pratiquent réellement le RAC 0 (pas seulement les dentistes affiliés sur le papier) dans un rayon de 10/20/50 km, avec délai de rendez-vous estimé, note Doctolib, et spécialités (orthodontie, implants, pédiatrie).
+
+**(4) Optimiseur mutuelle dentaire :** Comparaison des top 15 mutuelles françaises sur leur remboursement dentaire réel (prothèses, orthodontie adulte, implants) avec les cotisations mensuelles correspondantes — pour chaque profil d'âge et de besoins. Calcul de l'économie annuelle si l'utilisateur change de mutuelle.
+
+**(5) Pack Dentaire (payant) :** Modèle de lettre pour contester un refus de prise en charge mutuelle ou CPAM, guide "que dire au dentiste pour ne pas se faire vendre du secteur 2 inutilement", checklist des documents à préparer avant consultation, et template de demande d'entente préalable pour les prothèses.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Classificateur RAC 0 + Trouveur dentiste | €0 | Génère du trafic SEO massif |
+| Déchiffreur de devis | €0 (3/mois) | Gratuit pour conversion — le devis est le moment de vérité |
+| Pack Dentaire | €9 | Lettre contestation + guide négociation + checklist + entente préalable |
+| Abonnement Famille | €4/mois | Déchiffreur illimité + alertes remboursement + rappel détartrage semestriel |
+| Affiliation mutuelles | €15–€40/lead | Commission sur souscription mutuelle (partenariats Malakoff, Alan, April) |
+
+**Unit economics :** Claude API ~€0,03/dévis → marge >99% sur le pack €9. L'affiliation mutuelle peut générer €15–€40 par souscription — un utilisateur qui change de mutuelle vaut bien plus que le pack.
+
+**Potentiel de marché :** 40M de visites dentaires/an. 1% des patients avec un devis complexe = 400 000 utilisateurs potentiels. À 3% de conversion pack = 12 000 ventes/an = €108K revenus directs, plus affiliation mutuelles.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **OCR devis :** Claude API vision (claude-sonnet-4-6) pour extraction des codes NGAP et montants depuis photo ou PDF du devis
+- **Base RAC 0 :** Nomenclature NGAP complète + panier RAC 0 arrêté du 5 juin 2019 (mis à jour régulièrement) + tarifs opposables CPAM 2026 + grilles de remboursement mutuelles top 15 (mises à jour semestriellement)
+- **Données dentistes :** API Annuaire Santé (data.ameli.fr — données publiques) pour secteurs d'exercice + Doctolib API partenaire pour délais et disponibilités
+- **Moteur mutuelle :** Tableau croisé garanties × cotisations × profil (âge, situation familiale, fréquence soins) pour recommandation personnalisée
+- **Auth + DB :** Supabase
+- **Paiements :** Stripe
+
+### Go-to-Market (zero budget)
+1. **SEO :** "devis dentaire trop cher que faire", "dentiste RAC 0 près de moi vraiment gratuit", "couronne dentaire remboursement 100% santé 2026", "comprendre devis dentaire codes" — volume élevé, résultats Google actuels peu satisfaisants (sites gouvernementaux illisibles ou comparateurs de mutuelles généralistes)
+2. **Groupes Facebook patients :** "Les dents de vos enfants" (90K membres), "Santé et remboursements" (40K membres), groupes de parents locaux — les questions "comment comprendre mon devis" et "dentiste RAC 0 dans ma ville" y apparaissent chaque semaine
+3. **TikTok / Reels :** Format "J'ai payé €0 pour ma couronne — voici comment" — ce type de contenu génère facilement 500K+ vues sur la finance perso en France
+4. **Partenariats orthodontistes :** Proposer aux cabinets d'orthodontie un module "estimateur RAC 0 à intégrer sur votre site" (B2B SaaS €49/mois) qui renvoie des patients déjà informés et convaincus
+
+### Competitive Moat
+- **Le déchiffreur de devis dentaire** : aucun outil grand public ne traduit les codes NGAP en langage clair avec le calcul du RAC en temps réel — c'est le moment de vérité du parcours patient et la barrière à la copie rapide est la base NGAP × mutuelles × secteurs constamment mise à jour
+- **Base dentistes RAC 0 vérifiée** : agréger et maintenir les données Annuaire Santé + Doctolib pour identifier les praticiens qui pratiquent **vraiment** le RAC 0 (pas seulement déclarés secteur 1) est une barrière à l'entrée en termes de données
+- **Extension naturelle :** Ajouter les soins optiques (100% Santé lunettes), les audioprothèses (100% Santé appareils auditifs), et un bilan "RAC 0 annuel" complet — couvrir les 3 piliers de la réforme 100% Santé pour devenir le référent du reste à charge zéro
+
+### Figma Schematic
+[View SantéDentaire.ai — French Dental Cost Optimizer on FigJam](#) *(schematic pending Figma access)*
+
+---
+
+## 97. TélétravailFrais.ai
+
+> **Réclamez votre indemnité télétravail non perçue : €2,50/jour que votre employeur vous doit légalement — calculateur + modèle de lettre RH prêt à envoyer**
+
+### Problem
+Depuis le **1er janvier 2021**, l'URSSAF autorise les employeurs à rembourser les frais de télétravail à hauteur de **€2,50/jour** (ou €10/mois pour 1 jour/semaine, €20/mois pour 2 jours/semaine, €50/mois pour 5 jours/semaine) — **totalement exonérés de cotisations sociales et d'impôt sur le revenu**. Un salarié qui télétravaille 3 jours/semaine 46 semaines/an a droit à **€345/an net d'impôt**.
+
+**Le problème :** Selon une étude Malakoff Humanis 2024, **47% des salariés en télétravail régulier ne reçoivent aucune indemnité** de leur employeur pour couvrir internet, électricité, et équipement. Soit parce que l'employeur ne connaît pas l'obligation, soit parce que le salarié n'ose pas réclamer, soit parce que les RH gèrent ça avec une note de frais manuelle que personne ne complète.
+
+**Deuxième problème encore plus méconnu :** Les salariés avec des frais professionnels élevés (télétravail + déplacements + formation) peuvent **opter pour la déduction des frais réels** au lieu de l'abattement forfaitaire de 10% — ce qui économise souvent **€300–€800 d'impôts/an** — mais seulement 7% des contribuables français optent pour cette option, souvent parce qu'ils ne savent pas calculer si c'est plus avantageux.
+
+**Données clés :**
+- 6,2 millions de salariés en télétravail régulier en France en 2025 (source DARES)
+- €345/an en moyenne non réclamé par salarié (3j/semaine × 46 semaines × €2,50)
+- 6,2M × 47% non remboursés = **2,9 millions de salariés** pourraient réclamer une indemnité
+- La durée légale de rappel sur salaires est de 3 ans — certains salariés peuvent réclamer jusqu'à €1 035 de rattrapage
+
+### Solution
+**(1) Calculateur d'indemnité non perçue :** L'utilisateur entre ses jours de télétravail par semaine, le nombre de semaines/an, et ce que son employeur rembourse déjà. L'outil calcule l'indemnité URSSAF à laquelle il a droit, le montant annuel non perçu, et le rattrapage potentiel sur 3 ans.
+
+**(2) Générateur de lettre RH :** Modèle de courrier ou d'email à envoyer au service RH pour réclamer la mise en place de l'indemnité télétravail — ton professionnel, référence au cadre URSSAF, formulation qui préserve la relation employeur-salarié et maximise les chances d'acceptation.
+
+**(3) Comparateur frais réels vs forfait :** L'utilisateur entre ses dépenses annuelles déductibles (internet pro, électricité pro, abonnements, déplacements pro, repas, formation). L'outil calcule l'abattement 10% versus les frais réels et recommande l'option la plus avantageuse — avec le gain fiscal en euros sur la déclaration de revenus.
+
+**(4) Guide équipement déductible :** Liste des achats de matériel télétravail déductibles en frais réels (chaise ergonomique, écran, clavier, souris, casque, webcam, bureau — avec les règles de pro-ratisation si usage mixte) et les justificatifs à conserver pour le contrôle fiscal.
+
+**(5) Alerte déclaration de revenus :** Rappel en avril-mai avant la clôture de la déclaration : "Avez-vous pensé à déclarer vos frais réels ? Voici votre simulation basée sur vos données."
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calculateur + simulation frais réels | €0 | Forte viralité — "j'aurais dû avoir €345 de plus cette année" se partage naturellement |
+| Pack Télétravail | €7 | Lettre RH + guide équipements + rapport frais réels PDF prêt à joindre à la déclaration |
+| Abonnement Annuel | €9/an | Simulation mise à jour + rappel déclaration revenus chaque avril |
+| B2B RH / CSE | €49/mois | Module "calculateur indemnité télétravail" à intégrer dans l'intranet RH ou le portail CSE |
+
+**Unit economics :** Claude API ~€0,02/lettre → marge >99% sur le pack €7. Le B2B CSE est particulièrement attractif : il y a 35 000 CSE en France, et les CSE cherchent constamment des outils à proposer à leurs salariés.
+
+**Potentiel viralité :** "J'ai réclamé €345 à mon employeur grâce à une lettre générée en 2 minutes" est exactement le type de contenu qui explose sur LinkedIn France (finance perso + travail = 2 audiences qui se croisent).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Barème URSSAF 2026 (€2,50/jour ou plafonds mensuels selon fréquence), règle des 3 ans de rappel (art. L.3245-1 Code du travail), barème IR 2026 pour calcul frais réels vs forfait 10% (plafonné à €14 426 pour 2025), liste des postes déductibles en frais réels (art. 83 CGI)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour la lettre RH et le rapport frais réels
+- **Auth + DB :** Supabase
+- **Rappels :** Resend — email en avril "Pensez aux frais réels avant la fermeture de la déclaration"
+- **Paiements :** Stripe
+
+### Go-to-Market (zero budget)
+1. **SEO :** "indemnité télétravail montant 2026", "frais réels vs abattement 10% télétravail", "comment demander remboursement télétravail employeur", "équipement télétravail déductible impôts" — forte demande, peu d'outils pratiques et actionnables dans les résultats
+2. **LinkedIn France :** La communauté "vie au travail" est très active — un post "Mon employeur ne me versait pas l'indemnité télétravail légale depuis 3 ans. Voici comment j'ai réclamé €1 035" peut atteindre 200K+ vues avec la bonne accroche
+3. **Communautés finance perso :** Reddit r/vosfinances, forum Meilleur Taux, newsletter Snowball — les questions frais réels reviennent chaque printemps
+4. **CSE et syndicats :** Les Comités Sociaux et Économiques cherchent des outils concrets à proposer aux salariés. Un partenariat avec des fédérations syndicales (CFDT, FO, CGT) pour recommander l'outil à leurs adhérents peut générer 50 000+ visites dès le lancement
+
+### Competitive Moat
+- **La lettre RH prête à envoyer** : le calculateur seul existe déjà (simulateurs URSSAF basiques), mais aucun outil ne génère la lettre professionnelle qui demande réellement l'indemnité — c'est le passage à l'action qui manque, et c'est le produit
+- **Le comparateur frais réels** : le service des impôts propose un simulateur, mais il est notoire pour son manque d'ergonomie — une UX mobile-first avec recommandation claire et rapport PDF est une barrière différenciante
+- **Extension naturelle :** Ajouter le guide "frais de déplacements domicile-travail" (abonnement transport remboursé à 50% par l'employeur — là encore méconnu), le "pass Navigo partiellement remboursable au-delà de 50%", et l'indemnité vélo (€500/an exonérés si l'employeur participe)
+
+### Figma Schematic
+[View TélétravailFrais.ai — Remote Work Expense Reclaim Tool on FigJam](#) *(schematic pending Figma access)*
+
+---
+
+## 98. CumulEmploiRetraite.ai
+
+> **Vous êtes retraité ? Calculez exactement combien vous pouvez gagner en travaillant sans perdre un centime de pension — et découvrez comment ouvrir de nouveaux droits retraite**
+
+### Problem
+La France compte **17,5 millions de retraités** en 2026, dont une part croissante souhaite reprendre une activité partielle pour compléter une pension insuffisante, rester actif, ou simplement parce que le marché du travail les sollicite (secteurs en tension : aide à domicile, santé, enseignement, BTP). Le **cumul emploi-retraite** est légal et possible — mais ses règles sont réputées si complexes que la majorité des retraités y renonce par crainte de "perdre leur retraite".
+
+**Les vraies règles (méconnues) :**
+- **Cumul total sans plafond :** Accessible depuis la **liquidation totale** de toutes les retraites (base + complémentaire). Si le retraité a 67 ans ou a 43 ans de carrière, il peut gagner autant qu'il veut en travaillant sans aucun impact sur sa pension — et même **créer de nouveaux droits retraite** (réforme 2023, applicable depuis septembre 2023)
+- **Cumul partiel avec plafond (anciens régimes) :** Pour ceux qui n'ont pas liquidé toutes leurs retraites, l'AGIRC-ARRCO plafonne les revenus d'activité à 1,6 SMIC (€2 612/mois brut en 2026) — au-delà, la retraite complémentaire est suspendue proportionnellement
+- **Régime libéral :** Médecins, avocats, architectes — règles spécifiques selon leur caisse (CARMF, CNBF, CIPAV) avec seuils propres
+- **Auto-entrepreneur retraité :** Souvent plus favorable car les cotisations ne déclenchent pas de droits complémentaires — donc pas de risque de suspension de l'AGIRC-ARRCO pour les petits revenus d'activité
+
+**Le problème :** Ces règles changent selon l'année de naissance, la caisse de retraite, le régime d'activité choisi, le montant de pension — et ont évolué 3 fois en 10 ans (2015, 2019, 2023). Les retraités qui posent la question à leur caisse retraite reçoivent souvent une réponse incomplète ou incorrecte. Résultat : des retraités gagnent €500/mois "au noir" par peur des conséquences légales, ou renoncent à des missions à €2 000/mois parce qu'ils croient que leur pension sera suspendue.
+
+**Données clés :**
+- Pension moyenne nette : **€1 570/mois** (source DREES 2024) — insuffisante pour de nombreux foyers
+- 15% des retraités français exercent une activité rémunérée (source INSEE 2024) — mais 60% de plus souhaitent le faire sans savoir si c'est possible (sondage CSA 2024)
+- La "sur-retraite" (nouveaux droits post-2023) est quasi inconnue : seulement 2% des retraités actifs ont ouvert des nouveaux droits depuis la réforme selon les premières statistiques CNAV
+
+### Solution
+**(1) Éligibilité cumul total :** 5 questions (âge, trimestres validés, toutes retraites liquidées ?, caisse principale, profession envisagée) → diagnostic clair : cumul total possible / cumul partiel avec plafond / règles spécifiques libéral.
+
+**(2) Simulateur de revenus :** Pour chaque scénario (salarié, auto-entrepreneur, libéral), simulation du net mensuel après cotisations sociales + IR, avec le montant de pension maintenu ou suspendu selon les seuils. Visualisation "zone verte / zone orange / zone rouge" par tranches de revenus.
+
+**(3) Calculateur "sur-retraite" :** Simulation des nouveaux droits retraite générés par l'activité post-liquidation (depuis la réforme de 2023) — pour les retraités qui cotisent encore, combien de trimestres supplémentaires ils accumulent et quelle majoration de pension cela représente.
+
+**(4) Comparatif statuts :** Pour un même niveau de revenu cible, comparaison auto-entrepreneur vs salarié vs libéral : charges, impact sur la pension complémentaire, formalités, et conseil sur le statut optimal selon le profil.
+
+**(5) Pack Cumul Retraite (payant) :** Rapport PDF personnalisé à présenter à la caisse retraite, modèle de demande d'information écrite à l'AGIRC-ARRCO (trace écrite en cas de litige), guide de création auto-entrepreneur pour retraité étape par étape (SIRET, déclaration de revenus, déclaration trimestrielle Urssaf), et calcul de l'impact fiscal annuel (IR sur pension + revenus d'activité combinés).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic éligibilité + simulateur basique | €0 | Fort trafic SEO — les retraités cherchent cette info partout sans la trouver clairement |
+| Pack Cumul Retraite | €12 | Rapport PDF complet + lettre caisse retraite + guide auto-entrepreneur retraité + simulation IR |
+| Abonnement Suivi | €6/an | Alertes en cas de changement de règles (évolution plafonds SMIC, réforme retraite) |
+| B2B Mutuelles Retraite & Silver Economy | €79/mois | Module "simulation cumul emploi-retraite" intégrable dans les espaces clients Malakoff Humanis, Pro BTP, AG2R |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99% sur le pack €12. Le B2B silver economy est un marché en pleine croissance : mutuelles retraite, plateformes d'emploi senior (Senioract, Senior&Emploi), CARSAT — tous cherchent des outils à valeur ajoutée pour leurs adhérents.
+
+**Viralité senior :** Les retraités actifs sont très présents sur Facebook (groupes de retraites actifs, forums Boursorama, Retraite.com) et partagent massivement les outils qui leur font "découvrir" des droits méconnus.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur de calcul :** Règles de cumul emploi-retraite post-réforme 2023 (art. L.161-22 et L.161-22-1 CSS), plafond AGIRC-ARRCO 2026 (1,6 × SMIC = €2 612/mois brut), cotisations auto-entrepreneur (22% pour activité commerciale, 22,2% pour libéral), calcul "sur-retraite" (taux de liquidation sur nouveaux trimestres post-2023), barème IR 2026 combinant pension + revenus d'activité
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf pour le rapport personnalisé et les lettres
+- **Base caisses retraite :** CNAV, AGIRC-ARRCO, MSA, SSI (ex-RSI), CIPAV, CARMF, CNBF — règles et contacts de chaque caisse
+- **Auth + DB :** Supabase
+- **Alertes :** Resend — notification en cas de changement de plafonds SMIC (révision au 1er janvier) ou réforme réglementaire
+
+### Go-to-Market (zero budget)
+1. **SEO :** "cumul emploi retraite plafond 2026", "retraité auto-entrepreneur est-ce possible", "travailler à la retraite sans perdre sa pension", "sur-retraite nouveaux droits réforme 2023" — forte demande informationnelle, résultats Google actuels : Service-Public.fr avec textes juridiques indigestes
+2. **Groupes Facebook seniors :** "Retraités actifs de France" (180K membres), "Emploi Senior et Retraite" (45K membres) — les questions "est-ce que je peux travailler sans perdre ma retraite" y apparaissent plusieurs fois par semaine sans réponse claire et pratique
+3. **Plateformes emploi senior :** Partenariat avec Senioract, Senior&Emploi, Yumaincap — proposer leur intégrer l'outil en marque blanche pour que chaque offre d'emploi affiche "Simulez votre cumul emploi-retraite"
+4. **Caisses de retraite elles-mêmes :** Les CARSAT régionales et l'AGIRC-ARRCO cherchent des outils pédagogiques pour réduire les appels téléphoniques sur les règles de cumul — un partenariat de recommandation (même sans exclusivité) génèrerait des centaines de milliers de visites
+
+### Competitive Moat
+- **La simulation IR combinée pension + activité** : personne ne calcule l'impact fiscal total (pension soumise à IR + revenus d'activité cumulés) — c'est la vraie question que se pose le retraité avant de décider, et c'est la barrière à la copie rapide car ça nécessite d'intégrer le barème IR avec les spécificités de la pension (abattement 10% sur pensions, CSG/CRDS à taux différenciés selon revenus)
+- **La "sur-retraite" post-2023** : outil unique pour calculer les nouveaux droits ouverts depuis la réforme — pratiquement aucun outil grand public n'a intégré cette nouveauté alors qu'elle change la donne pour les retraités qui reprennent une activité
+- **Extension naturelle :** Ajouter le cumul chômage-retraite (ARE + pension : règles complexes mais très demandées), le guide "invalide et retraité" (cumul pension d'invalidité avec la retraite), et les simulations pour le conjoint survivant (pension de réversion + activité)
+
+### Figma Schematic
+[View CumulEmploiRetraite.ai — French Retirement + Work Income Simulator on FigJam](#) *(schematic pending Figma access)*
 
 ---
 
