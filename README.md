@@ -106,6 +106,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 96 | [SantéDentaire.ai](#96-santédentaireai) | Pay-per-pack + Affiliate mutuelles | €6K–€45K | Low |
 | 97 | [TélétravailFrais.ai](#97-télétravailfraisai) | Pay-per-pack + Freemium | €4K–€30K | Low |
 | 98 | [CumulEmploiRetraite.ai](#98-cumulemploirettraiteai) | Pay-per-pack + Freemium | €5K–€40K | Low |
+| 99 | [ConventionCollective.ai](#99-conventioncollectiveai) | Freemium + Pay-per-report | €8K–€55K | Low |
+| 100 | [AccidentTravail.ai](#100-accidenttravailai) | Pay-per-pack + Freemium | €6K–€45K | Low |
+| 101 | [ViagerCalcul.ai](#101-viagercalculai) | Pay-per-simulation + Affiliate notaires | €5K–€35K | Low |
 
 ---
 
@@ -5011,6 +5014,201 @@ La France compte **17,5 millions de retraités** en 2026, dont une part croissan
 
 ---
 
+## 99. ConventionCollective.ai
+
+> **Quelle est votre convention collective ? Êtes-vous payé à votre juste niveau ? Découvrez vos droits réels en 2 minutes**
+
+### Problem
+La France compte **700+ conventions collectives nationales** (CCN) qui s'appliquent à **25 millions de salariés du secteur privé**. Chaque CCN fixe des minimums salariaux par coefficient/niveau d'emploi, des durées de préavis, des primes obligatoires (ancienneté, 13e mois dans certains secteurs), et des congés supplémentaires. Pourtant :
+
+- **43% des salariés** ne savent pas quelle CCN s'applique à leur contrat (sondage DARES 2024)
+- **1 salarié sur 6** est payé en-dessous du minimum conventionnel de sa CCN (Inspection du Travail, rapport 2023) — souvent par erreur plutôt que mauvaise volonté de l'employeur
+- Les conventions collectives sont publiées sur Legifrance… en format PDF juridique de 300 pages illisibles
+- Les avocats en droit du travail facturent €150–€300/h pour une consultation sur les droits conventionnels
+
+**Cas concrets de droits ignorés :**
+- Secteur BTP : prime d'intempéries, prime de panier, indemnité de trajet — souvent non versées car salariés ignorent leur existence
+- Commerce de détail (CCN 3305) : préavis de 2 mois au lieu d'1 mois légal dès 2 ans d'ancienneté — quasiment personne ne le sait
+- Hôtellerie-restauration : nettoyage de tenues pris en charge par l'employeur — rarement appliqué
+- Métallurgie (nouvelle CCN 2024) : refonte totale de la grille — 600K salariés potentiellement reclassés à des niveaux inférieurs sans le savoir
+
+### Solution
+**(1) Identification CCN :** L'utilisateur saisit le nom ou SIRET de son entreprise → l'outil identifie automatiquement la CCN applicable via le code NAF/APE (base Sirene) + la liste officielle des CCN Legifrance.
+
+**(2) Vérification salariale :** Saisie du poste, coefficient/niveau et ancienneté → comparaison avec le minimum conventionnel de la CCN en vigueur. Résultat : « ✅ Vous êtes au-dessus du minimum » ou « ⚠️ Votre salaire semble inférieur de €XXX/mois au minimum de votre grille ».
+
+**(3) Droits conventionnels clés :** Récapitulatif des 5 droits les plus méconnus de la CCN : préavis réels, jours de congé supplémentaires, primes obligatoires, indemnités spécifiques.
+
+**(4) Pack Droits Conventionnels (payant) :** Rapport PDF complet avec toutes les clauses de la CCN analysées par l'IA pour le profil salarié, lettre de demande de régularisation de salaire (si sous-paiement détecté), guide des recours (inspection du travail, prud'hommes), et calcul du rappel de salaire sur 3 ans (prescription).
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Identification CCN + vérification salariale | €0 | Fort trafic SEO — question recherchée par des millions de salariés |
+| Pack Droits Conventionnels | €12 | Rapport PDF + lettre régularisation + calcul rappel salaire 3 ans |
+| Alerte Annuelle CCN | €5/an | Notification si votre CCN change (grilles salariales revalorisées chaque année) |
+| B2B Syndicats & CSE | €49/mois | Accès en marque blanche pour que les délégués syndicaux conseillent leurs adhérents |
+
+**Unit economics :** Claude API ~€0,04/analyse → marge >99% sur le pack €12. **Le B2B syndicats est immédiat :** CGT, CFDT, FO ont chacun des milliers de délégués qui passent leurs journées à répondre aux questions sur les droits conventionnels.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Identification CCN :** API Sirene (INSEE, gratuite) → code NAF → table de correspondance NAF↔CCN (publiée par le Ministère du Travail)
+- **Données CCN :** Scraping/parsing des CCN publiées sur Legifrance (données publiques) — les grilles salariales sont structurées et parsables
+- **Analyse IA :** Claude API (claude-sonnet-4-6) — interprétation des clauses complexes et génération du rapport personnalisé
+- **Génération documents :** react-pdf + lettres de régularisation modèles
+- **Auth + DB :** Supabase
+- **Payments :** Stripe
+
+### Go-to-Market (zero budget)
+1. **SEO :** "quelle convention collective pour mon entreprise", "salaire minimum convention collective [secteur]", "CCN métallurgie grille salariale 2026", "préavis licenciement convention collective" — requêtes à fort volume, résultats actuels : Legifrance (illisible) et cabinets d'avocats (payants)
+2. **Forums salariés :** r/FranceRH, groupes Facebook "Droits des salariés France" (120K membres), forums SeLoger Emploi — poser la question "savez-vous quelle CCN s'applique ?" génère immédiatement des dizaines de réponses intéressées
+3. **Syndicats et CSE :** Présenter l'outil aux délégués syndicaux locaux comme aide à leur mission de conseil — adoption naturelle car ça leur fait gagner des heures
+4. **TikTok/LinkedIn :** "1 salarié sur 6 est payé sous le minimum légal de sa convention collective — voici comment vérifier en 2 minutes"
+
+### Competitive Moat
+- **Identification CCN automatique via SIRET** : personne n'a fait ce lien simple NAF→CCN en self-service — les autres outils demandent à l'utilisateur de connaître sa CCN (ce qui est précisément le problème)
+- **Calcul du rappel de salaire sur 3 ans** : si l'utilisateur est sous-payé depuis 3 ans, le montant peut être de €5 000–€20 000 — cette information crée une motivation d'achat immédiate et forte
+- **Mise à jour annuelle des grilles** : les CCN sont renegociées chaque année → un service d'alerte crée une récurrence naturelle
+- **Extension vers le droit disciplinaire conventionnel** : chaque CCN a ses procédures de sanctions et licenciement — prochaine feature évidente
+
+### Figma Schematic
+[View ConventionCollective.ai — CCN Rights Checker on FigJam](https://www.figma.com/board/fLFGjrgPxeuL8YgPjxtigu)
+
+---
+
+## 100. AccidentTravail.ai
+
+> **Victime d'un accident au travail ? Connaissez vos droits en 5 minutes — et ne perdez plus une seule indemnité**
+
+### Problem
+Chaque année en France, **600 000+ accidents du travail** sont reconnus, dont **700 décès** et **40 000 accidents graves** (source : Assurance Maladie 2024). Pourtant la grande majorité des victimes ne connaissent pas leurs droits spécifiques — qui sont **radicalement meilleurs** que ceux d'un arrêt maladie ordinaire :
+
+- **Maintien du salaire à 100%** dès le 1er jour (vs 3 jours de carence en maladie ordinaire)
+- **Prise en charge à 100%** des soins sans avance de frais (vs reste à charge mutuelle en maladie)
+- **Rente d'incapacité permanente** si séquelles > 10% d'IPP (indemnité permanente proportionnelle)
+- **Recours pour faute inexcusable de l'employeur** si manquement aux règles de sécurité → majoration de la rente + dommages et intérêts
+
+**Ce que les victimes ignorent :**
+- La **déclaration d'accident doit être faite dans les 24 heures** à l'employeur — passé ce délai, la procédure se complique fortement
+- L'employeur a **48 heures** pour déclarer à la CPAM — il peut émettre des **réserves** qui bloquent la reconnaissance (40% des accidents avec réserves employeur ne sont pas reconnus au premier examen)
+- Le **taux d'IPP** (incapacité permanente partielle) est fixé unilatéralement par le médecin-conseil de la CPAM — il est contestable et **60% des recours sur le taux IPP aboutissent à une majoration**
+- La **rechute d'accident du travail** (réapparition des symptômes) bénéficie des mêmes droits que l'accident initial — quasi inconnu des victimes
+- Les **accidents de trajet** (domicile-travail) sont couverts au même titre que les accidents au poste — souvent déclarés à tort comme accidents de droit commun
+
+**Le problème financier concret :** Un salarié au SMIC avec un accident mal géré perd :
+- ~€500 sur 30 jours d'arrêt (indemnités maladie vs AT)
+- Potentiellement €10 000–€50 000 de rente d'incapacité si IPP non contestée
+- Des années de recours si la faute inexcusable n'est pas invoquée à temps (prescription 2 ans)
+
+### Solution
+**(1) Checklist d'urgence (gratuit) :** Guide "les 5 actions à faire dans les 24h" — rédaction du certificat médical initial, déclaration à l'employeur, précautions sur les réserves, contact CPAM. Envoi par email.
+
+**(2) Calculateur d'indemnités :** Salaire + durée d'arrêt → simulation comparée indemnités maladie ordinaire vs accident du travail → "vous avez droit à €XXX de plus en faisant reconnaître votre accident du travail".
+
+**(3) Détecteur de faute inexcusable :** Questionnaire guidé (l'employeur avait-il une obligation de sécurité ? y a-t-il eu formation ? EPI fournis ?) → diagnostic probabilité de faute inexcusable + délai de prescription restant.
+
+**(4) Pack Accident Travail (payant) :** Lettre de contestation des réserves employeur à la CPAM, guide de contestation du taux IPP, modèle de saisine du TASS (Tribunal des Affaires de Sécurité Sociale), lettre de mise en demeure pour faute inexcusable, calcul de la rente d'incapacité sur 5 et 10 ans selon différents taux IPP.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Checklist urgence + calculateur indemnités | €0 | Création immédiate de valeur → SEO + partage viral |
+| Pack Accident Travail | €15 | Tous les documents + calculs + guide recours |
+| Pack Faute Inexcusable | €25 | Dossier complet pour mise en cause de l'employeur |
+| B2B Syndicats & avocats droit social | €99/mois | Module intégrable dans les espaces adhérents |
+
+**Unit economics :** Claude API ~€0,05/dossier → marge >99% sur le pack €15. **L'urgence crée la conversion :** quelqu'un qui vient d'avoir un accident et lit "vous pouvez perdre €500 à €50 000 si vous ne faites pas ces démarches dans les 24h" est fortement motivé à payer €15.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (mobile-first — l'utilisateur est souvent aux urgences ou chez lui avec un plâtre)
+- **Moteur de calcul :** Règles AT (L.411-1 Code Sécurité Sociale), taux IJ AT (60% puis 80% du salaire journalier de référence), barème d'incapacité permanente BARÈME-AT, prescription faute inexcusable (2 ans depuis la consolidation)
+- **Génération documents :** Claude API + react-pdf — lettres pré-remplies avec les références légales exactes
+- **Auth + DB :** Supabase
+- **Payments :** Stripe
+
+### Go-to-Market (zero budget)
+1. **SEO :** "accident de travail droits indemnités", "réserves employeur accident travail comment contester", "taux IPP accident travail contestation", "faute inexcusable employeur comment prouver" — requêtes de très haute intention avec des volumes élevés et peu de réponses pratiques
+2. **Forums et Reddit :** r/droit, r/AskFrance, "Accident du travail : vos droits" sur Facebook (85K membres) — poster des guides pratiques et répondre aux questions
+3. **Médecins du travail et CHSCT :** Distribution de flyers/QR codes dans les médecines du travail et comités CHSCT — ils voient chaque semaine des victimes d'AT perdues dans les démarches
+4. **Syndicats :** même canal que ConventionCollective.ai — les deux outils se complètent naturellement
+
+### Competitive Moat
+- **L'urgence des 24h crée l'acquisition SEO naturelle** : personne qui vient d'avoir un accident cherche "accident travail que faire" — si on est premier résultat avec une checklist claire, la conversion est quasi certaine
+- **Calcul comparatif maladie vs AT** : montrer le gain financier concret en euros de faire reconnaître l'accident → motivation d'achat immédiate
+- **Extension naturelle :** Maladie professionnelle (tableau AT/MP), rechute AT, inaptitude au poste après AT — chaque étape du parcours victime est monétisable
+- **Données uniques :** Historiser les taux d'IPP obtenus par nos utilisateurs → base de données pour calibrer les simulations et identifier les secteurs où la CPAM sous-évalue systématiquement
+
+### Figma Schematic
+[View AccidentTravail.ai — Workplace Accident Rights Navigator on FigJam](https://www.figma.com/board/El4hUS89j1aKfKmLhFUUBu)
+
+---
+
+## 101. ViagerCalcul.ai
+
+> **Vendez ou achetez en viager avec des chiffres clairs — calculez en 3 minutes ce que les notaires font payer €500**
+
+### Problem
+Le **viager** est une transaction immobilière typiquement française : le vendeur (crédirentier) cède son bien contre un **bouquet** (capital initial) + une **rente mensuelle viagère** versée jusqu'à sa mort. L'acheteur (débirentier) parie sur la durée de vie du vendeur. Ce marché représente **7 000–9 000 transactions/an** en France (Chambre des Notaires 2024) et est en forte croissance car il répond simultanément à deux crises :
+- **Crise des retraites :** Les retraités avec une maison mais une pension insuffisante (1 570€ net moyen) peuvent transformer leur patrimoine immobilier en revenus réguliers sans quitter leur logement
+- **Crise d'accès à la propriété :** Les acheteurs sans apport suffisant peuvent acquérir un bien à prix décoté, sans prêt bancaire, avec des mensualités progressives
+
+**Le problème des chiffres opaques :**
+- Le calcul d'un viager nécessite : valeur du bien, valeur d'usage (droit d'occupation = décote de 30–60%), espérance de vie selon le barème INSEE par sexe/âge, taux d'indexation de la rente (ICC ou IRL), valeur capitalisée de la rente
+- **Les notaires** réalisent ces calculs mais **facturent €300–€500** pour un bilan viager, et leur simulation n'est disponible qu'après mandat signé
+- **Les vendeurs** (souvent âgés de 70–85 ans) ne comprennent pas si l'offre reçue est juste ou non
+- **Les acheteurs** ne savent pas calculer le vrai TRI (taux de rendement interne) de l'opération selon les scénarios de longévité du vendeur
+
+**Données clés :**
+- Bouquet moyen : **30–40% de la valeur vénale** (ex : maison à €200K → bouquet de €60–80K, rente de €400–600/mois)
+- Décote d'occupation (DUH - Droit d'Usage et d'Habitation) : **40–60% selon l'âge** du vendeur — calculée selon les tables de mortalité INSEE
+- Régime fiscal avantageux : rente viagère imposée uniquement sur une fraction (40% si vendeur 60–69 ans, 30% si 70+ ans) → avantage fiscal méconnu
+
+### Solution
+**(1) Calculateur viager vendeur :** Âge, sexe, valeur du bien, ville (pour le marché local) → calcul automatique du bouquet équitable, fourchette de rente mensuelle juste, et comparatif "viager vs vente ordinaire + rente sur capital investi" pour choisir objectivement.
+
+**(2) Calculateur viager acheteur :** Prix d'achat total prévisionnel selon différents scénarios de longévité (espérance de vie, +5 ans, +10 ans, -5 ans), calcul du TRI par scénario, comparaison avec un achat classique à crédit.
+
+**(3) Simulateur fiscal :** Imposition de la rente viagère par tranche d'âge du crédirentier, impact sur l'IR et la CSG/CRDS, avantage viager vs loyer ordinaire ou dividendes.
+
+**(4) Pack Viager Complet (payant) :** Rapport PDF "Bilan Viager" avec tous les calculs, lettre de contre-proposition motivée (si l'offre reçue est sous-évaluée), guide "10 clauses indispensables dans un acte viager" (clause résolutoire, indexation, garantie hypothécaire), et liste de notaires spécialisés viager par département.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulateur vendeur + acheteur basique | €0 | Acquisition SEO — vendeurs et acheteurs cherchent ces calculs |
+| Pack Viager Complet | €19 | Rapport PDF + contre-proposition + guide clauses + annuaire notaires |
+| Mise en relation notaires spécialisés | €50–€150/lead | Référencement notaires spécialisés viager (rare spécialité = forte demande) |
+| B2B Agences spécialisées viager | €99/mois | Viager Libre, Renée Costes, Monetivia — elles ont besoin d'outils de simulation pour leurs clients |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99% sur le pack €19. **Le B2B agences viager est le vrai jackpot :** les 5 grandes agences spécialisées (Renée Costes, Monetivia, Viager Select…) font chacune 200–500 transactions/an et n'ont pas d'outil de simulation client moderne.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **Moteur actuariel :** Tables de mortalité INSEE 2022–2024 (données publiques) + barème Daubry pour la valeur d'occupation + taux de capitalisation (2–4% selon profil de risque)
+- **Calcul fiscal :** Fractions imposables rente viagère par tranche d'âge (art. 158-6 CGI), abattements, impact IR/CSG
+- **Génération rapport :** Claude API (claude-sonnet-4-6) pour le commentaire personnalisé du bilan + react-pdf
+- **Annuaire notaires :** Base scrape des notaires déclarés spécialistes viager sur le site des Notaires de France
+- **Auth + DB :** Supabase
+- **Payments :** Stripe
+
+### Go-to-Market (zero budget)
+1. **SEO :** "calcul viager simulateur", "bouquet viager calcul", "rente viagère mensuelle estimation", "viager est-ce rentable pour l'acheteur" — fort volume de recherche, résultats actuels : articles de blog imprécis et calculateurs Excel des années 2010
+2. **Groupes seniors et immobilier :** Facebook "Viager France" (22K membres), "Retraite & Patrimoine" (85K membres), forums SeLoger/PAP — répondre aux questions de calcul avec l'outil
+3. **Agences spécialisées viager :** Démarchage direct de Renée Costes, Monetivia, Viager Select, Caisse Viagère — proposer un essai gratuit de l'outil B2B avec une simulation de leur dernier dossier
+4. **Conseillers en gestion de patrimoine (CGP) :** Le viager est en train de devenir un produit patrimoine courant — les CGP cherchent des outils de simulation pour leurs clients retraités
+
+### Competitive Moat
+- **Tables de mortalité INSEE intégrées et mises à jour** : les calculateurs existants utilisent des tables de 2010 — nos calculs sont 15% plus précis avec les tables 2024
+- **Comparatif TRI multi-scénario pour l'acheteur** : aucun outil gratuit ne montre clairement "si la vendeuse vit jusqu'à 95 ans, vous payez €320K pour un bien qui en vaut €200K" — cette transparence effraie certains mais fidélise ceux qui font confiance au calcul
+- **Mise en relation notaires spécialisés viager** : le marché du notariat viager est très concentré (< 500 notaires spécialisés en France) → fichier constitué en quelques semaines, ARPU de €50–€150/lead très confortable
+- **Extension naturelle :** Viager libre (sans occupation), nue-propriété, démembrement — tous des produits proches avec la même mécanique actuarielle
+
+### Figma Schematic
+[View ViagerCalcul.ai — French Viager Property Calculator on FigJam](https://www.figma.com/board/RpRevBD1DESNdAk8vcqZwW)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -5023,4 +5221,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-20 — Ideas 93–95 added (France-specific, ultra-low-budget: PortageSalarial.ai, ÉpargneRetraite.ai, LogementSocial.ai)*
+*Last updated: 2026-05-22 — Ideas 99–101 added (France-specific, ultra-low-budget: ConventionCollective.ai, AccidentTravail.ai, ViagerCalcul.ai)*
