@@ -109,6 +109,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 99 | [ConventionCollective.ai](#99-conventioncollectiveai) | Freemium + Pay-per-report | €8K–€55K | Low |
 | 100 | [AccidentTravail.ai](#100-accidenttravailai) | Pay-per-pack + Freemium | €6K–€45K | Low |
 | 101 | [ViagerCalcul.ai](#101-viagercalculai) | Pay-per-simulation + Affiliate notaires | €5K–€35K | Low |
+| 102 | [ClubSport.ai](#102-clubsportai) | Freemium + SaaS Subscription + B2B Fédérations | €8K–€60K | Low |
 
 ---
 
@@ -5206,6 +5207,80 @@ Le **viager** est une transaction immobilière typiquement française : le vende
 
 ### Figma Schematic
 [View ViagerCalcul.ai — French Viager Property Calculator on FigJam](https://www.figma.com/board/RpRevBD1DESNdAk8vcqZwW)
+
+---
+
+## 102. ClubSport.ai
+
+> **Gérez votre club sportif amateur en 10 minutes par mois — dossiers de subvention, licences, planning et comptabilité pour les 370 000 clubs de France**
+
+### Problem
+La France compte **370 000 clubs sportifs amateurs** (football, tennis, basketball, handball, judo, etc.) représentant **17 millions de licenciés**. Ces clubs sont gérés par des **bénévoles** — présidents, trésoriers, secrétaires — qui consacrent des dizaines d'heures par an à des tâches administratives répétitives :
+
+- **Dossier de subvention municipale** : chaque club doit soumettre annuellement un dossier à sa mairie (Cerfa 12156\*05 + rapport d'activité + bilan financier + projet sportif). Un bénévole non formé y passe 5–10 heures. Or **95% des clubs reçoivent une subvention municipale**, c'est la principale source de revenus hors cotisations.
+- **Gestion des licences** : suivi des adhérents, envoi à la fédération (FFF, FFT, FFBB…), relances des impayés de cotisations — fait souvent sur Excel ou papier.
+- **Planning de saison** : répartition des créneaux d'entraînement, réservations de gymnases/terrains, matchs inter-clubs — source de conflits chroniques.
+- **Comptabilité associative** : rapport annuel pour l'Assemblée Générale, suivi du budget AEP (Activités Éducatives et Pédagogiques), liasse fiscale association loi 1901.
+
+**Aucun outil simple et abordable n'existe** pour ces bénévoles. Les logiciels actuels (HelloAsso pour les paiements, LicenceConnect pour certaines fédérations) sont fragmentés et ne couvrent pas la génération de documents IA.
+
+**Données clés :**
+- 370 000 clubs × 1 dossier de subvention/an = **370 000 Cerfa** rédigés chaque année à la main
+- Subvention moyenne obtenue : **€2 000–€15 000** selon taille du club → un dossier bien rédigé peut obtenir 20–30% de plus
+- Coût d'un expert-comptable associatif : **€500–€2 000/an** pour la comptabilité d'un petit club
+- Nombre de présidents/trésoriers bénévoles actifs : **+1 million de personnes** en France
+
+### Solution
+
+**(1) Générateur de dossier de subvention (gratuit) :** Formulaire guidé (sport pratiqué, nombre de licenciés, budget, activités de l'année, bilan N-1) → IA génère le dossier complet au format attendu par les mairies (Cerfa + rapport d'activité + projet sportif) en PDF téléchargeable. **C'est le hook d'acquisition :** tout président de club cherche "modèle dossier subvention club sportif" chaque automne.
+
+**(2) Gestion des licences et adhérents :** Import CSV ou saisie manuelle des membres → tableau de bord cotisations payées/en attente → relances email automatiques → export au format fédération (FFF, FFT, FFBB, FFBad…).
+
+**(3) Planning de saison IA :** Saisie des équipes, créneaux disponibles, gymnases/terrains réservés → IA génère un planning optimisé sans conflits → export PDF + iCal pour partage avec les joueurs.
+
+**(4) Comptabilité simplifiée :** Saisie recettes/dépenses avec catégories pré-remplies (cotisations, subventions, achats équipement, déplacements…) → rapport annuel pour AG → export Cerfa 2044 association et liasse fiscale loi 1901.
+
+**(5) Pack Fédération (B2B) :** Whitelabel de la plateforme pour les ligues et comités régionaux — ils offrent l'outil à leurs clubs membres comme service à valeur ajoutée. Les **40 ligues régionales** et **100+ comités départementaux** de chaque sport sont les revendeurs naturels.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Générateur dossier subvention | €0 | Acquisition SEO + viralité (le trésorier partage l'outil à d'autres clubs) |
+| Pack Club | €19/mois ou €149/an | Licences + Planning + Comptabilité + dossiers illimités |
+| Pack Club Premium | €39/mois ou €299/an | + Intégration API fédérations + relances SMS + multi-sections |
+| B2B Ligues & Comités | €199/mois | Whitelabel pour 50–500 clubs dans leur réseau |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >98% sur le pack €19. **LTV cible :** 3 ans × €149/an = €447/club. **TAM réaliste :** 5% des 370 000 clubs = 18 500 clubs × €19/mois = **€352K MRR** à maturité.
+
+**Pourquoi les clubs vont payer :**
+- La subvention que le dossier permet d'obtenir représente souvent 50–100× le prix de l'abonnement
+- Le trésorier bénévole "économise" 20–30h/an de travail valorisables à €15–20/h personnellement
+- Risque zéro : le dossier gratuit crée la valeur avant tout paiement
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier — déploiement gratuit)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf — dossiers Cerfa pré-remplis avec les références légales et les formulations attendues par les mairies
+- **Base de données :** Supabase (free tier jusqu'à 500MB)
+- **Intégration fédérations :** API FFF (Football), API FFT (Tennis), FFBad — protocoles d'export CSV standardisés quand APIs indisponibles
+- **Planning :** Algorithme de coloration de graphe pour résolution de conflits de créneaux
+- **Payments :** Stripe (frais 1,4% + €0,25 — largement couvert par les marges)
+- **Emails relances :** Resend (free tier 100 emails/jour)
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "modèle dossier subvention club sportif", "cerfa association club sportif", "gestion licences football amateur", "comptabilité club association loi 1901" — **volumes élevés, résultats actuels : modèles Word des années 2015 sur des sites de mairies**
+2. **Facebook Groups :** "Présidents de clubs sportifs amateurs" (43K membres), "Trésoriers d'associations sportives" (18K membres), groupes football amateur régionaux (chaque ligue régionale a son groupe Facebook actif)
+3. **Partenariats assureurs clubs :** MAIF, GMF, Groupama assurent la quasi-totalité des clubs sportifs → co-marketing naturel ("nos clients clubs reçoivent ClubSport.ai gratuitement 3 mois")
+4. **Comités Olympiques Régionaux (CROS) :** 13 CROS en France, chacun supervise des milliers de clubs — un partenariat = milliers de clubs exposés d'un coup
+5. **Périodicité SEO :** Pic de trafic naturel septembre–novembre (rentrée sportive + dépôt dossiers subvention) → lancer la campagne SEO en juillet pour être premier en septembre
+
+### Competitive Moat
+- **Aucun concurrent direct :** HelloAsso = paiement en ligne seulement ; LicenceConnect = licences FFF seulement ; Assoconnect = trop cher et complexe (€49–€149/mois, cible les grandes associations)
+- **Effet réseau inter-clubs :** Un trésorier satisfait partage l'outil à 3–5 présidents d'autres clubs dans son entourage sportif → CAC naturellement proche de €0
+- **Mémoire institutionnelle :** Après 2 ans d'utilisation, le club a toute son historique financier, ses listes de membres, ses dossiers passés → coût de migration élevé = churn très faible
+- **B2B Fédérations = barrière à l'entrée :** Un accord avec une ligue régionale crée 50–300 clubs captifs que le concurrent ne peut pas approcher
+
+### Figma Schematic
+[View ClubSport.ai — Plateforme IA pour clubs sportifs amateurs on FigJam](https://www.figma.com/board/wO1aJ4hwoqDNaofWX5tjm6)
 
 ---
 
