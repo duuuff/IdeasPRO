@@ -109,6 +109,10 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 99 | [ConventionCollective.ai](#99-conventioncollectiveai) | Freemium + Pay-per-report | €8K–€55K | Low |
 | 100 | [AccidentTravail.ai](#100-accidenttravailai) | Pay-per-pack + Freemium | €6K–€45K | Low |
 | 101 | [ViagerCalcul.ai](#101-viagercalculai) | Pay-per-simulation + Affiliate notaires | €5K–€35K | Low |
+| 102 | [ClubSport.ai](#102-clubsportai) | Freemium + SaaS Subscription + B2B Fédérations | €8K–€60K | Low |
+| 103 | [ConcoursPro.ai](#103-concoursproai) | Freemium + Subscription | €6K–€45K | Low-Medium |
+| 104 | [NaturalisationFR.ai](#104-naturalisationfrai) | Pay-per-pack + Subscription | €8K–€55K | Low |
+| 105 | [RGPDBusiness.ai](#105-rgpdbusinessai) | Pay-per-pack + SaaS Subscription + B2B EC | €8K–€60K | Low |
 
 ---
 
@@ -5209,6 +5213,320 @@ Le **viager** est une transaction immobilière typiquement française : le vende
 
 ---
 
+## 102. ClubSport.ai
+
+> **Gérez votre club sportif amateur en 10 minutes par mois — dossiers de subvention, licences, planning et comptabilité pour les 370 000 clubs de France**
+
+### Problem
+La France compte **370 000 clubs sportifs amateurs** (football, tennis, basketball, handball, judo, etc.) représentant **17 millions de licenciés**. Ces clubs sont gérés par des **bénévoles** — présidents, trésoriers, secrétaires — qui consacrent des dizaines d'heures par an à des tâches administratives répétitives :
+
+- **Dossier de subvention municipale** : chaque club doit soumettre annuellement un dossier à sa mairie (Cerfa 12156\*05 + rapport d'activité + bilan financier + projet sportif). Un bénévole non formé y passe 5–10 heures. Or **95% des clubs reçoivent une subvention municipale**, c'est la principale source de revenus hors cotisations.
+- **Gestion des licences** : suivi des adhérents, envoi à la fédération (FFF, FFT, FFBB…), relances des impayés de cotisations — fait souvent sur Excel ou papier.
+- **Planning de saison** : répartition des créneaux d'entraînement, réservations de gymnases/terrains, matchs inter-clubs — source de conflits chroniques.
+- **Comptabilité associative** : rapport annuel pour l'Assemblée Générale, suivi du budget AEP (Activités Éducatives et Pédagogiques), liasse fiscale association loi 1901.
+
+**Aucun outil simple et abordable n'existe** pour ces bénévoles. Les logiciels actuels (HelloAsso pour les paiements, LicenceConnect pour certaines fédérations) sont fragmentés et ne couvrent pas la génération de documents IA.
+
+**Données clés :**
+- 370 000 clubs × 1 dossier de subvention/an = **370 000 Cerfa** rédigés chaque année à la main
+- Subvention moyenne obtenue : **€2 000–€15 000** selon taille du club → un dossier bien rédigé peut obtenir 20–30% de plus
+- Coût d'un expert-comptable associatif : **€500–€2 000/an** pour la comptabilité d'un petit club
+- Nombre de présidents/trésoriers bénévoles actifs : **+1 million de personnes** en France
+
+### Solution
+
+**(1) Générateur de dossier de subvention (gratuit) :** Formulaire guidé (sport pratiqué, nombre de licenciés, budget, activités de l'année, bilan N-1) → IA génère le dossier complet au format attendu par les mairies (Cerfa + rapport d'activité + projet sportif) en PDF téléchargeable. **C'est le hook d'acquisition :** tout président de club cherche "modèle dossier subvention club sportif" chaque automne.
+
+**(2) Gestion des licences et adhérents :** Import CSV ou saisie manuelle des membres → tableau de bord cotisations payées/en attente → relances email automatiques → export au format fédération (FFF, FFT, FFBB, FFBad…).
+
+**(3) Planning de saison IA :** Saisie des équipes, créneaux disponibles, gymnases/terrains réservés → IA génère un planning optimisé sans conflits → export PDF + iCal pour partage avec les joueurs.
+
+**(4) Comptabilité simplifiée :** Saisie recettes/dépenses avec catégories pré-remplies (cotisations, subventions, achats équipement, déplacements…) → rapport annuel pour AG → export Cerfa 2044 association et liasse fiscale loi 1901.
+
+**(5) Pack Fédération (B2B) :** Whitelabel de la plateforme pour les ligues et comités régionaux — ils offrent l'outil à leurs clubs membres comme service à valeur ajoutée. Les **40 ligues régionales** et **100+ comités départementaux** de chaque sport sont les revendeurs naturels.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Générateur dossier subvention | €0 | Acquisition SEO + viralité (le trésorier partage l'outil à d'autres clubs) |
+| Pack Club | €19/mois ou €149/an | Licences + Planning + Comptabilité + dossiers illimités |
+| Pack Club Premium | €39/mois ou €299/an | + Intégration API fédérations + relances SMS + multi-sections |
+| B2B Ligues & Comités | €199/mois | Whitelabel pour 50–500 clubs dans leur réseau |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >98% sur le pack €19. **LTV cible :** 3 ans × €149/an = €447/club. **TAM réaliste :** 5% des 370 000 clubs = 18 500 clubs × €19/mois = **€352K MRR** à maturité.
+
+**Pourquoi les clubs vont payer :**
+- La subvention que le dossier permet d'obtenir représente souvent 50–100× le prix de l'abonnement
+- Le trésorier bénévole "économise" 20–30h/an de travail valorisables à €15–20/h personnellement
+- Risque zéro : le dossier gratuit crée la valeur avant tout paiement
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier — déploiement gratuit)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf — dossiers Cerfa pré-remplis avec les références légales et les formulations attendues par les mairies
+- **Base de données :** Supabase (free tier jusqu'à 500MB)
+- **Intégration fédérations :** API FFF (Football), API FFT (Tennis), FFBad — protocoles d'export CSV standardisés quand APIs indisponibles
+- **Planning :** Algorithme de coloration de graphe pour résolution de conflits de créneaux
+- **Payments :** Stripe (frais 1,4% + €0,25 — largement couvert par les marges)
+- **Emails relances :** Resend (free tier 100 emails/jour)
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "modèle dossier subvention club sportif", "cerfa association club sportif", "gestion licences football amateur", "comptabilité club association loi 1901" — **volumes élevés, résultats actuels : modèles Word des années 2015 sur des sites de mairies**
+2. **Facebook Groups :** "Présidents de clubs sportifs amateurs" (43K membres), "Trésoriers d'associations sportives" (18K membres), groupes football amateur régionaux (chaque ligue régionale a son groupe Facebook actif)
+3. **Partenariats assureurs clubs :** MAIF, GMF, Groupama assurent la quasi-totalité des clubs sportifs → co-marketing naturel ("nos clients clubs reçoivent ClubSport.ai gratuitement 3 mois")
+4. **Comités Olympiques Régionaux (CROS) :** 13 CROS en France, chacun supervise des milliers de clubs — un partenariat = milliers de clubs exposés d'un coup
+5. **Périodicité SEO :** Pic de trafic naturel septembre–novembre (rentrée sportive + dépôt dossiers subvention) → lancer la campagne SEO en juillet pour être premier en septembre
+
+### Competitive Moat
+- **Aucun concurrent direct :** HelloAsso = paiement en ligne seulement ; LicenceConnect = licences FFF seulement ; Assoconnect = trop cher et complexe (€49–€149/mois, cible les grandes associations)
+- **Effet réseau inter-clubs :** Un trésorier satisfait partage l'outil à 3–5 présidents d'autres clubs dans son entourage sportif → CAC naturellement proche de €0
+- **Mémoire institutionnelle :** Après 2 ans d'utilisation, le club a toute son historique financier, ses listes de membres, ses dossiers passés → coût de migration élevé = churn très faible
+- **B2B Fédérations = barrière à l'entrée :** Un accord avec une ligue régionale crée 50–300 clubs captifs que le concurrent ne peut pas approcher
+
+### Figma Schematic
+[View ClubSport.ai — Plateforme IA pour clubs sportifs amateurs on FigJam](https://www.figma.com/board/wO1aJ4hwoqDNaofWX5tjm6)
+
+---
+
+## 103. ConcoursPro.ai
+
+> **Préparez votre concours de la fonction publique avec un coach IA personnalisé — annales, QCM, corrections et plan de révision pour les 250 000 candidats qui passent un concours chaque année**
+
+### Problem
+La France compte **5,7 millions de fonctionnaires** : enseignants, infirmiers, policiers, douaniers, agents des impôts, éducateurs spécialisés, postiers… Le seul moyen d'intégrer la fonction publique est de **passer un concours** — une épreuve nationale très sélective organisée une à deux fois par an. Chaque année, **250 000 à 400 000 candidats** se préparent à un concours :
+
+- **CRPE** (Concours de Recrutement de Professeurs des Écoles) : 30 000 inscrits/an pour 10 000 postes
+- **Concours infirmier (IFSI)** : 90 000 candidats/an
+- **Concours de police / gendarmerie** : 50 000 inscrits/an
+- **Concours des douanes, impôts, trésor, préfectures** : dizaines de milliers
+- **CAPES, Agrégation** pour les profs du secondaire
+
+La préparation prend **6 à 24 mois** et le taux d'échec moyen est de **70–90%**. Pourtant, les ressources disponibles sont fragmentées et datées :
+- Annales sur des sites gouvernementaux mal indexés (PDFs de 2015)
+- Livres de préparation généralistes à €25–€40 pièce
+- Quelques chaînes YouTube non structurées
+- Centres de préparation en présentiel à **€500–€2 000** (inaccessibles pour beaucoup)
+
+**Aucun outil IA n'existe** qui génère des QCM à la demande sur le programme exact d'un concours donné, corrige les copies ouvertes, ou adapte le plan de révision aux lacunes détectées.
+
+**Données clés :**
+- 250 000 candidats × taux de conversion 3% à €12/mois = **€90K MRR** à maturité
+- Le marché de la formation aux concours est estimé à **€800M/an en France**
+- Taux de recommandation naturel élevé : les candidats se regroupent en communautés Discord/Facebook par concours
+
+### Solution
+
+**(1) Catalogue de concours :** L'utilisateur sélectionne son concours parmi une base de 150+ concours (catégorie A, B, C) → le système charge le programme officiel, les coefficients des épreuves, le calendrier des sessions, et les statistiques de réussite.
+
+**(2) Diagnostic de niveau initial :** 20 questions QCM sur les matières du concours → analyse des lacunes → score de départ par matière.
+
+**(3) Plan de révision personnalisé :** En fonction des lacunes, du temps disponible (J-6 mois, J-3 mois…), et des épreuves prioritaires → planning hebdomadaire adaptatif.
+
+**(4) Banque d'annales IA :** Les annales officielles sont importées et analysées par l'IA → extraction des schémas de questions récurrents → génération de questions nouvelles dans le même style et la même difficulté.
+
+**(5) Correction IA des épreuves ouvertes :** L'utilisateur rédige une note de synthèse, un cas pratique ou une dissertation → l'IA la corrige selon les critères du jury (structure, arguments, références), attribue une note et propose des améliorations.
+
+**(6) Alertes et inscriptions :** Notifications push/email dès l'ouverture des inscriptions pour le concours suivi → rappels des deadlines de dépôt de dossier.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 10 QCM par concours, diagnostic de niveau |
+| Basic | €9/mois | QCM illimités, plan de révision, alertes sessions |
+| Pro | €15/mois | + Correction IA des épreuves ouvertes, simulations complètes, stats avancées |
+| Annuel Pro | €99/an | 45% de réduction vs mensuel |
+| Pack Intensif | €29 one-shot | Préparer un concours en 30 jours (non-abonné) |
+
+**Unit economics :** Claude API ~€0,04/correction de copie → marge >98%. Un candidat reste abonné en moyenne **8 mois** (durée de préparation) → LTV €72–€120 par utilisateur.
+
+**Pourquoi les candidats vont payer :**
+- Un centre de prépa coûte €500–€2 000 → ConcoursPro à €99/an est 5–20× moins cher
+- L'enjeu est énorme : un poste de fonctionnaire = sécurité de l'emploi à vie + avantages
+- Aucun concurrent IA direct sur ce segment
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération QCM et correction :** Claude API (claude-sonnet-4-6) — génère des questions dans le style des annales, corrige les dissertations selon les grilles de jury
+- **Base de données :** Supabase — stockage des annales, progression par utilisateur, planning
+- **Notifications :** Resend (emails) + Web Push API (alertes ouverture concours)
+- **Payments :** Stripe — abonnements mensuels/annuels + packs one-shot
+- **Contenu :** Scraping légal des annales officielles (sites Ministère Éducation, FPE, FPT, FPH)
+
+### Go-to-Market (zéro budget)
+1. **SEO ciblé :** "annales CRPE 2024 corrigées", "qcm concours infirmier en ligne", "préparation concours police gratuit" — des milliers de recherches mensuelles sur des requêtes peu couvertes par des outils modernes
+2. **Communautés Discord/Facebook :** Groupes "Futurs CRPE", "Concours Infirmier 2025", "Prépa Police" — des dizaines de groupes avec 5 000–50 000 membres chacun
+3. **TikTok/Reels pédagogiques :** "Je corrige votre copie de concours en direct" — format viral très efficace pour les étudiants
+4. **Partenariats lycées et universités :** Les BTS, licences pro, IUT envoient régulièrement des étudiants vers des concours de cat. B/C — partenariat conseiller d'orientation
+5. **Période clé :** Janvier–Avril (pré-inscription) et Septembre–Novembre (résultats + candidats pour l'année suivante) — lancer les campagnes sur ces fenêtres
+
+### Competitive Moat
+- **Données propriétaires :** Base d'annales nettoyées + métadonnées jury (points forts/faibles attendus par épreuve) impossible à recréer rapidement
+- **Personnalisation par concours :** Chaque concours a son programme exact, ses coefficients, son style d'épreuve — la granularité crée un fossé vs un simple ChatGPT
+- **Réseau de candidats :** Forum intégré par concours → les candidats partagent leurs copies, leurs notes, leurs ressources → effet communauté fort
+- **Extension naturelle :** Préparation aux entretiens de recrutement privés (le même moteur de correction IA fonctionne pour les entretiens d'embauche)
+
+### Figma Schematic
+[View ConcoursPro.ai — Préparation concours fonction publique on FigJam](https://www.figma.com/board/zluTHTqyHbvEl90ehKwxPX)
+
+---
+
+## 104. NaturalisationFR.ai
+
+> **Constituez votre dossier de naturalisation française sans avocat — vérification IA, lettre de motivation, CERFA pré-rempli et préparation à l'entretien pour les 100 000+ demandeurs par an**
+
+### Problem
+Chaque année, **environ 100 000 personnes** obtiennent la nationalité française. Beaucoup plus en font la demande mais voient leur dossier **rejeté ou retardé de 12 à 18 mois** pour des raisons administratives évitables :
+
+- **Dossier incomplet :** Le décret du 30 décembre 1993 liste 20 à 40 documents selon la situation (mariage, résidence, naissance, travail…) — beaucoup oublient des pièces et voient leur dossier classé sans suite
+- **Lettre de motivation insuffisante :** La préfecture évalue l'"assimilation à la communauté française" notamment via une lettre personnelle — les candidats ne savent pas ce que les agents attendent
+- **CERFA 12753\*03 mal rempli :** 8 pages de formulaire avec des questions sur les séjours à l'étranger, les condamnations, les services militaires — les erreurs entraînent un rejet automatique
+- **Entretien d'assimilation :** Un entretien en préfecture de 30–60 min sur la France, ses valeurs, son histoire, ses institutions — peu de ressources existent pour s'y préparer
+
+**Coût d'un accompagnement juridique :** Avocats spécialisés en droit des étrangers = **€800 à €2 000** pour préparer le dossier. Au-delà des moyens d'une majorité des demandeurs.
+
+**Données clés :**
+- 150 000+ dossiers déposés/an (chiffres Ministère de l'Intérieur 2023)
+- Taux de rejet pour dossier incomplet : estimé à 20–30%
+- Délai moyen de traitement : 12–18 mois → toute erreur coûte 1 à 2 ans
+- Communauté expatriée française = 3,5M personnes à l'étranger + 5M d'étrangers en France en voie de naturalisation
+
+### Solution
+
+**(1) Test d'éligibilité IA :** 10 questions (durée de résidence, situation familiale, niveau de français, condamnations…) → l'IA évalue l'éligibilité selon les critères du Code civil (art. 21-14 à 21-24) et explique les points bloquants.
+
+**(2) Checklist de documents personnalisée :** Selon le profil (célibataire/marié·e, enfants, ressortissant UE ou hors UE, cas particulier…) → liste exacte des 20 à 40 pièces à fournir avec les formats attendus (original, copie certifiée, traduction assermentée).
+
+**(3) Vérificateur de documents IA :** L'utilisateur coche les documents au fur et à mesure qu'il les collecte → l'IA signale les incohérences, les dates d'expiration proches, les traductions manquantes.
+
+**(4) Générateur de lettre de motivation IA :** Questionnaire sur le parcours, les attaches à la France, les engagements civiques → Claude génère une lettre de 2 pages personnalisée, respectant les attendus préfectoraux (références à la laïcité, aux valeurs républicaines, à l'intégration).
+
+**(5) CERFA 12753 pré-rempli :** Formulaire guidé question par question avec aide contextuelle → PDF CERFA généré avec toutes les cases correctement remplies.
+
+**(6) Préparation à l'entretien IA :** Simulation d'entretien sur les questions types (valeurs de la République, institutions françaises, histoire, droits et devoirs du citoyen) → feedback sur les réponses → fiches mémo.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Test d'éligibilité | €0 | Acquisition — tous les candidats potentiels passent par là |
+| Pack Dossier | €39 one-shot | Checklist complète + CERFA pré-rempli + lettre de motivation IA |
+| Pack Complet | €59 one-shot | Pack Dossier + vérificateur documents + simulation entretien |
+| Suivi Mensuel | €12/mois | Alertes préfecture + mises à jour réglementaires + support chat IA |
+| Pack Famille | €79 one-shot | Dossiers pour 2 personnes (couple) |
+
+**Unit economics :** Claude API ~€0,10/dossier → marge >99% sur les packs. Un avocat prend €800–€2 000 pour le même service → prix 15–50× inférieur. **LTV cible :** €59 (pack unique) + quelques mois de suivi = €80–€100/client.
+
+**Pourquoi les demandeurs vont payer :**
+- L'enjeu est énorme : nationalité française = droit de vote, passeport UE, sécurité de résidence
+- Une erreur dans le dossier coûte 12–18 mois de délai supplémentaire
+- €39–€59 vs €800–€2 000 chez un avocat : le ROI est évident
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA questionnaires et génération :** Claude API (claude-sonnet-4-6) — évaluation éligibilité, rédaction lettre, simulation entretien
+- **Génération PDF :** react-pdf — CERFA 12753 pré-rempli, récapitulatif dossier
+- **Base de données :** Supabase — profil utilisateur, avancement checklist, documents collectés
+- **Payments :** Stripe — packs one-shot + abonnement mensuel
+- **Veille réglementaire :** Scraping légal du JORF (Journal Officiel) et du site Service-Public.fr pour mises à jour automatiques des critères
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "dossier naturalisation française documents", "lettre motivation naturalisation exemples", "cerfa 12753 remplir" — des centaines de milliers de recherches avec des résultats actuels de très mauvaise qualité
+2. **Communautés d'expatriés :** Facebook Groups "Naturalisation France 2025", forums expat (Expat.com, FrenchEntrée), Reddit r/france et r/immigration
+3. **YouTube/TikTok :** "Comment remplir le CERFA 12753" — vidéo tutorielle avec CTA vers l'outil — format informatif très partagé dans les communautés
+4. **Associations d'aide aux migrants :** CIMADE, Samu Social, Croix-Rouge — les associations cherchent des outils gratuits pour leurs bénéficiaires → offre un accès gratuit en échange de visibilité
+5. **Presse communautaire :** Journaux en langues étrangères diffusés en France (arabophones, portugaiss, espagnols…) → article de presse gratuit en ciblant leur public
+
+### Competitive Moat
+- **Contenu réglementaire à jour :** Le droit de la nationalité change (circulaires ministérielles, jurisprudence) → veille automatique = avantage durable vs un simple générateur de documents statiques
+- **Base de lettres validées :** Après 1 000 dossiers, la base de lettres de motivation "approuvées" (retours positifs) affine le modèle → lettres de plus en plus efficaces
+- **Réseau d'avocats partenaires :** Pour les cas complexes, mise en relation payante avec des avocats en droit des étrangers (commission €50–€200/lead) → modèle d'affiliation naturel
+- **Extension :** Carte de résident (titre de séjour 10 ans), DCEM (Document de Circulation pour Étranger Mineur), passeport talent — tous liés au même parcours administratif
+
+### Figma Schematic
+[View NaturalisationFR.ai — Dossier naturalisation française on FigJam](https://www.figma.com/board/RfDWv5h8feBF1qTmHmOIcl)
+
+---
+
+## 105. RGPDBusiness.ai
+
+> **Mettez votre TPE ou micro-entreprise en conformité RGPD en 30 minutes — audit IA, registre des traitements, politique de confidentialité et mentions légales auto-générés pour les 3,4 millions de petits professionnels français**
+
+### Problem
+Depuis mai 2018, **toute entreprise qui traite des données personnelles** — même un artisan qui garde les coordonnées de ses clients dans un tableur — doit respecter le **RGPD (Règlement Général sur la Protection des Données)**. En France, la **CNIL** contrôle et sanctionne les contrevenants.
+
+Les **3,4 millions de micro-entreprises et TPE françaises** (artisans, commerçants, consultants, freelances, prestataires de services) sont dans une situation précaire :
+
+- **90%+ n'ont pas de registre des traitements** (obligation légale pour toute entreprise)
+- **Politique de confidentialité absente ou copiée** d'un site tiers sans adaptation → non-conforme
+- **Mentions légales incomplètes** sur leur site web (manque SIRET, responsable de traitement, délégué DPO si applicable)
+- **Bandeau cookies non conforme** (acceptation par défaut, pas de refus facile)
+- **Aucune procédure en cas de violation de données** — obligation de notifier la CNIL sous 72h
+
+**Coût d'un consultant RGPD :** €500–€2 000 pour un audit de base + mise en conformité d'une TPE. Certains cabinets facturent €300/h.
+
+**Risques concrets :**
+- Amende CNIL jusqu'à 4% du chiffre d'affaires mondial ou €20M (même pour une TPE)
+- En pratique : avertissements + amendes de €5 000–€50 000 pour les petites entreprises récidivistes
+- Plaintes clients (ex-employés, partenaires) en augmentation : **17 500 plaintes reçues par la CNIL en 2023**
+
+### Solution
+
+**(1) Audit RGPD IA en 5 minutes :** 15 questions sur l'activité (types de données collectées, clients, fournisseurs, site web, CRM utilisé…) → score de conformité sur 100 avec liste des points critiques.
+
+**(2) Registre des traitements auto-généré :** Document obligatoire sous l'Art. 30 RGPD — l'IA génère le registre complet (nom du traitement, finalité, base légale, durée de conservation, destinataires…) en PDF téléchargeable, mis à jour en un clic.
+
+**(3) Politique de confidentialité personnalisée :** Génération d'une politique conforme CNIL adaptée au secteur (e-commerce, artisan, consultant, cabinet médical…) en 5 langues si nécessaire.
+
+**(4) Mentions légales complètes :** Génération des mentions légales site web conformes (éditeur, hébergeur, SIRET, DPO, traitement des données) — intégrables directement dans Wix, WordPress, Shopify.
+
+**(5) Tableau de bord conformité :** Vue d'ensemble des obligations remplies/manquantes → alertes CNIL (nouvelles guidelines, mises à jour) → historique des documents.
+
+**(6) Gestion des demandes RGPD :** Portail de réception des demandes d'accès, de rectification, d'effacement (droit à l'oubli) des clients → réponses-types générées par IA dans les délais légaux (30 jours).
+
+**(7) Kit violation de données :** Procédure pas à pas en cas de fuite de données → notification CNIL pré-remplie → communication client → plan de remédiation.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Score RGPD + checklist prioritaire — acquisition SEO |
+| Pack Starter | €29 one-shot | Registre traitements + Politique confidentialité + Mentions légales |
+| Abonnement Pro | €19/mois | Tableau de bord + alertes CNIL + gestion demandes clients + mises à jour automatiques |
+| Annuel Pro | €149/an | 35% de réduction vs mensuel |
+| B2B Expert-Comptable | €49/mois | Accès multi-clients (jusqu'à 20 TPE gérées) — pour les EC qui intègrent la conformité RGPD dans leur offre |
+| B2B Franchise | €199/mois | Conformité RGPD pour un réseau de franchisés (jusqu'à 50 points de vente) |
+
+**Unit economics :** Claude API ~€0,05/génération document → marge >99% sur les packs. Un consultant RGPD prend €500–€2 000 → prix 17–70× inférieur. **LTV Pro :** 24 mois × €19 = €456.
+
+**Pourquoi les TPE vont payer :**
+- Le risque d'amende CNIL (même symbolique) est de plus en plus réel et médiatisé
+- Les banques et grandes entreprises exigent maintenant des preuves de conformité RGPD de leurs fournisseurs et sous-traitants
+- €19/mois pour protéger son activité vs €500+ pour un consultant : choix évident
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération documents :** Claude API (claude-sonnet-4-6) — génère le registre des traitements, la politique de confidentialité, les mentions légales selon le secteur et le profil de l'entreprise
+- **Génération PDF :** react-pdf — documents conformes téléchargeables
+- **Base de données :** Supabase — profil entreprise, registre des traitements versionné, historique des demandes RGPD
+- **Veille réglementaire :** RSS CNIL + scraping légal des guidelines EDPB (Comité européen de protection des données) pour alertes automatiques
+- **Payments :** Stripe — packs one-shot + abonnements mensuels/annuels + plans B2B
+- **Emails :** Resend — alertes CNIL + confirmations documents
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "registre traitements RGPD modèle", "politique de confidentialité RGPD gratuite", "mise en conformité RGPD TPE", "mentions légales rgpd auto-entrepreneur" — des volumes importants avec des résultats actuels de très mauvaise qualité
+2. **Communautés auto-entrepreneurs :** Facebook Groups "Auto-entrepreneurs France" (200K+ membres), forums freelances (Hopwork, Malt community) — tous concernés par le RGPD mais peu informés
+3. **Partenariats Experts-Comptables :** Les EC sont en première ligne pour conseiller leurs clients TPE sur la conformité → offrir un accès revendeur (plan B2B EC à €49/mois pour 20 clients)
+4. **Wix/WordPress/Shopify :** Plugin gratuit "Générer vos mentions légales RGPD" → appel vers l'outil → plusieurs dizaines de milliers d'installations potentielles
+5. **LinkedIn :** Article "Votre TPE risque une amende CNIL : 5 erreurs RGPD communes" → viralité dans les réseaux professionnels français
+
+### Competitive Moat
+- **Mises à jour réglementaires automatiques :** Les guidelines CNIL et EDPB changent régulièrement → une veille automatique = avantage durable vs des outils statiques (générateurs de templates fixes)
+- **Spécificité sectorielle :** Une politique de confidentialité pour un cabinet médical vs un e-commerçant vs un artisan sont très différentes — la personnalisation crée de la valeur vs les templates génériques
+- **Réseau d'avocats RGPD :** Pour les cas complexes (traitements sensibles, transferts hors UE) → mise en relation payante → revenu complémentaire et valeur perçue
+- **Intégration comptable :** Les experts-comptables en B2B amènent des dizaines de TPE d'un coup → CAC proche de €0 pour les clients finaux
+
+### Figma Schematic
+[View RGPDBusiness.ai — Conformité RGPD TPE et indépendants on FigJam](https://www.figma.com/board/3B43fueEq71g5OSZqhKGaT)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -5221,4 +5539,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-22 — Ideas 99–101 added (France-specific, ultra-low-budget: ConventionCollective.ai, AccidentTravail.ai, ViagerCalcul.ai)*
+*Last updated: 2026-05-24 — Ideas 103–105 added (France-specific, ultra-low-budget: ConcoursPro.ai, NaturalisationFR.ai, RGPDBusiness.ai)*
