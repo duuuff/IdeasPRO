@@ -113,6 +113,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 103 | [ConcoursPro.ai](#103-concoursproai) | Freemium + Subscription | €6K–€45K | Low-Medium |
 | 104 | [NaturalisationFR.ai](#104-naturalisationfrai) | Pay-per-pack + Subscription | €8K–€55K | Low |
 | 105 | [RGPDBusiness.ai](#105-rgpdbusinessai) | Pay-per-pack + SaaS Subscription + B2B EC | €8K–€60K | Low |
+| 106 | [CréateurFR.ai](#106-créateurfrai) | Freemium + Pay-per-pack + Subscription | €7K–€55K | Low |
 
 ---
 
@@ -5524,6 +5525,79 @@ Les **3,4 millions de micro-entreprises et TPE françaises** (artisans, commerç
 
 ### Figma Schematic
 [View RGPDBusiness.ai — Conformité RGPD TPE et indépendants on FigJam](https://www.figma.com/board/3B43fueEq71g5OSZqhKGaT)
+
+---
+
+## 106. CréateurFR.ai
+
+> **Gérez votre fiscalité, votre statut juridique et vos contrats de sponsoring en tant que créateur de contenu français — le copilote administratif des 6 millions de créateurs qui monétisent en France**
+
+### Problem
+
+La France compte plus de **6 millions de personnes qui génèrent des revenus en ligne** (YouTube, Twitch, TikTok, Instagram, Patreon, OnlyFans, vente de formations, merchandise…). Pourtant, la grande majorité d'entre eux naviguent à l'aveugle face à une complexité administrative unique :
+
+- **Quel statut choisir ?** Auto-entrepreneur, SASU, EURL, artiste-auteur (AGESSA) — chaque euro de revenu peut être taxé très différemment selon la structure.
+- **Comment déclarer ?** Les revenus AdSense viennent d'Irlande (Google Ireland), les revenus Twitch des USA, Patreon des USA — chacun a une case différente sur la 2042C et les règles TVA intracommunautaire ne sont pas intuitives.
+- **TVA ou pas TVA ?** Le seuil de 25 000 € (micro-BIC) déclenche des obligations TVA que peu de créateurs anticipent.
+- **Les contrats sponsoring ?** La plupart des créateurs signent des briefs informels ou des contrats déséquilibrés sans comprendre les clauses d'exclusivité, les droits d'image cédés, les pénalités, ou les obligations ARPP (Autorité de Régulation Professionnelle de la Publicité).
+
+**Résultat :** Redressements fiscaux surprise, sous-déclaration inconsciente, contrats signés à leur désavantage, et des milliers d'euros de charges payés en trop (ou en trop peu). Un expert-comptable spécialisé créateurs prend €150–€300/mois. Ils ne peuvent pas se le payer, et les généralistes ne connaissent pas ce secteur.
+
+### Solution
+
+**(1) Diagnostic Statut IA :** Questionnaire de 10 questions (plateformes utilisées, revenus annuels, nature des créations, situation fiscale du foyer) → recommandation claire avec comparatif chiffré : Auto-Entrepreneur vs SASU vs Artiste-Auteur AGESSA. Simulation des charges sociales et de l'IR net dans chaque cas.
+
+**(2) Simulateur Fiscal Multi-plateformes :** Saisir ses revenus par source (AdSense, Twitch Partner, TikTok Creator Fund, Patreon, merchandise, formations…) → l'IA calcule les charges sociales trimestrielles, l'IR estimé, les acomptes à verser, et envoie des rappels avant chaque échéance URSSAF.
+
+**(3) Générateur de Contrat Sponsoring IA :** Brief du partenariat (marque, format — post, vidéo, reel —, durée, rémunération) → Claude génère un contrat conforme aux recommandations de l'ARPP incluant mention #publi obligatoire, cession de droits d'image précisément délimitée, clause d'exclusivité sectorielle, conditions de résiliation, et pénalités en cas de non-respect des délais.
+
+**(4) Guide Déclaration Revenus :** Pour chaque plateforme, l'outil explique exactement où déclarer : revenus BIC ou BNC, case sur la 2042 / 2042C, traitement des revenus de source étrangère (formulaire 2047), TVA sur services électroniques intracommunautaires. Check-list personnalisée avant envoi aux impôts.
+
+**(5) Tableau de Bord Revenus :** Agrégation manuelle ou par import CSV des revenus multi-plateformes → prévision de l'impôt en temps réel → alertes sur les seuils (TVA à 25K€, plafond micro-BIC, plafond micro-BNC) → historique annuel exportable.
+
+**(6) Alerte Réglementaire :** Veille automatique sur les changements fiscaux impactant les créateurs (ex : fin du régime micro-BIC Airbnb, nouvelles règles déclaration Airbnb / Vinted en 2024, etc.) → notification push dès qu'une règle change.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit statut gratuit | €0 | Recommandation statut + comparatif — acquisition |
+| Pack Débutant | €19 one-shot | Guide déclaration personnalisé + checklist impôts |
+| Abonnement Solo | €12/mois | Simulateur fiscal complet + alertes seuils + 2 contrats sponsoring/mois |
+| Abonnement Pro | €24/mois | Tout Solo + contrats illimités + alerte réglementaire + export comptable |
+| Annuel Pro | €199/an | 30% de réduction vs mensuel |
+| Pack Sponsoring | €9/contrat | Génération unitaire d'un contrat sponsoring — pour les créateurs occasionnels |
+
+**Unit economics :** Claude API ~€0,08/génération → marge >95% sur tous les packs. Un expert-comptable spécialisé coûte €150–€300/mois → prix 6–25× inférieur. **LTV Pro :** 18 mois × €24 = €432.
+
+**Pourquoi les créateurs vont payer :**
+- Un redressement fiscal moyen coûte €2 000–€10 000 — €24/mois pour l'éviter est une évidence
+- Un seul contrat sponsoring mal négocié (clause d'exclusivité non plafonnée) peut coûter plusieurs milliers d'euros de manque à gagner
+- La communauté créateurs est très active en ligne → bouche-à-oreille rapide
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA calculs fiscaux & génération contrats :** Claude API (claude-sonnet-4-6) — simulation statuts, génération contrats ARPP, guide déclaration personnalisé
+- **Génération PDF :** react-pdf — contrats sponsoring, récapitulatifs fiscaux
+- **Base de données :** Supabase — profil créateur, historique revenus, contrats générés
+- **Payments :** Stripe — abonnements mensuels/annuels + packs one-shot
+- **Notifications :** Resend — alertes seuils URSSAF, rappels acomptes, veille réglementaire
+- **Veille fiscale :** RSS BOFIP (Bulletin Officiel des Finances Publiques) + scraping Service-Public.fr pour mises à jour automatiques
+
+### Go-to-Market (zéro budget)
+1. **YouTube SEO :** "comment déclarer revenus YouTube France", "statut auto-entrepreneur créateur de contenu", "TVA YouTube France" — des milliers de recherches avec des réponses actuelles fragmentées et souvent erronées
+2. **Communautés créateurs :** Discord "Créateurs FR" (50K+ membres), Reddit r/france + r/YouTubeurs, Facebook Groups "Créateurs de Contenu Francophones" — ciblage ultra-précis
+3. **TikTok/Instagram :** Contenu éducatif "Les 3 erreurs fiscales des créateurs français" → CTA vers le diagnostic gratuit — format naturellement viral dans cet écosystème
+4. **Partenariats MCN / agences :** Les Multi-Channel Networks (Webedia, Finder Studios, Mintmedia) cherchent des outils à valeur ajoutée pour fidéliser leurs créateurs — accord revenu partagé
+5. **Newsletter créateurs :** Sponsoring de newsletters spécialisées (Creator Economy France, La Lettre des Créateurs) — CPM très faible, audience ultra-qualifiée
+
+### Competitive Moat
+- **Spécificité sectorielle profonde :** La fiscalité d'un créateur français est très différente de celle d'un freelance classique (revenus multi-devises, TVA intracommunautaire, droits d'auteur éventuels) → un outil généraliste ne peut pas rivaliser
+- **Base de contrats validés :** Après 500 contrats, les retours créateurs et marques affinent la qualité → contrats de plus en plus équilibrés et défendables juridiquement
+- **Réseau d'experts partenaires :** Pour les créateurs au-delà de 77K€ de CA ou avec des cas complexes (société holding, activité internationale) → mise en relation payante avec des experts-comptables spécialisés créateurs (commission €50–€150/lead)
+- **Extension naturelle :** Outils pour les agences de talent (gérer 50 créateurs), pour les marques (gérer 100 contrats d'influence), SaaS B2B pour les MCN
+
+### Figma Schematic
+[View CréateurFR.ai — Dashboard Créateurs de Contenu France on FigJam](https://www.figma.com/board/zwFI5BhJVubA2PDavc79mv)
 
 ---
 
