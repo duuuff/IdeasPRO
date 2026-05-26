@@ -114,6 +114,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 104 | [NaturalisationFR.ai](#104-naturalisationfrai) | Pay-per-pack + Subscription | €8K–€55K | Low |
 | 105 | [RGPDBusiness.ai](#105-rgpdbusinessai) | Pay-per-pack + SaaS Subscription + B2B EC | €8K–€60K | Low |
 | 106 | [CréateurFR.ai](#106-créateurfrai) | Freemium + Pay-per-pack + Subscription | €7K–€55K | Low |
+| 107 | [RepasEco.ai](#107-repasecoai) | Freemium + Subscription | €4K–€30K | Low |
+| 108 | [ArtisanRGE.ai](#108-artisanrgeai) | Freemium + SaaS Subscription | €8K–€60K | Low-Medium |
+| 109 | [DossierSanté.ai](#109-dossiersantéai) | Freemium + Subscription | €6K–€45K | Low |
 
 ---
 
@@ -5601,6 +5604,211 @@ La France compte plus de **6 millions de personnes qui génèrent des revenus en
 
 ---
 
+## 107. RepasEco.ai
+
+> **Planificateur de menus anti-gaspillage et anti-budget pour les familles françaises — l'IA qui nourrit 4 personnes pour moins de 100 €/semaine**
+
+### Problem
+
+En France, une famille de 4 personnes jette en moyenne **30 kg de nourriture par an**, soit ~€160 de perte directe. En parallèle, avec la hausse des prix alimentaires (+20% depuis 2021), 8 millions de Français ont du mal à manger correctement avec leur budget. Les apps de recettes existantes (Marmiton, 750g) donnent des idées mais **ne gèrent ni le budget, ni le gaspillage, ni les promos du moment**. Résultat : courses improvisées, achats excessifs, frigo plein de produits périmés, et régime alimentaire dégradé.
+
+### Solution
+
+Un planificateur de menus hebdomadaire 100% IA qui prend en compte :
+- **Budget fixé** (ex : "80€ pour 4 personnes cette semaine")
+- **Préférences et allergies** (végé, sans gluten, enfants difficiles...)
+- **Ce qui reste dans le frigo** (scan ou saisie manuelle) → recettes "vide-frigo" en priorité
+- **Saisonnalité** (menus adaptés aux légumes/fruits de saison = moins chers)
+- **Comparaison des prix** entre enseignes proches (Lidl, Aldi, Leclerc — via APIs publiques ou scraping)
+
+**(1) Générateur de Menus IA :** 7 jours × 3 repas générés par Claude avec contraintes budget + DLC + saison + préférences. Chaque menu est accompagné d'une estimation de coût à l'assiette.
+
+**(2) Liste de Courses Intelligente :** Consolidation automatique des ingrédients sur 7 jours → liste triée par rayon → estimation du coût total → suggestion de substitutions moins chères (ex : thon frais → thon en boîte pour une recette).
+
+**(3) Tracker DLC (Date Limite de Consommation) :** L'utilisateur saisit (ou scanne) ce qu'il achète. L'app envoie une notification 2 jours avant expiration : "Ton yaourt Danone expire demain — voici 3 recettes qui l'utilisent".
+
+**(4) Score Anti-Gaspi :** Tableau de bord mensuel → kg de déchets évités estimés, euros économisés vs panier moyen français INSEE, empreinte carbone réduite.
+
+**(5) Recettes des Restes :** IA générative — l'utilisateur entre ce qu'il lui reste (ex : "pâtes cuites, demi-poivron, 2 œufs") → 3 recettes anti-gaspi en 10 secondes.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | 2 menus/semaine, liste de courses basique |
+| Solo | €3,99/mois | Menus illimités + tracker DLC + recettes restes |
+| Famille | €6,99/mois | Jusqu'à 6 profils, comparaison prix enseignes, score anti-gaspi |
+| Annuel Famille | €59,99/an | 30% de réduction vs mensuel |
+
+**Unit economics :** Claude API ~€0,03/menu généré → marge >90%. Une famille Famille économise 15× le prix de l'abonnement en réduisant son gaspillage. **LTV Famille :** 24 mois × €6,99 = €167.
+
+**Canaux d'acquisition gratuits :** r/france, forums parents, Instagram/TikTok "challenge budget semaine 50€", partenariats avec associations anti-gaspi (Too Good To Go, Les Glaneurs).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération menus & recettes :** Claude API (claude-sonnet-4-6) — génération menus contraints, recettes vide-frigo, suggestions de substitution
+- **Notifications DLC :** Resend (free tier — emails) + PWA push notifications
+- **Base de données :** Supabase — profil famille, stock frigo, historique menus
+- **Payments :** Stripe
+- **Prix enseignes :** API Drive Leclerc / comparateurs publics + fallback scraping weekly batch
+
+### Go-to-Market (zéro budget)
+1. **TikTok/Instagram :** "Semaine de menus pour 4 personnes — 75€ — tout fait par IA" → format viral naturel, démonstration en 60 secondes
+2. **Forums & Reddit :** r/france, r/vegan, r/vegetarien, forums MonEnfant.fr, forums familles nombreuses
+3. **Associations anti-gaspi :** Partenariat Too Good To Go, ADEME (qui cherche des outils grand public), Grenoble Alpes Métropole anti-gaspi programs
+4. **SEO :** "menus semaine pas chers", "idée repas anti-gaspi", "liste de courses semaine 4 personnes" — des milliers de recherches mensuelles
+5. **Email liste :** Landing page + inscription liste d'attente → 500 inscrits avant lancement = validation
+
+### Competitive Moat
+- **Contrainte budget réelle :** Aucune app existante ne génère des menus avec un plafond de budget strict et la comparaison prix en temps réel
+- **Tracker DLC + IA :** La combinaison stock frigo → recettes anti-gaspi → économies mesurées est unique
+- **Données comportementales :** Après 3 mois, l'IA apprend les préférences de la famille → menus de plus en plus personnalisés → retention forte
+- **Extension B2B :** Offre pour restauration collective scolaire, EHPAD, centres sociaux (budget contraint institutionnel)
+
+### Figma Schematic
+[View RepasEco.ai — Meal Planner Anti-Gaspillage on FigJam](https://www.figma.com/board/2bURijnTKqi9NkrL655ato)
+
+---
+
+## 108. ArtisanRGE.ai
+
+> **Le copilote administratif des 600 000 artisans du bâtiment français — certification RGE, devis conformes, dossiers MaPrimeRénov' clients**
+
+### Problem
+
+La rénovation énergétique est le marché de la décennie en France : **10 millions de passoires thermiques à rénover avant 2034**, €4,5 milliards de MaPrimeRénov' distribués en 2024. Mais pour toucher ces aides, les propriétaires **doivent obligatoirement faire appel à un artisan certifié RGE** (Reconnu Garant de l'Environnement). Problème :
+
+- **La certification RGE est un labyrinthe :** Qualibat, QualiPAC, QUALIFELEC, QualiSol, Eco Artisan... chaque corps de métier a son label, ses critères, ses organismes, ses délais et ses coûts. Un artisan ne sait souvent pas quel label viser ni comment le décrocher.
+- **Les dossiers MaPrimeRénov' sont chronophages :** Un artisan perd 3–5h par dossier client à rassembler devis pré-travaux, attestations RGE, fiches techniques produits, factures, photos chantier et formulaires ANAH. Pour une PME de 3 personnes, c'est 20% du temps de travail.
+- **Les devis sont souvent non conformes :** TVA réduite à 10% BTP (conditions strictes), mentions obligatoires (garantie décennale, assurance dommage-ouvrage, droit de rétractation 14j), désignation précise des matériaux avec performance (Rth, SCOP...) — une erreur = rejet du dossier ANAH.
+- **Les renouvellements de certification sont oubliés :** La RGE se renouvelle tous les 4 ans avec un audit et une formation obligatoire. Des dizaines d'artisans perdent leur certification par oubli, perdant ainsi l'accès au marché MaPrimeRénov'.
+
+**Résultat :** Des milliers d'artisans BTP restent hors du marché de la rénovation énergétique, ou y perdent des heures précieuses en paperasse.
+
+### Solution
+
+**(1) Diagnostic Certification IA :** Questionnaire métier (électricien, plombier-chauffagiste, maçon-isolant, menuisier...) + CA + zone géographique → recommandation du ou des labels RGE pertinents avec comparatif coût/délai/organisme + feuille de route personnalisée étape par étape.
+
+**(2) Générateur de Devis Conformes MaPrimeRénov' :** Claude génère un devis pré-travaux avec toutes les mentions obligatoires ANAH : désignation précise du produit avec référence, performance énergétique (Rth, SCOP, Uw...), TVA 10% correctement appliquée, mentions légales décennale/DO, droit de rétractation. Export PDF prêt à signer.
+
+**(3) Dossier MaPrimeRénov' Client :** Check-list automatique par type de travaux (isolation, PAC, VMC, fenêtres...) → l'outil indique exactement quels documents rassembler, dans quel ordre, avec quelles contraintes (ex : "photo AVANT travaux obligatoire avant démarrage") → réduction de 80% du temps de constitution de dossier.
+
+**(4) Tableau de Bord Artisan :** CA mensuel, certifications actives avec dates d'expiration, renouvellements à planifier, nombre de dossiers MaPrimeRénov' en cours, taux de validation ANAH, alertes.
+
+**(5) Facturation Conforme :** Facture post-travaux avec calcul automatique de la TVA réduite, mentions légales complètes, numéro de dossier ANAH, format accepté par l'ANAH pour le versement final.
+
+**(6) Formation RGE Tracking :** Rappels des formations continues obligatoires pour le renouvellement + liste des organismes de formation agréés proches.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Starter | €0/mois | 3 devis/mois, diagnostic RGE de base |
+| Pro | €29/mois | Devis illimités + dossiers MaPrimeRénov' + factures |
+| Expert | €59/mois | Multi-équipes (jusqu'à 5 techniciens), export compta, priorité support |
+| Annuel Pro | €249/an | 30% de réduction vs mensuel |
+| Pack Certification | €49 one-shot | Guide complet + documents pour obtenir 1 certification RGE |
+
+**Unit economics :** Un artisan Pro gagne ~3h/dossier × 4 dossiers/mois = 12h récupérées → à €35/h = **€420 de valeur créée pour €29 payé**. ROI 14× immédiat. Claude API ~€0,10/devis → marge >95%.
+
+**Marché :** 600 000 entreprises du BTP en France, 120 000 déjà RGE (cible directe), 480 000 à convaincre d'entrer dans le marché RGE. 0,5% du marché adressable = 3 000 artisans × €29/mois = **€87K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **IA génération devis & documents :** Claude API (claude-sonnet-4-6) — devis conformes ANAH, checklist dossiers, guides certification
+- **Génération PDF :** react-pdf ou Puppeteer — devis + factures + attestations
+- **Base de données :** Supabase — profil artisan, certifications, chantiers, clients
+- **Payments :** Stripe — abonnements SaaS + packs one-shot
+- **Notifications :** Resend — alertes renouvellement RGE, formations, statut dossiers ANAH
+- **Données ANAH :** Scraping régulier des barèmes MaPrimeRénov' + plafonds de travaux mis à jour automatiquement
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook artisans :** "Electriciens Indépendants France" (45K membres), "Plombiers Chauffagistes Indépendants" (30K), "Artisans BTP France" — démonstration "Devis MaPrimeRénov' en 2 minutes"
+2. **Capeb & FFB :** Contacter les fédérations régionales (Chambre Syndicale) pour partenariats → accès direct à des milliers d'artisans membres
+3. **YouTube SEO :** "Comment obtenir la certification RGE en 2026", "Remplir un dossier MaPrimeRénov artisan" — recherches en forte croissance
+4. **Salons professionnels :** Batimat, Interclima — présence sur stand partenaire à coût réduit via partenariat
+5. **Négociants matériaux :** Saint-Gobain, Leroy Merlin Pro, Point.P → intégration dans leur programme fidélité artisans
+
+### Competitive Moat
+- **Connaissance métier profonde :** Les règles TVA BTP, les mentions ANAH obligatoires, les critères de performance par label RGE → un outil généraliste ne peut pas rivaliser
+- **Base de devis validés ANAH :** Après 1 000 devis générés + retours ANAH, le taux de validation approche 99% → argument commercial puissant
+- **Alertes réglementaires :** Les barèmes MaPrimeRénov' changent chaque année (parfois en cours d'année) → l'outil se met à jour automatiquement, l'artisan est toujours conforme
+- **Extension B2B :** Groupements d'artisans, franchises (Domotelec, Engie Home Services), promoteurs immobiliers gérant des chantiers de rénovation en masse
+
+### Figma Schematic
+[View ArtisanRGE.ai — Assistant RGE pour Artisans BTP on FigJam](https://www.figma.com/board/FgCJFytOOJsSEen7pyt12N)
+
+---
+
+## 109. DossierSanté.ai
+
+> **Naviguez dans le système de santé français sans vous perdre — comprenez vos résultats, optimisez vos remboursements, connaissez vos droits**
+
+### Problem
+
+Le système de santé français est réputé l'un des meilleurs au monde, mais il est **d'une complexité kafkaïenne pour le patient ordinaire** :
+
+- **Les résultats d'analyses sont incompréhensibles :** Un compte rendu d'échographie ou une NFS (Numération Formule Sanguine) est écrit pour un médecin, pas pour un patient. Des millions de Français cherchent leurs résultats sur Google et tombent sur des forums angoissants.
+- **Le parcours de soins est opaque :** Faut-il un médecin traitant pour consulter ce dermatologue ? Ce spécialiste est-il en accès direct ? La consultation sera-t-elle remboursée à 70% ou 30% ? Très peu de gens le savent à l'avance.
+- **Les dépassements d'honoraires sont une surprise :** Un médecin secteur 2 peut facturer €150 pour une consultation remboursée €30 par la SS. La mutuelle couvre-t-elle le différentiel ? Ça dépend du contrat — que personne ne lit.
+- **Mon Espace Santé est sous-utilisé :** Le DMP (Dossier Médical Partagé) est une révolution potentielle, mais 80% des Français ne savent pas s'en servir, ne l'ont jamais activé, ou ne savent pas quoi y mettre.
+- **Les droits spéciaux sont méconnus :** ALD (Affection Longue Durée = 100% remboursé), C2S (Complémentaire Santé Solidaire gratuite), CSS, maternité à 100%... Des milliards d'euros de droits ne sont pas réclamés chaque année faute d'information.
+- **Les ordonnances s'accumulent et se perdent :** Renouvellement oublié, médicament plus disponible, dosage changé — la gestion des ordonnances chroniques est un stress quotidien pour 15 millions de Français sous traitement long.
+
+### Solution
+
+**(1) Lecteur IA de Documents Médicaux :** L'utilisateur uploade (photo ou PDF) un compte rendu, une ordonnance, une analyse. Claude explique en français simple ce que ça signifie, ce qui est dans la norme, ce qui mérite attention, et suggère des questions à poser au médecin. **Aucun diagnostic médical — uniquement de l'explication pédagogique.**
+
+**(2) Simulateur de Remboursement :** Avant un soin, l'utilisateur entre : type de soin, secteur du médecin (1/2/3), situation (médecin traitant déclaré ou pas, ALD, maternité...) → simulation SS + mutuelle avec fourchette de reste-à-charge. "Ce cardiologue secteur 2 vous coûtera entre €20 et €80 selon votre mutuelle."
+
+**(3) Annuaire Intelligent :** Recherche de médecins secteur 1 (sans dépassement) proches, avec disponibilité Doctolib en temps réel. Filtres : secteur, spécialité, délai d'attente, accessibilité, téléconsultation disponible.
+
+**(4) Tracker d'Ordonnances et DMP :** Saisie ou scan des ordonnances → rappels de renouvellement → historique consultable → export pour Mon Espace Santé → alerte si deux médicaments potentiellement incompatibles (interaction connue).
+
+**(5) Détecteur de Droits :** Questionnaire de 5 minutes → l'IA identifie les droits potentiels : ALD éligible ? C2S accessible selon revenus ? CSS ? Maternité à 100% à déclencher ? 100% remboursé sur certains soins ? → PDF récapitulatif à apporter au médecin traitant ou à la CPAM.
+
+**(6) Mon Espace Santé Guidé :** Tutoriel pas à pas pour activer et utiliser le DMP, uploader ses documents, paramétrer les accès médecins.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | Lecteur documents (3/mois), rappels ordonnances |
+| Santé+ | €4,99/mois | Documents illimités + simulateur remboursement + détecteur droits |
+| Famille | €8,99/mois | Jusqu'à 5 profils (idéal parents âgés + enfants) |
+| Annuel Famille | €79,99/an | 30% de réduction |
+
+**Unit economics :** Claude API ~€0,05/analyse document → marge >90%. Un utilisateur Santé+ qui récupère un droit ALD non déclaré économise potentiellement **€500–€2 000/an** → ROI immédiat. **LTV Famille :** 30 mois × €8,99 = €270.
+
+**Marché :** 66 millions de Français, dont 15M sous traitement chronique (cible primaire), 10M aidants familiaux (cible secondaire). 0,1% = 66 000 utilisateurs → €330K MRR à l'échelle.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind + PWA (Vercel)
+- **IA lecture documents & détection droits :** Claude API (claude-sonnet-4-6) — explication résultats médicaux, simulation remboursements, détection droits spéciaux
+- **OCR documents médicaux :** Google Vision API (€1,50 / 1 000 pages) ou AWS Textract
+- **Stockage documents :** Supabase Storage (chiffrement AES-256, conformité RGPD/HDS requis)
+- **Notifications :** Resend + PWA push — rappels ordonnances, renouvellements mutuelles
+- **Données mutuelles :** Partenariats API (BPCE Assurances, Harmonie Mutuelle) ou base manuelle maintenue
+- **Annuaire médecins :** API Doctolib partenaire + données RPPS (Répertoire Partagé des Professionnels de Santé, open data)
+- **Payments :** Stripe
+
+**Note réglementaire :** L'app ne produit **aucun diagnostic médical**. Elle explique, informe et oriente. Conformité RGPD + hébergement HDS (Hébergeur de Données de Santé) obligatoire dès que des données médicales sont stockées — OVHcloud HDS ~€30/mois pour commencer.
+
+### Go-to-Market (zéro budget)
+1. **SEO médical :** "comprendre résultats NFS", "remboursement cardiologue secteur 2", "ALD 30 liste maladies" — des volumes de recherche massifs avec intention forte
+2. **Communautés patients :** Forums maladies chroniques (Carenity, 200K membres), groupes Facebook aidants, r/france, forums parents enfants malades
+3. **Influenceurs santé :** Médecins vulgarisateurs sur TikTok/Instagram (Dr Nozman, Docteur Heart) — partenariat contenu éducatif
+4. **Mutuelles partenaires :** Harmonie Mutuelle, MGEN — intégration en marque blanche comme service à valeur ajoutée pour leurs adhérents
+5. **Médecins traitants :** Recommandation par des généralistes déjà convaincus → "dites à vos patients d'utiliser DossierSanté.ai avant leur prochain RDV"
+
+### Competitive Moat
+- **Conformité HDS + RGPD :** Barrière à l'entrée réelle — un clone rapide ne peut pas stocker des données médicales légalement en France sans cet agrément
+- **Données comportementales :** Après 6 mois d'utilisation, l'app connaît le profil médical complet de l'utilisateur → recommandations de plus en plus précises → retention forte
+- **Réseau mutuelles :** Une fois 2–3 grandes mutuelles intégrées en partenariat API, les données de remboursement réels (vs estimés) deviennent un avantage concurrentiel majeur
+- **Extension B2B :** Offre pour médecins traitants (dashboard patient simplifié), pour EHPAD (gestion médicaments résidents), pour employeurs (suivi arrêts maladie anonymisé)
+
+### Figma Schematic
+[View DossierSanté.ai — Navigateur Santé Français on FigJam](https://www.figma.com/board/sZH78FncP7ucric2ZfA2Ez)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -5613,4 +5821,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-24 — Ideas 103–105 added (France-specific, ultra-low-budget: ConcoursPro.ai, NaturalisationFR.ai, RGPDBusiness.ai)*
+*Last updated: 2026-05-26 — Ideas 107–109 added (France-specific, ultra-low-budget: RepasEco.ai, ArtisanRGE.ai, DossierSanté.ai)*
