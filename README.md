@@ -117,6 +117,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 107 | [RepasEco.ai](#107-repasecoai) | Freemium + Subscription | €4K–€30K | Low |
 | 108 | [ArtisanRGE.ai](#108-artisanrgeai) | Freemium + SaaS Subscription | €8K–€60K | Low-Medium |
 | 109 | [DossierSanté.ai](#109-dossiersantéai) | Freemium + Subscription | €6K–€45K | Low |
+| 110 | [SubventionAsso.ai](#110-subventionassoai) | Pay-per-dossier + Annual Subscription | €5K–€35K | Low |
+| 111 | [DropshippingFR.ai](#111-dropshippingfrai) | Freemium + Subscription | €8K–€55K | Low |
+| 112 | [MaternitéPro.ai](#112-maternitéproai) | Pay-per-report + Subscription | €6K–€40K | Low |
 
 ---
 
@@ -5809,6 +5812,230 @@ Le système de santé français est réputé l'un des meilleurs au monde, mais i
 
 ---
 
+## 110. SubventionAsso.ai
+
+> **Le générateur de dossiers de subvention pour les 1,5 million d'associations françaises — obtenez vos financements sans perdre 40 heures en paperasse**
+
+### Problem
+
+La France compte **1,5 million d'associations actives**, qui dépendent des subventions publiques pour survivre : mairies, conseils départementaux, régions, État (FONJEP, INJEP...), fonds européens. Le problème : **rédiger un dossier de subvention est un enfer administratif.**
+
+- **Chaque financeur a ses propres critères et formats :** Un dossier pour la mairie de Lyon ne ressemble pas à un dossier pour la Région Auvergne-Rhône-Alpes. Les nomenclatures budgétaires, les axes prioritaires, les indicateurs attendus changent d'une collectivité à l'autre.
+- **Les trésoriers bénévoles sont dépassés :** Dans 90% des associations, c'est un bénévole non formé qui rédige les dossiers — souvent un retraité ou un parent actif qui n'a ni le temps ni les compétences pour rédiger un argumentaire convaincant.
+- **Le taux de refus est élevé :** Dossier incomplet, budget mal présenté, objectifs trop vagues, manque d'indicateurs quantifiables — des dizaines de milliers de dossiers sont rejetés chaque année pour des raisons purement formelles, privant des associations de financements qu'elles méritaient.
+- **Le suivi des aides est inexistant :** Les deadlines de dépôt sont mal connues, les renouvellements oubliés, les comptes rendus d'utilisation (obligatoires !) négligés — ce qui compromet les demandes futures.
+- **La méconnaissance des dispositifs est massive :** La plupart des associations ne connaissent que leur mairie comme source de financement — elles ignorent les fonds DETR, FDVA, CNAF, REAAP, Fonds Social Européen, Erasmus+, etc.
+
+**Impact direct :** Des millions d'euros de subventions non réclamées chaque année par manque de savoir-faire administratif, pendant que des associations vitales ferment ou réduisent leurs activités.
+
+### Solution
+
+**(1) Diagnostic Financement IA :** L'association renseigne son type (sport, culture, insertion, handicap, environnement...), sa localisation, son budget annuel, ses bénéficiaires. Claude analyse et génère une **cartographie de tous les financeurs accessibles** avec les montants moyens accordés, les critères d'éligibilité et les calendriers de dépôt.
+
+**(2) Générateur de Dossier Adapté au Financeur :** L'utilisateur choisit un financeur dans la liste. Claude génère un dossier complet adapté aux critères de ce financeur spécifique :
+- Lettre de demande argumentée (axes prioritaires du financeur, impact social chiffré)
+- Fiche projet structurée (objectifs SMART, public bénéficiaire, moyens, évaluation)
+- Budget prévisionnel conforme (nomenclature de la collectivité, co-financements)
+- Annexes check-list (statuts, bilan N-1, rapport d'activité, RIB, liste dirigeants)
+
+**(3) Bibliothèque de Phrases Impact :** Des formulations percutantes testées sur des dossiers acceptés : "nombre de bénéficiaires directs", "valeur du bénévolat valorisé", "ancrage territorial", "partenariats institutionnels" — des mots-clés qui font mouche auprès des élus.
+
+**(4) Calendrier des Dossiers :** Toutes les deadlines compilées pour les principaux financeurs nationaux + rappels personnalisés 30 jours avant. "La Région ferme les dossiers FDVA le 15 mars — il vous reste 3 semaines."
+
+**(5) Compte Rendu d'Utilisation IA :** En fin d'année, l'association génère le compte rendu d'utilisation de la subvention (obligatoire pour tout renouvellement) à partir de son rapport d'activité — en 10 minutes au lieu de 3 jours.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Découverte | €0/mois | Diagnostic financement + 1 dossier/an |
+| Essentiel | €9/mois | 5 dossiers/mois + calendrier deadlines + comptes rendus |
+| Pro | €19/mois | Dossiers illimités + bibliothèque phrases + multi-utilisateurs |
+| Pack Dossier | €12 one-shot | 1 dossier complet pour 1 financeur précis |
+| Annuel Pro | €159/an | 30% de réduction vs mensuel |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >95%. Une association qui obtient €2 000 de plus de subvention grâce à un meilleur dossier a un ROI de 10× son abonnement annuel. **LTV Pro :** 36 mois × €19 = €684.
+
+**Marché :** 1,5M associations en France, dont ~500K actives avec budget >€5K. 0,3% = 1 500 abonnés × €19/mois = **€28,5K MRR**. Scalable à €200K MRR avec 1% de pénétration.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération dossiers :** Claude API (claude-sonnet-4-6) — dossiers adaptés par financeur, phrases impact, comptes rendus
+- **Base de données :** Supabase — profil association, dossiers, financeurs, calendrier
+- **Génération PDF :** react-pdf — export dossiers prêts à déposer
+- **Emails & rappels :** Resend — alertes deadlines, rappels comptes rendus
+- **Données financeurs :** Base manuelle maintenue + scraping portails officiels (Aides-Territoires, FDVA, data.gouv.fr)
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **Réseau associatif :** CPCA (Conférence Permanente des Coordinations Associatives), fédérations nationales (sport, culture, insertion) — partenariat pour diffusion à leurs membres
+2. **Maisons des Associations :** 3 000+ maisons des associations en France, très actives pour former les bénévoles — démonstrations gratuites = acquisition organique puissante
+3. **SEO :** "demande de subvention mairie association", "dossier subvention région sport", "FDVA association" — des volumes de recherche constants avec intention forte
+4. **Groupes Facebook associations :** "Gestion association loi 1901" (80K membres), "Trésoriers d'associations France", groupes sportifs, culturels par département
+5. **Partenariat logiciels gestion asso :** HelloAsso, Assoconnect — intégration ou cross-promotion (leurs clients sont exactement notre cible)
+
+### Competitive Moat
+- **Connaissance des critères par financeur :** Les axes prioritaires d'une région (ex : jeunesse, transition écologique) changent avec la politique — l'outil scrappe et met à jour les cahiers des charges automatiquement
+- **Bibliothèque de dossiers acceptés :** Après 1 000 dossiers générés, les associations partagent (anonymisé) si leur dossier a été accepté → entraînement du modèle → taux d'acceptation croissant → argument commercial puissant
+- **Extension B2B Collectivités :** Vendre aux mairies et conseils départementaux un outil pour dépouiller et évaluer les dossiers reçus (marché inverse) — revenus B2B €500/mois par collectivité
+
+### Figma Schematic
+[View SubventionAsso.ai — Générateur de Dossiers de Subvention on FigJam](https://www.figma.com/board/382HkUnC7BA9lYF7dEe2cl)
+
+---
+
+## 111. DropshippingFR.ai
+
+> **L'assistant fiscal et juridique pour les 3 millions d'e-commerçants et dropshippeurs français — TVA OSS/IOSS, douanes, statut, comptabilité : tout ce que personne ne leur explique**
+
+### Problem
+
+Le commerce en ligne explose en France : **3 millions de personnes** vendent en ligne de façon régulière (Marketplace vendeurs, dropshippeurs, e-commerce propre). La grande majorité sont de jeunes adultes attirés par les formations YouTube "dropshipping €10K/mois" — mais **personne ne leur explique les obligations légales et fiscales**, et les conséquences sont lourdes :
+
+- **La TVA OSS est un labyrinthe :** Dès €10 000 de ventes vers d'autres pays de l'UE, le vendeur doit s'enregistrer au guichet OSS (One Stop Shop) et reverser la TVA aux taux locaux de chaque pays de destination. 95% des dropshippeurs ignorent cette obligation et se retrouvent en situation irrégulière.
+- **L'IOSS pour les importations <150€ est méconnu :** Pour vendre des produits importés (AliExpress, Temu...) de moins de €150, il faut soit s'enregistrer à l'IOSS, soit les clients paient les droits de douane à la livraison (= retours en masse, mauvaises avis). La confusion coûte des milliers d'euros.
+- **Les seuils micro-entrepreneur basculent sans prévenir :** CA >77 700€ (BIC) = sortie du régime micro → déclaration TVA, compta réelle, IS. Des centaines de dropshippeurs reçoivent un redressement URSSAF pour avoir continué en micro après avoir dépassé le seuil.
+- **Les droits de douane sont une boîte noire :** Un produit importé de Chine : droit de douane (0% à 12% selon classification douanière) + TVA à l'import (20%) + frais de dédouanement. Sans outil de calcul, la marge réelle est inconnue.
+- **La comptabilité e-commerce est spécifique :** Retours, remboursements, commissions Marketplace (Amazon, Etsy, Shopify), frais publicitaires Meta/Google — la déclaration annuelle est complexe pour un micro sans comptable.
+
+**Impact :** Des redressements fiscaux de €5 000 à €50 000 qui ruinent des jeunes entrepreneurs à cause d'une méconnaissance des règles — alors qu'un outil simple pourrait les alerter à temps.
+
+### Solution
+
+**(1) Diagnostic Statut IA :** L'utilisateur entre son CA mensuel, type de produits vendus, pays de vente, fournisseur (dropshipping Chine / stock France / print-on-demand). Claude génère un diagnostic complet : statut optimal, obligations TVA actuelles, seuils à surveiller, risques identifiés.
+
+**(2) Simulateur TVA OSS / IOSS :** L'utilisateur renseigne ses ventes par pays UE ce mois-ci. L'outil calcule automatiquement la TVA due dans chaque pays (taux différents : Allemagne 19%, Italie 22%, Luxembourg 17%...) et génère le brouillon de déclaration OSS trimestrielle prêt à saisir sur le portail des impôts.
+
+**(3) Calculateur Douanes & Rentabilité Produit :** L'utilisateur entre : pays d'origine fournisseur, description produit, valeur unitaire, volume. L'outil retourne : classification douanière probable, taux de droit, TVA import, frais estimés, **marge nette réelle après tous frais**. "Ce produit à €8 FOB vous revient à €12,40 rendu France — votre prix de vente doit être >€25 pour une marge de 50%."
+
+**(4) Alertes Seuils Intelligentes :** Connecté aux données de ventes (import CSV ou connexion Shopify/Etsy API), l'outil envoie des alertes :
+- "Tu as fait €65 000 de CA cette année — dans 4 mois tu dépasseras le seuil micro BIC. Voici ce qui change."
+- "Tes ventes UE dépassent €10 000 — tu dois t'enregistrer à l'OSS avant le 31 octobre."
+- "Tu n'as pas déclaré ta TVA OSS Q3 — deadline dans 14 jours."
+
+**(5) Module Comptabilité Simplifiée :** Bilan mensuel automatique : CA net (déduction commissions marketplace), charges déductibles (publicité, hébergement, outils SaaS, échantillons), résultat imposable, cotisations URSSAF estimées. Export Cerfa-compatible pour la déclaration annuelle.
+
+**(6) Bibliothèque Juridique :** CGV conformes au droit de la consommation français (mention droit de rétractation 14j, SAV, RGPD), mentions légales pour le site, politique retours. Tout généré automatiquement pour le type de boutique.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | Diagnostic statut + simulateur douanes 3 produits/mois |
+| Starter | €9/mois | Simulateur TVA OSS/IOSS illimité + alertes seuils |
+| Pro | €19/mois | + comptabilité simplifiée + CGV generator + export compta |
+| Annuel Pro | €159/an | 30% de réduction vs mensuel |
+| Audit One-shot | €29 | Audit complet situation TVA/statut/douanes avec rapport PDF |
+
+**Unit economics :** Claude API ~€0,06/simulation → marge >97%. Un utilisateur Pro qui évite un seul redressement TVA de €3 000 a un ROI de 13 ans d'abonnement. **LTV Pro :** 24 mois × €19 = €456.
+
+**Marché :** 3M vendeurs en ligne en France, dont ~400K actifs avec CA >€10K (cible principale pour OSS/IOSS). 0,5% = 2 000 abonnés × €19/mois = **€38K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **IA diagnostic & génération docs :** Claude API (claude-sonnet-4-6) — diagnostic statut, CGV, simulation TVA multi-pays, guide comptabilité
+- **Taux TVA UE en temps réel :** API VIES (Commission Européenne, gratuite) + base de données taux par pays maintenue
+- **Classification douanière :** Tarif douanier UE (TARIC, open data) + heuristiques produit → code NC8 probable
+- **Connexion Marketplaces :** API Shopify, Etsy, WooCommerce (webhook CA mensuel) + import CSV Manuel
+- **Alertes :** Resend (emails) + SMS via Vonage free tier
+- **Payments :** Stripe
+- **Base de données :** Supabase — profil vendeur, historique ventes, déclarations, alertes
+
+### Go-to-Market (zéro budget)
+1. **YouTube & TikTok :** Contenu éducatif "La vraie fiscalité du dropshipping en France" — ce contenu manque cruellement, les vidéos sur ce sujet cumulent des centaines de milliers de vues
+2. **Communautés dropshipping FR :** Groupes Facebook "Dropshipping France" (200K+ membres), Discord e-commerce FR, forums Shopizy, Dropizi
+3. **Formateurs dropshipping :** Les influenceurs qui vendent des formations (Yomi Denzel, Gabriel Gab...) cherchent des outils à recommander à leurs étudiants → affiliation 30% MRR
+4. **SEO :** "TVA dropshipping France", "OSS dropshipping", "seuil micro-entrepreneur ecommerce" — des recherches en forte croissance avec 0 concurrents bien positionnés
+5. **Partenariats SaaS :** Shopify France, Dropizi, Dropified — intégration ou co-marketing
+
+### Competitive Moat
+- **Spécialisation France :** Les outils généralistes (Avalara, TaxJar) coûtent €100–€500/mois et visent les PME — rien n'existe pour les micro-dropshippeurs français
+- **Données comportementales CA :** En agrégeant le CA réel de milliers de vendeurs (anonymisé), l'outil peut prédire les dépassements de seuil 3 mois à l'avance avec précision — avantage données unique
+- **Extension B2B Comptables :** Version cabinet-comptable pour gérer 50 clients e-commerce en simultané → MRR récurrent €99/mois/cabinet
+
+### Figma Schematic
+[View DropshippingFR.ai — Assistant Fiscal pour E-commerçants Français on FigJam](https://www.figma.com/board/7hZkBAbAJ5PViVTeSOBtKc)
+
+---
+
+## 112. MaternitéPro.ai
+
+> **Le simulateur et optimiseur du congé maternité/paternité pour indépendantes, gérantes et salariées françaises — calculez vos indemnités CPAM à l'euro près et ne laissez rien sur la table**
+
+### Problem
+
+Chaque année en France, **800 000 bébés naissent** — et leurs parents font face à un système d'indemnisation maternité/paternité d'une complexité ahurissante qui varie selon le statut professionnel :
+
+- **Les indépendantes sont les grandes oubliées :** Une micro-entrepreneuse, une avocate, une médecin libérale ou une artisane touche des IJSS maternité (Indemnités Journalières de Sécurité Sociale) calculées sur son revenu des 3 dernières années — mais le calcul exact est opaque, les formulaires CPAM sont labyrinthiques, et beaucoup d'indépendantes ne réclament jamais leurs droits faute de savoir comment.
+- **Les gérantes de société (SASU, SARL) sont dans un angle mort :** Une gérante associée unique de SASU est assimilée-salariée → droits identiques aux salariées. Une gérante majoritaire de SARL est travailleuse non-salariée → régime indépendant. La confusion sur le statut entraîne des erreurs de calcul et des droits perdus.
+- **Le congé paternité n'est pas optimisé :** Depuis 2021, le congé paternité est de 28 jours (dont 7 obligatoires). Mais les règles de prise fractionnée, de cumul avec le congé annuel, et d'indemnisation par la prévoyance sont méconnues. Des millions d'euros d'indemnités CPAM ne sont pas réclamées.
+- **Le partage du congé parental est sous-utilisé :** Le complément de libre choix d'activité (CLCA), le PrePare, la majoration pour triplés... Les dispositifs CAF post-naissance sont une jungle que les jeunes parents n'explorent jamais faute de guide.
+- **Les deadlines CPAM sont méconnues :** La demande d'IJSS maternité doit être faite avant une certaine date, le certificat de grossesse envoyé à la CPAM avant le terme, le certificat médical post-naissance dans les 15 jours. Des milliers de mères perdent des indemnités pour un formulaire envoyé en retard.
+
+### Solution
+
+**(1) Simulateur d'Indemnités Personnalisé :** L'utilisateur renseigne son statut (salariée / indépendante type / gérante SASU-SARL / profession libérale), ses revenus des 3 dernières années, la date de départ en congé. Claude calcule :
+- IJSS maternité mois par mois pendant toute la durée du congé
+- Maintien de salaire employeur (selon convention collective saisie)
+- Complément prévoyance (si renseignée)
+- Allocations CAF cumulables (PAJE, prime naissance €1 017, CLCA)
+- **Revenu net total mois par mois pendant le congé**
+
+**(2) Guide Congé Paternité :** Simulation complète pour le conjoint — IJSS paternité (plafonnées à 87,03€/jour en 2026), règles de fractionnement, délai de prise (dans les 6 mois), impact sur le RTT/congés annuels, cumul prévoyance. "Ton congé paternité te rapportera €2 436 net — voici comment le prendre en 2 blocs pour maximiser ton temps avec bébé."
+
+**(3) Générateur de Dossier CPAM :** Formulaires pré-remplis selon le profil :
+- S3110 (demande d'IJSS maternité salariée)
+- S3128 (demande IJSS maternité travailleuse indépendante)
+- S3716 (demande IJSS paternité)
+- Attestation de salaire employeur (format CPAM)
+- Check-list des justificatifs à joindre
+
+**(4) Calendrier & Deadlines :** Timeline personnalisée de la grossesse à la reprise :
+- J-14 semaines : envoi certificat grossesse CPAM
+- J-8 semaines : déclaration congé maternité à l'employeur
+- J+7 jours post-naissance : envoi certificat médical CPAM
+- J+30 jours : demande congé paternité si non pris immédiatement
+- J+6 mois : dernier délai pour prendre le congé paternité
+
+**(5) Optimiseur Reprise :** Calcul comparatif des options de reprise (temps partiel thérapeutique, congé parental à taux plein vs réduit, cumul emploi-CAF) pour maximiser le revenu familial sur 24 mois post-naissance.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulation de base (salariée standard) |
+| Essentiel | €9 one-shot | Simulation complète tous statuts + formulaires CPAM |
+| Famille | €14,99/mois | Simulation mère + père + optimiseur reprise + alertes deadlines |
+| Annuel Famille | €99/an | 30% de réduction |
+
+**Unit economics :** Claude API ~€0,04/simulation → marge >99%. Une indépendante qui réclame ses IJSS grâce à l'outil récupère en moyenne €4 200 d'indemnités non réclamées → ROI immédiat et absolu. **LTV Famille :** 9 mois × €14,99 = €134 (utilisation concentrée sur la période grossesse/congé).
+
+**Marché :** 800 000 naissances/an × 2 parents = 1,6M concernés. Les indépendantes (300 000 naissances de mères indépendantes/an) sont la cible premium — ROI ultra-visible. 2% de conversion = 16 000 packs one-shot/an = **€144K ARR dès l'année 1**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind + PWA (Vercel)
+- **IA calcul & génération dossiers :** Claude API (claude-sonnet-4-6) — simulation IJSS multi-statuts, formulaires CPAM pré-remplis, guide congé paternité, optimiseur reprise
+- **Génération PDF formulaires :** react-pdf — formulaires CPAM S3110, S3128, S3716 remplis
+- **Base de données :** Supabase — profil utilisateur, revenus, dates, documents générés
+- **Notifications :** Resend + PWA push — deadlines CPAM, rappels formulaires, alertes CAF
+- **Barèmes CPAM & CAF :** Mis à jour annuellement (plafond IJSS, montant prime naissance, taux CLCA) — base interne maintenue
+- **Payments :** Stripe (one-shot + abonnement)
+
+### Go-to-Market (zéro budget)
+1. **Instagram & TikTok maternité :** "J'ai récupéré €4 200 d'indemnités CPAM que je ne savais pas que j'avais droit" — contenu témoignage ultra-viral dans les communautés de futures mamans
+2. **Groupes Facebook maternité & parentalité :** "Mamans Entrepreneures" (150K membres), "Maman Freelance", "Femmes Chefs d'Entreprise France", forums grossesse (Doctissimo, aufeminin)
+3. **Partenariats sages-femmes & maternités :** Les sages-femmes libérales cherchent des ressources à recommander — mention dans leur newsletter ou affichage en cabinet
+4. **SEO :** "indemnités maternité micro-entrepreneur", "IJSS maternité calcul indépendante", "congé paternité formulaire CPAM" — des milliers de recherches mensuelles, 0 outil clair existant
+5. **Entreprises HR :** DRH qui cherchent à mieux informer leurs salariées enceintes → licence B2B entreprise €99/mois pour accès illimité aux salariées
+
+### Competitive Moat
+- **Calcul multi-statuts précis :** La différence entre SASU et SARL gérance majoritaire change tout au calcul — aucun outil grand public ne gère cette complexité
+- **Formulaires CPAM pré-remplis :** Générer les vrais formulaires CPAM (S3110, S3128...) avec les bonnes données est un avantage concurrentiel direct — toutes les concurrentes potentielles n'ont que des calculateurs sans sortie actionnable
+- **Données historiques :** Après 10 000 simulations, l'outil connaît les taux de validation CPAM par région, les délais réels, les erreurs fréquentes → optimisation continue → meilleur outil du marché
+- **Extension B2B Mutuelles :** Une mutuelle qui intègre MaternitéPro.ai comme service à ses adhérentes augmente sa rétention — licensing B2B €2–5 par adhérente/an
+
+### Figma Schematic
+[View MaternitéPro.ai — Optimiseur Congé Maternité et Paternité France on FigJam](https://www.figma.com/board/dkljlkqdjkZ2287Rts6ytX)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -5821,4 +6048,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-26 — Ideas 107–109 added (France-specific, ultra-low-budget: RepasEco.ai, ArtisanRGE.ai, DossierSanté.ai)*
+*Last updated: 2026-05-27 — Ideas 110–112 added (France-specific, ultra-low-budget: SubventionAsso.ai, DropshippingFR.ai, MaternitéPro.ai)*
