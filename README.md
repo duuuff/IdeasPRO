@@ -120,6 +120,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 110 | [SubventionAsso.ai](#110-subventionassoai) | Pay-per-dossier + Annual Subscription | €5K–€35K | Low |
 | 111 | [DropshippingFR.ai](#111-dropshippingfrai) | Freemium + Subscription | €8K–€55K | Low |
 | 112 | [MaternitéPro.ai](#112-maternitéproai) | Pay-per-report + Subscription | €6K–€40K | Low |
+| 113 | [VidesGreniers.ai](#113-videsgreniersal) | Freemium + Subscription | €3K–€20K | Low |
+| 114 | [Micro-Mission.ai](#114-micro-missionai) | Freemium + Commission | €5K–€35K | Low-Medium |
+| 115 | [PrêtEntre.ai](#115-prêtentreai) | Pay-per-pack | €4K–€28K | Low |
 
 ---
 
@@ -6036,6 +6039,151 @@ Chaque année en France, **800 000 bébés naissent** — et leurs parents font 
 
 ---
 
+## 113. VidesGreniers.ai
+
+> **Outil d'estimation IA pour vide-greniers et brocantes — maximise tes revenus du dimanche**
+
+### Problem
+Plus de 1,5 million de Français participent régulièrement aux vide-greniers et brocantes. Pourtant, la grande majorité fixe ses prix "au pif" et perd en moyenne 30 à 50% de revenus potentiels par ignorance des cours du marché (LeBonCoin, Vinted, eBay). Résultat : des objets vendus €2 qui en valent €25, et des invendus qu'on ramène chez soi.
+
+### Solution
+L'utilisateur prend une photo de son objet avec son téléphone. L'IA identifie l'objet (marque, modèle, état estimé), interroge en temps réel LeBonCoin + Vinted + eBay, et propose un prix de vente réaliste avec fourchette basse/haute. L'app génère aussi une "fiche stand" imprimable et une carte des vide-greniers à venir dans un rayon de 30 km.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 5 estimations/mois |
+| Pro | €4,99/mois | Estimations illimitées + fiches stand + alertes marchés |
+| Saisonnier | €9,99 (3 mois) | Idéal saison avril–septembre |
+
+**Marché :** Les vide-grenier génèrent ~€2 milliards de transactions annuelles en France. Même 0,1% des vendeurs réguliers = 1 500 abonnés Pro = **€8 985 MRR**. Coût IA ~€0,02/estimation.
+
+### Tech Stack
+- **Frontend :** Next.js PWA (Vercel) — utilisable directement du téléphone sans installation
+- **Vision IA :** Claude API (claude-sonnet-4-6) — identification objet via photo + génération fiche
+- **Données marché :** Scraping LeBonCoin/Vinted (API non-officielle ou Playwright headless) pour prix temps réel
+- **Géolocalisation marchés :** OpenStreetMap + base de données vide-greniers (vide-greniers.org API ou scraping)
+- **PDF fiches :** react-pdf — fiches stand à imprimer
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **TikTok/Reels :** "J'ai scanné mes objets avant le vide-grenier — résultat choquant" (contenu avant/après ultra-viral)
+2. **Groupes Facebook :** "Vide-greniers France", "Chineuses et chineurs", "Brocante Passion" (300 000+ membres cumulés)
+3. **Flyers QR code** distribués sur les vide-greniers eux-mêmes le dimanche matin (coût quasi nul)
+4. **SEO :** "prix vide grenier", "combien vendre objet brocante", "estimer prix occasion France"
+5. **Partenariat organisateurs :** Proposer l'outil gratuit aux organisateurs qui le recommandent à leurs exposants
+
+### Competitive Moat
+- **Données France-first :** Les prix varient énormément selon la région (Paris vs province) — l'IA apprend les prix locaux
+- **Flywheel données :** Plus les utilisateurs soumettent d'objets, plus l'IA est précise → avantage concurrentiel cumulatif
+- **Extension naturelle :** Devenir LA plateforme de revente occasion FR — marketplace propriétaire à terme
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
+## 114. Micro-Mission.ai
+
+> **Agrégateur intelligent de micro-tâches rémunérées — gagne €50–200/mois en 2h par semaine**
+
+### Problem
+Des dizaines de plateformes paient les Français pour compléter des micro-tâches (enquêtes, tests UX, transcription, annotation IA, modération) : Prolific, Toluna, Clickworker, UserTesting, Appen, Dataforce, Testapic… Mais personne ne sait où s'inscrire, quelles plateformes paient vraiment en €, lesquelles correspondent à son profil, ni comment maximiser son temps. Résultat : 90% des gens abandonnent après 2 plateformes.
+
+### Solution
+L'utilisateur remplit un profil de 3 minutes (langues parlées, domaines de compétence, disponibilités, profil démographique). L'IA agrège les opportunités disponibles sur toutes les plateformes, les classe par taux horaire réel (en tenant compte du temps de setup), et envoie une notification quotidienne : "Aujourd'hui tu peux gagner €23 en 1h15 — voici les 3 missions parfaites pour toi."
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Accès 5 plateformes, alertes hebdo |
+| Premium | €6,99/mois | Toutes plateformes (20+), alertes temps réel, tri par €/heure |
+| Annuel | €49,99/an | 40% de réduction |
+
+**Marché :** 4 millions de Français cherchent activement des revenus complémentaires. L'app ne "crée" pas les missions — elle agrège l'existant. Coût marginal quasi nul. 1 000 abonnés Premium = **€6 990 MRR**.
+
+**Unit economics :** Coût opérationnel ~€0,10/utilisateur/mois (Claude API pour personnalisation). Marge brute >98%.
+
+### Tech Stack
+- **Frontend :** Next.js + PWA (Vercel) + notifications push
+- **Scraping & agrégation :** Playwright + cron jobs — surveille les offres disponibles sur 20+ plateformes
+- **Personnalisation IA :** Claude API (claude-sonnet-4-6) — matching profil/missions, calcul €/heure réel, rédaction alertes personnalisées
+- **Backend :** Supabase — profils, historique gains, préférences
+- **Notifications :** Resend (email) + OneSignal (push PWA)
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/beermoney_fr, r/argent_de_poche, forums étudiants français
+2. **TikTok :** "J'ai gagné €127 ce mois en faisant des sondages — voici exactement comment" (contenu preuve de gains)
+3. **YouTube SEO :** "gagner de l'argent facilement France 2026", "meilleurs sites pour sondages rémunérés"
+4. **Étudiants :** Partenariats avec BDE d'universités — outils pour étudiants fauchés
+5. **Forums :** Doctissimo, aufeminin, parents au foyer cherchant revenus flexibles
+
+### Competitive Moat
+- **Agrégation multi-plateformes :** Personne ne propose ça en France avec vraie personnalisation — chaque plateforme vit en silo
+- **Score €/heure réel :** Le taux affiché par les plateformes est souvent mensonger — Micro-Mission calcule le taux réel sur la base des retours utilisateurs
+- **Profil démographique :** Certaines études paient 3x plus les 35-50 ans, les parents, ou les propriétaires — l'IA optimise selon ton profil précis
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
+## 115. PrêtEntre.ai
+
+> **Formalise tes prêts entre particuliers — contrats légaux, échéanciers et déclarations fiscales en 5 minutes**
+
+### Problem
+En France, 6,2 milliards d'euros s'échangent chaque année sous forme de prêts entre famille et amis — sans aucun document légal. C'est un désastre : disputes, malentendus, redressements fiscaux. La loi française impose pourtant de déclarer tout prêt >5 000€ aux impôts (formulaire 2062), et un prêt sans écrit est inopposable aux tiers. Les notaires facturent €300–800 pour formaliser ça. Résultat : 95% des gens ne formalisent rien et s'exposent à des risques énormes.
+
+### Solution
+L'utilisateur saisit les détails du prêt (montant, prêteur, emprunteur, durée, taux d'intérêt ou prêt à 0%). L'IA génère en 30 secondes : (1) un contrat de prêt entre particuliers conforme au droit français, (2) un échéancier de remboursement mensuel, (3) les formulaires fiscaux pré-remplis (2062 si >5 000€), (4) une archive PDF signée électroniquement.
+
+**Cas d'usage clés :**
+- Parents qui prêtent pour l'apport immobilier d'un enfant
+- Prêt entre amis pour démarrer une micro-entreprise
+- Avance sur héritage formalisée légalement
+- Prêt entre ex-conjoints suite à divorce
+- Prêt employeur/salarié (avance sur salaire >1 200€)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Pack Simple | €9,99 one-shot | 1 contrat + échéancier + PDF signé |
+| Pack Complet | €19,99 one-shot | Contrat + échéancier + formulaire fiscal 2062 + rappels automatiques de remboursement |
+| Abonnement Famille | €4,99/mois | Contrats illimités + archivage + alertes paiement |
+
+**Marché :** Sur 6,2 milliards d'€ échangés, même 0,01% qui se formalisent = 620M€ × 0,01% = 62 000 transactions potentielles/an. À €9,99/pack = **€620 000 ARR potentiel**. Réaliste dès l'année 1 : 500 packs/mois = **€60K ARR**.
+
+**Unit economics :** Claude API ~€0,06/contrat généré → marge >99%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Génération contrats :** Claude API (claude-sonnet-4-6) — contrats personnalisés selon profil (CDI, indépendant, retraité) et type de prêt
+- **Génération PDF :** react-pdf — contrat de prêt + formulaire fiscal 2062 pré-rempli
+- **Signature électronique :** Yousign API (conforme eIDAS, solution française, plan gratuit disponible)
+- **Rappels remboursement :** Resend — emails automatiques aux deux parties à chaque échéance
+- **Backend :** Supabase — archive des contrats, suivi des remboursements
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "contrat prêt entre particuliers gratuit", "déclarer prêt familial impôts", "formulaire 2062 prêt" — requêtes à haute intention, peu de concurrents directs
+2. **Notaires & avocats :** Partenariat de référencement croisé — ils envoient les petits dossiers (<10 000€) sur PrêtEntre.ai, gagnent du temps sur les dossiers simples
+3. **Forums immobiliers :** SeLoger, MeilleursAgents forums — "comment formaliser le prêt familial pour mon apport ?" est une question posée des centaines de fois par jour
+4. **Comptables :** Les EC voient régulièrement des clients avec des prêts informels qui causent des problèmes fiscaux — ils peuvent recommander PrêtEntre.ai
+5. **TikTok :** "Ton père t'a prêté 20 000€ sans papier — voici ce qui peut arriver" (contenu alarmant mais éducatif, viral)
+
+### Competitive Moat
+- **Signature électronique intégrée :** Personne ne propose contrat + signature + déclaration fiscale en one-stop-shop en France
+- **Rappels automatiques :** L'app envoie des rappels aux deux parties → réduit les conflits → devient indispensable pendant toute la durée du prêt (LTV long)
+- **Données légales FR :** Mise à jour automatique des plafonds et seuils de déclaration → toujours conforme à la dernière loi fiscale
+- **Extension naturelle :** Donations entre particuliers, reconnaissance de dette, prêt employeur — même moteur légal, nouveaux produits
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -6048,4 +6196,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-27 — Ideas 110–112 added (France-specific, ultra-low-budget: SubventionAsso.ai, DropshippingFR.ai, MaternitéPro.ai)*
+*Last updated: 2026-05-28 — Ideas 113–115 added (France-specific, ultra-low-budget: VidesGreniers.ai, Micro-Mission.ai, PrêtEntre.ai)*
