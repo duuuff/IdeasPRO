@@ -109,6 +109,23 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 99 | [ConventionCollective.ai](#99-conventioncollectiveai) | Freemium + Pay-per-report | €8K–€55K | Low |
 | 100 | [AccidentTravail.ai](#100-accidenttravailai) | Pay-per-pack + Freemium | €6K–€45K | Low |
 | 101 | [ViagerCalcul.ai](#101-viagercalculai) | Pay-per-simulation + Affiliate notaires | €5K–€35K | Low |
+| 102 | [ClubSport.ai](#102-clubsportai) | Freemium + SaaS Subscription + B2B Fédérations | €8K–€60K | Low |
+| 103 | [ConcoursPro.ai](#103-concoursproai) | Freemium + Subscription | €6K–€45K | Low-Medium |
+| 104 | [NaturalisationFR.ai](#104-naturalisationfrai) | Pay-per-pack + Subscription | €8K–€55K | Low |
+| 105 | [RGPDBusiness.ai](#105-rgpdbusinessai) | Pay-per-pack + SaaS Subscription + B2B EC | €8K–€60K | Low |
+| 106 | [CréateurFR.ai](#106-créateurfrai) | Freemium + Pay-per-pack + Subscription | €7K–€55K | Low |
+| 107 | [RepasEco.ai](#107-repasecoai) | Freemium + Subscription | €4K–€30K | Low |
+| 108 | [ArtisanRGE.ai](#108-artisanrgeai) | Freemium + SaaS Subscription | €8K–€60K | Low-Medium |
+| 109 | [DossierSanté.ai](#109-dossiersantéai) | Freemium + Subscription | €6K–€45K | Low |
+| 110 | [SubventionAsso.ai](#110-subventionassoai) | Pay-per-dossier + Annual Subscription | €5K–€35K | Low |
+| 111 | [DropshippingFR.ai](#111-dropshippingfrai) | Freemium + Subscription | €8K–€55K | Low |
+| 112 | [MaternitéPro.ai](#112-maternitéproai) | Pay-per-report + Subscription | €6K–€40K | Low |
+| 113 | [VidesGreniers.ai](#113-videsgreniersal) | Freemium + Subscription | €3K–€20K | Low |
+| 114 | [Micro-Mission.ai](#114-micro-missionai) | Freemium + Commission | €5K–€35K | Low-Medium |
+| 115 | [PrêtEntre.ai](#115-prêtentreai) | Pay-per-pack | €4K–€28K | Low |
+| 116 | [TicketResto.ai](#116-ticketrestoai) | Freemium + Pay-per-feature + B2B SaaS | €4K–€30K | Low |
+| 117 | [StageFacile.ai](#117-stagefacileai) | Freemium + Pay-per-pack + B2B École | €6K–€45K | Low |
+| 118 | [VacancesSolidaires.ai](#118-vacancessolidairesai) | Freemium + Pay-per-dossier + B2B CSE | €5K–€35K | Low |
 
 ---
 
@@ -5209,6 +5226,1120 @@ Le **viager** est une transaction immobilière typiquement française : le vende
 
 ---
 
+## 102. ClubSport.ai
+
+> **Gérez votre club sportif amateur en 10 minutes par mois — dossiers de subvention, licences, planning et comptabilité pour les 370 000 clubs de France**
+
+### Problem
+La France compte **370 000 clubs sportifs amateurs** (football, tennis, basketball, handball, judo, etc.) représentant **17 millions de licenciés**. Ces clubs sont gérés par des **bénévoles** — présidents, trésoriers, secrétaires — qui consacrent des dizaines d'heures par an à des tâches administratives répétitives :
+
+- **Dossier de subvention municipale** : chaque club doit soumettre annuellement un dossier à sa mairie (Cerfa 12156\*05 + rapport d'activité + bilan financier + projet sportif). Un bénévole non formé y passe 5–10 heures. Or **95% des clubs reçoivent une subvention municipale**, c'est la principale source de revenus hors cotisations.
+- **Gestion des licences** : suivi des adhérents, envoi à la fédération (FFF, FFT, FFBB…), relances des impayés de cotisations — fait souvent sur Excel ou papier.
+- **Planning de saison** : répartition des créneaux d'entraînement, réservations de gymnases/terrains, matchs inter-clubs — source de conflits chroniques.
+- **Comptabilité associative** : rapport annuel pour l'Assemblée Générale, suivi du budget AEP (Activités Éducatives et Pédagogiques), liasse fiscale association loi 1901.
+
+**Aucun outil simple et abordable n'existe** pour ces bénévoles. Les logiciels actuels (HelloAsso pour les paiements, LicenceConnect pour certaines fédérations) sont fragmentés et ne couvrent pas la génération de documents IA.
+
+**Données clés :**
+- 370 000 clubs × 1 dossier de subvention/an = **370 000 Cerfa** rédigés chaque année à la main
+- Subvention moyenne obtenue : **€2 000–€15 000** selon taille du club → un dossier bien rédigé peut obtenir 20–30% de plus
+- Coût d'un expert-comptable associatif : **€500–€2 000/an** pour la comptabilité d'un petit club
+- Nombre de présidents/trésoriers bénévoles actifs : **+1 million de personnes** en France
+
+### Solution
+
+**(1) Générateur de dossier de subvention (gratuit) :** Formulaire guidé (sport pratiqué, nombre de licenciés, budget, activités de l'année, bilan N-1) → IA génère le dossier complet au format attendu par les mairies (Cerfa + rapport d'activité + projet sportif) en PDF téléchargeable. **C'est le hook d'acquisition :** tout président de club cherche "modèle dossier subvention club sportif" chaque automne.
+
+**(2) Gestion des licences et adhérents :** Import CSV ou saisie manuelle des membres → tableau de bord cotisations payées/en attente → relances email automatiques → export au format fédération (FFF, FFT, FFBB, FFBad…).
+
+**(3) Planning de saison IA :** Saisie des équipes, créneaux disponibles, gymnases/terrains réservés → IA génère un planning optimisé sans conflits → export PDF + iCal pour partage avec les joueurs.
+
+**(4) Comptabilité simplifiée :** Saisie recettes/dépenses avec catégories pré-remplies (cotisations, subventions, achats équipement, déplacements…) → rapport annuel pour AG → export Cerfa 2044 association et liasse fiscale loi 1901.
+
+**(5) Pack Fédération (B2B) :** Whitelabel de la plateforme pour les ligues et comités régionaux — ils offrent l'outil à leurs clubs membres comme service à valeur ajoutée. Les **40 ligues régionales** et **100+ comités départementaux** de chaque sport sont les revendeurs naturels.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Générateur dossier subvention | €0 | Acquisition SEO + viralité (le trésorier partage l'outil à d'autres clubs) |
+| Pack Club | €19/mois ou €149/an | Licences + Planning + Comptabilité + dossiers illimités |
+| Pack Club Premium | €39/mois ou €299/an | + Intégration API fédérations + relances SMS + multi-sections |
+| B2B Ligues & Comités | €199/mois | Whitelabel pour 50–500 clubs dans leur réseau |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >98% sur le pack €19. **LTV cible :** 3 ans × €149/an = €447/club. **TAM réaliste :** 5% des 370 000 clubs = 18 500 clubs × €19/mois = **€352K MRR** à maturité.
+
+**Pourquoi les clubs vont payer :**
+- La subvention que le dossier permet d'obtenir représente souvent 50–100× le prix de l'abonnement
+- Le trésorier bénévole "économise" 20–30h/an de travail valorisables à €15–20/h personnellement
+- Risque zéro : le dossier gratuit crée la valeur avant tout paiement
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier — déploiement gratuit)
+- **Génération documents :** Claude API (claude-sonnet-4-6) + react-pdf — dossiers Cerfa pré-remplis avec les références légales et les formulations attendues par les mairies
+- **Base de données :** Supabase (free tier jusqu'à 500MB)
+- **Intégration fédérations :** API FFF (Football), API FFT (Tennis), FFBad — protocoles d'export CSV standardisés quand APIs indisponibles
+- **Planning :** Algorithme de coloration de graphe pour résolution de conflits de créneaux
+- **Payments :** Stripe (frais 1,4% + €0,25 — largement couvert par les marges)
+- **Emails relances :** Resend (free tier 100 emails/jour)
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "modèle dossier subvention club sportif", "cerfa association club sportif", "gestion licences football amateur", "comptabilité club association loi 1901" — **volumes élevés, résultats actuels : modèles Word des années 2015 sur des sites de mairies**
+2. **Facebook Groups :** "Présidents de clubs sportifs amateurs" (43K membres), "Trésoriers d'associations sportives" (18K membres), groupes football amateur régionaux (chaque ligue régionale a son groupe Facebook actif)
+3. **Partenariats assureurs clubs :** MAIF, GMF, Groupama assurent la quasi-totalité des clubs sportifs → co-marketing naturel ("nos clients clubs reçoivent ClubSport.ai gratuitement 3 mois")
+4. **Comités Olympiques Régionaux (CROS) :** 13 CROS en France, chacun supervise des milliers de clubs — un partenariat = milliers de clubs exposés d'un coup
+5. **Périodicité SEO :** Pic de trafic naturel septembre–novembre (rentrée sportive + dépôt dossiers subvention) → lancer la campagne SEO en juillet pour être premier en septembre
+
+### Competitive Moat
+- **Aucun concurrent direct :** HelloAsso = paiement en ligne seulement ; LicenceConnect = licences FFF seulement ; Assoconnect = trop cher et complexe (€49–€149/mois, cible les grandes associations)
+- **Effet réseau inter-clubs :** Un trésorier satisfait partage l'outil à 3–5 présidents d'autres clubs dans son entourage sportif → CAC naturellement proche de €0
+- **Mémoire institutionnelle :** Après 2 ans d'utilisation, le club a toute son historique financier, ses listes de membres, ses dossiers passés → coût de migration élevé = churn très faible
+- **B2B Fédérations = barrière à l'entrée :** Un accord avec une ligue régionale crée 50–300 clubs captifs que le concurrent ne peut pas approcher
+
+### Figma Schematic
+[View ClubSport.ai — Plateforme IA pour clubs sportifs amateurs on FigJam](https://www.figma.com/board/wO1aJ4hwoqDNaofWX5tjm6)
+
+---
+
+## 103. ConcoursPro.ai
+
+> **Préparez votre concours de la fonction publique avec un coach IA personnalisé — annales, QCM, corrections et plan de révision pour les 250 000 candidats qui passent un concours chaque année**
+
+### Problem
+La France compte **5,7 millions de fonctionnaires** : enseignants, infirmiers, policiers, douaniers, agents des impôts, éducateurs spécialisés, postiers… Le seul moyen d'intégrer la fonction publique est de **passer un concours** — une épreuve nationale très sélective organisée une à deux fois par an. Chaque année, **250 000 à 400 000 candidats** se préparent à un concours :
+
+- **CRPE** (Concours de Recrutement de Professeurs des Écoles) : 30 000 inscrits/an pour 10 000 postes
+- **Concours infirmier (IFSI)** : 90 000 candidats/an
+- **Concours de police / gendarmerie** : 50 000 inscrits/an
+- **Concours des douanes, impôts, trésor, préfectures** : dizaines de milliers
+- **CAPES, Agrégation** pour les profs du secondaire
+
+La préparation prend **6 à 24 mois** et le taux d'échec moyen est de **70–90%**. Pourtant, les ressources disponibles sont fragmentées et datées :
+- Annales sur des sites gouvernementaux mal indexés (PDFs de 2015)
+- Livres de préparation généralistes à €25–€40 pièce
+- Quelques chaînes YouTube non structurées
+- Centres de préparation en présentiel à **€500–€2 000** (inaccessibles pour beaucoup)
+
+**Aucun outil IA n'existe** qui génère des QCM à la demande sur le programme exact d'un concours donné, corrige les copies ouvertes, ou adapte le plan de révision aux lacunes détectées.
+
+**Données clés :**
+- 250 000 candidats × taux de conversion 3% à €12/mois = **€90K MRR** à maturité
+- Le marché de la formation aux concours est estimé à **€800M/an en France**
+- Taux de recommandation naturel élevé : les candidats se regroupent en communautés Discord/Facebook par concours
+
+### Solution
+
+**(1) Catalogue de concours :** L'utilisateur sélectionne son concours parmi une base de 150+ concours (catégorie A, B, C) → le système charge le programme officiel, les coefficients des épreuves, le calendrier des sessions, et les statistiques de réussite.
+
+**(2) Diagnostic de niveau initial :** 20 questions QCM sur les matières du concours → analyse des lacunes → score de départ par matière.
+
+**(3) Plan de révision personnalisé :** En fonction des lacunes, du temps disponible (J-6 mois, J-3 mois…), et des épreuves prioritaires → planning hebdomadaire adaptatif.
+
+**(4) Banque d'annales IA :** Les annales officielles sont importées et analysées par l'IA → extraction des schémas de questions récurrents → génération de questions nouvelles dans le même style et la même difficulté.
+
+**(5) Correction IA des épreuves ouvertes :** L'utilisateur rédige une note de synthèse, un cas pratique ou une dissertation → l'IA la corrige selon les critères du jury (structure, arguments, références), attribue une note et propose des améliorations.
+
+**(6) Alertes et inscriptions :** Notifications push/email dès l'ouverture des inscriptions pour le concours suivi → rappels des deadlines de dépôt de dossier.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 10 QCM par concours, diagnostic de niveau |
+| Basic | €9/mois | QCM illimités, plan de révision, alertes sessions |
+| Pro | €15/mois | + Correction IA des épreuves ouvertes, simulations complètes, stats avancées |
+| Annuel Pro | €99/an | 45% de réduction vs mensuel |
+| Pack Intensif | €29 one-shot | Préparer un concours en 30 jours (non-abonné) |
+
+**Unit economics :** Claude API ~€0,04/correction de copie → marge >98%. Un candidat reste abonné en moyenne **8 mois** (durée de préparation) → LTV €72–€120 par utilisateur.
+
+**Pourquoi les candidats vont payer :**
+- Un centre de prépa coûte €500–€2 000 → ConcoursPro à €99/an est 5–20× moins cher
+- L'enjeu est énorme : un poste de fonctionnaire = sécurité de l'emploi à vie + avantages
+- Aucun concurrent IA direct sur ce segment
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération QCM et correction :** Claude API (claude-sonnet-4-6) — génère des questions dans le style des annales, corrige les dissertations selon les grilles de jury
+- **Base de données :** Supabase — stockage des annales, progression par utilisateur, planning
+- **Notifications :** Resend (emails) + Web Push API (alertes ouverture concours)
+- **Payments :** Stripe — abonnements mensuels/annuels + packs one-shot
+- **Contenu :** Scraping légal des annales officielles (sites Ministère Éducation, FPE, FPT, FPH)
+
+### Go-to-Market (zéro budget)
+1. **SEO ciblé :** "annales CRPE 2024 corrigées", "qcm concours infirmier en ligne", "préparation concours police gratuit" — des milliers de recherches mensuelles sur des requêtes peu couvertes par des outils modernes
+2. **Communautés Discord/Facebook :** Groupes "Futurs CRPE", "Concours Infirmier 2025", "Prépa Police" — des dizaines de groupes avec 5 000–50 000 membres chacun
+3. **TikTok/Reels pédagogiques :** "Je corrige votre copie de concours en direct" — format viral très efficace pour les étudiants
+4. **Partenariats lycées et universités :** Les BTS, licences pro, IUT envoient régulièrement des étudiants vers des concours de cat. B/C — partenariat conseiller d'orientation
+5. **Période clé :** Janvier–Avril (pré-inscription) et Septembre–Novembre (résultats + candidats pour l'année suivante) — lancer les campagnes sur ces fenêtres
+
+### Competitive Moat
+- **Données propriétaires :** Base d'annales nettoyées + métadonnées jury (points forts/faibles attendus par épreuve) impossible à recréer rapidement
+- **Personnalisation par concours :** Chaque concours a son programme exact, ses coefficients, son style d'épreuve — la granularité crée un fossé vs un simple ChatGPT
+- **Réseau de candidats :** Forum intégré par concours → les candidats partagent leurs copies, leurs notes, leurs ressources → effet communauté fort
+- **Extension naturelle :** Préparation aux entretiens de recrutement privés (le même moteur de correction IA fonctionne pour les entretiens d'embauche)
+
+### Figma Schematic
+[View ConcoursPro.ai — Préparation concours fonction publique on FigJam](https://www.figma.com/board/zluTHTqyHbvEl90ehKwxPX)
+
+---
+
+## 104. NaturalisationFR.ai
+
+> **Constituez votre dossier de naturalisation française sans avocat — vérification IA, lettre de motivation, CERFA pré-rempli et préparation à l'entretien pour les 100 000+ demandeurs par an**
+
+### Problem
+Chaque année, **environ 100 000 personnes** obtiennent la nationalité française. Beaucoup plus en font la demande mais voient leur dossier **rejeté ou retardé de 12 à 18 mois** pour des raisons administratives évitables :
+
+- **Dossier incomplet :** Le décret du 30 décembre 1993 liste 20 à 40 documents selon la situation (mariage, résidence, naissance, travail…) — beaucoup oublient des pièces et voient leur dossier classé sans suite
+- **Lettre de motivation insuffisante :** La préfecture évalue l'"assimilation à la communauté française" notamment via une lettre personnelle — les candidats ne savent pas ce que les agents attendent
+- **CERFA 12753\*03 mal rempli :** 8 pages de formulaire avec des questions sur les séjours à l'étranger, les condamnations, les services militaires — les erreurs entraînent un rejet automatique
+- **Entretien d'assimilation :** Un entretien en préfecture de 30–60 min sur la France, ses valeurs, son histoire, ses institutions — peu de ressources existent pour s'y préparer
+
+**Coût d'un accompagnement juridique :** Avocats spécialisés en droit des étrangers = **€800 à €2 000** pour préparer le dossier. Au-delà des moyens d'une majorité des demandeurs.
+
+**Données clés :**
+- 150 000+ dossiers déposés/an (chiffres Ministère de l'Intérieur 2023)
+- Taux de rejet pour dossier incomplet : estimé à 20–30%
+- Délai moyen de traitement : 12–18 mois → toute erreur coûte 1 à 2 ans
+- Communauté expatriée française = 3,5M personnes à l'étranger + 5M d'étrangers en France en voie de naturalisation
+
+### Solution
+
+**(1) Test d'éligibilité IA :** 10 questions (durée de résidence, situation familiale, niveau de français, condamnations…) → l'IA évalue l'éligibilité selon les critères du Code civil (art. 21-14 à 21-24) et explique les points bloquants.
+
+**(2) Checklist de documents personnalisée :** Selon le profil (célibataire/marié·e, enfants, ressortissant UE ou hors UE, cas particulier…) → liste exacte des 20 à 40 pièces à fournir avec les formats attendus (original, copie certifiée, traduction assermentée).
+
+**(3) Vérificateur de documents IA :** L'utilisateur coche les documents au fur et à mesure qu'il les collecte → l'IA signale les incohérences, les dates d'expiration proches, les traductions manquantes.
+
+**(4) Générateur de lettre de motivation IA :** Questionnaire sur le parcours, les attaches à la France, les engagements civiques → Claude génère une lettre de 2 pages personnalisée, respectant les attendus préfectoraux (références à la laïcité, aux valeurs républicaines, à l'intégration).
+
+**(5) CERFA 12753 pré-rempli :** Formulaire guidé question par question avec aide contextuelle → PDF CERFA généré avec toutes les cases correctement remplies.
+
+**(6) Préparation à l'entretien IA :** Simulation d'entretien sur les questions types (valeurs de la République, institutions françaises, histoire, droits et devoirs du citoyen) → feedback sur les réponses → fiches mémo.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Test d'éligibilité | €0 | Acquisition — tous les candidats potentiels passent par là |
+| Pack Dossier | €39 one-shot | Checklist complète + CERFA pré-rempli + lettre de motivation IA |
+| Pack Complet | €59 one-shot | Pack Dossier + vérificateur documents + simulation entretien |
+| Suivi Mensuel | €12/mois | Alertes préfecture + mises à jour réglementaires + support chat IA |
+| Pack Famille | €79 one-shot | Dossiers pour 2 personnes (couple) |
+
+**Unit economics :** Claude API ~€0,10/dossier → marge >99% sur les packs. Un avocat prend €800–€2 000 pour le même service → prix 15–50× inférieur. **LTV cible :** €59 (pack unique) + quelques mois de suivi = €80–€100/client.
+
+**Pourquoi les demandeurs vont payer :**
+- L'enjeu est énorme : nationalité française = droit de vote, passeport UE, sécurité de résidence
+- Une erreur dans le dossier coûte 12–18 mois de délai supplémentaire
+- €39–€59 vs €800–€2 000 chez un avocat : le ROI est évident
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA questionnaires et génération :** Claude API (claude-sonnet-4-6) — évaluation éligibilité, rédaction lettre, simulation entretien
+- **Génération PDF :** react-pdf — CERFA 12753 pré-rempli, récapitulatif dossier
+- **Base de données :** Supabase — profil utilisateur, avancement checklist, documents collectés
+- **Payments :** Stripe — packs one-shot + abonnement mensuel
+- **Veille réglementaire :** Scraping légal du JORF (Journal Officiel) et du site Service-Public.fr pour mises à jour automatiques des critères
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "dossier naturalisation française documents", "lettre motivation naturalisation exemples", "cerfa 12753 remplir" — des centaines de milliers de recherches avec des résultats actuels de très mauvaise qualité
+2. **Communautés d'expatriés :** Facebook Groups "Naturalisation France 2025", forums expat (Expat.com, FrenchEntrée), Reddit r/france et r/immigration
+3. **YouTube/TikTok :** "Comment remplir le CERFA 12753" — vidéo tutorielle avec CTA vers l'outil — format informatif très partagé dans les communautés
+4. **Associations d'aide aux migrants :** CIMADE, Samu Social, Croix-Rouge — les associations cherchent des outils gratuits pour leurs bénéficiaires → offre un accès gratuit en échange de visibilité
+5. **Presse communautaire :** Journaux en langues étrangères diffusés en France (arabophones, portugaiss, espagnols…) → article de presse gratuit en ciblant leur public
+
+### Competitive Moat
+- **Contenu réglementaire à jour :** Le droit de la nationalité change (circulaires ministérielles, jurisprudence) → veille automatique = avantage durable vs un simple générateur de documents statiques
+- **Base de lettres validées :** Après 1 000 dossiers, la base de lettres de motivation "approuvées" (retours positifs) affine le modèle → lettres de plus en plus efficaces
+- **Réseau d'avocats partenaires :** Pour les cas complexes, mise en relation payante avec des avocats en droit des étrangers (commission €50–€200/lead) → modèle d'affiliation naturel
+- **Extension :** Carte de résident (titre de séjour 10 ans), DCEM (Document de Circulation pour Étranger Mineur), passeport talent — tous liés au même parcours administratif
+
+### Figma Schematic
+[View NaturalisationFR.ai — Dossier naturalisation française on FigJam](https://www.figma.com/board/RfDWv5h8feBF1qTmHmOIcl)
+
+---
+
+## 105. RGPDBusiness.ai
+
+> **Mettez votre TPE ou micro-entreprise en conformité RGPD en 30 minutes — audit IA, registre des traitements, politique de confidentialité et mentions légales auto-générés pour les 3,4 millions de petits professionnels français**
+
+### Problem
+Depuis mai 2018, **toute entreprise qui traite des données personnelles** — même un artisan qui garde les coordonnées de ses clients dans un tableur — doit respecter le **RGPD (Règlement Général sur la Protection des Données)**. En France, la **CNIL** contrôle et sanctionne les contrevenants.
+
+Les **3,4 millions de micro-entreprises et TPE françaises** (artisans, commerçants, consultants, freelances, prestataires de services) sont dans une situation précaire :
+
+- **90%+ n'ont pas de registre des traitements** (obligation légale pour toute entreprise)
+- **Politique de confidentialité absente ou copiée** d'un site tiers sans adaptation → non-conforme
+- **Mentions légales incomplètes** sur leur site web (manque SIRET, responsable de traitement, délégué DPO si applicable)
+- **Bandeau cookies non conforme** (acceptation par défaut, pas de refus facile)
+- **Aucune procédure en cas de violation de données** — obligation de notifier la CNIL sous 72h
+
+**Coût d'un consultant RGPD :** €500–€2 000 pour un audit de base + mise en conformité d'une TPE. Certains cabinets facturent €300/h.
+
+**Risques concrets :**
+- Amende CNIL jusqu'à 4% du chiffre d'affaires mondial ou €20M (même pour une TPE)
+- En pratique : avertissements + amendes de €5 000–€50 000 pour les petites entreprises récidivistes
+- Plaintes clients (ex-employés, partenaires) en augmentation : **17 500 plaintes reçues par la CNIL en 2023**
+
+### Solution
+
+**(1) Audit RGPD IA en 5 minutes :** 15 questions sur l'activité (types de données collectées, clients, fournisseurs, site web, CRM utilisé…) → score de conformité sur 100 avec liste des points critiques.
+
+**(2) Registre des traitements auto-généré :** Document obligatoire sous l'Art. 30 RGPD — l'IA génère le registre complet (nom du traitement, finalité, base légale, durée de conservation, destinataires…) en PDF téléchargeable, mis à jour en un clic.
+
+**(3) Politique de confidentialité personnalisée :** Génération d'une politique conforme CNIL adaptée au secteur (e-commerce, artisan, consultant, cabinet médical…) en 5 langues si nécessaire.
+
+**(4) Mentions légales complètes :** Génération des mentions légales site web conformes (éditeur, hébergeur, SIRET, DPO, traitement des données) — intégrables directement dans Wix, WordPress, Shopify.
+
+**(5) Tableau de bord conformité :** Vue d'ensemble des obligations remplies/manquantes → alertes CNIL (nouvelles guidelines, mises à jour) → historique des documents.
+
+**(6) Gestion des demandes RGPD :** Portail de réception des demandes d'accès, de rectification, d'effacement (droit à l'oubli) des clients → réponses-types générées par IA dans les délais légaux (30 jours).
+
+**(7) Kit violation de données :** Procédure pas à pas en cas de fuite de données → notification CNIL pré-remplie → communication client → plan de remédiation.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit gratuit | €0 | Score RGPD + checklist prioritaire — acquisition SEO |
+| Pack Starter | €29 one-shot | Registre traitements + Politique confidentialité + Mentions légales |
+| Abonnement Pro | €19/mois | Tableau de bord + alertes CNIL + gestion demandes clients + mises à jour automatiques |
+| Annuel Pro | €149/an | 35% de réduction vs mensuel |
+| B2B Expert-Comptable | €49/mois | Accès multi-clients (jusqu'à 20 TPE gérées) — pour les EC qui intègrent la conformité RGPD dans leur offre |
+| B2B Franchise | €199/mois | Conformité RGPD pour un réseau de franchisés (jusqu'à 50 points de vente) |
+
+**Unit economics :** Claude API ~€0,05/génération document → marge >99% sur les packs. Un consultant RGPD prend €500–€2 000 → prix 17–70× inférieur. **LTV Pro :** 24 mois × €19 = €456.
+
+**Pourquoi les TPE vont payer :**
+- Le risque d'amende CNIL (même symbolique) est de plus en plus réel et médiatisé
+- Les banques et grandes entreprises exigent maintenant des preuves de conformité RGPD de leurs fournisseurs et sous-traitants
+- €19/mois pour protéger son activité vs €500+ pour un consultant : choix évident
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération documents :** Claude API (claude-sonnet-4-6) — génère le registre des traitements, la politique de confidentialité, les mentions légales selon le secteur et le profil de l'entreprise
+- **Génération PDF :** react-pdf — documents conformes téléchargeables
+- **Base de données :** Supabase — profil entreprise, registre des traitements versionné, historique des demandes RGPD
+- **Veille réglementaire :** RSS CNIL + scraping légal des guidelines EDPB (Comité européen de protection des données) pour alertes automatiques
+- **Payments :** Stripe — packs one-shot + abonnements mensuels/annuels + plans B2B
+- **Emails :** Resend — alertes CNIL + confirmations documents
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "registre traitements RGPD modèle", "politique de confidentialité RGPD gratuite", "mise en conformité RGPD TPE", "mentions légales rgpd auto-entrepreneur" — des volumes importants avec des résultats actuels de très mauvaise qualité
+2. **Communautés auto-entrepreneurs :** Facebook Groups "Auto-entrepreneurs France" (200K+ membres), forums freelances (Hopwork, Malt community) — tous concernés par le RGPD mais peu informés
+3. **Partenariats Experts-Comptables :** Les EC sont en première ligne pour conseiller leurs clients TPE sur la conformité → offrir un accès revendeur (plan B2B EC à €49/mois pour 20 clients)
+4. **Wix/WordPress/Shopify :** Plugin gratuit "Générer vos mentions légales RGPD" → appel vers l'outil → plusieurs dizaines de milliers d'installations potentielles
+5. **LinkedIn :** Article "Votre TPE risque une amende CNIL : 5 erreurs RGPD communes" → viralité dans les réseaux professionnels français
+
+### Competitive Moat
+- **Mises à jour réglementaires automatiques :** Les guidelines CNIL et EDPB changent régulièrement → une veille automatique = avantage durable vs des outils statiques (générateurs de templates fixes)
+- **Spécificité sectorielle :** Une politique de confidentialité pour un cabinet médical vs un e-commerçant vs un artisan sont très différentes — la personnalisation crée de la valeur vs les templates génériques
+- **Réseau d'avocats RGPD :** Pour les cas complexes (traitements sensibles, transferts hors UE) → mise en relation payante → revenu complémentaire et valeur perçue
+- **Intégration comptable :** Les experts-comptables en B2B amènent des dizaines de TPE d'un coup → CAC proche de €0 pour les clients finaux
+
+### Figma Schematic
+[View RGPDBusiness.ai — Conformité RGPD TPE et indépendants on FigJam](https://www.figma.com/board/3B43fueEq71g5OSZqhKGaT)
+
+---
+
+## 106. CréateurFR.ai
+
+> **Gérez votre fiscalité, votre statut juridique et vos contrats de sponsoring en tant que créateur de contenu français — le copilote administratif des 6 millions de créateurs qui monétisent en France**
+
+### Problem
+
+La France compte plus de **6 millions de personnes qui génèrent des revenus en ligne** (YouTube, Twitch, TikTok, Instagram, Patreon, OnlyFans, vente de formations, merchandise…). Pourtant, la grande majorité d'entre eux naviguent à l'aveugle face à une complexité administrative unique :
+
+- **Quel statut choisir ?** Auto-entrepreneur, SASU, EURL, artiste-auteur (AGESSA) — chaque euro de revenu peut être taxé très différemment selon la structure.
+- **Comment déclarer ?** Les revenus AdSense viennent d'Irlande (Google Ireland), les revenus Twitch des USA, Patreon des USA — chacun a une case différente sur la 2042C et les règles TVA intracommunautaire ne sont pas intuitives.
+- **TVA ou pas TVA ?** Le seuil de 25 000 € (micro-BIC) déclenche des obligations TVA que peu de créateurs anticipent.
+- **Les contrats sponsoring ?** La plupart des créateurs signent des briefs informels ou des contrats déséquilibrés sans comprendre les clauses d'exclusivité, les droits d'image cédés, les pénalités, ou les obligations ARPP (Autorité de Régulation Professionnelle de la Publicité).
+
+**Résultat :** Redressements fiscaux surprise, sous-déclaration inconsciente, contrats signés à leur désavantage, et des milliers d'euros de charges payés en trop (ou en trop peu). Un expert-comptable spécialisé créateurs prend €150–€300/mois. Ils ne peuvent pas se le payer, et les généralistes ne connaissent pas ce secteur.
+
+### Solution
+
+**(1) Diagnostic Statut IA :** Questionnaire de 10 questions (plateformes utilisées, revenus annuels, nature des créations, situation fiscale du foyer) → recommandation claire avec comparatif chiffré : Auto-Entrepreneur vs SASU vs Artiste-Auteur AGESSA. Simulation des charges sociales et de l'IR net dans chaque cas.
+
+**(2) Simulateur Fiscal Multi-plateformes :** Saisir ses revenus par source (AdSense, Twitch Partner, TikTok Creator Fund, Patreon, merchandise, formations…) → l'IA calcule les charges sociales trimestrielles, l'IR estimé, les acomptes à verser, et envoie des rappels avant chaque échéance URSSAF.
+
+**(3) Générateur de Contrat Sponsoring IA :** Brief du partenariat (marque, format — post, vidéo, reel —, durée, rémunération) → Claude génère un contrat conforme aux recommandations de l'ARPP incluant mention #publi obligatoire, cession de droits d'image précisément délimitée, clause d'exclusivité sectorielle, conditions de résiliation, et pénalités en cas de non-respect des délais.
+
+**(4) Guide Déclaration Revenus :** Pour chaque plateforme, l'outil explique exactement où déclarer : revenus BIC ou BNC, case sur la 2042 / 2042C, traitement des revenus de source étrangère (formulaire 2047), TVA sur services électroniques intracommunautaires. Check-list personnalisée avant envoi aux impôts.
+
+**(5) Tableau de Bord Revenus :** Agrégation manuelle ou par import CSV des revenus multi-plateformes → prévision de l'impôt en temps réel → alertes sur les seuils (TVA à 25K€, plafond micro-BIC, plafond micro-BNC) → historique annuel exportable.
+
+**(6) Alerte Réglementaire :** Veille automatique sur les changements fiscaux impactant les créateurs (ex : fin du régime micro-BIC Airbnb, nouvelles règles déclaration Airbnb / Vinted en 2024, etc.) → notification push dès qu'une règle change.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Audit statut gratuit | €0 | Recommandation statut + comparatif — acquisition |
+| Pack Débutant | €19 one-shot | Guide déclaration personnalisé + checklist impôts |
+| Abonnement Solo | €12/mois | Simulateur fiscal complet + alertes seuils + 2 contrats sponsoring/mois |
+| Abonnement Pro | €24/mois | Tout Solo + contrats illimités + alerte réglementaire + export comptable |
+| Annuel Pro | €199/an | 30% de réduction vs mensuel |
+| Pack Sponsoring | €9/contrat | Génération unitaire d'un contrat sponsoring — pour les créateurs occasionnels |
+
+**Unit economics :** Claude API ~€0,08/génération → marge >95% sur tous les packs. Un expert-comptable spécialisé coûte €150–€300/mois → prix 6–25× inférieur. **LTV Pro :** 18 mois × €24 = €432.
+
+**Pourquoi les créateurs vont payer :**
+- Un redressement fiscal moyen coûte €2 000–€10 000 — €24/mois pour l'éviter est une évidence
+- Un seul contrat sponsoring mal négocié (clause d'exclusivité non plafonnée) peut coûter plusieurs milliers d'euros de manque à gagner
+- La communauté créateurs est très active en ligne → bouche-à-oreille rapide
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA calculs fiscaux & génération contrats :** Claude API (claude-sonnet-4-6) — simulation statuts, génération contrats ARPP, guide déclaration personnalisé
+- **Génération PDF :** react-pdf — contrats sponsoring, récapitulatifs fiscaux
+- **Base de données :** Supabase — profil créateur, historique revenus, contrats générés
+- **Payments :** Stripe — abonnements mensuels/annuels + packs one-shot
+- **Notifications :** Resend — alertes seuils URSSAF, rappels acomptes, veille réglementaire
+- **Veille fiscale :** RSS BOFIP (Bulletin Officiel des Finances Publiques) + scraping Service-Public.fr pour mises à jour automatiques
+
+### Go-to-Market (zéro budget)
+1. **YouTube SEO :** "comment déclarer revenus YouTube France", "statut auto-entrepreneur créateur de contenu", "TVA YouTube France" — des milliers de recherches avec des réponses actuelles fragmentées et souvent erronées
+2. **Communautés créateurs :** Discord "Créateurs FR" (50K+ membres), Reddit r/france + r/YouTubeurs, Facebook Groups "Créateurs de Contenu Francophones" — ciblage ultra-précis
+3. **TikTok/Instagram :** Contenu éducatif "Les 3 erreurs fiscales des créateurs français" → CTA vers le diagnostic gratuit — format naturellement viral dans cet écosystème
+4. **Partenariats MCN / agences :** Les Multi-Channel Networks (Webedia, Finder Studios, Mintmedia) cherchent des outils à valeur ajoutée pour fidéliser leurs créateurs — accord revenu partagé
+5. **Newsletter créateurs :** Sponsoring de newsletters spécialisées (Creator Economy France, La Lettre des Créateurs) — CPM très faible, audience ultra-qualifiée
+
+### Competitive Moat
+- **Spécificité sectorielle profonde :** La fiscalité d'un créateur français est très différente de celle d'un freelance classique (revenus multi-devises, TVA intracommunautaire, droits d'auteur éventuels) → un outil généraliste ne peut pas rivaliser
+- **Base de contrats validés :** Après 500 contrats, les retours créateurs et marques affinent la qualité → contrats de plus en plus équilibrés et défendables juridiquement
+- **Réseau d'experts partenaires :** Pour les créateurs au-delà de 77K€ de CA ou avec des cas complexes (société holding, activité internationale) → mise en relation payante avec des experts-comptables spécialisés créateurs (commission €50–€150/lead)
+- **Extension naturelle :** Outils pour les agences de talent (gérer 50 créateurs), pour les marques (gérer 100 contrats d'influence), SaaS B2B pour les MCN
+
+### Figma Schematic
+[View CréateurFR.ai — Dashboard Créateurs de Contenu France on FigJam](https://www.figma.com/board/zwFI5BhJVubA2PDavc79mv)
+
+---
+
+## 107. RepasEco.ai
+
+> **Planificateur de menus anti-gaspillage et anti-budget pour les familles françaises — l'IA qui nourrit 4 personnes pour moins de 100 €/semaine**
+
+### Problem
+
+En France, une famille de 4 personnes jette en moyenne **30 kg de nourriture par an**, soit ~€160 de perte directe. En parallèle, avec la hausse des prix alimentaires (+20% depuis 2021), 8 millions de Français ont du mal à manger correctement avec leur budget. Les apps de recettes existantes (Marmiton, 750g) donnent des idées mais **ne gèrent ni le budget, ni le gaspillage, ni les promos du moment**. Résultat : courses improvisées, achats excessifs, frigo plein de produits périmés, et régime alimentaire dégradé.
+
+### Solution
+
+Un planificateur de menus hebdomadaire 100% IA qui prend en compte :
+- **Budget fixé** (ex : "80€ pour 4 personnes cette semaine")
+- **Préférences et allergies** (végé, sans gluten, enfants difficiles...)
+- **Ce qui reste dans le frigo** (scan ou saisie manuelle) → recettes "vide-frigo" en priorité
+- **Saisonnalité** (menus adaptés aux légumes/fruits de saison = moins chers)
+- **Comparaison des prix** entre enseignes proches (Lidl, Aldi, Leclerc — via APIs publiques ou scraping)
+
+**(1) Générateur de Menus IA :** 7 jours × 3 repas générés par Claude avec contraintes budget + DLC + saison + préférences. Chaque menu est accompagné d'une estimation de coût à l'assiette.
+
+**(2) Liste de Courses Intelligente :** Consolidation automatique des ingrédients sur 7 jours → liste triée par rayon → estimation du coût total → suggestion de substitutions moins chères (ex : thon frais → thon en boîte pour une recette).
+
+**(3) Tracker DLC (Date Limite de Consommation) :** L'utilisateur saisit (ou scanne) ce qu'il achète. L'app envoie une notification 2 jours avant expiration : "Ton yaourt Danone expire demain — voici 3 recettes qui l'utilisent".
+
+**(4) Score Anti-Gaspi :** Tableau de bord mensuel → kg de déchets évités estimés, euros économisés vs panier moyen français INSEE, empreinte carbone réduite.
+
+**(5) Recettes des Restes :** IA générative — l'utilisateur entre ce qu'il lui reste (ex : "pâtes cuites, demi-poivron, 2 œufs") → 3 recettes anti-gaspi en 10 secondes.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | 2 menus/semaine, liste de courses basique |
+| Solo | €3,99/mois | Menus illimités + tracker DLC + recettes restes |
+| Famille | €6,99/mois | Jusqu'à 6 profils, comparaison prix enseignes, score anti-gaspi |
+| Annuel Famille | €59,99/an | 30% de réduction vs mensuel |
+
+**Unit economics :** Claude API ~€0,03/menu généré → marge >90%. Une famille Famille économise 15× le prix de l'abonnement en réduisant son gaspillage. **LTV Famille :** 24 mois × €6,99 = €167.
+
+**Canaux d'acquisition gratuits :** r/france, forums parents, Instagram/TikTok "challenge budget semaine 50€", partenariats avec associations anti-gaspi (Too Good To Go, Les Glaneurs).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération menus & recettes :** Claude API (claude-sonnet-4-6) — génération menus contraints, recettes vide-frigo, suggestions de substitution
+- **Notifications DLC :** Resend (free tier — emails) + PWA push notifications
+- **Base de données :** Supabase — profil famille, stock frigo, historique menus
+- **Payments :** Stripe
+- **Prix enseignes :** API Drive Leclerc / comparateurs publics + fallback scraping weekly batch
+
+### Go-to-Market (zéro budget)
+1. **TikTok/Instagram :** "Semaine de menus pour 4 personnes — 75€ — tout fait par IA" → format viral naturel, démonstration en 60 secondes
+2. **Forums & Reddit :** r/france, r/vegan, r/vegetarien, forums MonEnfant.fr, forums familles nombreuses
+3. **Associations anti-gaspi :** Partenariat Too Good To Go, ADEME (qui cherche des outils grand public), Grenoble Alpes Métropole anti-gaspi programs
+4. **SEO :** "menus semaine pas chers", "idée repas anti-gaspi", "liste de courses semaine 4 personnes" — des milliers de recherches mensuelles
+5. **Email liste :** Landing page + inscription liste d'attente → 500 inscrits avant lancement = validation
+
+### Competitive Moat
+- **Contrainte budget réelle :** Aucune app existante ne génère des menus avec un plafond de budget strict et la comparaison prix en temps réel
+- **Tracker DLC + IA :** La combinaison stock frigo → recettes anti-gaspi → économies mesurées est unique
+- **Données comportementales :** Après 3 mois, l'IA apprend les préférences de la famille → menus de plus en plus personnalisés → retention forte
+- **Extension B2B :** Offre pour restauration collective scolaire, EHPAD, centres sociaux (budget contraint institutionnel)
+
+### Figma Schematic
+[View RepasEco.ai — Meal Planner Anti-Gaspillage on FigJam](https://www.figma.com/board/2bURijnTKqi9NkrL655ato)
+
+---
+
+## 108. ArtisanRGE.ai
+
+> **Le copilote administratif des 600 000 artisans du bâtiment français — certification RGE, devis conformes, dossiers MaPrimeRénov' clients**
+
+### Problem
+
+La rénovation énergétique est le marché de la décennie en France : **10 millions de passoires thermiques à rénover avant 2034**, €4,5 milliards de MaPrimeRénov' distribués en 2024. Mais pour toucher ces aides, les propriétaires **doivent obligatoirement faire appel à un artisan certifié RGE** (Reconnu Garant de l'Environnement). Problème :
+
+- **La certification RGE est un labyrinthe :** Qualibat, QualiPAC, QUALIFELEC, QualiSol, Eco Artisan... chaque corps de métier a son label, ses critères, ses organismes, ses délais et ses coûts. Un artisan ne sait souvent pas quel label viser ni comment le décrocher.
+- **Les dossiers MaPrimeRénov' sont chronophages :** Un artisan perd 3–5h par dossier client à rassembler devis pré-travaux, attestations RGE, fiches techniques produits, factures, photos chantier et formulaires ANAH. Pour une PME de 3 personnes, c'est 20% du temps de travail.
+- **Les devis sont souvent non conformes :** TVA réduite à 10% BTP (conditions strictes), mentions obligatoires (garantie décennale, assurance dommage-ouvrage, droit de rétractation 14j), désignation précise des matériaux avec performance (Rth, SCOP...) — une erreur = rejet du dossier ANAH.
+- **Les renouvellements de certification sont oubliés :** La RGE se renouvelle tous les 4 ans avec un audit et une formation obligatoire. Des dizaines d'artisans perdent leur certification par oubli, perdant ainsi l'accès au marché MaPrimeRénov'.
+
+**Résultat :** Des milliers d'artisans BTP restent hors du marché de la rénovation énergétique, ou y perdent des heures précieuses en paperasse.
+
+### Solution
+
+**(1) Diagnostic Certification IA :** Questionnaire métier (électricien, plombier-chauffagiste, maçon-isolant, menuisier...) + CA + zone géographique → recommandation du ou des labels RGE pertinents avec comparatif coût/délai/organisme + feuille de route personnalisée étape par étape.
+
+**(2) Générateur de Devis Conformes MaPrimeRénov' :** Claude génère un devis pré-travaux avec toutes les mentions obligatoires ANAH : désignation précise du produit avec référence, performance énergétique (Rth, SCOP, Uw...), TVA 10% correctement appliquée, mentions légales décennale/DO, droit de rétractation. Export PDF prêt à signer.
+
+**(3) Dossier MaPrimeRénov' Client :** Check-list automatique par type de travaux (isolation, PAC, VMC, fenêtres...) → l'outil indique exactement quels documents rassembler, dans quel ordre, avec quelles contraintes (ex : "photo AVANT travaux obligatoire avant démarrage") → réduction de 80% du temps de constitution de dossier.
+
+**(4) Tableau de Bord Artisan :** CA mensuel, certifications actives avec dates d'expiration, renouvellements à planifier, nombre de dossiers MaPrimeRénov' en cours, taux de validation ANAH, alertes.
+
+**(5) Facturation Conforme :** Facture post-travaux avec calcul automatique de la TVA réduite, mentions légales complètes, numéro de dossier ANAH, format accepté par l'ANAH pour le versement final.
+
+**(6) Formation RGE Tracking :** Rappels des formations continues obligatoires pour le renouvellement + liste des organismes de formation agréés proches.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Starter | €0/mois | 3 devis/mois, diagnostic RGE de base |
+| Pro | €29/mois | Devis illimités + dossiers MaPrimeRénov' + factures |
+| Expert | €59/mois | Multi-équipes (jusqu'à 5 techniciens), export compta, priorité support |
+| Annuel Pro | €249/an | 30% de réduction vs mensuel |
+| Pack Certification | €49 one-shot | Guide complet + documents pour obtenir 1 certification RGE |
+
+**Unit economics :** Un artisan Pro gagne ~3h/dossier × 4 dossiers/mois = 12h récupérées → à €35/h = **€420 de valeur créée pour €29 payé**. ROI 14× immédiat. Claude API ~€0,10/devis → marge >95%.
+
+**Marché :** 600 000 entreprises du BTP en France, 120 000 déjà RGE (cible directe), 480 000 à convaincre d'entrer dans le marché RGE. 0,5% du marché adressable = 3 000 artisans × €29/mois = **€87K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **IA génération devis & documents :** Claude API (claude-sonnet-4-6) — devis conformes ANAH, checklist dossiers, guides certification
+- **Génération PDF :** react-pdf ou Puppeteer — devis + factures + attestations
+- **Base de données :** Supabase — profil artisan, certifications, chantiers, clients
+- **Payments :** Stripe — abonnements SaaS + packs one-shot
+- **Notifications :** Resend — alertes renouvellement RGE, formations, statut dossiers ANAH
+- **Données ANAH :** Scraping régulier des barèmes MaPrimeRénov' + plafonds de travaux mis à jour automatiquement
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook artisans :** "Electriciens Indépendants France" (45K membres), "Plombiers Chauffagistes Indépendants" (30K), "Artisans BTP France" — démonstration "Devis MaPrimeRénov' en 2 minutes"
+2. **Capeb & FFB :** Contacter les fédérations régionales (Chambre Syndicale) pour partenariats → accès direct à des milliers d'artisans membres
+3. **YouTube SEO :** "Comment obtenir la certification RGE en 2026", "Remplir un dossier MaPrimeRénov artisan" — recherches en forte croissance
+4. **Salons professionnels :** Batimat, Interclima — présence sur stand partenaire à coût réduit via partenariat
+5. **Négociants matériaux :** Saint-Gobain, Leroy Merlin Pro, Point.P → intégration dans leur programme fidélité artisans
+
+### Competitive Moat
+- **Connaissance métier profonde :** Les règles TVA BTP, les mentions ANAH obligatoires, les critères de performance par label RGE → un outil généraliste ne peut pas rivaliser
+- **Base de devis validés ANAH :** Après 1 000 devis générés + retours ANAH, le taux de validation approche 99% → argument commercial puissant
+- **Alertes réglementaires :** Les barèmes MaPrimeRénov' changent chaque année (parfois en cours d'année) → l'outil se met à jour automatiquement, l'artisan est toujours conforme
+- **Extension B2B :** Groupements d'artisans, franchises (Domotelec, Engie Home Services), promoteurs immobiliers gérant des chantiers de rénovation en masse
+
+### Figma Schematic
+[View ArtisanRGE.ai — Assistant RGE pour Artisans BTP on FigJam](https://www.figma.com/board/FgCJFytOOJsSEen7pyt12N)
+
+---
+
+## 109. DossierSanté.ai
+
+> **Naviguez dans le système de santé français sans vous perdre — comprenez vos résultats, optimisez vos remboursements, connaissez vos droits**
+
+### Problem
+
+Le système de santé français est réputé l'un des meilleurs au monde, mais il est **d'une complexité kafkaïenne pour le patient ordinaire** :
+
+- **Les résultats d'analyses sont incompréhensibles :** Un compte rendu d'échographie ou une NFS (Numération Formule Sanguine) est écrit pour un médecin, pas pour un patient. Des millions de Français cherchent leurs résultats sur Google et tombent sur des forums angoissants.
+- **Le parcours de soins est opaque :** Faut-il un médecin traitant pour consulter ce dermatologue ? Ce spécialiste est-il en accès direct ? La consultation sera-t-elle remboursée à 70% ou 30% ? Très peu de gens le savent à l'avance.
+- **Les dépassements d'honoraires sont une surprise :** Un médecin secteur 2 peut facturer €150 pour une consultation remboursée €30 par la SS. La mutuelle couvre-t-elle le différentiel ? Ça dépend du contrat — que personne ne lit.
+- **Mon Espace Santé est sous-utilisé :** Le DMP (Dossier Médical Partagé) est une révolution potentielle, mais 80% des Français ne savent pas s'en servir, ne l'ont jamais activé, ou ne savent pas quoi y mettre.
+- **Les droits spéciaux sont méconnus :** ALD (Affection Longue Durée = 100% remboursé), C2S (Complémentaire Santé Solidaire gratuite), CSS, maternité à 100%... Des milliards d'euros de droits ne sont pas réclamés chaque année faute d'information.
+- **Les ordonnances s'accumulent et se perdent :** Renouvellement oublié, médicament plus disponible, dosage changé — la gestion des ordonnances chroniques est un stress quotidien pour 15 millions de Français sous traitement long.
+
+### Solution
+
+**(1) Lecteur IA de Documents Médicaux :** L'utilisateur uploade (photo ou PDF) un compte rendu, une ordonnance, une analyse. Claude explique en français simple ce que ça signifie, ce qui est dans la norme, ce qui mérite attention, et suggère des questions à poser au médecin. **Aucun diagnostic médical — uniquement de l'explication pédagogique.**
+
+**(2) Simulateur de Remboursement :** Avant un soin, l'utilisateur entre : type de soin, secteur du médecin (1/2/3), situation (médecin traitant déclaré ou pas, ALD, maternité...) → simulation SS + mutuelle avec fourchette de reste-à-charge. "Ce cardiologue secteur 2 vous coûtera entre €20 et €80 selon votre mutuelle."
+
+**(3) Annuaire Intelligent :** Recherche de médecins secteur 1 (sans dépassement) proches, avec disponibilité Doctolib en temps réel. Filtres : secteur, spécialité, délai d'attente, accessibilité, téléconsultation disponible.
+
+**(4) Tracker d'Ordonnances et DMP :** Saisie ou scan des ordonnances → rappels de renouvellement → historique consultable → export pour Mon Espace Santé → alerte si deux médicaments potentiellement incompatibles (interaction connue).
+
+**(5) Détecteur de Droits :** Questionnaire de 5 minutes → l'IA identifie les droits potentiels : ALD éligible ? C2S accessible selon revenus ? CSS ? Maternité à 100% à déclencher ? 100% remboursé sur certains soins ? → PDF récapitulatif à apporter au médecin traitant ou à la CPAM.
+
+**(6) Mon Espace Santé Guidé :** Tutoriel pas à pas pour activer et utiliser le DMP, uploader ses documents, paramétrer les accès médecins.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | Lecteur documents (3/mois), rappels ordonnances |
+| Santé+ | €4,99/mois | Documents illimités + simulateur remboursement + détecteur droits |
+| Famille | €8,99/mois | Jusqu'à 5 profils (idéal parents âgés + enfants) |
+| Annuel Famille | €79,99/an | 30% de réduction |
+
+**Unit economics :** Claude API ~€0,05/analyse document → marge >90%. Un utilisateur Santé+ qui récupère un droit ALD non déclaré économise potentiellement **€500–€2 000/an** → ROI immédiat. **LTV Famille :** 30 mois × €8,99 = €270.
+
+**Marché :** 66 millions de Français, dont 15M sous traitement chronique (cible primaire), 10M aidants familiaux (cible secondaire). 0,1% = 66 000 utilisateurs → €330K MRR à l'échelle.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind + PWA (Vercel)
+- **IA lecture documents & détection droits :** Claude API (claude-sonnet-4-6) — explication résultats médicaux, simulation remboursements, détection droits spéciaux
+- **OCR documents médicaux :** Google Vision API (€1,50 / 1 000 pages) ou AWS Textract
+- **Stockage documents :** Supabase Storage (chiffrement AES-256, conformité RGPD/HDS requis)
+- **Notifications :** Resend + PWA push — rappels ordonnances, renouvellements mutuelles
+- **Données mutuelles :** Partenariats API (BPCE Assurances, Harmonie Mutuelle) ou base manuelle maintenue
+- **Annuaire médecins :** API Doctolib partenaire + données RPPS (Répertoire Partagé des Professionnels de Santé, open data)
+- **Payments :** Stripe
+
+**Note réglementaire :** L'app ne produit **aucun diagnostic médical**. Elle explique, informe et oriente. Conformité RGPD + hébergement HDS (Hébergeur de Données de Santé) obligatoire dès que des données médicales sont stockées — OVHcloud HDS ~€30/mois pour commencer.
+
+### Go-to-Market (zéro budget)
+1. **SEO médical :** "comprendre résultats NFS", "remboursement cardiologue secteur 2", "ALD 30 liste maladies" — des volumes de recherche massifs avec intention forte
+2. **Communautés patients :** Forums maladies chroniques (Carenity, 200K membres), groupes Facebook aidants, r/france, forums parents enfants malades
+3. **Influenceurs santé :** Médecins vulgarisateurs sur TikTok/Instagram (Dr Nozman, Docteur Heart) — partenariat contenu éducatif
+4. **Mutuelles partenaires :** Harmonie Mutuelle, MGEN — intégration en marque blanche comme service à valeur ajoutée pour leurs adhérents
+5. **Médecins traitants :** Recommandation par des généralistes déjà convaincus → "dites à vos patients d'utiliser DossierSanté.ai avant leur prochain RDV"
+
+### Competitive Moat
+- **Conformité HDS + RGPD :** Barrière à l'entrée réelle — un clone rapide ne peut pas stocker des données médicales légalement en France sans cet agrément
+- **Données comportementales :** Après 6 mois d'utilisation, l'app connaît le profil médical complet de l'utilisateur → recommandations de plus en plus précises → retention forte
+- **Réseau mutuelles :** Une fois 2–3 grandes mutuelles intégrées en partenariat API, les données de remboursement réels (vs estimés) deviennent un avantage concurrentiel majeur
+- **Extension B2B :** Offre pour médecins traitants (dashboard patient simplifié), pour EHPAD (gestion médicaments résidents), pour employeurs (suivi arrêts maladie anonymisé)
+
+### Figma Schematic
+[View DossierSanté.ai — Navigateur Santé Français on FigJam](https://www.figma.com/board/sZH78FncP7ucric2ZfA2Ez)
+
+---
+
+## 110. SubventionAsso.ai
+
+> **Le générateur de dossiers de subvention pour les 1,5 million d'associations françaises — obtenez vos financements sans perdre 40 heures en paperasse**
+
+### Problem
+
+La France compte **1,5 million d'associations actives**, qui dépendent des subventions publiques pour survivre : mairies, conseils départementaux, régions, État (FONJEP, INJEP...), fonds européens. Le problème : **rédiger un dossier de subvention est un enfer administratif.**
+
+- **Chaque financeur a ses propres critères et formats :** Un dossier pour la mairie de Lyon ne ressemble pas à un dossier pour la Région Auvergne-Rhône-Alpes. Les nomenclatures budgétaires, les axes prioritaires, les indicateurs attendus changent d'une collectivité à l'autre.
+- **Les trésoriers bénévoles sont dépassés :** Dans 90% des associations, c'est un bénévole non formé qui rédige les dossiers — souvent un retraité ou un parent actif qui n'a ni le temps ni les compétences pour rédiger un argumentaire convaincant.
+- **Le taux de refus est élevé :** Dossier incomplet, budget mal présenté, objectifs trop vagues, manque d'indicateurs quantifiables — des dizaines de milliers de dossiers sont rejetés chaque année pour des raisons purement formelles, privant des associations de financements qu'elles méritaient.
+- **Le suivi des aides est inexistant :** Les deadlines de dépôt sont mal connues, les renouvellements oubliés, les comptes rendus d'utilisation (obligatoires !) négligés — ce qui compromet les demandes futures.
+- **La méconnaissance des dispositifs est massive :** La plupart des associations ne connaissent que leur mairie comme source de financement — elles ignorent les fonds DETR, FDVA, CNAF, REAAP, Fonds Social Européen, Erasmus+, etc.
+
+**Impact direct :** Des millions d'euros de subventions non réclamées chaque année par manque de savoir-faire administratif, pendant que des associations vitales ferment ou réduisent leurs activités.
+
+### Solution
+
+**(1) Diagnostic Financement IA :** L'association renseigne son type (sport, culture, insertion, handicap, environnement...), sa localisation, son budget annuel, ses bénéficiaires. Claude analyse et génère une **cartographie de tous les financeurs accessibles** avec les montants moyens accordés, les critères d'éligibilité et les calendriers de dépôt.
+
+**(2) Générateur de Dossier Adapté au Financeur :** L'utilisateur choisit un financeur dans la liste. Claude génère un dossier complet adapté aux critères de ce financeur spécifique :
+- Lettre de demande argumentée (axes prioritaires du financeur, impact social chiffré)
+- Fiche projet structurée (objectifs SMART, public bénéficiaire, moyens, évaluation)
+- Budget prévisionnel conforme (nomenclature de la collectivité, co-financements)
+- Annexes check-list (statuts, bilan N-1, rapport d'activité, RIB, liste dirigeants)
+
+**(3) Bibliothèque de Phrases Impact :** Des formulations percutantes testées sur des dossiers acceptés : "nombre de bénéficiaires directs", "valeur du bénévolat valorisé", "ancrage territorial", "partenariats institutionnels" — des mots-clés qui font mouche auprès des élus.
+
+**(4) Calendrier des Dossiers :** Toutes les deadlines compilées pour les principaux financeurs nationaux + rappels personnalisés 30 jours avant. "La Région ferme les dossiers FDVA le 15 mars — il vous reste 3 semaines."
+
+**(5) Compte Rendu d'Utilisation IA :** En fin d'année, l'association génère le compte rendu d'utilisation de la subvention (obligatoire pour tout renouvellement) à partir de son rapport d'activité — en 10 minutes au lieu de 3 jours.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Découverte | €0/mois | Diagnostic financement + 1 dossier/an |
+| Essentiel | €9/mois | 5 dossiers/mois + calendrier deadlines + comptes rendus |
+| Pro | €19/mois | Dossiers illimités + bibliothèque phrases + multi-utilisateurs |
+| Pack Dossier | €12 one-shot | 1 dossier complet pour 1 financeur précis |
+| Annuel Pro | €159/an | 30% de réduction vs mensuel |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >95%. Une association qui obtient €2 000 de plus de subvention grâce à un meilleur dossier a un ROI de 10× son abonnement annuel. **LTV Pro :** 36 mois × €19 = €684.
+
+**Marché :** 1,5M associations en France, dont ~500K actives avec budget >€5K. 0,3% = 1 500 abonnés × €19/mois = **€28,5K MRR**. Scalable à €200K MRR avec 1% de pénétration.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **IA génération dossiers :** Claude API (claude-sonnet-4-6) — dossiers adaptés par financeur, phrases impact, comptes rendus
+- **Base de données :** Supabase — profil association, dossiers, financeurs, calendrier
+- **Génération PDF :** react-pdf — export dossiers prêts à déposer
+- **Emails & rappels :** Resend — alertes deadlines, rappels comptes rendus
+- **Données financeurs :** Base manuelle maintenue + scraping portails officiels (Aides-Territoires, FDVA, data.gouv.fr)
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **Réseau associatif :** CPCA (Conférence Permanente des Coordinations Associatives), fédérations nationales (sport, culture, insertion) — partenariat pour diffusion à leurs membres
+2. **Maisons des Associations :** 3 000+ maisons des associations en France, très actives pour former les bénévoles — démonstrations gratuites = acquisition organique puissante
+3. **SEO :** "demande de subvention mairie association", "dossier subvention région sport", "FDVA association" — des volumes de recherche constants avec intention forte
+4. **Groupes Facebook associations :** "Gestion association loi 1901" (80K membres), "Trésoriers d'associations France", groupes sportifs, culturels par département
+5. **Partenariat logiciels gestion asso :** HelloAsso, Assoconnect — intégration ou cross-promotion (leurs clients sont exactement notre cible)
+
+### Competitive Moat
+- **Connaissance des critères par financeur :** Les axes prioritaires d'une région (ex : jeunesse, transition écologique) changent avec la politique — l'outil scrappe et met à jour les cahiers des charges automatiquement
+- **Bibliothèque de dossiers acceptés :** Après 1 000 dossiers générés, les associations partagent (anonymisé) si leur dossier a été accepté → entraînement du modèle → taux d'acceptation croissant → argument commercial puissant
+- **Extension B2B Collectivités :** Vendre aux mairies et conseils départementaux un outil pour dépouiller et évaluer les dossiers reçus (marché inverse) — revenus B2B €500/mois par collectivité
+
+### Figma Schematic
+[View SubventionAsso.ai — Générateur de Dossiers de Subvention on FigJam](https://www.figma.com/board/382HkUnC7BA9lYF7dEe2cl)
+
+---
+
+## 111. DropshippingFR.ai
+
+> **L'assistant fiscal et juridique pour les 3 millions d'e-commerçants et dropshippeurs français — TVA OSS/IOSS, douanes, statut, comptabilité : tout ce que personne ne leur explique**
+
+### Problem
+
+Le commerce en ligne explose en France : **3 millions de personnes** vendent en ligne de façon régulière (Marketplace vendeurs, dropshippeurs, e-commerce propre). La grande majorité sont de jeunes adultes attirés par les formations YouTube "dropshipping €10K/mois" — mais **personne ne leur explique les obligations légales et fiscales**, et les conséquences sont lourdes :
+
+- **La TVA OSS est un labyrinthe :** Dès €10 000 de ventes vers d'autres pays de l'UE, le vendeur doit s'enregistrer au guichet OSS (One Stop Shop) et reverser la TVA aux taux locaux de chaque pays de destination. 95% des dropshippeurs ignorent cette obligation et se retrouvent en situation irrégulière.
+- **L'IOSS pour les importations <150€ est méconnu :** Pour vendre des produits importés (AliExpress, Temu...) de moins de €150, il faut soit s'enregistrer à l'IOSS, soit les clients paient les droits de douane à la livraison (= retours en masse, mauvaises avis). La confusion coûte des milliers d'euros.
+- **Les seuils micro-entrepreneur basculent sans prévenir :** CA >77 700€ (BIC) = sortie du régime micro → déclaration TVA, compta réelle, IS. Des centaines de dropshippeurs reçoivent un redressement URSSAF pour avoir continué en micro après avoir dépassé le seuil.
+- **Les droits de douane sont une boîte noire :** Un produit importé de Chine : droit de douane (0% à 12% selon classification douanière) + TVA à l'import (20%) + frais de dédouanement. Sans outil de calcul, la marge réelle est inconnue.
+- **La comptabilité e-commerce est spécifique :** Retours, remboursements, commissions Marketplace (Amazon, Etsy, Shopify), frais publicitaires Meta/Google — la déclaration annuelle est complexe pour un micro sans comptable.
+
+**Impact :** Des redressements fiscaux de €5 000 à €50 000 qui ruinent des jeunes entrepreneurs à cause d'une méconnaissance des règles — alors qu'un outil simple pourrait les alerter à temps.
+
+### Solution
+
+**(1) Diagnostic Statut IA :** L'utilisateur entre son CA mensuel, type de produits vendus, pays de vente, fournisseur (dropshipping Chine / stock France / print-on-demand). Claude génère un diagnostic complet : statut optimal, obligations TVA actuelles, seuils à surveiller, risques identifiés.
+
+**(2) Simulateur TVA OSS / IOSS :** L'utilisateur renseigne ses ventes par pays UE ce mois-ci. L'outil calcule automatiquement la TVA due dans chaque pays (taux différents : Allemagne 19%, Italie 22%, Luxembourg 17%...) et génère le brouillon de déclaration OSS trimestrielle prêt à saisir sur le portail des impôts.
+
+**(3) Calculateur Douanes & Rentabilité Produit :** L'utilisateur entre : pays d'origine fournisseur, description produit, valeur unitaire, volume. L'outil retourne : classification douanière probable, taux de droit, TVA import, frais estimés, **marge nette réelle après tous frais**. "Ce produit à €8 FOB vous revient à €12,40 rendu France — votre prix de vente doit être >€25 pour une marge de 50%."
+
+**(4) Alertes Seuils Intelligentes :** Connecté aux données de ventes (import CSV ou connexion Shopify/Etsy API), l'outil envoie des alertes :
+- "Tu as fait €65 000 de CA cette année — dans 4 mois tu dépasseras le seuil micro BIC. Voici ce qui change."
+- "Tes ventes UE dépassent €10 000 — tu dois t'enregistrer à l'OSS avant le 31 octobre."
+- "Tu n'as pas déclaré ta TVA OSS Q3 — deadline dans 14 jours."
+
+**(5) Module Comptabilité Simplifiée :** Bilan mensuel automatique : CA net (déduction commissions marketplace), charges déductibles (publicité, hébergement, outils SaaS, échantillons), résultat imposable, cotisations URSSAF estimées. Export Cerfa-compatible pour la déclaration annuelle.
+
+**(6) Bibliothèque Juridique :** CGV conformes au droit de la consommation français (mention droit de rétractation 14j, SAV, RGPD), mentions légales pour le site, politique retours. Tout généré automatiquement pour le type de boutique.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0/mois | Diagnostic statut + simulateur douanes 3 produits/mois |
+| Starter | €9/mois | Simulateur TVA OSS/IOSS illimité + alertes seuils |
+| Pro | €19/mois | + comptabilité simplifiée + CGV generator + export compta |
+| Annuel Pro | €159/an | 30% de réduction vs mensuel |
+| Audit One-shot | €29 | Audit complet situation TVA/statut/douanes avec rapport PDF |
+
+**Unit economics :** Claude API ~€0,06/simulation → marge >97%. Un utilisateur Pro qui évite un seul redressement TVA de €3 000 a un ROI de 13 ans d'abonnement. **LTV Pro :** 24 mois × €19 = €456.
+
+**Marché :** 3M vendeurs en ligne en France, dont ~400K actifs avec CA >€10K (cible principale pour OSS/IOSS). 0,5% = 2 000 abonnés × €19/mois = **€38K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **IA diagnostic & génération docs :** Claude API (claude-sonnet-4-6) — diagnostic statut, CGV, simulation TVA multi-pays, guide comptabilité
+- **Taux TVA UE en temps réel :** API VIES (Commission Européenne, gratuite) + base de données taux par pays maintenue
+- **Classification douanière :** Tarif douanier UE (TARIC, open data) + heuristiques produit → code NC8 probable
+- **Connexion Marketplaces :** API Shopify, Etsy, WooCommerce (webhook CA mensuel) + import CSV Manuel
+- **Alertes :** Resend (emails) + SMS via Vonage free tier
+- **Payments :** Stripe
+- **Base de données :** Supabase — profil vendeur, historique ventes, déclarations, alertes
+
+### Go-to-Market (zéro budget)
+1. **YouTube & TikTok :** Contenu éducatif "La vraie fiscalité du dropshipping en France" — ce contenu manque cruellement, les vidéos sur ce sujet cumulent des centaines de milliers de vues
+2. **Communautés dropshipping FR :** Groupes Facebook "Dropshipping France" (200K+ membres), Discord e-commerce FR, forums Shopizy, Dropizi
+3. **Formateurs dropshipping :** Les influenceurs qui vendent des formations (Yomi Denzel, Gabriel Gab...) cherchent des outils à recommander à leurs étudiants → affiliation 30% MRR
+4. **SEO :** "TVA dropshipping France", "OSS dropshipping", "seuil micro-entrepreneur ecommerce" — des recherches en forte croissance avec 0 concurrents bien positionnés
+5. **Partenariats SaaS :** Shopify France, Dropizi, Dropified — intégration ou co-marketing
+
+### Competitive Moat
+- **Spécialisation France :** Les outils généralistes (Avalara, TaxJar) coûtent €100–€500/mois et visent les PME — rien n'existe pour les micro-dropshippeurs français
+- **Données comportementales CA :** En agrégeant le CA réel de milliers de vendeurs (anonymisé), l'outil peut prédire les dépassements de seuil 3 mois à l'avance avec précision — avantage données unique
+- **Extension B2B Comptables :** Version cabinet-comptable pour gérer 50 clients e-commerce en simultané → MRR récurrent €99/mois/cabinet
+
+### Figma Schematic
+[View DropshippingFR.ai — Assistant Fiscal pour E-commerçants Français on FigJam](https://www.figma.com/board/7hZkBAbAJ5PViVTeSOBtKc)
+
+---
+
+## 112. MaternitéPro.ai
+
+> **Le simulateur et optimiseur du congé maternité/paternité pour indépendantes, gérantes et salariées françaises — calculez vos indemnités CPAM à l'euro près et ne laissez rien sur la table**
+
+### Problem
+
+Chaque année en France, **800 000 bébés naissent** — et leurs parents font face à un système d'indemnisation maternité/paternité d'une complexité ahurissante qui varie selon le statut professionnel :
+
+- **Les indépendantes sont les grandes oubliées :** Une micro-entrepreneuse, une avocate, une médecin libérale ou une artisane touche des IJSS maternité (Indemnités Journalières de Sécurité Sociale) calculées sur son revenu des 3 dernières années — mais le calcul exact est opaque, les formulaires CPAM sont labyrinthiques, et beaucoup d'indépendantes ne réclament jamais leurs droits faute de savoir comment.
+- **Les gérantes de société (SASU, SARL) sont dans un angle mort :** Une gérante associée unique de SASU est assimilée-salariée → droits identiques aux salariées. Une gérante majoritaire de SARL est travailleuse non-salariée → régime indépendant. La confusion sur le statut entraîne des erreurs de calcul et des droits perdus.
+- **Le congé paternité n'est pas optimisé :** Depuis 2021, le congé paternité est de 28 jours (dont 7 obligatoires). Mais les règles de prise fractionnée, de cumul avec le congé annuel, et d'indemnisation par la prévoyance sont méconnues. Des millions d'euros d'indemnités CPAM ne sont pas réclamées.
+- **Le partage du congé parental est sous-utilisé :** Le complément de libre choix d'activité (CLCA), le PrePare, la majoration pour triplés... Les dispositifs CAF post-naissance sont une jungle que les jeunes parents n'explorent jamais faute de guide.
+- **Les deadlines CPAM sont méconnues :** La demande d'IJSS maternité doit être faite avant une certaine date, le certificat de grossesse envoyé à la CPAM avant le terme, le certificat médical post-naissance dans les 15 jours. Des milliers de mères perdent des indemnités pour un formulaire envoyé en retard.
+
+### Solution
+
+**(1) Simulateur d'Indemnités Personnalisé :** L'utilisateur renseigne son statut (salariée / indépendante type / gérante SASU-SARL / profession libérale), ses revenus des 3 dernières années, la date de départ en congé. Claude calcule :
+- IJSS maternité mois par mois pendant toute la durée du congé
+- Maintien de salaire employeur (selon convention collective saisie)
+- Complément prévoyance (si renseignée)
+- Allocations CAF cumulables (PAJE, prime naissance €1 017, CLCA)
+- **Revenu net total mois par mois pendant le congé**
+
+**(2) Guide Congé Paternité :** Simulation complète pour le conjoint — IJSS paternité (plafonnées à 87,03€/jour en 2026), règles de fractionnement, délai de prise (dans les 6 mois), impact sur le RTT/congés annuels, cumul prévoyance. "Ton congé paternité te rapportera €2 436 net — voici comment le prendre en 2 blocs pour maximiser ton temps avec bébé."
+
+**(3) Générateur de Dossier CPAM :** Formulaires pré-remplis selon le profil :
+- S3110 (demande d'IJSS maternité salariée)
+- S3128 (demande IJSS maternité travailleuse indépendante)
+- S3716 (demande IJSS paternité)
+- Attestation de salaire employeur (format CPAM)
+- Check-list des justificatifs à joindre
+
+**(4) Calendrier & Deadlines :** Timeline personnalisée de la grossesse à la reprise :
+- J-14 semaines : envoi certificat grossesse CPAM
+- J-8 semaines : déclaration congé maternité à l'employeur
+- J+7 jours post-naissance : envoi certificat médical CPAM
+- J+30 jours : demande congé paternité si non pris immédiatement
+- J+6 mois : dernier délai pour prendre le congé paternité
+
+**(5) Optimiseur Reprise :** Calcul comparatif des options de reprise (temps partiel thérapeutique, congé parental à taux plein vs réduit, cumul emploi-CAF) pour maximiser le revenu familial sur 24 mois post-naissance.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulation de base (salariée standard) |
+| Essentiel | €9 one-shot | Simulation complète tous statuts + formulaires CPAM |
+| Famille | €14,99/mois | Simulation mère + père + optimiseur reprise + alertes deadlines |
+| Annuel Famille | €99/an | 30% de réduction |
+
+**Unit economics :** Claude API ~€0,04/simulation → marge >99%. Une indépendante qui réclame ses IJSS grâce à l'outil récupère en moyenne €4 200 d'indemnités non réclamées → ROI immédiat et absolu. **LTV Famille :** 9 mois × €14,99 = €134 (utilisation concentrée sur la période grossesse/congé).
+
+**Marché :** 800 000 naissances/an × 2 parents = 1,6M concernés. Les indépendantes (300 000 naissances de mères indépendantes/an) sont la cible premium — ROI ultra-visible. 2% de conversion = 16 000 packs one-shot/an = **€144K ARR dès l'année 1**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind + PWA (Vercel)
+- **IA calcul & génération dossiers :** Claude API (claude-sonnet-4-6) — simulation IJSS multi-statuts, formulaires CPAM pré-remplis, guide congé paternité, optimiseur reprise
+- **Génération PDF formulaires :** react-pdf — formulaires CPAM S3110, S3128, S3716 remplis
+- **Base de données :** Supabase — profil utilisateur, revenus, dates, documents générés
+- **Notifications :** Resend + PWA push — deadlines CPAM, rappels formulaires, alertes CAF
+- **Barèmes CPAM & CAF :** Mis à jour annuellement (plafond IJSS, montant prime naissance, taux CLCA) — base interne maintenue
+- **Payments :** Stripe (one-shot + abonnement)
+
+### Go-to-Market (zéro budget)
+1. **Instagram & TikTok maternité :** "J'ai récupéré €4 200 d'indemnités CPAM que je ne savais pas que j'avais droit" — contenu témoignage ultra-viral dans les communautés de futures mamans
+2. **Groupes Facebook maternité & parentalité :** "Mamans Entrepreneures" (150K membres), "Maman Freelance", "Femmes Chefs d'Entreprise France", forums grossesse (Doctissimo, aufeminin)
+3. **Partenariats sages-femmes & maternités :** Les sages-femmes libérales cherchent des ressources à recommander — mention dans leur newsletter ou affichage en cabinet
+4. **SEO :** "indemnités maternité micro-entrepreneur", "IJSS maternité calcul indépendante", "congé paternité formulaire CPAM" — des milliers de recherches mensuelles, 0 outil clair existant
+5. **Entreprises HR :** DRH qui cherchent à mieux informer leurs salariées enceintes → licence B2B entreprise €99/mois pour accès illimité aux salariées
+
+### Competitive Moat
+- **Calcul multi-statuts précis :** La différence entre SASU et SARL gérance majoritaire change tout au calcul — aucun outil grand public ne gère cette complexité
+- **Formulaires CPAM pré-remplis :** Générer les vrais formulaires CPAM (S3110, S3128...) avec les bonnes données est un avantage concurrentiel direct — toutes les concurrentes potentielles n'ont que des calculateurs sans sortie actionnable
+- **Données historiques :** Après 10 000 simulations, l'outil connaît les taux de validation CPAM par région, les délais réels, les erreurs fréquentes → optimisation continue → meilleur outil du marché
+- **Extension B2B Mutuelles :** Une mutuelle qui intègre MaternitéPro.ai comme service à ses adhérentes augmente sa rétention — licensing B2B €2–5 par adhérente/an
+
+### Figma Schematic
+[View MaternitéPro.ai — Optimiseur Congé Maternité et Paternité France on FigJam](https://www.figma.com/board/dkljlkqdjkZ2287Rts6ytX)
+
+---
+
+## 113. VidesGreniers.ai
+
+> **Outil d'estimation IA pour vide-greniers et brocantes — maximise tes revenus du dimanche**
+
+### Problem
+Plus de 1,5 million de Français participent régulièrement aux vide-greniers et brocantes. Pourtant, la grande majorité fixe ses prix "au pif" et perd en moyenne 30 à 50% de revenus potentiels par ignorance des cours du marché (LeBonCoin, Vinted, eBay). Résultat : des objets vendus €2 qui en valent €25, et des invendus qu'on ramène chez soi.
+
+### Solution
+L'utilisateur prend une photo de son objet avec son téléphone. L'IA identifie l'objet (marque, modèle, état estimé), interroge en temps réel LeBonCoin + Vinted + eBay, et propose un prix de vente réaliste avec fourchette basse/haute. L'app génère aussi une "fiche stand" imprimable et une carte des vide-greniers à venir dans un rayon de 30 km.
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 5 estimations/mois |
+| Pro | €4,99/mois | Estimations illimitées + fiches stand + alertes marchés |
+| Saisonnier | €9,99 (3 mois) | Idéal saison avril–septembre |
+
+**Marché :** Les vide-grenier génèrent ~€2 milliards de transactions annuelles en France. Même 0,1% des vendeurs réguliers = 1 500 abonnés Pro = **€8 985 MRR**. Coût IA ~€0,02/estimation.
+
+### Tech Stack
+- **Frontend :** Next.js PWA (Vercel) — utilisable directement du téléphone sans installation
+- **Vision IA :** Claude API (claude-sonnet-4-6) — identification objet via photo + génération fiche
+- **Données marché :** Scraping LeBonCoin/Vinted (API non-officielle ou Playwright headless) pour prix temps réel
+- **Géolocalisation marchés :** OpenStreetMap + base de données vide-greniers (vide-greniers.org API ou scraping)
+- **PDF fiches :** react-pdf — fiches stand à imprimer
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **TikTok/Reels :** "J'ai scanné mes objets avant le vide-grenier — résultat choquant" (contenu avant/après ultra-viral)
+2. **Groupes Facebook :** "Vide-greniers France", "Chineuses et chineurs", "Brocante Passion" (300 000+ membres cumulés)
+3. **Flyers QR code** distribués sur les vide-greniers eux-mêmes le dimanche matin (coût quasi nul)
+4. **SEO :** "prix vide grenier", "combien vendre objet brocante", "estimer prix occasion France"
+5. **Partenariat organisateurs :** Proposer l'outil gratuit aux organisateurs qui le recommandent à leurs exposants
+
+### Competitive Moat
+- **Données France-first :** Les prix varient énormément selon la région (Paris vs province) — l'IA apprend les prix locaux
+- **Flywheel données :** Plus les utilisateurs soumettent d'objets, plus l'IA est précise → avantage concurrentiel cumulatif
+- **Extension naturelle :** Devenir LA plateforme de revente occasion FR — marketplace propriétaire à terme
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
+## 114. Micro-Mission.ai
+
+> **Agrégateur intelligent de micro-tâches rémunérées — gagne €50–200/mois en 2h par semaine**
+
+### Problem
+Des dizaines de plateformes paient les Français pour compléter des micro-tâches (enquêtes, tests UX, transcription, annotation IA, modération) : Prolific, Toluna, Clickworker, UserTesting, Appen, Dataforce, Testapic… Mais personne ne sait où s'inscrire, quelles plateformes paient vraiment en €, lesquelles correspondent à son profil, ni comment maximiser son temps. Résultat : 90% des gens abandonnent après 2 plateformes.
+
+### Solution
+L'utilisateur remplit un profil de 3 minutes (langues parlées, domaines de compétence, disponibilités, profil démographique). L'IA agrège les opportunités disponibles sur toutes les plateformes, les classe par taux horaire réel (en tenant compte du temps de setup), et envoie une notification quotidienne : "Aujourd'hui tu peux gagner €23 en 1h15 — voici les 3 missions parfaites pour toi."
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Accès 5 plateformes, alertes hebdo |
+| Premium | €6,99/mois | Toutes plateformes (20+), alertes temps réel, tri par €/heure |
+| Annuel | €49,99/an | 40% de réduction |
+
+**Marché :** 4 millions de Français cherchent activement des revenus complémentaires. L'app ne "crée" pas les missions — elle agrège l'existant. Coût marginal quasi nul. 1 000 abonnés Premium = **€6 990 MRR**.
+
+**Unit economics :** Coût opérationnel ~€0,10/utilisateur/mois (Claude API pour personnalisation). Marge brute >98%.
+
+### Tech Stack
+- **Frontend :** Next.js + PWA (Vercel) + notifications push
+- **Scraping & agrégation :** Playwright + cron jobs — surveille les offres disponibles sur 20+ plateformes
+- **Personnalisation IA :** Claude API (claude-sonnet-4-6) — matching profil/missions, calcul €/heure réel, rédaction alertes personnalisées
+- **Backend :** Supabase — profils, historique gains, préférences
+- **Notifications :** Resend (email) + OneSignal (push PWA)
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/beermoney_fr, r/argent_de_poche, forums étudiants français
+2. **TikTok :** "J'ai gagné €127 ce mois en faisant des sondages — voici exactement comment" (contenu preuve de gains)
+3. **YouTube SEO :** "gagner de l'argent facilement France 2026", "meilleurs sites pour sondages rémunérés"
+4. **Étudiants :** Partenariats avec BDE d'universités — outils pour étudiants fauchés
+5. **Forums :** Doctissimo, aufeminin, parents au foyer cherchant revenus flexibles
+
+### Competitive Moat
+- **Agrégation multi-plateformes :** Personne ne propose ça en France avec vraie personnalisation — chaque plateforme vit en silo
+- **Score €/heure réel :** Le taux affiché par les plateformes est souvent mensonger — Micro-Mission calcule le taux réel sur la base des retours utilisateurs
+- **Profil démographique :** Certaines études paient 3x plus les 35-50 ans, les parents, ou les propriétaires — l'IA optimise selon ton profil précis
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
+## 115. PrêtEntre.ai
+
+> **Formalise tes prêts entre particuliers — contrats légaux, échéanciers et déclarations fiscales en 5 minutes**
+
+### Problem
+En France, 6,2 milliards d'euros s'échangent chaque année sous forme de prêts entre famille et amis — sans aucun document légal. C'est un désastre : disputes, malentendus, redressements fiscaux. La loi française impose pourtant de déclarer tout prêt >5 000€ aux impôts (formulaire 2062), et un prêt sans écrit est inopposable aux tiers. Les notaires facturent €300–800 pour formaliser ça. Résultat : 95% des gens ne formalisent rien et s'exposent à des risques énormes.
+
+### Solution
+L'utilisateur saisit les détails du prêt (montant, prêteur, emprunteur, durée, taux d'intérêt ou prêt à 0%). L'IA génère en 30 secondes : (1) un contrat de prêt entre particuliers conforme au droit français, (2) un échéancier de remboursement mensuel, (3) les formulaires fiscaux pré-remplis (2062 si >5 000€), (4) une archive PDF signée électroniquement.
+
+**Cas d'usage clés :**
+- Parents qui prêtent pour l'apport immobilier d'un enfant
+- Prêt entre amis pour démarrer une micro-entreprise
+- Avance sur héritage formalisée légalement
+- Prêt entre ex-conjoints suite à divorce
+- Prêt employeur/salarié (avance sur salaire >1 200€)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Pack Simple | €9,99 one-shot | 1 contrat + échéancier + PDF signé |
+| Pack Complet | €19,99 one-shot | Contrat + échéancier + formulaire fiscal 2062 + rappels automatiques de remboursement |
+| Abonnement Famille | €4,99/mois | Contrats illimités + archivage + alertes paiement |
+
+**Marché :** Sur 6,2 milliards d'€ échangés, même 0,01% qui se formalisent = 620M€ × 0,01% = 62 000 transactions potentielles/an. À €9,99/pack = **€620 000 ARR potentiel**. Réaliste dès l'année 1 : 500 packs/mois = **€60K ARR**.
+
+**Unit economics :** Claude API ~€0,06/contrat généré → marge >99%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Génération contrats :** Claude API (claude-sonnet-4-6) — contrats personnalisés selon profil (CDI, indépendant, retraité) et type de prêt
+- **Génération PDF :** react-pdf — contrat de prêt + formulaire fiscal 2062 pré-rempli
+- **Signature électronique :** Yousign API (conforme eIDAS, solution française, plan gratuit disponible)
+- **Rappels remboursement :** Resend — emails automatiques aux deux parties à chaque échéance
+- **Backend :** Supabase — archive des contrats, suivi des remboursements
+- **Payments :** Stripe
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "contrat prêt entre particuliers gratuit", "déclarer prêt familial impôts", "formulaire 2062 prêt" — requêtes à haute intention, peu de concurrents directs
+2. **Notaires & avocats :** Partenariat de référencement croisé — ils envoient les petits dossiers (<10 000€) sur PrêtEntre.ai, gagnent du temps sur les dossiers simples
+3. **Forums immobiliers :** SeLoger, MeilleursAgents forums — "comment formaliser le prêt familial pour mon apport ?" est une question posée des centaines de fois par jour
+4. **Comptables :** Les EC voient régulièrement des clients avec des prêts informels qui causent des problèmes fiscaux — ils peuvent recommander PrêtEntre.ai
+5. **TikTok :** "Ton père t'a prêté 20 000€ sans papier — voici ce qui peut arriver" (contenu alarmant mais éducatif, viral)
+
+### Competitive Moat
+- **Signature électronique intégrée :** Personne ne propose contrat + signature + déclaration fiscale en one-stop-shop en France
+- **Rappels automatiques :** L'app envoie des rappels aux deux parties → réduit les conflits → devient indispensable pendant toute la durée du prêt (LTV long)
+- **Données légales FR :** Mise à jour automatique des plafonds et seuils de déclaration → toujours conforme à la dernière loi fiscale
+- **Extension naturelle :** Donations entre particuliers, reconnaissance de dette, prêt employeur — même moteur légal, nouveaux produits
+
+### Figma Schematic
+[View Ideas 113–115 on FigJam](https://www.figma.com/board/p2LJXhSYxj8SMXQuP2yaZY)
+
+---
+
+## 116. TicketResto.ai
+
+> **Maximise tes titres-restaurant : solde, expiration, commerces proches, et lettre employeur IA**
+
+### Problem
+3,5 millions de salariés français reçoivent des titres-restaurant (Swile, Edenred, Sodexo, Up…) mais en moyenne €150–300 de valeur disparaît chaque année : solde expiré fin février, plafond journalier de 25€ mal connu, commerces acceptant les TR méconnus, participation employeur sous-optimale (jusqu'à 60% légal). Aucun outil n'agrège tous les émetteurs en vue unifiée.
+
+### Solution
+L'utilisateur connecte son compte TR (API officielle Swile/Edenred/Sodexo) ou saisit son solde manuellement. L'app :
+- Alerte avant expiration fin février et calcule le rythme de dépense nécessaire
+- Géolocalise les commerces acceptant les TR dans un rayon de 500m (OpenStreetMap + Google Places)
+- Optimise les achats : supermarchés, boulangeries, épiceries à privilégier selon solde et budget
+- Génère une lettre pré-remplie (Claude API) pour demander une augmentation de la participation employeur
+- Explique l'économie réelle en net après impôts vs salaire brut (les TR sont exonérés de cotisations sociales)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Solde + alertes expiration + carte 500m |
+| Premium | €3,99/mois | Optimiseur achats + lettre employeur + historique annuel |
+| B2B RH | €2/salarié/mois | Tableau de bord RH, réduction gaspillage collectif |
+
+**Marché :** 3,5M de bénéficiaires, 6 milliards d'€ de transactions/an en France. 1 000 abonnés Premium = **€3 990 MRR**. Coût IA ~€0,03/utilisateur/mois.
+
+### Tech Stack
+- **Frontend :** Next.js PWA (Vercel) + notifications push (OneSignal)
+- **Intégration TR :** APIs officielles Swile Connect, Edenred, Sodexo Partner (toutes ouvertes aux partenaires)
+- **Géolocalisation :** OpenStreetMap + Google Places API (gratuit jusqu'à 28 500 req/mois)
+- **IA :** Claude API (claude-sonnet-4-6) — lettre employeur personnalisée + recommandations optimisation
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **LinkedIn :** "Tu laisses €200/an de TR expirer — voici comment les utiliser" → viral RH et managers
+2. **Groupes Facebook salariés :** "Optimiser ses avantages salariaux", "Salariés futés" (100 000+ membres cumulés)
+3. **SEO :** "que faire avec titres-restaurant expirés", "swile solde expiration", "restaurants edenred paris"
+4. **DRH / responsables avantages :** Proposer l'outil gratuitement aux DRH → ils le diffusent à toute l'entreprise
+5. **Comparateurs avantages :** HelloWork, Welcome to the Jungle sections "avantages salariaux"
+
+### Competitive Moat
+- **Vue multi-émetteurs :** Swile + Edenred + Sodexo + Up en une seule app — aucun outil ne fait ça
+- **Lettre employeur IA :** ROI immédiat mesurable → forte rétention et bouche-à-oreille
+- **Données commerces enrichies :** Retours utilisateurs sur quels commerces acceptent réellement les TR → base propriétaire croissante
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
+## 117. StageFacile.ai
+
+> **Convention de stage conforme en 5 minutes — plus jamais de ping-pong administratif entre école, étudiant et entreprise**
+
+### Problem
+3 millions de stagiaires par an en France. La convention de stage est **obligatoire** — sans elle, le stage est illégal et l'étudiant n'est pas couvert par la sécurité sociale. Or chaque université/école a son propre modèle de convention avec ses propres champs et exigences. Résultat : 40% des conventions reviennent avec des erreurs, 2–3 semaines de ping-pong administratif, des entreprises découragées, et des étudiants qui ratent des opportunités.
+
+### Solution
+L'étudiant saisit ses informations (école, niveau, durée, mission, dates). L'app :
+1. Identifie automatiquement le modèle de convention de son établissement (base des 500 principales écoles et universités FR)
+2. Pré-remplit tous les champs requis via Claude API avec les bonnes formulations légales
+3. Vérifie la conformité (gratification minimale 2026, limite 6 mois, clauses obligatoires)
+4. Envoie la convention pré-remplie à l'entreprise et à l'école pour signature électronique (Yousign)
+5. Archive tous les documents + gère les avenants si le stage est prolongé
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Étudiant | Gratuit | 1 convention/an + signatures illimitées |
+| Pack Étudiant Pro | €9,99/an | Conventions illimitées + avenants + archivage 5 ans |
+| B2B Entreprise | €19/mois | Gestion de tous leurs stagiaires, onboarding automatisé |
+| B2B École | €299/an | Licence établissement — toutes les conventions centralisées |
+
+**Marché :** 3M de stagiaires × 1% payant = 30 000 packs/an = **€300K ARR**. B2B entreprise : 500 entreprises × €19/mois = **€114K MRR** potentiel.
+
+**Unit economics :** Claude API ~€0,08/convention générée. Marge brute >98%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Génération convention :** Claude API (claude-sonnet-4-6) — remplit les conventions avec formulations légales correctes selon établissement et type de stage
+- **Base conventions :** Web scraping des modèles officiels des universités + crowdsourcing utilisateurs
+- **Signature :** Yousign API (eIDAS, français, plan gratuit 10 docs/mois pour démarrer)
+- **PDF :** react-pdf + pdf-lib (templates avec cases, logos, champs multi-signataires)
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **BDE (associations étudiantes) :** Proposer en white-label aux 5 000 BDE français — ils l'offrent comme service à leurs adhérents
+2. **Groupes Facebook étudiants :** 200+ groupes par université, contenu "erreurs à éviter sur ta convention de stage"
+3. **LinkedIn :** Cibler les RH en charge des stagiaires (frustration universelle côté entreprise)
+4. **SEO :** "modèle convention de stage", "gratification minimale stage 2026", "convention stage université"
+5. **Discord étudiants :** Serveurs Discord par filière (info, droit, commerce…) — croissance organique naturelle
+
+### Competitive Moat
+- **Base multi-établissements :** Plus d'utilisateurs → plus de templates → avantage concurrentiel cumulatif
+- **Flow A-Z intégré :** Génération + signature électronique + archivage en une seule app — aucun concurrent ne propose ça
+- **B2B stickiness :** Une entreprise intégrée ne repart pas — données historiques, conformité, habitude
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
+## 118. VacancesSolidaires.ai
+
+> **Simule et maximise toutes tes aides vacances — économise €200–800 sur tes prochaines vacances en France**
+
+### Problem
+En France, il existe des dizaines d'aides pour partir en vacances avec un budget limité : ANCV Chèques-Vacances, Vacaf (CAF), VVF Villages, Maisons familiales, bons colonies CAF, aides des comités d'entreprise (CSE), aides régionales, aides mutuelles… €4 milliards d'aides vacances sont distribuées chaque année, mais **60% des familles éligibles n'en bénéficient pas** — elles ne connaissent pas leur existence ou abandonnent face à la complexité administrative.
+
+### Solution
+L'utilisateur remplit un profil de 3 minutes (composition famille, revenus, département, type d'employeur). L'IA :
+1. Calcule exactement à quelles aides il a droit (ANCV, Vacaf, aides communes, mutuelles, CSE…)
+2. Estime le montant total récupérable (souvent €200–800)
+3. Génère les dossiers de demande pré-remplis pour chaque aide
+4. Propose les meilleures destinations correspondant au budget résiduel (campings, VVF, maisons familiales)
+5. Alerte sur les dates limites de dépôt de dossier (souvent décembre–janvier pour les vacances d'été)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation | Gratuit | Calcul des droits + montant estimé |
+| Pack Dossiers | €9,99 | Tous les dossiers pré-remplis + alertes dates limites |
+| Abonnement Famille | €4,99/mois (saisonnier) | Toutes les années + destinations optimisées + relances automatiques |
+| B2B CSE / Mairie | €299/an | Licence comité d'entreprise ou service social communal |
+
+**Marché :** 3,5M de familles éligibles Vacaf, 15M de salariés potentiellement éligibles ANCV. 5 000 packs/an = **€50K ARR** an 1. B2B : 100 CSE × €299/an = **€30K ARR** supplémentaires.
+
+**Unit economics :** Claude API ~€0,05/simulation. Marge brute >99%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Calcul éligibilité IA :** Claude API (claude-sonnet-4-6) — parse les conditions de chaque aide, génère diagnostic personnalisé et dossiers sur-mesure
+- **Base aides :** Base de données des 50+ aides vacances FR (règles d'éligibilité, montants, dates, formulaires) — mise à jour annuelle manuelle + scraping sites officiels
+- **Génération dossiers :** react-pdf — formulaires officiels pré-remplis prêts à soumettre
+- **Alertes :** Resend — notifications dates limites par email
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **CAF et assistantes sociales :** Partenariat de référencement — les travailleurs sociaux recommandent l'outil à leurs bénéficiaires
+2. **Groupes Facebook familles :** "Parents et familles nombreuses France", "Bons plans vacances famille" (500 000+ membres cumulés)
+3. **SEO :** "aides vacances familiales CAF 2026", "comment obtenir chèques vacances ANCV", "Vacaf dossier"
+4. **TikTok :** "J'ai récupéré €680 d'aides vacances que je ne savais pas avoir" (contenu preuve ultra-viral)
+5. **Mairies et CCAS :** Outil gratuit proposé aux services sociaux communaux → diffusion massive dans toutes les communes
+
+### Competitive Moat
+- **Agrégation multi-aides :** Personne ne regroupe toutes les aides vacances en un seul outil en France
+- **Génération dossiers complète :** Pas juste une liste — les vrais formulaires remplis, réduction radicale de la friction
+- **B2B stickiness :** CSE et mairies qui adoptent l'outil le diffusent à des centaines/milliers de familles → croissance organique massive
+- **Extension naturelle :** Aides sorties culturelles, sport/loisirs enfants → même moteur, plus de revenus par utilisateur
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -5221,4 +6352,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-22 — Ideas 99–101 added (France-specific, ultra-low-budget: ConventionCollective.ai, AccidentTravail.ai, ViagerCalcul.ai)*
+*Last updated: 2026-05-29 — Ideas 116–118 added (France-specific, ultra-low-budget: TicketResto.ai, StageFacile.ai, VacancesSolidaires.ai)*
