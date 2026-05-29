@@ -123,6 +123,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 113 | [VidesGreniers.ai](#113-videsgreniersal) | Freemium + Subscription | €3K–€20K | Low |
 | 114 | [Micro-Mission.ai](#114-micro-missionai) | Freemium + Commission | €5K–€35K | Low-Medium |
 | 115 | [PrêtEntre.ai](#115-prêtentreai) | Pay-per-pack | €4K–€28K | Low |
+| 116 | [TicketResto.ai](#116-ticketrestoai) | Freemium + Pay-per-feature + B2B SaaS | €4K–€30K | Low |
+| 117 | [StageFacile.ai](#117-stagefacileai) | Freemium + Pay-per-pack + B2B École | €6K–€45K | Low |
+| 118 | [VacancesSolidaires.ai](#118-vacancessolidairesai) | Freemium + Pay-per-dossier + B2B CSE | €5K–€35K | Low |
 
 ---
 
@@ -6184,6 +6187,159 @@ L'utilisateur saisit les détails du prêt (montant, prêteur, emprunteur, duré
 
 ---
 
+## 116. TicketResto.ai
+
+> **Maximise tes titres-restaurant : solde, expiration, commerces proches, et lettre employeur IA**
+
+### Problem
+3,5 millions de salariés français reçoivent des titres-restaurant (Swile, Edenred, Sodexo, Up…) mais en moyenne €150–300 de valeur disparaît chaque année : solde expiré fin février, plafond journalier de 25€ mal connu, commerces acceptant les TR méconnus, participation employeur sous-optimale (jusqu'à 60% légal). Aucun outil n'agrège tous les émetteurs en vue unifiée.
+
+### Solution
+L'utilisateur connecte son compte TR (API officielle Swile/Edenred/Sodexo) ou saisit son solde manuellement. L'app :
+- Alerte avant expiration fin février et calcule le rythme de dépense nécessaire
+- Géolocalise les commerces acceptant les TR dans un rayon de 500m (OpenStreetMap + Google Places)
+- Optimise les achats : supermarchés, boulangeries, épiceries à privilégier selon solde et budget
+- Génère une lettre pré-remplie (Claude API) pour demander une augmentation de la participation employeur
+- Explique l'économie réelle en net après impôts vs salaire brut (les TR sont exonérés de cotisations sociales)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Solde + alertes expiration + carte 500m |
+| Premium | €3,99/mois | Optimiseur achats + lettre employeur + historique annuel |
+| B2B RH | €2/salarié/mois | Tableau de bord RH, réduction gaspillage collectif |
+
+**Marché :** 3,5M de bénéficiaires, 6 milliards d'€ de transactions/an en France. 1 000 abonnés Premium = **€3 990 MRR**. Coût IA ~€0,03/utilisateur/mois.
+
+### Tech Stack
+- **Frontend :** Next.js PWA (Vercel) + notifications push (OneSignal)
+- **Intégration TR :** APIs officielles Swile Connect, Edenred, Sodexo Partner (toutes ouvertes aux partenaires)
+- **Géolocalisation :** OpenStreetMap + Google Places API (gratuit jusqu'à 28 500 req/mois)
+- **IA :** Claude API (claude-sonnet-4-6) — lettre employeur personnalisée + recommandations optimisation
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **LinkedIn :** "Tu laisses €200/an de TR expirer — voici comment les utiliser" → viral RH et managers
+2. **Groupes Facebook salariés :** "Optimiser ses avantages salariaux", "Salariés futés" (100 000+ membres cumulés)
+3. **SEO :** "que faire avec titres-restaurant expirés", "swile solde expiration", "restaurants edenred paris"
+4. **DRH / responsables avantages :** Proposer l'outil gratuitement aux DRH → ils le diffusent à toute l'entreprise
+5. **Comparateurs avantages :** HelloWork, Welcome to the Jungle sections "avantages salariaux"
+
+### Competitive Moat
+- **Vue multi-émetteurs :** Swile + Edenred + Sodexo + Up en une seule app — aucun outil ne fait ça
+- **Lettre employeur IA :** ROI immédiat mesurable → forte rétention et bouche-à-oreille
+- **Données commerces enrichies :** Retours utilisateurs sur quels commerces acceptent réellement les TR → base propriétaire croissante
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
+## 117. StageFacile.ai
+
+> **Convention de stage conforme en 5 minutes — plus jamais de ping-pong administratif entre école, étudiant et entreprise**
+
+### Problem
+3 millions de stagiaires par an en France. La convention de stage est **obligatoire** — sans elle, le stage est illégal et l'étudiant n'est pas couvert par la sécurité sociale. Or chaque université/école a son propre modèle de convention avec ses propres champs et exigences. Résultat : 40% des conventions reviennent avec des erreurs, 2–3 semaines de ping-pong administratif, des entreprises découragées, et des étudiants qui ratent des opportunités.
+
+### Solution
+L'étudiant saisit ses informations (école, niveau, durée, mission, dates). L'app :
+1. Identifie automatiquement le modèle de convention de son établissement (base des 500 principales écoles et universités FR)
+2. Pré-remplit tous les champs requis via Claude API avec les bonnes formulations légales
+3. Vérifie la conformité (gratification minimale 2026, limite 6 mois, clauses obligatoires)
+4. Envoie la convention pré-remplie à l'entreprise et à l'école pour signature électronique (Yousign)
+5. Archive tous les documents + gère les avenants si le stage est prolongé
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Étudiant | Gratuit | 1 convention/an + signatures illimitées |
+| Pack Étudiant Pro | €9,99/an | Conventions illimitées + avenants + archivage 5 ans |
+| B2B Entreprise | €19/mois | Gestion de tous leurs stagiaires, onboarding automatisé |
+| B2B École | €299/an | Licence établissement — toutes les conventions centralisées |
+
+**Marché :** 3M de stagiaires × 1% payant = 30 000 packs/an = **€300K ARR**. B2B entreprise : 500 entreprises × €19/mois = **€114K MRR** potentiel.
+
+**Unit economics :** Claude API ~€0,08/convention générée. Marge brute >98%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Génération convention :** Claude API (claude-sonnet-4-6) — remplit les conventions avec formulations légales correctes selon établissement et type de stage
+- **Base conventions :** Web scraping des modèles officiels des universités + crowdsourcing utilisateurs
+- **Signature :** Yousign API (eIDAS, français, plan gratuit 10 docs/mois pour démarrer)
+- **PDF :** react-pdf + pdf-lib (templates avec cases, logos, champs multi-signataires)
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **BDE (associations étudiantes) :** Proposer en white-label aux 5 000 BDE français — ils l'offrent comme service à leurs adhérents
+2. **Groupes Facebook étudiants :** 200+ groupes par université, contenu "erreurs à éviter sur ta convention de stage"
+3. **LinkedIn :** Cibler les RH en charge des stagiaires (frustration universelle côté entreprise)
+4. **SEO :** "modèle convention de stage", "gratification minimale stage 2026", "convention stage université"
+5. **Discord étudiants :** Serveurs Discord par filière (info, droit, commerce…) — croissance organique naturelle
+
+### Competitive Moat
+- **Base multi-établissements :** Plus d'utilisateurs → plus de templates → avantage concurrentiel cumulatif
+- **Flow A-Z intégré :** Génération + signature électronique + archivage en une seule app — aucun concurrent ne propose ça
+- **B2B stickiness :** Une entreprise intégrée ne repart pas — données historiques, conformité, habitude
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
+## 118. VacancesSolidaires.ai
+
+> **Simule et maximise toutes tes aides vacances — économise €200–800 sur tes prochaines vacances en France**
+
+### Problem
+En France, il existe des dizaines d'aides pour partir en vacances avec un budget limité : ANCV Chèques-Vacances, Vacaf (CAF), VVF Villages, Maisons familiales, bons colonies CAF, aides des comités d'entreprise (CSE), aides régionales, aides mutuelles… €4 milliards d'aides vacances sont distribuées chaque année, mais **60% des familles éligibles n'en bénéficient pas** — elles ne connaissent pas leur existence ou abandonnent face à la complexité administrative.
+
+### Solution
+L'utilisateur remplit un profil de 3 minutes (composition famille, revenus, département, type d'employeur). L'IA :
+1. Calcule exactement à quelles aides il a droit (ANCV, Vacaf, aides communes, mutuelles, CSE…)
+2. Estime le montant total récupérable (souvent €200–800)
+3. Génère les dossiers de demande pré-remplis pour chaque aide
+4. Propose les meilleures destinations correspondant au budget résiduel (campings, VVF, maisons familiales)
+5. Alerte sur les dates limites de dépôt de dossier (souvent décembre–janvier pour les vacances d'été)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation | Gratuit | Calcul des droits + montant estimé |
+| Pack Dossiers | €9,99 | Tous les dossiers pré-remplis + alertes dates limites |
+| Abonnement Famille | €4,99/mois (saisonnier) | Toutes les années + destinations optimisées + relances automatiques |
+| B2B CSE / Mairie | €299/an | Licence comité d'entreprise ou service social communal |
+
+**Marché :** 3,5M de familles éligibles Vacaf, 15M de salariés potentiellement éligibles ANCV. 5 000 packs/an = **€50K ARR** an 1. B2B : 100 CSE × €299/an = **€30K ARR** supplémentaires.
+
+**Unit economics :** Claude API ~€0,05/simulation. Marge brute >99%.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Calcul éligibilité IA :** Claude API (claude-sonnet-4-6) — parse les conditions de chaque aide, génère diagnostic personnalisé et dossiers sur-mesure
+- **Base aides :** Base de données des 50+ aides vacances FR (règles d'éligibilité, montants, dates, formulaires) — mise à jour annuelle manuelle + scraping sites officiels
+- **Génération dossiers :** react-pdf — formulaires officiels pré-remplis prêts à soumettre
+- **Alertes :** Resend — notifications dates limites par email
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **CAF et assistantes sociales :** Partenariat de référencement — les travailleurs sociaux recommandent l'outil à leurs bénéficiaires
+2. **Groupes Facebook familles :** "Parents et familles nombreuses France", "Bons plans vacances famille" (500 000+ membres cumulés)
+3. **SEO :** "aides vacances familiales CAF 2026", "comment obtenir chèques vacances ANCV", "Vacaf dossier"
+4. **TikTok :** "J'ai récupéré €680 d'aides vacances que je ne savais pas avoir" (contenu preuve ultra-viral)
+5. **Mairies et CCAS :** Outil gratuit proposé aux services sociaux communaux → diffusion massive dans toutes les communes
+
+### Competitive Moat
+- **Agrégation multi-aides :** Personne ne regroupe toutes les aides vacances en un seul outil en France
+- **Génération dossiers complète :** Pas juste une liste — les vrais formulaires remplis, réduction radicale de la friction
+- **B2B stickiness :** CSE et mairies qui adoptent l'outil le diffusent à des centaines/milliers de familles → croissance organique massive
+- **Extension naturelle :** Aides sorties culturelles, sport/loisirs enfants → même moteur, plus de revenus par utilisateur
+
+### Figma Schematic
+[View Ideas 116–118 on FigJam](https://www.figma.com/board/kzXWu7PlehGe1KrFEifHFN)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -6196,4 +6352,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-28 — Ideas 113–115 added (France-specific, ultra-low-budget: VidesGreniers.ai, Micro-Mission.ai, PrêtEntre.ai)*
+*Last updated: 2026-05-29 — Ideas 116–118 added (France-specific, ultra-low-budget: TicketResto.ai, StageFacile.ai, VacancesSolidaires.ai)*
