@@ -126,6 +126,14 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 116 | [TicketResto.ai](#116-ticketrestoai) | Freemium + Pay-per-feature + B2B SaaS | €4K–€30K | Low |
 | 117 | [StageFacile.ai](#117-stagefacileai) | Freemium + Pay-per-pack + B2B École | €6K–€45K | Low |
 | 118 | [VacancesSolidaires.ai](#118-vacancessolidairesai) | Freemium + Pay-per-dossier + B2B CSE | €5K–€35K | Low |
+| 119 | [DossierLocatif.ai](#119-dossierlocatifai) | Pay-per-dossier + Subscription | €4K–€28K | Low |
+| 120 | [MédecinFR.ai](#120-médecinfrail) | Freemium + Pay-per-simulation + Alert | €5K–€35K | Low |
+| 121 | [PLU.ai](#121-pluai) | Pay-per-analysis + B2B SaaS | €5K–€30K | Low |
+| 122 | [CompareStatuts.ai](#122-comparestatutsai) | Freemium + Pay-per-report + B2B EC | €6K–€45K | Low |
+| 123 | [PrimeAutoVerte.ai](#123-primeautoverteai) | Freemium + Pay-per-simulation + B2B | €5K–€38K | Low |
+| 124 | [AgriPAC.ai](#124-agripacai) | Pay-per-report + Annual Subscription + B2B Chambres | €8K–€60K | Low-Medium |
+| 125 | [NoteBulletin.ai](#125-notebulletinai) | Freemium + Pay-per-report + Subscription | €5K–€40K | Low |
+| 126 | [VétéFacile.ai](#126-vétefacileai) | Freemium + Pay-per-estimation + Subscription + Affiliate | €8K–€55K | Low |
 
 ---
 
@@ -6340,6 +6348,430 @@ L'utilisateur remplit un profil de 3 minutes (composition famille, revenus, dép
 
 ---
 
+## 119. DossierLocatif.ai
+
+> **Créez le dossier de location parfait en 10 minutes — finissez-en avec les rejets pour dossier incomplet**
+
+### Problem
+En France, **2 à 5 candidats se disputent en moyenne chaque appartement mis en location**, et les propriétaires/agences éliminent en premier les dossiers incomplets ou mal présentés. Or la composition du dossier exigible varie selon le profil : un salarié en CDI a besoin de 3 bulletins de salaire + avis d'imposition + contrat de travail ; un auto-entrepreneur doit fournir ses bilans + un extrait Kbis + une justification détaillée de ses revenus variables ; un étudiant doit joindre la garantie Visale ou une caution parentale. Les erreurs les plus fréquentes : mauvais ordre des documents, justificatif non signé, revenus sous-présentés (un auto-entrepreneur qui ne montre que son CA et non son revenu net), lettre de motivation absente (pourtant souvent décisive). Un cabinet de location charge **€50–€100** pour "préparer" un dossier, et des services comme Garantme facturent **€30–€50/mois** sans garantir l'acceptation.
+
+### Solution
+L'utilisateur saisit son profil (statut : salarié CDI/CDD/AE/TNS/retraité/étudiant, revenus mensuels nets, présence d'un garant). L'IA génère :
+1. La **checklist exacte** des documents requis selon le profil + les erreurs à éviter
+2. Une **lettre de motivation locative personnalisée** (présentation du candidat, sécurisation du propriétaire, formulation du projet de vie dans le logement)
+3. Pour les profils non-standard (AE, CDD, pluriactifs) : un **mémo de présentation des revenus** expliquant la régularité et la durabilité au bailleur
+4. Une **fiche garant complète** si garant physique, avec ce qu'il doit fournir et comment rédiger l'engagement de caution
+5. Une comparaison des solutions de garantie : **Visale** (gratuit, Action Logement), **Garantme**, **GLI** (garantie loyer impayé via l'agence), leurs conditions d'éligibilité exactes
+6. Le tout exporté en **ZIP professionnel** avec un index lisible, et en **PDF unique fusionné** pour les candidatures par email
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | Checklist documents + score de candidature estimé |
+| Dossier Complet | €3,99 | Lettre de motivation + mémo revenus + fiche garant + ZIP |
+| Abonnement Chasseur | €9,99/mois | Dossiers illimités + personnalisation par logement + tracking candidatures |
+
+**Unit economics :** Claude API ~€0,05/dossier → marge >98%. Marché naturel : **4 millions de recherches de logement actives en permanence en France**. 1 000 dossiers/mois × €3,99 = **€3 990 MRR** dès les premiers mois. L'abonnement "Chasseur" cible les personnes en recherche intensive (grande ville, mobilité pro) — 500 abonnés = **€4 995 MRR supplémentaires**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel free tier)
+- **AI génération :** Claude API (claude-sonnet-4-6) — lettre de motivation + mémo revenus + fiche garant + conseils personnalisés
+- **Base documentaire :** JSON des pièces exigibles × statut × type de garant — source décret n°2015-1437 (loi Alur)
+- **Score candidature :** Algorithme simulant le ratio loyer/revenu (règle des 33%) et les critères agence
+- **ZIP/PDF :** JSZip + react-pdf
+- **Backend :** Supabase + Stripe
+- **Auth :** Supabase Magic Link (zéro friction)
+
+### Go-to-Market (zéro budget)
+1. **TikTok/YouTube :** "Voilà pourquoi ton dossier de location est rejeté — et comment le refaire en 10 minutes" (contenu ultra-viral dans les grandes villes)
+2. **Groupes Facebook :** "Cherche appart Paris/Lyon/Marseille", "Logement étudiant", "Expats en France" (500 000+ membres cumulés)
+3. **Reddit :** r/france, r/paris, r/Lyon — les questions "comment monter un dossier de location" reviennent chaque semaine
+4. **SEO :** "dossier de location auto-entrepreneur", "lettre motivation location appartement", "documents location loi alur", "garant location étudiant"
+5. **Partenariats agences :** Proposer l'outil aux petites agences et chasseurs d'appartements qui orientent leurs clients
+
+### Competitive Moat
+- **Aucun outil grand public** ne génère une lettre de motivation locative + mémo revenus + fiche garant en une passe
+- La **comparaison Visale/Garantme/GLI** en temps réel (avec liens d'inscription) est un différenciateur fort
+- L'**abonnement Chasseur** (plusieurs dossiers, plusieurs logements) crée un LTV long dans les marchés tendus
+- Les **profils non-standard** (AE, CDD, pluriactifs) sont totalement ignorés par les templates existants — segment mal servi et très demandeur
+
+### Figma Schematic
+[View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 120. MédecinFR.ai
+
+> **Trouvez un médecin traitant qui accepte de nouveaux patients — et simulez vos remboursements réels avant chaque consultation**
+
+### Problem
+La France compte **6,7 millions de personnes sans médecin traitant** (Cour des comptes 2024), un chiffre en hausse constante. Les déserts médicaux touchent désormais **30% du territoire**. Mais même les personnes qui trouvent un médecin font face à un deuxième problème : **personne ne comprend ce qu'il va réellement payer**. Les tarifs en secteur 2 et 3 sont opaques, les dépassements d'honoraires varient du simple au quadruple (+600% sur certains spécialistes), et le montant remboursé par la mutuelle dépend d'une combinaison de plafonds, de forfaits et de bases de remboursement que même les assurés chevronnés ne maîtrisent pas. Résultat : des milliers de patients évitent des consultations nécessaires par peur du coût, ou reçoivent des factures imprévues de €80–€200 après avoir cru payer €30.
+
+### Solution
+L'utilisateur entre son code postal et son profil (médecin traitant ou spécialiste, mutuelle si connue, situation : CMU-C/ACS/standard). L'outil :
+1. **Retrouve les médecins acceptant de nouveaux patients** dans un rayon paramétrable (API annuaire Ameli + Doctolib pages publiques)
+2. Pour chaque médecin affiché : secteur (1/2/3/OPTAM), tarif moyen des actes courants, délai d'attente estimé, accessibilité handicap
+3. **Simulateur de remboursement** : entrez le type de consultation → calcul exact remboursement SS + estimation mutuelle standard + **reste à charge réel**
+4. Explique le **"100% Santé"** : quels médecins, quels actes, quels équipements (optique, dentaire, audiologie) sont vraiment sans reste à charge
+5. **Génère la lettre de désignation médecin traitant** (formulaire Cerfa S3704 pré-rempli + lettre d'accompagnement)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Recherche + estimation coût | €0 | Liste des médecins dispo + simulation remboursement de base |
+| Rapport personnalisé | €2,99 | Analyse complète avec votre mutuelle, recommandation OPTAM, guide 100% Santé |
+| Alerte disponibilité | €1,99/mois | Notification dès qu'un médecin proche accepte de nouveaux patients |
+
+**Unit economics :** Claude API ~€0,03/simulation → marge >99%. **6,7 millions de personnes cherchent un médecin traitant** — même 0,1% payant = 6 700 rapports/mois = **€20 000 MRR**. L'alerte disponibilité génère un revenu récurrent à LTV quasi infini (l'utilisateur s'abonne jusqu'à trouver).
+
+### Tech Stack
+- **Frontend :** Next.js PWA + Tailwind (Vercel) — mobile-first
+- **Données médecins :** API Annuaire Santé (data.ameli.fr — open data public) + scraping Doctolib pages publiques + Doctolib API partenaire (programme d'accès ouvert)
+- **Simulateur remboursement :** Algorithme NGAP/CCAM × secteur × situation patient — données publiques CNAM
+- **Alertes :** Resend (email) + OneSignal (push PWA) — vérification quotidienne des disponibilités
+- **AI :** Claude API (claude-sonnet-4-6) — explique résultats + génère lettre désignation médecin traitant
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/sante, r/medecine — "mon médecin traitant prend sa retraite, que faire ?" est posée chaque semaine
+2. **Groupes Facebook :** "Santé France", "Expatriés en France", "Nouveaux arrivants Paris/Lyon" — les gens cherchent des médecins constamment
+3. **SEO :** "médecin traitant qui accepte nouveaux patients 2026", "médecin secteur 1 pas de dépassement", "combien coûte un spécialiste secteur 2", "100% santé médecin"
+4. **Partenariats CAF/CPAM :** Outil complémentaire proposé aux travailleurs sociaux accompagnant les personnes en situation précaire
+5. **TikTok :** "Voilà pourquoi votre consultation chez le spécialiste vous a coûté €120 au lieu de €30"
+
+### Competitive Moat
+- **Doctolib** montre les disponibilités mais ne simule pas les coûts ni ne filtre par secteur/tarif
+- **Ameli.fr** donne les remboursements théoriques mais n'intègre pas les mutuelles et ne localise pas les médecins disponibles
+- La combinaison **disponibilité + simulation coût réel + génération administrative** en une seule app est unique
+- L'**alerte disponibilité** crée un engagement récurrent fort — personne ne se désinscrit tant qu'il n'a pas trouvé son médecin traitant
+
+### Figma Schematic
+[View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 121. PLU.ai
+
+> **Comprenez le Plan Local d'Urbanisme de votre commune en 5 minutes — sans architecte, sans avocat**
+
+### Problem
+Chaque commune française dispose d'un **Plan Local d'Urbanisme (PLU)** qui détermine avec précision ce que vous pouvez faire sur votre terrain : agrandir votre maison, construire un abri de jardin, poser une terrasse couverte, transformer un commerce en logement, diviser un terrain. Ces règles sont **publiques mais totalement illisibles** pour le non-initié : chaque commune a son propre règlement, les zones (UA, UB, UC, N, A...) ont des règles différentes, et les articles (Coefficient d'Emprise au Sol, recul par rapport aux limites séparatives, hauteur maximale, matériaux autorisés) nécessitent un décodage. Un **architecte ou géomètre-expert** facture **€300–€800** pour une simple étude de faisabilité. Résultat : des milliers de propriétaires engagent des travaux sans vérifier, reçoivent des arrêtés de non-conformité, ou renoncent à des projets légaux par méconnaissance.
+
+### Solution
+L'utilisateur entre son adresse. L'app :
+1. **Récupère automatiquement** la zone PLU de la parcelle via l'API du Géoportail de l'Urbanisme (GPU — service public gratuit)
+2. **Télécharge le règlement de zone** (PDF public) et extrait les règles applicables via OCR + Claude API
+3. Présente les règles en **langage clair** : "Vous êtes en zone UB — vous pouvez construire jusqu'à 9m, avec un recul minimum de 5m en façade"
+4. **Interface de questions** : "Puis-je construire un abri de jardin de 15m² ?" → réponse précise + type d'autorisation requis (déclaration préalable DP ou permis de construire PC)
+5. **Génère le début du dossier administratif** : liste des pièces pour une DP ou un PC pré-remplie avec les informations disponibles
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Aperçu gratuit | €0 | Zone PLU + 3 règles principales + résumé |
+| Analyse Complète | €4,99 | Toutes les règles + réponse à votre projet + type d'autorisation requis |
+| Pack Dossier | €9,99 | Analyse + checklist pièces DP ou permis de construire |
+| B2B Agents/Artisans | €29/mois | Analyses illimitées + API + rapport PDF brandé |
+
+**Unit economics :** API GPU et données PLU sont 100% gratuites (open data État) → Claude API ~€0,10/analyse → marge >97%. **4 millions de permis et déclarations déposés chaque année en France**. 500 analyses/mois = **€2 495 MRR**. B2B (agents immobiliers, artisans, notaires) : 100 abonnés × €29/mois = **€2 900 MRR** additionnel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Données PLU :** API Géoportail de l'Urbanisme (GPU.geoportail-urbanisme.gouv.fr — open data, gratuit) → récupère zone + lien vers règlement PDF
+- **Extraction règles :** OCR (Tesseract.js) + Claude API (claude-sonnet-4-6) — extrait et interprète les articles du règlement de zone
+- **Moteur de questions :** Chaîne Claude avec contexte règlement → réponses précises sur le projet utilisateur
+- **Données seuils :** JSON national des seuils (20m² → DP, 40m² en zone U → PC, etc.) — source Code de l'Urbanisme
+- **PDF rapport :** react-pdf
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **SEO :** "que puis-je construire dans mon jardin sans permis", "déclaration préalable vs permis de construire surface", "règlement PLU zone UB" — requêtes à très haute intention
+2. **Forums bricolage/construction :** Ooreka, Système D, Mon Chantier, Travaux.com — des milliers de questions "est-ce que je peux..." chaque semaine
+3. **Groupes Facebook :** "Propriétaires de maison France", "Constructeurs et rénovateurs" (300 000+ membres)
+4. **Agents immobiliers :** Outil offert gratuitement aux petites agences → adoption rapide, passage B2B naturel
+5. **YouTube :** "J'ai voulu agrandir ma maison — voici comment j'ai décrypté le PLU en 5 minutes sans architecte"
+
+### Competitive Moat
+- Les seuls outils comparables sont des SaaS B2B (ArengiSoft, Urbapro) à **€200–€800/mois** — aucun outil grand public n'existe
+- L'**API GPU est publique** mais personne n'a construit une interface conversationnelle dessus
+- Chaque commune met à jour son PLU → le scraping automatique devient un avantage durable (base croissante)
+- L'extension naturelle est massive : estimation des droits à construire, valorisation foncière, aide aux marchands de biens
+
+### Figma Schematic
+[View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 122. CompareStatuts.ai
+
+> **Simulez tous les statuts freelance français et trouvez le plus rentable pour votre situation exacte**
+
+### Problem
+Chaque année, **plus de 1 million de personnes** créent une activité indépendante en France et doivent choisir entre micro-entrepreneur (AE), entreprise individuelle (EI), EURL, SASU, ou portage salarial. Ce choix est **le plus impactant financièrement de la vie d'un freelance** : à 60 000€ de CA annuel, l'écart de revenu net entre un AE en services et une SASU bien optimisée peut dépasser **€10 000/an**. Or ce calcul est incompréhensible sans expert-comptable : les taux de charges sociales varient (22% AE vs 45% TNS vs ~80% brut salarié en SASU), l'ACRE réduit les charges la première année, et la protection sociale (chômage, retraite, prévoyance) change radicalement selon le statut. Un expert-comptable facture **€150–€400** pour cette consultation initiale. Les simulateurs en ligne (URSSAF, INPI) ne comparent qu'un statut à la fois et ignorent les interactions fiscales.
+
+### Solution
+L'utilisateur saisit : chiffre d'affaires projeté, secteur d'activité, situation actuelle (salarié / demandeur d'emploi avec ARE / étudiant), envie d'embaucher à terme, besoin de conserver des droits chômage. Le simulateur produit :
+1. **Tableau comparatif complet** : pour chaque statut (AE, EI, EURL IR, EURL IS, SASU, portage), le revenu net mensuel estimé après toutes charges et impôts
+2. **Projection sur 3 ans** : impact de l'ACRE (exonérations de charge la 1ère année), évolution du revenu net avec la croissance
+3. **Analyse de la protection sociale** : droits chômage, trimestres retraite validés, prévoyance et arrêt maladie
+4. **Recommandation personnalisée** avec justification chiffrée et seuil de reconsidération (ex. "passez en SASU si vous dépassez 50 000€")
+5. **Guide d'immatriculation** pour le statut recommandé : étapes, coûts, délais, liens directs URSSAF/INPI/greffe
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation rapide | €0 | Comparaison basique 3 statuts + recommandation générale |
+| Rapport Complet | €9,99 | Simulation personnalisée tous statuts + projection 3 ans + protection sociale |
+| Pack Création | €24,99 | Rapport + guide immatriculation pas-à-pas + checklist comptabilité an 1 |
+| B2B Expert-comptable | €49/mois | Simulations illimitées + mise à jour automatique des seuils + API |
+
+**Unit economics :** Claude API ~€0,08/simulation → marge >99%. **1 million de créations d'entreprises/an × 5%** de payants = 50 000 rapports/an = **€500K ARR** potentiel. B2B EC : 200 experts-comptables × €49/mois = **€9 800 MRR** additionnel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — formulaire progressif mobile-first
+- **Moteur de calcul :** Algorithme déterministe JavaScript, source : barèmes officiels URSSAF, CGI, DSS — mis à jour chaque 1er janvier via scraping BO DGFiP
+  - AE : taux cotisations par secteur × CA, abattement forfaitaire impôt
+  - EI : régime réel simplifié, calcul TNS (cotisations sur bénéfice)
+  - EURL/SASU : rémunération dirigeant + dividendes, IS (15% plafonné + 25%), charges salariales vs TNS
+  - Portage : simulation sur salaire brut reconstitué + frais de gestion (~10%)
+- **ACRE :** Module de calcul d'exonération de charge première année (critères : demandeur d'emploi, RSA, moins de 26 ans...)
+- **AI narrative :** Claude API (claude-sonnet-4-6) — explique les résultats en français simple + génère la recommandation personnalisée
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/AutoEntrepreneur, r/france, r/freelance_fr — "AE ou SASU pour 60K€ de CA ?" est posée chaque jour sans réponse précise
+2. **LinkedIn :** "J'ai comparé 5 statuts freelance français à 50K€ de CA — voici les résultats" → viral chez les reconversions pro
+3. **YouTube :** "Freelance : quel statut juridique choisir en France en 2026 ? Simulation avec IA"
+4. **SEO :** "auto-entrepreneur vs SASU comparaison", "micro-entreprise vs EURL revenu net", "simulateur statut freelance france"
+5. **Experts-comptables :** Outil demo gratuit offert aux EC indépendants → ils l'utilisent en consultation → passage B2B naturel
+
+### Competitive Moat
+- Les simulateurs URSSAF ne comparent qu'**un statut à la fois** sans croiser fiscalité et social
+- Le calcul **dividendes + rémunération SASU** (optimisation split) est ignoré par tous les outils gratuits
+- La **mise à jour automatique annuelle** des barèmes (URSSAF publie chaque 1er janvier) crée une dépendance pérenne
+- L'extension naturelle est massive : dossier de création, devis clients, simulation TVA, passage d'un statut à l'autre
+
+### Figma Schematic
+[View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 123. PrimeAutoVerte.ai
+
+> **Calculez le cumul exact de toutes vos aides pour l'achat d'un véhicule propre — bonus, prime à la conversion, aides régionales et municipales**
+
+### Problem
+L'achat d'un véhicule électrique ou hybride rechargeable en France ouvre droit à un empilement d'aides potentiellement considérable : **bonus écologique national** (jusqu'à €7 000 pour les ménages modestes depuis la réforme 2024, soumis à barème de revenus), **prime à la conversion** (jusqu'à €5 000 pour la mise à la casse d'un vieux diesel/essence), **leasing social** (€100/mois — relancé en 2026), **aides régionales** (13 régions sur 18 proposent des aides de €500 à €5 000), **aides municipales** (Paris, Lyon, Bordeaux, Grenoble versent €500–€2 000). Total potentiel : **€15 000–€18 000** pour un ménage modeste avec vieux diesel en grande ville. Pourtant, la majorité des acheteurs ne perçoit que le bonus national — les règles de **cumul et d'exclusivité** entre aides sont impossibles à démêler, les barèmes ont changé 3 fois en 2 ans, et les concessionnaires ont intérêt à simplifier (ils n'incluent souvent que le bonus dans leur calcul).
+
+### Solution
+L'utilisateur entre : son **revenu fiscal de référence** (RFR du dernier avis d'imposition), sa composition familiale, sa commune de résidence, son véhicule actuel (si applicable : année, carburant, critair), et le véhicule ciblé (marque, modèle, prix catalogue, neuf ou occasion). Le moteur calcule :
+1. Le **bonus écologique exact** selon le barème de revenus 2026 (tranches RFR/UC + bonus géographique si ZFE)
+2. La **prime à la conversion** si le véhicule actuel est éligible (immatriculation avant 2011 diesel ou 2006 essence, Critair 3+)
+3. Les **aides régionales** (base des 18 régions avec règles de cumul, montants, conditions)
+4. Les **aides municipales et intercommunales** (50 principales collectivités)
+5. Les règles de **cumul/exclusivité** : bonus + prime à la conversion = oui ; bonus + leasing social = non
+6. Le **gain net** : prix du véhicule − toutes aides = coût réel finançable
+7. Les **formulaires de demande pré-remplis** pour chaque aide (Aides-Territoires, portails régionaux)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul rapide | €0 | Bonus national + prime à la conversion estimée |
+| Simulation Complète | €3,99 | Toutes les aides + règles de cumul + coût réel net |
+| Pack Démarches | €6,99 | Simulation + formulaires pré-remplis + guide dépôt pas-à-pas |
+| B2B Concessionnaires | €49/mois | Widget intégré showroom + site web + badge "simulation aides" |
+
+**Unit economics :** Claude API ~€0,04/simulation → marge >99%. **250 000 véhicules électriques vendus/an en France**. 2 000 simulations complètes/mois = **€7 980 MRR**. B2B concessionnaires : 200 concessions × €49/mois = **€9 800 MRR** récurrent.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — formulaire 5 étapes, mobile-first (les gens simulent en concession)
+- **Moteur aides nationales :** Algorithme déterministe — barèmes bonus écologique (décret annuel DREAL) + prime à la conversion (critères âge véhicule + Critair) — scraping legifrance.gouv.fr
+- **Base aides locales :** JSON maintenu pour les 18 régions + 50 grandes villes (mise à jour trimestrielle — source Aides-Territoires API + sites régionaux)
+- **Règles de cumul :** Graphe de compatibilité entre aides (JSON + validation)
+- **API véhicules :** Open data SIV pour le critair du véhicule actuel ; API constructeurs pour les véhicules éligibles au bonus
+- **AI :** Claude API (claude-sonnet-4-6) — explique le résultat, génère le guide de démarches personnalisé
+- **PDF formulaires :** react-pdf + génération des Cerfa pré-remplis
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Forums auto :** Automobile-Propre.fr (100 000+ membres — communauté VE la plus active de France), Caradisiac forums
+2. **TikTok/YouTube :** "Voilà combien vous pouvez économiser sur votre voiture électrique en 2026 selon vos revenus" (simulation live, très viral)
+3. **SEO :** "bonus écologique 2026 revenus", "prime à la conversion 2026 éligible", "aide régionale véhicule électrique", "cumul bonus prime conversion"
+4. **Concessionnaires :** Widget B2B offert 3 mois gratuitement → conversion naturelle (argument de vente immédiat)
+5. **Comparateurs auto :** Caradisiac, La Centrale, Automobile Magazine — proposer un widget d'intégration
+
+### Competitive Moat
+- L'API **Aides-Territoires** agrège certaines aides mais n'a pas de calculateur ni de règles de cumul
+- **Aucun outil** ne combine bonus + prime + aides régionales + aides municipales avec les règles de cumul dans un seul tunnel
+- La base **aides locales** (régions + villes) est longue à construire mais simple à maintenir — avantage concurrentiel durable
+- Le **widget B2B concessionnaires** est un canal d'acquisition payant et un moat fort — une fois intégré dans le showroom, il ne part pas
+- Chaque annonce gouvernementale sur les aides VE génère un **spike de trafic organique** sur les mots-clés cibles
+
+### Figma Schematic
+[View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 124. AgriPAC.ai
+
+> **Simplifiez vos déclarations PAC et maximisez vos aides agricoles avec l'IA**
+
+### Problem
+France compte **400 000 exploitants agricoles** dont 60% ont moins de 50 000€ de revenus annuels. La **Politique Agricole Commune (PAC)** représente jusqu'à 80% du revenu de certaines exploitations, mais les déclarations annuelles (Telepac) sont d'une complexité redoutable : identification des parcelles par bloc de culture, calcul des droits à paiement de base (DPB), éco-régimes, aides couplées (bovins, ovins, protéines végétales...), paiement redistributif, majoration jeune agriculteur. Les erreurs coûtent très cher : des pénalités s'appliquent sur la totalité des aides si les surfaces déclarées sont inexactes. Un conseiller ASP ou chambre d'agriculture facture **€150–€300** pour accompagner la déclaration. Et surtout, la majorité des agriculteurs **ne sait pas combien ils devraient toucher** avant de recevoir le virement.
+
+### Solution
+L'agriculteur entre ses données clés : hectares par type de culture, spéculations animales, département, âge (jeune agriculteur < 40 ans ?). L'app :
+1. **Simule l'enveloppe PAC totale** : DPB estimés × surfaces + aides couplées éligibles + éco-régime voie possible + paiement redistributif
+2. **Identifie les aides manquées** : "Vous semblez éligible à l'aide bovine allaitante — avez-vous déclaré vos animaux ?"
+3. **Guide la déclaration Telepac** : pas-à-pas pour chaque section, captures annotées de l'interface Telepac
+4. **Alerte calendrier** : dates limites dépôt PAC, MAE, demandes spécifiques (aide PCAE, DJA...)
+5. **Compare les éco-régimes** : voie 1 HVE, voie 2 pratiques, voie 3 bio — choisit la plus rémunératrice
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Enveloppe PAC estimée sans détail |
+| Rapport Complet | €19,99 | Simulation complète + aides manquées + comparatif éco-régimes |
+| Pack Déclaration | €39,99 | Rapport + guide Telepac pas-à-pas + alerte deadlines |
+| Abonnement annuel | €79/an | Mises à jour barèmes + 2 simulations/an + alertes calendrier |
+| B2B Chambre d'Agriculture | €299/mois | Outil conseiller — suivi portefeuille agriculteurs |
+
+**Unit economics :** Claude API ~€0,20/simulation → marge >99%. **400 000 exploitants × 1% payants** = 4 000 × €39,99 = **€160K ARR** potentiel. Chambres d'agriculture : 96 départements × €299 = **€28 704 MRR** additionnel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — formulaire pas-à-pas, mobile-first (utilisé aux champs)
+- **Moteur PAC :** Algorithme déterministe — barèmes PAC 2023–2027 publiés par FranceAgriMer et ASP — DPB moyen par département (open data ASP), aides couplées (50 références), éco-régimes (grille officielle)
+- **Open data :** API Registre Parcellaire Graphique (RPG — IGN open data) pour vérification surfaces par commune
+- **AI :** Claude API (claude-sonnet-4-6) — identifie aides manquées, génère guide personnalisé en français agricole
+- **Alertes :** Resend (email) + SMS optionnel (Twilio)
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Forums agricoles :** Agrinaute.com, LaFranceAgricole.fr forums, Reddit r/agriculture — "combien je touche de la PAC ?" posée sans réponse précise chaque semaine
+2. **TikTok/YouTube :** "J'ai simulé ma PAC avec une IA — voilà ce que j'aurais manqué" (communauté agricole très active sur TikTok)
+3. **Syndicats agricoles :** FNSEA, Jeunes Agriculteurs, Confédération Paysanne — proposition de partenariat ou outil blanc
+4. **SEO :** "simulateur PAC 2026", "calcul DPB hectare", "éco-régime PAC voie 2 montant", "aide couplée bovine éligible"
+5. **Salons agricoles :** Salon de l'Agriculture, SPACE, Sommet de l'Élevage — démo en direct
+
+### Competitive Moat
+- **FranceAgriMer** et **ASP** publient les barèmes mais n'offrent aucun simulateur pédagogique accessible
+- Les conseillers chambres d'agriculture n'ont pas d'outil numérique — le marché SaaS agricole est quasi-vierge
+- La base de données barèmes PAC (mise à jour annuelle, 50 aides couplées, variations départementales) est difficile à répliquer
+- Extension naturelle puissante : déclaration MSA, PCAE (plan de compétitivité), aide à l'installation DJA
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
+
+---
+
+## 125. NoteBulletin.ai
+
+> **Analysez le bulletin scolaire de votre enfant en 30 secondes — plan de révision personnalisé, ressources gratuites ciblées**
+
+### Problem
+En France, **12 millions d'élèves** du collège et du lycée reçoivent 3 bulletins scolaires par an. Les parents lisent les notes et appréciations, mais 90% ne savent pas concrètement **quoi en faire** : quelle matière prioriser ? L'élève est-il sous la moyenne nationale pour son niveau ? Quelles ressources gratuites comblent les lacunes ? Les familles aisées paient **€30–€60/heure** pour des cours particuliers (Superprof, LesBonsProfs). Les familles modestes n'ont pas cette option. Résultat : les inégalités se creusent dès le collège. L'IA éducative est un marché massif mais les outils français d'**analyse de bulletin** sont quasi-inexistants.
+
+### Solution
+Le parent (ou l'élève) photographie son bulletin ou saisit notes + appréciations. L'app :
+1. **Diagnostique les matières à risque** : compare les notes aux moyennes nationales par niveau (6ème → Terminale) et identifie les gaps critiques
+2. **Analyse les appréciations** : extrait les signaux faibles ("peut mieux faire", "manque de rigueur") et les traduit en actions concrètes
+3. **Génère un plan de révision sur-mesure** pour les 4 semaines suivantes : matières à prioriser, temps par semaine, objectifs intermédiaires
+4. **Recommande des ressources gratuites** ciblées sur les chapitres à améliorer : Lumni (service public), Khan Academy, fiches Kartable, Annabac
+5. **Prépare les objectifs** à discuter lors des réunions parents-profs : formulations concrètes et mesurables
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse unique | €0 | Diagnostic matières + 3 ressources gratuites |
+| Plan Complet | €4,99 | Analyse complète + plan révision 4 semaines + toutes ressources |
+| Abonnement Famille | €9,99/mois | Jusqu'à 3 enfants + alertes trimestrielles + suivi progression |
+| B2B Établissement | €99/mois | Outil enseignant — analyse classe entière + rapports parents |
+
+**Unit economics :** Claude API ~€0,06/analyse → marge >98%. France : 12M élèves × 3 bulletins/an. 20 000 analyses payantes/mois = **€100K MRR** potentiel. Abonnements familles : 5 000 × €9,99 = **€50K MRR** récurrent.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — PWA mobile-first (bulletins photographiés à la volée)
+- **OCR bulletin :** Google Vision API (€1/1 000 pages) ou Tesseract.js — extrait notes, matières, appréciations
+- **Moyennes nationales :** Base JSON des moyennes par niveau (source DEPP/MEN — données open data Éducation nationale)
+- **Base de ressources :** Index Lumni (API publique), Khan Academy, fiches Kartable (scraping public) — classées par niveau + chapitre du programme officiel (Eduscol)
+- **AI :** Claude API (claude-sonnet-4-6) — analyse appréciations + génère plan de révision + recommande ressources ciblées
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook parents :** "Parents d'élèves collège/lycée" (500 000+ membres), groupes par établissement — viralité naturelle à chaque fin de trimestre
+2. **Reddit :** r/france, r/Parents — "mon enfant a de mauvaises notes, par où commencer ?" posée chaque semaine
+3. **TikTok :** "J'ai analysé le bulletin de ma fille avec l'IA — voilà ce que j'aurais raté" (très partagé par les parents)
+4. **SEO :** "que faire quand son enfant a de mauvaises notes", "ressources gratuites collège en ligne", "plan de révision lycée IA"
+5. **Associations de parents :** FCPE, PEEP — proposer l'outil comme ressource recommandée
+
+### Competitive Moat
+- **Schoolmouv, Kartable** proposent du contenu mais aucun n'**analyse le bulletin** et ne génère un plan personnalisé
+- La base de ressources gratuites (Lumni, Khan, Kartable) indexée par niveau + chapitre est une donnée de valeur croissante
+- L'**historique des bulletins** (3 par an × plusieurs années) crée une fidélisation forte — les familles ne partent pas
+- Extension naturelle : préparer les entretiens parents-profs, simuler le bac blanc, anticiper l'orientation ParcourSup
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
+
+---
+
+## 126. VétéFacile.ai
+
+> **Trouvez un vétérinaire disponible, estimez vos frais, et comparez les assurances animaux — en 2 minutes**
+
+### Problem
+La France compte **16 millions de chats, 8 millions de chiens** et 30 millions d'animaux de compagnie. **36% des propriétaires renoncent à des soins vétérinaires pour raisons financières** (enquête FACCO 2024). Les coûts vétérinaires ont augmenté de 40% en 5 ans : radio €80–€200, stérilisation €150–€400, urgence nocturne €300–€800. Les problèmes concrets :
+1. **Trouver un vétérinaire disponible** : les cliniques débordées ne prennent plus de nouveaux clients, les urgences de nuit sont introuvables
+2. **Anticiper les coûts** : personne ne sait ce que va coûter une consultation avant d'y aller
+3. **L'assurance animaux reste incomprise** : 5 millions d'animaux assurés en France vs 80 millions au Royaume-Uni — l'écart vient de la complexité des contrats et de l'absence d'outils de comparaison fiables
+4. **Obligations réglementaires** mal connues : puce obligatoire, déclaration chiens catégorisés (1ère et 2ème catégorie), permis de détention — la méconnaissance entraîne des amendes
+
+### Solution
+Application en 4 modules :
+1. **Vétérinaire Express :** Recherche géolocalisée avec filtres "accepte nouveaux patients", "urgences 24h/7j", "disponible aujourd'hui" — données Google Places + annuaire ONV (ordre public)
+2. **Estimateur de Frais :** L'utilisateur sélectionne l'animal (espèce, âge, race) et décrit le motif. L'IA estime la fourchette de coût + liste les actes probables
+3. **Comparateur Assurance :** Profil de l'animal → comparaison des 8 principales assurances françaises (Santevet, Bulle Bleue, Agria, MMA...) avec coût réel projeté sur 5 ans
+4. **Assistant Réglementaire :** Rappels identification obligatoire, déclaration chiens catégorisés, vaccins selon espèce, règles transport animal en avion
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Recherche vétérinaire | €0 | Trouver vétérinaire + horaires |
+| Estimation Frais | €1,99 | Estimation coût + actes probables |
+| Comparateur Assurance | €0 | Gratuit — commission affiliation 6–12% prime annuelle |
+| Premium | €4,99/mois | Accès complet + historique médical animal + rappels vaccins |
+| B2B Vétérinaires | €29/mois | Référencement premium + gestion RDV en ligne |
+
+**Unit economics :** Claude API ~€0,05/requête → marge >98%. Affiliation assurance : 1 000 contrats/mois × prime moyenne €250/an × 10% = **€2 500 MRR affiliation seul**. Abonnements Premium : 5 000 × €4,99 = **€25K MRR**. B2B vétérinaires : 500 × €29 = **€14 500 MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js PWA + Tailwind (Vercel) — mobile-first (utilisé en situation d'urgence)
+- **Annuaire vétérinaires :** Annuaire public ONV (Ordre National des Vétérinaires) + enrichissement Google Places API (horaires, avis, disponibilité)
+- **Disponibilités :** Google Maps API + intégration Vetolib (portail RDV vétérinaires — API partenaire)
+- **Base de tarifs :** JSON tarifs moyens nationaux par acte (source : enquêtes SNVEL, tarifs affichés en clinique)
+- **Données races :** Base pathologies fréquentes par race (open data + curation initiale)
+- **Assurances :** Scraping tarificateurs publics des 8 assureurs + partenariats affiliation directe
+- **AI :** Claude API (claude-sonnet-4-6) — estimation frais + conseil réglementaire + triage symptômes
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook propriétaires :** "Chiens de France" (800K membres), "Chat et maîtres" (400K membres) — "mon chat vomit que faire ?" posée 10× par jour
+2. **Reddit :** r/france, r/animaux, r/chats, r/chiens — forte demande urgences vétérinaires nocturnes
+3. **TikTok :** "Voilà ce que coûte vraiment une urgence vétérinaire la nuit — et comment payer moins" (viral garanti)
+4. **SEO :** "vétérinaire urgence nuit", "assurance chien comparatif 2026", "coût stérilisation chat France", "vétérinaire accepte nouveaux patients"
+5. **Partenariat refuges et SPA :** Refuges recommandent l'app aux nouveaux adoptants — canal d'acquisition ultra-qualifié
+
+### Competitive Moat
+- **Vetolib** gère les RDV mais n'estime pas les coûts et ne compare pas les assurances
+- **LeLynx, Hyperassur** comparent les assurances animaux sans profilage précis par race ni historique médical
+- La combinaison **urgence + estimation + assurance + réglementaire** en une seule app est unique sur le marché français
+- L'**historique médical** de l'animal (vaccins, traitements, maladies) crée une fidélisation extrêmement forte
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -6352,4 +6784,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-29 — Ideas 116–118 added (France-specific, ultra-low-budget: TicketResto.ai, StageFacile.ai, VacancesSolidaires.ai)*
+*Last updated: 2026-05-30 — Ideas 119–123 added (France-specific, ultra-low-budget: DossierLocatif.ai, MédecinFR.ai, PLU.ai, CompareStatuts.ai, PrimeAutoVerte.ai)*
