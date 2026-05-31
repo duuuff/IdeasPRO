@@ -131,6 +131,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 121 | [PLU.ai](#121-pluai) | Pay-per-analysis + B2B SaaS | €5K–€30K | Low |
 | 122 | [CompareStatuts.ai](#122-comparestatutsai) | Freemium + Pay-per-report + B2B EC | €6K–€45K | Low |
 | 123 | [PrimeAutoVerte.ai](#123-primeautoverteai) | Freemium + Pay-per-simulation + B2B | €5K–€38K | Low |
+| 124 | [AgriPAC.ai](#124-agripacai) | Pay-per-report + Annual Subscription + B2B Chambres | €8K–€60K | Low-Medium |
+| 125 | [NoteBulletin.ai](#125-notebulletinai) | Freemium + Pay-per-report + Subscription | €5K–€40K | Low |
+| 126 | [VétéFacile.ai](#126-vétefacileai) | Freemium + Pay-per-estimation + Subscription + Affiliate | €8K–€55K | Low |
 
 ---
 
@@ -6606,6 +6609,166 @@ L'utilisateur entre : son **revenu fiscal de référence** (RFR du dernier avis 
 
 ### Figma Schematic
 [View Ideas 119–123 on FigJam](https://www.figma.com/board/xkOr60JC14CYRjI92Jfd5H)
+
+---
+
+## 124. AgriPAC.ai
+
+> **Simplifiez vos déclarations PAC et maximisez vos aides agricoles avec l'IA**
+
+### Problem
+France compte **400 000 exploitants agricoles** dont 60% ont moins de 50 000€ de revenus annuels. La **Politique Agricole Commune (PAC)** représente jusqu'à 80% du revenu de certaines exploitations, mais les déclarations annuelles (Telepac) sont d'une complexité redoutable : identification des parcelles par bloc de culture, calcul des droits à paiement de base (DPB), éco-régimes, aides couplées (bovins, ovins, protéines végétales...), paiement redistributif, majoration jeune agriculteur. Les erreurs coûtent très cher : des pénalités s'appliquent sur la totalité des aides si les surfaces déclarées sont inexactes. Un conseiller ASP ou chambre d'agriculture facture **€150–€300** pour accompagner la déclaration. Et surtout, la majorité des agriculteurs **ne sait pas combien ils devraient toucher** avant de recevoir le virement.
+
+### Solution
+L'agriculteur entre ses données clés : hectares par type de culture, spéculations animales, département, âge (jeune agriculteur < 40 ans ?). L'app :
+1. **Simule l'enveloppe PAC totale** : DPB estimés × surfaces + aides couplées éligibles + éco-régime voie possible + paiement redistributif
+2. **Identifie les aides manquées** : "Vous semblez éligible à l'aide bovine allaitante — avez-vous déclaré vos animaux ?"
+3. **Guide la déclaration Telepac** : pas-à-pas pour chaque section, captures annotées de l'interface Telepac
+4. **Alerte calendrier** : dates limites dépôt PAC, MAE, demandes spécifiques (aide PCAE, DJA...)
+5. **Compare les éco-régimes** : voie 1 HVE, voie 2 pratiques, voie 3 bio — choisit la plus rémunératrice
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Simulation gratuite | €0 | Enveloppe PAC estimée sans détail |
+| Rapport Complet | €19,99 | Simulation complète + aides manquées + comparatif éco-régimes |
+| Pack Déclaration | €39,99 | Rapport + guide Telepac pas-à-pas + alerte deadlines |
+| Abonnement annuel | €79/an | Mises à jour barèmes + 2 simulations/an + alertes calendrier |
+| B2B Chambre d'Agriculture | €299/mois | Outil conseiller — suivi portefeuille agriculteurs |
+
+**Unit economics :** Claude API ~€0,20/simulation → marge >99%. **400 000 exploitants × 1% payants** = 4 000 × €39,99 = **€160K ARR** potentiel. Chambres d'agriculture : 96 départements × €299 = **€28 704 MRR** additionnel.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — formulaire pas-à-pas, mobile-first (utilisé aux champs)
+- **Moteur PAC :** Algorithme déterministe — barèmes PAC 2023–2027 publiés par FranceAgriMer et ASP — DPB moyen par département (open data ASP), aides couplées (50 références), éco-régimes (grille officielle)
+- **Open data :** API Registre Parcellaire Graphique (RPG — IGN open data) pour vérification surfaces par commune
+- **AI :** Claude API (claude-sonnet-4-6) — identifie aides manquées, génère guide personnalisé en français agricole
+- **Alertes :** Resend (email) + SMS optionnel (Twilio)
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Forums agricoles :** Agrinaute.com, LaFranceAgricole.fr forums, Reddit r/agriculture — "combien je touche de la PAC ?" posée sans réponse précise chaque semaine
+2. **TikTok/YouTube :** "J'ai simulé ma PAC avec une IA — voilà ce que j'aurais manqué" (communauté agricole très active sur TikTok)
+3. **Syndicats agricoles :** FNSEA, Jeunes Agriculteurs, Confédération Paysanne — proposition de partenariat ou outil blanc
+4. **SEO :** "simulateur PAC 2026", "calcul DPB hectare", "éco-régime PAC voie 2 montant", "aide couplée bovine éligible"
+5. **Salons agricoles :** Salon de l'Agriculture, SPACE, Sommet de l'Élevage — démo en direct
+
+### Competitive Moat
+- **FranceAgriMer** et **ASP** publient les barèmes mais n'offrent aucun simulateur pédagogique accessible
+- Les conseillers chambres d'agriculture n'ont pas d'outil numérique — le marché SaaS agricole est quasi-vierge
+- La base de données barèmes PAC (mise à jour annuelle, 50 aides couplées, variations départementales) est difficile à répliquer
+- Extension naturelle puissante : déclaration MSA, PCAE (plan de compétitivité), aide à l'installation DJA
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
+
+---
+
+## 125. NoteBulletin.ai
+
+> **Analysez le bulletin scolaire de votre enfant en 30 secondes — plan de révision personnalisé, ressources gratuites ciblées**
+
+### Problem
+En France, **12 millions d'élèves** du collège et du lycée reçoivent 3 bulletins scolaires par an. Les parents lisent les notes et appréciations, mais 90% ne savent pas concrètement **quoi en faire** : quelle matière prioriser ? L'élève est-il sous la moyenne nationale pour son niveau ? Quelles ressources gratuites comblent les lacunes ? Les familles aisées paient **€30–€60/heure** pour des cours particuliers (Superprof, LesBonsProfs). Les familles modestes n'ont pas cette option. Résultat : les inégalités se creusent dès le collège. L'IA éducative est un marché massif mais les outils français d'**analyse de bulletin** sont quasi-inexistants.
+
+### Solution
+Le parent (ou l'élève) photographie son bulletin ou saisit notes + appréciations. L'app :
+1. **Diagnostique les matières à risque** : compare les notes aux moyennes nationales par niveau (6ème → Terminale) et identifie les gaps critiques
+2. **Analyse les appréciations** : extrait les signaux faibles ("peut mieux faire", "manque de rigueur") et les traduit en actions concrètes
+3. **Génère un plan de révision sur-mesure** pour les 4 semaines suivantes : matières à prioriser, temps par semaine, objectifs intermédiaires
+4. **Recommande des ressources gratuites** ciblées sur les chapitres à améliorer : Lumni (service public), Khan Academy, fiches Kartable, Annabac
+5. **Prépare les objectifs** à discuter lors des réunions parents-profs : formulations concrètes et mesurables
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse unique | €0 | Diagnostic matières + 3 ressources gratuites |
+| Plan Complet | €4,99 | Analyse complète + plan révision 4 semaines + toutes ressources |
+| Abonnement Famille | €9,99/mois | Jusqu'à 3 enfants + alertes trimestrielles + suivi progression |
+| B2B Établissement | €99/mois | Outil enseignant — analyse classe entière + rapports parents |
+
+**Unit economics :** Claude API ~€0,06/analyse → marge >98%. France : 12M élèves × 3 bulletins/an. 20 000 analyses payantes/mois = **€100K MRR** potentiel. Abonnements familles : 5 000 × €9,99 = **€50K MRR** récurrent.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — PWA mobile-first (bulletins photographiés à la volée)
+- **OCR bulletin :** Google Vision API (€1/1 000 pages) ou Tesseract.js — extrait notes, matières, appréciations
+- **Moyennes nationales :** Base JSON des moyennes par niveau (source DEPP/MEN — données open data Éducation nationale)
+- **Base de ressources :** Index Lumni (API publique), Khan Academy, fiches Kartable (scraping public) — classées par niveau + chapitre du programme officiel (Eduscol)
+- **AI :** Claude API (claude-sonnet-4-6) — analyse appréciations + génère plan de révision + recommande ressources ciblées
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook parents :** "Parents d'élèves collège/lycée" (500 000+ membres), groupes par établissement — viralité naturelle à chaque fin de trimestre
+2. **Reddit :** r/france, r/Parents — "mon enfant a de mauvaises notes, par où commencer ?" posée chaque semaine
+3. **TikTok :** "J'ai analysé le bulletin de ma fille avec l'IA — voilà ce que j'aurais raté" (très partagé par les parents)
+4. **SEO :** "que faire quand son enfant a de mauvaises notes", "ressources gratuites collège en ligne", "plan de révision lycée IA"
+5. **Associations de parents :** FCPE, PEEP — proposer l'outil comme ressource recommandée
+
+### Competitive Moat
+- **Schoolmouv, Kartable** proposent du contenu mais aucun n'**analyse le bulletin** et ne génère un plan personnalisé
+- La base de ressources gratuites (Lumni, Khan, Kartable) indexée par niveau + chapitre est une donnée de valeur croissante
+- L'**historique des bulletins** (3 par an × plusieurs années) crée une fidélisation forte — les familles ne partent pas
+- Extension naturelle : préparer les entretiens parents-profs, simuler le bac blanc, anticiper l'orientation ParcourSup
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
+
+---
+
+## 126. VétéFacile.ai
+
+> **Trouvez un vétérinaire disponible, estimez vos frais, et comparez les assurances animaux — en 2 minutes**
+
+### Problem
+La France compte **16 millions de chats, 8 millions de chiens** et 30 millions d'animaux de compagnie. **36% des propriétaires renoncent à des soins vétérinaires pour raisons financières** (enquête FACCO 2024). Les coûts vétérinaires ont augmenté de 40% en 5 ans : radio €80–€200, stérilisation €150–€400, urgence nocturne €300–€800. Les problèmes concrets :
+1. **Trouver un vétérinaire disponible** : les cliniques débordées ne prennent plus de nouveaux clients, les urgences de nuit sont introuvables
+2. **Anticiper les coûts** : personne ne sait ce que va coûter une consultation avant d'y aller
+3. **L'assurance animaux reste incomprise** : 5 millions d'animaux assurés en France vs 80 millions au Royaume-Uni — l'écart vient de la complexité des contrats et de l'absence d'outils de comparaison fiables
+4. **Obligations réglementaires** mal connues : puce obligatoire, déclaration chiens catégorisés (1ère et 2ème catégorie), permis de détention — la méconnaissance entraîne des amendes
+
+### Solution
+Application en 4 modules :
+1. **Vétérinaire Express :** Recherche géolocalisée avec filtres "accepte nouveaux patients", "urgences 24h/7j", "disponible aujourd'hui" — données Google Places + annuaire ONV (ordre public)
+2. **Estimateur de Frais :** L'utilisateur sélectionne l'animal (espèce, âge, race) et décrit le motif. L'IA estime la fourchette de coût + liste les actes probables
+3. **Comparateur Assurance :** Profil de l'animal → comparaison des 8 principales assurances françaises (Santevet, Bulle Bleue, Agria, MMA...) avec coût réel projeté sur 5 ans
+4. **Assistant Réglementaire :** Rappels identification obligatoire, déclaration chiens catégorisés, vaccins selon espèce, règles transport animal en avion
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Recherche vétérinaire | €0 | Trouver vétérinaire + horaires |
+| Estimation Frais | €1,99 | Estimation coût + actes probables |
+| Comparateur Assurance | €0 | Gratuit — commission affiliation 6–12% prime annuelle |
+| Premium | €4,99/mois | Accès complet + historique médical animal + rappels vaccins |
+| B2B Vétérinaires | €29/mois | Référencement premium + gestion RDV en ligne |
+
+**Unit economics :** Claude API ~€0,05/requête → marge >98%. Affiliation assurance : 1 000 contrats/mois × prime moyenne €250/an × 10% = **€2 500 MRR affiliation seul**. Abonnements Premium : 5 000 × €4,99 = **€25K MRR**. B2B vétérinaires : 500 × €29 = **€14 500 MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js PWA + Tailwind (Vercel) — mobile-first (utilisé en situation d'urgence)
+- **Annuaire vétérinaires :** Annuaire public ONV (Ordre National des Vétérinaires) + enrichissement Google Places API (horaires, avis, disponibilité)
+- **Disponibilités :** Google Maps API + intégration Vetolib (portail RDV vétérinaires — API partenaire)
+- **Base de tarifs :** JSON tarifs moyens nationaux par acte (source : enquêtes SNVEL, tarifs affichés en clinique)
+- **Données races :** Base pathologies fréquentes par race (open data + curation initiale)
+- **Assurances :** Scraping tarificateurs publics des 8 assureurs + partenariats affiliation directe
+- **AI :** Claude API (claude-sonnet-4-6) — estimation frais + conseil réglementaire + triage symptômes
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook propriétaires :** "Chiens de France" (800K membres), "Chat et maîtres" (400K membres) — "mon chat vomit que faire ?" posée 10× par jour
+2. **Reddit :** r/france, r/animaux, r/chats, r/chiens — forte demande urgences vétérinaires nocturnes
+3. **TikTok :** "Voilà ce que coûte vraiment une urgence vétérinaire la nuit — et comment payer moins" (viral garanti)
+4. **SEO :** "vétérinaire urgence nuit", "assurance chien comparatif 2026", "coût stérilisation chat France", "vétérinaire accepte nouveaux patients"
+5. **Partenariat refuges et SPA :** Refuges recommandent l'app aux nouveaux adoptants — canal d'acquisition ultra-qualifié
+
+### Competitive Moat
+- **Vetolib** gère les RDV mais n'estime pas les coûts et ne compare pas les assurances
+- **LeLynx, Hyperassur** comparent les assurances animaux sans profilage précis par race ni historique médical
+- La combinaison **urgence + estimation + assurance + réglementaire** en une seule app est unique sur le marché français
+- L'**historique médical** de l'animal (vaccins, traitements, maladies) crée une fidélisation extrêmement forte
+
+### Figma Schematic
+[View Ideas 124–126 on FigJam](https://www.figma.com/board/Y7dWkKxnnubFzy8AL8nW5P)
 
 ---
 
