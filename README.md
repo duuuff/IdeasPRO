@@ -134,6 +134,11 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 124 | [AgriPAC.ai](#124-agripacai) | Pay-per-report + Annual Subscription + B2B Chambres | €8K–€60K | Low-Medium |
 | 125 | [NoteBulletin.ai](#125-notebulletinai) | Freemium + Pay-per-report + Subscription | €5K–€40K | Low |
 | 126 | [VétéFacile.ai](#126-vétefacileai) | Freemium + Pay-per-estimation + Subscription + Affiliate | €8K–€55K | Low |
+| 127 | [ImpôtCrypto.ai](#127-impôtcryptoai) | Pay-per-declaration + Annual Subscription | €5K–€40K | Low |
+| 128 | [VoisinIA](#128-voisiia) | Pay-per-letter + Subscription | €4K–€25K | Low |
+| 129 | [FamilleNombreuse.ai](#129-famillenombreuse) | Freemium + Pay-per-guide + Subscription | €5K–€35K | Low |
+| 130 | [AbonnementScan.ai](#130-abonnementscanai) | Freemium + Pay-per-scan + Subscription | €6K–€40K | Low |
+| 131 | [CréditConso.ai](#131-créditconsoai) | Freemium + Pay-per-report + Affiliate | €8K–€55K | Low |
 
 ---
 
@@ -6772,6 +6777,288 @@ Application en 4 modules :
 
 ---
 
+## 127. ImpôtCrypto.ai
+
+> **Déclarez vos plus-values crypto en France en 10 minutes — formulaire 2086 généré automatiquement**
+
+### Problem
+La France compte **8 millions de détenteurs de cryptomonnaies** (Autorité des Marchés Financiers, 2025). Depuis 2019, toute cession de crypto est imposable selon l'article 150 VH bis du CGI : flat tax de 30%, calcul du prix de revient global, formulaire 2086 obligatoire. Les problèmes concrets :
+1. **Calcul complexe :** Le coût d'acquisition doit être recalculé à chaque opération selon une formule proportionnelle (portefeuille global × fraction cédée) — impossible à faire à la main avec des dizaines de transactions
+2. **Multi-exchanges :** Les utilisateurs jonglent entre Binance, Coinbase, Kraken, Ledger — aucun outil ne consolide tout automatiquement pour l'administration française
+3. **Formulaire 2086 inconnu :** 60% des détenteurs ignorent qu'ils doivent le remplir, s'exposant à un redressement fiscal (majorations 40% pour oubli délibéré)
+4. **Les comptables ne comprennent pas la crypto :** Une déclaration crypto chez un expert-comptable coûte €300–€800 — pour des gains parfois inférieurs
+
+### Solution
+Application en 3 étapes :
+1. **Import automatique :** L'utilisateur exporte son historique de transactions depuis Binance, Coinbase, Kraken (CSV standardisé) et les uploade en une fois
+2. **Calcul IA :** L'IA parse les transactions, applique la formule légale française du prix de revient global, identifie toutes les cessions imposables, calcule la plus-value nette
+3. **Génération formulaire :** Formulaire 2086 pré-rempli, prêt à reporter sur impots.gouv.fr + récapitulatif PDF pour archivage + alertes si stratégies de report légales disponibles (report en moins-value)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Calcul de base | €0 | Jusqu'à 10 transactions, résumé simplifié |
+| Déclaration complète | €9,99 | Calcul illimité + formulaire 2086 PDF |
+| Abonnement annuel | €24,99/an | Déclarations illimitées + alertes légales + historique 5 ans |
+| Pack Expert | €49,99 | Inclut révision par fiscaliste partenaire (Legalstart, Shine) |
+
+**Unit economics :** Claude API ~€0,08/calcul complexe → marge >98%. France : 8M détenteurs × taux de déclaration réelle ~40% = **3,2M contribuables concernés**. 50 000 déclarations payantes/an = **€500K de revenus annuels**. MRR abonnements : 5 000 × €24,99/12 = **€10K MRR récurrent**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — interface d'upload drag-and-drop
+- **Parseurs CSV :** Parseurs spécifiques par exchange (Binance, Coinbase, Kraken, Bitpanda, Ledger Live) — formats standardisés documentés publiquement
+- **Moteur fiscal :** Implémentation de l'art. 150 VH bis CGI — calcul prix de revient global, formule proportionnelle, abattement possible
+- **Génération PDF :** `pdf-lib` ou `@react-pdf/renderer` — formulaire 2086 conforme DGFiP
+- **Données marché :** API CoinGecko (historique des cours en EUR au moment de chaque transaction)
+- **AI :** Claude API (claude-sonnet-4-6) — parsing des CSV non-standard, détection anomalies, conseils d'optimisation
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/cryptomonnaie (150K membres), r/france — "comment déclarer ses cryptos ?" posée chaque saison fiscale (mars–mai), réponses très virales
+2. **Groupes Facebook crypto :** "Crypto France", "Bitcoin France" (200K+ membres combinés) — angoisses fiscales très fréquentes
+3. **YouTube/TikTok :** "J'ai failli avoir un redressement fiscal pour mes cryptos — voilà comment éviter ça" (format peur/solution = viral)
+4. **SEO :** "formulaire 2086", "comment déclarer crypto france 2026", "impôt bitcoin france", "calcul plus-value crypto" — 100K+ recherches/mois avril–mai
+5. **Partenariats** : Shine, Qonto, Legalstart — leurs clients crypto ont exactement ce besoin
+
+### Competitive Moat
+- **Koinly, Waltio** existent mais sont génériques (international), pas optimisés pour le formulaire 2086 spécifique à la France ni pour l'intégration impots.gouv.fr
+- La précision du calcul selon la loi française (prix de revient global, not FIFO/LIFO) est une barrière technique réelle
+- L'**historique multi-années** crée une fidélisation forte : une fois les données importées, l'utilisateur revient chaque année
+- Extension naturelle : alertes en temps réel quand vendre pour optimiser la fiscalité, intégration directe impots.gouv.fr via API DGFIP
+
+### Figma Schematic
+[View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
+## 128. VoisinIA
+
+> **Résolvez vos conflits de voisinage avec la loi de votre côté — lettres LRAR juridiques générées en 2 minutes**
+
+### Problem
+**3,8 millions de conflits de voisinage** sont traités chaque année en France (Ministère de la Justice). C'est la première cause de saisine des juges de proximité. Les problèmes sont universels et récurrents :
+1. **Bruit :** Musique, travaux, chien, talon, soirées — article R1334-31 du CSP, arrêté préfectoral, décret du 31 août 2006
+2. **Végétaux et haies :** Hauteur légale des haies (2m ou 1,5m selon zone), branches dépassantes, racines envahissantes — articles 671 à 673 du Code civil
+3. **Mitoyenneté :** Clôture, mur mitoyen, vue droite/oblique (articles 678-680 Code civil), règles d'implantation des constructions
+4. **Stationnement gênant :** Véhicule bloquant accès, épave sur voie privée, non-respect des servitudes de passage
+5. **Troubles anormaux du voisinage :** La théorie prétorienne des "troubles anormaux" — difficile à invoquer sans connaître la jurisprudence récente
+
+La plupart des gens ne savent pas que la **première lettre recommandée** est souvent suffisante pour résoudre le conflit (effet dissuasif de la formalité juridique). Ils ignorent aussi que la **médiation est gratuite** (médiateur de justice) avant tout recours judiciaire.
+
+### Solution
+Wizard en 4 étapes :
+1. **Qualification :** L'utilisateur décrit son conflit (type, fréquence, durée, preuves disponibles) → l'IA catégorise et identifie les textes de loi applicables
+2. **Stratégie :** Proposition de la meilleure approche : lettre amiable d'abord → LRAR formelle → médiation → juge de proximité — avec délais et coûts estimés pour chaque étape
+3. **Génération lettre :** LRAR formelle conforme, avec références légales exactes, pièces jointes suggérées, ton calibré (amiable mais ferme)
+4. **Suivi :** Rappels pour suivre la réponse du voisin, escalade automatique au niveau suivant si absence de réaction
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic | €0 | Identification du problème + loi applicable |
+| Lettre amiable | €0 | Modèle simple sans références légales |
+| Lettre LRAR Juridique | €4,99 | Lettre avec références légales + stratégie complète |
+| Pack Conflit Complet | €14,99 | 3 lettres + guide médiation + modèle saisine juge proximité |
+| Abonnement Pro | €7,99/mois | Illimité + suivi + accès base jurisprudence |
+
+**Unit economics :** Claude API ~€0,04/lettre → marge >99%. France : 3,8M conflits/an × taux numérique ~30% = **1,1M conflits potentiellement adressables**. 20 000 lettres payantes/mois = **€100K MRR potentiel**. Conservateur : 5 000 × €4,99 = **€25K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — wizard conversationnel mobile-first
+- **Base juridique :** JSON des articles pertinents (Code civil 544, 671-680, CSP R1334-31, etc.) + jurisprudence sélectionnée (Légifrance open data)
+- **Génération lettre :** Claude API → template structuré avec variables (nom voisin, adresse, nature conflit, textes applicables) → PDF via `pdf-lib`
+- **Géolocalisation :** API INSEE (règles PLU/POS varient selon commune pour les haies et constructions)
+- **Médiation :** Base des médiateurs de justice (annuaire MJD — données publiques) — orientation vers le médiateur compétent
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook voisinage :** "Entraide voisins France", "Questions juridiques entre voisins" (300K+ membres) — conflits postés en temps réel
+2. **Reddit :** r/france, r/droit — "mon voisin fait du bruit à 2h du matin, que faire ?" = post type toutes les semaines
+3. **Mairies et syndics :** Partenariat avec syndics de copropriété — recommandent l'outil aux copropriétaires avant de gérer le conflit eux-mêmes
+4. **SEO :** "lettre voisin bruit modèle", "droit haie voisin france", "conflit voisinage que faire", "modèle lettre recommandée voisin"
+5. **TikTok :** "Voilà comment j'ai réglé mon conflit de voisinage avec une lettre de 5€ et la loi" (format très partageable)
+
+### Competitive Moat
+- Les sites de modèles de lettres (documentissime, modele-lettres.com) ne qualifient pas le problème, ne citent pas les lois exactes, et ne génèrent pas de stratégie
+- Aucun service n'offre le **parcours complet** : diagnostic → lettre → médiation → juge de proximité
+- La base de données juridiques locale (PLU, règles communales sur haies) est un actif construit dans le temps
+- L'**historique des lettres** (dates, réponses) constitue un dossier de preuve si le conflit monte au tribunal
+
+### Figma Schematic
+[View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
+## 129. FamilleNombreuse.ai
+
+> **Découvrez toutes les aides et réductions auxquelles vous avez droit avec 3 enfants ou plus — en 5 minutes**
+
+### Problem
+La France compte **1,5 million de familles nombreuses** (3 enfants et plus). Ces familles ont accès à un écosystème massif d'avantages, mais celui-ci est si fragmenté que la majorité des familles **laissent des centaines d'euros sur la table chaque année** :
+1. **Carte famille nombreuse SNCF :** Réductions de 30% à 75% sur les billets train — mais seulement 600 000 familles l'utilisent sur 1,5M éligibles
+2. **Quotient familial CAF :** Réductions d'activités (sport, culture, loisirs) basées sur le QF — méconnu des familles ne fréquentant pas la CAF régulièrement
+3. **Avantages fiscaux :** Parts supplémentaires (3ème enfant = +1 part entière), crédits d'impôt garde, déductions frais scolarité — souvent mal optimisés
+4. **Réductions mairies et collectivités :** Tarifs réduits piscine, bibliothèque, activités périscolaires, transports en commun — varient par commune et sont quasi impossibles à lister sans chercher activement
+5. **Avantages commerçants et loisirs :** Cinémas (UGC, Pathé), parcs d'attractions (Disneyland, Parc Astérix), musées, restaurants familiaux — non centralisés
+6. **Abonnements téléphonie/internet :** Orange, SFR, Bouygues, Free proposent des tarifs familles nombreuses moins connus
+
+### Solution
+Application en 3 étapes :
+1. **Profil famille :** Nombre d'enfants, âges, commune, revenus (pour QF CAF), statut professionnel des parents
+2. **Découverte complète :** L'IA génère la liste personnalisée et priorisée de **tous** les avantages applicables : nationaux (SNCF, fiscalité, CAF), régionaux, communaux, et commerçants partenaires — avec économie annuelle estimée par avantage
+3. **Dossiers guidés :** Pour chaque avantage sélectionné, guide pas à pas pour en faire la demande (documents requis, délais, liens officiels)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Découverte de base | €0 | 10 avantages nationaux principaux listés |
+| Rapport complet | €3,99 | Liste exhaustive personnalisée + économies estimées |
+| Dossiers guidés | €1,99/dossier | Guide complet pour une démarche spécifique |
+| Abonnement Famille | €4,99/mois | Tout inclus + alertes nouveaux avantages + mise à jour annuelle |
+| B2B CSE | €49/mois | Tableau de bord CSE pour informer les salariés familles nombreuses |
+
+**Unit economics :** Claude API ~€0,05/rapport → marge >98%. France : 1,5M familles × digital adoption 60% = **900K familles adressables**. 20 000 rapports payants = **€80K MRR potentiel**. Conservateur réaliste : 5 000 abonnements × €4,99 = **€25K MRR**. B2B CSE : 200 CSE × €49 = **€10K MRR supplémentaire**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — wizard + dashboard famille
+- **Base d'avantages :** JSON structuré par catégorie (national/régional/communal/privé), enrichi manuellement + crawl régulier des sites officiels (SNCF, CAF, mairies)
+- **QF CAF :** Calcul automatique du Quotient Familial à partir des revenus déclarés → lookup table des seuils
+- **Données communes :** API INSEE + scraping sites mairies pour réductions locales (1-2 semaines de constitution de la base initiale)
+- **AI :** Claude API (claude-sonnet-4-6) — personnalisation de la liste, estimation des économies, rédaction des guides de démarche
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook familles nombreuses :** "Familles nombreuses de France" (180K membres), "Maman de 3 enfants et +" (250K membres) — communautés très actives et très partageuses
+2. **Instagram/TikTok famille :** Contenu "5 avantages familles nombreuses que vous ne connaissez pas" — format viral naturel
+3. **Reddit :** r/france, r/Parenting_France — questions sur les aides pour familles posées régulièrement
+4. **SEO :** "avantages famille nombreuse france 2026", "carte famille nombreuse SNCF", "réductions famille 3 enfants", "aide CAF famille nombreuse"
+5. **Partenariats CSE :** Les comités d'entreprise cherchent des outils à proposer à leurs salariés — canal B2B naturel
+
+### Competitive Moat
+- **CAF.fr** n'agrège pas les avantages privés ni les réductions locales
+- Aucun outil ne **personnalise par commune** et n'estime les **économies réelles** pour chaque famille
+- La base d'avantages (nationale + régionale + locale + privée) est un actif difficile à répliquer rapidement
+- L'**alerte sur les nouveaux avantages** (nouvelles conventions SNCF, nouveaux partenaires CAF) crée un abonnement annuel naturel
+
+### Figma Schematic
+[View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
+## 130. AbonnementScan.ai
+
+> **Uploadez votre relevé bancaire — l'IA détecte tous vos abonnements oubliés et résilie en masse**
+
+### Problem
+Selon une étude C-Zam/OpinionWay (2024), le foyer français dépense en moyenne **€312/an en abonnements dont il n'a plus conscience** (streaming oublié, essai gratuit jamais annulé, abonnement presse numérique, gym non fréquenté, logiciel, jeu mobile…). Les raisons :
+1. **Prolifération des abonnements :** Un foyer type souscrit à 12–15 abonnements différents en 2026 vs 4–5 en 2018
+2. **Camouflage bancaire :** Les libellés bancaires sont cryptiques (« AMZN DIGITAL », « SPFY », « NFLX ») et les prélèvements de 2–5€/mois passent inaperçus dans un relevé mensuel
+3. **Résiliation difficile :** Les services en ligne rendent la résiliation volontairement complexe (dark patterns) — certains n'ont pas de bouton "résilier" visible
+4. **Aucun outil existant** ne part du relevé bancaire réel pour faire la détection — les apps de gestion budget existent mais ne génèrent pas les lettres de résiliation
+
+**Différence avec RésilIA (#38) :** RésilIA génère une lettre pour un service que l'utilisateur a déjà identifié. AbonnementScan découvre d'abord les abonnements oubliés depuis les données bancaires, puis propose la résiliation en masse.
+
+### Solution
+Workflow en 3 étapes :
+1. **Upload relevé :** L'utilisateur exporte son relevé bancaire au format PDF ou OFX (toutes les banques françaises le proposent) et l'uploade — 0 connexion bancaire ouverte, 0 données bancaires stockées (traitement local + suppression immédiate)
+2. **Détection IA :** L'IA parse le relevé, identifie les prélèvements récurrents (même montant ± 10% sur 2+ mois), les associe à des services connus (base de 500 services référencés), catégorise et présente le tableau "voici tous vos abonnements actifs + coût annuel estimé"
+3. **Résiliation en masse :** Pour chaque abonnement sélectionné par l'utilisateur → génération de la lettre de résiliation adaptée (email, courrier LRAR si nécessaire, lien direct vers page résiliation)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Scan de base | €0 | Détecte jusqu'à 5 abonnements, résumé sans détails |
+| Scan complet | €4,99 | Détection illimitée + coût annuel estimé + lettres de résiliation |
+| Abonnement mensuel | €3,99/mois | Scan mensuel automatique + alertes nouveaux abonnements détectés |
+| Abonnement annuel | €29,99/an | Tout inclus + rapport annuel "économies réalisées" |
+
+**Unit economics :** Claude API ~€0,06/scan PDF → marge >98%. Marché : 30M de foyers français, pénétration cible 1% = **300 000 utilisateurs potentiels**. 30 000 scans payants/mois = **€150K MRR potentiel**. Réaliste : 8 000 abonnements × €3,99 = **€32K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — zone de drag-and-drop pour PDF
+- **Parsing PDF :** `pdf.js` (client-side, zéro données envoyées au serveur) → extraction texte brut → Claude API analyse
+- **Base abonnements :** JSON de 500+ services avec libellés bancaires associés (AMZN DIGITAL = Amazon Prime, SPFY = Spotify, etc.) — construit manuellement et enrichi par l'IA sur les inconnus
+- **Génération lettres :** Templates résiliation par type de service (email préformaté, lettre LRAR, lien direct) — mis à jour régulièrement
+- **Confidentialité :** Traitement côté client si possible (pdf.js), sinon serveur éphémère avec suppression immédiate des données — affichage d'un badge "Vos données ne sont pas conservées"
+- **AI :** Claude API (claude-sonnet-4-6) — identification des libellés inconnus, classification, génération des lettres personnalisées
+- **Backend :** Supabase (comptes utilisateurs uniquement) + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/finances_perso — "j'ai découvert que je payais 47€/mois d'abonnements que j'avais oubliés" = post récurrent et viral
+2. **TikTok :** "J'ai uploadé mon relevé bancaire et voilà ce que l'IA a trouvé — j'économise 312€/an" (format révélation = très partageable)
+3. **Groupes Facebook budget famille :** "Zéro dépense superflu", "Budget serré France" (500K+ membres combinés) — cible parfaite
+4. **SEO :** "trouver abonnements oubliés banque", "annuler abonnements oubliés", "dépenses récurrentes oubliées comment trouver"
+5. **Presse éco :** Pitch à Capital.fr, BFM Business, Moneyvox — sujet parfait pour article "comment économiser sans effort"
+
+### Competitive Moat
+- **Linxo, Bankin'** font de l'agrégation bancaire mais nécessitent une connexion ouverte à la banque (friction énorme) et ne génèrent pas les lettres de résiliation
+- Le fait de **partir du PDF** (et non d'une connexion open banking) élimine la friction réglementaire et les peurs de l'utilisateur
+- La base de **mapping libellés → services** (libellé bancaire cryptique → nom du service + procédure de résiliation) est un actif propriétaire qui grandit avec les scans
+- Extension naturelle : recommander des alternatives moins chères pour chaque abonnement (affiliation) → **€ supplémentaires par scan**
+
+### Figma Schematic
+[View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
+## 131. CréditConso.ai
+
+> **Calculez le coût réel de votre crédit conso, optimisez votre remboursement et négociez avec votre banque**
+
+### Problem
+L'encours de crédit à la consommation en France dépasse **190 milliards d'euros** (Banque de France, T1 2026) pour 25 millions de ménages emprunteurs. La quasi-totalité ne maîtrise pas les mécanismes de son propre crédit :
+1. **TAEG incompris :** Le Taux Annuel Effectif Global affiché est correct mais personne ne sait calculer le coût total réel en euros sur la durée, ni comment il évolue s'ils remboursent par anticipation
+2. **Remboursement anticipé ignoré :** L'article L312-34 du Code de la consommation garantit le droit de rembourser par anticipation avec des indemnités plafonnées à 0,5%–1% — des dizaines de milliards d'euros de crédit ne sont jamais remboursés par anticipation par manque d'information
+3. **Rachat de crédit non initié :** Avec la baisse des taux (2024–2026), des millions d'emprunteurs pourraient faire racheter leur crédit à un taux inférieur et économiser des centaines d'euros — mais la démarche paraît complexe
+4. **Crédits revolving:** Les crédits renouvelables (type Cetelem, Cofidis, Floa) ont des taux à 18–22% et des mécanismes de prélèvement minimum qui allongent la durée à l'infini — beaucoup de détenteurs ne comprennent pas qu'ils ne remboursent que les intérêts
+
+**Différence avec SurendettementGuide.ai (#72) :** SurendettementGuide cible les situations de détresse extrême (dossier Banque de France). CréditConso.ai cible les ménages avec des crédits normaux qui veulent les optimiser proactivement.
+
+### Solution
+Tableau de bord en 4 modules :
+1. **Radiographie crédit :** L'utilisateur entre ses crédits (montant restant dû, taux, mensualité, durée restante) → l'IA calcule le coût total réel restant en euros, génère le tableau d'amortissement détaillé, identifie la part intérêts vs capital pour chaque mensualité
+2. **Simulateur remboursement anticipé :** "Si je rembourse 2 000€ en plus ce mois → économie X€ d'intérêts + durée réduite de Y mois + indemnité maximale légale Z€"
+3. **Alerte rachat de crédit :** Compare le taux actuel du marché (scraping des offres Cetelem, Sofinco, Younited Credit) au taux de l'emprunteur → "Vous économiseriez €X en faisant racheter votre crédit aujourd'hui — voilà comment"
+4. **Lettre de négociation :** Génère une lettre formelle pour demander une réduction de taux à la banque (avec arguments légaux et marché actuels)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Radiographie crédit | €0 | 1 crédit analysé, tableau d'amortissement simplifié |
+| Analyse complète | €4,99 | Tous les crédits + simulateur remboursement anticipé |
+| Abonnement | €6,99/mois | Suivi mensuel + alertes rachat + mise à jour taux marché |
+| Lettre de négociation | €2,99 | Lettre personnalisée pour renégocier avec sa banque |
+| Affiliation rachat | €0 | Gratuit — commission 0,5–1% sur crédit racheté via partenaire |
+
+**Unit economics :** Claude API ~€0,05/analyse → marge >99%. Marché : 25M ménages avec crédit conso × taux digital 50% = **12,5M adressables**. Affiliation : 1 000 rachats × crédit moyen €8 000 × 1% = **€80K/mois affiliation seule**. Abonnements : 8 000 × €6,99 = **€56K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — dashboard avec graphiques d'amortissement (Chart.js ou Recharts)
+- **Moteur financier :** Calcul TAEG, tableau d'amortissement, simulation remboursement anticipé — formules financières standards implémentées en TypeScript (zéro dépendance externe)
+- **Données marché :** Scraping hebdomadaire des meilleurs taux du moment (Meilleurtaux, Younited Credit, Cetelem offres en ligne) — stockés dans Supabase
+- **Génération PDF :** Tableau d'amortissement + rapport analyse → PDF partageable
+- **Affiliation :** Partenariats Meilleurtaux, Younited Credit, Boursorama (programmes d'affiliation ouverts)
+- **AI :** Claude API (claude-sonnet-4-6) — interprétation des données crédit, rédaction des lettres de négociation, conseils personnalisés
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/finances_perso, r/immobilier — "est-ce que ça vaut le coup de racheter mon crédit conso ?" posée chaque semaine
+2. **Groupes Facebook budget :** "Budget et économies France", "Famille et finances" (400K+ membres) — public parfaitement ciblé
+3. **TikTok :** "Mon crédit à la consommation me coûte en réalité X€ — voilà comment j'aurais pu économiser" (format choc révélation)
+4. **SEO :** "calculer cout crédit conso", "remboursement anticipé crédit conso france", "renégocier crédit conso banque", "rachat crédit conso taux 2026"
+5. **Partenariats :** Younited Credit, Meilleurtaux — ils ont intérêt à envoyer des clients qui veulent racheter leur crédit
+
+### Competitive Moat
+- **Meilleurtaux, Empruntis** existent pour comparer les offres initiales mais n'analysent pas les crédits existants ni ne génèrent les lettres de négociation
+- Le module **"lettre de négociation banque"** est unique — les banques accordent souvent une réduction de taux sur demande écrite formelle, un secret très peu connu
+- L'**historique des remboursements** et l'alerte "le bon moment pour racheter" créent une fidélisation mensuelle naturelle
+- Extension naturelle : regroupement de crédits, crédit immobilier (renégociation), assurance emprunteur (loi Lemoine 2022) — chaque module devient une nouvelle source d'affiliation
+
+### Figma Schematic
+[View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -6784,4 +7071,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-05-30 — Ideas 119–123 added (France-specific, ultra-low-budget: DossierLocatif.ai, MédecinFR.ai, PLU.ai, CompareStatuts.ai, PrimeAutoVerte.ai)*
+*Last updated: 2026-06-01 — Ideas 127–131 added (France-specific, ultra-low-budget: ImpôtCrypto.ai, VoisinIA, FamilleNombreuse.ai, AbonnementScan.ai, CréditConso.ai)*
