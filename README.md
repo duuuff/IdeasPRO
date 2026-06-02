@@ -139,6 +139,11 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 129 | [FamilleNombreuse.ai](#129-famillenombreuse) | Freemium + Pay-per-guide + Subscription | €5K–€35K | Low |
 | 130 | [AbonnementScan.ai](#130-abonnementscanai) | Freemium + Pay-per-scan + Subscription | €6K–€40K | Low |
 | 131 | [CréditConso.ai](#131-créditconsoai) | Freemium + Pay-per-report + Affiliate | €8K–€55K | Low |
+| 132 | [NégocierSalaire.ai](#132-négociersalaireai) | Freemium + Pay-per-dossier + Subscription | €8K–€60K | Low |
+| 133 | [LivreurFuté.ai](#133-livreurFutéai) | Freemium + Subscription | €5K–€40K | Low |
+| 134 | [AlerteUrbanisme.ai](#134-alerteurbanismeai) | Pay-per-report + Subscription + B2B | €6K–€45K | Low |
+| 135 | [FraisRéels.ai](#135-fraisréelsai) | Freemium + Pay-per-simulation + Annual Subscription | €6K–€45K | Low |
+| 136 | [DevisGarage.ai](#136-devisgarageai) | Freemium + Pay-per-analysis + Subscription | €8K–€60K | Low |
 
 ---
 
@@ -7056,6 +7061,281 @@ Tableau de bord en 4 modules :
 
 ### Figma Schematic
 [View Ideas 127–131 on FigJam](https://www.figma.com/board/DdHYObdIdB0C2fxUktxflv)
+
+---
+
+## 132. NégocierSalaire.ai
+
+> **Négociez votre salaire en vous appuyant sur votre convention collective et les données du marché**
+
+### Problem
+En France, 68% des salariés n'ont jamais négocié leur salaire (enquête Glassdoor 2025). Les raisons principales :
+1. **Méconnaissance de la convention collective :** Chaque salarié est couvert par une convention collective (CCN) qui fixe des grilles salariales minimales par coefficient — la grande majorité des salariés ne connaissent pas leur coefficient ni leur salaire minimum légal dans leur branche
+2. **Asymétrie d'information totale :** L'employeur connaît les grilles, le salarié non — cette asymétrie coûte en moyenne **€180/mois** aux salariés sous-payés vs. leur minimum conventionnel
+3. **Absence d'argumentaire structuré :** "Je mérite plus" ne fonctionne pas — mais un dossier qui cite le coefficient conventionnel, le salaire médian de la branche (DARES), et la valeur marché (INSEE, Glassdoor) change la conversation
+4. **Peur du refus :** Sans script de négociation, les salariés abandonnent à la première objection
+
+### Solution
+Application en 3 étapes :
+1. **Diagnostic :** Saisie du poste, secteur, département, années d'expérience, salaire actuel → l'IA identifie la convention collective applicable, le coefficient théorique, le salaire minimum conventionnel, et le salaire médian du marché
+2. **Dossier de négociation :** Rapport PDF personnalisé incluant : comparatif salaire actuel vs. minimum CCN vs. marché, arguments légaux (obligation de revalorisation), arguments marché, simulation gain annuel (+5% / +10% / +15%), et script de négociation en 3 scénarios (entretien annuel, demande spontanée, nouvelle offre)
+3. **Suivi et relance :** Si refus, génération d'une lettre formelle de demande de revalorisation avec argumentation DARES et évolution du SMIC
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic rapide | €0 | Salaire vs. marché, coefficient CCN estimé |
+| Dossier complet | €9,99 | Rapport PDF + script + 3 scénarios de négociation |
+| Abonnement | €4,99/mois | Veille continue sur les revalorisations CCN + alertes |
+| Lettre formelle | €3,99 | Lettre de demande de revalorisation générée |
+
+**Unit economics :** Claude API ~€0,08/dossier → marge >99%. France : 27M salariés du privé × 15% sous-payés vs. CCN = **4M adressables urgents**. 20 000 dossiers × €9,99 = **€200K MRR potentiel**. Réaliste : 5 000 dossiers/mois = **€50K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel)
+- **Base CCN :** Les 300 principales conventions collectives françaises sont disponibles sur Légifrance en open data — JSON structuré par IDCC, secteur, grilles de coefficient et salaires minimaux
+- **Données marché :** DARES (salaires par branche, disponibles en open data), enrichi par scraping Glassdoor et LinkedIn Salary
+- **Génération PDF :** Rapport personnalisé avec graphiques comparatifs
+- **AI :** Claude API (claude-sonnet-4-6) — identification CCN, rédaction scripts de négociation, personnalisation des arguments
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/finances_perso — "comment savoir si je suis payé selon ma convention collective ?" = question fréquente et sans réponse claire
+2. **LinkedIn :** Contenu "Êtes-vous payé selon votre CCN ?" — fort potentiel viral chez les RH et salariés
+3. **TikTok :** "J'étais payé €200/mois en dessous de mon minimum légal sans le savoir" — format révélation
+4. **SEO :** "salaire minimum convention collective 2026", "négocier augmentation salaire france", "coefficient convention collective salaire"
+5. **Partenariats syndicaux :** Les syndicats (CGT, CFDT, FO) ont intérêt à diffuser un outil qui aide leurs adhérents à connaître leurs droits
+
+### Competitive Moat
+- **Glassdoor, LinkedIn Salary** existent mais ne s'appuient pas sur la convention collective — le droit français offre un levier légal que les outils américains ignorent totalement
+- La base CCN structurée (300+ conventions, grilles de coefficients) est un actif difficile à construire rapidement
+- Le **script de négociation contextualisé** (secteur, département, ancienneté) est unique sur le marché français
+- Extension naturelle : alerte automatique "votre CCN vient d'être revalorisée — demandez une augmentation maintenant" = abonnement récurrent naturel
+
+### Figma Schematic
+[View Ideas 132–136 on FigJam](https://www.figma.com/board/2irmaMv1kQqnAT18iqsBkn)
+
+---
+
+## 133. LivreurFuté.ai
+
+> **Le tableau de bord fiscal de l'auto-entrepreneur livreur : optimisez vos charges, déclarez sans erreur**
+
+### Problem
+La France compte **320 000 livreurs auto-entrepreneurs** actifs sur les plateformes (Uber Eats, Deliveroo, Stuart, Yango, Amazon Flex) en 2026 — un chiffre qui a quadruplé depuis 2019. Ces travailleurs sont ultra-connectés (smartphone natif) mais fiscalement abandonnés :
+1. **Optimisation fiscale inconnue :** L'abattement forfaitaire de 50% (BIC prestations de services) est automatique, mais les **frais réels** (véhicule, téléphone, équipements) peuvent être supérieurs — personne ne le leur explique
+2. **Déclarations URSSAF mal faites :** Beaucoup confondent chiffre d'affaires et revenu, déclarent des erreurs trimestrielles, ratent les seuils de la franchise TVA (€91 900 en 2026 pour les services)
+3. **Seuils micro-entrepreneur ignorés :** Franchissement du seuil → passage obligatoire à un régime réel → majorité des livreurs ne l'anticipent pas et sont rattrapés avec pénalités
+4. **Accident et couverture :** La gestion des accidents (AT non salarié, invalidité) et leur impact fiscal est un angle mort total
+
+### Solution
+Dashboard auto-entrepreneur spécialisé plateforme gig :
+1. **Compteur en temps réel :** Saisie des courses effectuées → calcul automatique CA cumulé, charges URSSAF dues, net estimé après abattement ou frais réels (comparaison des deux régimes)
+2. **Optimiseur frais réels :** Le livreur log ses km, son carburant, l'entretien de son véhicule, son abonnement téléphonique pro — l'IA calcule si l'option frais réels est avantageuse et de combien
+3. **Génération déclarations :** Pré-remplissage des déclarations URSSAF trimestrielles (CA exact par activité, option micro-fiscal ou versement libératoire) — copier-coller sur autoentrepreneur.urssaf.fr
+4. **Alertes seuils :** Alerte à 75%, 90%, 95% du seuil micro-entrepreneur + simulation du passage au régime réel
+5. **Guide accident :** Si accident pendant une course, checklist immédiate : déclarer à la plateforme, contacter CPAM, droits AT indépendant vs. salarié
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Suivi CA basique | €0 | Compteur CA, calcul URSSAF basique, 1 plateforme |
+| Abonnement mensuel | €3,99/mois | Toutes plateformes, optimiseur frais réels, alertes seuils, déclarations pré-remplies |
+| Abonnement annuel | €29,99/an | Tout inclus + historique annuel + rapport fiscal de fin d'année |
+| Consultation fiscale | €9,99 | Session 30min avec un comptable partenaire (B2B avec cabinets comptables) |
+
+**Unit economics :** Coût technique ~€0,02/déclaration → marge >98%. 320 000 livreurs × 30% actifs réguliers = **96 000 adressables**. 15 000 abonnés × €3,99 = **€60K MRR potentiel**. Réaliste : 5 000 abonnés = **€20K MRR + B2B comptables**.
+
+### Tech Stack
+- **Frontend :** React Native (iOS + Android) — livreurs = mobile-first absolu
+- **Moteur fiscal :** Calcul URSSAF par taux d'activité (achat-revente 12,3%, prestations de services 21,2%, libéral BNC 23%), seuils micro, franchise TVA — logique TypeScript pur
+- **Données véhicule :** Barème kilométrique fiscal officiel (publié chaque année par l'administration fiscale) intégré
+- **PDF déclarations :** Génération pré-remplie du format URSSAF
+- **AI :** Claude API (claude-sonnet-4-6) — conseils optimisation, réponses aux questions fiscales complexes, rédaction du rapport de fin d'année
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook livreurs :** "Livreurs Uber Eats France" (180K membres), "Auto-entrepreneurs livreurs" (95K membres) — communautés ultra-actives cherchant exactement ce type d'outil
+2. **TikTok livreur :** "Voilà combien je gagne réellement par heure après charges" — format addictif dans la communauté
+3. **Reddit :** r/livreur, r/AutoEntrepreneurFrance — questions fiscales posées quotidiennement
+4. **YouTube :** "Comment déclarer ses revenus Uber Eats" — SEO fort, pas de concurrent sérieux
+5. **B2B comptables :** Les experts-comptables qui ont des clients auto-entrepreneurs voudront référencer l'outil
+
+### Competitive Moat
+- **AutoEntrepreneur.info** existe mais est un site informatif, pas un outil de calcul personnalisé
+- La **spécialisation plateforme** (Uber Eats, Deliveroo, etc.) avec gestion multi-plateforme dans un seul tableau de bord est unique
+- L'optimiseur **frais réels vs. abattement** spécifique aux livreurs (barème km vélo vs. moto vs. voiture vs. vélo cargo) est une différenciation forte
+- Extension : assurance auto-entrepreneur intégrée (affiliation), carte carburant pro partenaire → revenus additionnels
+
+### Figma Schematic
+[View Ideas 132–136 on FigJam](https://www.figma.com/board/2irmaMv1kQqnAT18iqsBkn)
+
+---
+
+## 134. AlerteUrbanisme.ai
+
+> **Soyez alerté dès qu'un permis de construire est déposé à proximité de votre propriété**
+
+### Problem
+En France, **1,2 million de permis de construire et déclarations préalables** sont déposés chaque année (SITADEL 2025). Ces documents sont publics mais :
+1. **Invisibles en pratique :** Les dépôts sont affichés pendant 2 mois sur un panneau à la mairie et sur le portail de la commune — 99% des voisins et propriétaires ne les voient jamais
+2. **Impact financier direct :** Un immeuble qui cache votre vue peut faire perdre **15-25% de la valeur de votre bien**. Un entrepôt logistique, une antenne relais, ou un élevage intensif en zone agricole périurbaine peuvent ruiner un investissement immobilier
+3. **Droit de recours ignoré :** Les voisins ont **2 mois** après l'affichage du permis pour déposer un recours gracieux ou contentieux — délai inconnu de la grande majorité des propriétaires
+4. **Investisseurs immobiliers aveugles :** Acheter un bien sans savoir si un projet de construction est en cours dans un rayon de 200m est un risque majeur non géré
+
+### Solution
+Service d'intelligence urbanistique personnalisée :
+1. **Enregistrement d'adresses surveillées :** L'utilisateur entre une ou plusieurs adresses (sa résidence principale, son investissement locatif, un bien qu'il envisage d'acheter)
+2. **Monitoring automatique :** Le système surveille quotidiennement les portails de demandes de permis (Géoportail Urbanisme API, portails communes, SITADEL) dans un rayon paramétrable (50m, 100m, 300m, 1km)
+3. **Alerte enrichie :** Dès un nouveau dépôt, notification avec : type de projet, surface, hauteur, distance, coordonnées du demandeur, analyse d'impact sur la valeur du bien, et — si pertinent — guide de recours
+4. **Rapport avant achat :** Rapport instantané "Qu'est-ce qui est prévu autour de ce bien ?" pour tout acheteur immobilier avant signature
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Rapport ponctuel | €4,99 | Analyse de tout ce qui est prévu autour d'une adresse |
+| Surveillance mensuelle | €3,99/adresse/mois | Alertes en temps réel, 1 adresse |
+| Pack investisseur | €14,99/mois | 5 adresses surveillées + rapport mensuel + guide recours |
+| B2B agences | €99/mois | 50 adresses, dashboard agence, rapport de due diligence |
+| B2B notaires | €149/mois | Intégration due diligence vente + alertes portefeuille client |
+
+**Unit economics :** Appels API Géoportail gratuits (open data) + Claude API ~€0,04/rapport → marge >99%. France : 36M propriétaires × 15% actifs en gestion = **5,4M adressables**. 5 000 abonnés × €3,99 = **€20K MRR**. B2B : 100 agences × €99 = **€10K MRR**. Réaliste an 1 : **€30K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind + Mapbox pour la visualisation des périmètres
+- **Données urbanisme :** API Géoportail Urbanisme (IGN, open data), SITADEL open data (permis accordés), portails ADS communaux — scraping quotidien si pas d'API
+- **Système d'alertes :** Job CRON quotidien → diff vs. base précédente → notification push/email pour chaque adresse surveillée
+- **Geocoding :** API Adresse (data.gouv.fr) pour convertir adresses en coordonnées
+- **Analyse d'impact :** Claude API (claude-sonnet-4-6) — résumé du projet, analyse d'impact potentiel sur le bien surveillé, guide recours si applicable
+- **Backend :** Supabase + Stripe (abonnements récurrents par adresse)
+
+### Go-to-Market (zéro budget)
+1. **Forums immobilier :** Forum SeLoger, Immo-Forum.fr, r/immobilier — "comment savoir ce qui va être construit près de mon futur achat ?" = question sans réponse
+2. **Groupes Facebook propriétaires :** "Propriétaires bailleurs France", "Investissement locatif clé en main" (300K+ membres combinés)
+3. **LinkedIn :** Agents immobiliers, notaires, CGP — outil qu'ils peuvent proposer à leurs clients
+4. **SEO :** "permis de construire voisin comment savoir", "recours permis de construire délai", "projet construction près de chez moi"
+5. **Partenariats :** SeLoger, Meilleurs Agents pourraient intégrer ce service dans leur parcours acheteur
+
+### Competitive Moat
+- **Géoportail Urbanisme** existe (open data officiel) mais est incompréhensible pour un non-spécialiste et ne génère pas d'alertes automatiques
+- Aucun service commercial français ne fait de la **surveillance d'adresse + alertes** sur les permis de construire
+- L'**analyse d'impact** (comment ce projet affecte votre bien spécifiquement) et le guide de recours sont des différenciateurs forts
+- Extension : alertes sur les révisions de PLU (zones constructibles modifiées) → impact encore plus fort sur les valeurs foncières
+
+### Figma Schematic
+[View Ideas 132–136 on FigJam](https://www.figma.com/board/2irmaMv1kQqnAT18iqsBkn)
+
+---
+
+## 135. FraisRéels.ai
+
+> **Découvrez si l'option frais réels vous fait économiser des impôts — et générez votre justificatif complet**
+
+### Problem
+En France, l'administration fiscale applique automatiquement une **déduction forfaitaire de 10%** sur les salaires pour frais professionnels. Mais les contribuables peuvent opter pour les **frais réels** s'ils sont supérieurs. Cette option est massivement sous-utilisée :
+1. **Méconnaissance totale :** Seulement 5% des salariés optent pour les frais réels (DGFiP) alors que beaucoup y auraient intérêt
+2. **Éligibles non-déclarants :** Les personnes avec un long trajet domicile-travail (frais kilométriques), travaillant en télétravail (bureau, matériel, internet), en formation continue, ou utilisant leur voiture personnelle pour des déplacements professionnels peuvent déduire des milliers d'euros
+3. **Calcul perçu comme complexe :** Le barème kilométrique, les règles de prise en charge à 50% du trajet aller-retour, la limite de 40km aller, les justificatifs requis — autant de barrières qui découragent avant d'essayer
+4. **Erreurs de calcul coûteuses :** Un mauvais calcul peut entraîner un redressement — et personne ne veut prendre ce risque sans être sûr
+
+**Montant moyen de gain pour un éligible :** €680/an (source : DGFiP). Pour un salarié avec 50km aller-retour et 250 jours travaillés en voiture 6CV : **€4 200 de frais réels vs. €2 100 de déduction forfaitaire 10% sur €21 000 de salaires** → gain d'impôt d'environ **€525** pour une TMI à 30%.
+
+### Solution
+Outil en 4 étapes :
+1. **Questionnaire de pré-qualification :** 5 questions → "Vaut-il le coup de faire les frais réels pour vous ?" avec estimation gain potentiel immédiate
+2. **Calculateur détaillé :** Kilométrage (barème officiel intégré, mis à jour chaque année), télétravail (nombre de jours × forfait €2,50/jour ou coûts réels bureau/énergie), formation, repas, équipements pro → total frais réels vs. déduction forfaitaire
+3. **Générateur de justificatifs :** Tableau de suivi des trajets (à imprimer et faire valider), liste de justificatifs requis par catégorie, checklist de conservation
+4. **Pré-remplissage déclaration :** Les montants exacts à reporter sur la déclaration 2042 (case 1AK/1BK), avec explication ligne par ligne
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Pré-qualification | €0 | "Êtes-vous éligible ?" et gain estimé |
+| Calcul complet + justificatifs | €4,99 | Calcul détaillé + générateur de documents + pré-remplissage déclaration |
+| Abonnement annuel | €9,99/an | Suivi continu (log des trajets auto), mise à jour barèmes, rappel déclaration |
+| Pack famille | €14,99/an | 2 déclarants dans le foyer fiscal |
+
+**Unit economics :** Claude API ~€0,03/calcul → marge >99%. France : 27M déclarants salariés × 30% potentiellement éligibles = **8,1M adressables**. 30 000 calculs × €4,99 = **€150K MRR potentiel** (pic mars-mai). Abonnements récurrents : 10 000 × €9,99/an = **€100K ARR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — wizard multi-étapes + dashboard suivi annuel
+- **Moteur fiscal :** Barèmes kilométriques (DGFiP, mis à jour chaque janvier) + règles frais réels (40km domicile-travail, 50% covoiturage, etc.) — TypeScript pur, zéro dépendance
+- **Log de trajets :** LocalStorage (côté client) pour suivi quotidien des km, sync Supabase si abonné
+- **Génération PDF :** Tableau annuel des trajets + rapport de déclaration + liste justificatifs
+- **AI :** Claude API (claude-sonnet-4-6) — interprétation des cas complexes (double résidence, mi-temps, CDD multi-employeurs), rédaction des justificatifs atypiques
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/finances_perso — "est-ce que l'option frais réels vaut le coup pour moi ?" = question posée tous les mois de mars-avril
+2. **TikTok :** "J'ai récupéré €650 d'impôts grâce aux frais réels — voilà comment" — format parfait pour viralité fiscale
+3. **SEO (saisonnier fort) :** "frais réels impots 2026", "frais kilométriques impots", "option frais réels ou déduction forfaitaire", "télétravail frais réels impots" — pics de trafic × 10 en période de déclaration (avril-juin)
+4. **Groupes Facebook commute :** "Trajets domicile travail longue distance France" — cible principale
+5. **Partenariats RH / CSE :** Les DRH peuvent proposer l'outil à leurs salariés comme avantage — co-branding possible
+
+### Competitive Moat
+- **Impots.gouv.fr** existe pour la déclaration mais ne calcule pas l'optimisation frais réels
+- Aucun outil grand public ne combine **calcul barème kilométrique + télétravail + générateur de justificatifs** dans un parcours fluide
+- La **base de règles fiscales** (cas complexes : expatrié, double résidence, mi-temps) enrichie par Claude est difficile à répliquer correctement
+- L'**abonnement annuel** avec log de trajets auto (GPS import possible) est un hook de rétention fort
+
+### Figma Schematic
+[View Ideas 132–136 on FigJam](https://www.figma.com/board/2irmaMv1kQqnAT18iqsBkn)
+
+---
+
+## 136. DevisGarage.ai
+
+> **Uploadez votre devis de garage ou rapport CT — l'IA vous dit ce qui est urgent, ce qui est surfacturé, et vous génère une contre-offre**
+
+### Problem
+Le marché de l'entretien automobile représente **€10 milliards/an** en France (Fédération de la Carrosserie, 2025), mais les conducteurs naviguent en total angle mort :
+1. **Devis incompréhensibles :** Les devis mécaniques sont rédigés dans un jargon technique (reniflard, rotule, bougie platinée, amortisseur MacPherson) que 90% des conducteurs ne comprennent pas — ils signent sans savoir ce qu'ils paient
+2. **Surfacturation généralisée :** Des études comparatives (UFC-Que Choisir, 2024) montrent des écarts de **+45% à +180%** entre garages pour les mêmes opérations sur le même véhicule
+3. **Rapport CT mal interprété :** Les **défaillances majeures** (obligatoirement corrigées avant contre-visite) sont souvent surestimées par les garages partenaires CT. Les **défaillances mineures** n'obligent pas une réparation immédiate mais sont présentées comme urgentes
+4. **Absence de prix de référence accessible :** Il n'existe pas en France d'équivalent à AutoZone (US) qui affiche les prix fixes — Midas, Carglass, Norauto pratiquent des prix "recommandés" peu transparents
+
+### Solution
+Outil en 3 modules :
+1. **Analyse de devis :** Upload photo ou PDF du devis → l'IA identifie chaque ligne, traduit le jargon technique en langage clair, compare les prix unitaires avec les tarifs de référence du marché (tarifs affichés des chaînes nationales + données UFC-Que Choisir), et flag les lignes suspectes
+2. **Analyse CT :** Upload du rapport de contrôle technique → l'IA classe les défaillances (majeure obligatoire / mineure recommandée / préventive non urgente), explique chaque point en français simple, et donne le prix raisonnable de réparation pour chaque point obligatoire
+3. **Contre-offre générée :** Si le devis semble surestimé → génération d'un email professionnel de négociation avec les références de prix marché et une contre-proposition ligne par ligne
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Analyse rapide | €0 | 1 analyse CT basique, 3 lignes de devis |
+| Analyse complète | €3,99 | Devis ou CT complet + comparatif prix + flags surfacturation |
+| Pack complet | €6,99 | Analyse + contre-offre rédigée |
+| Abonnement | €4,99/mois | Analyses illimitées + historique véhicule + rappels entretien |
+| B2B associations auto | €99/mois | Dashboard UFC-Que Choisir / associations de consommateurs |
+
+**Unit economics :** Claude API ~€0,08/analyse (vision OCR + raisonnement) → marge >97%. France : 38M véhicules en circulation × 70% font au moins un devis/an = **26M analyses/an adressables**. 20 000 analyses × €3,99 = **€80K MRR potentiel**. Réaliste : 5 000 analyses × €3,99 + 3 000 abonnés × €4,99 = **€35K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) + React Native (app mobile pour prise de photo sur place chez le garagiste)
+- **OCR :** Claude Vision (claude-sonnet-4-6 avec image input) — lecture directe des devis papier photographiés et rapports CT
+- **Base de données prix :** JSON de ~2 000 opérations de maintenance avec fourchettes de prix par région (construit depuis tarifs Midas, Norauto, Feu Vert publics, données UFC-Que Choisir, forums auto)
+- **Référentiel CT :** Liste officielle des points de contrôle technique avec classification défaillance majeure/mineure/critique
+- **Génération email :** Template de contre-offre structuré avec références légales (devis obligatoire en vertu de l'art. L224-1 du code de la consommation)
+- **AI :** Claude API (claude-sonnet-4-6) — OCR, décodage jargon, comparaison prix, rédaction contre-offre personnalisée
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Groupes Facebook auto :** "Les bons plans auto France" (350K membres), "Mécanique auto entre amis" (280K membres) — discussions sur les devis abusifs très fréquentes
+2. **Reddit :** r/france, r/AutoFrance — "mon garagiste me demande X€ pour changer les plaquettes, c'est normal ?" = question hebdomadaire
+3. **TikTok :** "J'ai photographié mon devis de garage et l'IA m'a dit que j'allais payer €400 de trop" — format révélation ultra-partageable
+4. **UFC-Que Choisir / 60 Millions de consommateurs :** Partenariat éditorial possible (articles comparatifs avec notre outil)
+5. **SEO :** "devis garage trop cher que faire", "prix raisonnable vidange", "contrôle technique défaillance majeure obligatoire"
+
+### Competitive Moat
+- **Midas, Norauto** affichent des prix mais ne permettent pas de vérifier un devis concurrent
+- **UFC-Que Choisir** publie des comparatifs mais pas en temps réel ni personnalisés au devis reçu
+- L'**OCR de devis photographié** sur place (avant de signer) est un cas d'usage inédit en France
+- La base de **mapping jargon → explication + prix marché** est un actif propriétaire qui s'enrichit avec chaque analyse
+- Extension : recommandation de garages moins chers à proximité (affiliation ou avis vérifiés) → nouveau canal de revenus
+
+### Figma Schematic
+[View Ideas 132–136 on FigJam](https://www.figma.com/board/2irmaMv1kQqnAT18iqsBkn)
 
 ---
 
