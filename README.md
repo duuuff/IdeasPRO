@@ -144,6 +144,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 134 | [AlerteUrbanisme.ai](#134-alerteurbanismeai) | Pay-per-report + Subscription + B2B | €6K–€45K | Low |
 | 135 | [FraisRéels.ai](#135-fraisréelsai) | Freemium + Pay-per-simulation + Annual Subscription | €6K–€45K | Low |
 | 136 | [DevisGarage.ai](#136-devisgarageai) | Freemium + Pay-per-analysis + Subscription | €8K–€60K | Low |
+| 137 | [AudioGuide.ai](#137-audioguideai) | Pay-per-circuit + B2B SaaS Offices de Tourisme | €8K–€60K | Low |
 
 ---
 
@@ -7339,6 +7340,66 @@ Outil en 3 modules :
 
 ---
 
+## 137. AudioGuide.ai
+
+> **Générez un circuit audio guidé pour n'importe quelle ville ou monument français — en 30 secondes, en 6 langues**
+
+### Problem
+La France est la **1ère destination touristique mondiale** (100M visiteurs/an) mais l'écrasante majorité de son patrimoine est muet :
+1. **43 000 monuments historiques, moins de 500 audio-guidés :** La Base Mérimée recense 46 000 édifices protégés — seuls les très grandes attractions (Versailles, Louvre, Notre-Dame) disposent d'un vrai audioguide. Les 45 500 restants n'ont rien.
+2. **36 000 communes rurales sans contenu numérique :** La France compte 46 000 communes. Environ 36 000 ont un patrimoine local (châteaux, abbayes, vieux villages, sites naturels) mais aucune ne peut se payer une production audio professionnelle (€5 000–€20 000 pour un circuit de 8 arrêts).
+3. **Guides papier illisibles, QR codes inutilisables :** Les offices de tourisme ruraux proposent encore des brochures ou des QR codes qui renvoient vers des pages HTML mal formatées sur mobile — le visiteur abandonne en 10 secondes.
+4. **Barrière linguistique dévastatrice :** Les touristes étrangers (Britanniques, Allemands, Espagnols, Américains, Chinois) qui visitent la France rurale n'ont aucun contenu dans leur langue. Un château cathare, une bastide médiévale, un site mégalithique breton : rien en anglais, en espagnol, en mandarin.
+5. **Airbnb Experiences sans contenu :** Des milliers de guides indépendants et d'hôtes Airbnb proposent des visites locales mais n'ont ni le temps ni le budget pour créer du contenu audio professionnel.
+
+### Solution
+Plateforme de génération instantanée de circuits audio guidés :
+1. **Génération à la demande :** L'utilisateur entre une adresse, un nom de ville, ou choisit un monument → l'IA synthétise les données historiques publiques (Base Mérimée, Wikipedia FR, Archives départementales ouvertes, IGN) et génère un circuit narratif avec 5–10 arrêts géolocalisés, chacun avec une narration de 2–4 minutes
+2. **Voix naturelle multilingue :** Chaque arrêt est converti en audio par synthèse vocale (ElevenLabs) en français, anglais, allemand, espagnol, italien et mandarin — au choix au moment du téléchargement
+3. **GPS embarqué :** La carte interactive guide le visiteur d'arrêt en arrêt avec un waypoint visible en temps réel. Fonctionne offline une fois téléchargé (PWA)
+4. **B2B : tableau de bord offices de tourisme :** Les collectivités souscrivent pour avoir leurs circuits en marque blanche sur leur site, avec analytics (arrêts les plus écoutés, durée moyenne, langue, nationalité), QR codes imprimables, et un outil de mise à jour du contenu sans compétences techniques
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Freemium | €0 | 1er arrêt du circuit en aperçu (1/8) |
+| Circuit complet | €2,99 | 5–10 arrêts GPS + narration complète (~45 min de visite) |
+| Pack Explorateur | €9,99 | 5 circuits au choix dans toute la France |
+| Abonnement Voyageur | €4,99/mois | Circuits illimités, toutes villes |
+| B2B Office de tourisme | €99/mois | Circuits illimités sur le territoire, marque blanche, analytics, QR codes |
+| B2B Premium Mairie / EPCI | €199/mois | Voix custom, intégration site mairie, rapport mensuel fréquentation numérique |
+
+**Unit economics :** Génération Claude ~€0,15/circuit (contenu 8 arrêts) + ElevenLabs TTS ~€0,12/circuit (6 langues × 8 fichiers audio) → coût total ~€0,27/circuit, marge **>90 % à €2,99**. France : 100M touristes/an × 8 % utilisent des audio-guides = **8M adressables**. Réaliste an 1 : 8 000 circuits/mois × €2,99 + 150 offices × €99 = **€39K MRR**. An 2 avec croissance B2B : **€70K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js PWA + Tailwind (Vercel) — fonctionne offline après téléchargement du circuit, optimisé mobile
+- **Carte GPS :** Mapbox GL JS — affichage des waypoints, position temps réel, routing piéton entre les arrêts
+- **Génération contenu :** Claude API (claude-sonnet-4-6) — synthèse des sources open data, rédaction narrative immersive par arrêt, cohérence du récit global
+- **Sources données :** Base Mérimée (DRAC, 46 000 monuments, open data), DBpedia/Wikipedia FR, IGN OpenData (toponymie, cartes), Archives ouvertes des collectivités (Gallica BnF)
+- **TTS multilingue :** ElevenLabs API (voix française naturelle) pour le premium ; Google Cloud TTS (moins cher) pour les langues secondaires — les fichiers audio sont pré-générés et mis en cache (S3 ou Supabase Storage)
+- **Format de distribution :** MP3 téléchargeable + fichier GPX pour intégration GPS externe (Komoot, AllTrails, Wikiloc)
+- **Backend :** Supabase (auth, circuits, analytics) + Stripe (paiements à l'acte + abonnements)
+
+### Go-to-Market (zéro budget)
+1. **TikTok voyageur :** "J'ai visité [Château de Pierrefonds / Carcassonne / Mont Saint-Michel] grâce à un guide IA en 3 minutes" — contenu de voyage ultra-partageable, format parfait pour la communauté #visitezlafrance
+2. **Groupes Facebook tourisme local :** "Tourisme en Bretagne", "Visiter l'Occitanie", "Road trip France" (300K+ membres combinés) — partage de circuits par les utilisateurs
+3. **Hôtes Airbnb Experiences :** Contact direct des 15 000 hôtes Airbnb Experiences en France — outil qui leur permet d'enrichir leur offre sans effort
+4. **Offices de tourisme ruraux :** Email direct aux 2 000+ offices de tourisme de communes < 10 000 habitants — aucun fournisseur ne les cible, budget numérique disponible (Atout France finance une partie)
+5. **SEO longue traîne :** "audioguide [ville] gratuit", "visite guidée [monument] mp3", "que voir à [commune] en 2h" — milliers de requêtes locales sans concurrence sérieuse pour les villes moyennes
+6. **Partenariats randonnée :** Wikiloc, Komoot, AllTrails FR — circuits thématiques (patrimoine + rando) pour leurs 2M d'utilisateurs français
+
+### Competitive Moat
+- **izi.TRAVEL** (principal concurrent) : contenu entièrement manuel, délai de 3–6 mois pour créer un circuit, couvre < 2 % des communes françaises — aucune génération IA
+- **Audiocity, Histovery** : uniquement les grandes métropoles (Paris, Lyon, Bordeaux), pas de modèle B2B accessible aux petits offices
+- La capacité à générer un circuit pour **n'importe quelle commune française en 30 secondes** (y compris les villages de 200 habitants avec une église romane du XIIe siècle) est le différenciateur clé
+- L'**actif propriétaire** : la base de circuits générés et notés par les utilisateurs s'enrichit et s'améliore — un cercle vertueux que les concurrents manuels ne peuvent pas rattraper
+- Extension naturelle : circuits thématiques (Route des Châteaux Cathares, Chemins de Saint-Jacques, D-Day Normandy), randonnées GR avec narration géolocalisée, intégration SNCF / Ouibus pour les voyageurs en train
+
+### Figma Schematic
+[View AudioGuide.ai Product Flow on FigJam](https://www.figma.com/board/8uxSONDyQNyQgcVOp2oQcz)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -7351,4 +7412,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-01 — Ideas 127–131 added (France-specific, ultra-low-budget: ImpôtCrypto.ai, VoisinIA, FamilleNombreuse.ai, AbonnementScan.ai, CréditConso.ai)*
+*Last updated: 2026-06-03 — Idea 137 added (AudioGuide.ai — AI-generated multilingual audio tours for French cities and heritage sites, B2C €2.99/circuit + B2B offices de tourisme)*
