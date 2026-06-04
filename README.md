@@ -145,6 +145,11 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 135 | [FraisRéels.ai](#135-fraisréelsai) | Freemium + Pay-per-simulation + Annual Subscription | €6K–€45K | Low |
 | 136 | [DevisGarage.ai](#136-devisgarageai) | Freemium + Pay-per-analysis + Subscription | €8K–€60K | Low |
 | 137 | [AudioGuide.ai](#137-audioguideai) | Pay-per-circuit + B2B SaaS Offices de Tourisme | €8K–€60K | Low |
+| 138 | [FreelanceChasse.ai](#138-freelancechassai) | Freemium + Subscription | €6K–€50K | Low |
+| 139 | [ReventeMode.ai](#139-reventemodeai) | Freemium + Commission + Subscription | €5K–€35K | Low |
+| 140 | [BudgetÉtudiant.ai](#140-budgetétudiantai) | Freemium + Subscription + Affiliate | €6K–€45K | Low |
+| 141 | [CovoiturageBack.ai](#141-covoituragebackai) | Freemium + Subscription + Affiliate | €4K–€28K | Low |
+| 142 | [MicroFerme.ai](#142-microfermeai) | Freemium + Subscription + B2B Coopératives | €5K–€40K | Low-Medium |
 
 ---
 
@@ -7400,6 +7405,283 @@ Plateforme de génération instantanée de circuits audio guidés :
 
 ---
 
+## 138. FreelanceChasse.ai
+
+> **L'IA qui chasse les missions freelance à votre place — Malt, Comet, Freelance.com, Crème de la Crème scannés en continu, candidatures personnalisées envoyées automatiquement**
+
+### Problem
+La France compte **1,2 million de freelances** (URSSAF 2025, +14 %/an) — auto-entrepreneurs, portage salarial, SASU — mais l'écrasante majorité perd jusqu'à **40 % de son temps de travail** à prospecter plutôt qu'à facturer :
+1. **Fragmentation des plateformes :** Malt (650K freelances inscrits), Comet, Crème de la Crème, Freelance.com, Kicklox, Upwork FR — les missions sont éparpillées sur 6–8 plateformes, chacune avec son interface et ses alertes défaillantes
+2. **Délai = mission perdue :** Sur Malt, les missions premium sont pourvues en moins de **4 heures**. Un freelance qui scanne ses notifications 2 fois par jour perd systématiquement les meilleures opportunités
+3. **Candidatures génériques rejetées :** Les clients reçoivent 15–40 candidatures par mission. Un message copié-collé finit dans la corbeille. Rédiger une candidature ciblée prend 20–30 minutes — impossible à l'échelle
+4. **TJM sous-évalué :** 68 % des freelances français facturent en dessous du marché (Malt Baromètre 2025) faute de visibilité sur les grilles de référence par compétence, région et secteur
+5. **Zéro temps de prospection = zéro pipeline :** Un freelance en mission ne prospecte plus. Résultat : le "feast or famine" cyclique — surcharge puis désert de missions avec 0 revenus pendant 2–6 semaines
+
+### Solution
+Agent IA de chasse de missions en 4 modules :
+1. **Scanner multi-plateformes temps réel :** Connexion API et scraping éthique de Malt, Comet, Freelance.com, Crème de la Crème, Kicklox — toutes les nouvelles missions remontées en moins de 5 minutes
+2. **Matching intelligent :** Le profil freelance (compétences, stack, TJM, disponibilité, préférence remote/présentiel, secteurs cibles) est vectorisé. Chaque mission reçoit un score de pertinence 0–100. Seules les missions > 70 déclenchent une candidature
+3. **Candidature auto-générée :** Claude rédige une proposition personnalisée par mission (2–3 paragraphes) en injectant les mots-clés du cahier des charges, des exemples du portfolio du freelance, et une ouverture sur la spécificité client — en moins de 30 secondes
+4. **Radar TJM :** Benchmark en temps réel du TJM moyen pour chaque combinaison (compétence + expérience + région) basé sur les missions actives. Alerte si le freelance est sous le marché
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 3 alertes/semaine, matching sans candidature auto |
+| Starter | €19/mois | 5 candidatures IA/semaine, benchmark TJM, toutes plateformes |
+| Pro | €39/mois | Candidatures illimitées, relance automatique, tableau de bord pipeline |
+| Agence | €99/mois | Jusqu'à 5 profils freelances, reporting global, API Zapier |
+
+**Unit economics :** Claude API ~€0,06/candidature (prompt ~1 500 tokens) → coût opérationnel négligeable. France : 1,2M freelances × 15 % actifs en recherche = **180 000 adressables**. Réaliste an 1 : 2 000 abonnés Starter + 500 Pro = **€57K MRR**. An 2 avec offre Agence : **€100K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — dashboard mission pipeline style Kanban
+- **Scraping/API :** Playwright headless pour les plateformes sans API publique, polling officiel Malt API (partenariat envisageable)
+- **Matching IA :** Embeddings OpenAI text-embedding-3-small + recherche cosine dans Supabase pgvector — score de pertinence mission/profil
+- **Génération candidature :** Claude API (claude-sonnet-4-6) — rédaction contextualisée avec injection du cahier des charges et du portfolio
+- **Gestion profil :** Supabase Auth + base de données profils freelances (stack, TJM, expériences, portfolio snippets)
+- **Notifications :** Email (Resend) + push Web pour alertes missions urgentes
+- **Paiements :** Stripe Subscriptions
+
+### Go-to-Market (zéro budget)
+1. **Communautés Malt :** Slack "Malt Community" (12K membres), Discord "Freelance France" (8K membres) — partage d'un témoignage "j'ai gagné 3 missions en une semaine sans chercher"
+2. **LinkedIn :** Contenu organique sur le "feast or famine" freelance — sujet hyper-engageant dans la communauté indépendante française
+3. **TikTok / YouTube :** "Démonstration live : je configure mon agent IA, il trouve et répond à 5 missions en 10 minutes" — format facile à viraliser
+4. **Producteurs de contenu freelance :** Partenariat avec les newsletters FreelanceRepublik (35K abonnés), Indépendants.io (20K abonnés) — test gratuit 30 jours pour leurs lecteurs
+5. **SEO :** "trouver des missions freelance france", "malt automatisation", "comment trouver clients freelance rapidement" — 50 000 recherches/mois combinées
+
+### Competitive Moat
+- **Malt, Comet** ont une app native mais pas d'agent IA qui candidature — ils ne le feront pas (conflit d'intérêt modèle plateforme = volume manuel)
+- La **multi-plateforme en temps réel** est impossible à répliquer pour une plateforme individuelle par construction
+- Le **dataset de matching** (missions vues × candidatures envoyées × taux de réponse) s'enrichit : chaque freelance améliore le modèle pour les suivants
+- **Effet réseau doux :** Plus de freelances = meilleure calibration du TJM benchmark = plus de valeur pour chaque nouvel abonné
+
+### Figma Schematic
+[View IdeasPRO — New Ideas #138-142 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
+## 139. ReventeMode.ai
+
+> **Photographiez un vêtement — l'IA identifie la marque, calcule le meilleur prix et publie votre annonce sur Vinted, Vestiaire Collective et Leboncoin en 30 secondes**
+
+### Problem
+Le marché de la **seconde main textile** atteint **€7 milliards en France** (ThredUp 2025, +25 %/an), mais la majorité des vendeurs laissent de l'argent sur la table :
+1. **Mauvais prix :** Les vendeurs occasionnels fixent leurs prix au jugé. Résultat : les pièces de valeur (Sandro, Maje, Isabel Marant) sont bradées à 30–40 % sous la cote réelle. À l'inverse, les marques fast fashion sont surévaluées et ne se vendent pas
+2. **Mauvaise plateforme :** Vinted est parfait pour le mass market (Zara, H&M, Uniqlo). Vestiaire Collective est la bonne plateforme pour les pièces > €80 de marques premium. Depop cible les années 90 streetwear. La plupart des vendeurs ne savent pas où publier et ratent l'audience idéale
+3. **Descriptions nulles :** Les annonces sans mots-clés SEO sont noyées. "Belle robe bleue" ne génère aucune vue. "Robe midi plissée Isabel Marant Étoile taille 38 bleu marine — état parfait, portée 2 fois" génère 10× plus de contacts
+4. **Photos inexploitables :** Une photo floue sur fond encombré = annonce ignorée. Mais personne ne sait mettre en scène ses vêtements
+
+### Solution
+Application mobile en 3 étapes :
+1. **Photo → identification IA :** L'utilisateur photographie un vêtement. Claude Vision identifie : marque (reconnaissance logo, étiquette, coupe), modèle approximatif, matière probable, état (excellent / bon / correct), et recherche la cote actuelle sur Vinted, Vestiaire et Depop en temps réel
+2. **Prix optimal par plateforme :** L'IA recommande un prix spécifique pour chaque plateforme (exemple : "€45 sur Vinted, €65 sur Vestiaire Collective, ne pas mettre sur Depop — trop basique pour leur audience") avec le délai de vente estimé à chaque prix
+3. **Publication automatique :** L'utilisateur sélectionne la plateforme → l'IA génère le titre SEO, la description complète (matière, coupe, taille convertie EU/UK/US, défauts éventuels, conseils entretien) et guide pour la photo sur fond neutre. En un clic : publication via API Vinted (partenariat) ou presse-papiers pour copier-coller
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 5 analyses/mois, prix indicatif sans publication auto |
+| Standard | €4,99/mois | Analyses illimitées + publication assistée + estimation délai vente |
+| Pro Revendeur | €12,99/mois | Gestion multi-articles + tableau de bord stock + export CSV comptabilité auto-entrepreneur |
+| Commission vente | 0,5 % | Sur les ventes trackées via le lien de suivi (opt-in) |
+
+**Unit economics :** Claude Vision ~€0,04/analyse photo. Marché cible immédiat : les **2,5 millions de vendeurs actifs sur Vinted France** — seulement 3 % convertis au plan payant = 75 000 × €4,99 = **€374K MRR potentiel**. Réaliste an 1 : 5 000 abonnés Standard + 500 Pro Revendeur = **€31,5K MRR**.
+
+### Tech Stack
+- **Mobile :** React Native (Expo) — appareil photo natif + upload image
+- **Vision IA :** Claude API (claude-sonnet-4-6 avec image input) — identification marque, état, matière + analyse photo qualité
+- **Données prix temps réel :** Scraping Vinted (API publique partielle), Vestiaire Collective (données vendues publiques), Depop FR — base de prix actualisée toutes les 12h
+- **Publication :** Deep link vers Vinted app avec pré-remplissage (scheme URL), API Vestiaire Collective partenaire pour les pros
+- **Backend :** Supabase + Stripe Mobile SDK
+- **Analytics vendeur :** Dashboard Next.js (vues, contacts, délai moyen vente par catégorie)
+
+### Go-to-Market (zéro budget)
+1. **TikTok :** "J'ai photographié 10 vêtements dormant dans mon armoire — l'IA m'a dit que j'avais €430 à récupérer" — format ultra-partageable, hashtag #videguarderobeai
+2. **Groupes Facebook Vinted France :** "Vinted France officiel" (850K membres), "Vinted entre vendeurs" (280K membres) — démonstration live de la précision de l'identification
+3. **Micro-influenceurs mode durable :** Partenariat d'affiliation avec les comptes lifestyle/seconde main (10K–100K followers) — contenu authentique, audience très qualifiée
+4. **Reddit :** r/france, r/frugalFrance — "j'ai fait €800 en un mois en vidant mon armoire, voilà comment j'ai optimisé mes prix"
+5. **SEO :** "comment fixer prix vinted", "combien vendre vêtement vestiaire collective", "meilleure appli revente vêtements france"
+
+### Competitive Moat
+- **Vinted** elle-même ne propose pas d'évaluation de prix IA — le faire les cannibaliserait (leur modèle = volume d'annonces)
+- **Vestiaire Collective** a une équipe de curation humaine pour le luxe — pas scalable, pas accessible au mid-range
+- La base de données de **prix de vente réalisés** (pas les prix demandés) croisée par marque × état × saison est un actif propriétaire inégalable
+- Extension naturelle : **photo groupée** (photographier tout un tiroir en une fois) + **garde-robe digitale** avec rappel de saison → retention forte
+
+### Figma Schematic
+[View IdeasPRO — New Ideas #138-142 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
+## 140. BudgetÉtudiant.ai
+
+> **Le copilote financier des étudiants français : calcule vos droits APL + bourse CROUS, agrège les jobs étudiants près de chez vous, optimise votre budget mois par mois**
+
+### Problem
+La France compte **2,9 millions d'étudiants** — et **1 étudiant sur 5 vit sous le seuil de pauvreté** (CNOUS 2025), alors que des milliers d'euros d'aides sociales leur sont accessibles mais non réclamées :
+1. **Méconnaissance des droits :** APL (aide personnalisée au logement), bourse sur critères sociaux CROUS (6 échelons), aide d'urgence CVEC (€100–€1 200), aide à la mobilité internationale, complémentaire santé solidaire — chaque dispositif est sur un portail différent (CAF, CROUS, CPAM) avec un jargon administratif opaque
+2. **Simulation APL inaccessible :** Le simulateur CAF officiel est complexe et donne des résultats parfois erronés pour les cas mixtes (étudiant en coloc, studio meublé, résidence CROUS). Les étudiants sous-estiment leur APL de €40–€120/mois en moyenne
+3. **Jobs étudiants introuvables :** Les offres sont éparpillées sur Indeed, Jobijoba, Étudiant.gouv, les tableaux d'affichage campus, les groupes WhatsApp de promo. Aucun agrégateur ne filtre par "compatible cours du matin + 15h max/semaine"
+4. **Budget chaotique :** L'argent disparaît sans qu'on sache où. Le virement mensuel parents + bourse arrive, puis c'est le flou jusqu'à la fin du mois — surtout pour les étudiants qui gèrent leur premier budget seul
+
+### Solution
+Application all-in-one en 4 modules :
+1. **Simulateur droits sociaux :** Saisie de la situation (revenus parents, loyer, colocation, statut CROUS) → calcul immédiat APL estimé + bourse CROUS probable + éligibilité aides complémentaires + démarches pas-à-pas pour les obtenir
+2. **Agrégateur jobs étudiants :** Scraping de 15 sources (Indeed, Jobijoba, Hellowork, Étudiant.gouv, Mission Locale) + géolocalisation + filtre "compatible planning cours" → alerte dès qu'une offre correspond dans un rayon de 3 km
+3. **Budget tracker conversationnel :** Import automatique des transactions bancaires (Open Banking API via Budget Insight ou Powens) → catégorisation IA + alertes dépassement + projection fin de mois + conseil hebdo ("tu dépenses 35 % de plus en livraison que le mois dernier")
+4. **Guide première fois :** Module interactif "première démarche" — ouvrir un compte bancaire, souscrire une mutuelle étudiante, déclarer ses revenus étudiants aux impôts (seuil d'exonération), déclarer le changement de situation CAF
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulateur droits + 1 mois budget tracker |
+| Standard | €2,99/mois | Budget tracker complet + alertes jobs + guide démarches |
+| Premium | €4,99/mois | Import bancaire automatique + projection financière annuelle + conseils personnalisés |
+| B2B CROUS / Universités | €500/mois | Intégration portail étudiant, marque blanche, analytics anonymisés taux de recours aux aides |
+
+**Unit economics :** Marché : 2,9M étudiants. 10 % payants = 290 000 × €2,99 = **€867K MRR potentiel**. Réaliste an 1 : 8 000 abonnés Standard + 2 000 Premium = **€33,9K MRR**. Levier B2B : 20 universités × €500 = +€10K MRR dès an 1.
+
+### Tech Stack
+- **Mobile :** React Native (Expo) — cible principale = smartphone, pas ordinateur
+- **Simulation aides :** Moteur de règles custom basé sur barèmes CAF 2026 (APL), barème CROUS 2026 (6 échelons de bourse) — mis à jour chaque rentrée scolaire
+- **Agrégation jobs :** Scraping asynchrone (Playwright + Cheerio) sur 15 sources + Supabase PostGIS pour la recherche géolocalisée
+- **Open Banking :** API Budget Insight (agréé ACPR) ou Powens — import transactions bancaires sécurisé
+- **IA budget :** Claude API (claude-haiku-4-5) — catégorisation transactions, génération conseils hebdomadaires personnalisés (coût très bas pour cette tâche)
+- **Backend :** Supabase + Stripe
+- **Notifications :** Expo Push + email Resend pour alertes jobs et fin de mois
+
+### Go-to-Market (zéro budget)
+1. **BDE (Bureaux Des Étudiants) :** Partenariat direct avec 500 BDE universitaires — 1 email à chaque délégué = accès à 500–5 000 étudiants par BDE. Les BDE adorent les outils gratuits à partager
+2. **TikTok étudiant :** "Je suis étudiant et je touchais €0 de CAF — l'IA m'a trouvé €340/mois que je laissais de côté" — format révélation garanti viral
+3. **Forum Étudiant (forumétudiant.fr) :** 4M de visiteurs uniques/mois, discussions constantes sur les bourses et APL — présence organique dans les fils
+4. **Rentrée scolaire :** Campagne septembre-octobre avec liste "10 aides que tu ne connais pas et qui te rapportent €2 000/an" — pics de trafic naturels à la rentrée
+5. **SEO :** "simulation bourse crous 2026", "calcul apl étudiant", "job etudiant compatible cours", "budget etudiant mensuel" — 200K+ recherches/mois combinées
+
+### Competitive Moat
+- **CAF.fr, CROUS.fr** : des portails séparés, pas d'agrégation, 0 IA, 0 budget tracker
+- **Lydia, Bankin'** : trackers bancaires généralistes, pas orientés droits sociaux étudiants, pas d'agrégateur jobs
+- L'**agrégation des aides + jobs + budget dans une seule app** est inédite pour les étudiants français
+- Partenariat **CROUS/université** = distribution institutionnelle que personne d'autre n'a l'angle pour obtenir
+- La **base de données des offres emplois étudiants géolocalisés** enrichie en temps réel est un actif propriétaire
+
+### Figma Schematic
+[View IdeasPRO — New Ideas #138-142 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
+## 141. CovoiturageBack.ai
+
+> **Rentabilisez votre trajet domicile-travail : l'IA calcule vos gains BlaBlaCar Daily + frais kilométriques exacts + optimise votre itinéraire pour maximiser le revenu net**
+
+### Problem
+En France, **74 % des actifs utilisent leur voiture pour aller au travail** (INSEE 2025) — un coût moyen de **€3 200/an**. Deux mécanismes permettent de rentabiliser ce trajet, mais restent sous-utilisés :
+1. **BlaBlaCar Daily méconnu :** BlaBlaCar Daily (ex-Karos) permet de covoiturer sur son trajet quotidien et de recevoir une contrepartie financière (€0,06–€0,12/km passager embarqué). Mais la plupart des actifs ne connaissent pas leur potentiel de gain réel sur leur trajet spécifique
+2. **Frais kilométriques sous-optimisés :** L'option frais réels aux impôts permet de déduire ses frais kilométriques (barème 2026 : €0,529–€0,636/km selon puissance fiscale) — mais seulement **12 % des contribuables** l'activent, beaucoup ne sachant pas si ça vaut le coup dans leur cas précis
+3. **Double calcul impossible :** Calculer le gain net combiné (BlaBlaCar Daily + déduction fiscale - frais essence - usure véhicule) nécessite 4 calculs croisés avec des variables fiscales et géographiques que personne ne veut faire à la main
+4. **Optimisation d'itinéraire absente :** Sur BlaBlaCar Daily, un léger détour de 5 minutes peut permettre d'embarquer 2 passagers au lieu de 0. Aucun outil ne propose une version "itinéraire optimisé revenus" de son trajet
+
+### Solution
+Calculateur en 3 modules :
+1. **Simulation revenu BlaBlaCar Daily :** Saisie du trajet domicile-travail → l'IA interroge la densité de covoitureurs actifs sur le couloir géographique, estime le taux de remplissage probable (1,2 passager/jour moyen en Île-de-France, 0,7 en province), et calcule le revenu mensuel/annuel attendu
+2. **Optimiseur frais kilométriques :** Calcul exact de la déduction impôts (barème CV fiscal × km aller-retour × jours travaillés) vs. déduction forfaitaire 10 % — recommandation claire + générateur du log de trajets prêt à présenter au contrôle fiscal (PDF horodaté)
+3. **Bilan net mensuel :** Agrégation des deux postes moins le coût réel essence (prix moyen pompiste local via GovData FR) → revenu net mensuel généré par le trajet domicile-travail. Visualisation simple "votre trajet vous coûte €210/mois ou vous rapporte €85/mois selon vos choix"
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulation BlaBlaCar Daily + estimation frais kilométriques basique |
+| Premium | €2,99/mois | Bilan net complet + log de trajets automatique (GPS) + export PDF impôts |
+| Annuel | €19,99/an | Toutes fonctions + alerte changement barème kilométrique + intégration Waze |
+| B2B RH / CSE | €49/mois | Outil marque blanche pour entreprise, calcul collectif, rapport covoiturage employeur |
+
+**Unit economics :** France : 28M actifs motorisés × 74 % utilisent la voiture = **20M adressables**. 1 % payants = 200 000 × €2,99 = **€598K MRR potentiel**. Réaliste an 1 : 3 000 Premium + 200 annuels + 30 CSE = **€12,9K MRR**. An 2 avec B2B RH : **€28K MRR**.
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — outil web-first (consulté au moment de faire sa déclaration d'impôts)
+- **Données BlaBlaCar Daily :** API BlaBlaCar partenaire (accord usage données de densité anonymisées) ou estimation via heatmap public covoiturage.gouv.fr
+- **Barème fiscal :** Table officielle DGFiP 2026 (barème kilométrique 5 tranches CV fiscaux) intégrée en dur + mise à jour annuelle
+- **GPS log trajets :** PWA avec géolocalisation background (ou import TCX/GPX depuis Garmin/Strava) → stocké chiffré côté client (RGPD)
+- **Calcul prix essence :** API prix carburants gouv.fr (données officielles temps réel des stations-service françaises, open data)
+- **Export PDF :** Génération PDF avec React-PDF — log de trajets horodaté conforme à la doctrine fiscale
+- **Backend :** Supabase + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Reddit :** r/france, r/finances_perso — "mon calculateur de trajet maison vs BlaBlaCar Daily — j'ai trouvé €1 100/an que je perdais" — pic naturel en période de déclaration d'impôts
+2. **Groupes Facebook navetteurs :** "Covoiturage Île-de-France", "Navetteurs Grand Paris", groupes régionaux (450K membres combinés)
+3. **TikTok :** "J'ai entré mon adresse et j'ai découvert que mon trajet me coûte €280/mois alors qu'il pourrait me rapporter €110" — format révélation visuelle parfait
+4. **Partenariat BlaBlaCar :** Accord de référencement mutuel — outil qui envoie des inscriptions BlaBlaCar Daily = levier d'acquisition B2B2C
+5. **CSE / comités d'entreprise :** Les lois Mobilité 2019 obligent les entreprises à encourager le covoiturage — outil clé en main pour les DRH
+
+### Competitive Moat
+- **BlaBlaCar Daily** a une app mais ne calcule pas les frais kilométriques ni le bilan fiscal net
+- **FraisRéels.ai** (#135, déjà dans ce repo) couvre les frais kilométriques mais pas le covoiturage Daily
+- La **combinaison covoiturage + optimisation fiscale dans un seul bilan** est inédite et défendable
+- Le **log GPS automatique** pour justificatif fiscal est un actif de rétention fort (l'utilisateur ne veut pas perdre ses données)
+- Intégration naturelle avec les obligations légales employeurs (Forfait Mobilités Durables) = canal B2B captif
+
+### Figma Schematic
+[View IdeasPRO — New Ideas #138-142 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
+## 142. MicroFerme.ai
+
+> **Le kit complet pour lancer votre micro-ferme en France : subventions PAC + FEADER calculées, certifications bio guidées, marchés locaux trouvés, plan financier généré**
+
+### Problem
+La France perd **500 exploitations agricoles par semaine** (MSA 2025) mais le micro-maraîchage (< 1 hectare, production intensive) connaît une **renaissance sans précédent** : +18 % de nouvelles installations en micro-ferme depuis 2023, portées par des citadins en reconversion et des ruraux qui veulent vivre de la terre avec peu de capital. Pourtant, 68 % des projets micro-ferme échouent dans les 3 ans faute de préparation :
+1. **Maquis des subventions incompréhensible :** PAC (Politique Agricole Commune), DJA (Dotation Jeune Agriculteur, jusqu'à €43 000), FEADER (Fonds Européen pour le Développement Rural), aides à l'installation MSA, aides régionales spécifiques — chaque dispositif a ses critères d'éligibilité, ses fenêtres de dépôt, ses pièces justificatives. Un conseiller Chambre d'Agriculture coûte €200/session
+2. **Certification bio = parcours du combattant :** L'agriculture biologique AB demande 2 ans de conversion, une certification INAO, un organisme certificateur (Ecocert, Bureau Veritas, etc.) et des audits annuels. La certification HVE (Haute Valeur Environnementale) est moins connue mais plus accessible. Personne ne guide le porteur de projet étape par étape
+3. **Aucun outil de business plan agricole adapté :** Les business plans standards sont inadaptés à l'agriculture (saisonnalité, aléas climatiques, subventions variables, statuts MSA). Les outils Chambre d'Agriculture sont archaïques et non-interactifs
+4. **Trouver des débouchés est un art obscur :** AMAP (paniers hebdomadaires), marchés de producteurs, restauration collective locale (loi EGalim impose 50 % de produits locaux/bio dans les cantines), épiceries bio locales — les circuits existent mais sont invisibles pour un porteur de projet extérieur à la région
+
+### Solution
+Plateforme all-in-one en 5 modules :
+1. **Simulateur subventions :** Saisie du profil (âge, diplôme agricole ou non, surface disponible, département, productions envisagées) → calcul des aides accessibles (DJA, PAC 1er pilier, aides agro-environnementales MAEC, aides régionales) avec montants estimés et calendrier de dépôt
+2. **Roadmap certification :** Choix de la certification cible (AB, HVE niveau 3, Nature & Progrès) → roadmap pas-à-pas avec durées, coûts, organismes certificateurs de votre département, modèles de documents
+3. **Business plan agricole IA :** Saisie des paramètres (surface, productions, débouchés visés, investissements prévus) → génération d'un business plan complet avec compte de résultat sur 5 ans, seuil de rentabilité, analyse des risques climatiques, comparaison de scénarios (maraîchage seul vs. maraîchage + AMAP + restauration)
+4. **Carte débouchés locaux :** Géolocalisation de toutes les AMAP du département, marchés de producteurs, épiceries bio, cantines scolaires (loi EGalim) — avec contact direct et indication si elles cherchent de nouveaux fournisseurs
+5. **Communauté & mentorat :** Mise en relation avec des micro-fermiers expérimentés dans un rayon de 50 km — partage de retours d'expérience, locations de matériel entre voisins (motoculture, serres)
+
+### Revenue Model
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulateur subventions basique + carte débouchés |
+| Porteur de projet | €29/mois | Business plan complet + roadmap certification + exports PDF bankables |
+| Installé actif | €19/mois | Tableau de bord exploitation + veille aides + communauté |
+| B2B Coopératives / Chambres | €299/mois | Accès multi-porteurs de projet, reporting, personnalisation territoire |
+
+**Unit economics :** France : 60 000 nouveaux porteurs de projet agricole/an (Agreste) × 20 % en micro-ferme = **12 000 cibles directes/an**. 25 % payants = 3 000 × €29 = **€87K MRR potentiel** en régime de croisière. An 1 réaliste : 400 abonnés Porteur + 200 Installé + 5 coopératives = **€17 300 MRR**. Potentiel fort avec B2B Chambres d'Agriculture (100 en France).
+
+### Tech Stack
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop-first (porteurs de projet travaillent sur ordinateur pour les dossiers)
+- **Données subventions :** Base structurée des dispositifs PAC 2023-2027, DJA par région, MAEC, FEADER — maintenue manuellement + veille automatique JO et DRAAF
+- **Business plan IA :** Claude API (claude-sonnet-4-6) — génération des projections financières à partir des paramètres exploitation, scénarios de sensibilité, analyse risques
+- **Carte débouchés :** Supabase PostGIS + données AMAP France (repertoire-amap.org, open data) + OpenStreetMap + appels Overpass API pour marchés producteurs
+- **Génération PDF :** React-PDF pour les business plans exportables (format attendu par les banques et la DJA)
+- **Communauté :** Forum lightweight (Discourse ou solution maison) + géolocalisation producteurs volontaires
+- **Backend :** Supabase Auth + Stripe
+
+### Go-to-Market (zéro budget)
+1. **Facebook groupes agriculture alternative :** "Micro-ferme France" (45K membres), "Maraîchage bio petite surface" (28K), "Installation agricole hors cadre familial" (22K) — présence organique avec contenu de valeur sur les subventions
+2. **Jeunes Agriculteurs :** Organisation nationale avec 55 000 membres — partenariat naturel, leur problème #1 est le financement et les démarches administratives
+3. **Chambres d'Agriculture régionales :** Démarche directe B2B — elles cherchent des outils numériques pour réduire la charge de leurs conseillers installation
+4. **YouTube / Podcasts reconversion agricole :** "Du bureau à la ferme", "Paysan du futur" — audiences très engagées, content marketing sur les subventions méconnues
+5. **SEO longue traîne :** "comment créer micro ferme france", "dja jeune agriculteur montant 2026", "simulation pac première installation", "amap créer fournisseur" — 80K recherches/mois combinées, faible concurrence
+
+### Competitive Moat
+- **Chambres d'Agriculture** : conseillers humains limités, coûteux, pas de SaaS en ligne accessible 24/7
+- **Agreste, DRAAF, MSA** : données brutes sans outil de synthèse ni business plan
+- La **combinaison subventions + certification + business plan + débouchés locaux** dans un seul outil est inédite en France
+- La **base de données débouchés locaux** (AMAP, marchés, cantines EGalim) actualisée est un actif propriétaire difficile à répliquer
+- Effet réseau : chaque micro-fermier inscrit enrichit la communauté et la carte → plus de valeur pour le suivant
+
+### Figma Schematic
+[View IdeasPRO — New Ideas #138-142 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -7412,4 +7694,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-03 — Idea 137 added (AudioGuide.ai — AI-generated multilingual audio tours for French cities and heritage sites, B2C €2.99/circuit + B2B offices de tourisme)*
+*Last updated: 2026-06-04 — Ideas 138–142 added (FreelanceChasse.ai, ReventeMode.ai, BudgetÉtudiant.ai, CovoiturageBack.ai, MicroFerme.ai — cinq idées ciblées France, démarrage zéro budget)*
