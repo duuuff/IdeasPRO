@@ -150,6 +150,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 140 | [BudgetÉtudiant.ai](#140-budgetétudiantai) | Freemium + Subscription + Affiliate | €6K–€45K | Low |
 | 141 | [CovoiturageBack.ai](#141-covoituragebackai) | Freemium + Subscription + Affiliate | €4K–€28K | Low |
 | 142 | [MicroFerme.ai](#142-microfermeai) | Freemium + Subscription + B2B Coopératives | €5K–€40K | Low-Medium |
+| 143 | [EffaceMoi.ai](#143-effacemoiai) | Freemium + Subscription + B2B DPO | €5K–€45K | Low |
 
 ---
 
@@ -7682,6 +7683,73 @@ Plateforme all-in-one en 5 modules :
 
 ---
 
+## 143. EffaceMoi.ai
+
+> **Gérez vos droits RGPD en 3 clics : effacez vos données, exercez vos droits Articles 15–21, escaladez automatiquement à la CNIL si besoin**
+
+### Problem
+
+Le RGPD donne à chaque citoyen français des droits puissants sur ses données personnelles — mais les exercer reste un parcours du combattant que seule une minorité affronte :
+
+1. **Fuites de données massives et répétées :** En 2024 uniquement, Free (19M clients), France Travail (43M de personnes), Cdiscount, Boulanger, SFR — plus de **100M de données françaises exposées**. Les victimes ne savent pas qui détient encore leurs données ni comment les faire effacer
+2. **Droits méconnus et sous-utilisés :** Seulement **14 000 plaintes déposées à la CNIL en 2024** pour 67M de Français — non pas par manque de motivation, mais parce que rédiger une lettre RGPD juridiquement correcte (Article 15, 17, 21…) et connaître les délais légaux (30 jours de réponse obligatoire) est complexe pour un non-juriste
+3. **Data brokers invisibles :** Des centaines de courtiers en données (Axiom, Experian, LexisNexis, mais aussi des acteurs 100 % français) revendent vos données sans que vous le sachiez — aucun outil grand public ne permet de les identifier et de leur envoyer des demandes d'effacement en masse
+4. **Suivi impossible manuellement :** Une demande RGPD non répondue en 30 jours doit être escaladée à la CNIL — mais qui gère les relances, les deadlines, les accusés de réception pour 20, 30, 50 entreprises à la fois ?
+
+### Solution
+
+Plateforme en 4 modules qui automatise l'exercice de vos droits RGPD de A à Z :
+
+1. **Audit données personnelles :** Connexion OAuth Gmail/Outlook (lecture seule, RGPD compliant) → détection des expéditeurs qui stockent vos données + liste curatée de **800+ data brokers** France/EU avec statut d'opt-out disponible
+2. **Générateur de demandes RGPD IA :** Sélection du type de demande (accès Article 15, effacement Article 17, portabilité Article 20, opposition Article 21) → Claude API personnalise la lettre selon le secteur d'activité de l'entreprise (banque, e-commerce, assurance, RH…) avec les bons articles de loi et le bon ton juridique
+3. **Envoi & suivi automatisés :** Envoi par email ou lettre recommandée électronique (API AR24 — opérateur officiel ANSSI/RGPD) + tableau de bord avec statuts, relance automatique à J+15, alerte à J+30 (deadline légale)
+4. **Escalade CNIL en 1 clic :** Si l'entreprise ne répond pas dans les 30 jours, génération automatique du formulaire de plainte CNIL pré-rempli avec les pièces justificatives — prêt à soumettre sur signal.cnil.fr
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 5 demandes/mois + suivi basique 30 jours |
+| Personnel | €3,99/mois | Demandes illimitées + relances auto + export PDF + escalade CNIL |
+| Famille | €6,99/mois | Jusqu'à 5 profils email + tableau de bord partagé |
+| Pro DPO | €49/mois | Gestion multi-clients, reporting RGPD conforme, white label pour cabinets juridiques |
+
+**Unit economics :** France : 50M internautes × 20 % sensibles à la vie privée (post-fuites 2024) = **10M adressables**. 1 % payants = 100 000 × €3,99 = **€399K MRR potentiel**. Réaliste an 1 : 2 000 Personnel + 200 Famille + 15 DPO = **€9 900 MRR**. An 2 avec B2B DPO : **€28K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop-first (gestion administrative, formulaires)
+- **Email scanner :** OAuth2 Gmail / Outlook (scope lecture seule `mail.readonly`) → extraction des expéditeurs uniquement, aucun contenu stocké, RGPD by design
+- **IA rédaction lettres :** Claude API (claude-haiku-4-5 pour la génération de masse, claude-sonnet-4-6 pour les cas complexes) — personnalisation par secteur et type de demande
+- **Envoi recommandé électronique :** API AR24 (opérateur certifié ANSSI pour les LRE RGPD) — valeur légale identique au recommandé papier, coût ~€1,5/envoi refacturé
+- **Base data brokers :** Base SQLite maintenue manuellement (800+ entrées France/EU) + script de vérification semestrielle des URLs opt-out
+- **Suivi délais :** Supabase + cron jobs (Vercel) pour relances J+15 et alertes J+30
+- **Génération PDF plainte CNIL :** React-PDF avec modèle conforme au formulaire signal.cnil.fr
+- **Backend :** Supabase Auth + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Timing post-fuite :** Créer une alerte Google News "fuite données France" → publier immédiatement sur r/france, r/privacy un post "comment faire effacer vos données de [NomEntreprise] suite à la fuite — outil gratuit" — taux de conversion exceptionnel en période de crise
+2. **SEO longue traîne :** "effacer mes données internet", "exercer droits RGPD", "faire plainte CNIL", "supprimer compte vieux sites", "data broker opt out France" — 200K+ recherches/mois combinées, faible concurrence
+3. **Partenariats associations privacy :** La Quadrature du Net (180K abonnés), Nothing2Hide, PrivacyBee France — public ultra-qualifié, acquisition organique
+4. **TikTok / YouTube Shorts :** "J'ai envoyé des demandes d'effacement à 47 sites — voilà ce qui s'est passé 30 jours après" — format révélation avec résultats concrets (graphe avant/après données détenues)
+5. **Producteurs de contenu :** Journalistes tech (Numerama, NextInpact, Clubic) adorent ce genre d'outil après chaque scandale de fuite — une démo = article garanti
+
+### Competitive Moat
+
+- **Jumbo Privacy** (concurrent US) : interface anglaise, peu adapté aux spécificités CNIL et au droit français, pas de lettre recommandée AR24
+- **Deleteme.com** : uniquement data brokers US, aucune couverture France/EU
+- La **base de 800+ data brokers France/EU** est un actif propriétaire long à construire (6–12 mois) et difficile à répliquer rapidement
+- L'**intégration AR24** (lettre recommandée électronique à valeur légale) est un différenciateur technique fort que les concurrents DIY ne peuvent pas offrir
+- **Timing structurel :** Le RGPD a 8 ans mais son exercice pratique reste non-automatisé — les fuites massives de 2024 ont créé une fenêtre d'attention durable
+- **B2B DPO :** Les délégués à la protection des données (DPO) des PME n'ont aucun outil SaaS dédié au suivi des demandes entrantes ET sortantes — canal B2B récurrent avec fort ARR
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #143 on FigJam](https://www.figma.com/board/0AXrnJMj35zW1Ranwu6BFr)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -7694,4 +7762,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-04 — Ideas 138–142 added (FreelanceChasse.ai, ReventeMode.ai, BudgetÉtudiant.ai, CovoiturageBack.ai, MicroFerme.ai — cinq idées ciblées France, démarrage zéro budget)*
+*Last updated: 2026-06-05 — Idea 143 added (EffaceMoi.ai — gestionnaire automatique de droits RGPD, zéro budget, ciblé France, timing post-fuites de données 2024)*
