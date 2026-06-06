@@ -151,6 +151,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 141 | [CovoiturageBack.ai](#141-covoituragebackai) | Freemium + Subscription + Affiliate | €4K–€28K | Low |
 | 142 | [MicroFerme.ai](#142-microfermeai) | Freemium + Subscription + B2B Coopératives | €5K–€40K | Low-Medium |
 | 143 | [EffaceMoi.ai](#143-effacemoiai) | Freemium + Subscription + B2B DPO | €5K–€45K | Low |
+| 144 | [BulletinPaie.ai](#144-bulletinpaieai) | Freemium + Subscription + B2B RH | €8K–€55K | Low |
 
 ---
 
@@ -7750,6 +7751,63 @@ Plateforme en 4 modules qui automatise l'exercice de vos droits RGPD de A à Z :
 
 ---
 
+## 144. BulletinPaie.ai
+
+> **Auditeur IA de bulletins de paie français — détecte les erreurs et récupère l'argent perdu**
+
+Le bulletin de paie français est officiellement le document administratif le plus complexe qu'un salarié reçoit chaque mois : en moyenne 35 lignes de cotisations (maladie, retraite, chômage, CEG, CET, prévoyance, mutuelle…), 15 lignes de charges patronales, des références de convention collective et des primes variables. **73 % des salariés avouent ne pas comprendre leur bulletin.** Pire encore : des études sectorielles révèlent que **25 à 35 % des bulletins de paie contiennent des erreurs** — mauvais coefficient de convention collective, taux de cotisation périmé, heures supplémentaires mal calculées, prime d'ancienneté oubliée. Ces erreurs coûtent en moyenne **€500 à €1 500 par an et par salarié lésé**, sans que personne ne s'en aperçoive.
+
+BulletinPaie.ai permet à n'importe quel salarié d'uploader son bulletin PDF et d'obtenir en 30 secondes :
+
+1. **Explication claire** : chaque ligne traduite en français simple, sans jargon RH
+2. **Vérification URSSAF** : croisement automatique contre les taux officiels en vigueur (mis à jour chaque trimestre)
+3. **Comparaison convention collective** : identification automatique via le code IDCC (code NAF de l'entreprise) → vérification des minima conventionnels, primes obligatoires, classifications
+4. **Rapport d'anomalies** : liste des écarts détectés avec estimation du montant récupérable en euros
+5. **Lettre de réclamation** : modèle juridiquement valide à envoyer au service RH, pré-rempli avec les articles de loi concernés
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 1 analyse/mois + explication simplifiée ligne par ligne |
+| Solo | €4,99/mois | Analyses illimitées + détection d'erreurs + historique 12 mois |
+| Expert | €9,99/mois | Convention collective détaillée + modèles de lettres juridiques + alertes changements légaux |
+| RH Pro | €29/mois | Multi-salariés jusqu'à 50 + dashboard équipe + rapports conformité CSE |
+
+**Unit economics :** 17M salariés en France × 1 % sensibles à leurs droits = **170 000 adressables**. An 1 : 3 400 payants Solo × €4,99 = **€16 966 MRR**. An 2 avec canal CSE et B2B RH Pro : **€38K MRR**. Coût Claude API par analyse : ~€0,06 (claude-haiku-4-5 pour extraction, claude-sonnet-4-6 pour anomalies complexes). Marge brute : **96 %**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — upload drag-and-drop, dashboard interactif
+- **Extraction PDF :** `pdf-parse` + Claude API (`claude-sonnet-4-6`) → OCR et compréhension structurée des bulletins (même scannés ou photographiés)
+- **Base taux URSSAF :** Table SQL mise à jour trimestriellement depuis les circulaires URSSAF officielles (DSN Info, BOSS — Bulletin Officiel de la Sécurité Sociale)
+- **Base conventions collectives :** API publique IDCC (data.gouv.fr) + table des minima conventionnels actualisée via accords de branche publiés au Journal Officiel
+- **Génération de lettres :** Claude API + templates Handlebars → export PDF via `react-pdf`
+- **Backend :** Supabase Auth + PostgreSQL + Edge Functions
+- **Paiements :** Stripe Billing (abonnements mensuels + usage-based pour RH Pro)
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / Shorts :** "J'ai découvert que mon employeur me devait €1 200 grâce à cet outil" — format révélation avec avant/après du bulletin annoté en rouge ; contenu viral garanti sur la thématique "droits salariés"
+2. **Reddit :** r/france, r/droit, r/travail — post éducatif "3 erreurs fréquentes sur les bulletins de paie que vous ne détectez pas" avec lien vers l'outil gratuit
+3. **SEO longue traîne :** "erreur bulletin de paie", "comprendre mon bulletin de paie", "convention collective salaire minimum", "prime ancienneté oubliée", "taux URSSAF 2026" — 300K+ recherches/mois combinées, concurrence faible
+4. **Syndicats & CSE :** 50 000 Comités Sociaux et Économiques en France, tous avec budget annuel dédié à l'accompagnement des salariés — une démo = accès direct aux équipes entières (canal B2B RH Pro)
+5. **Influenceurs finances perso :** Heu!reka, Finary, MoneyRadar, Snowball — public exactement ciblé sur droits et optimisation financière, taux de conversion élevé
+
+### Competitive Moat
+
+- **Aucun concurrent direct** en France sur l'audit automatisé bulletin de paie + croisement convention collective : les outils existants (simulateurs URSSAF, fiches pratiques syndicales) sont statiques et non personnalisés
+- La **base IDCC croisée avec les minima conventionnels** (700+ conventions en France) est un actif long à construire et à maintenir — barrière à l'entrée réelle pour les copycats
+- Les **CSE (50 000+ en France)** constituent un canal B2B récurrent avec budget formation annuel — une fois intégré dans les services proposés par un CSE, le churn est quasi nul
+- Les **mises à jour légales contraintes** (taux URSSAF trimestriels, SMIC annuel, accords de branche) créent un avantage opérationnel croissant pour l'acteur qui maintient ses bases à jour — les nouveaux entrants partent avec 6–12 mois de retard
+- **Viralité naturelle :** chaque utilisateur qui récupère de l'argent en parle autour de lui → boucle de croissance organique sans budget marketing
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #144 on FigJam](https://www.figma.com/board/gnMI4XpWHWsGM9Oq7cH9gK)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -7762,4 +7820,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-05 — Idea 143 added (EffaceMoi.ai — gestionnaire automatique de droits RGPD, zéro budget, ciblé France, timing post-fuites de données 2024)*
+*Last updated: 2026-06-06 — Idea 144 added (BulletinPaie.ai — auditeur IA de bulletins de paie français, détection erreurs URSSAF & conventions collectives, zéro budget, 17M salariés adressables)*
