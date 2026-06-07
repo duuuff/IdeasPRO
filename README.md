@@ -7808,6 +7808,197 @@ BulletinPaie.ai permet à n'importe quel salarié d'uploader son bulletin PDF et
 
 ---
 
+## 145. MonDossierSocial.ai
+
+> **Le détecteur d'aides sociales non réclamées : scannez votre situation en 5 minutes et récupérez les milliers d'euros d'aides auxquelles vous avez droit**
+
+### Problem
+
+La France laisse **€10 milliards d'aides sociales non réclamées chaque année** (CNAF 2025). Le non-recours aux droits touche 30 à 50 % des ménages éligibles selon les prestations :
+
+1. **Fragmentation administrative extrême :** CAF (13 prestations dont APL, RSA, prime d'activité, allocations familiales), CPAM (Complémentaire Santé Solidaire, indemnités journalières), France Travail (allocation chômage, aide à la formation), MDPH (AAH, AEEH, PCH), Mairies (aides locales) — chaque organisme a son propre portail, ses propres critères, son propre jargon
+2. **Jargon inaccessible :** RSA, prime d'activité, CSS, ASPA, AHA, PCH, AEEH, CVEC, ARCE, AIF — les acronymes se multiplient et les critères sont formulés en langage administratif opaque ; un étudiant qui ignore la CSS (ex-CMU-C) à 0 € ou une personne précaire qui ne sait pas qu'elle est éligible à la prime d'activité est la norme, pas l'exception
+3. **Fenêtres de dépôt ignorées :** Certaines aides (prime de naissance, prime d'adoption, aide à la mobilité) doivent être demandées dans un délai strict — si vous manquez ce délai, vous perdez définitivement le bénéfice
+4. **Aucun outil unifié n'existe :** MesAides.gouv.fr ne couvre que 21 aides, est ciblé jeunes, et ne guide pas les démarches ; les portails CAF, CPAM, France Travail ne communiquent pas entre eux
+
+### Solution
+
+Application en 3 étapes :
+
+1. **Questionnaire de 5 minutes :** Situation familiale (seul, couple, enfants, âge), revenus (salarié, auto-entrepreneur, chômage, retraite, zéro), logement (locataire, propriétaire, hébergé), santé (ALD, invalidité, handicap), département → Claude API cartographie en temps réel les **50+ prestations nationales et locales** avec montants estimés et probabilité d'éligibilité
+2. **Guide de demande pas-à-pas :** Pour chaque aide détectée : liste de pièces justificatives, lien direct vers le formulaire officiel, délai de traitement estimé, date prévisionnelle du premier versement, pièges à éviter (erreurs fréquentes qui retardent l'instruction)
+3. **Alertes actives :** Si votre situation change (naissance, perte d'emploi, déménagement, 18 ans d'un enfant) → recalcul automatique + notification "vous êtes probablement éligible à X nouvellement"
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Scan complet droits + liste des aides détectées |
+| Accompagné | €4,99/mois | Guide pas-à-pas détaillé + alertes + chat IA pour vos questions |
+| Famille | €7,99/mois | Jusqu'à 4 profils (seniors, parents, enfants adultes) + tableau de bord partagé |
+| B2B Travailleur social | €49/mois | Multi-dossiers illimités + export rapport + intégration CCAS |
+
+**Unit economics :** France : 15M ménages éligibles à au moins une aide non réclamée. An 1 : 3 000 Accompagnés × €4,99 + 150 CCAS × €49 = **€22 320 MRR**. An 2 avec B2B associations (Secours Catholique, Croix Rouge, Restos du Cœur) : **€48K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — questionnaire progressif, mobile-first (utilisateurs en situation précaire souvent sur téléphone uniquement)
+- **Moteur de règles :** Base de données structurée des critères d'éligibilité pour 50+ prestations nationales + veille automatique des barèmes via JO et circulaires CAF/CPAM (mise à jour trimestrielle)
+- **IA :** Claude API (claude-sonnet-4-6) — compréhension des situations complexes (famille recomposée, auto-entrepreneur + salarié, temps partiel thérapeutique), reformulation en langage clair
+- **Alertes :** Supabase + Resend (email) + Web Push Notifications — déclenchées sur changement de situation ou de barèmes légaux
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Partenariats CCAS :** 6 000 Centres Communaux d'Action Sociale cherchent des outils numériques pour démultiplier l'accompagnement → démarchage direct des directeurs de CCAS + offre B2B immédiate
+2. **Associations :** Secours Catholique, Croix Rouge, ATD Quart Monde, Restos du Cœur — elles orientent des millions de personnes vers des aides → partenariat de diffusion (logo sur l'outil = légitimité instantanée)
+3. **TikTok :** "3 aides CAF que 90 % des éligibles n'ont jamais demandées" → liste révélation + lien vers le scan gratuit ; pic naturel en janvier (résolutions) et en septembre (rentrée)
+4. **Reddit :** r/france, r/RSA, r/chomage — "j'ai testé cet outil et découvert €2 400/an d'aides non réclamées" → post récurrent et viral
+5. **France Travail / CPAM :** Canal de distribution potentiel — les conseillers emploi et médecins-conseils peuvent recommander l'outil à leurs allocataires et patients
+
+### Competitive Moat
+
+- **MesAides.gouv.fr** : 21 aides, ciblé jeunes, aucun guide démarches ni alertes actives
+- **1jeune1solution.gouv.fr** : uniquement moins de 26 ans, pas de logique multi-organisme
+- La **consolidation de 50+ aides de 6 organismes différents** dans une interface unifiée avec guide pas-à-pas est un actif technique long à construire — 6 à 12 mois avant qu'un concurrent soit à niveau
+- Les **profils sauvegardés** avec historique des aides et alertes actives créent une rétention forte : l'utilisateur ne veut pas recommencer le questionnaire ailleurs
+- Canal B2B CCAS : **6 000 clients potentiels** avec budget numérique obligatoire depuis la loi de transformation sociale — churn quasi nul une fois intégré dans les pratiques du service social
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #145-147 on FigJam](https://www.figma.com/board/jZkDzu7b7MWWpzRcvdtzVZ)
+
+---
+
+## 146. ReclamationVoyage.ai
+
+> **Récupérez l'argent que compagnies aériennes et SNCF vous doivent légalement — jusqu'à €600 par trajet — en 5 minutes, sans avocat ni intermédiaire à 25 %**
+
+### Problem
+
+Chaque année, **€1,2 milliard d'indemnités légales de transport restent non réclamées en Europe** (AirHelp 2025), dont une part majeure sur les voyageurs français :
+
+1. **EU261/2004 méconnu :** Tout vol décollant d'un aéroport européen ou arrivant en Europe sur une compagnie européenne donne droit à €250–€600 d'indemnisation en cas d'annulation ou retard 3h+ — mais **seulement 3 % des passagers éligibles réclament**. La compagnie ne prévient jamais spontanément de ce droit
+2. **Droits SNCF enfouis :** Le règlement UE 2021/782 + l'article L. 2151-3 du Code des transports imposent à la SNCF une compensation de 25 % (retard 1h–2h) à 50 %+ (retard 2h+) du prix du billet — mais le formulaire de réclamation est noyé dans les profondeurs de l'app OUI.sncf et la moitié des voyageurs ignore qu'il existe
+3. **Procédure d'escalade inconnue :** Si la compagnie ou la SNCF ignore votre demande, vous pouvez saisir gratuitement la DGAC (Direction Générale de l'Aviation Civile), le Médiateur SNCF, ou la DGCCRF — des recours officiels puissants mais quasi-inconnus du grand public
+4. **Délais de prescription courts :** 2 ans pour les vols et 5 ans pour les trains depuis la date du voyage — passé ce délai, la créance est perdue ; sans outil de suivi, les passagers laissent expirer leurs droits
+
+### Solution
+
+Plateforme en 4 étapes :
+
+1. **Vérification d'éligibilité :** Saisie du numéro de vol ou du billet de train + date → croisement avec les bases de données de retards officiels (AviationStack API, FlightAware, SNCF Open Data) → calcul automatique de l'indemnité due avec les articles de loi applicables
+2. **Génération de la demande :** Claude API rédige une lettre de réclamation juridiquement formelle en français, personnalisée selon la compagnie, le motif (retard, annulation, surbooking, correspondance manquée), et le montant — ton ferme mais factuel, avec les références légales exactes
+3. **Envoi et suivi :** Envoi par email à l'adresse officielle de réclamation + rappel automatique à J+30 (délai légal de réponse) + tableau de bord de toutes vos réclamations en cours avec statuts
+4. **Escalade automatique :** Si pas de réponse sous 30 jours → génération du formulaire de saisine DGAC (vols) ou Médiateur SNCF (trains) pré-rempli, prêt à soumettre en 1 clic
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 2 réclamations/an + lettre basique |
+| Pro | €4,99/mois | Réclamations illimitées + lettres personnalisées + suivi + escalade DGAC/Médiateur |
+| À succès | 15 % | Gratuit sauf si on récupère l'argent — honoraires sur le montant encaissé |
+| B2B Agences de voyage | €99/mois | Service white-label pour gérer les réclamations de leurs clients |
+
+**Unit economics :** France : 130M de voyages aériens/an × 5 % de retards/annulations éligibles = **6,5M de réclamations non faites/an**. An 1 réaliste : 3 000 Pro × €4,99 + 500 réclamations succès (15 % × €350 moy.) = **€26 200 MRR**. Coût Claude API ~€0,05/lettre → marge brute **97 %**. An 2 avec B2B agences : **€55K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — formulaire 4 étapes, mobile-first (réclamation faite dans les aéroports ou en gare)
+- **Données vols :** AviationStack API (délais temps réel) + FlightAware (historique 2 ans) + DGAC open data → vérification automatique du retard exact
+- **Données SNCF :** SNCF Open Data API ponctualité + upload billet PDF → Claude API extrait numéro de train et date automatiquement
+- **IA :** Claude API (claude-haiku-4-5 pour cas simples, claude-sonnet-4-6 pour cas complexes — correspondances manquées, extraordinary circumstances, multi-segment) → lettres juridiquement correctes
+- **Suivi et relances :** Supabase + cron jobs Vercel → relances J+15, J+30, génération formulaire DGAC si non réponse
+- **Backend :** Supabase Auth + PostgreSQL + Stripe (abonnements + paiement au succès via Stripe Connect)
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / YouTube Shorts :** "La SNCF me devait €148 que je ne savais pas — voilà comment récupérer en 5 minutes" → format révélation avec formulaire rempli à l'écran ; contenu naturellement viral (chaque abonné a vécu un retard)
+2. **Reddit :** r/france, r/SNCF, r/voyages — post "comment récupérer vos indemnités vol ou train sans passer par les intermédiaires à 25 %" → critique naturelle des AirHelp-like = traction organique immédiate
+3. **SEO longue traîne :** "indemnisation vol annulé france", "remboursement sncf retard 1h", "saisir dgac vol retard", "eu261 comment réclamer", "mediateur sncf formulaire" — 280K+ recherches/mois combinées, concurrence quasi absente sur les outils gratuits
+4. **Groupes Facebook voyageurs :** "Voyageurs SNCF en galère", "Budget voyage Europe", "Astuce voyage pas cher" (1,2M membres combinés) — public ultra-réceptif
+5. **Partenariats agences de voyage :** Les 8 000 agences et TO (tour-opérateurs) ont des centaines de clients/mois avec des retards/annulations → offre white-label B2B à €99/mois pour gérer toutes leurs réclamations clients
+
+### Competitive Moat
+
+- **AirHelp, Flightright, Indemniflight** : prennent 25–35 % de commission + délais de 3–6 mois — notre outil DIY à 15 % max (ou €4,99/mois) est 2× à 3× moins cher avec des délais maîtrisés par l'utilisateur
+- **Aucun outil existant** ne couvre à la fois vols EU261 **et** trains SNCF dans la même interface, avec escalade automatisée DGAC **et** Médiateur SNCF
+- La **base de données de retards** (AviationStack + SNCF Open Data) croisée avec les critères légaux EU261 est un actif technique que les concurrents manuels ne peuvent pas automatiser aussi rapidement
+- **Effet réseau :** chaque utilisateur qui récupère de l'argent le dit autour de lui → croissance organique compoundée sans budget marketing
+- Canal B2B agences : une fois intégré dans le process de service après-vente d'une agence, le churn est minimal — ils vendent le service à leurs clients comme un avantage concurrentiel
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #145-147 on FigJam](https://www.figma.com/board/jZkDzu7b7MWWpzRcvdtzVZ)
+
+---
+
+## 147. HéritageClair.ai
+
+> **Ce que votre notaire fait à €300/h — simuler votre succession, calculer les droits, optimiser la transmission — en clair, en gratuit, en 10 minutes**
+
+### Problem
+
+La France traite **800 000 successions par an** dont 60 % génèrent des incompréhensions ou des conflits entre héritiers (rapport Sénatorial 2024). Le droit successoral français est l'un des plus complexes d'Europe :
+
+1. **Calcul des droits impossible pour un non-juriste :** Abattements (€100 000 parent-enfant renouvelable tous les 15 ans, €15 932 frères/sœurs, €80 724 époux), réserve héréditaire (part légale incompressible des enfants), quotient conjugal, usufruit du conjoint survivant, rapport des donations antérieures — même des cadres supérieurs abandonnent et signent n'importe quoi chez le notaire
+2. **Coût des notaires prohibitif :** €200–€400/heure de conseil + émoluments réglementés sur la valeur brute de la succession (0,5 % à 5 %). Pour une succession de €250 000, les frais dépassent €6 000–€8 000 — personne ne peut faire de simulation préalable sans payer
+3. **La succession ne s'anticipe jamais :** La majorité des familles ne planifient pas leur transmission de leur vivant — tabou ou ignorance des outils. Résultat : découverte post-décès de biens oubliés, d'assurances-vie non déclarées aux héritiers, de donations non rapportables qui créent des conflits
+4. **Assurance-vie mal exploitée :** L'assurance-vie est hors succession légale avec sa propre fiscalité (abattement €152 500 par bénéficiaire, flat tax 20 %–31,25 % au-delà selon l'âge des versements) — la plupart des familles paient des impôts largement évitables faute de planification
+
+### Solution
+
+Plateforme en 4 modules :
+
+1. **Simulateur succession :** Saisie de l'actif successoral (biens immobiliers, comptes bancaires, véhicules, assurances-vie, dettes) + situation familiale + donations antérieures → calcul automatique des droits de succession par héritier, des abattements applicables, du montant net à régler au fisc, des délais légaux (déclaration de succession à déposer dans les 6 mois suivant le décès)
+2. **Optimiseur de planification patrimoniale :** Simulation "si vous faites une donation de €X aujourd'hui" → économie fiscale calculée, délai de 15 ans pour renouveler l'abattement, comparaison des stratégies (donation nue-propriété, SCI familiale, démembrement de propriété, assurance-vie complémentaire) avec explication en français clair
+3. **Checklist post-décès :** Ordre des démarches à effectuer, délais légaux (6 mois pour la déclaration de succession sous peine de 0,2 %/mois de pénalités), liste des organismes à prévenir (CAF, CPAM, Caisse de retraite, EDF, banques), modèles de courriers de notification
+4. **Assistant Claude IA :** Questions en langage naturel sur la succession → réponses sourcées Code civil (articles précis) + renvoi systématique vers le notaire pour les actes authentiques (partage, donation notariée, testament)
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulateur succession basique + checklist post-décès |
+| Éclairé | €9,99/mois | Simulateur complet + optimiseur planification + assistant IA illimité + alertes fiscales |
+| Famille | €19,99/mois | Jusqu'à 6 profils + tableau de bord patrimonial partagé + simulation multi-scénarios |
+| B2B Notaire / CGP | €149/mois | White-label client, multi-dossiers, exports PDF bankables pour présentation banque |
+
+**Unit economics :** 800K successions/an × 3 personnes concernées = **2,4M personnes/an directement touchées** + 10M familles qui devraient anticiper. An 1 réaliste : 2 000 Éclairés × €9,99 + 400 Familles × €19,99 + 30 notaires × €149 = **€32 400 MRR**. An 2 avec B2B CGP (5 000 conseillers en gestion de patrimoine en France) : **€70K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop-first (gestion patrimoniale sérieuse sur grand écran), mobile pour la checklist post-décès
+- **Moteur de calcul succession :** Algorithme TypeScript pur — barèmes droits de succession 2026 (tranches 5 %–45 % selon lien de parenté), abattements légaux par lien, réserve héréditaire (art. 912 Code civil), calcul du rapport des donations — données statiques mises à jour annuellement par la loi de finances
+- **IA :** Claude API (claude-sonnet-4-6) — réponse aux questions complexes (usufruit, SCI, démembrement, clause bénéficiaire assurance-vie, succession internationale), génération de scénarios d'optimisation, formulation accessible
+- **Export PDF :** React-PDF — rapport de simulation formaté pour présentation au notaire ou à la banque
+- **Alertes :** Supabase + Resend — notification automatique quand un délai de 15 ans d'abattement approche de son renouvellement
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **SEO longue traîne :** "calcul droits de succession 2026", "donation parent enfant abattement 100000", "assurance vie fiscalité succession bénéficiaire", "checklist décès proche france délai 6 mois", "simuler succession gratuit" — 600K+ recherches/mois combinées, forte intention, quasi aucun outil interactif concurrent
+2. **YouTube Finances Perso :** Heu!reka, Finary, MoneyRadar, Snowball — le thème "comment transmettre son patrimoine" est récurrent ; l'outil de simulation est du contenu de valeur pour eux et une acquisition massive pour nous
+3. **Notaires partenaires :** 10 000 études notariales en France — notre outil réduit leur charge de pré-conseil → partenariat B2B white-label + option accès client depuis leur site web
+4. **Reddit :** r/france, r/financespersonelles — "simulateur succession gratuit — famille type €250K, voilà ce que chaque héritier doit payer" → naturellement viral (tout le monde a des parents)
+5. **Presse économique :** Capital, Les Échos, Le Revenu publient des dossiers "succession" en janvier et en juin → communiqué de presse ciblé = couverture garantie
+
+### Competitive Moat
+
+- **impots.gouv.fr** : calculateur de droits basique, sans optimisation ni planification ni IA conversationnelle
+- **service-notaires.fr** : guides généraux sans simulation personnalisée
+- **Financer.com, Meilleurtaux** : simulateurs partiels, sans scénarios d'optimisation ni assistant IA
+- La **combinaison simulation + optimisation fiscale + assistant IA + checklist** est inédite en France à ce niveau de détail et d'accessibilité — aucun outil grand public ne couvre SCI, démembrements et assurances-vie dans un seul endroit gratuit
+- Le **canal B2B notaires/CGP** (10 000 notaires + 5 000 CGP) représente un réseau de distribution récurrent avec ARR élevé et churn quasi nul une fois intégré dans les pratiques du cabinet
+- Les **données de profil patrimonial** (consentement explicite) permettent des alertes proactives (changement législatif, délai de renouvellement abattement) — rétention forte sur la durée
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #145-147 on FigJam](https://www.figma.com/board/jZkDzu7b7MWWpzRcvdtzVZ)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
