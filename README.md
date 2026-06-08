@@ -152,6 +152,12 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 142 | [MicroFerme.ai](#142-microfermeai) | Freemium + Subscription + B2B Coopératives | €5K–€40K | Low-Medium |
 | 143 | [EffaceMoi.ai](#143-effacemoiai) | Freemium + Subscription + B2B DPO | €5K–€45K | Low |
 | 144 | [BulletinPaie.ai](#144-bulletinpaieai) | Freemium + Subscription + B2B RH | €8K–€55K | Low |
+| 145 | [MonDossierSocial.ai](#145-mondossiersocialai) | Freemium + Subscription + B2B CCAS | €4K–€30K | Low |
+| 146 | [ReclamationVoyage.ai](#146-reclamationvoyageai) | Freemium + Pay-per-pack + Commission + B2B | €5K–€35K | Low |
+| 147 | [HéritageClair.ai](#147-héritageclairai) | Freemium + Subscription + B2B Notaires/CGP | €8K–€55K | Low |
+| 148 | [CoachBudget.ai](#148-coachbudgetai) | Freemium + Subscription + Affiliate | €8K–€60K | Low |
+| 149 | [ChantierParticulier.ai](#149-chantierparticulierai) | Pay-per-pack + Subscription | €6K–€45K | Low |
+| 150 | [TransmissionPME.ai](#150-transmissionpmeai) | Pay-per-report + B2B SaaS | €8K–€60K | Low-Medium |
 
 ---
 
@@ -7999,6 +8005,196 @@ Plateforme en 4 modules :
 
 ---
 
+## 148. CoachBudget.ai
+
+> **L'IA qui optimise votre épargne française en 5 minutes — Livret A, PEL, PEA, PER, assurance-vie — et vous dit exactement combien vous perdez chaque mois en laissant dormir votre argent au mauvais endroit**
+
+### Problem
+
+Les ménages français laissent en moyenne **€18 000 sur des comptes courants ou Livret A à 2,4 %** alors qu'une allocation optimisée entre PEA, PER, assurance-vie fonds euros et SCPI rapporterait 2× à 4× plus avec des avantages fiscaux massifs :
+
+1. **Complexité paralysante :** 12 enveloppes fiscales différentes (Livret A, LDDS, PEL, CEL, PEA, PEA-PME, PER individuel, assurance-vie, PERP, compte-titres, SCPI, crowdfunding immo) avec des règles d'éligibilité, plafonds, et fiscalités entièrement différentes — personne ne sait quelle enveloppe choisir sans payer un CGP à €150/h
+2. **Optimisation fiscale manquée :** Le PER (Plan Épargne Retraite) offre une déduction fiscale immédiate sur les versements à hauteur de 10 % des revenus → un cadre qui verse €5 000/an dans son PER **récupère €2 250 d'impôts la même année** — mais 80 % des actifs ignorent ce mécanisme
+3. **Inflation réelle vs rendement apparent :** Avec l'inflation à 3,5 %, le Livret A à 2,4 % fait **perdre du pouvoir d'achat** — personne ne le visualise concrètement en euros
+4. **Absence d'outil personnalisé gratuit :** Les simulateurs des banques et assureurs sont biaisés (ils poussent leurs propres produits). Les comparateurs indépendants (MeilleurTaux, HelloSafe) donnent des infos génériques sans simulation personnalisée selon la TMI, la situation familiale et les objectifs
+
+### Solution
+
+Plateforme en 3 étapes :
+
+1. **Profil en 3 minutes :** Revenus nets, situation familiale, TMI estimée, durée d'investissement, épargne existante par enveloppe, objectifs (retraite, projet immo, transmission, épargne de précaution)
+2. **Analyse IA :** Claude API calcule l'allocation optimale, l'économie fiscale annuelle concrète (ex : "en mettant €3 000 de plus dans votre PER vous récupérez €1 350 d'impôts"), le coût d'opportunité actuel en euros/an, et classe les actions par priorité et par facilité
+3. **Plan d'action cliquable :** Chaque recommandation inclut comment ouvrir le bon produit (banque en ligne recommandée, courtier, assureur), les documents à fournir, et l'impact fiscal simulé
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Bilan épargne complet + liste des optimisations |
+| Éclairé | €4,99/mois | Plan d'action détaillé + alertes taux + chat IA illimité + réévaluation trimestrielle |
+| Premium | €9,99/mois | Simulation multi-scénarios + suivi portefeuille + alertes loi de finances |
+| Affiliation | Variable | Commission sur ouverture PER, PEA, assurance-vie via partenaires (Linxea, Fortuneo, Boursorama) |
+
+**Unit economics :** 18M de ménages français épargnants. An 1 : 3 000 Éclairés × €4,99 + 500 affiliations ouverture PER (€80 moy.) = **€54 970 MRR**. Coût Claude API ~€0,05/analyse → marge brute **98 %**. An 2 avec Premium + affiliation assurance-vie : **€80K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop-first (gestion patrimoniale sérieuse), mobile pour les alertes
+- **Moteur de calcul :** TypeScript pur — barèmes TMI 2026, plafonds PER (10 % des revenus N-1), plafonds PEA (€150 000), règles Livret A/LDDS/PEL — données statiques mises à jour annuellement
+- **IA :** Claude API (claude-sonnet-4-6) — personnalisation des recommandations, explication en langage naturel, réponse aux questions complexes (démembrement, donation temporaire d'usufruit, stratégie donation/cession)
+- **Alertes :** Supabase + Resend — notification taux Livret A, changements loi de finances, rappel versements PER avant le 31 décembre
+- **Affiliation :** Liens trackés vers partenaires (Linxea, Fortuneo, Boursorama, Meilleurtaux Placement) — commission à l'ouverture de compte + éventuellement sur encours
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **YouTube Finances Perso :** Heu!reka, Finary, MoneyRadar, Snowball — une vidéo "j'ai testé l'IA qui optimise mon épargne" = 50–200K vues + acquisition massive ; leur audience cherche exactement ce type d'outil
+2. **SEO longue traîne :** "meilleur placement épargne 2026", "PER vs assurance vie comparaison", "simulateur PEA PER impôts", "combien mettre dans mon PER", "optimiser épargne salarié france" — 400K+ recherches/mois combinées, faible concurrence sur les outils personnalisés
+3. **Reddit :** r/france, r/financespersonelles — "j'ai construit un simulateur gratuit PER vs assurance-vie — voici les résultats pour 3 profils types" → traction immédiate, format transparence très apprécié
+4. **TikTok FinTok :** "le truc que votre banquier ne vous dit pas — combien vous perdez chaque mois en laissant votre argent sur votre compte courant" → format choc + outil de vérification = viralité naturelle
+5. **Partenariats courtiers indépendants :** 3 000 conseillers en gestion de patrimoine indépendants (CGPI) → offre white-label pour leurs clients, commission sur les ouvertures générées
+
+### Competitive Moat
+
+- **Simulateurs bancaires** (BNP, Société Générale) : biaisés, poussent leurs propres produits, pas de vision multi-enveloppes
+- **Comparateurs** (MeilleurTaux, HelloSafe) : généralistes, pas de simulation personnalisée selon TMI et objectifs
+- **Finary, Linxea** : agrégateurs de portefeuille mais pas de recommandations d'optimisation fiscale proactives
+- La **combinaison simulation fiscale personnalisée + plan d'action cliquable + alertes + affiliation** est absente du marché grand public — les CGP facturent €150/h pour ce service
+- Les **données de profil patrimonial** permettent des recommandations de plus en plus précises + un modèle d'affiliation récurrent très rentable (réouverture tous les 15 ans pour renouveler les abattements)
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #148-150 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
+## 149. ChantierParticulier.ai
+
+> **Le bouclier des particuliers face aux artisans : vérifiez vos devis, trackez vos garanties légales, et générez une mise en demeure en 30 secondes si le chantier part en vrille**
+
+### Problem
+
+En France, **1,2 million de litiges entre particuliers et artisans** sont enregistrés chaque année (DGCCRF 2024). Le rapport de force est structurellement défavorable au particulier :
+
+1. **Devis incompréhensibles et non comparables :** Un devis de plombier ou d'électricien contient des postes vagues ("fournitures diverses", "main d'œuvre"), des références produits cryptiques, et aucun prix de référence — impossible de savoir si €3 500 pour une salle de bain est dans la norme sans interroger 3 artisans
+2. **Garanties légales ignorées :** La garantie décennale (10 ans), de parfait achèvement (1 an), et biennale (2 ans) protègent théoriquement le particulier — mais 70 % des propriétaires ne savent pas comment les activer, à qui écrire, ni quel délai respecter pour ne pas les perdre
+3. **Rétention de retenue de garantie :** Les 5 % de retenue de garantie légale (loi de 1971 sur les marchés privés) sont rarement réclamés — les artisans comptent dessus pour ne pas les reverser
+4. **Surcoûts travaux incontestés :** En France, le dépassement moyen d'un chantier de rénovation est de **+37 %** par rapport au devis initial — la plupart des propriétaires acceptent les "travaux supplémentaires" sans les contester faute d'outils
+
+### Solution
+
+Plateforme en 3 modules :
+
+1. **Vérificateur de devis :** Upload PDF ou photo du devis → Claude API extrait chaque ligne (poste, quantité, prix unitaire, main d'œuvre) et compare aux prix de référence UNTEC/Batiprix/indices CAPEB → alerte sur chaque ligne anormale avec fourchette de marché + suggestions de contre-offre
+2. **Gestionnaire de garanties :** Saisie date de réception des travaux → suivi automatique des délais légaux (1 an parfait achèvement, 2 ans biennale, 10 ans décennale) → alertes avant expiration + checklist des défauts à signaler + modèle de déclaration de sinistre à l'assurance décennale
+3. **Générateur de lettres légales :** Mise en demeure artisan (délai inexécuté, malfaçons, non-restitution retenue garantie), saisine médiateur CNAB, lettre assurance décennale — avec références légales exactes (art. 1792 Code civil, loi Spinetta) générées en 30 secondes
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | 1 vérification de devis/mois + checklist garanties |
+| Pack Chantier | €9,99 | Vérification complète 1 devis + 3 lettres légales + suivi garanties 12 mois |
+| Tranquillité | €4,99/mois | Vérifications illimitées + alertes garanties + chat IA + assistance réclamation |
+| B2B Syndics / Promoteurs | €99/mois | Multi-chantiers + API devis + rapports PDF pour architectes |
+
+**Unit economics :** 3M de chantiers de rénovation par an en France × 37 % de litiges potentiels = **1,1M de situations adressables**. An 1 : 2 000 Pack Chantier × €9,99 + 500 Tranquillité × €4,99 = **€22 460 MRR**. Coût Claude API ~€0,08/devis analysé → marge brute **99 %**. An 2 avec B2B syndics (30 000 syndicats de copropriété) : **€60K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (photos de devis prises sur chantier)
+- **Extraction devis :** Claude API vision (claude-sonnet-4-6) — lit les PDF et photos de devis, extrait les lignes et les prix, détecte les formulations vagues ("divers", "frais de déplacement non détaillés") qui sont des signaux de surfacturation
+- **Base de prix de référence :** Indices CAPEB + données UNTEC (Union Nationale des Economistes de la Construction) scrappées et normalisées trimestriellement — dataset propriétaire qui devient la barrière à l'entrée
+- **Génération de lettres :** Templates juridiques validés (mise en demeure Huissier, déclaration assurance décennale, saisine CNAB) + Claude API pour personnalisation avec les faits du dossier
+- **Suivi et alertes :** Supabase + cron jobs Vercel + Resend — calendrier de garanties, alertes J-30 avant expiration, rappels de déclaration
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / YouTube Shorts :** "mon artisan m'a surfacturé €800 — voilà comment je l'ai prouvé en 5 minutes" → format révélation avec l'outil utilisé à l'écran ; contenu naturellement viral (tout le monde a une mauvaise histoire d'artisan)
+2. **Reddit :** r/france, r/bricolage, r/immobilier — "j'ai vérifié mon devis plombier avec une IA, il était gonflé de 42 % — voici les détails" → traction immédiate, commentaires en masse de gens qui ont eu pareil
+3. **SEO longue traîne :** "devis artisan trop cher recours", "garantie décennale comment l'activer", "mise en demeure artisan modèle", "retenue de garantie travaux particulier" — 320K+ recherches/mois combinées, forte intention, faible concurrence
+4. **Groupes Facebook bricolage/rénov :** "Rénovation Maison France", "Travaux Immo Particuliers" (2M+ membres combinés) — public ultra-ciblé ayant des chantiers en cours
+5. **Partenariats courtiers assurance :** Les courtiers en assurance décennale (pour artisans) et en assurance dommages-ouvrage (pour particuliers) ont des milliers de clients concernés → référencement mutuel
+
+### Competitive Moat
+
+- **Aucun outil grand public** ne fait la vérification de devis artisan par IA avec des prix de référence réels — le marché est vierge
+- **Qualitel, UFC-Que Choisir** : guides généraux sans outil interactif ni génération de lettres
+- **Avocats / huissiers** : €150–€300 pour une mise en demeure — notre outil la génère en 30 secondes pour €9,99
+- La **base de données de prix** (CAPEB + UNTEC) enrichie par les devis des utilisateurs (avec consentement anonyme) crée un dataset propriétaire impossible à répliquer rapidement
+- Le **canal B2B syndics de copropriété** (30 000 syndicats gérant en moyenne 4 chantiers/an) représente un MRR récurrent très stable une fois l'intégration faite
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #148-150 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
+## 150. TransmissionPME.ai
+
+> **Transmettez votre PME sans payer 45 % d'impôts — le simulateur Pacte Dutreil, holding et donation-cession que votre avocat facture €2 000 pour vous expliquer**
+
+### Problem
+
+**300 000 PME françaises changent de mains dans les 10 prochaines années** (rapport BpiFrance 2024) mais **60 % des dirigeants de TPE/PME ne connaissent pas le Pacte Dutreil** — le mécanisme légal qui permet de transmettre une entreprise avec **75 % d'exonération des droits de mutation**, réduisant une facture fiscale de €900 000 à €225 000 sur une PME valant €1M.
+
+Problèmes concrets :
+1. **Complexité juridique perçue comme insurmontable :** Pacte Dutreil (art. 787 B CGI), donation-cession, holding patrimoniale, transmission aux salariés (SCOP), lease-back — chaque mécanisme a ses conditions, ses délais d'engagement (2 ans collectif + 4 ans individuel pour Dutreil), ses incompatibilités — seul un avocat fiscaliste peut tout cartographier
+2. **Coût prohibitif de la consultation :** €1 500–€3 000 pour un audit de transmission avec un avocat ou un expert-comptable spécialisé — la plupart des TPE ne l'engagent jamais, découvrent les options trop tard, et payent l'impôt plein
+3. **Urgence temporelle ignorée :** Le Pacte Dutreil nécessite 6 ans d'engagement minimum (2 collectif + 4 individuel) — un dirigeant qui veut partir dans 3 ans n'a plus le temps de l'activer ; personne ne lui dit que l'anticiper à 10 ans lui ferait économiser des centaines de milliers d'euros
+4. **Risque de cession "sauvage" :** Un dirigeant qui cède sans structuration paie le régime général de plus-values professionnelles (30 % PFU ou jusqu'à 62,2 % avec charges sociales) ; avec la bonne structure, il peut atteindre une **quasi-exonération totale** (abattement cédants art. 151 septies bis + Pacte Dutreil + holding IS)
+
+### Solution
+
+Simulateur en 3 modules :
+
+1. **Diagnostic de transmission :** Saisie valeur estimée de l'entreprise, structure juridique (SARL, SAS, SA), composition du capital, âge du dirigeant, profil des repreneur(s) envisagés (enfants, salariés, externe) → scoring automatique des mécanismes applicables par ordre d'économie fiscale
+2. **Simulateur comparatif :** Calcul côte à côte de 5 scenarios : vente directe (plein régime), Pacte Dutreil (−75 %), donation-cession (plus-value effacée), holding IS + apport-cession (report d'imposition + réinvestissement), transmission SCOP/SCIC (exonération partielle et financement BpiFrance) → économies fiscales en euros, conditions à remplir, délais, risques
+3. **Rapport PDF bankable :** Synthèse formatée pour présentation à l'avocat, l'expert-comptable, ou la banque — questions prioritaires à poser, articles CGI applicables, calendrier optimal de mise en œuvre, coûts de structuration estimés
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Diagnostic flash 5 mécanismes + scoring applicabilité |
+| Rapport complet | €29 | Simulation complète tous scénarios + PDF bankable + questions pour avocat |
+| Accompagnement | €99/mois | Chat IA illimité + suivi dossier + alertes CGI + accès modèles pacte Dutreil |
+| B2B Expert-comptable / Avocat | €149/mois | Multi-dossiers + API + white-label + formation dirigeants clients |
+
+**Unit economics :** 300K PME en transmission sur 10 ans = **30 000 dirigeants/an en phase active**. An 1 : 500 Rapports × €29 + 100 Accompagnements × €99 + 20 experts-comptables × €149 = **€27 280 MRR**. Coût Claude API ~€0,10/simulation → marge brute **99 %**. An 2 avec B2B réseau EC (20 000 cabinets en France) : **€80K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop-first (dirigeants de PME sur ordinateur, contexte professionnel)
+- **Moteur de calcul fiscal :** TypeScript pur — barèmes droits de mutation à titre gratuit 2026, conditions Pacte Dutreil (art. 787 B CGI), régimes de plus-values professionnelles (art. 151 septies, 151 septies bis, 238 quindecies), abattements dirigeants (500K€ exonération si départ retraite dans les 2 ans) — données statiques mises à jour à chaque loi de finances
+- **IA :** Claude API (claude-sonnet-4-6) — personnalisation des recommandations selon la structure (SARL/SAS, holding, groupe), réponse aux questions complexes (SCI intégrée, gestion du goodwill, pacte familial multi-branches), génération des résumés PDF
+- **Export PDF :** React-PDF — rapport structuré avec tableaux comparatifs, références CGI, calendrier de mise en œuvre
+- **Alertes CGI :** Supabase + Resend — notification automatique si la loi de finances modifie un régime applicable au dossier du dirigeant
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **LinkedIn ciblé dirigeants PME :** Posts "les 5 mécanismes légaux pour ne pas payer 45 % d'impôts quand vous cédez votre boîte" → format liste très partageable par les dirigeants, expert-comptables et avocats d'affaires ; potentiel viral dans les cercles professionnels
+2. **Partenariats experts-comptables :** 20 000 cabinets EC en France ont tous des clients dirigeants dans les 5 ans précédant la retraite → offre white-label "outil de pré-diagnostic transmission pour vos clients" + formation + commission ; canal B2B massif avec churn quasi nul
+3. **SEO B2B :** "pacte dutreil conditions 2026", "simulateur transmission entreprise", "holding apport cession plus-value", "céder sa PME sans impôts", "donation entreprise exonération" — 180K+ recherches/mois combinées, intention très haute, concurrence quasi absente sur les outils gratuits
+4. **Réseaux CCI / CMA :** Les 100 CCI et 82 CMA (Chambres de Métiers et de l'Artisanat) organisent des ateliers "transmission" — partenariat pour référencer l'outil dans leurs programmes (distribution gratuite à des milliers de dirigeants par an)
+5. **Presse économique B2B :** Les Échos, BFM Business, Capital — dossiers "succession d'entreprise" réguliers, surtout en janvier et en septembre → communiqué de presse + accès presse à l'outil = couverture éditoriale garantie
+
+### Competitive Moat
+
+- **Aucun simulateur grand public** ne couvre le Pacte Dutreil + donation-cession + holding IS dans un seul outil gratuit — le marché est vierge côté PME
+- **impots.gouv.fr** : guides textuels sans outil de simulation comparative
+- **Avocats et EC spécialisés** : €1 500–€3 000 pour un audit qu'on remplace par un pré-diagnostic à €29
+- Le **réseau B2B expert-comptable** (20 000 cabinets) est une barrière à l'entrée massive : une fois l'outil intégré dans la relation EC-dirigeant, il est irremplaçable (les EC ne changeraient pas d'outil pour des dossiers déjà en cours)
+- Les **données de profils de PME** (secteur, structure, valeur, scenario) permettent d'améliorer les recommandations IA et d'identifier des opportunités de partenariats (fonds de LBO, repreneurs SCOP, réseaux de franchises)
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #148-150 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -8011,4 +8207,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-06 — Idea 144 added (BulletinPaie.ai — auditeur IA de bulletins de paie français, détection erreurs URSSAF & conventions collectives, zéro budget, 17M salariés adressables)*
+*Last updated: 2026-06-08 — Ideas 148–150 added (CoachBudget.ai — optimiseur épargne française multi-enveloppes ; ChantierParticulier.ai — vérificateur de devis artisan & tracker garanties décennales ; TransmissionPME.ai — simulateur Pacte Dutreil & cession PME, zéro budget, marché France)*
