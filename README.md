@@ -8195,6 +8195,196 @@ Simulateur en 3 modules :
 
 ---
 
+## 151. RetraiteClaire.ai
+
+> **Combien toucherez-vous vraiment à la retraite ? Le simulateur IA qui calcule vos trimestres manquants, votre pension réelle, et les options légales pour partir avant 64 ans**
+
+### Problem
+
+Le système de retraite français est l'un des plus complexes au monde avec **42 régimes différents** (régime général CNAV, AGIRC-ARRCO, fonctionnaires, professions libérales, agriculteurs, artistes…) et la réforme 2023 a ajouté une couche d'incompréhension supplémentaire :
+
+1. **Opacité totale sur la pension future :** Le relevé de carrière sur Info-Retraite est incompréhensible pour 90 % des actifs (trimestres cotisés vs validés, points AGIRC-ARRCO, régimes multiples si carrière mixte salarié/indépendant). La pension finale est une boîte noire jusqu'à la demande officielle — souvent trop tard pour optimiser
+2. **Cas de départ anticipé massivement ignorés :** La réforme 2023 (64 ans) s'accompagne de **7 cas de départ anticipé** légaux : carrière longue (départ à 58, 60 ou 62 ans si début avant 16, 18 ou 20 ans), handicap, inaptitude, pénibilité via le C2P, et invalidité — environ **1,8 million de salariés** sont éligibles à partir avant 62 ans sans le savoir
+3. **Trimestres gratuits non réclamés :** Périodes de chômage indemnisé, congé maternité, maladie longue durée, service militaire, études en apprentissage — autant de trimestres **automatiquement comptabilisés** mais que les assurés ne déclarent pas ou ne vérifient jamais sur leur relevé de carrière
+4. **Rachat de trimestres : rentable ou pas ?** Coût de €1 000 à €8 500 par trimestre racheté selon l'âge et le revenu. Rentable si le gain de pension sur la durée de vie dépasse le coût du rachat — mais ce calcul actuariel est quasi impossible à faire seul, et personne ne le propose gratuitement
+
+### Solution
+
+Simulateur en 3 étapes :
+
+1. **Profil retraite en 5 minutes :** Année de naissance, début de carrière, statuts successifs (salarié, indépendant, fonctionnaire, chômage, maternité, arrêt maladie), revenus approximatifs par décennie, situation familiale (enfants → majoration 10 % si 3 enfants ou plus)
+2. **IA calcule :** Trimestres acquis vs requis (régime général), estimation points AGIRC-ARRCO selon historique salarial, date de départ légale sous réforme 2023, pension estimée nette à 62/64/67 ans en euros mensuels + taux de remplacement par rapport au dernier salaire, éligibilité aux cas de départ anticipé (carrière longue, pénibilité C2P, handicap)
+3. **Options d'optimisation :** Rentabilité du rachat de trimestres (calcul actuariel : combien d'années avant amortissement), impact de la surcote (repousser le départ de 1–4 ans → +1,25 %/trimestre sur la pension de base), cumul emploi-retraite, droit au minimum contributif (MICO) pour les petites pensions
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Simulation de base : trimestres + pension estimée + date de départ |
+| Rapport complet | €9,99 | Toutes les options légales + calcul rachat trimestres + PDF téléchargeable |
+| Suivi annuel | €2,99/mois | Mise à jour auto de la simulation + alertes changements réforme + rappel relevé de carrière annuel |
+| B2B RH | €89/mois | Module intranet pour DRH — salarié simule sa retraite directement via l'outil RH de l'entreprise |
+
+**Unit economics :** 28M d'actifs français dont 6M à moins de 10 ans de la retraite. An 1 : 3 000 Rapports × €9,99 + 800 Suivis × €2,99 = **€32 362 MRR**. Coût Claude API ~€0,04/simulation → marge brute **99 %**. An 2 avec B2B RH (50 entreprises × €89) : **€50K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (simulation pendant le trajet domicile-travail)
+- **Moteur de calcul :** TypeScript pur — barème trimestres 2026 (172 requis pour le taux plein à 64 ans), majorations familiales, taux de liquidation par régime, calcul des points AGIRC-ARRCO (valeur du point : €1,4386 en 2026), formule du minimum contributif, algorithme rachat de trimestres (table de mortalité INSEE T2024)
+- **IA :** Claude API (claude-sonnet-4-6) — interprétation des cas complexes (carrière mixte, expatriation, périodes de non-cotisation non renseignées), réponse en langage naturel aux questions sur les droits, personnalisation des recommandations
+- **Export PDF :** React-PDF — rapport complet avec simulation tabulaire, graphique pension par âge de départ, checklist des démarches prioritaires
+- **Alertes :** Supabase + Resend — rappels de mise à jour du relevé de carrière Info-Retraite, notification si nouvelle réforme ou changement du taux de cotisation AGIRC-ARRCO
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Reddit :** r/france, r/retraite, r/financespersonelles — "j'ai construit un simulateur de retraite gratuit pour comprendre l'impact de la réforme 2023 sur ma situation" → format vécu personnel, très partageable dans une audience qui cherche exactement ce type d'outil
+2. **YouTube Finances Perso :** Heu!reka, Finary, MoneyRadar — une vidéo "j'ai calculé ma retraite avec une IA — les résultats m'ont surpris" → 50–200K vues + acquisition massive via l'audience qui découvre qu'elle ne sait pas du tout ce qu'elle touchera
+3. **SEO longue traîne :** "simulateur retraite 2026", "combien de trimestres pour la retraite", "carrière longue conditions 2026", "rachat trimestres rentable ou pas", "retraite régime général points agirc arrco" — 900K+ recherches/mois combinées, concurrence très faible sur les outils personnalisés gratuits
+4. **LinkedIn professionnel :** Posts "les 7 cas où vous pouvez partir à la retraite avant 64 ans en 2026" → très partageable par les DRH, conseillers en gestion de patrimoine, experts-comptables ; potentiel viral dans les cercles professionnels 40–55 ans
+5. **Partenariats syndicats et CHSCT :** Les délégués syndicaux (CFDT, CGT, FO) informent régulièrement leurs membres sur les droits à la retraite → référencement de l'outil dans leurs communications internes et sur leurs sites
+
+### Competitive Moat
+
+- **Info-Retraite.fr** (officiel) : relevé de carrière brut, pas de simulation ni de recommandation d'optimisation ; impossible de simuler des scénarios alternatifs
+- **M@rel** (CNAV) : simulation officielle mais sans les cas de départ anticipé, sans calcul de rachat de trimestres, sans surcote
+- **Banques et assureurs** : simulations biaisées vers leurs propres produits de retraite supplémentaire (PER, PERP)
+- La combinaison **trimestres manquants + cas légaux départ anticipé + calcul actuariel rachat** dans un seul outil gratuit est absente du marché grand public — les CGP facturent €200/h pour ce type d'analyse
+- Avec la réforme 2023 encore mal digérée, le **moment de marché est parfait** : des millions d'actifs ont des questions urgentes et précises sur leur nouveau calendrier de départ
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #151-153 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
+## 152. ÉlecVrai.ai
+
+> **Le seul calculateur honnête pour savoir si l'électrique est rentable pour VOUS — aides empilées, TCO 5 ans, borne domicile, et les 3 modèles dans votre budget après déductions**
+
+### Problem
+
+La France vise 100 % de véhicules électriques vendus d'ici 2035, mais le passage à l'électrique est rendu opaque par un **maquis d'aides incompréhensible** et des calculs de rentabilité biaisés par les constructeurs et les médias :
+
+1. **Aides non empilées par méconnaissance :** Bonus écologique (jusqu'à €7 000 selon revenu fiscal de référence), prime à la conversion (jusqu'à €5 000 si ménage modeste + vieille voiture thermique), leasing social €100/mois (renouvelé en 2025), aide régionale (€500–€2 000 selon la région), aide employeur (accord mobilité), TVA déductible pour auto-entrepreneurs — ces aides **se cumulent** mais moins de 20 % des acheteurs les optimisent toutes
+2. **TCO sous-estimé ou surestimé :** Les comparateurs oublient : coût de la borne à domicile (installation Advenir : €800–€1 500 selon configuration), hausse de l'abonnement électrique (passage en heures creuses, abonnement EV Linky), coût réel des recharges rapides sur autoroute (35–70 cts/kWh vs 15 cts/kWh à domicile), dépréciation accélérée des modèles obsolètes (Zoe G2 perd 45 % en 3 ans)
+3. **Situation personnelle ignorée :** Habite en appartement sans parking privatif → pas de borne → charge publique uniquement → équation complètement différente. Fait 60 000 km/an en B2B → rentabilité explosive. Fait 5 000 km/an en ville → rentabilité douteuse vs un véhicule thermique d'occasion
+4. **Prime à la conversion : conditions cachées :** La prime expire si le véhicule n'est pas **livré dans les 6 mois** suivant la commande. Les délais de livraison (Tesla Model 3 : 3 semaines, Peugeot E-208 : 4 mois, certains modèles en attente 7 mois) font perdre la prime à des milliers d'acheteurs chaque année
+
+### Solution
+
+Calculateur en 3 étapes :
+
+1. **Profil conducteur :** Km/an et type de trajet (urbain/mixte/autoroute), type de logement (maison avec garage, appartement avec place de parking, sans parking privatif), voiture actuelle (éligibilité prime à la conversion), revenu fiscal de référence (barème bonus écologique 2026), usage professionnel éventuel (TVA déductible, IKV employeur)
+2. **Moteur de calcul :** Aides empilées calculées selon le profil exact (bonus barème 2026 : RFR < €14 089 → max €7 000 ; prime à la conversion si voiture > Crit'Air 3 ; aide Advenir pour la borne), économies carburant (prix de l'essence moyen régional vs coût kWh selon contrat EDF/Engie/TotalEnergies), TCO 5 ans complet avec dépréciation, assurance, entretien (−60 % vs thermique : pas de vidange, moins de freins, moins de révisions)
+3. **Top 3 modèles + démarches :** Dans le budget après aides → comparaison réelle Dacia Spring (€15 000 après aides possible), Citroën ë-C3 (€20 000 après aides), Renault 5 E-Tech (€23 000 après aides) avec délais de livraison actuels + checklist des démarches dans l'ordre (bonus TIRUVERT d'abord, puis prime à la conversion, puis Advenir borne, puis aide régionale)
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Calcul TCO + aides empilées pour 1 configuration |
+| Pack Comparatif | €4,99 | Top 3 modèles + simulation financement LOA vs achat + alertes nouveaux modèles + PDF |
+| Alerte Bons Plans | €1,99/mois | Notification si nouvelles aides régionales + alerte si votre modèle cible passe en stock |
+| Affiliation constructeurs / LOA | Variable | Commission trackée sur commandes VE (€100–€300/vente selon modèle) + LOA Cetelem/Franfinance |
+
+**Unit economics :** 2,5M de ventes de VP neufs/an en France dont 25 % électriques (2026). 630K acheteurs potentiels/an. An 1 : 10 000 Pack Comparatif × €4,99 + 2 000 Alertes × €1,99 + 500 affiliations × €150 = **€128 768 MRR**. Coût Claude API ~€0,03/calcul → marge brute **99 %**. An 2 avec affiliation LOA : **€200K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (décision souvent prise en concession ou sur le parking)
+- **Moteur de calcul :** TypeScript pur — barèmes bonus écologique 2026 (par RFR et PTAC), éligibilité prime à la conversion (Crit'Air 3+, ancienneté > 5 ans), calcul Advenir (puissance borne, coût installation selon logement), formule TCO 5 ans (prix achat − aides + coût énergie + entretien + assurance + dépréciation − valeur revente estimée)
+- **Dataset VE :** Catalogue des VE disponibles en France (ACEA + immatriculations CCFA) avec prix catalogue, bonus calculé automatiquement, consommation WLTP, délai de livraison moyen mis à jour mensuellement — base propriétaire
+- **IA :** Claude API (claude-sonnet-4-6) — réponse aux questions de comparaison complexes (LOA vs achat crédit, impact fiscal pour auto-entrepreneur, calcul si borne commune en copropriété est possible), personnalisation des recommandations selon le profil
+- **Affiliations :** Liens trackés Dacia, Renault, Stellantis, Tesla + partenaires LOA (Cetelem, Franfinance) + installation borne (Schneider, Hager partenaires Advenir)
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / YouTube Shorts :** "j'ai calculé si l'électrique est rentable pour moi en 2026 — le résultat m'a surpris" → format transparent très engageant, en particulier si le résultat va contre les idées reçues (ex: "non, si tu fais 5 000 km/an ça ne vaut pas le coup") ; authenticité > publicité
+2. **Reddit :** r/france, r/voitures, r/economie — "j'ai fait le calcul honnête du TCO sur 5 ans pour 10 profils différents — voici les résultats avec les vraies aides empilées" → format tableau très partageable, répond à une question que des dizaines de milliers de personnes se posent
+3. **SEO longue traîne :** "bonus écologique 2026 conditions", "prime à la conversion 2026 simulateur", "leasing social renouvelé 2025", "borne recharge appartement sans parking", "voiture électrique rentable ou pas 2026" — 1,2M+ recherches/mois combinées, forte intention d'achat, outil de comparaison quasi absent
+4. **Groupes Facebook auto :** "Tesla France", "Renault 5 E-Tech Club", "Dacia Spring Owners" (500K membres combinés) — communautés ultra-engagées qui cherchent exactement des calculs précis sur les aides et le TCO
+5. **Partenariats concessions :** Les concessionnaires multimarques (réseaux de vente VE en croissance) cherchent des outils pour accompagner les clients hésitants → référencement de l'outil sur leur site en échange de commission sur les ventes trackées
+
+### Competitive Moat
+
+- **Simulateurs officiels** (site gouv.fr, ADEM) : calcul du bonus seul, sans prime à la conversion, sans TCO, sans comparaison de modèles
+- **Comparateurs** (Caroom, Aramisauto, La Centrale) : prix des voitures mais pas d'optimisation d'aides ni de TCO complet
+- **Constructeurs** (Renault, Stellantis) : biaisés vers leurs propres modèles
+- La combinaison **aides empilées + TCO personnalisé + situation logement + top modèles dans le budget** est absente — un angle trop spécifique pour les grands comparateurs, trop technique pour les médias auto
+- Le **dataset propriétaire de délais de livraison et d'éligibilité prime à la conversion par modèle** (enrichi en temps réel) est impossible à répliquer rapidement
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #151-153 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
+## 153. LoyerJuste.ai
+
+> **Votre loyer est-il légal ? En 2 minutes, vérifiez l'encadrement des loyers et récupérez jusqu'à 3 ans de trop-perçu avec la lettre de mise en demeure générée automatiquement**
+
+### Problem
+
+En France, **l'encadrement des loyers** s'applique dans 31 agglomérations (Paris, Lyon, Bordeaux, Montpellier, Grenoble, Lille, Strasbourg, Marseille, et bien d'autres) couvrant **4,5 millions de logements** — et la plupart des locataires ignorent que leur loyer pourrait être illégal :
+
+1. **Méconnaissance quasi-totale du dispositif :** Moins de 5 % des locataires vérifient leur loyer contre le loyer de référence majoré de leur ville. Le bailleur est légalement tenu de ne pas dépasser ce plafond (loyer de référence médian +20 % pour les biens situés dans les zones concernées) mais l'écart moyen entre loyer pratiqué et loyer légal est de **+12 % dans Paris intramuros**, soit €130/mois en moyenne sur un T2
+2. **Trop-perçu réclamable jusqu'à 3 ans en arrière :** Un locataire qui découvre que son loyer a été illégal depuis le début du bail peut **réclamer le remboursement de la différence** sur les 3 dernières années (prescription triennale, art. 2224 du Code civil). Sur 3 ans à €130/mois de trop, c'est **€4 680 réclamables** — personne ne le sait
+3. **Procédure de contestation complexe :** La saisine de la Commission Départementale de Conciliation (CDC) est obligatoire avant tout tribunal. La plupart des locataires abandonnent face au CERFA, aux délais (3–6 mois de procédure), et à la crainte des représailles (non-renouvellement du bail). Résultat : la loi ALUR/ELAN est quasi-inappliquée faute d'outils grand public
+4. **Complément de loyer abusif :** Le propriétaire peut légalement ajouter un "complément de loyer" (loyers > référence majoré) si le logement présente une "caractéristique de localisation ou de confort déterminante" — mais les justificatifs sont souvent vagues ou inexistants, et le complément est contestable dans les 3 mois du bail
+
+### Solution
+
+Vérificateur en 3 modules :
+
+1. **Vérification en 2 minutes :** Adresse exacte du logement (géolocalisation dans la zone d'encadrement), surface habitable, caractéristiques (meublé/non meublé, période de construction, étage avec/sans ascenseur), loyer actuel hors charges → comparaison automatique avec le loyer de référence majoré du décret annuel de la ville + calcul du montant illégal mensuel et cumulé sur la durée du bail
+2. **Génération du dossier légal :** Lettre de mise en demeure au bailleur (références exactes : décret préfectoral de la ville, art. 17 loi du 6 juillet 1989 modifiée ALUR, jurisprudence récente) + formulaire CERFA de saisine de la CDC pré-rempli + calendrier de la procédure (délai de réponse bailleur : 1 mois, saisine CDC sous 3 mois, audience ~3 mois) + modèle de courrier au tribunal si échec de la conciliation
+3. **Alertes et suivi :** Notification automatique dès la publication du nouveau décret annuel (généralement juillet–août) → vérification si le loyer est toujours légal + rappel des 3 mois pour contester le complément de loyer si bail récent + alerte si la ville étend sa zone d'encadrement
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Vérification loyer légal ou non + montant illégal mensuel |
+| Dossier complet | €4,99 | Calcul trop-perçu exact (3 ans) + lettre de mise en demeure + CERFA pré-rempli + guide procédure |
+| Abonnement locataire | €1,99/mois | Alertes décret annuel + vérification charges récupérables + chat IA + suivi dossier |
+| B2B Associations | €49/mois | CLCV, UFC-Que Choisir, syndicats locataires — vérification multi-dossiers + export CSV + tableau de bord |
+
+**Unit economics :** 4,5M de logements concernés par l'encadrement, 2M de nouveaux baux/an dans les zones couvertes. An 1 : 5 000 Dossiers × €4,99 + 1 000 Abonnements × €1,99 + 10 assos × €49 = **€27 370 MRR**. Coût Claude API ~€0,02/vérification → marge brute **99 %**. An 2 avec B2B assos (50 assos) : **€40K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (vérification rapide sur smartphone)
+- **Moteur de calcul :** TypeScript pur — données des décrets préfectoraux de chaque ville (Paris, Lyon, Bordeaux, Montpellier, Grenoble, etc.) normalisées en JSON et mises à jour annuellement, formule de calcul loyer de référence majoré par zone géographique, surface et type de logement, calcul du trop-perçu cumulé avec prescription triennale
+- **Géolocalisation :** Géoportail IGN (API Adresse.data.gouv.fr) + couches SIG des zones d'encadrement par ville → lookup précis sans erreur de zone
+- **IA :** Claude API (claude-sonnet-4-6) — personnalisation de la lettre de mise en demeure selon les faits du dossier, réponse aux questions sur la procédure CDC et les recours, analyse du contrat de bail uploadé pour identifier les clauses contestables
+- **Documents légaux :** Templates validés par un juriste (mise en demeure, CERFA saisine CDC, courrier tribunal d'instance) + Claude API pour personnalisation
+- **Alertes :** Supabase + cron jobs Vercel + Resend — surveillance des décrets préfectoraux (scraping BODACC + sites préfectures), notification automatique à chaque mise à jour
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Reddit :** r/france, r/immobilier, r/paris, r/lyon — "j'ai vérifié mon loyer et il était illégal depuis 2 ans — voici comment j'ai récupéré €3 120" → format témoignage personnel avec les étapes détaillées, viralité naturelle dans une audience locataire très engagée sur ce sujet
+2. **TikTok :** "votre propriétaire vous surcharge peut-être €130/mois — vérifiez en 2 minutes" → format révélation + lien direct vers l'outil, contenu naturellement choquant et très partageable (tout le monde a un appartement à Paris ou dans une grande ville)
+3. **SEO longue traîne :** "encadrement loyers 2026 vérification", "loyer de référence Paris 2026", "comment contester loyer illégal", "commission conciliation locataire bailleur CERFA", "trop perçu loyer remboursement" — 400K+ recherches/mois combinées, très forte intention, concurrence quasi nulle sur les outils interactifs gratuits
+4. **Partenariats associations locataires :** CLCV (900 000 adhérents), UNPI côté locataires, ADIL (Agences Départementales d'Information sur le Logement) présentes dans chaque département — référencement dans leurs guides et permanences juridiques gratuites
+5. **Presse généraliste :** Le Monde, Libération, Huffington Post France, 20 Minutes — dossiers "logement" réguliers ; un angle "l'IA qui vérifie si votre loyer est légal" est un sujet clé-en-main parfait pour la rentrée de septembre ou la sortie des nouveaux décrets (juillet–août)
+
+### Competitive Moat
+
+- **ADIL.org et mairie de Paris** : vérification manuelle possible mais sans génération de documents ni calcul du trop-perçu cumulé ; procédure non guidée
+- **Hosman, Yanport** : outils de valorisation de bien côté propriétaire, pas côté locataire
+- **Aucun outil grand public** ne fait la vérification + calcul trop-perçu + génération de lettres légales dans un seul parcours simple
+- Le **dataset des décrets préfectoraux géolocalisés** (30+ villes) mis à jour annuellement est une barrière à l'entrée technique significative
+- Le **canal B2B associations locataires** (CLCV, associations locales) génère une distribution massive à coût nul + légitimité institutionnelle qui renforce la confiance des locataires à passer à l'action
+
+### Figma Schematic
+
+[View IdeasPRO — Ideas #151-153 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -8207,4 +8397,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-08 — Ideas 148–150 added (CoachBudget.ai — optimiseur épargne française multi-enveloppes ; ChantierParticulier.ai — vérificateur de devis artisan & tracker garanties décennales ; TransmissionPME.ai — simulateur Pacte Dutreil & cession PME, zéro budget, marché France)*
+*Last updated: 2026-06-09 — Ideas 151–153 added (RetraiteClaire.ai — simulateur retraite personnalisé trimestres & départ anticipé ; ÉlecVrai.ai — calculateur TCO véhicule électrique & aides empilées ; LoyerJuste.ai — vérificateur d'encadrement des loyers & générateur de mise en demeure, zéro budget, marché France)*
