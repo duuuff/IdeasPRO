@@ -158,6 +158,10 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 148 | [CoachBudget.ai](#148-coachbudgetai) | Freemium + Subscription + Affiliate | €8K–€60K | Low |
 | 149 | [ChantierParticulier.ai](#149-chantierparticulierai) | Pay-per-pack + Subscription | €6K–€45K | Low |
 | 150 | [TransmissionPME.ai](#150-transmissionpmeai) | Pay-per-report + B2B SaaS | €8K–€60K | Low-Medium |
+| 151 | [RetraiteClaire.ai](#151-retraiteclaireai) | Pay-per-report + Subscription + B2B RH | €8K–€50K | Low-Medium |
+| 152 | [ÉlecVrai.ai](#152-élecvraiai) | Freemium + Pay-per-pack + Subscription + Affiliate | €15K–€90K | Low-Medium |
+| 153 | [LoyerJuste.ai](#153-loyerjusteai) | Freemium + Pay-per-pack + Subscription + B2B Associations | €5K–€40K | Low |
+| 154 | [BonusRéparation.ai](#154-bonusréparationai) | Freemium + Pay-per-report + B2B Réparateurs | €5K–€32K | Low |
 
 ---
 
@@ -8382,6 +8386,68 @@ Vérificateur en 3 modules :
 ### Figma Schematic
 
 [View IdeasPRO — Ideas #151-153 on FigJam](https://www.figma.com/board/Es6RkwqHDYL8nY5fsLlRfq)
+
+---
+
+## 154. BonusRéparation.ai
+
+> **Trouvez en 30 secondes le réparateur labellisé près de chez vous, découvrez votre Bonus Réparation (jusqu'à €60 offerts par l'État), et laissez l'IA trancher : réparer ou racheter ?**
+
+### Problem
+
+Depuis 2022, la France a mis en place le **Bonus Réparation** (fonds réparation issu de la loi AGEC, financé par les éco-organismes via l'éco-participation) — une aide directe pour réparer plutôt que jeter. Pourtant ce dispositif, doté de centaines de millions d'euros par an, reste largement inutilisé :
+
+1. **Notoriété quasi nulle :** Selon l'ADEME, moins de 20 % des Français connaissent l'existence du Bonus Réparation. Le bonus est pourtant déduit automatiquement de la facture chez un réparateur labellisé : €10 à €60 selon l'appareil électroménager/électronique (filière Ecosystem, depuis 2022), €6 à €25 pour les vêtements et chaussures (filière Refashion, depuis octobre 2023), et désormais l'ameublement (Ecomaison/Eco-mobilier, depuis octobre 2024) et les jouets/articles de sport (Ecologic, déploiement 2025–2026)
+2. **Annuaires éclatés par filière :** Chaque éco-organisme (Ecosystem, Refashion, Ecomaison, Ecologic) gère son propre annuaire de réparateurs labellisés "QualiRépar", sur des sites différents, sans recherche géolocalisée unifiée ni montant de bonus affiché clairement par type d'appareil
+3. **Décision réparer vs racheter faite à l'aveugle :** Un devis de réparation à €80 pour un lave-linge semble cher face à un modèle neuf à €250 — mais avec le bonus de €25 à €40, le coût net tombe à €40–€55, souvent bien plus rentable qu'un achat neuf (sans compter l'indice de réparabilité et la durée de vie restante). Personne ne fait ce calcul avant de jeter
+4. **Barèmes mouvants :** Les montants de bonus, les catégories de produits éligibles et les filières actives évoluent chaque année — un casse-tête pour les consommateurs et pour les réparateurs eux-mêmes qui peinent à promouvoir le dispositif
+
+### Solution
+
+Outil en 3 modules :
+
+1. **Recherche en 2 étapes :** L'utilisateur indique le type d'objet à réparer (électroménager, smartphone/ordinateur, vêtement, chaussure, meuble, vélo, jouet, équipement sportif) et son code postal → l'IA agrège les annuaires QualiRépar des 4 éco-organismes (Ecosystem, Refashion, Ecomaison, Ecologic) et affiche les réparateurs labellisés à proximité avec le **montant exact du Bonus Réparation applicable** à cet appareil
+2. **Réparer ou racheter ? :** L'utilisateur uploade son devis de réparation (photo/PDF) et indique le prix d'un produit neuf équivalent → Claude API extrait le montant du devis, calcule le coût net après bonus, croise avec l'indice de réparabilité ADEME du produit et sa durée de vie restante estimée (âge, usure), puis donne une recommandation claire chiffrée + l'impact CO2 évité en réparant
+3. **Suivi & alertes :** Compte gratuit pour enregistrer ses appareils (date d'achat, garantie), recevoir une alerte dès qu'une panne survient pendant la période où la réparation reste rentable, et être notifié des changements de barème ou de l'ouverture de nouvelles filières (jouets, sport)
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Gratuit | €0 | Recherche réparateur labellisé + montant du bonus applicable |
+| Rapport Réparer ou Racheter | €2,99 | Analyse du devis + comparaison coût net vs produit neuf + impact CO2 + PDF |
+| Tranquillité Appareils | €1,99/mois | Suivi illimité des appareils + alertes bonus/garantie + chat IA réparation |
+| B2B Réparateurs | €19–€39/mois | Fiche pro mise en avant dans l'annuaire + statistiques de demandes + badge "vérifié" |
+
+**Unit economics :** Le fonds réparation finance plusieurs millions de réparations éligibles par an en France (électroménager, textile, ameublement). An 1 : 5 000 Rapports × €2,99 + 2 000 Abonnements × €1,99 + 100 réparateurs B2B × €29 = **€21 830 MRR**. Coût Claude API ~€0,03/analyse → marge brute **99 %**. An 2 avec extension jouets/sport et plus de réparateurs B2B (300) : **€32K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (recherche depuis chez soi, devis pris en photo sur le moment)
+- **Annuaire agrégé :** Scraping/API des annuaires QualiRépar par éco-organisme (Ecosystem, Refashion, Ecomaison, Ecologic), normalisé en base PostgreSQL avec géocodage via API Adresse.data.gouv.fr — dataset propriétaire mis à jour mensuellement
+- **Moteur de calcul :** TypeScript pur — barèmes du bonus par filière et catégorie de produit (mis à jour annuellement), formule réparer/racheter (coût net après bonus, indice de réparabilité ADEME, durée de vie restante estimée par catégorie)
+- **IA :** Claude API (claude-sonnet-4-6) — OCR et extraction du montant/objet du devis uploadé, recommandation personnalisée réparer/racheter, réponses aux questions sur l'indice de réparabilité et les filières
+- **Alertes :** Supabase + cron jobs Vercel + Resend — rappel garanties, alertes nouveaux barèmes/filières
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / Reels :** "L'État vous offre jusqu'à €60 pour réparer votre grille-pain et 80 % des Français l'ignorent" → format révélation très partageable, applicable à des objets du quotidien que tout le monde possède
+2. **Reddit :** r/france, r/vosfinances, r/ZeroWaste, r/france_zerowaste — "j'ai fait réparer mon lave-linge pour €40 au lieu d'en racheter un grâce au bonus réparation — voici comment" → témoignage concret, audience anti-gaspillage très réceptive
+3. **SEO longue traîne :** "bonus réparation 2026 montant", "réparateur labellisé qualirepar près de chez moi", "réparer ou racheter électroménager", "bonus réparation vêtement comment ça marche" — fort volume, quasi aucun outil interactif grand public
+4. **Partenariats Repair Cafés et associations anti-gaspillage :** Le réseau Repair Café (1 000+ ateliers bénévoles en France) et associations comme Zero Waste France cherchent des outils pour orienter vers des réparateurs professionnels labellisés quand la réparation bénévole n'est pas possible → référencement croisé
+5. **Partenariats éco-organismes :** Ecosystem, Refashion, Ecomaison ont un objectif de taux de recours au bonus fixé par l'État — un outil qui augmente ce taux d'usage les intéresse directement pour du référencement ou un financement de visibilité
+
+### Competitive Moat
+
+- **Sites officiels QualiRépar** existent mais restent cloisonnés par filière, sans recherche géolocalisée unifiée ni calcul réparer/racheter
+- **Repair Café** et associations sont gratuits mais reposent sur du bénévolat, sans couverture nationale garantie ni dimension financière
+- L'**annuaire agrégé multi-filières géolocalisé**, mis à jour mensuellement, constitue une barrière technique simple mais réelle à reproduire
+- Le **moteur réparer/racheter** combinant bonus + indice de réparabilité + durée de vie restante est une fonctionnalité absente du marché, alors que le sujet anti-gaspillage est en forte croissance médiatique et politique (extension des filières prévue jusqu'en 2026)
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #154 BonusRéparation.ai on FigJam](https://www.figma.com/board/VZqTo3f6lQlxCvq02IBDds)
 
 ---
 
