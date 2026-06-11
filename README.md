@@ -162,6 +162,9 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 152 | [ÉlecVrai.ai](#152-élecvraiai) | Freemium + Pay-per-pack + Subscription + Affiliate | €15K–€90K | Low-Medium |
 | 153 | [LoyerJuste.ai](#153-loyerjusteai) | Freemium + Pay-per-pack + Subscription + B2B Associations | €5K–€40K | Low |
 | 154 | [BonusRéparation.ai](#154-bonusréparationai) | Freemium + Pay-per-report + B2B Réparateurs | €5K–€32K | Low |
+| 155 | [ForfaitMatch.ai](#155-forfaitmatchai) | Freemium + Pay-per-pack + Subscription + Affiliate opérateurs | €6K–€40K | Low |
+| 156 | [MariageBudget.ai](#156-mariagebudgetai) | Freemium + Pay-per-pack + Subscription + B2B Prestataires | €6K–€45K | Low |
+| 157 | [DonFiscal.ai](#157-donfiscalai) | Freemium + Pay-per-pack + Subscription + B2B Associations | €4K–€30K | Low |
 
 ---
 
@@ -8451,6 +8454,196 @@ Outil en 3 modules :
 
 ---
 
+## 155. ForfaitMatch.ai
+
+> **Scannez votre facture mobile/internet, l'IA trouve l'offre moins chère et résilie l'ancienne à votre place.**
+
+### Problem
+
+Des millions de foyers français paient chaque mois bien plus cher que nécessaire pour leur forfait mobile et leur box internet, sans le savoir :
+
+1. **Le piège du "prix d'appel" :** La quasi-totalité des offres mobiles et box (Free, Bouygues, SFR, Orange, RED, Sosh, B&You) sont vendues avec un tarif promotionnel pendant 12 ou 24 mois, puis le prix bondit de €5 à €15/mois — sans notification claire. Résultat : des "abonnements zombies" oubliés qui coûtent 30 à 50 % de plus que le prix affiché en boutique
+2. **Comparateurs biaisés :** Les comparateurs existants (Selectra, Hellobank, LeLynx) sont financés par des commissions d'opérateurs et fonctionnent en générateurs de leads — formulaire + appel téléphonique de centre d'appel, intrusif et orienté vers les offres les plus rémunératrices pour le comparateur, pas les moins chères pour le client
+3. **Comparer, c'est compliqué :** Une facture mobile contient des dizaines de lignes (forfait, options, hors-forfait, remises temporaires) — difficile de savoir ce qu'on paie réellement et de le comparer à une offre concurrente avec des unités différentes (Go, minutes, durée d'engagement)
+4. **La résiliation fait peur :** Beaucoup renoncent à changer par crainte de perdre leur numéro ou de se tromper dans la procédure de portabilité (code RIO), alors que la loi Chatel/Hamon a rendu la résiliation et la portabilité simples et rapides depuis 2024
+
+### Solution
+
+Outil en 3 modules :
+
+1. **Scan facture :** L'utilisateur prend en photo ou transfère par email sa facture mobile/internet/box → Claude API extrait l'opérateur, le prix actuel, le volume de data/minutes, la date de fin d'engagement et — surtout — la date de fin de promotion (souvent en petits caractères)
+2. **Comparateur "vrai prix sur 24 mois" :** L'IA compare cette facture à une base d'offres low-cost mises à jour quotidiennement (Free, Sosh, RED, B&You, Prixtel, Auchan Telecom, Cdiscount Mobile, etc.), calcule le **coût réel sur 24 mois** (en intégrant la fin de promo de l'offre actuelle ET de l'offre proposée) selon l'usage réel de l'utilisateur — pas les Go marketing jamais consommés
+3. **Résiliation et portabilité en 1 clic :** Si une meilleure offre est trouvée, l'outil génère la lettre de résiliation avec demande de code RIO (portabilité du numéro), l'envoie en Lettre Recommandée Électronique, et programme un rappel pour la prochaine échéance de promo de la nouvelle offre — pour ne plus jamais se faire avoir
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Comparateur "vrai prix" | €0 | Scan facture + comparaison sur 24 mois + alerte si surfacturation détectée |
+| Pack Résiliation + Portabilité | €4,99 | Lettre de résiliation + demande RIO + LRE + suivi du transfert |
+| Veille Tarifaire | €1,49/mois | Re-scan automatique annuel des factures + alerte avant chaque fin de promo + comparaison continue |
+| B2B Affiliation opérateurs | €10–€30/souscription | Commission lors d'une souscription effective via un lien partenaire (programmes d'affiliation Free, Prixtel, Sosh, etc.) |
+
+**Unit economics :** La France compte ~75 millions de lignes mobiles et ~31 millions d'abonnements internet fixe — l'écrasante majorité paie un prix supérieur au marché à un moment donné. An 1 : 3 000 Packs Résiliation × €4,99 + 5 000 abonnés Veille × €1,49 + 250 conversions affiliation × €18 = **€26,42K MRR** (mix one-time/récurrent). Coût Claude API ~€0,02/scan → marge brute **99 %**. An 2 avec partenariats opérateurs élargis et 15 000 abonnés Veille : **€45K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (la facture est scannée depuis le téléphone, souvent en marchant vers la boîte aux lettres)
+- **OCR/extraction :** Claude API (claude-sonnet-4-6) — extraction structurée des factures (opérateur, montant, data, dates d'engagement et de fin de promo, mentions en petits caractères)
+- **Base d'offres :** scraping quotidien des grilles tarifaires des opérateurs low-cost (Free, Sosh, RED, B&You, Prixtel, Auchan Telecom, Cdiscount Mobile, Lebara) normalisé en PostgreSQL
+- **Moteur de comparaison :** TypeScript pur — calcul du coût réel sur 24 mois intégrant les paliers de prix post-promo des deux offres et l'usage réel déclaré
+- **Résiliation + portabilité :** génération PDF (React-PDF) avec demande de code RIO + envoi via API Lettre Recommandée Électronique (AR24 ou La Poste Recommandé Numérique)
+- **Alertes :** Supabase + cron jobs Vercel + Resend — rappel avant chaque fin de promo détectée
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **TikTok / Reels :** "Ta facture Free/Sosh va augmenter de 10€ dans 2 mois et tu ne le sais même pas — voici comment vérifier en 30 secondes" → format révélation, applicable à des millions de personnes
+2. **Reddit :** r/france, r/vosfinances — "j'ai économisé 240€/an juste en scannant ma facture mobile, voici le calcul détaillé" → témoignage chiffré, audience très réceptive
+3. **SEO longue traîne :** "ma promo free mobile se termine que faire", "comparateur forfait mobile sans engagement 2026", "lettre résiliation portabilité numéro modèle", "pourquoi ma facture orange a augmenté"
+4. **Programmes d'affiliation existants :** Free, Prixtel, Sosh et d'autres opérateurs low-cost ont des programmes de parrainage/affiliation déjà en place — intégration immédiate sans négociation B2B
+5. **Newsletter mensuelle "1 minute pour vérifier vos factures" :** les économies réalisées (captures d'écran "vous économisez €18/mois") sont hautement partageables sur les réseaux sociaux
+
+### Competitive Moat
+
+- Les comparateurs historiques (Selectra, LeLynx, Hellobank) sont des **générateurs de leads avec démarchage téléphonique**, pas des outils self-service neutres
+- Le calcul du **"vrai prix sur 24 mois"** intégrant la fin de promo des deux côtés (offre actuelle ET offre proposée) est une mécanique absente des comparateurs classiques, qui comparent des prix d'appel entre eux
+- La **veille automatique des dates de fin de promo** crée une relation récurrente naturelle (rappel annuel), contrairement à un comparateur ponctuel
+- Faible barrière technique mais forte barrière d'usage : une fois la facture scannée et le compte créé, l'utilisateur revient chaque année
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #155 ForfaitMatch.ai on FigJam](https://www.figma.com/board/qHaHRu2kvxE4NnlwAVr2Na)
+
+---
+
+## 156. MariageBudget.ai
+
+> **Le wedding planner IA qui construit votre budget réaliste, compare vos devis prestataires et gère votre liste d'invités — pour les 230 000 mariages célébrés chaque année en France.**
+
+### Problem
+
+Organiser un mariage en France représente un budget moyen de **€10 000 à €20 000+**, étalé sur 12 à 18 mois de planification, et tourne souvent au casse-tête financier et logistique :
+
+1. **Aucun budget de référence fiable :** Les futurs mariés n'ont aucune idée de la répartition réaliste de leur budget par poste (lieu, traiteur, photographe, robe, fleuriste, DJ, faire-part) ni des écarts de prix entre régions (un traiteur à Paris peut coûter le double qu'en Bretagne pour la même prestation)
+2. **Devis impossibles à comparer :** Chaque prestataire envoie un devis PDF dans son propre format, avec des prestations incluses différentes et des conditions d'annulation variables — comparer 3 traiteurs ou 3 photographes à la main prend des heures et laisse passer des clauses défavorables
+3. **Plateformes biaisées par la pub :** Mariages.net, ZankYou et Mariable sont des annuaires financés par les prestataires qui paient pour être mis en avant — aucun outil neutre de budget ou d'aide à la décision
+4. **Liste d'invités et plan de table : la bombe à retardement :** Gérer les RSVP, les relances, et surtout le plan de table avec des familles recomposées, des conflits familiaux ou des contraintes (enfants, handicap, régimes alimentaires) est une source majeure de stress émotionnel
+5. **Échéances de paiement éparpillées :** Chaque prestataire demande un acompte (30 à 50 %) à des dates différentes étalées sur plus d'un an — sans suivi centralisé, le risque de mauvaise surprise de trésorerie est réel
+
+### Solution
+
+Outil en 3 modules :
+
+1. **Budget réaliste :** Le couple indique son budget global, son nombre d'invités, sa région et son style de mariage (champêtre, chic, traditionnel, intime) → l'IA génère une répartition par poste de dépense basée sur des fourchettes de prix réelles par région, avec recommandations pour arbitrer (ex : "réduire le poste fleuriste de €X permettrait d'ajouter un photographe la veille")
+2. **Comparateur de devis :** Le couple uploade les devis PDF reçus de chaque prestataire → Claude API extrait prix, prestations incluses, conditions d'annulation et d'acompte, et produit un tableau comparatif ligne à ligne, signale les prix hors marché ou les clauses abusives, et suggère des arguments de négociation personnalisés
+3. **Invités & Plan de table :** Gestionnaire de liste d'invités avec page RSVP en ligne partageable, suivi automatique des relances, et générateur de plan de table par IA qui respecte les contraintes saisies (familles séparées, conflits, enfants, PMR) en quelques secondes — modifiable par glisser-déposer
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Budget réaliste | €0 | Répartition budgétaire par poste et par région + conseils d'arbitrage |
+| Pack Mariage Complet | €14,99 (one-time) | Comparateur de devis illimité + plan de table IA + suivi des échéances de paiement |
+| Coordination Premium | €6,99/mois | Pendant la période de planification (~12 mois) : chat IA négociation illimité + alertes échéances + export PDF prestataires |
+| B2B Référencement Prestataires | €29–€79/mois | Fiche prestataire mise en avant + leads qualifiés filtrés par budget, région et style des couples |
+
+**Unit economics :** ~230 000 mariages célébrés chaque année en France. An 1 : 800 Packs Complets × €14,99 + 400 Coordinations Premium × €6,99 + 60 prestataires B2B × €39 = **€16,4K MRR** (mix one-time/récurrent). Coût Claude API ~€0,05/devis analysé → marge brute **97 %**. An 2 avec 5 % de part de marché et réseau prestataires élargi (300 B2B) : **€48K MRR**.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — desktop et mobile (les couples planifient souvent ensemble le soir, sur ordinateur ou téléphone)
+- **Moteur budget :** TypeScript pur — base de fourchettes de prix moyens par région et poste de dépense, mise à jour annuelle à partir de données de marché publiques et retours utilisateurs anonymisés
+- **IA :** Claude API (claude-sonnet-4-6) — extraction et analyse comparative des devis PDF, génération du plan de table sous contraintes, chat conseils négociation et arbitrage budgétaire
+- **Plan de table :** algorithme de satisfaction de contraintes (CSP) + interface de visualisation drag-and-drop en React
+- **RSVP :** pages publiques Next.js + Supabase pour réponses des invités en temps réel et relances automatiques
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Instagram / Pinterest :** visuels "budget mariage type par région" — format très partageable dans la communauté mariage française, fort potentiel d'épingles
+2. **Reddit :** r/mariage, r/france, r/vosfinances — "j'ai comparé mes 4 devis traiteur avec une IA et économisé 1 500€, voici comment"
+3. **SEO longue traîne :** "budget mariage 2026 combien prévoir", "comparateur devis traiteur mariage gratuit", "générateur plan de table mariage en ligne"
+4. **Partenariats wedding planners indépendants :** les wedding planners freelances cherchent des outils à proposer à leurs clients — partage de revenus sur le Pack Complet
+5. **Groupes Facebook "mariage [région]" :** très actifs et engagés — partage de templates de budget gratuits avec lien vers l'outil
+
+### Competitive Moat
+
+- Mariages.net et ZankYou sont des **annuaires monétisés par les prestataires** (biais structurel), sans outil de budget neutre
+- Le **comparateur de devis ligne à ligne par IA** n'existe sur aucune plateforme mariage française actuelle
+- Le **générateur de plan de table sous contraintes** résout un point de friction émotionnel fort (familles recomposées) avec une technologie simple mais inédite sur ce marché
+- La relation dure 12 à 18 mois (durée moyenne de planification), créant un revenu récurrent naturel sur la durée du projet
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #156 MariageBudget.ai on FigJam](https://www.figma.com/board/TC8D0ghQ9IdYn7qTl7Rn0b)
+
+---
+
+## 157. DonFiscal.ai
+
+> **Centralisez vos reçus fiscaux de dons, suivez votre réduction d'impôt en temps réel, et ne ratez plus le plafond des 75 % avant le 31 décembre.**
+
+### Problem
+
+Les dons aux associations ouvrent droit à une réduction d'impôt importante en France, mais ce dispositif reste largement sous-exploité et mal suivi :
+
+1. **Réduction méconnue et complexe :** Un don à une association reconnue d'intérêt général ouvre droit à une réduction d'impôt de **66 % du montant donné, dans la limite de 20 % du revenu imposable** (article 200 du CGI), et de **75 % pour les dons aux organismes d'aide aux personnes en difficulté** (loi Coluche), dans la limite d'un plafond annuel réévalué à chaque loi de finances. Peu de contribuables comprennent comment ces deux taux se combinent
+2. **Reçus fiscaux dispersés :** Les donateurs réguliers (dons mensuels au Secours Populaire, à la Croix-Rouge, au WWF, à des associations locales...) reçoivent des reçus fiscaux (CERFA n°11580) par email ou courrier tout au long de l'année, jamais centralisés. Au moment de la déclaration, beaucoup oublient des dons ou ne savent pas dans quelle case du formulaire 2042 RICI les reporter (7UD, 7UF, 7XS, 7VC...)
+3. **Aucun suivi du plafond en temps réel :** Personne ne sait, en novembre, "combien me reste-t-il de plafond à 75 % avant d'atteindre les €1 000 ?" — un don de fin d'année bien placé peut pourtant être nettement plus avantageux fiscalement
+4. **Petites associations en difficulté :** La France compte environ 1,5 million d'associations, dont des centaines de milliers habilitées à délivrer des reçus fiscaux. Beaucoup de petites structures (souvent gérées par des bénévoles) peinent à générer des CERFA 11580 conformes en masse et craignent un redressement fiscal en cas de non-conformité (procédure de rescrit fiscal, article 1378 octies du CGI)
+
+### Solution
+
+Outil en 3 modules :
+
+1. **Coffre-fort dons :** L'utilisateur transfère par email ou uploade en photo/PDF les reçus fiscaux (CERFA 11580) reçus tout au long de l'année → Claude API extrait automatiquement le montant, l'association, la date et le taux applicable (66 % ou 75 %), et les centralise dans un tableau de bord
+2. **Simulateur de plafond en temps réel :** Calcule la réduction d'impôt cumulée sur l'année, le plafond restant disponible (75 % jusqu'à €1 000, puis 66 % jusqu'à 20 % du revenu imposable), et alerte en novembre/décembre si un don supplémentaire reste avantageux avant le 31 décembre, avec simulation du montant optimal
+3. **Pré-remplissage déclaration :** Génère un récapitulatif annuel indiquant les bonnes cases du formulaire 2042 RICI (7UD, 7UF, 7XS, 7VC...) avec les montants à recopier, prêt pour la déclaration de revenus
+
+Pour les associations (B2B) : génération en masse de reçus fiscaux CERFA 11580 conformes à partir d'un import CSV de donateurs, et assistant d'éligibilité au rescrit fiscal
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Coffre-fort + Simulateur | €0 | Centralisation des reçus + calcul du plafond en temps réel |
+| Pack Déclaration Dons | €1,99/an | Récapitulatif pré-rempli avec cases CGI + export PDF pour la déclaration |
+| Suivi Plafond Premium | €0,99/mois (saisonnier, sept.–déc.) | Alertes plafond temps réel + simulateur de don optimal de fin d'année |
+| B2B Associations — Génération CERFA | €19–€49/mois | Génération en masse de reçus fiscaux conformes + aide au rescrit fiscal + tableau de bord des dons collectés |
+
+**Unit economics :** Environ 5,5 millions de foyers fiscaux français déclarent des dons chaque année (DGFiP). An 1 : 8 000 Packs Déclaration × €1,99 + 3 000 Suivi Plafond × €0,99 (actif 4 mois/an) + 120 associations B2B × €29 = **€7,4K MRR équivalent** (mix one-time saisonnier/récurrent). Coût Claude API ~€0,02/reçu → marge brute **99 %**. An 2 avec 800 associations B2B (sur 1,5M en France) : **€26K MRR**, le segment B2B devenant le moteur principal de croissance récurrente.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (les reçus arrivent par email, transfert immédiat depuis le téléphone)
+- **OCR/extraction :** Claude API (claude-sonnet-4-6) — extraction structurée des CERFA 11580 (montant, association, date, taux applicable 66 %/75 %)
+- **Moteur de calcul :** TypeScript pur — barèmes de réduction d'impôt pour dons (articles 200 et 238 bis du CGI), plafonds mis à jour à chaque loi de finances
+- **Génération CERFA B2B :** templates PDF conformes (React-PDF) + import CSV des donateurs + vérification de l'habilitation fiscale via le Répertoire National des Associations (RNA, data.gouv.fr)
+- **Alertes :** Supabase + cron jobs Vercel + Resend — alertes de plafond en fin d'année
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **Partenariats avec les associations elles-mêmes :** Restos du Cœur, Secours Populaire et petites associations locales ont intérêt à aider leurs donateurs à optimiser leur réduction d'impôt — placement du lien directement dans l'email du reçu fiscal envoyé aux donateurs
+2. **SEO longue traîne :** "réduction d'impôt dons 2026 plafond 75%", "où déclarer reçu fiscal don case 7UD", "don avant le 31 décembre réduction impôt calcul"
+3. **Reddit :** r/vosfinances, r/france — "j'ai centralisé tous mes reçus de dons et découvert qu'il me restait 200€ de plafond à 75% de réduction"
+4. **Démarchage direct B2B :** cold email aux petites associations identifiées via le Répertoire National des Associations (1,5M structures) — "générez vos reçus fiscaux conformes en 2 clics, sans risque de redressement"
+5. **Effet saisonnier décembre :** campagnes ciblées sur réseaux sociaux financiers en fin d'année, période d'urgence fiscale avant le 31/12 propice à la viralité
+
+### Competitive Moat
+
+- Aucun outil grand public ne centralise les reçus fiscaux multi-associations avec **calcul de plafond combiné 66 %/75 % en temps réel**
+- La mécanique fiscale des plafonds cumulés est peu connue et mal expliquée — une barrière de connaissance que l'IA lève immédiatement, créant un effet "waouh" propice au bouche-à-oreille
+- Le produit **B2B (génération CERFA conforme pour petites associations)** crée un revenu récurrent stable et une distribution gratuite côté donateurs via le réseau associatif lui-même
+- Levier saisonnier fort (urgence du 31 décembre) qui génère des pics d'acquisition prévisibles et peu coûteux
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #157 DonFiscal.ai on FigJam](https://www.figma.com/board/gPmJYPOL0uhAtc51W3Mq4f)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -8463,4 +8656,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-09 — Ideas 151–153 added (RetraiteClaire.ai — simulateur retraite personnalisé trimestres & départ anticipé ; ÉlecVrai.ai — calculateur TCO véhicule électrique & aides empilées ; LoyerJuste.ai — vérificateur d'encadrement des loyers & générateur de mise en demeure, zéro budget, marché France)*
+*Last updated: 2026-06-11 — Ideas 155–157 added (ForfaitMatch.ai — comparateur "vrai prix" mobile/box & résiliation/portabilité automatisée ; MariageBudget.ai — wedding planner IA avec budget réaliste, comparateur de devis et plan de table ; DonFiscal.ai — centralisation des reçus fiscaux de dons et simulateur de plafond de réduction d'impôt, zéro budget, marché France)*
