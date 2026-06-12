@@ -165,6 +165,7 @@ A curated collection of validated, buildable project ideas designed to generate 
 | 155 | [ForfaitMatch.ai](#155-forfaitmatchai) | Freemium + Pay-per-pack + Subscription + Affiliate opérateurs | €6K–€40K | Low |
 | 156 | [MariageBudget.ai](#156-mariagebudgetai) | Freemium + Pay-per-pack + Subscription + B2B Prestataires | €6K–€45K | Low |
 | 157 | [DonFiscal.ai](#157-donfiscalai) | Freemium + Pay-per-pack + Subscription + B2B Associations | €4K–€30K | Low |
+| 158 | [ColisLitige.ai](#158-colislitigeai) | Freemium + Pay-per-pack + Subscription + B2B Vendeurs | €5K–€35K | Low |
 
 ---
 
@@ -8644,6 +8645,71 @@ Pour les associations (B2B) : génération en masse de reçus fiscaux CERFA 1158
 
 ---
 
+## 158. ColisLitige.ai
+
+> **Décrivez votre problème de colis (perdu, abîmé, en retard), l'IA identifie la procédure de réclamation exacte du transporteur, génère la lettre et calcule l'indemnisation à laquelle vous avez droit.**
+
+### Problem
+
+La France compte environ **1,7 milliard de colis livrés par an** (FEVAD), et même un taux d'incident de 1 à 2 % représente **17 à 34 millions de colis perdus, abîmés ou en retard chaque année** — un point de friction massif et quotidien :
+
+1. **Procédures de réclamation éclatées et opaques :** Chaque transporteur (La Poste/Colissimo, Chronopost, Mondial Relay, UPS, DPD, GLS, Colis Privé) a ses propres délais de réclamation (souvent **10 jours** pour un dommage apparent, jusqu'à plusieurs mois pour une perte), ses propres formulaires, et ses propres plafonds d'indemnisation selon que le colis était assuré ou non (indemnisation forfaitaire de quelques euros vs valeur déclarée)
+2. **Le consommateur ignore ses droits :** Le Code des transports et le Code de la consommation encadrent précisément la responsabilité du transporteur et les recours possibles, mais ces textes sont inconnus du grand public — beaucoup abandonnent face à un service client qui répond "ouvrez un litige sur le site" sans jamais traiter le dossier
+3. **Les vendeurs particuliers et petits e-commerçants sont les plus exposés :** Sur Vinted, Leboncoin, Etsy ou en dropshipping, un colis perdu ou abîmé en transit oblige souvent le vendeur à rembourser l'acheteur de sa poche, **sans savoir comment se faire indemniser à son tour par le transporteur** — multiplié par des dizaines d'envois mensuels, la perte financière s'accumule
+4. **Délais de forclusion ratés faute de suivi :** Sans rappel, les délais légaux de réclamation (souvent très courts) sont dépassés, et le droit à indemnisation disparaît définitivement — y compris pour des litiges légitimes de plusieurs dizaines voire centaines d'euros
+
+### Solution
+
+Outil en 3 modules :
+
+1. **Diagnostic du litige :** L'utilisateur indique le transporteur, le numéro de suivi, le type de problème (perdu, endommagé, retard, livré à la mauvaise adresse) et la valeur du contenu → l'IA identifie instantanément la procédure applicable, le délai légal de réclamation restant, le plafond d'indemnisation probable (forfaitaire ou valeur déclarée selon l'assurance souscrite), et la liste exacte des justificatifs à fournir (facture d'achat, photos, déclaration de valeur)
+2. **Générateur de lettre de réclamation :** Claude API rédige la lettre formelle de réclamation adressée au transporteur, avec les références légales précises (Code des transports, conditions générales de vente du transporteur concerné) et l'argumentaire adapté au cas — prête à envoyer par email ou Lettre Recommandée Électronique
+3. **Suivi et relance/médiation :** Suivi des délais de réponse légaux du transporteur (généralement 30 jours) ; si absence de réponse ou refus injustifié, génération automatique d'une lettre d'escalade vers le **médiateur du e-commerce (FEVAD)** ou le médiateur sectoriel compétent, avec rappel programmé
+
+Pour les vendeurs (B2B) : tableau de bord multi-colis pour suivre tous les litiges en cours sur plusieurs transporteurs et marketplaces, avec génération de réclamations en masse.
+
+### Revenue Model
+
+| Option | Prix | Détails |
+|--------|------|---------|
+| Diagnostic | €0 | Identification de la procédure, délai restant et indemnisation estimée |
+| Pack Réclamation | €3,99 | Lettre de réclamation personnalisée + checklist justificatifs + envoi LRE |
+| Pack Escalade Médiation | €4,99 (upsell) | Lettre d'escalade vers le médiateur si absence de réponse du transporteur |
+| Vendeur Pro | €9,99/mois | Tableau de bord multi-colis, réclamations en masse, alertes de délais, export comptable |
+| B2B API Marketplaces | €0,50–€2/litige traité | Intégration API pour plateformes (Vinted Pro, places de marché) souhaitant automatiser la gestion des litiges transport de leurs vendeurs |
+
+**Unit economics :** Sur 17 à 34 millions de colis problématiques par an, même une part infime représente un marché énorme. An 1 : 5 000 Packs Réclamation × €3,99 + 1 200 Packs Escalade × €4,99 + 600 Vendeurs Pro × €9,99 = **€32K MRR équivalent** (mix one-time/récurrent). Coût Claude API ~€0,03/diagnostic+lettre → marge brute **98 %**. An 2 avec un premier partenariat B2B marketplace : **€55K MRR**, le volume B2B prenant le relais comme moteur de croissance récurrent.
+
+### Tech Stack
+
+- **Frontend :** Next.js + Tailwind (Vercel) — mobile-first (la déclaration se fait souvent depuis le téléphone, juste après l'ouverture d'un colis abîmé)
+- **IA :** Claude API (claude-sonnet-4-6) — diagnostic du cas, identification de la procédure applicable, génération de la lettre de réclamation et de l'escalade médiation
+- **Base de règles transporteurs :** PostgreSQL — délais de réclamation, plafonds d'indemnisation et CGV de chaque transporteur (La Poste/Colissimo, Chronopost, Mondial Relay, UPS, DPD, GLS, Colis Privé), mise à jour trimestrielle
+- **Génération de lettres :** React-PDF + envoi via API Lettre Recommandée Électronique (AR24 ou La Poste Recommandé Numérique)
+- **Suivi/alertes :** Supabase + cron jobs Vercel + Resend — rappels avant expiration des délais légaux
+- **Backend :** Supabase Auth + PostgreSQL + Stripe
+
+### Go-to-Market (zéro budget)
+
+1. **SEO longue traîne :** "colis perdu remboursement comment faire", "colis abîmé chronopost réclamation modèle", "délai réclamation colissimo", "mondial relay colis non reçu que faire" — volume de recherche très élevé, quasi aucun outil interactif existant
+2. **Communautés vendeurs :** groupes Facebook et forums Vinted/Leboncoin/dropshipping ("j'ai été remboursé par Chronopost en 5 jours grâce à cette lettre, voici le modèle")
+3. **Reddit :** r/france, r/vosfinances, r/Vinted — témoignages chiffrés sur les remboursements obtenus
+4. **TikTok/Reels :** format "ton colis est perdu ? voici le délai que tu as pour réclamer (et la plupart des gens le ratent)"
+5. **Partenariats créateurs de contenu e-commerce/dropshipping :** ces créateurs ont une audience de vendeurs qui subissent ce problème en volume — programme d'affiliation sur le Pack Vendeur Pro
+
+### Competitive Moat
+
+- Aucun outil grand public ne centralise les **procédures, délais et plafonds d'indemnisation de tous les transporteurs** dans un seul diagnostic
+- La **lettre de réclamation avec références légales précises** transforme un consommateur démuni face à un service client en interlocuteur qui invoque ses droits — taux de succès nettement supérieur
+- Le **suivi automatique des délais de forclusion** est une fonctionnalité absente partout ailleurs, alors que c'est la cause numéro un de perte de droit à indemnisation
+- Le segment **Vendeur Pro / B2B marketplaces** crée un revenu récurrent stable avec un volume mensuel élevé par client, et une distribution naturelle via les communautés de vendeurs en ligne
+
+### Figma Schematic
+
+[View IdeasPRO — Idea #158 ColisLitige.ai on FigJam](https://www.figma.com/board/eizilaAqGbsTnwE0GnKL2E)
+
+---
+
 ## How to Evaluate an Idea
 
 Before building, validate with this checklist:
@@ -8656,4 +8722,4 @@ Before building, validate with this checklist:
 
 ---
 
-*Last updated: 2026-06-11 — Ideas 155–157 added (ForfaitMatch.ai — comparateur "vrai prix" mobile/box & résiliation/portabilité automatisée ; MariageBudget.ai — wedding planner IA avec budget réaliste, comparateur de devis et plan de table ; DonFiscal.ai — centralisation des reçus fiscaux de dons et simulateur de plafond de réduction d'impôt, zéro budget, marché France)*
+*Last updated: 2026-06-12 — Idea 158 added (ColisLitige.ai — diagnostic IA des litiges colis (perdu, abîmé, en retard), génération de lettre de réclamation et d'escalade médiation, avec offre dédiée aux vendeurs Vinted/Leboncoin/dropshipping, zéro budget, marché France)*
